@@ -22,7 +22,7 @@
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
 	<div class="container" id="class">
-	
+		<h2>추가했어</h2>
 	</div>
 	<br/>
 	<%@ include file="../include/footer.jsp" %>
