@@ -119,7 +119,7 @@
 				<!-- session을 체트하기 위해서 상단에 page session값을 true로 설정해야 한다 -->
 				<c:if test="${member!=null}">
 					<div class="form-group">
-						<a href=".member/mypage.do">MyPage(${member.id}})</a>
+						<a href=".member/mypage.do">MyPage(${member.id})</a>
 					</div>
 				</c:if>
 				<!-- msg가 false인 경우 -->
