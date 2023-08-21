@@ -7,6 +7,7 @@
 <title>My page</title>
 <%@ include file="./WEB-INF/views/include/header.jsp" %>
 <style>
+<<<<<<< Updated upstream
 body 	{ 	
    	background-image:url("./resources/images/background2.jpg");
    	background-attachment: fixed, scroll;
@@ -59,6 +60,22 @@ aside	{
     flex-grow: 1;
     height:1200px;
 }
+body { 	
+    	background-image:url("./resources/images/background2.jpg");
+    	background-attachment: fixed, scroll;
+    	background-repeat:no-repeat;
+   	 	background-size:cover;
+		}
+
+		#class {
+		background-color:	#FFFFFF;
+		text-align:			center;
+		border-radius:		10px;
+		padding: 30px 30px 30px 30px;
+    	margin-top:		150PX ;
+    	
+		margin-bottom: 150px;
+		}
 </style>
 </head>
 <body>
@@ -77,9 +94,7 @@ aside	{
 			</aside>
 		</div>
 		<div id="content">
-			<h2> Mypage</h2>
-		
-		
+		<h2>아리랑</h2>
 		</div>
 	</div>
 	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
