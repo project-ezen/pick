@@ -94,7 +94,7 @@ body {
 			</aside>
 		</div>
 		<div id="content">
-		
+		<h2>아리랑</h2>
 		</div>
 	</div>
 	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
