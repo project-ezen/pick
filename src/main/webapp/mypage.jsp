@@ -81,7 +81,7 @@ aside	{
 		
 		</div>
 		<div>
-			<h2></h2>
+			<h2>aaaaaaaaa</h2>
 		</div>
 	</div>
 	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
