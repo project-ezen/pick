@@ -63,7 +63,7 @@
                 <form method="post" action="witchs_pick_login" id="login-form">
                 
                 	<!-- 로그인을 하지 않고 들어온 경우 -->
-                	<c:if text="${member == null}">
+                	<!--<c:if text="${member == null}">-->
                     <div class="form-group">
                         <div>
                             <div>
