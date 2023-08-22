@@ -65,27 +65,28 @@ aside	{
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
 	<div class="container" id="class">
-			<h2 class="title">MyPage</h2>
+		<h2 class="title">MyPage</h2>
 		<div id="contents" class="submenu">
-			<hr/>
-			<aside>
-			<h3>MyPage</h3>
-			<ul class="tab">
-				<li class='tabmenu'><a href="#">구매내역</a></li>
-				<li class='tabmenu'><a href="#">찜한 게시물</a></li>
-				<li class='tabmenu'><a href="#">내가 쓴 게시물</a></li>
-				<li class='tabmenu'><a href="#">회원정보수정</a></li>
-			</ul>
-			</aside>
-			<section class="content">
-				<article> 
-					<img style="height:100px; width:100px;" src="./resources/images/alcohol.png">
-					<h2>{.nickname}님</h2>
-				</article>
-				<article>
-					<div>주문/결제</div>
-				</article>
-			</section>
+		<hr/>
+		<aside>
+		<h3>MyPage</h3>
+		<ul class="tab">
+			<li class='tabmenu'><a href="#">구매내역</a></li>
+			<li class='tabmenu'><a href="#">찜한 게시물</a></li>
+			<li class='tabmenu'><a href="#">내가 쓴 게시물</a></li>
+			<li class='tabmenu'><a href="#">회원정보수정</a></li>
+		</ul>
+		</aside>
+		<section class="content">
+			<article> 
+				<img style="height:100px; width:100px; vertical-align:top;" src="./resources/images/alcohol.png" border="0">
+				<h2>${member.name}</h2><h2>님</h2>
+			</article>
+			<article>
+				<button></button>
+				<button></button>
+			</article>
+		</section>
 		</div>
 	</div>
 	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
