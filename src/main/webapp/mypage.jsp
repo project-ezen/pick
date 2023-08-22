@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,6 @@
 <title>My page</title>
 <%@ include file="./WEB-INF/views/include/header.jsp" %>
 <style>
-<<<<<<< Updated upstream
 body 	{ 	
    	background-image:url("./resources/images/background2.jpg");
    	background-attachment: fixed, scroll;
@@ -39,9 +38,10 @@ body 	{
 	position:	fixed;
 	height:		100%;
 	overflow:	auto; 
-
 }
-
+li {
+	list-style-type: none;
+}
 li a	{
 	text-decoration: none;
 	display:	block;
@@ -53,48 +53,40 @@ li a	{
 .content	{
 	margin-left: 25%;
 	padding:	1px 16px;
-	height:		1000px;
 }		
 
 aside	{
-    flex-grow: 1;
-    height:1200px;
+    flex-grow: 	1;
+    position: 	left;
+    float:		left;
 }
-body { 	
-    	background-image:url("./resources/images/background2.jpg");
-    	background-attachment: fixed, scroll;
-    	background-repeat:no-repeat;
-   	 	background-size:cover;
-		}
-
-		#class {
-		background-color:	#FFFFFF;
-		text-align:			center;
-		border-radius:		10px;
-		padding: 30px 30px 30px 30px;
-    	margin-top:		150PX ;
-    	
-		margin-bottom: 150px;
-		}
 </style>
 </head>
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
 	<div class="container" id="class">
-			<h2 class="title">MyPage</h2>
+		<h2 class="title">MyPage</h2>
 		<div id="contents" class="submenu">
-			<hr/>
-			<aside>
-			<ul class="tab">
-				<li class='tabmenu'><a href="#">구매내역</a></li>
-				<li class='tabmenu'><a href="#">찜한 게시물</a></li>
-				<li class='tabmenu'><a href="#">내가 쓴 게시물</a></li>
-				<li class='tabmenu'><a href="#">회원정보수정</a></li>
-			</ul>
-			</aside>
-		</div>
-		<div id="content">
-		<h2>아리랑</h2>
+		<hr/>
+		<aside>
+		<h3>MyPage</h3>
+		<ul class="tab">
+			<li class='tabmenu'><a href="#">구매내역</a></li>
+			<li class='tabmenu'><a href="#">찜한 게시물</a></li>
+			<li class='tabmenu'><a href="#">내가 쓴 게시물</a></li>
+			<li class='tabmenu'><a href="#">회원정보수정</a></li>
+		</ul>
+		</aside>
+		<section class="content">
+			<article> 
+				<img style="height:100px; width:100px; vertical-align:top;" src="./resources/images/alcohol.png" border="0">
+				<h2>${member.name}</h2><h2>님</h2>
+			</article>
+			<article>
+				<button></button>
+				<button></button>
+			</article>
+		</section>
 		</div>
 	</div>
 	<%@ include file="./WEB-INF/views/include/footer.jsp" %>

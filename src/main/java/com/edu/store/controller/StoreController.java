@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping(value="/shopping")
-public class ShoppingController {
-	private static final Logger logger = LoggerFactory.getLogger(ShoppingController.class);
+public class StoreController {
+	private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
 	
 	// 장바구니 연결 Controller
 	@RequestMapping(value="/cart", method=RequestMethod.GET)
@@ -32,4 +32,7 @@ public class ShoppingController {
 		mav.setViewName(viewName);
 		return mav;
 	}	// End shoppingOrder method
+	
+	
+	
 }

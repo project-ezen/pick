@@ -1,13 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>아이디 찾기</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <%@ include file="./WEB-INF/views/include/header.jsp" %>
     <style>
         h3 {
             border-bottom: 2px solid gray;
@@ -15,14 +14,14 @@
         }
         .input-width {
             max-width: 350px; 
-            margin-left: 130px;
+            margin-left: 450px;
         }
         .name-input {
             max-width: 225px; 
         }
         .radio-label { 
             text-align: left;
-            padding-left: 100px;
+            padding-left: 450px;
         }
         .phone-container, .email-container, .confirm-container {
             display: flex; 
@@ -35,12 +34,10 @@
         .phone-button .email-button, .confirm-button {
             flex: 1; 
         }
-        .confirm-button {
-            max-width: px; 
-        }
     </style>
 </head>
 <body>
+<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
     <div class="container">
         <h3 class="text-center">아이디 찾기</h3><br>
         <div class="radio radio-label">
@@ -100,5 +97,6 @@
             </div>
         </div>
     </div>
+    <%@ include file="./WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
