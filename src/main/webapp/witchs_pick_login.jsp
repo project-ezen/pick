@@ -55,12 +55,16 @@
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
     <div class="login" >
+    	
         <div>
             <div class="login-header">
                 <h1 class="text-center">Login</h1><br><br>
             </div>
             <div>
-                <form id="login-form">
+                <form method="post" action="witchs_pick_login" id="login-form">
+                
+                	<!-- 로그인을 하지 않고 들어온 경우 -->
+                	<c:if text="${member == null}">
                     <div class="form-group">
                         <div>
                             <div>
@@ -93,19 +97,28 @@
                             <a href="#">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
                         </div>
                     </div><br>
+                <div class="social-buttons">
+                    <button type="submit" class="btn btn-warning" id="kakao-login">카카오 로그인</button>
+                </div>
+                <div class="social-buttons">
+                    <button type="submit" class="btn btn-success" id="naver-login">네이버 로그인</button>
+                </div>
+                <div class="social-buttons">
+                    <button type="submit" class="btn btn-danger" id="google-login">구글 로그인</button>
+                </div>
+                </c:if>
                 </form>
-                <div class="social-buttons">
-                    <button class="btn btn-warning" id="kakao-login">카카오 로그인</button>
-                </div>
-                <div class="social-buttons">
-                    <button class="btn btn-success" id="naver-login">네이버 로그인</button>
-                </div>
-                <div class="social-buttons">
-                    <button class="btn btn-danger" id="google-login">구글 로그인</button>
-                </div>
             </div>
         </div>
     </div>
     <%@ include file="./WEB-INF/views/include/footer.jsp" %>
+    
+    <script>
+    	$(document).ready(function() {
+    		$("#submit").on("click", function() {
+    			
+    		});
+    	});
+    </script>
 </body>
 </html>
