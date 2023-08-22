@@ -80,6 +80,7 @@ aside	{
 			<section class="content">
 				<article> 
 					<img style="height:100px; width:100px;" src="./resources/images/alcohol.png">
+					<h2>{.nickname}님</h2>
 				</article>
 				<article>
 					<div>주문/결제</div>
