@@ -8,6 +8,7 @@
 <%@ include file="../include/header.jsp" %>
 	<title>Home</title>
 	<style>
+	
     /* 체크박스 크기 설정 */
     #info{
         width: 15px;
@@ -28,11 +29,26 @@
     #info:hover, #info_s:hover {
         cursor: default;
     }
+    
+    /* 배경 화면 */
+	body { 	
+	    background-image:url("/resources/images/background2.jpg");
+	    background-attachment: fixed, scroll;
+	    background-repeat:no-repeat;
+	    background-size:cover;
+	}
+	
+	#class {
+		background-color: #EBFBFF;
+		padding: 10px 0;
+	}
+	
 </style>
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 <br/><br/>
+<div class="container" id="class">
     <section class="container text-center" id="ff">
         <div><h1>주문하기</h1></div>
         <br/>
@@ -254,6 +270,8 @@
             </div>
         </form>
     </section>
+    </div>
+    <br/>
     <%@ include file="../include/footer.jsp" %>
 </body>
 <script>

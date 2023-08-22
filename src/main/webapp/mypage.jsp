@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,6 +80,7 @@ aside	{
 			<section class="content">
 				<article> 
 					<img style="height:100px; width:100px;" src="./resources/images/alcohol.png">
+					<h2>{.nickname}님</h2>
 				</article>
 				<article>
 					<div>주문/결제</div>
