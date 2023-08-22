@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.edu.member.controller.MemberController;
 import com.edu.sole.DTO.SolePageMaker;
 import com.edu.sole.DTO.SoleSearchCriteria;
 import com.edu.sole.DTO.liveSoleDTO;
