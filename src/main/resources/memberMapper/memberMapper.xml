@@ -23,10 +23,15 @@
 		SET		passwd			= #{passwd},
 				repasswd		= #{repasswd},
 				name			= #{name},
+				nickname		= #{nickname},
 				phoneNumber		= #{phoneNumber},
+				gender			= #{gender},
 				zipcode			= #{zipcode},
-				address1		= #{address1},
-				addressdetail	= #{addressdetail}
+				gender			= #{gender},
+				address			= #{address},
+				addressdetail	= #{addressDetail},
+				birthdate		= #{birthdate}
+				
 		WHERE	id				= #{id}
 	</update>
 	
@@ -41,8 +46,8 @@
 	<!-- 회원 가입 POST -->
 	<insert id="insert" parameterType="com.edu.member.dto.MemberDTO">
 		INSERT INTO member
-				(id,passwd,repasswd, name,nickname, phoneNumber, gender, zipcode, address1, addressdetail,reg_date)
-		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name},#{nickname}, #{phoneNumber},#{gender}, #{zipcode}, #{address1}, #{addressdetail} , sysdate)
+				(id,passwd,repasswd, name,nickname, phoneNumber, gender,reg_date, gender, zipcode, address, addressDetail, birthdate)
+		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name},#{nickname}, #{phoneNumber},#{gender}, sysdate, #{gender}, #{zipcode}, #{address}, #{addressDetail}, #{birthdate})
 	</insert>
 	
 	

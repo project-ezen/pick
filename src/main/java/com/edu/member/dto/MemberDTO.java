@@ -8,11 +8,13 @@ public class MemberDTO {
 	private	String	repasswd;
 	private	String	name;
 	private String 	nickname;
-	private int		phoneNumnber; 
+	private int		phoneNumnber;
+	private String 	gender;
 	private	Date	reg_date;
 	private String  zipcode;
 	private	String	address1;
 	private	String	addressDetail;
+	private Date 	birthdate;
 	
 	public String getId() {
 		return id;
@@ -50,6 +52,12 @@ public class MemberDTO {
 	public void setPhoneNumnber(int phoneNumnber) {
 		this.phoneNumnber = phoneNumnber;
 	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	public Date getReg_date() {
 		return reg_date;
 	}
@@ -74,13 +82,23 @@ public class MemberDTO {
 	public void setAddressDetail(String addressDetail) {
 		this.addressDetail = addressDetail;
 	}
+	public Date getBirthdate() {
+		return birthdate;
+	}
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate;
+	}
 	
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", passwd=" + passwd + ", repasswd=" + repasswd + ", name=" + name
-				+ ", nickname=" + nickname + ", phoneNumnber=" + phoneNumnber + ", reg_date=" + reg_date + ", zipcode="
-				+ zipcode + ", address1=" + address1 + ", addressDetail=" + addressDetail + "]";
+				+ ", nickname=" + nickname + ", phoneNumnber=" + phoneNumnber + ", gender=" + gender + ", reg_date="
+				+ reg_date + ", zipcode=" + zipcode + ", address1=" + address1 + ", addressDetail=" + addressDetail
+				+ ", birthdate=" + birthdate + "]";
 	}
+	
+	
+
 	
 	
 }
