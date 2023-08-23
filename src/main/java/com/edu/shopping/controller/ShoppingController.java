@@ -36,7 +36,9 @@ public class ShoppingController {
 		// 해당 회원 아이디가 가진 장바구니 번호 가져오기
 		int cartNumber = 1;
 		// 장바구니에 담긴 product List
-		List<ProductDisplayVO> cartList = shoppingService.cartProductsList(cartNumber);
+		String productList = "10001";
+		// product List속 상품 상세 정보
+		List<ProductDisplayVO> cartList = shoppingService.cartProductsList(productList);
 		
 		log.info("장바구니에 담긴 product List");
 		

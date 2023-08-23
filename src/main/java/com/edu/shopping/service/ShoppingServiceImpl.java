@@ -18,8 +18,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 	private ShoppingDAO shoppingDAO;
 	
 	@Override
-	public List<ProductDisplayVO> cartProductsList(int cartNumber) throws Exception {
-		return shoppingDAO.cartProductsList(cartNumber);
+	public List<ProductDisplayVO> cartProductsList(String productList) throws Exception {
+		return shoppingDAO.cartProductsList(productList);
 	}
 
 	@Override
