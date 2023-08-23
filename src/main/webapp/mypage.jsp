@@ -81,11 +81,12 @@ aside	{
 			<article> 
 				<img style="height:100px; width:100px; vertical-align:top;" src="./resources/images/alcohol.png" border="0">
 				<h2>${member.name}</h2><h2>님</h2>
-				<h3>djfksla</h3>
+				<h3>adsadasdsad</h3>
 			</article>
 			<article>
 				<button>주문내역</button>
         <button>찜한 게시물</button>
+
 			</article>
 		</section>
 		</div>
