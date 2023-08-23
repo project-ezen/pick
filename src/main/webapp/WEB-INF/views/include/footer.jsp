@@ -5,39 +5,53 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=divice-width, initial-scale=1">
-	<title>html</title>
+	<title>footer</title>
 
     <style>
         .logo {
             /* width: 100px; */
             text-align: center;
         }
+        
         .info {
             /* width: 580px; */
         }
+        
         .customer {
             /* width: 200px; margin-top: -20px; */
         }
+        
         .sns {
           /*  width: 270px; */
         }
+        
         html,body {
         padding: 0px;
         margin: 0px;
       	}
+<<<<<<< HEAD
+=======
+      	
+>>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
       	#footer_ft {
       	background-color: rgba(255,255,255,0.3);
       	padding: 10px 0px;
       	color: #fff;
+<<<<<<< HEAD
       	position: relative;
       	margin-bottom: 0px;
+=======
+>>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
       	}
       	
       	a {
       	color: inherit;
       	text-decoration: none;
       	}
+<<<<<<< HEAD
       	
+=======
+>>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
     	
     </style>
 </head>
