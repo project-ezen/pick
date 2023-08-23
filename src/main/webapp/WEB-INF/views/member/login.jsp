@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
-    <%@ include file="./WEB-INF/views/include/header.jsp" %>
+    <%@ include file="../include/header.jsp" %>
     <style>
     	body 	{ 	
 		   	background-image:url("./resources/images/background2.jpg");
@@ -52,7 +52,7 @@
     </style>
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
     <div class="login" >
     	
         <div>
@@ -107,7 +107,7 @@
             </div>
         </div>
     </div>
-    <%@ include file="./WEB-INF/views/include/footer.jsp" %>
+    <%@ include file="../include/footer.jsp" %>
     
     <script>
     	$(document).ready(function() {

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원 가입</title>
-    <%@ include file="./WEB-INF/views/include/header.jsp" %>
+    <%@ include file="../include/header.jsp" %>
     <style>
         .join-form {
             margin: auto;
@@ -41,7 +41,7 @@
     </style>
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
 	<div class="container">
 		<div class="join-form">
 			<h1 class="text-center">회원 가입</h1>
@@ -356,7 +356,7 @@
 			</form>
 		</div>
 	</div><br><br>
-	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+	<%@ include file="../include/footer.jsp" %>
 </body>
 
 
