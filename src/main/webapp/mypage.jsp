@@ -83,8 +83,9 @@ aside	{
 				<h2>${member.name}</h2><h2>님</h2>
 			</article>
 			<article>
-				<button></button>
-				<button></button>
+				<button>aaaaaaaa</button>
+				<button>bbbbbbbbb</button>
+				<h1>sfdsdf</h1>
 			</article>
 		</section>
 		</div>
