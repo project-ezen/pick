@@ -1,5 +1,6 @@
 package com.edu.shopping.dto;
 
+//ì‹¤ì–´ë‚˜ë¥´ëŠ” ê°’
 public class orderDTO {
 	private String receiver_name;
 	private int receiver_phonenum;
@@ -7,8 +8,8 @@ public class orderDTO {
 	private int cart_number;
 	private int final_price;
 	private int zipcode;
-	private String address;				// Áý ÁÖ¼Ò
-	private String address_detail;		// Áý »ó¼¼ ÁÖ¼Ò
+	private String address;				// ï¿½ï¿½ ï¿½Ö¼ï¿½
+	private String address_detail;		// ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö¼ï¿½
 	public String getReceiver_name() {
 		return receiver_name;
 	}

@@ -1,6 +1,6 @@
 package com.edu.shopping.dto;
 
-// ½Ç¾î³ª¸£´Â °ª
+//ì‹¤ì–´ë‚˜ë¥´ëŠ” ê°’
 public class CartDTO {
 	private int cart_number;
 	private String product_id;
