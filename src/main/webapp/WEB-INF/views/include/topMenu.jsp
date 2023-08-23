@@ -45,8 +45,7 @@ color: #fff;
                         <li><a href="#">list</a></li>
                     </ul>
                 </li>
-                <li><a href="#">My Own Recipe</a></li>
-                <li><a href="#">Board</a></li>
+                <li><a href="${path }/board/articleList">My Own Recipe</a></li>
                 <li><a href="${path }/shopping/cart">Store</a></li>
                 
                 <li id="user_information_small">

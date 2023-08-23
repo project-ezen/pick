@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>글쓰기</title>
-<%@ include file="./WEB-INF/views/include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
@@ -19,14 +19,6 @@ input.reon {
 
 label {
 	font-size: 18px;
-}
-
-
-.ck.ck-editor {
-   	max-width: 600px;
-}
-.ck-editor__editable {
-    min-height: 300px;
 }
 
 .btn_sub {
@@ -53,7 +45,7 @@ color: #fff;
 
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
 <br/><br/>
 <div class="container">
 	<form class="form-horizontal" action="#" method="post">
@@ -80,7 +72,7 @@ color: #fff;
 		<div class="form-group">
 			<label class="control-label col-sm-3">내용</label>
 			<div class="col-sm-6">
-				<textarea id="classic" name="editordata"></textarea>
+				<textarea class="form-control" rows="15"></textarea>
 			</div>
 		</div>
 		<hr/>
@@ -96,12 +88,9 @@ color: #fff;
 </div>
 <br/>
 <script>
-ClassicEditor.create( document.querySelector( '#classic' ), {
-    removePlugins: [ 'Heading' ],
-    language: "ko"
-  } );
+
 </script>
 
-<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
