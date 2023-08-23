@@ -22,44 +22,12 @@ body 	{
    	margin-top:		150PX ;
 	margin-bottom: 150px;
 }
-		
-.tab 	{
-	width: 207px;
-  	display: inline-block;
-  	vertical-align: top;
-  	margin-top: 50px;
-}
-
-.ul	{
-	list-style-type: none;
-	width: 		25%;
-	padding: 	0;
-	margin: 	0;
-	position:	fixed;
-	height:		100%;
-	overflow:	auto; 
-}
-li {
-	list-style-type: none;
-}
-li a	{
-	text-decoration: none;
-	display:	block;
-	color:		#000;
-	padding: 	8px 15px 8px 15px;
-	font-weight: bold;
-}
 
 .content	{
 	margin-left: 25%;
 	padding:	1px 16px;
 }		
 
-aside	{
-    flex-grow: 	1;
-    position: 	left;
-    float:		left;
-}
 </style>
 </head>
 <body>
@@ -68,25 +36,16 @@ aside	{
 		<h2 class="title">MyPage</h2>
 		<div id="contents" class="submenu">
 		<hr/>
-		<aside>
-		<h3>MyPage</h3>
-		<ul class="tab">
-			<li class='tabmenu'><a href="#">구매내역</a></li>
-			<li class='tabmenu'><a href="#">찜한 게시물</a></li>
-			<li class='tabmenu'><a href="#">내가 쓴 게시물</a></li>
-			<li class='tabmenu'><a href="#">회원정보수정</a></li>
-		</ul>
-		</aside>
 		<section class="content">
 			<article> 
 				<img style="height:100px; width:100px; vertical-align:top;" src="./resources/images/alcohol.png" border="0">
 				<h2>${member.name}</h2><h2>님</h2>
-				<h3>태규</h3>
+				
 			</article>
 			<article>
 				<button>주문내역</button>
         		<button>찜한 게시물</button>
-
+				<
 			</article>
 		</section>
 		</div>
