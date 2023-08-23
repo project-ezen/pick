@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <style>
 body {
-background-image: url("./resources/images/background2.jpg");
+background-image: url("../../resources/images/background2.jpg");
 background-attachment : fixed, scroll;
 background-repeat: no-repeat;
 background-size: cover;
