@@ -13,7 +13,6 @@ public class MemberDTO {
 	private String  zipcode;
 	private	String	address1;
 	private	String	addressDetail;
-	private	String	email;
 	
 	public String getId() {
 		return id;
@@ -76,18 +75,13 @@ public class MemberDTO {
 	public void setAddressDetail(String addressDetail) {
 		this.addressDetail = addressDetail;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
 	
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", passwd=" + passwd + ", repasswd=" + repasswd + ", name=" + name
 				+ ", nickname=" + nickname + ", phoneNumber=" + phoneNumber + ", reg_date=" + reg_date + ", zipcode="
-				+ zipcode + ", address1=" + address1 + ", addressDetail=" + addressDetail + ", email=" + email + "]";
+				+ zipcode + ", address1=" + address1 + ", addressDetail=" + addressDetail + "]";
 	}
 	
 	

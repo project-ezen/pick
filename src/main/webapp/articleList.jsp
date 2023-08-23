@@ -26,7 +26,7 @@ background-attachment : fixed, scroll;
 background-repeat: no-repeat;
 background-size: cover;
 }
-
+ 
 .search {
 width: 700px;
 position: relative;

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class boardDTO {
 	
-	private int id;	// 연결할 
+	private int id;	// 연결할 고유글번호
 	private String title;
 	private String content;
 	private int articleNO;	//글순번
