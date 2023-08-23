@@ -22,5 +22,9 @@ background-size: cover;
 }
 .container {
 background-color: #fff;
+<<<<<<< HEAD
+min-height: 600px;
+=======
+>>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
 }
 </style>

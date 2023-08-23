@@ -26,27 +26,37 @@
         }
         
         html,body {
-        height: 100%;
         padding: 0px;
         margin: 0px;
       	}
+<<<<<<< HEAD
+=======
       	
+>>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
       	#footer_ft {
       	background-color: rgba(255,255,255,0.3);
       	padding: 10px 0px;
       	color: #fff;
+<<<<<<< HEAD
+      	position: relative;
+      	margin-bottom: 0px;
+=======
+>>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
       	}
       	
       	a {
       	color: inherit;
       	text-decoration: none;
       	}
+<<<<<<< HEAD
+      	
+=======
+>>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
     	
     </style>
 </head>
 <body>
     <footer class="jumbotron" id="footer_ft">
-        <div class="container-fluid" id="footer_foot">
             <div class="row" style="width: 100%; overflow: hidden;" id="footer_ff">
                 <div class="col-sm-3 logo"><h2><a href="#"><img src="./images/alcohol.png"></a></h2></div>
                 <div class="col-sm-3 info">
@@ -80,7 +90,6 @@
                     <img style="height: 45px; width: 45px;" src="${path}/resources/images/instagram.png">
                 </div>
             </div>
-        </div>
     </footer>
 </body>
 <script>
