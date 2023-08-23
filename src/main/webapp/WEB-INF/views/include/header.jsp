@@ -13,3 +13,14 @@
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
+<style>
+body {
+background-image: url("./resources/images/background2.jpg");
+background-attachment : fixed, scroll;
+background-repeat: no-repeat;
+background-size: cover;
+}
+.container {
+background-color: #fff;
+}
+</style>

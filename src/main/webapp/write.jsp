@@ -105,7 +105,7 @@ color: #fff;
 		</div>
 	</form>
 </div>
-
+<br/>
 <script>
 ClassicEditor.create( document.querySelector( '#classic' ), {
     removePlugins: [ 'Heading' ],
