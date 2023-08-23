@@ -101,7 +101,7 @@ border: 1px solid #656562;
 		</table>		
 	</div>
 </div>
-
+<br/>
 <%@ include file="./WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
