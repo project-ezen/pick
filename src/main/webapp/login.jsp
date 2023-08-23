@@ -29,9 +29,9 @@
             margin-top: 15px;
         }
         
-        #kakao-login,
-        #naver-login,
-        #google-login {
+        #kakaoLogin,
+        #naverLogin,
+        #googleLogin {
             border-radius: 10px;
             width: 275px;
         }
@@ -45,7 +45,7 @@
             border-radius: 10px 0 0 10px;
         }
         
-        #login-button {
+        #loginButton {
             width: 300px;
             border-radius: 10px;
         }
@@ -54,15 +54,14 @@
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
     <div class="login" >
+    	
         <div>
             <div class="login-header">
                 <h1 class="text-center">Login</h1><br><br>
             </div>
             <div>
-                <form method="post" action="witchs_pick_login" id="login-form">
+                <form method="post" action="/member/login" id="loginForm">
                 
-                	<!-- 로그인을 하지 않고 들어온 경우 -->
-                	<!--<c:if text="${member == null}">-->
                     <div class="form-group">
                         <div>
                             <div>
@@ -70,7 +69,7 @@
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-user"></span>
                                     </span>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="User Name">
+                                    <input type="text" class="form-control" id="id" name="id" maxlength="20" placeholder="User ID">
                                 </div>
                             </div>
                             <div>
@@ -78,33 +77,32 @@
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-lock"></span>
                                     </span>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                    <input type="password" class="form-control" id="passwd" name="passwd" maxlength="20" placeholder="Password">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="login-button">
-                            <button type="submit" class="btn btn-primary" id="login-button" >로그인</button>
+                            <button type="submit" class="btn btn-primary" id="loginButton" >로그인</button>
                         </div>
                     </div>
                     <div class="form-group">                            
                         <div class="text-center">
-                            <a href="#">아이디 찾기&nbsp;&nbsp;</a> |
-                            <a href="#">&nbsp;&nbsp;비밀번호 찾기&nbsp;&nbsp;</a> |
-                            <a href="#">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
+                            <a href="/findId.jsp">아이디 찾기&nbsp;&nbsp;</a> |
+                            <a href="/findPassword.jsp">&nbsp;&nbsp;비밀번호 찾기&nbsp;&nbsp;</a> |
+                            <a href="/join.jsp">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
                         </div>
                     </div><br>
                 <div class="social-buttons">
-                    <button type="submit" class="btn btn-warning" id="kakao-login">카카오 로그인</button>
+                    <button class="btn btn-warning" id="kakaoLogin">카카오 로그인</button>
                 </div>
                 <div class="social-buttons">
-                    <button type="submit" class="btn btn-success" id="naver-login">네이버 로그인</button>
+                    <button class="btn btn-success" id="naverLogin">네이버 로그인</button>
                 </div>
                 <div class="social-buttons">
-                    <button type="submit" class="btn btn-danger" id="google-login">구글 로그인</button>
+                    <button class="btn btn-danger" id="googleLogin">구글 로그인</button>
                 </div>
-                </c:if>
                 </form>
             </div>
         </div>
@@ -113,10 +111,26 @@
     
     <script>
     	$(document).ready(function() {
-    		$("#submit").on("click", function() {
+    		// 로그인 버튼을 눌렀을 경우
+    		$("#loginButton").on("click", function() {
+    			// 아이디와 비밀번호는 꼭 입력해야 한다.
+    			// 아이디와 비밀번호는 4자리 이상 입력해야 한다.
     			
+    			if($("#id").val() == "") {
+    				alert("이메일을 입력해주세요.");
+    				$("#Id").focus();
+    				return false;
+    			}
+    			
+    			if($("#passwd").val() == "" || $("#passwd").val().length < 4) {
+    				alert("비밀번호는 4자리 이상입력하셔야 합니다.");
+    				$("#passwd").focus();
+    				return false;
+    			}
+    			
+    			document.getElementById("loginForm").submit();
+    			return false;
     		});
-    	});
     </script>
 </body>
 </html>

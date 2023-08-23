@@ -31,7 +31,7 @@
         .phone-input, .email-input, .confirm-input {
             flex: 2; 
         }
-        .phone-button .email-button, .confirm-button {
+        .phone-button, .email-button, .confirm-button {
             flex: 1; 
         }
     </style>
