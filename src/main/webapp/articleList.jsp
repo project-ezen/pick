@@ -165,12 +165,15 @@ text-align: center;
 span {
 font-size: 15px;
 }
+.container {
+padding: 0px;
+}
 
 </style>
 </head>
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
-<div class="container center" style="background-color: white;">
+<div class="container" style="background-color: white;">
 	<h2 align="center">나만의 레시피</h2>
 	<br/>
 		<div class="search">
@@ -182,8 +185,8 @@ font-size: 15px;
 				</select>
 			</div>
 		</div>
-	<div class="container center">
-	<div style="width: 380px; height: 230px; float: left;">
+	<div class="c">
+	<div style="width: 370px; height: 230px; float: left;">
 		<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
 			<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
 			<div class="lele">
@@ -199,27 +202,27 @@ font-size: 15px;
 			</div>
 		</div>
 	</div>
-	<div style="width: 380px; height: 230px; float: left;">
+	<div style="width: 370px; height: 230px; float: left;">
 		<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
 			<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
 		</div>
 	</div>
-	<div style="width: 380px; height: 230px; float: left;">
+	<div style="width: 370px; height: 230px; float: left;">
 		<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
 			<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
 		</div>
 	</div>
-	<div style="width: 380px; height: 230px; float: left;">
+	<div style="width: 370px; height: 230px; float: left;">
 		<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
 			<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
 		</div>
 	</div>
-	<div style="width: 380px; height: 230px; float: left;">
+	<div style="width: 370px; height: 230px; float: left;">
 		<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
 			<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
 		</div>
 	</div>
-	<div style="width: 380px; height: 230px; float: left;">
+	<div style="width: 370px; height: 230px; float: left;">
 		<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
 			<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
 		</div>

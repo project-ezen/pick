@@ -14,6 +14,9 @@
         display: block;
     }
 }
+.container-fluid {
+color: #fff;
+}
 </style>
 <section class="navbar navbar-light fixed-top">
     <div class="container-fluid">

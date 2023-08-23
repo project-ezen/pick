@@ -33,6 +33,7 @@
         .phone-button, .confirm-button {
             flex: 1; 
         }
+        
     </style>
 </head>
 <body>

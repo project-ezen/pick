@@ -22,20 +22,31 @@
           /*  width: 270px; */
         }
         html,body {
-        height: 100%;
         padding: 0px;
         margin: 0px;
       	}
+      	#footer_ft {
+      	background-color: rgba(255,255,255,0.3);
+      	padding: 10px 0px;
+      	color: #fff;
+      	position: relative;
+      	margin-bottom: 0px;
+      	}
+      	
+      	a {
+      	color: inherit;
+      	text-decoration: none;
+      	}
+      	
     	
     </style>
 </head>
 <body>
     <footer class="jumbotron" id="footer_ft">
-        <div class="container-fluid" id="footer_foot">
             <div class="row" style="width: 100%; overflow: hidden;" id="footer_ff">
                 <div class="col-sm-3 logo"><h2><a href="#"><img src="./images/alcohol.png"></a></h2></div>
-
                 <div class="col-sm-3 info">
+				<br/>
                     <b>(주)마녀의 Pick</b><br>
                     CEO:이동범<br>
                     고객센터:070-1111-1111<br>
@@ -60,12 +71,11 @@
                 <div class="col-sm-3 sns">
                     <h3><b>SNS</b></h3>
                     <br>
-                    <img style="height: 50px; width: 50px;" src="${path}/resources/images/youtube.png">
-                    <img style="height: 50px; width: 50px;" src="${path}/resources/images/facebook.png">
-                    <img style="height: 50px; width: 50px;" src="${path}/resources/images/instagram.png">
+                    <img style="height: 45px; width: 45px;" src="${path}/resources/images/youtube.png">
+                    <img style="height: 45px; width: 45px;" src="${path}/resources/images/facebook.png">
+                    <img style="height: 45px; width: 45px;" src="${path}/resources/images/instagram.png">
                 </div>
             </div>
-        </div>
     </footer>
 </body>
 <script>
