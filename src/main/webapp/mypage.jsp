@@ -85,6 +85,7 @@ aside	{
 			<article>
 				<button>주문내역</button>
 				<button>찜한 게시물</button>
+				<button>내가쓴 게시물</button>
 				
 			</article>
 		</section>
