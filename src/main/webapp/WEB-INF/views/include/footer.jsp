@@ -29,29 +29,20 @@
         padding: 0px;
         margin: 0px;
       	}
-<<<<<<< HEAD
-=======
       	
->>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
       	#footer_ft {
       	background-color: rgba(255,255,255,0.3);
       	padding: 10px 0px;
       	color: #fff;
-<<<<<<< HEAD
+
       	position: relative;
       	margin-bottom: 0px;
-=======
->>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
       	}
       	
       	a {
       	color: inherit;
       	text-decoration: none;
       	}
-<<<<<<< HEAD
-      	
-=======
->>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
     	
     </style>
 </head>

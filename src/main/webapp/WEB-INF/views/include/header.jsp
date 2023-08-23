@@ -12,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <style>
 body {
 background-image: url("./resources/images/background2.jpg");
@@ -22,9 +22,7 @@ background-size: cover;
 }
 .container {
 background-color: #fff;
-<<<<<<< HEAD
 min-height: 600px;
-=======
->>>>>>> 2d447f7ccf5eff833bc95ecf30f04e0ea900f0e4
+
 }
 </style>
