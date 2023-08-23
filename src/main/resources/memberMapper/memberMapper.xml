@@ -12,6 +12,7 @@
 		AND		passwd	= #{passwd}
 	</select>
 		
+		<!-- 회원상세정보 -->
 	<select id="detail" parameterType="String" resultType="com.edu.member.dto.MemberDTO">
 		SELECT * FROM member WHERE id = #{id}
 	</select>
@@ -19,22 +20,16 @@
 	<!-- 회원 아이디에 해당하는 비밀번호, 비밀번호 확인, 이름, 전화번호, 주소를 변경한다.  -->
 	<update id="update" parameterType="com.edu.member.dto.MemberDTO">
 		UPDATE	member
-		SET		passwd		= #{passwd},
-				repasswd	= #{repasswd},
-				name		= #{name},
-				tel			= #{tel},
-				zipcode		= #{zipcode},
-				address1	= #{address1},
-				address2	= #{address2},
-				email		= #{email}
-		WHERE	id			= #{id}
+		SET		passwd			= #{passwd},
+				repasswd		= #{repasswd},
+				name			= #{name},
+				phoneNumber		= #{phoneNumber},
+				zipcode			= #{zipcode},
+				address1		= #{address1},
+				addressdetail	= #{addressdetail}
+		WHERE	id				= #{id}
 	</update>
 	
-	<!-- 아이디에 해당하는 회원 정보를 삭제한다. -->
-	<delete id="delete" parameterType="String">
-		DELETE	FROM	member
-		WHERE	id		= #{id}
-	</delete>
 	
 	<!-- 회원 아이디 중복 검사 -->
 	<select id="idCheck" parameterType="com.edu.member.dto.MemberDTO" resultType="int">
@@ -46,8 +41,8 @@
 	<!-- 회원 가입 POST -->
 	<insert id="insert" parameterType="com.edu.member.dto.MemberDTO">
 		INSERT INTO member
-				(id, passwd, repasswd, name, reg_date, tel, zipcode, address1, address2, email)
-		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name}, sysdate, #{tel}, #{zipcode}, #{address1}, #{address2}, #{email})
+				(id,passwd,repasswd, name,nickname, phoneNumber, gender, zipcode, address1, addressdetail,reg_date)
+		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name},#{nickname}, #{phoneNumber},#{gender}, #{zipcode}, #{address1}, #{addressdetail} , sysdate)
 	</insert>
 	
 	

@@ -95,7 +95,7 @@ public class MemberController {
 	
 	
 	//아이디 중복 검사 post
-	@ResponseBody
+	/*@ResponseBody
 	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
 	public int idCheck(MemberDTO memberDTO) throws Exception {
 		
@@ -106,7 +106,7 @@ public class MemberController {
 		
 		// result 값 : 1이면 아이디에 해당하는 정보가 이미 존재
 		//			   0이면 아이디에 해당하는 정보가 존재하지 않는다.
-		return result;
+		return result;*/
 	
 	
 	//로그아웃 get
