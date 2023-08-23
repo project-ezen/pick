@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h2>주문 상세 내역</h2>
 </body>
 </html>
