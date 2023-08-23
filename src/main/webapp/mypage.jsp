@@ -36,18 +36,19 @@ body 	{
 		<h2 class="title">MyPage</h2>
 		<div id="contents" class="submenu">
 		<hr/>
-		<section class="content">
-			<article> 
+		<div class="content">
+			<div> 
 				<img style="height:100px; width:100px; vertical-align:top;" src="./resources/images/alcohol.png" border="0">
 				<h2>${member.name}</h2><h2>님</h2>
 				
-			</article>
-			<article>
+			</div>
+			<div>
 				<button>주문내역</button>
         		<button>찜한 게시물</button>
-				<
-			</article>
-		</section>
+				<button>내가 쓴 게시물</button>
+				<button>회원정보 수정</button>
+			</div>
+		</div>
 		</div>
 	</div>
 	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
