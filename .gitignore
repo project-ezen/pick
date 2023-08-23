@@ -10,6 +10,7 @@ tmp/
 *.swp
 *~.nib
 local.properties
+.settings/
 .loadpath
 .recommenders
 
@@ -68,6 +69,7 @@ local.properties
 
 ### Java ###
 # Compiled class file
+*.class
 
 # Log file
 *.log
