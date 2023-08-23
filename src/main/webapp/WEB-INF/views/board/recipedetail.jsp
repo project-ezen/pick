@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>레시피 상세</title>
-<%@ include file="./WEB-INF/views/include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
@@ -41,7 +41,7 @@ border: 1px solid #656562;
 </style>
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
 
 <div class="container">
 	<h2 style="text-align: center;">나만의 레시피 상세</h2>
@@ -102,6 +102,6 @@ border: 1px solid #656562;
 	</div>
 </div>
 <br/>
-<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

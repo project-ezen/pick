@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>listArticle</title>
-<%@ include file="./WEB-INF/views/include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <style>
 
 
@@ -20,12 +20,6 @@ padding: 0px;
 margin: 15px 15px;
 }
 
-body {
-background-image: url("./resources/images/background2.jpg");
-background-attachment : fixed, scroll;
-background-repeat: no-repeat;
-background-size: cover;
-}
  
 .search {
 width: 700px;
@@ -172,7 +166,7 @@ padding: 0px;
 </style>
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
 <div class="container" style="background-color: white;">
 	<h2 align="center">나만의 레시피</h2>
 	<br/>
@@ -202,6 +196,11 @@ padding: 0px;
 	</div> 
 </div>
 <br/>
-<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+<%@ include file="../include/footer.jsp" %>
+<script>
+function wbtn(){
+	
+}
+</script>
 </body>
 </html>
