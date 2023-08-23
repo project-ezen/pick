@@ -186,7 +186,7 @@ padding: 0px;
 			</div>
 		</div>
 	<div class="list">
-		
+	
 	</div>
 	<button type="button" class="wbtn" onclick="wbtn">글쓰기</button>
 	<div class="page_wrap">
