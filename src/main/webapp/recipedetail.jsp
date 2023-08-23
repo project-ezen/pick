@@ -43,7 +43,7 @@ border: 1px solid #656562;
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
 
-<div class="container center">
+<div class="container">
 	<h2 style="text-align: center;">나만의 레시피 상세</h2>
 	<br/>
 	<div>

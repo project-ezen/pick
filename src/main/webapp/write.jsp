@@ -12,17 +12,6 @@
 
 <style>
 
-body {
-background-image: url("./resources/images/background2.jpg");
-background-attachment : fixed, scroll;
-background-repeat: no-repeat;
-background-size: cover;
-}
-
-.container {
-background-color: #fff;
-}
-
 input.reon {
 	border: none;
 	outline: none;
