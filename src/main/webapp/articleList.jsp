@@ -199,7 +199,7 @@ padding: 0px;
 	      <a href="#">5</a>
 	      <a class="arrow next" href="#"><i class="bi bi-caret-right-fill"></i></a>
 	   </div>
-	</div>
+	</div> 
 </div>
 <br/>
 <%@ include file="./WEB-INF/views/include/footer.jsp" %>
