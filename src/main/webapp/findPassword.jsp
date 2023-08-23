@@ -12,11 +12,10 @@
             padding-bottom: 10px; 
         }
         .input-width {
-            max-width: 350px; 
-            margin-left: 450px;
+            max-width: 350px;
         }
         .name-input {
-            max-width: 225px; 
+            
         }
         .radio-label { 
             text-align: left;
@@ -33,19 +32,20 @@
         .phone-button, .confirm-button {
             flex: 1; 
         }
-        
     </style>
 </head>
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
-    <div class="container">
+    <div class="container" align="center">
         <h3 class="text-center">비밀번호 찾기</h3><br>
         <div class="radio radio-label">
             <label><input type="radio" name="findMethod" checked>휴대폰 번호로 찾기</label>
         </div>
-        <div class="form-group input-width name-input">
-            <label>이름</label>
-            <input type="text" class="form-control">
+        <div class="form-group input-width name-input row">
+	            <div style="padding-right:124px;">
+	            	<label>이름</label>
+	            	<input type="text" class="form-control">
+	            </div>
         </div>
         <div class="form-group input-width phone-container">
             <div class="phone-input"> 
@@ -54,7 +54,7 @@
             </div>&nbsp;&nbsp;&nbsp;
             <div class="phone-button"> 
                 <label>&nbsp;</label> 
-                <button class="btn btn-Secondary btn-block">인증번호 받기</button>
+                <button class="btn btn-secondary btn-block">인증번호 받기</button>
             </div>
         </div>
         <div class="form-group input-width confirm-container">
@@ -68,7 +68,6 @@
             </div>
         </div>
     </div>
-    <br/>
 <%@ include file="./WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
