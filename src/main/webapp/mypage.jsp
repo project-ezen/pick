@@ -83,8 +83,8 @@ aside	{
 				<h2>${member.name}</h2><h2>님</h2>
 			</article>
 			<article>
-				<button>aaaaaaaa</button>
-				<button>bbbbbbbbb</button>
+				<button>주문내역</button>
+				<button>찜한 게시물</button>
 				
 			</article>
 		</section>
