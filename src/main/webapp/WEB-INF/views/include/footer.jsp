@@ -34,12 +34,11 @@
       	background-color: rgba(255,255,255,0.3);
       	padding: 10px 0px;
       	color: #fff;
-
       	position: relative;
       	margin-bottom: 0px;
       	}
       	
-      	a {
+      	footer {
       	color: inherit;
       	text-decoration: none;
       	}
@@ -49,7 +48,7 @@
 <body>
     <footer class="jumbotron" id="footer_ft">
             <div class="row" style="width: 100%; overflow: hidden;" id="footer_ff">
-                <div class="col-sm-3 logo"><h2><a href="#"><img src="./images/alcohol.png"></a></h2></div>
+                <div class="col-sm-3 logo"><h2><a class="footer" href="/"><img src="./images/alcohol.png"></a></h2></div>
                 <div class="col-sm-3 info">
 				<br/>
                     <b>(주)마녀의 Pick</b><br>
