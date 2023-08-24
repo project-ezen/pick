@@ -7,6 +7,11 @@
 <title>My page</title>
 <%@ include file="./WEB-INF/views/include/header.jsp" %>
 <style>
+@media ( min-width: 946px ) {
+  .set1 {
+  	width: auto;
+  }
+}
 
 body 	{ 	
    	background-image:url("./resources/images/background2.jpg");
@@ -22,18 +27,13 @@ body 	{
 	padding: 30px 30px 30px 30px;
    	margin-top:		150PX ;
 	margin-bottom: 150px;
-}
-
-.content	{
-	margin-left: 25%;
-	padding:	1px 16px;
-}		
+}	
 
 img { float: left; }
 
-.set1 { width: 1100px; height: 200px; background-color:	#C3E7FA; margin-right: 0px; border-radius:10px; }
+.set1 { width: 100%; height: 200px; background-color:	#C3E7FA; margin-right: 0px; border-radius:10px; }
 
-.set2 {width: 1100px; height: 200px; background-color:	#C3E7FA; margin-right: 0px; border-radius:10px; text-align: center; }
+.set2 {width: 100%; padding-bottom: 3%; background-color:	#C3E7FA; margin-right: 0px; border-radius:10px;}
 
 .nim { text-align : center; line-height : 200px; width: 70%; height: 200px; float: right; margin:0 auto; }
 
@@ -46,9 +46,9 @@ img { float: left; }
 	color:#fff;
 	font-family:Arial;
 	font-size:19px;
-	padding:24px 51px;
 	text-decoration:none;
-	display :inline-block;
+	margin: 50px 30px 30px 30px;
+	padding: 30px 30px;
 }
 .order:hover {
 	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
@@ -73,12 +73,10 @@ img { float: left; }
 		</div>
 		<hr/>
 		<div class="set2">
-			<div class="order">
-			<button>주문한 내역</button>
-			<button>찜한 레시피</button>
-			<button>내가 쓴 게시물</button>
-			<button>회원 정보 수정</button>
-			</div>
+			<button class="order" type="button">주문한 내역</button>
+			<button class="order" type="button">찜한 레시피</button>
+			<button class="order" type="button">내가 쓴 게시물</button>
+			<button class="order" type="button">회원 정보 수정</button>
 		</div>
 	</div>
 	<br/>
