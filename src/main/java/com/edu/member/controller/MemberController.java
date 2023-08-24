@@ -31,7 +31,7 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
-	
+	/*
 	//로그인 화면 get
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String getLogin(@RequestParam(value="action", required=false) String action, 
@@ -43,6 +43,7 @@ public class MemberController {
 		session.setAttribute("action", action);
 		return "/member/login";
 	}
+	*/
 	
 	//로그인 post => 있는지 확인
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -83,30 +84,47 @@ public class MemberController {
 		
 	}
 	
-	
+	/*
 	//회원가입 화면 get
 	@RequestMapping(value="/memberjoin", method=RequestMethod.GET)
 	public String memberInsertPet() throws Exception {
 		logger.info("회원 가입 화면 GET");
 		return "/member/memberjoin";
 	}
+	*/
 	
 	//회원가입 화면 post
-	
-	
-	//아이디 중복 검사 post
-	/*@ResponseBody
-	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
-	public int idCheck(MemberDTO memberDTO) throws Exception {
+	@RequestMapping(value="/join", method=RequestMethod.POST)
+	public String join(MemberDTO memberDTO) throws Exception {
 		
-		logger.info("아이디 중복 검사 : " + memberDTO);
-		
+		// 아이디(이메일)이 존재하는지 먼저 검사한다.
 		int result = memberService.idCheck(memberDTO);
-		logger.info("아이디 중복 검사 결과 : " + result);
 		
+		try {
+			if(result == 1) {
+				return "/member/join";
+			} else if(result == 0) {
+				memberService.join(memberDTO);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
+		
+		return "redirect:/mypage.jsp";
+		
+	}
+	
+	//닉네임 중복 검사
+	@ResponseBody
+	@RequestMapping(value="/nickCheck", method=RequestMethod.POST)
+	public int nickCheck(MemberDTO memberDTO) throws Exception {
+		
+		int result = memberService.nickCheck(memberDTO);
+
 		// result 값 : 1이면 아이디에 해당하는 정보가 이미 존재
 		//			   0이면 아이디에 해당하는 정보가 존재하지 않는다.
-		return result;*/
+		return result;
+	}	
 	
 	
 	//로그아웃 get

@@ -65,7 +65,7 @@
 					<div class="input-group">
 						<input type="text" class="form-control" id="nickname" name="nickname">
 						<span class="input-group-btn">
-							<button class="btn btn-info" type="button" id="checkNickname" onClick="fn_checkNickname">중복확인</button>
+							<button class="btn btn-info" type="button" id="nickCheck" onClick="fn_nickCheck">중복확인</button>
 						</span>
 					</div>
 				</div>
@@ -79,11 +79,11 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label">연락처</label>
-					<input type="text" class="form-control" id="tel" name="tel" placeholder="ex) 010-1234-5678">
+					<input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="ex) 010-1234-5678">
 				</div>
 				<div class="form-group">
 					<label class="control-label">생년월일</label>
-					<input type="date" class="form-control" id="birthdate" name="birthdate">
+					<input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="ex) 19980505">
 				</div>
 				<div class="form-group">
 					<label>성별</label><br>
@@ -361,6 +361,20 @@
 
 
 <script>
+function allCheck() {
+    var inputID = $('#id').val();
+    var infoChecked = $('#info').prop('checked');
+    var info1Checked = $('#info1').prop('checked');
+    
+    // 이메일 형식, 중복 여부, 약관 동의 여부를 확인하여 회원가입 버튼 활성화
+    if(inputID != "" && inputID.includes('@') && $(".msg").val() === "사용이 가능한 이메일입니다." && infoChecked && info1Checked) {
+        $(".joinButton").prop("disabled", false);
+    } else {
+        $(".joinButton").prop("disabled", true);
+    }
+}
+
+
 $(document).ready(function() {
 
 	// 회원가입취소 버튼을 누르면 
@@ -372,45 +386,88 @@ $(document).ready(function() {
     $("#id").on("input", function() {
         var inputID = $('#id').val();
 
-        // ajax
-        $.ajax
-            url:        "member/idCheck",
-            type:       "post",
-            dataType:   "json",
-            data:       {"id" : $('#id').val()},
-            success:    function(data) {
-                if(inputID = "" && !inputID.includes('@') && data == '0') {
+        $.ajax({
+            url: "member/idCheck",
+            type: "post",
+            dataType: "json",
+            data: {"id": inputID},
+            success: function(data) {
+                if (inputID === "" || !inputID.includes('@') || data === '0') {
                     $(".joinButton").prop("disabled", true);
-                    $(".joinButton").css("background-color", "#AAAAAA");
-                    document.getElementById("msg").value = "이메일 형식이 아닙니다.";
-                    
+                    $("#msg").value("이메일 형식이 아닙니다.");
                     $("#msg").css("background-color", "#ffcece");
-                    
-                } else if(inputID != "" && inputID.includes('@') && data == '0') {
-                    ${".joinButton"}.prop("disabled", false);
-                    $(".joinButton").css({"backgroundColor": "#4CAF50",
-                                    "backgroundImage": "none"});
-                    document.getElementById("msg").value = "사용이 가능한 이메일입니다.";
-                    
+                } else if (inputID !== "" && inputID.includes('@') && data === '0') {
+                    $(".joinButton").prop("disabled", false);
+                    $("#msg").value("사용이 가능한 이메일입니다.");
                     $("#msg").css("background-color", "#b0f6ac");
-                    
-                } else if(data == '1') {
+                } else if (data === '1') {
                     $(".joinButton").prop("disabled", true);
-                    $(".joinButton").css("background-color", "#AAAAAA");
-                    document.getElementById("msg").value = "이미 사용 중인 이메일입니다.";
-                    
+                    $("#msg").value("이미 사용 중인 이메일입니다.");
                     $("#msg").css("background-color", "#ffcece");
                 }
             },
             error: function(info) {
-
-            },
-            complete: function(info) {
             	
+			},
+            complete: function(info) {
+                allCheck();
             }
+        });
     });
+	
+	
+    $("#joinButton").on("click", function() {
+		// 아이디, 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
+		// 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
+		
+		if($("#id").val() == "") {
+			alert("아이디를 입력하셔야 합니다.");
+			$("#userID").focus();
+			return false;
+		}
+		if($("#passwd").val() == "") {
+			alert("비밀번호를 입력하셔야 합니다.");
+			$("#passwd").focus();
+			return false;
+		}
+		if($("#repasswd").val() == "") {
+			alert("비밀번호확인을 입력하셔야 합니다.");
+			$("re#passwd").focus();
+			return false;
+		}
+		if($("#name").val() == "") {
+			alert("이름을 입력하셔야 합니다.");
+			$("#name").focus();
+			return false;
+		}
+		if($("#nickname").val() == "") {
+			alert("닉네임을 입력하셔야 합니다.");
+			$("#nickname").focus();
+			return false;
+		}
+		if($("#phoneNumber").val() == "") {
+			alert("전화번호를 입력하셔야 합니다.");
+			$("#phoneNumber").focus();
+			return false;
+		}
+		if($("#birthdate").val() == "") {
+			alert("생년월일을 입력하셔야 합니다.");
+			$("#birthdate").focus();
+			return false;
+		}
+		if($("#address1").val() == "") {
+			alert("주소를 입력하셔야 합니다.");
+			$("#address1").focus();
+			return false;
+		}
+
+		document.getElementById("address").value = $("#address1").val();
+		
+	});
+	
 });
 </script>
+
 <script>
 	var smt = $("#submit");
 	var ccl = $("#cancel");
@@ -422,6 +479,7 @@ $(document).ready(function() {
 		ccl.on("click", function() {
 			$("#info").prop("checked", false);
 		});
+		allCheck();
 	});
 </script>
 <script>
@@ -435,7 +493,40 @@ $(document).ready(function() {
 		ccl1.on("click", function() {
 			$("#info1").prop("checked", false);
 		});
+		allCheck();
 	});
+</script>
+
+<script>
+function fn_nickCheck() {
+	
+	var nickname = $("#nickname").val();
+
+	if (!nickname) { // 닉네임이 비어 있을 경우
+		alert("닉네임을 입력하십시오.");
+		$("#nickname").focus();
+		return;
+	}
+
+	$.ajax({
+		url:		"/member/nickCheck",
+		type:		"post",
+		dataType:	"json",
+		data:		{"nickname" : nickname},
+		success:	function(data) {
+			
+			if(data == 1) {
+				alert("이미 사용 중인 닉네임입니다.\n다른 닉네임을 입력하십시오.");
+				$("#nickname").focus();
+			} else if(data == 0) {
+				alert("사용 가능한 닉네임입니다.");
+				$("#nickCheck").attr("value", "Y");
+				$("#passwd").focus();
+			}
+		}
+	});
+}
+
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
