@@ -39,6 +39,7 @@
 
 </style>
 
+
 <footer class="jumbotron" id="footer_ft">
         <div class="row" style="width: 100%; overflow: hidden;" id="footer_ff">
             <div class="col-sm-3 logo"><h2><a class="footer" href="/"><img src="./images/alcohol.png"></a></h2></div>
