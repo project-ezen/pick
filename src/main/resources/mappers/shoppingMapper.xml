@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shopping.mapper">
+	<select id="cartList" parameterType="int" resultType="productDisplayVO">
+		<![CDATA[
+			SELECT * FROM display_product ORDER BY display_product_id
+		]]>
+	</select>
+	
+	<select id="productPrice" parameterType="productDisplayVO" resultType="int">
+		<![CDATA[
+			SELECT product_price FROM display_product WHERE product_name = #{product_name}
+		]]>
+	</select>
+</mapper>
