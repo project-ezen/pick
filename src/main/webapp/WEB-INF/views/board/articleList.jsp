@@ -182,7 +182,7 @@ padding: 0px;
 	<div class="list">
 	
 	</div>
-	<button type="button" class="wbtn" onclick="wbtn">글쓰기</button>
+	<button type="button" class="wbtn" onclick="location.href='${path}/board/write';">글쓰기</button>
 	<div class="page_wrap">
 	   <div class="page_nation">
 	      <a class="arrow prev" href="#"><i class="bi bi-caret-left-fill"></i></a>
@@ -198,9 +198,6 @@ padding: 0px;
 <br/>
 <%@ include file="../include/footer.jsp" %>
 <script>
-function wbtn(){
-	
-}
 </script>
 </body>
 </html>
