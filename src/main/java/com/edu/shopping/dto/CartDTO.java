@@ -6,6 +6,7 @@ public class CartDTO {
 	private String product_id;
 	private String member_id;
 	private int total_price;
+	
 	public int getCart_number() {
 		return cart_number;
 	}
@@ -30,6 +31,7 @@ public class CartDTO {
 	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
+	
 	@Override
 	public String toString() {
 		return "CartDTO [cart_number=" + cart_number + ", product_id=" + product_id + ", member_id=" + member_id
