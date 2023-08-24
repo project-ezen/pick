@@ -7,6 +7,7 @@
 <title>My page</title>
 <%@ include file="./WEB-INF/views/include/header.jsp" %>
 <style>
+
 body 	{ 	
    	background-image:url("./resources/images/background2.jpg");
    	background-attachment: fixed, scroll;
@@ -22,78 +23,69 @@ body 	{
    	margin-top:		150PX ;
 	margin-bottom: 150px;
 }
-		
-.tab 	{
-	width: 207px;
-  	display: inline-block;
-  	vertical-align: top;
-  	margin-top: 50px;
-}
-
-.ul	{
-	list-style-type: none;
-	width: 		25%;
-	padding: 	0;
-	margin: 	0;
-	position:	fixed;
-	height:		100%;
-	overflow:	auto; 
-}
-li {
-	list-style-type: none;
-}
-li a	{
-	text-decoration: none;
-	display:	block;
-	color:		#000;
-	padding: 	8px 15px 8px 15px;
-	font-weight: bold;
-}
 
 .content	{
 	margin-left: 25%;
 	padding:	1px 16px;
 }		
 
-aside	{
-    flex-grow: 	1;
-    position: 	left;
-    float:		left;
+img { float: left; }
+
+.set1 { width: 1100px; height: 200px; background-color:	#C3E7FA; margin-right: 0px; border-radius:10px; }
+
+.set2 {width: 1100px; height: 200px; background-color:	#C3E7FA; margin-right: 0px; border-radius:10px; text-align: center; }
+
+.nim { text-align : center; line-height : 200px; width: 70%; height: 200px; float: right; margin:0 auto; }
+
+.order {
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	background-color:#7892c2;
+	border-radius:16px;
+	display:inline-block;
+	cursor:pointer;
+	color:#fff;
+	font-family:Arial;
+	font-size:19px;
+	padding:24px 51px;
+	text-decoration:none;
+	display :inline-block;
 }
+.order:hover {
+	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background-color:#476e9e;
+}
+.order:active {
+	position:relative;
+	top:1px;
+}
+	
+
 </style>
 </head>
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
 	<div class="container" id="class">
 		<h2 class="title">MyPage</h2>
-		<div id="contents" class="submenu">
 		<hr/>
-		<aside>
-		<h3>MyPage</h3>
-		<ul class="tab">
-			<li class='tabmenu'><a href="#">구매내역</a></li>
-			<li class='tabmenu'><a href="#">찜한 게시물</a></li>
-			<li class='tabmenu'><a href="#">내가 쓴 게시물</a></li>
-			<li class='tabmenu'><a href="#">회원정보수정</a></li>
-		</ul>
-		</aside>
-		<section class="content">
-			<article> 
-				<img style="height:100px; width:100px; vertical-align:top;" src="./resources/images/alcohol.png" border="0">
-				<h2>${member.name}</h2><h2>님</h2>
-			</article>
-			<article>
-				<button></button>
-				<button></button>
-			</article>
-		</section>
+		<div id="contents" class="set1">
+		<img style=" padding-left: 15px; height:200px; width:30%; vertical-align:top; float: left;" src="./resources/images/alcohol.png" border="0">
+		<div>${member.name}<h2 class="nim">님, 어서오세요!</h2></div>
+		</div>
+		<hr/>
+		<div class="set2">
+			<div class="order">
+			<button>주문한 내역</button>
+			<button>찜한 레시피</button>
+			<button>내가 쓴 게시물</button>
+			<button>회원 정보 수정</button>
+			</div>
 		</div>
 	</div>
+	<br/>
 	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 </script>
-
 </body>
 </html>
