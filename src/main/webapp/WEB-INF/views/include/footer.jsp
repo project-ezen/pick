@@ -53,7 +53,6 @@
                 고객님의 안전거래를 위한 현금등으로 결제 시<br>PG사의 구매안전서비스를 이용하실 수 있습니다.(서비스가입사실확인)<br><br>
                 <a href="#">(C)마녀의 Pick.ALL RIGHTS RESERVED. designed by DB.</a>
             </div>
-
             <div class="col-sm-3 customer">
                 <h3>Customer Center</h3>
                 <h3>070-2222-2222</h3>
