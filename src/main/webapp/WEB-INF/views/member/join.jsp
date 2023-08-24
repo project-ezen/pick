@@ -65,7 +65,7 @@
 					<div class="input-group">
 						<input type="text" class="form-control" id="nickname" name="nickname">
 						<span class="input-group-btn">
-							<button class="btn btn-info" type="button" id="nickCheck" onClick="fn_nickCheck">중복확인</button>
+							<button class="btn btn-info" type="button" id="nickCheck" onClick="fn_nickCheck()">중복확인</button>
 						</span>
 					</div>
 				</div>
@@ -377,48 +377,49 @@ function allCheck() {
 $(document).ready(function() {
 
 	// 회원가입취소 버튼을 누르면 
-    $(".cancel").on("click", function() {
-		location.href="/member/login";
+   $(".cancel").on("click", function() {
+	location.href="/member/login";
 	});
 
 	// 실시간 중복 검사
-    $("#id").on("input", function() {
-        var inputID = $('#id').val();
+   $("#id").on("input", function() {
+       var inputID = $('#id').val();
 
-        $.ajax({
-            url: "member/idCheck",
-            type: "post",
-            dataType: "json",
-            data: {"id": inputID},
-            success: function(data) {
-                if (inputID === "" || !inputID.includes('@') || data === '0') {
-                    $(".joinButton").prop("disabled", true);
-                    $("#msg").value("이메일 형식이 아닙니다.");
-                    $("#msg").css("background-color", "#ffcece");
-                } else if (inputID !== "" && inputID.includes('@') && data === '0') {
-                    $(".joinButton").prop("disabled", false);
-                    $("#msg").value("사용이 가능한 이메일입니다.");
-                    $("#msg").css("background-color", "#b0f6ac");
-                } else if (data === '1') {
-                    $(".joinButton").prop("disabled", true);
-                    $("#msg").value("이미 사용 중인 이메일입니다.");
-                    $("#msg").css("background-color", "#ffcece");
-                }
-            },
-            error: function(info) {
-            	
+       $.ajax({
+           url: "/member/idCheck",
+           type: "post",
+           dataType: "json",
+           data: {"id": inputID},
+           success: function(data) {
+               if (inputID === "" || !inputID.includes('@') || data === '0') {
+                   $(".joinButton").prop("disabled", true);
+                   $("#msg").val("이메일 형식이 아닙니다.");
+                   $("#msg").css("background-color", "#ffcece");
+               } else if (inputID !== "" && inputID.includes('@') && data === '0') {
+                   $(".joinButton").prop("disabled", false);
+                   $("#msg").val("사용이 가능한 이메일입니다.");
+                   $("#msg").css("background-color", "#b0f6ac");
+               } else if (data === '1') {
+                   $(".joinButton").prop("disabled", true);
+                   $("#msg").val("이미 사용 중인 이메일입니다.");
+                   $("#msg").css("background-color", "#ffcece");
+               }
+           },
+           error: function(info) {
+           	
 			},
-            complete: function(info) {
-                allCheck();
-            }
-        });
-    });
+           complete: function(info) {
+               allCheck();
+           }
+       });
+   });
+
+
+// 빈칸 확인
+   $(".joinButton").on("click", function() {
+	// 아이디, 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
+	// 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
 	
-	
-    $("#joinButton").on("click", function() {
-		// 아이디, 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
-		// 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
-		
 		if($("#id").val() == "") {
 			alert("아이디를 입력하셔야 합니다.");
 			$("#userID").focus();
@@ -431,7 +432,7 @@ $(document).ready(function() {
 		}
 		if($("#repasswd").val() == "") {
 			alert("비밀번호확인을 입력하셔야 합니다.");
-			$("re#passwd").focus();
+			$("#repasswd").focus();
 			return false;
 		}
 		if($("#name").val() == "") {
@@ -459,46 +460,45 @@ $(document).ready(function() {
 			$("#address1").focus();
 			return false;
 		}
-
+	
 		document.getElementById("address").value = $("#address1").val();
-		
-	});
 	
 });
-</script>
 
-<script>
-	var smt = $("#submit");
-	var ccl = $("#cancel");
-	$(document).ready(function() {
-		smt.on("click", function() {
-			$("#info").prop("checked", true);
-			alert("약관에 동의하셨습니다.");
-		});
-		ccl.on("click", function() {
-			$("#info").prop("checked", false);
-		});
-		allCheck();
-	});
-</script>
-<script>
-	var smt1 = $("#submit1");
-	var ccl1 = $("#cancel1");
-	$(document).ready(function() {
-		smt1.on("click", function() {
-			$("#info1").prop("checked", true);
-			alert("약관에 동의하셨습니다.");
-		});
-		ccl1.on("click", function() {
-			$("#info1").prop("checked", false);
-		});
-		allCheck();
-	});
-</script>
+   
+	// 약관 동의
 
-<script>
+       var smt = $("#submit");
+       var ccl = $("#cancel");
+
+       smt.on("click", function() {
+           $("#info").prop("checked", true);
+           alert("약관에 동의하셨습니다.");
+           allCheck();
+       });
+
+       ccl.on("click", function() {
+           $("#info").prop("checked", false);
+       });
+
+       var smt1 = $("#submit1");
+       var ccl1 = $("#cancel1");
+
+       smt1.on("click", function() {
+           $("#info1").prop("checked", true);
+           alert("약관에 동의하셨습니다.");
+           allCheck();
+       });
+
+       ccl1.on("click", function() {
+           $("#info1").prop("checked", false);
+       });
+   });
+
+
+// 닉네임 중복 체크
 function fn_nickCheck() {
-	
+
 	var nickname = $("#nickname").val();
 
 	if (!nickname) { // 닉네임이 비어 있을 경우
@@ -528,6 +528,7 @@ function fn_nickCheck() {
 
 </script>
 
+<!-- 우편번호 검색 -->
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function daumZipCode() {
