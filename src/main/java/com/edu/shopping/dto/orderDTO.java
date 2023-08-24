@@ -1,5 +1,6 @@
-package com.edu.store.dto;
+package com.edu.shopping.dto;
 
+//실어나르는 값
 public class orderDTO {
 	private String receiver_name;
 	private int receiver_phonenum;
