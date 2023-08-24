@@ -17,7 +17,7 @@
 		 그래서 DB와 연동하는 작업에는 반드시 필요하다. -->	
 	<bean  id="datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	    <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-      	<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"></property>
+      	<property name="url" value="jdbc:log4jdbc:oracle:thin:@project.crcyskxfnjtg.ap-northeast-2.rds.amazonaws.com:1521:ORCL"></property>
 		<property name="username" value="pick"></property>
 		<property name="password" value="projectpick"></property>
 	</bean>
@@ -35,7 +35,7 @@
 
 		
 		<!-- XML Mapper 파일을 인식하도록 설정한다. -->
-		<!-- <property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property> -->
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
 	</bean>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
