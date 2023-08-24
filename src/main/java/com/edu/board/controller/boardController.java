@@ -26,17 +26,8 @@ public class boardController {
 	}
 	@RequestMapping("/articleList")
 	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		logger.info("레시피목록 게시판 출력");
+		logger.info("글쓰기 게시판 출력");
 		String viewName = "./board/articleList";
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		return mav;
-		
-	}
-	@RequestMapping("/recipedetail")
-	public ModelAndView recipeDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		logger.info("레시피상세 게시판 출력");
-		String viewName = "./board/recipedetail";
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		return mav;
