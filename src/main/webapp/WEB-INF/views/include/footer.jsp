@@ -1,11 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-    <meta name="viewport" content="width=divice-width, initial-scale=1">
-	<title>footer</title>
 
     <style>
         .logo {
@@ -44,8 +38,7 @@
       	}
     	
     </style>
-</head>
-<body>
+
     <footer class="jumbotron" id="footer_ft">
             <div class="row" style="width: 100%; overflow: hidden;" id="footer_ff">
                 <div class="col-sm-3 logo"><h2><a class="footer" href="/"><img src="./images/alcohol.png"></a></h2></div>
@@ -81,8 +74,3 @@
                 </div>
             </div>
     </footer>
-</body>
-<script>
-
-</script>
-</html>
