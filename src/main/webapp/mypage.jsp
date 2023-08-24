@@ -13,27 +13,11 @@
   }
 }
 
-body 	{ 	
-   	background-image:url("./resources/images/background2.jpg");
-   	background-attachment: fixed, scroll;
-   	background-repeat:no-repeat;
-  	background-size:cover;
-}
-
-#class	{
-	background-color:	#FFFFFF;
-	text-align:			center;
-	border-radius:		10px;
-	padding: 30px 30px 30px 30px;
-   	margin-top:		150PX ;
-	margin-bottom: 150px;
-}	
-
 img { float: left; }
 
-.set1 { width: 100%; height: 200px; background-color:	#C3E7FA; margin-right: 0px; border-radius:10px; }
+.set1 { width: 100%; height: 200px; background-color: #ccd6d9; opacity:0.8; margin-right: 0px; border-radius:10px; }
 
-.set2 {width: 100%; padding-bottom: 3%; background-color:	#C3E7FA; margin-right: 0px; border-radius:10px;}
+.set2 { width: 100%; text-align:center; padding-bottom: 3%; background-color: #ccd6d9; margin-right: 0px; border-radius:10px; display: inline-block;}
 
 .nim { text-align : center; line-height : 200px; width: 70%; height: 200px; float: right; margin:0 auto; }
 
@@ -59,12 +43,11 @@ img { float: left; }
 	top:1px;
 }
 	
-
 </style>
 </head>
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
-	<div class="container" id="class">
+	<div class="container" id="">
 		<h2 class="title">MyPage</h2>
 		<hr/>
 		<div id="contents" class="set1">
@@ -73,17 +56,44 @@ img { float: left; }
 		</div>
 		<hr/>
 		<div class="set2">
-			<button class="order" type="button">주문한 내역</button>
-			<button class="order" type="button">찜한 레시피</button>
-			<button class="order" type="button">내가 쓴 게시물</button>
-			<button class="order" type="button">회원 정보 수정</button>
+			<button class="order" type="button" onclick="fn_order(this.form)">주문한 내역</button>
+			<button class="order" type="button" onclick="fn_jjim(this.form)'">찜한 레시피</button>
+			<button class="order" type="button" onclick="fn_mine(this.form)'">내가 쓴 게시물</button>
+			<button class="order" type="button" onclick="fn_insert(this.form)'">회원 정보 수정</button>
 		</div>
 	</div>
-	<br/>
+	<br/><br/>
 	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
+
+//주문한 내역
+function fn_order(obj) {
+	alert("주문한 내역");
+	obj.action = "${path}/shopping/order.jsp";
+	obj.submit();
+}	
+
+function fn_jjim(obj) {
+	alert("찜한 레시피");
+	obj.action = "${path}/board/.jsp";
+	obj.submit();
+}	
+
+function fn_mine(obj) {
+	alert("작성한 게시물");
+	obj.action = "${path}/shopping/order.jsp";
+	obj.submit();
+}	
+
+function fn_insert(obj) {
+	alert("회원정보수정");
+	obj.action = "${path}/shopping/order.jsp";
+	obj.submit();
+}	
+
+
 </script>
 </body>
 </html>

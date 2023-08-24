@@ -13,12 +13,6 @@ import com.edu.board.dto.pagingCriteria;
 @Service("boardService")
 public class boardServiceImpl implements boardDAO {
 	
-	@Autowired
-	boardDAO boardDAO;
 	
-	@Override
-	public List<boardDTO> boardListPaging(pagingCriteria cri) throws DataAccessException {
-		return boardDAO.boardListPaging(cri);
-	}
 
 }

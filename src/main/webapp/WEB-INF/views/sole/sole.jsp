@@ -8,10 +8,7 @@
 <style type="text/css">
 	.bg {
 		 background-image: url("/resources/images/background2.jpg");
-
          height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
 		 background-attachment: fixed, scroll;
          background-position: center;
          background-repeat: no-repeat;
