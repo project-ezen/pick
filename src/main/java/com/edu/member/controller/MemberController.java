@@ -31,7 +31,7 @@ public class MemberController {
 	@Inject
 	private MemberService memberService;
 	
-	/*
+	
 	//로그인 화면 get
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String getLogin(@RequestParam(value="action", required=false) String action, 
@@ -43,9 +43,8 @@ public class MemberController {
 		session.setAttribute("action", action);
 		return "/member/login";
 	}
-	*/
 	
-	//로그인 post => 있는지 확인
+	//로그인 => 있는지 확인
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("member") MemberDTO member,
 			RedirectAttributes rAttr,
@@ -84,16 +83,16 @@ public class MemberController {
 		
 	}
 	
-	/*
-	//회원가입 화면 get
-	@RequestMapping(value="/memberjoin", method=RequestMethod.GET)
-	public String memberInsertPet() throws Exception {
-		logger.info("회원 가입 화면 GET");
-		return "/member/memberjoin";
-	}
-	*/
 	
-	//회원가입 화면 post
+	//회원가입 화면 get
+	@RequestMapping(value="/join", method=RequestMethod.GET)
+	public String getJoin() throws Exception {
+		logger.info("회원 가입 화면 GET");
+		return "/member/join";
+	}
+	
+	
+	//회원가입
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(MemberDTO memberDTO) throws Exception {
 		
@@ -114,6 +113,18 @@ public class MemberController {
 		
 	}
 	
+	//아이디 중복 검사
+	@ResponseBody
+	@RequestMapping(value="/idCheck", method=RequestMethod.POST)
+	public int idCheck(MemberDTO memberDTO) throws Exception {
+		
+		int result = memberService.idCheck(memberDTO);
+		
+		// result 값 : 1이면 아이디에 해당하는 정보가 이미 존재
+		//			   0이면 아이디에 해당하는 정보가 존재하지 않는다.
+		return result;
+	}
+	
 	//닉네임 중복 검사
 	@ResponseBody
 	@RequestMapping(value="/nickCheck", method=RequestMethod.POST)
@@ -121,13 +132,13 @@ public class MemberController {
 		
 		int result = memberService.nickCheck(memberDTO);
 
-		// result 값 : 1이면 아이디에 해당하는 정보가 이미 존재
-		//			   0이면 아이디에 해당하는 정보가 존재하지 않는다.
+		// result 값 : 1이면 닉네임에 해당하는 정보가 이미 존재
+		//			   0이면 닉네임에 해당하는 정보가 존재하지 않는다.
 		return result;
 	}	
 	
 	
-	//로그아웃 get
+	//로그아웃
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String logout(HttpSession session) throws Exception {
 		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.

@@ -14,9 +14,8 @@ public class MemberDAOImpl implements MemberDAO {
 	private SqlSession sqlSession;
 
 	//namespace
-	private static final String namespace = "com.edu.member.mapper.memberMapper";
+	private static final String namespace = "memberMapper";
 	
-	//로그인 화면 get
 	
 	//로그인 POST
 	@Override
@@ -33,13 +32,14 @@ public class MemberDAOImpl implements MemberDAO {
 	//아이디 중복 검사
 	@Override
 	public int idCheck(MemberDTO memberDTO) throws Exception {
-		return sqlSession.selectOne(namespace + "idCheck", memberDTO);
+		return sqlSession.selectOne(namespace + ".idCheck", memberDTO);
 	}
 	
 	//닉네임 중복 검사
 	@Override
 	public int nickCheck(MemberDTO memberDTO) throws Exception {
-		return sqlSession.selectOne(namespace + "nickCheck", memberDTO);
+		System.out.println("닉네임 중복 검사 ==> " + memberDTO);
+		return sqlSession.selectOne(namespace + ".nickCheck", memberDTO);
 	}
 	
 

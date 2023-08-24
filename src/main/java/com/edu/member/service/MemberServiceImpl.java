@@ -13,7 +13,6 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	private MemberDAO memberDAO;
 
-	//로그인 화면 get
 	
 	//로그인 post => 있는지 확인
 	@Override
