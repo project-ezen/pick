@@ -2,15 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shopping.mapper">
-	<select id="cartList" parameterType="int" resultType="productDisplayVO">
+
+	<select id="cartList" parameterType="String" resultType="cartDTO">
 		<![CDATA[
-			SELECT * FROM display_product ORDER BY display_product_id
+			SELECT c.cart_id, c.member_id FROM cart c, member m WHERE c.member_id = m.member_id and m.member_id = #{member_id}
 		]]>
 	</select>
-	
-	<select id="productPrice" parameterType="productDisplayVO" resultType="int">
+
+	<select id="productsDetailList" parameterType="cartDTO" resultType="productDisplayVO">
 		<![CDATA[
-			SELECT product_price FROM display_product WHERE product_name = #{product_name}
+			SELECT d.product_display_id, d.product_name, d.product_info, d.capacity, d.alcohol_content, d.origin, d.manufacturer, d.product_image, d.product_price
+			FROM cart c, product p, product_display d 
+			WHERE p.cart_id = c.cart_id
+			AND p.product_display_id = d.product_display_id
+			AND c.cart_id = #{cart_id}
 		]]>
 	</select>
 </mapper>

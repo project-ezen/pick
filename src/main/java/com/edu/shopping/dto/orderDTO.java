@@ -11,6 +11,7 @@ public class orderDTO {
 	private String address;				//기본주소
 	private String address_detail;		//상세주소
 	
+
 	public String getReceiver_name() {
 		return receiver_name;
 	}
@@ -59,7 +60,7 @@ public class orderDTO {
 	public void setAddress_detail(String address_detail) {
 		this.address_detail = address_detail;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "orderDTO [receiver_name=" + receiver_name + ", receiver_phonenum=" + receiver_phonenum

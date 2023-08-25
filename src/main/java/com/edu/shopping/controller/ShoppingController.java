@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.service.ShoppingService;
 import com.edu.store.dto.ProductDisplayVO;
 
@@ -33,19 +35,44 @@ public class ShoppingController {
 		
 		// 회원 아이디 가져오기
 		String memberId = "101";
+		log.info("memberId : " + memberId);
+		
+		// 해당 회원 아이디가 가진 장바구니
+		CartDTO cartList = shoppingService.cartList(memberId);
+		log.info("cartList : " + cartList);
+		
+		// 장바구니에 담긴 product List
+		List<ProductDisplayVO> productDetailList = shoppingService.cartProductsList(cartList);
+		log.info("productDetailList : " + productDetailList);
+
 		// 해당 회원 아이디가 가진 장바구니 번호 가져오기
 		int cartNumber = 1;
 		// 장바구니에 담긴 product List
 		String productList = "10001";
 		// product List속 상품 상세 정보
 		List<ProductDisplayVO> cartList = shoppingService.cartProductsList(productList);
-		
+
 		log.info("장바구니에 담긴 product List");
 		
 		mav.setViewName(viewName);
 		mav.addObject("cart", cartList);
+		mav.addObject("product", productDetailList);
 		return mav;
 	}	// End - shoppingCart method
+	
+//	// 상품 원가 가져오기
+//	@ResponseBody
+//	@RequestMapping(value="/calculate", method=RequestMethod.GET)
+//	public int productPrice(ProductDisplayVO productDisplayVO) throws Exception {
+//		log.info("원가");
+//		System.out.println(productDisplayVO);
+//		int price = shoppingService.productPrice(productDisplayVO);
+//		log.info("제품의 원가는 " + price);
+//		
+//		// return price;
+//		return price;
+//	}
+
 	
 	// 상품 원가 가져오기
 	@ResponseBody
@@ -59,7 +86,7 @@ public class ShoppingController {
 		// return price;
 		return price;
 	}
-	
+
 	// Order Controller
 	@RequestMapping(value="/order", method=RequestMethod.GET)
 	public ModelAndView shoppingOrder(HttpServletRequest request, HttpServletResponse response) throws Exception {
