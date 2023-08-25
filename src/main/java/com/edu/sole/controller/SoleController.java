@@ -25,7 +25,7 @@ public class SoleController {
 	@Inject
 	SoleService soleservice;
 	
-	private static final Logger logger = LoggerFactory.getLogger(SoleControll.class);
+	private static final Logger logger = LoggerFactory.getLogger(SoleController.class);
 	
 	//------------------------------------------------------------------------------------------
 	// 레시피 술 보여주는
