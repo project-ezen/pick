@@ -122,11 +122,6 @@
     				return false;
     			}
     			
-    			if($("#passwd").val() == "" || $("#passwd").val().length < 4) {
-    				alert("비밀번호는 4자리 이상입력하셔야 합니다.");
-    				$("#passwd").focus();
-    				return false;
-    			}
     			
     			document.getElementById("loginForm").submit();
     			return false;

@@ -29,7 +29,7 @@
 				gender			= #{gender},
 				zipcode			= #{zipcode},
 				gender			= #{gender},
-				address			= #{address},
+				address			= #{address1},
 				addressdetail	= #{addressDetail},
 				birthdate		= #{birthdate}
 				
@@ -54,8 +54,8 @@
 	<!-- 회원 가입  -->
 	<insert id="join" parameterType="com.edu.member.dto.MemberDTO">
 		INSERT INTO member
-				(member_id, member_pw, member_repw, member_name, member_nickname, member_phoneNumber, member_gender, member_zipcode, member_address1, member_address2, member_birthdate)
-		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name}, #{nickname}, #{phoneNumber}, #{gender}, #{zipcode}, #{address1}, #{addressDetail}, #{birthdate})
+				(member_id, member_pw, member_repw, member_name, member_nickname, member_phoneNumber, member_birthdate, member_gender, member_zipcode, member_address, member_addressdetail )
+		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name}, #{nickname}, #{phoneNumber}, #{birthdate}, #{gender}, #{zipcode}, #{address1}, #{addressDetail} )
 	</insert>
 	
 </mapper>

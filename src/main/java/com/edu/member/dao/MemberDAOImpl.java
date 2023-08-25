@@ -3,8 +3,11 @@ package com.edu.member.dao;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.edu.member.controller.MemberController;
 import com.edu.member.dto.MemberDTO;
 
 @Repository
@@ -12,6 +15,8 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
+	
+	private static final Logger logger = LoggerFactory.getLogger(MemberDAOImpl.class);
 
 	//namespace
 	private static final String namespace = "memberMapper";
@@ -26,6 +31,9 @@ public class MemberDAOImpl implements MemberDAO {
 	//회원가입
 	@Override
 	public int join(MemberDTO memberDTO) throws Exception {
+		
+		logger.info("memberDTO : " + memberDTO);
+		
 		return sqlSession.insert(namespace + ".join", memberDTO);
 	}
 	
