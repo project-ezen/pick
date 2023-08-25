@@ -48,7 +48,7 @@ img { float: left; }
 <%@ include file="../include/topMenu.jsp" %>
 	<div class="container">
 	<c:if test="${member == null}">
-		
+		<div>dfhdf</div>
 	</c:if>
 	<c:if test="${member != null}">
 		<h2 class="title">MyPage</h2>
