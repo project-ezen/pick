@@ -29,11 +29,14 @@
         
         
         <property name="java-output-path" value="/pick/target/classes"/>
+<<<<<<< HEAD
+=======
                                                 
         
         
         
         
+>>>>>>> fb818eb5c39d872a3da4536ac33ba6ff25954388
         <property name="context-root" value="main"/>
                                             
     
