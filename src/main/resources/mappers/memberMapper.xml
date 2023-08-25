@@ -18,24 +18,23 @@
 	</select>
 	
 	<!--  회원 아이디에 해당하는 비밀번호, 비밀번호 확인, 이름, 전화번호, 주소를 변경한다.  -->
-	<!-- 
+	 
 	<update id="update" parameterType="com.edu.member.dto.MemberDTO">
 		UPDATE	member
-		SET		passwd			= #{passwd},
-				repasswd		= #{repasswd},
-				name			= #{name},
-				nickname		= #{nickname},
-				phoneNumber		= #{phoneNumber},
-				gender			= #{gender},
-				zipcode			= #{zipcode},
-				gender			= #{gender},
-				address			= #{address1},
-				addressdetail	= #{addressDetail},
-				birthdate		= #{birthdate}
-				
-		WHERE	id				= #{id}
+		SET		member_passwd			= #{passwd},
+				member_repasswd			= #{repasswd},
+				member_name				= #{name},
+				member_nickname			= #{nickname},
+				member_phoneNumber		= #{phoneNumber},
+				member_gender			= #{gender},
+				member_zipcode			= #{zipcode},
+				member_gender			= #{gender},
+				member_address			= #{address1},
+				member_addressdetail	= #{addressDetail},
+				member_birthdate		= #{birthdate}
+		WHERE	member_id				= #{id}
 	</update>
-	-->
+	
 	
 	<!-- 아이디(이메일) 중복 검사 -->
 	<select id="idCheck" parameterType="com.edu.member.dto.MemberDTO" resultType="int">

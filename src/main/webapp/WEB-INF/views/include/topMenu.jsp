@@ -32,8 +32,8 @@ color: #fff;
             <a class="navbar-right" data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="#">로그아웃</a>
             <a class="navbar-right" data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="#">내 페이지</a>
 
-            <a class="navbar-right" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="#">회원가입</a>
-            <a class="navbar-right" data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="#">로그인</a>
+            <a class="navbar-right" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;"href="${path}/member/join">회원가입</a>
+            <a class="navbar-right" data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/login">로그인</a>
         
         </div>
         <div class="collapse navbar-collapse" id="mainNavbar" style="padding-top: 10px;">
@@ -52,8 +52,8 @@ color: #fff;
                     <a class="navbar-right" data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="#">로그아웃</a>
                     <a class="navbar-right" data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="#">내 페이지</a>
                     
-                    <a class="navbar-right" data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="#">로그인</a>
-                    <a class="navbar-right" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="#">회원가입</a>
+                    <a class="navbar-right" data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/login">로그인</a>
+                    <a class="navbar-right" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;"href="${path}/member/join">회원가입</a>
                 
                 </li> 
             </ul>

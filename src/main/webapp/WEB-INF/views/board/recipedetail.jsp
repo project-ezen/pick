@@ -25,6 +25,7 @@ background-color: #99A1D7;
 th, td {
 border-bottom: 1px solid #ddd;
 padding: 10px;
+border: 1px solid #eee;
 }
 .btn_1 {
 width: 60px;

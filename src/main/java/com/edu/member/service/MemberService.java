@@ -23,6 +23,11 @@ public interface MemberService {
 	
 	//비밀번호 찾기 post
 	
-	
-	//회원정보수정 post	
+//--------------------------------------------------------------------------------------------------	
+	//회원 상세 정보 수정 get
+	public MemberDTO memberDetail(String id) throws Exception;
+
+	//회원 정보 수정 POST
+	public void memberUpdate(MemberDTO memberDTO) throws Exception;
+
 }

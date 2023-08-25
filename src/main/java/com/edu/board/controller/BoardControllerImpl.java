@@ -1,0 +1,53 @@
+package com.edu.board.controller;
+
+import java.util.List;
+
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.edu.board.dto.BoardDTO;
+import com.edu.board.service.BoardService;
+import com.edu.member.dto.MemberDTO;
+
+
+@Controller("/BoardController")
+public class BoardControllerImpl implements BoardController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(BoardControllerImpl.class);
+	
+	@Autowired
+	private BoardService boardService;
+	
+	
+	// 게시글 목록
+	@Override
+	@RequestMapping(value="/board/articleList.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		logger.info("게시글 목록 화면좀 나와라");
+		
+		String viewName = "./board/articleList";
+		ModelAndView mav = new ModelAndView();
+		
+		
+		List<BoardDTO> articlesList = boardService.recipeBoard();
+		mav.setViewName(viewName);
+		mav.addObject("articleList", articlesList);
+	
+		return mav;
+	}
+	
+	
+}

@@ -24,16 +24,6 @@
 		#insert-button {
 			margin-right: 50px;
 		}
-		body { 	
-    	background-image:url("./resources/images/background2.jpg");
-    	background-attachment: fixed, scroll;
-    	background-repeat:no-repeat;
-   	 	background-size:cover;
-		}
-
-		#class {
-		background-color: #EBFBFF;
-		}
 		
 		.check {
 		box-shadow:inset 0px 0px 15px 3px #276873;
