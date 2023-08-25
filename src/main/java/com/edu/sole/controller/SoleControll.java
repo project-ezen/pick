@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.edu.sole.DTO.SolePageMaker;
-import com.edu.sole.DTO.SoleSearchCriteria;
-import com.edu.sole.DTO.liveSoleDTO;
+import com.edu.sole.dto.SolePageMaker;
+import com.edu.sole.dto.SoleSearchCriteria;
+import com.edu.sole.dto.LiveSoleDTO;
 import com.edu.sole.service.SoleService;
 
 @Controller
@@ -42,7 +42,7 @@ public class SoleControll {
 		logger.info("2");
 		pgm.setTotalCount(soleservice.solecount(solesearchcriteria));   // cri로 검색한 총 건수를 totalCount 변수에 저장한다.
 		logger.info("3");
-		List<liveSoleDTO> soleMain = soleservice.soleMain(solesearchcriteria);
+		List<LiveSoleDTO> soleMain = soleservice.soleMain(solesearchcriteria);
 		logger.info("4");
 		mav.addObject("sole", soleMain);
 		logger.info("5");

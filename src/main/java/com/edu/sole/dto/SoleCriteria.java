@@ -1,4 +1,4 @@
-package com.edu.sole.DTO;
+package com.edu.sole.dto;
 
 //----------------------------------------------------------------------------------------------------
 //public class Criteria
