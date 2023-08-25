@@ -91,7 +91,7 @@
                         <div class="text-center">
                             <a href="/findId.jsp">아이디 찾기&nbsp;&nbsp;</a> |
                             <a href="/findPassword.jsp">&nbsp;&nbsp;비밀번호 찾기&nbsp;&nbsp;</a> |
-                            <a href="/join.jsp">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
+                            <a href="/member/join">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
                         </div>
                     </div><br>
                 <div class="social-buttons">
