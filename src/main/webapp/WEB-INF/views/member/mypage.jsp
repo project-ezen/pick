@@ -47,10 +47,6 @@ img { float: left; }
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 	<div class="container">
-	<c:if test="${member == null}">
-		<div>dfhdf</div>
-	</c:if>
-	<c:if test="${member != null}">
 		<h2 class="title">MyPage</h2>
 		<hr/>
 		<div id="contents" class="set1">
@@ -65,7 +61,6 @@ img { float: left; }
 			<button class="order" type="button" onclick="fn_insert(this.form)'">회원 정보 수정</button>
 		</div>
 	</div>
-	</c:if>
 	<br/><br/>
 	<%@ include file="../include/footer.jsp" %>
 
