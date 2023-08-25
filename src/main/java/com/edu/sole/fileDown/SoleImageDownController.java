@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 // 이미지 파일 다운로드
 //--------------------------------------------------------------------------------------------
 @Controller
-public class soleImageDownController {
+public class SoleImageDownController {
 
 	//---------------------------------------------------------------------------------
 	// 업로드된 폴더와 위치가 같아야 한다.

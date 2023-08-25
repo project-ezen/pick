@@ -13,9 +13,9 @@ import com.edu.sole.DTO.SoleSearchCriteria;
 import com.edu.sole.DTO.liveSoleDTO;
 
 @Repository
-public class soleDAOImpl implements soleDAO {
+public class SoleDAOImpl implements SoleDAO {
 
-	private static final Logger logger = LoggerFactory.getLogger(soleDAOImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(SoleDAOImpl.class);
 	
 	@Inject
 	private SqlSession sqlSession;
