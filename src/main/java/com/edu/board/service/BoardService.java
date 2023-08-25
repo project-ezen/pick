@@ -1,7 +1,14 @@
 package com.edu.board.service;
 
+import java.util.List;
 
-// 게시글 
+import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.PagingCriteria;
+
 public interface BoardService {
+	
+	// 게시글 목록
+	public List<BoardDTO> recipeBoard() throws Exception;
+	
+}
 
-} // End - public interface BoardService
