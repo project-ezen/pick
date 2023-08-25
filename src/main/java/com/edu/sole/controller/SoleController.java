@@ -20,7 +20,7 @@ import com.edu.sole.service.SoleService;
 
 @Controller
 @RequestMapping("/sole")
-public class SoleControll {
+public class SoleController {
 	
 	@Inject
 	SoleService soleservice;
