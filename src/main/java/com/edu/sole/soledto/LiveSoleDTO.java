@@ -1,6 +1,6 @@
-package com.edu.sole.soledto;
+package com.edu.sole.dto;
 
-public class liveSoleDTO {
+public class LiveSoleDTO {
 	private String 	live_alcohole_id;
 	private int 	alcohole_level;
 	private String  content;
@@ -8,6 +8,7 @@ public class liveSoleDTO {
 	private String  alcohole_image;
 	private String  favor;
 	private int 	rwm;
+	
 	
 	public String getLive_alcohole_id() {
 		return live_alcohole_id;
@@ -33,10 +34,10 @@ public class liveSoleDTO {
 	public void setAlcohole_name(String alcohole_name) {
 		this.alcohole_name = alcohole_name;
 	}
-	public String getRecipe_image() {
+	public String getAlcohole_image() {
 		return alcohole_image;
 	}
-	public void setRecipe_image(String alcohole_image) {
+	public void setAlcohole_image(String alcohole_image) {
 		this.alcohole_image = alcohole_image;
 	}
 	public String getFavor() {
@@ -45,19 +46,19 @@ public class liveSoleDTO {
 	public void setFavor(String favor) {
 		this.favor = favor;
 	}
-	
-	
 	public int getRwm() {
 		return rwm;
 	}
 	public void setRwm(int rwm) {
 		this.rwm = rwm;
 	}
+	
 	@Override
 	public String toString() {
-		return "liveSoleDTO [live_alcohole_id=" + live_alcohole_id + ", alcohole_level=" + alcohole_level + ", content="
-				+ content + ", alcohole_name=" + alcohole_name + ", recipe_image=" + alcohole_image + ", favor=" + favor
-				+ "]";
+		return "LiveSoleDTO [live_alcohole_id=" + live_alcohole_id + ", alcohole_level=" + alcohole_level + ", content="
+				+ content + ", alcohole_name=" + alcohole_name + ", alcohole_image=" + alcohole_image + ", favor="
+				+ favor + ", rwm=" + rwm + "]";
 	}
 	
+
 }
