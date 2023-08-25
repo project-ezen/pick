@@ -470,7 +470,6 @@ $(document).ready(function() {
 	
 });
 
-   
 	// 약관 동의
 
        var smt = $("#submit");

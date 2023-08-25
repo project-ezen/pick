@@ -1,3 +1,5 @@
+<!-- session을 체트하기 위해서 상단에 page session값을 true로 설정해야 한다 -->
+<%@ page session="true"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -6,13 +8,6 @@
     <title>Login Page</title>
     <%@ include file="../include/header.jsp" %>
     <style>
-    	body 	{ 	
-		   	background-image:url("./resources/images/background2.jpg");
-		   	background-attachment: fixed, scroll;
-		   	background-repeat:no-repeat;
-		  	background-size:cover;
-		}
-
         .login {
         	background-color:	#FFFFFF;
 			text-align:			center;
@@ -54,59 +49,53 @@
 <body>
 <%@ include file="../include/topMenu.jsp" %>
     <div class="login" >
-    	
-        <div>
-            <div class="login-header">
-                <h1 class="text-center">Login</h1><br><br>
-            </div>
-            <div>
-                <form method="post" action="/member/login" id="loginForm">
-                
-                    <div class="form-group">
-                        <div>
-                            <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-user"></span>
-                                    </span>
-                                    <input type="text" class="form-control" id="id" name="id" maxlength="20" placeholder="User ID">
-                                </div>
-                            </div>
-                            <div>
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-lock"></span>
-                                    </span>
-                                    <input type="password" class="form-control" id="passwd" name="passwd" maxlength="20" placeholder="Password">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="login-button">
-                            <button type="submit" class="btn btn-primary" id="loginButton" >로그인</button>
-                        </div>
-                    </div>
-                    <div class="form-group">                            
-                        <div class="text-center">
-                            <a href="/findId.jsp">아이디 찾기&nbsp;&nbsp;</a> |
-                            <a href="/findPassword.jsp">&nbsp;&nbsp;비밀번호 찾기&nbsp;&nbsp;</a> |
-                            <a href="/member/join">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
-                        </div>
-                    </div><br>
-                <div class="social-buttons">
-                    <button class="btn btn-warning" id="kakaoLogin">카카오 로그인</button>
-                </div>
-                <div class="social-buttons">
-                    <button class="btn btn-success" id="naverLogin">네이버 로그인</button>
-                </div>
-                <div class="social-buttons">
-                    <button class="btn btn-danger" id="googleLogin">구글 로그인</button>
-                </div>
-                </form>
-            </div>
+    	<form  class="form-horizontal" action="/member/login" method="post"id="loginForm">
+        <div class="login-header">
+            <h1 class="text-center">Login</h1><br><br>
         </div>
-    </div>
+            <div class="form-group">
+                <div>
+                    <div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                            <input type="text" class="form-control" id="id" name="id" maxlength="20" placeholder="User ID">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-lock"></span>
+                            </span>
+                            <input type="password" class="form-control" id="passwd" name="passwd" maxlength="20" placeholder="Password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="login-button">
+                    <button type="submit" class="btn btn-primary" id="loginButton" >로그인</button>
+                </div>
+            </div>
+            <div class="form-group">                            
+                <div class="text-center">
+                    <a href="/findId.jsp">아이디 찾기&nbsp;&nbsp;</a> |
+                    <a href="/findPassword.jsp">&nbsp;&nbsp;비밀번호 찾기&nbsp;&nbsp;</a> |
+                    <a href="/member/join">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
+                </div>
+            </div><br>
+        <div class="social-buttons">
+            <button class="btn btn-warning" id="kakaoLogin">카카오 로그인</button>
+        </div>
+        <div class="social-buttons">
+            <button class="btn btn-success" id="naverLogin">네이버 로그인</button>
+        </div>
+        <div class="social-buttons">
+            <button class="btn btn-danger" id="googleLogin">구글 로그인</button>
+        </div>
+    </form>
+</div>
     <%@ include file="../include/footer.jsp" %>
     
     <script>
