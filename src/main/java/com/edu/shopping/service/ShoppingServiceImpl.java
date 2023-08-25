@@ -27,4 +27,9 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public List<ProductDisplayVO> cartProductsList(CartDTO productList) throws Exception {
 		return shoppingDAO.cartProductsList(productList);
 	}
+
+	@Override
+	public int productPrice(ProductDisplayVO productDisplayVO) throws Exception {
+		return shoppingDAO.productPrice(productDisplayVO);
+	}
 }

@@ -8,13 +8,13 @@ public class MemberDTO {
 	private	String	repasswd;
 	private	String	name;
 	private String 	nickname;
-	private int		phoneNumnber;
+	private String	phoneNumber;
 	private String 	gender;
 	private	Date	reg_date;
 	private String  zipcode;
 	private	String	address1;
 	private	String	addressDetail;
-	private Date 	birthdate;
+	private int 	birthdate;
 	
 	public String getId() {
 		return id;
@@ -46,11 +46,11 @@ public class MemberDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getPhoneNumnber() {
-		return phoneNumnber;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setPhoneNumnber(int phoneNumnber) {
-		this.phoneNumnber = phoneNumnber;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	public String getGender() {
 		return gender;
@@ -82,17 +82,17 @@ public class MemberDTO {
 	public void setAddressDetail(String addressDetail) {
 		this.addressDetail = addressDetail;
 	}
-	public Date getBirthdate() {
+	public int getBirthdate() {
 		return birthdate;
 	}
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(int birthdate) {
 		this.birthdate = birthdate;
 	}
 	
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", passwd=" + passwd + ", repasswd=" + repasswd + ", name=" + name
-				+ ", nickname=" + nickname + ", phoneNumnber=" + phoneNumnber + ", gender=" + gender + ", reg_date="
+				+ ", nickname=" + nickname + ", phoneNumber=" + phoneNumber + ", gender=" + gender + ", reg_date="
 				+ reg_date + ", zipcode=" + zipcode + ", address1=" + address1 + ", addressDetail=" + addressDetail
 				+ ", birthdate=" + birthdate + "]";
 	}

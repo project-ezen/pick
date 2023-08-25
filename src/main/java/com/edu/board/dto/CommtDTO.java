@@ -2,7 +2,7 @@ package com.edu.board.dto;
 
 import java.sql.Date;
 
-public class commtDTO {
+public class CommtDTO {
 
 		private int id;
 		private String content;

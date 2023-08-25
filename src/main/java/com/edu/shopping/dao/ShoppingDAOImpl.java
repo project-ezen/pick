@@ -31,5 +31,11 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 		log.info("productList" + productList);
 		
 		return sqlsession.selectList(namespace + ".productsDetailList", productList);
+  }
+
+	@Override
+	public int productPrice(ProductDisplayVO productDisplayVO) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".productPrice", productDisplayVO);
 	}
+    
 }
