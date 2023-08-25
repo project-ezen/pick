@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.edu.sole.DAO.SoleDAO;
-import com.edu.sole.DTO.SoleSearchCriteria;
-import com.edu.sole.DTO.liveSoleDTO;
+import com.edu.sole.dao.SoleDAO;
+import com.edu.sole.dto.SoleSearchCriteria;
+import com.edu.sole.dto.LiveSoleDTO;
 
 @Service
 public class SoleServiceImpl implements SoleService {
@@ -22,7 +22,7 @@ public class SoleServiceImpl implements SoleService {
 	
 	// 술 목록 보여주는
 	@Override
-	public List<liveSoleDTO> soleMain(SoleSearchCriteria solesearchcriteria) {
+	public List<LiveSoleDTO> soleMain(SoleSearchCriteria solesearchcriteria) {
 		
 		logger.info("서비스 들어감");
 		
