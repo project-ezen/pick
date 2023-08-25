@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page session="true" %>
+    <%@ page session="true" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,13 +23,16 @@ body {
 	min-height: 600px;
 	
 	}
+  
 input.reon {
 	border: none;
 	outline: none;
 }
+
 label {
 	font-size: 18px;
 }
+
 .btn_sub {
 	width: 70px;
 	height: 35px;
@@ -38,6 +42,7 @@ label {
 	background-color: #687AB6;
 	color: #fff;
 	}
+
 .btn_cle {
 	width: 70px;
 	height: 35px;
@@ -47,6 +52,7 @@ label {
 	background-color: #E96F84;
 	color: #fff;
 	}
+
 </style>
 
 </head>
@@ -67,7 +73,6 @@ label {
 				<input type="text" class="form-control-plaintext reon" value="${member.nickname}" readonly/>
 			</div>
 		</div>
-
 		<div class="form-group">
 			<label class="control-label col-sm-3">내용</label>
 			<div class="col-sm-6">

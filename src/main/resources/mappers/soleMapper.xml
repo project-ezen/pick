@@ -2,12 +2,13 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+  
   <!-- src/main/resource/mappers/memberMapper.xml -->
-
+  
 <mapper namespace="com.edu.sole.mappers.soleMapper">  
-
+	
 	<!-- 술 종류 가져오기 -->
-	<select id="soleMain" resultType="com.edu.sole.soledto.RecipedSoleDTO" parameterType="com.edu.sole.soledto.SoleSearchCriteria">
+	<select id="soleMain" resultType="com.edu.sole.dto.RecipedSoleDTO" parameterType="com.edu.sole.dto.SoleSearchCriteria">
 
 		<![CDATA[
 			select *
@@ -19,6 +20,7 @@
 		<include refid="search"/>
 	</select>
 
+	
 	 <!-- 게시글 검색조건 -->
   	<!-- oracle = || 은 + 처럼 쓰일수잇음 컬럼도 합칠수잇 -->
   	<sql id="search">
@@ -27,6 +29,7 @@
   				and alcohole_name like '%' || #{keyword} || '%'
   			]]>
   		</if>
+
 
   		<if test="dosu != null and dosu != '' and dosu != 0">
   			<![CDATA[
@@ -66,11 +69,10 @@
 			from reciped_alcohole
 			where 1=1 
 		]]>
-
+		
 		<include refid="search"/>
-	</select>
-
-
+  </select>
+	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- 술 레시피  디테일 가져오기 -->
 	<select id="solerecipeDetail" parameterType="String" resultType="com.edu.sole.soledto.recipe.recipeDTO">

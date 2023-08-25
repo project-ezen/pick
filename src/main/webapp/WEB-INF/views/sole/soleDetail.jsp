@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="true" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -60,6 +61,7 @@
         font-size: 15px;
         color: rgb(0, 0, 0);
       }
+      
       .infoAndReview li a {
         background-color: rgb(139, 139, 139);
       }
@@ -75,6 +77,7 @@
       	width: 8%;
       	height: 8%;
       }
+
       /*상세 설명, 리뷰*/
     </style>
   </head>
@@ -83,11 +86,8 @@
     <br />
     <br />
     <br />
-
-
     <div>
       <div class="container" style="background-color:white">
-
         <div class="row" >
           <!--상품 이미지-->
           <div class="col-md-6">
@@ -131,7 +131,6 @@
             <li class="active">
               <a data-toggle="tab" href="#description">재료정보</a>
             </li>
-
             <li>
             	<a data-toggle="tab" href="#review">리뷰</a>
             </li>
@@ -162,8 +161,6 @@
         </div>
         </div>
     </div>
-
-
    <%@ include file="../include/footer.jsp" %>
 
     <script>
