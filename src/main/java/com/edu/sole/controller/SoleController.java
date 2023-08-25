@@ -1,5 +1,6 @@
 package com.edu.sole.controller;
 
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -15,21 +16,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.member.controller.MemberController;
-import com.edu.sole.soledto.RecipedSoleDTO;
-import com.edu.sole.soledto.SolePageMaker;
-import com.edu.sole.soledto.SoleSearchCriteria;
-import com.edu.sole.soledto.liveSoleDTO;
-import com.edu.sole.soledto.recipe.recipeDTO;
-import com.edu.sole.service.soleService;
+import com.edu.sole.dto.RecipedSoleDTO;
+import com.edu.sole.dto.SolePageMaker;
+import com.edu.sole.dto.SoleSearchCriteria;
+import com.edu.sole.dto.LiveSoleDTO;
+import com.edu.sole.dto.recipe.RecipeDTO;
+import com.edu.sole.service.SoleService;
 
 @Controller
 @RequestMapping("/sole")
-public class soleControll {
+public class SoleController {
 	
 	@Inject
-	soleService soleservice;
+	SoleService soleservice;
 	
-	private static final Logger logger = LoggerFactory.getLogger(soleControll.class);
+	private static final Logger logger = LoggerFactory.getLogger(SoleController.class);
 	
 	//------------------------------------------------------------------------------------------
 	// 술 메인
@@ -56,7 +57,7 @@ public class soleControll {
 		logger.info("2");
 		pgm.setTotalCount(soleservice.solecount(solesearchcriteria));   // cri로 검색한 총 건수를 totalCount 변수에 저장한다.
 		logger.info("3");
-		List<liveSoleDTO> soleMain = soleservice.soleMain(solesearchcriteria);
+		List<LiveSoleDTO> soleMain = soleservice.soleMain(solesearchcriteria);
 		logger.info("4");
 		mav.addObject("sole", soleMain);
 		logger.info("5");
@@ -80,7 +81,7 @@ public class soleControll {
 		
 		logger.info("recipe_code : " + recipe_code);
 		
-		List<recipeDTO> recipeDetailDTO = soleservice.solerecipeDetail(recipe_code);   // 술 상세한 레시피 보여주는
+		List<RecipeDTO> recipeDetailDTO = soleservice.solerecipeDetail(recipe_code);   // 술 상세한 레시피 보여주는
 		
 		RecipedSoleDTO recipeDTO = new RecipedSoleDTO();
 		
