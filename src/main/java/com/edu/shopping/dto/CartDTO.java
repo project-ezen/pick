@@ -3,16 +3,6 @@ package com.edu.shopping.dto;
 //실어나르는 값
 public class CartDTO {
 
-	private String cart_id;
-	private String member_id;
-	
-	public String getCart_id() {
-		return cart_id;
-	}
-  
-	public void setCart_id(String cart_id) {
-		this.cart_id = cart_id;
-  }
   
 	private int cart_number;
 	private String product_id;
