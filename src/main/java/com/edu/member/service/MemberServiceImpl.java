@@ -13,7 +13,6 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	private MemberDAO memberDAO;
 
-	//로그인 화면 get
 	
 	//로그인 post => 있는지 확인
 	@Override
@@ -21,11 +20,26 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.login(memberDTO);
 	}
 
+//-------------------------------------------------------------------------------
+	
+	
 	//회원가입
 	@Override
 	public int join(MemberDTO memberDTO) throws Exception {
 		int result = memberDAO.join(memberDTO);
 		return result;
+	}
+	
+	//회원 상세 정보 수정 get
+	@Override
+	public MemberDTO memberDetail(String id) throws Exception {
+		return memberDAO.memberDetail(id);
+	}
+	
+	//회원 정보 수정 POST
+	@Override
+	public void memberUpdate(MemberDTO memberDTO) throws Exception {
+		memberDAO.memberUpdate(memberDTO);	
 	}
 	
 	//아이디 중복 검사
@@ -41,6 +55,10 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.nickCheck(memberDTO);
 		return result;
 	}
+
+	
+	
+//-------------------------------------------------------------------------------
 
 
 	

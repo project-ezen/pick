@@ -10,7 +10,6 @@ public interface BoardController {
 	
 	// 게시글 목록
 	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	 
-	
-	
+
 }
+

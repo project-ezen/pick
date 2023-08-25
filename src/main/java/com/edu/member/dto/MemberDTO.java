@@ -8,7 +8,7 @@ public class MemberDTO {
 	private	String	repasswd;
 	private	String	name;
 	private String 	nickname;
-	private int		phoneNumnber;
+	private int		phoneNumber;
 	private String 	gender;
 	private	Date	reg_date;
 	private String  zipcode;
@@ -46,11 +46,11 @@ public class MemberDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getPhoneNumnber() {
-		return phoneNumnber;
+	public int getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setPhoneNumnber(int phoneNumnber) {
-		this.phoneNumnber = phoneNumnber;
+	public void setPhoneNumber(int phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 	public String getGender() {
 		return gender;
@@ -92,7 +92,7 @@ public class MemberDTO {
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", passwd=" + passwd + ", repasswd=" + repasswd + ", name=" + name
-				+ ", nickname=" + nickname + ", phoneNumnber=" + phoneNumnber + ", gender=" + gender + ", reg_date="
+				+ ", nickname=" + nickname + ", phoneNumber=" + phoneNumber + ", gender=" + gender + ", reg_date="
 				+ reg_date + ", zipcode=" + zipcode + ", address1=" + address1 + ", addressDetail=" + addressDetail
 				+ ", birthdate=" + birthdate + "]";
 	}

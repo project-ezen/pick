@@ -12,3 +12,4 @@ public interface BoardDAO {
 	// 게시글 목록
 	public List selectAllArticlesList() throws DataAccessException;
 }
+

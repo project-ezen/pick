@@ -1,5 +1,6 @@
 package com.edu.board.dao;
 
+
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -25,3 +26,4 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	
 }
+

@@ -5,7 +5,7 @@ import java.util.List;
 import com.edu.sole.DTO.SoleSearchCriteria;
 import com.edu.sole.DTO.liveSoleDTO;
 
-public interface soleDAO {
+public interface SoleDAO {
 	
 	public List<liveSoleDTO> soleMain(SoleSearchCriteria solesearchcriteria);
 	

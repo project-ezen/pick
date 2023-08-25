@@ -11,3 +11,4 @@ public interface BoardService {
 	public List<BoardDTO> recipeBoard() throws Exception;
 	
 }
+
