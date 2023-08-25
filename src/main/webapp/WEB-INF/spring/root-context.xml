@@ -33,7 +33,6 @@
  
 		<property name="configLocation" value="classpath:/mybatis-config.xml"></property>
 
-		
 		<!-- XML Mapper 파일을 인식하도록 설정한다. -->
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
 	</bean>
