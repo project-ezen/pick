@@ -21,6 +21,10 @@
 	 
 	<update id="update" parameterType="com.edu.member.dto.MemberDTO">
 		UPDATE	member
+<<<<<<< HEAD
+=======
+
+>>>>>>> 09ae3365b3d2b6741cc0523acbda96742c41ece2
 		SET		member_passwd			= #{passwd},
 				member_repasswd			= #{repasswd},
 				member_name				= #{name},
@@ -29,10 +33,9 @@
 				member_gender			= #{gender},
 				member_zipcode			= #{zipcode},
 				member_gender			= #{gender},
-				member_address			= #{address},
+				member_address			= #{address1},
 				member_addressdetail	= #{addressDetail},
 				member_birthdate		= #{birthdate}
-				
 		WHERE	member_id				= #{id}
 	</update>
 	
@@ -54,8 +57,8 @@
 	<!-- 회원 가입  -->
 	<insert id="join" parameterType="com.edu.member.dto.MemberDTO">
 		INSERT INTO member
-				(member_id, member_pw, member_repw, member_name, member_nickname, member_phoneNumber, member_gender, member_zipcode, member_address1, member_address2, member_birthdate)
-		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name}, #{nickname}, #{phoneNumber}, #{gender}, #{zipcode}, #{address1}, #{addressDetail}, #{birthdate})
+				(member_id, member_pw, member_repw, member_name, member_nickname, member_phoneNumber, member_birthdate, member_gender, member_zipcode, member_address, member_addressdetail )
+		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name}, #{nickname}, #{phoneNumber}, #{birthdate}, #{gender}, #{zipcode}, #{address1}, #{addressDetail} )
 	</insert>
 	
 </mapper>

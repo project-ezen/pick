@@ -42,6 +42,8 @@ public class MemberController {
 		System.out.println("Login GET action : " + action);
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
+		
+		
 		return "/member/login";
 	}
 	
@@ -95,11 +97,15 @@ public class MemberController {
 	
 	//회원가입 
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(MemberDTO memberDTO) throws Exception {
+	public String join(MemberDTO memberDTO, HttpServletRequest request,	HttpServletResponse response) throws Exception {
+		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=utf-8");
+		
+		logger.info("memberDTO COntroller" + memberDTO);
 		
 		// 아이디(이메일)이 존재하는지 먼저 검사한다.
 		int result = memberService.idCheck(memberDTO);
-		
 		try {
 			if(result == 1) {
 				return "/member/join";

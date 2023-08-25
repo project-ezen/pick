@@ -45,7 +45,7 @@
 		<div class="join-form">
 			<h1 class="text-center">회원 가입</h1>
 			
-			<form id="join-form" method="post" action="member/join">
+			<form id="join-form" method="post" action="/member/join">
                 <div class="form-group">
 					<label class="control-label">아이디</label>
 					<input type="text" class="form-control" id="id" name="id" placeholder="이메일을 입력하세요">
@@ -105,7 +105,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label">상세주소</label>
-					<input type="text" class="form-control" id="address2" name="address2">
+					<input type="text" class="form-control" id="address2" name="addressDetail">
 				</div><br>
 
 				<div class="form-group">
