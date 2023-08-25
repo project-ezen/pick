@@ -8,23 +8,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.edu.sole.dao.soleDAO;
-import com.edu.sole.soledto.RecipedSoleDTO;
-import com.edu.sole.soledto.SoleSearchCriteria;
-import com.edu.sole.soledto.liveSoleDTO;
-import com.edu.sole.soledto.recipe.recipeDTO;
+import com.edu.sole.dao.SoleDAO;
+import com.edu.sole.dto.RecipedSoleDTO;
+import com.edu.sole.dto.SoleSearchCriteria;
+import com.edu.sole.dto.LiveSoleDTO;
+import com.edu.sole.dto.recipe.RecipeDTO;
 
 @Service
-public class soleServiceImpl implements soleService {
+public class SoleServiceImpl implements SoleService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(soleServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(SoleServiceImpl.class);
 	
 	@Inject
-	soleDAO soledao;
+	SoleDAO soledao;
 	
 	// 술 목록 보여주는
 	@Override
-	public List<liveSoleDTO> soleMain(SoleSearchCriteria solesearchcriteria) {
+	public List<LiveSoleDTO> soleMain(SoleSearchCriteria solesearchcriteria) {
 		
 		logger.info("서비스 들어감");
 		
@@ -42,7 +42,7 @@ public class soleServiceImpl implements soleService {
 	
 	// 술 레시피 구하는
 	@Override
-	public List<recipeDTO> solerecipeDetail(String recipe_code) throws Exception {
+	public List<RecipeDTO> solerecipeDetail(String recipe_code) throws Exception {
 		
 		return soledao.solerecipeDetail(recipe_code);
 	}
@@ -55,4 +55,3 @@ public class soleServiceImpl implements soleService {
 	}
 
 }
-
