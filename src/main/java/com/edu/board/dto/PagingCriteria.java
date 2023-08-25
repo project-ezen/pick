@@ -3,7 +3,7 @@ package com.edu.board.dto;
 //-----------------------------------------------------------------------------------------------------------
 // public class Criteria
 //-----------------------------------------------------------------------------------------------------------
-public class pagingCriteria {
+public class PagingCriteria {
 
 	private	int	page;		// 현재 페이지 번호
 	private	int	perPageNum;	// 한 페이지당 보여줄 글의 갯수
@@ -23,7 +23,7 @@ public class pagingCriteria {
 	}
 	
 	// 기본 생성자
-	public pagingCriteria() {
+	public PagingCriteria() {
 		// 최초 게시판에 진입할 때를 위해서 기본 값을 설정해야 한다.
 		this.page		= 1;
 		this.perPageNum	= 6;

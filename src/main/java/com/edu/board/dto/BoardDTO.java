@@ -2,21 +2,21 @@ package com.edu.board.dto;
 
 import java.sql.Date;
 
-public class boardDTO {
+public class BoardDTO {
 	
-	private int id;	// 연결할 고유글번호
+	private int b_id;	// 연결할 고유글번호
 	private String title;
 	private String content;
-	private int articleNO;	//글순번
 	private Date writeDate;
 	private String image;
+	private String id;
 	
 	
-	public int getId() {
-		return id;
+	public int getB_id() {
+		return b_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setB_id(int b_id) {
+		this.b_id = b_id;
 	}
 	public String getTitle() {
 		return title;
@@ -30,13 +30,6 @@ public class boardDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getArticleNO() {
-		return articleNO;
-	}
-	public void setArticleNO(int articleNO) {
-		this.articleNO = articleNO;
-	}
-	
 	public Date getWriteDate() {
 		return writeDate;
 	}
@@ -49,11 +42,16 @@ public class boardDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
-		return "boardDTO [id=" + id + ", title=" + title + ", content=" + content + ", articleNO=" + articleNO
-				+ ", writeDate=" + writeDate + ", image=" + image + "]";
+		return "boardDTO [b_id=" + b_id + ", title=" + title + ", content=" + content + ", writeDate=" + writeDate
+				+ ", image=" + image + ", id=" + id + "]";
 	}
-	
 	
 }

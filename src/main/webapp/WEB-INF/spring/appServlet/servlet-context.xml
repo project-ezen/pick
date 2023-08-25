@@ -22,10 +22,18 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.edu.main" />
+	
+	<context:component-scan base-package="com.edu.member.controller" />
+	<context:component-scan base-package="com.edu.member.service" />
+	<context:component-scan base-package="com.edu.member.dao" />
+	
+	<context:component-scan base-package="com.edu.board.controller"/>
+	<context:component-scan base-package="com.edu.board.service"/>
+	<context:component-scan base-package="com.edu.board.dao"/>
+	
+	
 	<context:component-scan base-package="com.edu.store" />
-	<context:component-scan base-package="com.edu.member" />
 	<context:component-scan base-package="com.edu.alchole" />
-	<context:component-scan base-package="com.edu.board" />
 	<context:component-scan base-package="com.edu.mypage" />
 	
 	

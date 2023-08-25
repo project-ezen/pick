@@ -5,17 +5,17 @@ package com.edu.board.dto;
 //-----------------------------------------------------------------------------------------------------------
 public class PageMaker {
 	
-	private	pagingCriteria	cri;
+	private	PagingCriteria	cri;
 	private	int			totalCount;				// 전체 페이지 개수
 	private	int			startPage;				// 현재 화면에서 보이는 startPage 번호
 	private	int			endPage;				// 현재 화면에서 보이는 endPage 번호
 	private	boolean		prev;					// 페이징 이전 버튼 활성화 여부
 	private	boolean		next;					// 페이징 다음 버튼 활성화 여부
 	private	int			displayPageNum = 10;	// 화면 하단에 보여줄 페이지의 개수 (1,2,3,4,5,6,7,8,9,10)
-	public pagingCriteria getCri() {
+	public PagingCriteria getCri() {
 		return cri;
 	}
-	public void setCri(pagingCriteria cri) {
+	public void setCri(PagingCriteria cri) {
 		this.cri = cri;
 	}
 	public int getTotalCount() {
