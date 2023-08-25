@@ -21,7 +21,10 @@
 	 
 	<update id="update" parameterType="com.edu.member.dto.MemberDTO">
 		UPDATE	member
+<<<<<<< HEAD
+=======
 
+>>>>>>> 09ae3365b3d2b6741cc0523acbda96742c41ece2
 		SET		member_passwd			= #{passwd},
 				member_repasswd			= #{repasswd},
 				member_name				= #{name},
@@ -30,7 +33,7 @@
 				member_gender			= #{gender},
 				member_zipcode			= #{zipcode},
 				member_gender			= #{gender},
-				member_address			= #{address},
+				member_address			= #{address1},
 				member_addressdetail	= #{addressDetail},
 				member_birthdate		= #{birthdate}
 		WHERE	member_id				= #{id}
