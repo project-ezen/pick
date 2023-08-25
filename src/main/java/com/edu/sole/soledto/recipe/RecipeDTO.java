@@ -1,6 +1,6 @@
-package com.edu.sole.soledto.recipe;
+package com.edu.sole.dto.recipe;
 
-public class recipeDTO {
+public class RecipeDTO {
 	
 	private String recipe_code;
 	private String ingredient_number;
