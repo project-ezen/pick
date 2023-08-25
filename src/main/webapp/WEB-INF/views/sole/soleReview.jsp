@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ page session="true" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +23,7 @@ body {
 	min-height: 600px;
 	
 	}
-
+  
 input.reon {
 	border: none;
 	outline: none;
@@ -73,7 +73,6 @@ label {
 				<input type="text" class="form-control-plaintext reon" value="${member.nickname}" readonly/>
 			</div>
 		</div>
-		
 		<div class="form-group">
 			<label class="control-label col-sm-3">내용</label>
 			<div class="col-sm-6">

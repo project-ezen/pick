@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.edu.board.mappers.boardMapper">
+
+	<resultMap id="articlesResult" type="com.edu.board.dto.BoardDTO">
+		<result property="board_id"		column="b_id"/>
+		<result property="title"		column="title"/>
+		<result property="content"		column="content"/>
+		<result property="member_id"	column="m_id"/>
+		<result property="writeDate"	column="writeDate"/>
+		<result property="image"		column="image"/>
+	</resultMap>
+
+	<!-- 게시물 목록 -->
+	<select id="selectAllArticleList" resultMap="articlesResult">
+		<![CDATA[
+		SELECT	b_id, title, image, m_id
+		FROM	board
+		order by b_id desc
+		]]>
+	</select>
+	
+	
+	
+</mapper>
+
+

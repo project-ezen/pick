@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>My page</title>
-<%@ include file="./WEB-INF/views/include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <style>
 @media ( min-width: 946px ) {
   .set1 {
@@ -22,21 +22,20 @@ img { float: left; }
 .nim { text-align : center; line-height : 200px; width: 70%; height: 200px; float: right; margin:0 auto; }
 
 .order {
-	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
 	background-color:#7892c2;
 	border-radius:16px;
+	border:none;
 	display:inline-block;
 	cursor:pointer;
 	color:#fff;
 	font-family:Arial;
-	font-size:19px;
+	font-size:20px;
 	text-decoration:none;
 	margin: 50px 30px 30px 30px;
 	padding: 30px 30px;
 }
 .order:hover {
-	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
-	background-color:#476e9e;
+	background-color:#afb7db;
 }
 .order:active {
 	position:relative;
@@ -46,8 +45,8 @@ img { float: left; }
 </style>
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
-	<div class="container" id="">
+<%@ include file="../include/topMenu.jsp" %>
+	<div class="container">
 		<h2 class="title">MyPage</h2>
 		<hr/>
 		<div id="contents" class="set1">
@@ -63,7 +62,7 @@ img { float: left; }
 		</div>
 	</div>
 	<br/><br/>
-	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+	<%@ include file="../include/footer.jsp" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -71,25 +70,25 @@ img { float: left; }
 //주문한 내역
 function fn_order(obj) {
 	alert("주문한 내역");
-	obj.action = "${path}/shopping/order.jsp";
+	obj.action = "${path}/shopping/myorder.jsp";
 	obj.submit();
 }	
 
 function fn_jjim(obj) {
 	alert("찜한 레시피");
-	obj.action = "${path}/board/.jsp";
+	obj.action = "${path}/board/recipejjim.jsp";
 	obj.submit();
 }	
 
 function fn_mine(obj) {
 	alert("작성한 게시물");
-	obj.action = "${path}/shopping/order.jsp";
+	obj.action = "${path}/board/myboard.jsp";
 	obj.submit();
 }	
 
 function fn_insert(obj) {
 	alert("회원정보수정");
-	obj.action = "${path}/shopping/order.jsp";
+	obj.action = "${path}/member/insertInfo.jsp";
 	obj.submit();
 }	
 

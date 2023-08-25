@@ -179,10 +179,26 @@ padding: 0px;
 				</select>
 			</div>
 		</div>
-	<div class="list">
 	
+	<div style="width: 370px; height: 230px; float: left;">
+		<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
+			<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
+			<div class="lele">
+				<div class="top">
+					<p class="title">제목</p>
+					<p class="writer">작성자</p>
+				</div>
+				<div class="bottom">
+					<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<i class="bi bi-heart"></i><span>100</span>
+				</div>
+			</div>
+		</div>
 	</div>
-	<button type="button" class="wbtn" onclick="wbtn">글쓰기</button>
+	
+	
+	<button type="button" class="wbtn" onclick="location.href='${path}/board/write';">글쓰기</button>
 	<div class="page_wrap">
 	   <div class="page_nation">
 	      <a class="arrow prev" href="#"><i class="bi bi-caret-left-fill"></i></a>
@@ -194,13 +210,10 @@ padding: 0px;
 	      <a class="arrow next" href="#"><i class="bi bi-caret-right-fill"></i></a>
 	   </div>
 	</div> 
-</div>
 <br/>
+</div>
 <%@ include file="../include/footer.jsp" %>
 <script>
-function wbtn(){
-	
-}
 </script>
 </body>
 </html>

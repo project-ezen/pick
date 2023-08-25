@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
   
   <!-- src/main/resource/mappers/memberMapper.xml -->
   
 <mapper namespace="com.edu.sole.mappers.soleMapper">  
 	
 	<!-- 술 종류 가져오기 -->
-	<select id="soleMain" resultType="com.edu.sole.soledto.RecipedSoleDTO" parameterType="com.edu.sole.soledto.SoleSearchCriteria">
-		
+	<select id="soleMain" resultType="com.edu.sole.dto.RecipedSoleDTO" parameterType="com.edu.sole.dto.SoleSearchCriteria">
+
 		<![CDATA[
 			select *
 			from	
@@ -18,6 +19,7 @@
 		]]>
 		<include refid="search"/>
 	</select>
+
 	
 	 <!-- 게시글 검색조건 -->
   	<!-- oracle = || 은 + 처럼 쓰일수잇음 컬럼도 합칠수잇 -->
@@ -27,38 +29,39 @@
   				and alcohole_name like '%' || #{keyword} || '%'
   			]]>
   		</if>
-  		
+
+
   		<if test="dosu != null and dosu != '' and dosu != 0">
   			<![CDATA[
   				and alcohole_level = #{dosu}
   			]]>
   		</if>
-  		
+
   		 <if test="mat != null and mat != '' and mat != '모든'">
   			<![CDATA[
   				and favor = #{mat}
   			]]>
   		</if>
-  		
+
   		<if test="alcohole_category != null and alcohole_category != '' and alcohole_category != 0">
   			<![CDATA[
   				and alcohole_category = #{alcohole_category}
   			]]>
   		</if>
-  		
+
   		 <if test="dosu == 0">
   			<![CDATA[
   				and 1=1
   			]]>
   		</if>
-  		
+
   		 <if test="mat == '모든'">
   			<![CDATA[
   				and 1=1
   			]]>
   		</if>
   	</sql>
-	
+
 	<!-- 술 개수 가져오기 -->
 	<select id="solecount" parameterType="com.edu.sole.soledto.SoleSearchCriteria" resultType="int">
 		<![CDATA[
@@ -68,8 +71,7 @@
 		]]>
 		
 		<include refid="search"/>
-	</select>
-	
+  </select>
 	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- 술 레시피  디테일 가져오기 -->
@@ -80,7 +82,7 @@
 			where recipe_code = #{recipe_code}
 		]]>
 	</select>
-	
+
 	<!-- 술 정보 -->
 	<select id="solerecipe" resultType="com.edu.sole.soledto.RecipedSoleDTO" parameterType="String">
 		<![CDATA[
@@ -89,5 +91,5 @@
 			where recipe_code = #{recipe_code}
 		]]>
 	</select>
-	
+
 </mapper>

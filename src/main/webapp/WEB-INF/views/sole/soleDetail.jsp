@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page session="true" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -12,7 +12,6 @@
       /*상품 관련 이미지, 위치*/
 	  .bg {
 		 background-image: url("/resources/images/background2.jpg");
-
          height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
          
          
@@ -34,7 +33,6 @@
         margin-top: 39px;
       }
       /*상품 관련 이미지, 위치*/
-
       /*테이블*/
       .table {
         height: 300px;
@@ -53,7 +51,6 @@
         text-align: center;
       }
       /*테이블*/     
-
       /*상세 설명, 리뷰*/
       input:focus {
         outline: none;
@@ -64,7 +61,7 @@
         font-size: 15px;
         color: rgb(0, 0, 0);
       }
-
+      
       .infoAndReview li a {
         background-color: rgb(139, 139, 139);
       }
@@ -89,11 +86,8 @@
     <br />
     <br />
     <br />
-    
-   
     <div>
       <div class="container" style="background-color:white">
-        
         <div class="row" >
           <!--상품 이미지-->
           <div class="col-md-6">
@@ -137,7 +131,6 @@
             <li class="active">
               <a data-toggle="tab" href="#description">재료정보</a>
             </li>
-            
             <li>
             	<a data-toggle="tab" href="#review">리뷰</a>
             </li>
@@ -168,10 +161,8 @@
         </div>
         </div>
     </div>
-  
-    
    <%@ include file="../include/footer.jsp" %>
-   
+
     <script>
 		$(document).ready(function () {
 			var reviewForm = $("#reviewForm");

@@ -8,13 +8,13 @@ public class MemberDTO {
 	private	String	repasswd;
 	private	String	name;
 	private String 	nickname;
-	private int		phoneNumber;
+	private String	phoneNumber;
 	private String 	gender;
 	private	Date	reg_date;
 	private String  zipcode;
 	private	String	address1;
 	private	String	addressDetail;
-	private Date 	birthdate;
+	private int 	birthdate;
 	
 	public String getId() {
 		return id;
@@ -46,10 +46,10 @@ public class MemberDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getPhoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	public String getGender() {
@@ -82,10 +82,10 @@ public class MemberDTO {
 	public void setAddressDetail(String addressDetail) {
 		this.addressDetail = addressDetail;
 	}
-	public Date getBirthdate() {
+	public int getBirthdate() {
 		return birthdate;
 	}
-	public void setBirthdate(Date birthdate) {
+	public void setBirthdate(int birthdate) {
 		this.birthdate = birthdate;
 	}
 	

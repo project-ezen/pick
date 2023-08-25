@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +45,7 @@
 		<div class="join-form">
 			<h1 class="text-center">회원 가입</h1>
 			
-			<form id="join-form" method="post" action="member/join">
+			<form id="join-form" method="post" action="/member/join">
                 <div class="form-group">
 					<label class="control-label">아이디</label>
 					<input type="text" class="form-control" id="id" name="id" placeholder="이메일을 입력하세요">
@@ -54,6 +53,15 @@
                 <div class="form-group">
 					<label class="control-label">실시간 중복확인</label>
 					<input type="text" class="form-control msg" id="msg" name="msg" readonly placeholder="결과 확인">
+				</div>
+				
+				<div class="form-group">
+					<label class="control-label">비밀번호</label>
+					<input type="password" class="form-control" id="passwd" name="passwd">
+				</div>
+				<div class="form-group">
+					<label class="control-label">비밀번호 확인</label>
+					<input type="password" class="form-control" id="repasswd" name="repasswd">
 				</div>
 				
 				<div class="form-group">
@@ -68,14 +76,6 @@
 							<button class="btn btn-info" type="button" id="nickCheck" onClick="fn_nickCheck()">중복확인</button>
 						</span>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">비밀번호</label>
-					<input type="password" class="form-control" id="passwd" name="passwd">
-				</div>
-				<div class="form-group">
-					<label class="control-label">비밀번호 확인</label>
-					<input type="password" class="form-control" id="repasswd" name="repasswd">
 				</div>
 				<div class="form-group">
 					<label class="control-label">연락처</label>
@@ -105,7 +105,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label">상세주소</label>
-					<input type="text" class="form-control" id="address2" name="address2">
+					<input type="text" class="form-control" id="address2" name="addressDetail">
 				</div><br>
 
 				<div class="form-group">
@@ -360,13 +360,16 @@
 
 
 <script>
+var nickIsValid = false; // 초기에 닉네임은 유효하지 않다고 가정
+
 function allCheck() {
     var inputID = $('#id').val();
+    var nickname = $("#nickname").val();
     var infoChecked = $('#info').prop('checked');
     var info1Checked = $('#info1').prop('checked');
     
     // 이메일 형식, 중복 여부, 약관 동의 여부를 확인하여 회원가입 버튼 활성화
-    if(inputID != "" && inputID.includes('@') && $(".msg").val() === "사용이 가능한 이메일입니다." && infoChecked && info1Checked) {
+    if(inputID != "" && inputID.includes('@') && $(".msg").val() === "사용이 가능한 이메일입니다." && infoChecked && info1Checked && nickIsValid) {
         $(".joinButton").prop("disabled", false);
     } else {
         $(".joinButton").prop("disabled", true);
@@ -391,15 +394,16 @@ $(document).ready(function() {
            dataType: "json",
            data: {"id": inputID},
            success: function(data) {
-               if (inputID === "" || !inputID.includes('@') || data === '0') {
+        	   // alert(inputID + ":" + data);
+               if (inputID === "" || !inputID.includes("@") || (!inputID.includes(".com") && !inputID.includes(".net"))) {
                    $(".joinButton").prop("disabled", true);
                    $("#msg").val("이메일 형식이 아닙니다.");
                    $("#msg").css("background-color", "#ffcece");
-               } else if (inputID !== "" && inputID.includes('@') && data === '0') {
+               } else if (inputID !== "" && inputID.includes("@") && data === 0) {
                    $(".joinButton").prop("disabled", false);
                    $("#msg").val("사용이 가능한 이메일입니다.");
                    $("#msg").css("background-color", "#b0f6ac");
-               } else if (data === '1') {
+               } else if (data === 1) {
                    $(".joinButton").prop("disabled", true);
                    $("#msg").val("이미 사용 중인 이메일입니다.");
                    $("#msg").css("background-color", "#ffcece");
@@ -465,7 +469,6 @@ $(document).ready(function() {
 	
 });
 
-   
 	// 약관 동의
 
        var smt = $("#submit");
@@ -512,6 +515,7 @@ function fn_nickCheck() {
 		type:		"post",
 		dataType:	"json",
 		data:		{"nickname" : nickname},
+		async:		false,
 		success:	function(data) {
 			
 			if(data == 1) {
@@ -520,8 +524,10 @@ function fn_nickCheck() {
 			} else if(data == 0) {
 				alert("사용 가능한 닉네임입니다.");
 				$("#nickCheck").attr("value", "Y");
-				$("#passwd").focus();
+				$("#phoneNumber").focus();
+				nickIsValid = true;
 			}
+			allCheck();
 		}
 	});
 }

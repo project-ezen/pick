@@ -1,14 +1,15 @@
 package com.edu.board.controller;
 
-import org.springframework.stereotype.Controller;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-@Controller("boardController")
-public class BoardController {
+import org.springframework.web.servlet.ModelAndView;
 
+
+public interface BoardController {
 	
-			
-} // End - public class BoardControllerImpl implements BoardController
+	// 게시글 목록
+	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-
-
+}
 
