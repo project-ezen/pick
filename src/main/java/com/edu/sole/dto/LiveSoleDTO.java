@@ -1,6 +1,6 @@
-package com.edu.sole.DTO;
+package com.edu.sole.dto;
 
-public class liveSoleDTO {
+public class LiveSoleDTO {
 	private String 	live_alcohole_id;
 	private int 	alcohole_level;
 	private String  content;

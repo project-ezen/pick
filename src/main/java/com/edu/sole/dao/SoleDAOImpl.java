@@ -1,4 +1,4 @@
-package com.edu.sole.DAO;
+package com.edu.sole.dao;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.edu.sole.DTO.SoleSearchCriteria;
-import com.edu.sole.DTO.liveSoleDTO;
+import com.edu.sole.dto.SoleSearchCriteria;
+import com.edu.sole.dto.LiveSoleDTO;
 
 @Repository
 public class SoleDAOImpl implements SoleDAO {
@@ -23,7 +23,7 @@ public class SoleDAOImpl implements SoleDAO {
 	private static final String namespace = "com.edu.sole.mappers.soleMapper";
 	
 	@Override
-	public List<liveSoleDTO> soleMain(SoleSearchCriteria solesearchcriteria) {
+	public List<LiveSoleDTO> soleMain(SoleSearchCriteria solesearchcriteria) {
 		// TODO Auto-generated method stub
 		
 		logger.info("DAO입장");

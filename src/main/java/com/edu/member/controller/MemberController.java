@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -94,7 +95,7 @@ public class MemberController {
 	}
 	
 	
-	//회원가입
+	//회원가입 
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(MemberDTO memberDTO, HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		
@@ -158,7 +159,32 @@ public class MemberController {
 	//비밀번호 찾기 post
 	
 	
-	//회원정보수정 post
+	
+	
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	//회원정보상세정보=>수정 GET
+	@RequestMapping(value="/memberDetail",method=RequestMethod.GET)
+	public void memberDetail(@RequestParam("id")String id,Model model) throws Exception {
+		 
+		MemberDTO memberDTO = memberService.memberDetail(id);   //id를 줘서 
+		model.addAttribute("detail",memberDTO);
+		
+		System.out.println("상세 정보 :" + memberDTO);
+	}
+	
+	
+	//회원정보수정 POST
+	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
+	public String MemberUpdate(MemberDTO memberDTO) throws Exception {
+		
+		//client에서 보내오는 데이터들의 name이 맞으면 memberDTO에 알아서 값이 들어간다.
+		memberService.memberUpdate(memberDTO);
+		
+		return "redirect:/member/mypage"; 
+		//redirect<요청을 해서 데이터도 같이 보여준다.> 
+		//redirect없이 쓰면 페이지형태만 보여준다.(/member/memberList로 넘어가지 않는다.)
+	}
+	
 	
 	
 }
