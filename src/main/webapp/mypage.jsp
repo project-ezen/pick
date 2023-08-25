@@ -22,21 +22,20 @@ img { float: left; }
 .nim { text-align : center; line-height : 200px; width: 70%; height: 200px; float: right; margin:0 auto; }
 
 .order {
-	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
 	background-color:#7892c2;
 	border-radius:16px;
+	border:none;
 	display:inline-block;
 	cursor:pointer;
 	color:#fff;
 	font-family:Arial;
-	font-size:19px;
+	font-size:20px;
 	text-decoration:none;
 	margin: 50px 30px 30px 30px;
 	padding: 30px 30px;
 }
 .order:hover {
-	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
-	background-color:#476e9e;
+	background-color:#afb7db;
 }
 .order:active {
 	position:relative;
@@ -47,7 +46,7 @@ img { float: left; }
 </head>
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
-	<div class="container" id="">
+	<div class="container">
 		<h2 class="title">MyPage</h2>
 		<hr/>
 		<div id="contents" class="set1">
