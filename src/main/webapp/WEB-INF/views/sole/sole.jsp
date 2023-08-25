@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,10 @@
 <style type="text/css">
 	.bg {
 		 background-image: url("/resources/images/background2.jpg");
+
          height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
+         
+         
 		 background-attachment: fixed, scroll;
          background-position: center;
          background-repeat: no-repeat;
@@ -79,14 +84,14 @@
 		<!-- select  -->
 		<div class="selectdiv">
 			<select id="dosu">
-				<option value="">도수</option>
+				<option value="0">도수</option>
 				<option value="8">약한도수</option>
 				<option value="9">중간도수</option>
 				<option value="10">강한도수</option>
 			</select>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<select id="mat">
-				<option>맛</option>
+				<option value="모든">맛</option>
 				<option value="단맛">단맛</option>
 				<option value="쓴맛">쓴맛</option>
 				<option value="신맛">신맛</option>
@@ -95,24 +100,25 @@
 		<br/><br/><br/>
 		<!-- items -->
 		<div class="col-sm-12">			
-			<c:forEach var="livesole" items="${sole}">
+			<c:forEach var="sole" items="${sole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a href="#"><img src="${path}/download?recipe_image=${livesole.recipe_image}"/></a>
-					<p style="text-align: center;"><a href="#">${livesole.alcohole_name}</a></p>
+					<a href="#"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
+					<p style="text-align: center;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
 			
 			<div class="input-group col-sm-12" style="bottom: 5px;">	
             	<span class="input-group-addon"><span class="glyphicon glyphicon-search" id="searchBtn"></span></span>
             	
-            	<input type="text" class="form-control" id="searchBox"/>
+            	<input type="text" class="form-control" id="searchBox" value="${cri.keyword}"/>
             	
             	<form id="formList" action="/sole/sole" method="get">
 					<input type="hidden" name="page"/>
 					<input type="hidden" name="keyword"/>
 					<input type="hidden" name="dosu"/>
 					<input type="hidden" name="mat"/>
+					<input type="hidden" name="alcohole_category"/>
 				</form>
             	
             	<ul class="btn-group pagination col-sm-offset-6 col-sm-2">
@@ -124,7 +130,7 @@
 					
 					<c:forEach begin="${pagemaker.startPage}" end="${pagemaker.endPage}" var="pageNum">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}"/>'><i>${pageNum}</i></a>
+							<a href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}&alcohole_category=${cri.alcohole_category}"/>'><i>${pageNum}</i></a>
 						</li>
 					</c:forEach>
 					
@@ -141,41 +147,86 @@
 <%@ include file="../include/footer.jsp" %>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		var formObj = $("#formList");
-		
-		$("#searchBox").keydown(function(key) {
-			if(key.keyCode === 13) {
-				var keywordStr = $("#searchBox").val();
-				formObj.find("[name='keyword']").val(keywordStr);
-				formObj.find("[name='page']").val("1");
-				formObj.submit();
-			}
-		});
-		
-		$("#searchBtn").click(function () {
+$(document).ready(function() {
+    var formObj = $("#formList");
+    var dosuSelect = $("#dosu");
+    var matSelect = $("#mat");
+    
+    // 페이지 로드 시 셀렉트 박스 값 설정
+    var selectedDosu = "${cri.dosu}";
+    var selectedMat = "${cri.mat}";
+    var selectedCategory = "${param.alcohole_category}";
+    
+    if (selectedDosu !== "") {
+        dosuSelect.val(selectedDosu).change(); // 값을 선택한 상태로 설정하고 change 이벤트 발생
+    }
+    
+    if (selectedMat !== "") {
+        matSelect.val(selectedMat).change(); // 값을 선택한 상태로 설정하고 change 이벤트 발생
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////    
+
+    
+    // 서브밋 버튼 클릭 이벤트 핸들러
+    $("#searchBtn").click(function() {
+        var keywordStr = $("#searchBox").val();
+        var keywordStrTrim = keywordStr.trim();
+        formObj.find("[name='keyword']").val(keywordStrTrim);
+        formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+        formObj.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
+        formObj.find("[name='page']").val("1");
+        formObj.submit();
+    });
+    
+    // 셀렉트 박스 값 변경 이벤트 핸들러
+    dosuSelect.on("change", function() {
+        var dosuValue = dosuSelect.val();
+        if(dosuValue == 0) {
+            formObj.find("[name='dosu']").val(dosuValue);
+            formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+            formObj.find("[name='page']").val("1");
+            formObj.submit();
+        }else {
+        formObj.find("[name='dosu']").val(dosuValue);
+        formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+        formObj.find("[name='mat']").val(selectedMat); // 카테고리 값 유지
+        formObj.find("[name='page']").val("1");
+        formObj.submit();
+        }
+    });
+    
+    // 셀렉박스 값 변경 이벤트 핸들러
+    matSelect.on("change", function() {
+        var matValue = matSelect.val();
+        if(matValue == "모두") {
+            formObj.find("[name='mat']").val(matValue);
+            formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+            formObj.find("[name='page']").val("1");
+            formObj.submit();          
+        }
+        formObj.find("[name='mat']").val(matValue);
+        formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+        formObj.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
+        formObj.find("[name='page']").val("1");
+        formObj.submit();
+    });
+    
+	$("#searchBox").keydown(function(key) {    // 엔터키 누르면 쳐지는
+		if(key.keyCode == 13) {
 			var keywordStr = $("#searchBox").val();
-			formObj.find("[name='keyword']").val(keywordStr);
+			var keywordStrTrim = keywordStr.trim();
+			formObj.find("[name='keyword']").val(keywordStrTrim);
+			formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+		    formObj.find("[name='mat']").val(selectedMat); // 카테고리 값 유지
+		    formObj.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
 			formObj.find("[name='page']").val("1");
-			formObj.submit(); 
-		});
-		
-		$("#dosu").on("change", function() {
-			var dosuint = $("#dosu").find(":selected").val();
-			alert(dosuint);
-			formObj.find("[name='dosu']").val(dosuint);
-			formObj.find("[name='page']").val("1");
-			formObj.submit();
-		});
-		
-		$("#mat").on("change", function() {
-			var mat = $("#mat").find(":selected").val();
-			alert(mat);
-			formObj.find("[name='mat']").val(mat);
-			formObj.find("[name='page']").val("1");
-			formObj.submit();
-		});
+			formObj.submit();			
+		}
 	});
+    
+    
+});
 </script>
 </body>
 </html>

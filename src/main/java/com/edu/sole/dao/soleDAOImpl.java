@@ -1,4 +1,4 @@
-package com.edu.sole.DAO;
+package com.edu.sole.dao;
 
 import java.util.List;
 
@@ -9,13 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.edu.sole.DTO.SoleSearchCriteria;
-import com.edu.sole.DTO.liveSoleDTO;
+import com.edu.sole.soledto.RecipedSoleDTO;
+import com.edu.sole.soledto.SoleSearchCriteria;
+import com.edu.sole.soledto.liveSoleDTO;
+import com.edu.sole.soledto.recipe.recipeDTO;
 
 @Repository
-public class SoleDAOImpl implements SoleDAO {
+public class soleDAOImpl implements soleDAO {
 
-	private static final Logger logger = LoggerFactory.getLogger(SoleDAOImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(soleDAOImpl.class);
 	
 	@Inject
 	private SqlSession sqlSession;
@@ -27,6 +29,7 @@ public class SoleDAOImpl implements SoleDAO {
 		// TODO Auto-generated method stub
 		
 		logger.info("DAO입장");
+		logger.info("술 메인의 solesearchcriteria" + solesearchcriteria);
 		return sqlSession.selectList(namespace + ".soleMain", solesearchcriteria);
 		// return sqlSession.selectList(namespace + ".soleMain", livesoleDTO);
 	}
@@ -34,7 +37,24 @@ public class SoleDAOImpl implements SoleDAO {
 	@Override
 	public int solecount(SoleSearchCriteria solesearchcriteria) {
 		
+		logger.info("술 카운트의 solesearchcriteria" + solesearchcriteria);
 		return sqlSession.selectOne(namespace + ".solecount", solesearchcriteria);
+	}
+	
+	
+	////////////////////////// 술 디테일 부분 ///////////////////////////////////////////////////////////////////////////
+	//술 레시피 구하는
+	@Override
+	public List<recipeDTO> solerecipeDetail(String recipe_code) throws Exception {
+		
+		return sqlSession.selectList(namespace + ".solerecipeDetail", recipe_code);
+	}
+	
+	// 술 정보 구하는
+	@Override
+	public RecipedSoleDTO solerecipe(String recipe_code) throws Exception {
+		
+		return sqlSession.selectOne(namespace + ".solerecipe", recipe_code);
 	}
 
 }

@@ -1,11 +1,11 @@
-package com.edu.sole.DTO;
+package com.edu.sole.soledto;
 
 public class liveSoleDTO {
 	private String 	live_alcohole_id;
 	private int 	alcohole_level;
 	private String  content;
 	private String  alcohole_name;
-	private String  recipe_image;
+	private String  alcohole_image;
 	private String  favor;
 	private int 	rwm;
 	
@@ -34,10 +34,10 @@ public class liveSoleDTO {
 		this.alcohole_name = alcohole_name;
 	}
 	public String getRecipe_image() {
-		return recipe_image;
+		return alcohole_image;
 	}
-	public void setRecipe_image(String recipe_image) {
-		this.recipe_image = recipe_image;
+	public void setRecipe_image(String alcohole_image) {
+		this.alcohole_image = alcohole_image;
 	}
 	public String getFavor() {
 		return favor;
@@ -56,7 +56,7 @@ public class liveSoleDTO {
 	@Override
 	public String toString() {
 		return "liveSoleDTO [live_alcohole_id=" + live_alcohole_id + ", alcohole_level=" + alcohole_level + ", content="
-				+ content + ", alcohole_name=" + alcohole_name + ", recipe_image=" + recipe_image + ", favor=" + favor
+				+ content + ", alcohole_name=" + alcohole_name + ", recipe_image=" + alcohole_image + ", favor=" + favor
 				+ "]";
 	}
 	
