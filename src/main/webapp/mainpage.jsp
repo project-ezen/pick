@@ -60,7 +60,6 @@
         <div class="container-fluid">
             <div class="col-sm-4">
                 <h1 style="margin-top: 50px;">logo</h1>
-                
                 <div id="listid">          
                     <li class="item" style="margin-top: 50px;">
 	                   Alcohol
@@ -80,7 +79,7 @@
                    	</div>
 
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="#">MyPage</a></label>
+                       <label id="solo"><a href="">MyPage</a></label>
                    	</div>
 
                    	<div style="margin-top: 50px;">
@@ -88,7 +87,7 @@
                    	</div>
 
                    	<div style="margin-top: 350px;" id="logindiv">
-                       <label><a href="#">login</a> | <a href="#">sign on</a></label>
+                       <label><a href="${path}/member/login">login</a> | <a href="${path}/member/join">sign on</a></label>
                    	</div>
                 </div>
             </div>
