@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>My page</title>
-<%@ include file="./WEB-INF/views/include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <style>
 @media ( min-width: 946px ) {
   .set1 {
@@ -45,7 +45,7 @@ img { float: left; }
 </style>
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
 	<div class="container">
 		<h2 class="title">MyPage</h2>
 		<hr/>
@@ -62,7 +62,7 @@ img { float: left; }
 		</div>
 	</div>
 	<br/><br/>
-	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+	<%@ include file="../include/footer.jsp" %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
@@ -70,25 +70,25 @@ img { float: left; }
 //주문한 내역
 function fn_order(obj) {
 	alert("주문한 내역");
-	obj.action = "${path}/shopping/order.jsp";
+	obj.action = "${path}/shopping/myorder.jsp";
 	obj.submit();
 }	
 
 function fn_jjim(obj) {
 	alert("찜한 레시피");
-	obj.action = "${path}/board/.jsp";
+	obj.action = "${path}/board/recipejjim.jsp";
 	obj.submit();
 }	
 
 function fn_mine(obj) {
 	alert("작성한 게시물");
-	obj.action = "${path}/shopping/order.jsp";
+	obj.action = "${path}/board/myboard.jsp";
 	obj.submit();
 }	
 
 function fn_insert(obj) {
 	alert("회원정보수정");
-	obj.action = "${path}/shopping/order.jsp";
+	obj.action = "${path}/member/insertInfo.jsp";
 	obj.submit();
 }	
 
