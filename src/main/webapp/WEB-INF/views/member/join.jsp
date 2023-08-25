@@ -351,12 +351,11 @@
                         </div>
                     </div>
                 </div>
-
-
-				<!-- modal -->
+			<!-- modal -->
 			</form>
 		</div>
-	</div><br><br>
+	</div>
+	<br><br>
 	<%@ include file="../include/footer.jsp" %>
 </body>
 

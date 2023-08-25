@@ -16,16 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 import com.edu.sole.DTO.SolePageMaker;
 import com.edu.sole.DTO.SoleSearchCriteria;
 import com.edu.sole.DTO.liveSoleDTO;
-import com.edu.sole.service.soleService;
+import com.edu.sole.service.SoleService;
 
 @Controller
 @RequestMapping("/sole")
-public class soleControll {
+public class SoleControll {
 	
 	@Inject
-	soleService soleservice;
+	SoleService soleservice;
 	
-	private static final Logger logger = LoggerFactory.getLogger(soleControll.class);
+	private static final Logger logger = LoggerFactory.getLogger(SoleControll.class);
 	
 	//------------------------------------------------------------------------------------------
 	// 레시피 술 보여주는
