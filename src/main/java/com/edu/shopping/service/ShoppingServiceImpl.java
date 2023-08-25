@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edu.shopping.dao.ShoppingDAO;
+import com.edu.shopping.dto.CartDTO;
 import com.edu.store.dto.ProductDisplayVO;
 
 @Service("shoppingService")
@@ -16,14 +17,14 @@ public class ShoppingServiceImpl implements ShoppingService {
 	
 	@Autowired
 	private ShoppingDAO shoppingDAO;
-	
-	@Override
-	public List<ProductDisplayVO> cartProductsList(String productList) throws Exception {
-		return shoppingDAO.cartProductsList(productList);
-	}
 
 	@Override
-	public int productPrice(ProductDisplayVO productDisplayVO) throws Exception {
-		return shoppingDAO.productPrice(productDisplayVO);
+	public CartDTO cartList(String memberId) throws Exception {
+		return shoppingDAO.cartList(memberId);
+	}
+	
+	@Override
+	public List<ProductDisplayVO> cartProductsList(CartDTO productList) throws Exception {
+		return shoppingDAO.cartProductsList(productList);
 	}
 }

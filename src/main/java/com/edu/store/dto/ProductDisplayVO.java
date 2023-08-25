@@ -2,7 +2,7 @@ package com.edu.store.dto;
 
 // 거의 고정된 값
 public class ProductDisplayVO {
-	private String display_product_id;
+	private String product_display_id;
 	private String product_name;
 	private String product_info;
 	private String capacity;
@@ -17,11 +17,11 @@ public class ProductDisplayVO {
 	public void setProduct_price(int product_price) {
 		this.product_price = product_price;
 	}
-	public String getDisplay_product_id() {
-		return display_product_id;
+	public String getProduct_display_id() {
+		return product_display_id;
 	}
-	public void setDisplay_product_id(String display_product_id) {
-		this.display_product_id = display_product_id;
+	public void setProduct_display_id(String product_display_id) {
+		this.product_display_id = product_display_id;
 	}
 	public String getProduct_name() {
 		return product_name;
@@ -67,7 +67,7 @@ public class ProductDisplayVO {
 	}
 	@Override
 	public String toString() {
-		return "ProductDisplayVO [display_product_id=" + display_product_id + ", product_name=" + product_name
+		return "ProductDisplayVO [product_display_id=" + product_display_id + ", product_name=" + product_name
 				+ ", product_info=" + product_info + ", capacity=" + capacity + ", alcohol_content=" + alcohol_content
 				+ ", origin=" + origin + ", manufacturer=" + manufacturer + ", product_image=" + product_image
 				+ ", product_price=" + product_price + "]";
