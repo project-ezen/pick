@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dao.ShoppingDAO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.store.dto.ProductDisplayVO;
@@ -29,7 +30,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 
 	@Override
-	public int productPrice(ProductDisplayVO productDisplayVO) throws Exception {
-		return shoppingDAO.productPrice(productDisplayVO);
+	public MemberDTO memberInfo(String member_id) throws Exception {
+		return shoppingDAO.memberInfo(member_id);
 	}
 }
