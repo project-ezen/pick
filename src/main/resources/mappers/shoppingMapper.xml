@@ -18,4 +18,12 @@
 			AND c.cart_id = #{cart_id}
 		]]>
 	</select>
+	
+	<select id="memberInfo" parameterType="String" resultType="memberDTO">
+		<![CDATA[
+			SELECT *
+			FROM member
+			WHERE member_id = #{member_id}
+		]]>
+	</select>
 </mapper>

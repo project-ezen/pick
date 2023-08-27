@@ -8,6 +8,7 @@
 	<typeAliases>
 		<typeAlias type="com.edu.member.dto.MemberDTO" alias="memberDTO"/>
 		<typeAlias type="com.edu.shopping.dto.CartDTO" alias="cartDTO"/>
+		<typeAlias type="com.edu.shopping.dto.OrderDTO" alias="orderDTO"/>
 		<typeAlias type="com.edu.store.dto.ProductDisplayVO" alias="productDisplayVO"/>
 		<typeAlias type="com.edu.store.dto.ProductDTO" alias="productDTO"/>
 		<typeAlias type="com.edu.board.dto.BoardDTO" alias="boardDTO"/>
