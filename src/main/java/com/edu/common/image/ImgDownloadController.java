@@ -17,7 +17,7 @@ public class ImgDownloadController {
 	private static final String ARTICLE_IMAGE_REPO = "C:\\project\\gitspace\\product_images";
 	
 	// 이미지 파일 다운로드
-	@RequestMapping(value="/download")
+	@RequestMapping(value="/imgdownload")
 	protected void download(@RequestParam("imageFile") String imgfn, HttpServletResponse response) throws Exception{
 		OutputStream out = response.getOutputStream();
 		String downFile = ARTICLE_IMAGE_REPO + "\\" + imgfn;
