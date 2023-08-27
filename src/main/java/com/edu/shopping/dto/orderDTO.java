@@ -1,17 +1,15 @@
 package com.edu.shopping.dto;
 
-//실어나르는 값
-public class orderDTO {
+// 실어나르는 값
+public class OrderDTO {
 	private String receiver_name;
 	private int receiver_phonenum;
-	private int order_number;
-	private int cart_number;
+	private String order_id;
+	private String cart_id;
 	private int final_price;
 	private int zipcode;
-	private String address;				//기본주소
-	private String address_detail;		//상세주소
-	
-
+	private String address;				// 주소
+	private String address_detail;		// 상세 주소
 	public String getReceiver_name() {
 		return receiver_name;
 	}
@@ -24,17 +22,17 @@ public class orderDTO {
 	public void setReceiver_phonenum(int receiver_phonenum) {
 		this.receiver_phonenum = receiver_phonenum;
 	}
-	public int getOrder_number() {
-		return order_number;
+	public String getOrder_id() {
+		return order_id;
 	}
-	public void setOrder_number(int order_number) {
-		this.order_number = order_number;
+	public void setOrder_id(String order_id) {
+		this.order_id = order_id;
 	}
-	public int getCart_number() {
-		return cart_number;
+	public String getCart_id() {
+		return cart_id;
 	}
-	public void setCart_number(int cart_number) {
-		this.cart_number = cart_number;
+	public void setCart_id(String cart_id) {
+		this.cart_id = cart_id;
 	}
 	public int getFinal_price() {
 		return final_price;
@@ -60,11 +58,10 @@ public class orderDTO {
 	public void setAddress_detail(String address_detail) {
 		this.address_detail = address_detail;
 	}
-
 	@Override
 	public String toString() {
-		return "orderDTO [receiver_name=" + receiver_name + ", receiver_phonenum=" + receiver_phonenum
-				+ ", order_number=" + order_number + ", cart_number=" + cart_number + ", final_price=" + final_price
-				+ ", zipcode=" + zipcode + ", address=" + address + ", address_detail=" + address_detail + "]";
+		return "OrderDTO [receiver_name=" + receiver_name + ", receiver_phonenum=" + receiver_phonenum + ", order_id="
+				+ order_id + ", cart_id=" + cart_id + ", final_price=" + final_price + ", zipcode=" + zipcode
+				+ ", address=" + address + ", address_detail=" + address_detail + "]";
 	}
 }

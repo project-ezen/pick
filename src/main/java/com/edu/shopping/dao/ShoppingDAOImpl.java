@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.store.dto.ProductDisplayVO;
 
@@ -34,8 +35,8 @@ public class ShoppingDAOImpl implements ShoppingDAO {
   }
 
 	@Override
-	public int productPrice(ProductDisplayVO productDisplayVO) throws DataAccessException {
-		return sqlsession.selectOne(namespace + ".productPrice", productDisplayVO);
+	public MemberDTO memberInfo(String member_id) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".memberInfo", member_id);
 	}
     
 }
