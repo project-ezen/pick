@@ -64,6 +64,7 @@ body {
 							</c:when>
 							<%-- 장바구니에 상품이 있는 경우 --%>
 							<c:when test="${cart != null }">
+								<input type="hidden" value="${cart.cart_id }" name="cartId">
 								<c:forEach var="products_item" items="${product }" varStatus="productNum">
 									<tr>
 									    <td class="form-group" style="vertical-align: middle;">
