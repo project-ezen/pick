@@ -63,7 +63,7 @@
   	</sql>
 
 	<!-- 술 개수 가져오기 -->
-	<select id="solecount" parameterType="com.edu.sole.soledto.SoleSearchCriteria" resultType="int">
+	<select id="solecount" parameterType="com.edu.sole.dto.SoleSearchCriteria" resultType="int">
 		<![CDATA[
 			select count(*)
 			from reciped_alcohole
@@ -75,7 +75,7 @@
 	
 	<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<!-- 술 레시피  디테일 가져오기 -->
-	<select id="solerecipeDetail" parameterType="String" resultType="com.edu.sole.soledto.recipe.recipeDTO">
+	<select id="solerecipeDetail" parameterType="String" resultType="com.edu.sole.dto.recipe.RecipeDTO">
 		<![CDATA[
 			select *
 			from recipe
@@ -84,7 +84,7 @@
 	</select>
 
 	<!-- 술 정보 -->
-	<select id="solerecipe" resultType="com.edu.sole.soledto.RecipedSoleDTO" parameterType="String">
+	<select id="solerecipe" resultType="com.edu.sole.dto.RecipedSoleDTO" parameterType="String">
 		<![CDATA[
 			select *
 			from reciped_alcohole

@@ -7,11 +7,21 @@
 
 	<typeAliases>
 		<typeAlias type="com.edu.member.dto.MemberDTO" alias="memberDTO"/>
+		
 		<typeAlias type="com.edu.shopping.dto.CartDTO" alias="cartDTO"/>
 		<typeAlias type="com.edu.shopping.dto.OrderDTO" alias="orderDTO"/>
+		
 		<typeAlias type="com.edu.store.dto.ProductDisplayVO" alias="productDisplayVO"/>
 		<typeAlias type="com.edu.store.dto.ProductDTO" alias="productDTO"/>
+		
 		<typeAlias type="com.edu.board.dto.BoardDTO" alias="boardDTO"/>
+		
+		<typeAlias type="com.edu.sole.dto.LiveSoleDTO" alias="liveSoleDTO"/>
+		<typeAlias type="com.edu.sole.dto.RecipedSoleDTO" alias="recipedSoleDTO"/>
+		<typeAlias type="com.edu.sole.dto.SoleCriteria" alias="soleCriteria"/>
+		<typeAlias type="com.edu.sole.dto.SolePageMaker" alias="solePageMaker"/>
+		<typeAlias type="com.edu.sole.dto.SoleSearchCriteria" alias="soleSearchCriteria"/>
+		<typeAlias type="com.edu.sole.dto.recipe.RecipeDTO" alias="recipeDTO"/>
 	</typeAliases>
 	
 </configuration>
