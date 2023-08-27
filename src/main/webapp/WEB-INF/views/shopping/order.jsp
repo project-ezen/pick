@@ -50,6 +50,7 @@
 	    <section class="container text-center" id="ff">
 	        <div><h1>주문하기</h1></div>
 	        <br/>
+	        <form action="/shopping/orderdetail" method="post">
 	        <!-- 주문 상품 나열하기 -->
 	        <div>
 	            <table class="table table-stripted">
@@ -71,20 +72,21 @@
 								<td class="form-group" style="vertical-align: middle;">
 									<div class="col-md-12 text-center" id="item_thumbnail">
 									    <a href="#" class="thumbnail">
-									        <input type="image" src="${path }/download?imageFile=${display.image }" width="161" height="133" id="imageFile" name="imageFile" disabled>
+									        <input type="image" src="${path }/download?imageFile=${display.image }" width="161" height="133" disabled>
 									    </a>
 									</div>
 								</td>
 								<td class="form-group" style="vertical-align: middle;">
-								    <input class="form-control text-center productName" type="text" id="productName" name="productName" value="${display.name }" disabled>
+								    <input class="form-control text-center productName" type="text" value="${display.name }" disabled>
+								    <input type="hidden" name="productName" value="${display.name }">
 								</td>
 								<td class="form-inline" style="vertical-align: middle;">
 								    <div class="form-group">
-								        <input class="form-control text-center cnt" width="30px" type="text" name="cnt" value="${display.count }" disabled>
+								        <input class="form-control text-center cnt" width="30px" type="text" value="${display.count }" disabled>
 								    </div>
 								</td>
 								<td class="form-group" style="vertical-align: middle;">
-									<input class="form-control text-center productPrice" type="text" id="productPrice" name="productPrice" value="${display.price }" disabled>
+									<input class="form-control text-center productPrice" type="text" value="${display.price }" disabled>
 								</td>
 		                    </tr>
 	                    </c:forEach>
@@ -96,38 +98,39 @@
 	        </div>
 	        <!-- 주문 상품 나열 끝 -->
 	        
-	        <form class="form-horizontal" action="/shopping/cart" method="post">
+	        <div class="form-horizontal">
+	        	<input type="hidden" value="${cart_id }" name="cart_id">
 	            <div class="row">
 	                <!-- 배송 정보 -->
 	                <div class="col-md-6 col-sm-11">
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">수령인</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_name }" id="name">
+	                            <input type="text" class="form-control text-center" value="${member.member_name }" name="receiver_name" id="name">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">전화번호</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_phoneNumber }" id="tel">
+	                            <input type="text" class="form-control text-center" value="${member.member_phoneNumber }" name="receiver_phonenum" id="phone">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">우편번호</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_zipcode }" id="zip_code">
+	                            <input type="text" class="form-control text-center" value="${member.member_zipcode }" name="zipcode" id="zipcode">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">주소</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_address }" id="address">
+	                            <input type="text" class="form-control text-center" value="${member.member_address }" name="address" id="address">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">상세주소</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_address_detail }" id="detail_address">
+	                            <input type="text" class="form-control text-center" value="${member.member_address_detail }" name="address_detail" id="address_detail">
 	                        </div>
 	                    </div>
 	                </div>
@@ -158,7 +161,7 @@
 				                    <td align="center">
 				                    	<label>
 				                    		<input class="form-control text-center" id="finalPrice" type="text" disabled>
-				                    		<input class="form-control text-center" id="fnPrice" type="hidden">
+				                    		<input class="form-control text-center" id="fnPrice" type="hidden" name="final_price">
 				                    	</label>
 				                    </td>
 				                </tr>
@@ -181,6 +184,7 @@
 	                </div>
 	                <!-- 구매 여부 확인 끝 -->
 	            </div>
+	        </div>
 	        </form>
 	        
       		<!-- 개인 정보 수집 여부 label을 클릭했을 경우 modal(팝업)창 띄우기 -->
@@ -317,14 +321,14 @@ $(document).ready(function() {
         info.prop("checked", true);
         info.prop("value", true);
     	$("#pay").prop("disabled", false);
-        alert(info.is(":checked"));
+        // alert(info.is(":checked"));
     });
 	// 구매 서약 동의 하지 않은 경우
     cancel.on("click", function() {
         info.prop("checked", false);
         info.prop("value", false);
    		$("#pay").prop("disabled", true);
-        alert(info.is(":checked"));
+        // alert(info.is(":checked"));
     });
 });
 

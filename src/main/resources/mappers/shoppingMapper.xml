@@ -26,4 +26,21 @@
 			WHERE member_id = #{member_id}
 		]]>
 	</select>
+	
+	<insert id="orderInsert" parameterType="orderDTO">
+		<![CDATA[
+			INSERT INTO product_order
+			VALUES (#{order_id}, #{cart_id}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{final_price})
+		]]>
+	</insert>
+	
+	<delete id="deleteProduct" parameterType="java.util.Map">
+		<![CDATA[
+			DELETE
+			FROM (SELECT * 
+			      FROM product
+			      WHERE cart_id IN (SELECT cart_id FROM cart WHERE member_id = #{member_id}))
+			WHERE product_display_id IN (SELECT product_display_id FROM product_display WHERE product_name = #{product_name})
+		]]>
+	</delete>
 </mapper>
