@@ -30,7 +30,7 @@ public class BoardControllerImpl implements BoardController {
 	
 	
 	@Override
-	@RequestMapping(value="/board/newwrite", method=RequestMethod.GET)
+	@RequestMapping(value="/board/write", method=RequestMethod.GET)
 	public ModelAndView articleForm() throws Exception {
 		
 		ModelAndView mav = new ModelAndView();

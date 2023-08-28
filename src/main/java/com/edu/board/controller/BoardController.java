@@ -22,5 +22,5 @@ public interface BoardController {
 		// 게시글 쓰기 처리
 		public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 				throws Exception;
-	
+		
 }
