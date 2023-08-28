@@ -4,19 +4,19 @@ import java.sql.Date;
 
 public class BoardDTO {
 	
-	private int 	b_id;	// 연결할 고유글번호
-	private String 	title;
-	private String 	content;
-	private Date 	writeDate;
-	private String 	image;
-	private String 	id;
+	private int board_id;
+	private String title;
+	private String content;
+	private Date writeDate;
+	private String image;
+	private String m_id;
 	
 	
-	public int getB_id() {
-		return b_id;
+	public int getBoard_id() {
+		return board_id;
 	}
-	public void setB_id(int b_id) {
-		this.b_id = b_id;
+	public void setBoard_id(int board_id) {
+		this.board_id = board_id;
 	}
 	public String getTitle() {
 		return title;
@@ -42,16 +42,17 @@ public class BoardDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getId() {
-		return id;
+	public String getM_id() {
+		return m_id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
 	}
 	@Override
 	public String toString() {
-		return "boardDTO [b_id=" + b_id + ", title=" + title + ", content=" + content + ", writeDate=" + writeDate
-				+ ", image=" + image + ", id=" + id + "]";
+		return "BoardDTO [board_id=" + board_id + ", title=" + title + ", content=" + content + ", writeDate="
+				+ writeDate + ", image=" + image + ", m_id=" + m_id + "]";
 	}
+	
 	
 }

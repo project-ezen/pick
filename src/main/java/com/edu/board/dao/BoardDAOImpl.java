@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.PagingCriteria;
 
 @Repository("BoardDAO")
 public class BoardDAOImpl implements BoardDAO {
@@ -24,6 +25,17 @@ public class BoardDAOImpl implements BoardDAO {
 		return articlesList;
 	}
 	
+	// 전체 게시글 수 구하기 (Paging 처리)
+	@Override
+	public int boardListTotalCount(PagingCriteria pcri) throws DataAccessException {
+		return sqlSession.selectOne(namespace + ".boardListTotalCount", pcri);
+	}
 	
+	// 게시글 목록 가져오기 (Paging)
+	@Override
+	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws DataAccessException {
+		return sqlSession.selectList(namespace + ".boardListPaging", pcri);
+	}
 }
-
+	
+	
