@@ -32,7 +32,7 @@ public class ShoppingController {
 	@Inject
 	ShoppingService shoppingService;
 	
-	// Cart Controller
+	// Cart get Controller
 	@RequestMapping(value="/cart", method=RequestMethod.GET)
 	public ModelAndView shoppingCart(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = "/shopping/cart";
@@ -57,6 +57,7 @@ public class ShoppingController {
 		mav.addObject("product", productDetailList);
 		return mav;
 	}	// End - shoppingCart method
+	
 //----------------------------------------------------------------------------------------------------------------	
 	// Order Controller
 	@RequestMapping(value="/order", method=RequestMethod.POST)
@@ -99,7 +100,7 @@ public class ShoppingController {
 		return mav;
 	}	// End shoppingOrder method
 //----------------------------------------------------------------------------------------------------------------	
-	// OrderDetail Controller
+	// Cart Controller
 	@RequestMapping(value="/orderdetail", method=RequestMethod.POST)
 	public ModelAndView orderComplete(@ModelAttribute("order")OrderDTO orderDTO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = "redirect:/shopping/cart";
@@ -116,15 +117,15 @@ public class ShoppingController {
 		log.info("주문내역 등록 완료");
 		
 		// 회원 아이디 가져오기
-		String memberId = "101";
-		log.info("memberId : " + memberId);
+		String m_id = "101";
+		log.info("memberId : " + m_id);
 		// 구매한 물품 가져오기
 		String product[] = request.getParameterValues("productName");
 		
 		// 구매한 물품을 장바구니에서 제거하기
 		Map<String, String> productMap = new HashMap<String, String>();
 		for(int i = 0; i < product.length; i++) {
-			productMap.put("member_id", memberId);
+			productMap.put("member_id", m_id);
 			productMap.put("product_name", product[i]);
 			shoppingService.dropProduct(productMap);
 		}
@@ -134,4 +135,5 @@ public class ShoppingController {
 		return mav;
 	}	// End orderComplete method
 //----------------------------------------------------------------------------------------------------------------	
+	
 }

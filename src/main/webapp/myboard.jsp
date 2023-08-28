@@ -56,56 +56,16 @@ top: 50px;
 			</thead>
 			<tbody>
 				<tr>
-					<td>{이미지}</td>
-					<td>{제목}</td>
-					<td>{작성자(닉네임)}</td>
-					<td>{작성일자}</td>
+					<td>{boardDTO.image}</td>
+					<td>{boardDTO.title}</td>
+					<td>{m.id}</td>
+					<td>{boardDTO.writeDate}</td>
 				</tr>
-				<tr>
-					<td>{이미지}</td>
-					<td>{제목}</td>
-					<td>{작성자(닉네임)}</td>
-					<td>{작성일자}</td>
-				</tr>
-				<tr>
-					<td>{이미지}</td>
-					<td>{제목}</td>
-					<td>{작성자(닉네임)}</td>
-					<td>{작성일자}</td>
-				</tr>
-				<tr>
-					<td>{이미지}</td>
-					<td>{제목}</td>
-					<td>{작성자(닉네임)}</td>
-					<td>{작성일자}</td>
-				</tr>
-				<tr>
-					<td>{이미지}</td>
-					<td>{제목}</td>
-					<td>{작성자(닉네임)}</td>
-					<td>{작성일자}</td>
-				</tr>
-				<tr>
-					<td>{이미지}</td>
-					<td>{제목}</td>
-					<td>{작성자(닉네임)}</td>
-					<td>{작성일자}</td>
-				</tr>
-				<tr>
-					<td>{이미지}</td>
-					<td>{제목}</td>
-					<td>{작성자(닉네임)}</td>
-					<td>{작성일자}</td>
-				</tr>
-				
 			</tbody>
 		</table>
 	</div>
 	<button type="button" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
-	<div style="width: 200px; height: 30px; background-color: #ddd;
-	position: absolute; top: 580px; left: 44%;">
-	페이징
-	</div>
+	<div style="width: 200px; height: 30px; background-color: #ddd; position: absolute; top: 580px; left: 44%;"> 페이징 </div>
 </div>
 <br/><br/>
 <%@ include file="./WEB-INF/views/include/footer.jsp" %>

@@ -1,10 +1,12 @@
 package com.edu.shopping.dto;
 
 public class DisplayOrderVO {
+	
 	private String image;
 	private String name;
 	private String price;
 	private String count;
+	
 	public DisplayOrderVO(String image, String name, String price, String count) {
 		this.image = image; this.name = name; this.price = price; this.count = count;
 	}
