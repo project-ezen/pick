@@ -2,6 +2,7 @@ package com.edu.shopping.dto;
 
 // 실어나르는 값
 public class OrderDTO {
+
 	private String 	receiver_name;		//받는이
 	private int 	receiver_phonenum;	//받는사람 번호	
 	private String 	order_id;			//주문번호
