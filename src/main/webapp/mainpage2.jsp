@@ -61,7 +61,7 @@
                 <h1 style="margin-top: 50px;">logo</h1>
                 <div id="listid">          
                     <li class="item" style="margin-top: 50px;"><!-- 메 -->
-	                   Alcohol
+	                   Alcoholddd
 	                   <ul>
 	                       <li id="lilist"><a href="#">진</a></li>
 	                       <li id="lilist"><a href="#">럼</a></li>
