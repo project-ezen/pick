@@ -4,7 +4,7 @@ package com.edu.shopping.dto;
 public class OrderDTO {
 
 	private String 	receiver_name;		//받는이
-	private int 	receiver_phonenum;	//받는사람 번호	
+	private String 	receiver_phonenum;	//받는사람 번호	
 	private String 	order_id;			//주문번호
 	private String 	cart_id;			//카트번호
 	private int 	final_price;		//최종가격
@@ -19,10 +19,10 @@ public class OrderDTO {
 	public void setReceiver_name(String receiver_name) {
 		this.receiver_name = receiver_name;
 	}
-	public int getReceiver_phonenum() {
+	public String getReceiver_phonenum() {
 		return receiver_phonenum;
 	}
-	public void setReceiver_phonenum(int receiver_phonenum) {
+	public void setReceiver_phonenum(String receiver_phonenum) {
 		this.receiver_phonenum = receiver_phonenum;
 	}
 	public String getOrder_id() {
