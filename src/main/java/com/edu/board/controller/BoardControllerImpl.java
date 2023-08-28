@@ -20,7 +20,7 @@ import com.edu.board.service.BoardService;
 
 
 
-@Controller("/BoardController")
+@Controller
 public class BoardControllerImpl implements BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardControllerImpl.class);
