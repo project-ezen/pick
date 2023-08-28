@@ -36,7 +36,6 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws DataAccessException {
 		return sqlSession.selectList(namespace + ".boardListPaging", pcri);
 	}
-	
-	
 }
-
+	
+	

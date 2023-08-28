@@ -9,35 +9,54 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
-.container {
-background-color: #fff;
-min-height: 600px;
-}
-table {
-width: 100%;
-border: 2px solid #ddd;
-margin-left: auto;
-margin-right: auto;
-}
-th {
-background-color: #99A1D7;
-}
-th, td {
-border-bottom: 1px solid #ddd;
-padding: 10px;
-text-align: center;
-border: 1px solid #eee;
-}
-label {
-font-size: 20px;
-}
-#myorder {
-padding-bottom: 20px;
-}
-#cancel_info {
-padding-bottom: 20px;
-}
+	.container {
+		background-color: #fff;
+		min-height: 600px;
+	}
+	table {
+		width: 100%;
+		border: 2px solid #ddd;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	th { background-color: #ccd6d9; }
+	
+	th, td {
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #eee;
+	}
+	
+	label { font-size: 18px; }
+	#receipt_info { padding-bottom: 20px; }
+	#cancel_info { padding-bottom: 20px; }
 
+	.list {
+		margin-bottom: 20px;
+		float: right;
+		background-color:#8aa2b2;
+		border-radius:8px;
+		border:none;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;
+		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		padding:8px 18px;
+		text-decoration:none;
+		float: right;
+		margin-bottom:10px; 
+	}
+	
+	.list:hover { background-color:#476e9e; }
+	
+	.list:active { position:relative; top:1px; }
+	
+	label { margin-bottom:15px; }
+	
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
@@ -45,10 +64,12 @@ padding-bottom: 20px;
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <div class="container">
-	<br/>
-	<div id="myorder">
+	<h3 style="text-align: center;">주문 조회</h3>
+	<button type="button" class="list" style="margin-bottom: 20px; float: right;">목록으로 돌아가기</button>
+	<div id="receipt_info">
 	<form>
 		<label>구매내역</label>
+		<br/>
 		<div>
 			<input type="text" id="datepicker1" placeholder="날짜를 선택하십시오."/>
 			<b>~</b>
@@ -63,56 +84,20 @@ padding-bottom: 20px;
 					<th>이미지</th>
 					<th>상품정보</th>
 					<th>수량</th>
-					<th>상품구매내역</th>
+					<th>상품구매금액</th>
 					<th>주문처리상태</th>
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
+					<td>${orderDTO.order_id}</td>
+					<td>${productDisplayVO.product_image}</td>
+					<td>${productDisplayVO.product_info}</td>
+					<td>${productDTO.product_count}</td>
+					<td>${productDisplayVO.product_price}</td>
+					<td>{orderDTO.}</td>
+					<td>{orderDTO.}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -121,6 +106,7 @@ padding-bottom: 20px;
 	<div id="cancel_info">
 	<form>
 		<label>취소내역</label>
+		<br/>
 		<div>
 			<input type="text" id="datepicker3" placeholder="날짜를 선택하십시오."/>
 			<b>~</b>
@@ -135,62 +121,26 @@ padding-bottom: 20px;
 					<th>이미지</th>
 					<th>상품정보</th>
 					<th>수량</th>
-					<th>상품구매내역</th>
+					<th>상품구매금역</th>
 					<th>주문처리상태</th>
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
+					<td>${orderDTO.order_id}</td>
+					<td>${productDisplayVO.product_image}</td>
+					<td>${productDisplayVO.product_info}</td>
+					<td>${productDTO.product_count}</td>
+					<td>${productDisplayVO.product_price}</td>
+					<td>{orderDTO.}</td>
+					<td>{orderDTO.}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<button type="button" style="margin-bottom: 20px; float: right;">마이페이지 목록가기</button>
-</div><br/><br/>
+</div>
+<br/><br/>
 <script>
 $("#datepicker1, #datepicker2, #datepicker3, #datepicker4").datepicker({
 	

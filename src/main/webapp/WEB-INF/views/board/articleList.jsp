@@ -72,52 +72,6 @@ margin-right: 50px;
 margin-bottom: 20px;
 }
 
-.page_wrap {
-	width: 100%;
-	text-align:center;
-	font-size:0;
-	height: 40px;
-	margin-left: 100px;
- }
-.page_nation {
-	display:inline-block;
-	padding-top: 7px;
-}
-.page_nation .none {
-	display:none;
-}
-.page_nation a {
-	display:block;
-	margin:0 3px;
-	float:left;
-	border:1px solid #e6e6e6;
-	width:28px;
-	height:28px;
-	line-height:28px;
-	text-align:center;
-	background-color:#fff;
-	font-size:13px;
-	color:#999999;
-	text-decoration:none;
-}
-.page_nation .arrow {
-	border:1px solid #ccc;
-}
-
-.page_nation .prev {
-	background:#f8f8f8 url('img/page_prev.png') no-repeat center center;
-	margin-right:7px;
-}
-.page_nation .next {
-	background:#f8f8f8 url('img/page_next.png') no-repeat center center;
-	margin-left:7px;
-}
-.page_nation a.active {
-	background-color:#42454c;
-	color:#fff;
-	border:1px solid #42454c;
-}
-
 .lele {
 width: 180px;
 height: 200px;
@@ -160,9 +114,7 @@ text-align: center;
 span {
 font-size: 15px;
 }
-.container {
-padding: 0px;
-}
+
 
 </style>
 </head>
@@ -194,7 +146,7 @@ padding: 0px;
 			<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
 				<div style="width: 370px; height: 230px; float: left;">
 					<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
-						<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
+						<img alt="" src="${path}/resources/images/cat1.jpg" width="100px" height="100px">
 						<div class="lele">
 							<div class="top">
 								<p class="title">${article.title}</p>
