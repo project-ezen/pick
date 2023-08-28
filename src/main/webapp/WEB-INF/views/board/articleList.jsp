@@ -212,8 +212,7 @@ padding: 0px;
 		</c:when>
 	</c:choose>
 	<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
-	
-<br/>
+<br/><br/>
 </div>
 <%@ include file="../include/footer.jsp" %>
 <script>

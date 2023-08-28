@@ -55,7 +55,7 @@ img { float: left; }
 		</div>
 		<hr/>
 		<div class="set2">
-			<button class="order" type="button" onclick="fn_order(this.form)">주문한 내역</button>
+			<button class="order" type="button" onclick="fn_order(this.form)">주문 조회</button>
 			<button class="order" type="button" onclick="fn_jjim(this.form)'">찜한 레시피</button>
 			<button class="order" type="button" onclick="fn_mine(this.form)'">내가 쓴 게시물</button>
 			<button class="order" type="button" onclick="fn_insert(this.form)'">회원 정보 수정</button>
@@ -69,7 +69,7 @@ img { float: left; }
 
 //주문한 내역
 function fn_order(obj) {
-	alert("주문한 내역");
+	alert("주문조회");
 	obj.action = "${path}/shopping/myorderList.jsp";
 	obj.submit();
 }	

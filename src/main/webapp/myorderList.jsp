@@ -20,7 +20,7 @@
 		margin-right: auto;
 	}
 	
-	th { background-color: #99A1D7; }
+	th { background-color: #ccd6d9; }
 	
 	th, td {
 	border-bottom: 1px solid #ddd;
@@ -29,10 +29,34 @@
 	border: 1px solid #eee;
 	}
 	
-	label { font-size: 20px; }
+	label { font-size: 18px; }
 	#receipt_info { padding-bottom: 20px; }
 	#cancel_info { padding-bottom: 20px; }
 
+	.list {
+		margin-bottom: 20px;
+		float: right;
+		background-color:#8aa2b2;
+		border-radius:8px;
+		border:none;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;
+		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		padding:8px 18px;
+		text-decoration:none;
+		float: right;
+		margin-bottom:10px; 
+	}
+	
+	.list:hover { background-color:#476e9e; }
+	
+	.list:active { position:relative; top:1px; }
+	
+	label { margin-bottom:15px; }
+	
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
@@ -40,10 +64,12 @@
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <div class="container">
-	<br/>
+	<h3 style="text-align: center;">주문 조회</h3>
+	<button type="button" class="list" style="margin-bottom: 20px; float: right;">목록으로 돌아가기</button>
 	<div id="receipt_info">
 	<form>
 		<label>구매내역</label>
+		<br/>
 		<div>
 			<input type="text" id="datepicker1" placeholder="날짜를 선택하십시오."/>
 			<b>~</b>
@@ -70,8 +96,8 @@
 					<td>${productDisplayVO.product_info}</td>
 					<td>${productDTO.product_count}</td>
 					<td>${productDisplayVO.product_price}</td>
-					<td>{}</td>
-					<td>{}</td>
+					<td>{orderDTO.}</td>
+					<td>{orderDTO.}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -80,6 +106,7 @@
 	<div id="cancel_info">
 	<form>
 		<label>취소내역</label>
+		<br/>
 		<div>
 			<input type="text" id="datepicker3" placeholder="날짜를 선택하십시오."/>
 			<b>~</b>
@@ -106,14 +133,14 @@
 					<td>${productDisplayVO.product_info}</td>
 					<td>${productDTO.product_count}</td>
 					<td>${productDisplayVO.product_price}</td>
-					<td>{}</td>
-					<td>{}</td>
+					<td>{orderDTO.}</td>
+					<td>{orderDTO.}</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-	<button type="button" style="margin-bottom: 20px; float: right;">마이페이지 목록가기</button>
 </div>
+<br/><br/>
 <script>
 $("#datepicker1, #datepicker2, #datepicker3, #datepicker4").datepicker({
 	

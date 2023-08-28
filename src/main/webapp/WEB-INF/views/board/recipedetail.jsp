@@ -20,7 +20,7 @@ margin-left: auto;
 margin-right: auto;
 }
 th {
-background-color: #99A1D7;
+background-color: #ccd6d9;
 }
 th, td {
 border-bottom: 1px solid #ddd;
