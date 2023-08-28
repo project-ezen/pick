@@ -9,34 +9,29 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
-.container {
-background-color: #fff;
-min-height: 600px;
-}
-table {
-width: 100%;
-border: 2px solid #ddd;
-margin-left: auto;
-margin-right: auto;
-}
-th {
-background-color: #99A1D7;
-}
-th, td {
-border-bottom: 1px solid #ddd;
-padding: 10px;
-text-align: center;
-border: 1px solid #eee;
-}
-label {
-font-size: 20px;
-}
-#receipt_info {
-padding-bottom: 20px;
-}
-#cancel_info {
-padding-bottom: 20px;
-}
+	.container {
+		background-color: #fff;
+		min-height: 600px;
+	}
+	table {
+		width: 100%;
+		border: 2px solid #ddd;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	th { background-color: #99A1D7; }
+	
+	th, td {
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #eee;
+	}
+	
+	label { font-size: 20px; }
+	#receipt_info { padding-bottom: 20px; }
+	#cancel_info { padding-bottom: 20px; }
 
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

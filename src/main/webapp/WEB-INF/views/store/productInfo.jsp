@@ -10,6 +10,19 @@
 
 
     <style>
+    
+    .bg {
+		 background-image: url("/resources/images/background2.jpg");
+
+         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
+         
+         
+		 background-attachment: fixed, scroll;
+         background-position: center;
+         background-repeat: no-repeat;
+         background-size: cover; 
+	}
+    
     .container-fluid{
     margin-left: 80px;
     margin-right: auto;
@@ -22,7 +35,7 @@
       /* 글리피콘 세모*/
       #btnDown {
         color: #05224e;
-        margin-top: -10px;
+        margin-top: 40px;
         margin-left: 60px;
         display: none;
       }
@@ -153,12 +166,12 @@
 
       /*상품 정보*/
       #productInfo {
-        margin-top: 20px;
+        padding-top: 60px;
       }
 
       .productInfo_in {
         border-radius: 5px;
-        background-color: #032457;
+        background-color: rgba(0, 0, 0, 0);
         color: #fff;
         margin: 10px;
         height: 300px !important;
@@ -170,11 +183,12 @@
         height: 200px;
         width: 200px;
         margin: 10px;
+        margin-top: 20px;
       }
       .productInfo_in:hover {
-        background-color: rgb(96, 104, 104);
-        outline-color: brown;
+        background-color: #576fa0;
         transition: 0.7s;
+        border-radius: 30%;
       }
       /*상품 정보*/
 
@@ -229,12 +243,35 @@
       body {
       background-color: white;
       }
-
-
+      
       /*검색 버튼*/
+	  
+	  /*select css*/
+	  .selectSearch{
+	    margin-top: 30px;
+	    border-style: none;
+	    background-color: rgba(0, 0, 0, 0);
+	    color:	#FFF;
+	    width: 150px;
+	    font-size: 17px;
+	  }     
+	  .selectSearch:focus{
+	  	border-style: none;
+	  	outline: none;
+	  }
+      /*select css*/
+      
+	  option {
+	  	color: black;
+	  }
+	   option:hover {
+	  	background-color: black;
+	  	color: white;
+	  }
+      
     </style>
   </head>
-  <body>
+  <body class="bg">
     <!-- Top Menu -->
      <%@ include file="../include/topMenu.jsp" %>
     
@@ -256,10 +293,10 @@
           <img src="/resources/images/gango.jpg" />
         </div>
         <div class="item">
-          <img src="./images/gango1.jpg" />
+          <img src="/resources/images/gango.jpg" />
         </div>
         <div class="item">
-          <img src="./images/gango2.jpg" />
+          <img src="/resources/images/gango.jpg" />
         </div>
       </div>
 
@@ -285,29 +322,22 @@
     </div>
     <br/>
 
-    <form>
+<!-- 버튼 -->
       <nav id="searchBtn" class="col-sm-12">
-        <button type="button" id="alcSearchBtn" class="col-sm-2">
+        <button type="button" id="alcSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=술'">
           <span>&nbsp;&nbsp;술&nbsp;&nbsp;</span>
         </button>
-        <button type="button" id="jucSearchBtn" class="col-sm-2">
+        <button type="button" id="jucSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=음료'">
           <span>음료</span>
         </button>
-        <button type="button" id="doguSearchBtn" class="col-sm-2">
+        <button type="button" id="doguSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=도구'">
           <span>도구</span>
         </button>
-        <button type="button" id="furSearchBtn" class="col-sm-2">
+        <button type="button" id="furSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=과일'">
           <span>과일</span>
         </button>
-    <div id="search_fromKeyword">
-      <input type="text" id="searchKeyword" value="" placeholder="검색값" />	
-      <button
-        id="searchBtn_fromKeyword"
-        class="glyphicon glyphicon-search"
-      ></button>
-    </div>
-      </nav>
-    </form>
+        
+<!-- 검색 버튼 -->
     <div>
       <span
         id="btnDown"
@@ -315,18 +345,31 @@
         style="font-size: 30px"
       ></span>
     </div>
+	
+	 <div id="search_fromKeyword">
+	    <form action="/store/productInfo" method="GET">
+	        <input type="hidden" name="category" value="${param.category}" />
+	        <input type="text" id="searchKeyword" name="searchKeyword" value="${param.searchKeyword.trim()}"/>	
+	        <button type="submit" id="searchBtn_fromKeyword" class="glyphicon glyphicon-search"></button>
+	    </form>
+      <select class="selectSearch" name="select" onchange="selectSearch()" id="select">
+      	<option value="def" <c:if test="${param.select eq 'def'}">selected</c:if>>기본</option>
+      	<option value="lowPrice" <c:if test="${param.select eq 'lowPrice'}">selected</c:if>>낮은 가격순</option>
+      	<option value="highPrice" <c:if test="${param.select eq 'highPrice'}">selected</c:if>>높은 가격순</option>
+      </select>
+	</div>
     
     <br />
     <br />
     
 	<div class="container-fluid">
-	<div class="row text-center">
+	<div class="row text-center" id="productInfo">
 		<c:forEach var="product" items="${productList}">
-			<a href="/store/productInfos?display_product_id=${product.display_Product_Id}">
+			<a href="/store/productInfos?display_product_id=${product.display_product_id}">
 				<div class="col-sm-3 productInfo_in">
 					<img src="${path}/download.do?imageFileName=${product.product_image}" align="center"/>
-					<p align="center">상품명 : ${product.product_Name }</p>
-					<p align="center">가격 : ${product.product_Price }</p>
+					<p align="center">상품명 : ${product.product_name }</p>
+					<p align="center">가격 : <fmt:formatNumber value="${product.product_price }" pattern="#,###"/>원</p>
 				</div>
 			</a>
 		</c:forEach>
@@ -335,9 +378,29 @@
          
          
   </div>
+ <div align="center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="First" onclick="updateURLParamsAndNavigate('page', 1); return false;">
+                    <span aria-hidden="true" class="glyphicon glyphicon-backward"></span>
+                </a>
+            </li>
+            <c:forEach begin="1" end="${totalPages}" varStatus="loop">
+                <li class="${loop.index == currentPage ? 'active' : ''}">
+                    <a href="#" onclick="updateURLParamsAndNavigate('page', ${loop.index}); return false;">${loop.index}</a>
+                </li>
+            </c:forEach>
+            <li>
+                <a href="#" aria-label="Last" onclick="updateURLParamsAndNavigate('page', ${totalPages}); return false;">
+                    <span aria-hidden="true" class="glyphicon glyphicon-forward"></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>
  </div>
- </div> 
-     
+
     <div class="row">
       <div id="footer">
         <%@ include file="../include/footer.jsp" %>
@@ -347,10 +410,145 @@
   </body>
 
   <script>
+  function selectSearch() {
+	  var select = document.getElementById("select");
+	  var choose = select.options[select.selectedIndex].value;
+	  
+	  if(choose == 'def') {
+		  select.options[0].selected = true;
+		  updateURLParamsAndNavigateSelect('select', 'def'); return false;
+		  
+	  }else if(choose == 'lowPrice') {
+		  select.options[1].selected = true;
+		  updateURLParamsAndNavigateSelect('select', 'lowPrice'); return false;
+
+	  }else if(choose == 'highPrice') {
+		  select.options[2].selected = true;
+		  updateURLParamsAndNavigateSelect('select', 'highPrice'); return false;
+	  }
+  }
+
+  
+  $(document).ready(function(){
+	  $("#searchBtn_fromKeyword").on("click", function(){
+	    var searchKeyword = $("#searchKeyword").val();
+	    var trimmedKeyword = searchKeyword.trim();
+	    $("#searchKeyword").val(trimmedKeyword);
+	  });
+	});
+  
     // 술 버튼
+      var arcCheck  = 0;
+      var doguCheck = 0;
+      var furCheck  = 0;
+      var jucCheck  = 0;
+      
+      var searchParams = new URLSearchParams(location.search);
+
+      for (var param of searchParams) {
+        console.log(param);
+      }
+      
+      
     $(document).ready(function () {
-      $("#alcSearchBtn").on("click", function () {
-        // 색상바꾸기
+      $("#alcSearchBtn").on("click", function () {    	 
+        arcButton();
+        if(arcCheck == 1){
+        	backStore();
+        }
+    });
+      if (searchParams.get("category") === "술") {
+          arcButton();
+          arcCheck++;
+      }
+  });
+
+    // 도구 버튼
+    $(document).ready(function () {
+      $("#doguSearchBtn").on("click", function () {
+    	  doguButton();
+    	  if(doguCheck == 1){
+          	backStore();
+          }
+      });
+      if (searchParams.get("category") === "도구") {
+          doguButton();
+          doguCheck++;
+      }
+    });
+
+    // 과일 버튼
+    $(document).ready(function () {
+      $("#furSearchBtn").on("click", function () {
+    	  furButton();
+    	  if(furCheck == 1){
+          	backStore();
+          }       
+      });
+      if (searchParams.get("category") === "과일") {
+          furButton();
+          furCheck++;
+      }
+    });
+
+    // 음료 버튼
+    $(document).ready(function () {
+      $("#jucSearchBtn").on("click", function () {
+    	  jucButton();
+    	  if(jucCheck == 1){
+            	backStore();
+            }              
+      });
+      if (searchParams.get("category") === "음료") {
+          jucButton();
+          jucCheck++;
+      }
+    });
+    
+    // 현재 파라미터 값을 가져오는 펑션
+    function getCurrentURLParams() {
+        var urlParams = new URLSearchParams(window.location.search);
+        return urlParams.toString(); // 파라미터를 문자열 형태로 반환
+      }
+    
+    // page 파라미터 업데이트
+    function updateURLParamsAndNavigate(newParam, newValue) {
+        var currentParams = getCurrentURLParams(); // 현재 파라미터 값을 가져옴
+        var urlParams = new URLSearchParams(currentParams);
+
+        // 'page' 파라미터가 이미 있다면 제거
+        if (urlParams.has('page')) {
+          urlParams.delete('page');
+        }
+
+        // 새로운 파라미터 추가
+        urlParams.append(newParam, newValue);
+
+        var newURL = window.location.pathname + '?' + urlParams.toString(); // 새로운 파라미터가 있는 URL 생성
+        window.location.href = newURL; // 새로운 URL로 이동
+      }
+    
+    // select 파라미터 업데이트
+    function updateURLParamsAndNavigateSelect(newParam, newValue) {
+        var currentParams = getCurrentURLParams(); // 현재 파라미터 값을 가져옴
+        var urlParams = new URLSearchParams(currentParams);
+
+        // select가 있다면 제거
+        if (urlParams.has('select')) {
+        	urlParams.delete('select');
+        }
+
+        // 새로운 파라미터 추가
+        urlParams.append(newParam, newValue);
+
+        var newURL = window.location.pathname + '?' + urlParams.toString(); // 새로운 파라미터가 있는 URL 생성
+        window.location.href = newURL; // 새로운 URL로 이동
+      }
+    
+    
+    // 술 펑션
+    function arcButton() {
+    	// 색상바꾸기
         $("#doguSearchBtn").css("background-color", "rgb(115, 115, 189)");
         $("#furSearchBtn").css("background-color", "rgb(115, 115, 189)");
         $("#jucSearchBtn").css("background-color", "rgb(115, 115, 189)");
@@ -365,7 +563,7 @@
         $("#jucSearchBtn").css("background-image", "none");
 
         // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "60px");
+        $("#btnDown").css("margin-left", "-470px");
         $("#btnDown").css("display", "inline-block");
         $("#productInfo").css("margin-top", "0px");
 
@@ -374,25 +572,11 @@
         $("#doguSearchBtn").css("height", "30px");
         $("#furSearchBtn").css("height", "30px");
         $("#jucSearchBtn").css("height", "30px");
-      $.ajax({
-    	 type:		"get",
-    	 url:		"/store/productInfo",
-    	 data: 		{ category : "술"},
-    	 dataType:	"json",
-    	 success:	function(data, textStatus){
-    		console.log(data);
-    	 },
-    	 error: function(data, textStatus){
-    		 alert("시발");
-    	 }
-      });
-    });
-  });
-
-    // 도구 버튼
-    $(document).ready(function () {
-      $("#doguSearchBtn").on("click", function () {
-        // 색상바꾸기
+    }
+    
+    // 도구 펑션
+    function doguButton(){
+    	 // 색상바꾸기
         $("#alcSearchBtn").css("background-color", "rgb(115, 115, 189)");
         $("#furSearchBtn").css("background-color", "rgb(115, 115, 189)");
         $("#jucSearchBtn").css("background-color", "rgb(115, 115, 189)");
@@ -407,7 +591,7 @@
         $("#jucSearchBtn").css("background-image", "none");
 
         // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "325px");
+        $("#btnDown").css("margin-left", "-210px");
         $("#btnDown").css("display", "inline-block");
         $("#productInfo").css("margin-top", "0px");
 
@@ -416,13 +600,12 @@
         $("#doguSearchBtn").css("height", "50px");
         $("#furSearchBtn").css("height", "30px");
         $("#jucSearchBtn").css("height", "30px");
-      });
-    });
-
-    // 과일 버튼
-    $(document).ready(function () {
-      $("#furSearchBtn").on("click", function () {
-        // 색상바꾸기
+    }
+    
+    // 과일 펑션
+    function furButton(){
+    	
+    	 // 색상바꾸기
         $("#alcSearchBtn").css("background-color", "rgb(115, 115, 189)");
         $("#doguSearchBtn").css("background-color", "rgb(115, 115, 189)");
         $("#jucSearchBtn").css("background-color", "rgb(115, 115, 189)");
@@ -437,7 +620,7 @@
         $("#jucSearchBtn").css("background-image", "none");
 
         // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "455px");
+        $("#btnDown").css("margin-left", "-80px");
         $("#btnDown").css("display", "inline-block");
         $("#productInfo").css("margin-top", "0px");
 
@@ -446,13 +629,11 @@
         $("#doguSearchBtn").css("height", "30px");
         $("#furSearchBtn").css("height", "50px");
         $("#jucSearchBtn").css("height", "30px");
-      });
-    });
-
-    // 음료 버튼
-    $(document).ready(function () {
-      $("#jucSearchBtn").on("click", function () {
-        // 색상바꾸기
+    }
+    
+    // 음료 펑션
+    function jucButton(){
+    	 // 색상바꾸기
         $("#alcSearchBtn").css("background-color", "rgb(115, 115, 189)");
         $("#doguSearchBtn").css("background-color", "rgb(115, 115, 189)");
         $("#furSearchBtn").css("background-color", "rgb(115, 115, 189)");
@@ -467,7 +648,7 @@
         $("#furSearchBtn").css("background-image", "none");
 
         // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "190px");
+        $("#btnDown").css("margin-left", "-340px");
         $("#btnDown").css("display", "inline-block");
         $("#productInfo").css("margin-top", "0px");
 
@@ -476,8 +657,12 @@
         $("#doguSearchBtn").css("height", "30px");
         $("#furSearchBtn").css("height", "30px");
         $("#jucSearchBtn").css("height", "50px");
-      });
-    });
+    }
+    
+    function backStore(){
+    	location.href = "/store/productInfo";
+    }
+    
   </script>
 </html>
 
