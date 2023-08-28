@@ -11,7 +11,6 @@ public class OrderDTO {
 	private int 	zipcode;			//우편번호
 	private String 	address;			//주소
 	private String 	address_detail;		//상세 주소
-	//배송메시지
 	
 	public String getReceiver_name() {
 		return receiver_name;
