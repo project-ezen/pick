@@ -58,56 +58,20 @@
 					<th>이미지</th>
 					<th>상품정보</th>
 					<th>수량</th>
-					<th>상품구매내역</th>
+					<th>상품구매금액</th>
 					<th>주문처리상태</th>
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
+					<td>${orderDTO.order_id}</td>
+					<td>${productDisplayVO.product_image}</td>
+					<td>${productDisplayVO.product_info}</td>
+					<td>${productDTO.product_count}</td>
+					<td>${productDisplayVO.product_price}</td>
+					<td>{}</td>
+					<td>{}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -130,56 +94,20 @@
 					<th>이미지</th>
 					<th>상품정보</th>
 					<th>수량</th>
-					<th>상품구매내역</th>
+					<th>상품구매금역</th>
 					<th>주문처리상태</th>
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
+					<td>${orderDTO.order_id}</td>
+					<td>${productDisplayVO.product_image}</td>
+					<td>${productDisplayVO.product_info}</td>
+					<td>${productDTO.product_count}</td>
+					<td>${productDisplayVO.product_price}</td>
+					<td>{}</td>
+					<td>{}</td>
 				</tr>
 			</tbody>
 		</table>

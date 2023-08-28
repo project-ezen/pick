@@ -2,14 +2,16 @@ package com.edu.shopping.dto;
 
 // 실어나르는 값
 public class OrderDTO {
-	private String receiver_name;
-	private String receiver_phonenum;
-	private String order_id;
-	private String cart_id;
-	private int final_price;
-	private int zipcode;
-	private String address;				// 주소
-	private String address_detail;		// 상세 주소
+
+	private String 	receiver_name;		//받는이
+	private String 	receiver_phonenum;	//받는사람 번호	
+	private String 	order_id;			//주문번호
+	private String 	cart_id;			//카트번호
+	private int 	final_price;		//최종가격
+	private int 	zipcode;			//우편번호
+	private String 	address;			//주소
+	private String 	address_detail;		//상세 주소
+	//배송메시지
 	
 	public String getReceiver_name() {
 		return receiver_name;

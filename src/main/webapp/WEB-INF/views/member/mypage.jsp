@@ -51,7 +51,7 @@ img { float: left; }
 		<hr/>
 		<div id="contents" class="set1">
 		<img style=" padding-left: 15px; height:200px; width:30%; vertical-align:top; float: left;" src="./resources/images/alcohol.png" border="0">
-		<div>${member.name}<h2 class="nim">님, 어서오세요!</h2></div>
+		<div>${m.name}<h2 class="nim">님, 어서오세요!</h2></div>
 		</div>
 		<hr/>
 		<div class="set2">
@@ -70,14 +70,14 @@ img { float: left; }
 //주문한 내역
 function fn_order(obj) {
 	alert("주문한 내역");
-	obj.action = "${path}/shopping/myorder.jsp";
+	obj.action = "${path}/shopping/myorderList.jsp";
 	obj.submit();
 }	
 
-function fn_jjim(obj) {
+function fn_jjim(ob) {
 	alert("찜한 레시피");
-	obj.action = "${path}/board/recipejjim.jsp";
-	obj.submit();
+	ob.action = "${path}/board/recipejjim.jsp";
+	ob.submit();
 }	
 
 function fn_mine(obj) {
