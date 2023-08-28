@@ -190,7 +190,7 @@ padding-bottom: 20px;
 		</table>
 	</div>
 	<button type="button" style="margin-bottom: 20px; float: right;">마이페이지 목록가기</button>
-</div>
+</div><br/><br/>
 <script>
 $("#datepicker1, #datepicker2, #datepicker3, #datepicker4").datepicker({
 	
