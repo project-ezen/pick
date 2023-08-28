@@ -37,4 +37,4 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList(namespace + ".boardListPaging", pcri);
 	}
 	
-	
+}	
