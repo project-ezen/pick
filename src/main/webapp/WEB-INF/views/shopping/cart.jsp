@@ -33,6 +33,7 @@ body {
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
+	<form action="/shopping/order" method="post" enctype="multipart/form-data">
 	<div class="row">
 		<div class="container" id="class">
 			<section class="container text-center" style="margin: auto;">
@@ -63,12 +64,13 @@ body {
 							</c:when>
 							<%-- 장바구니에 상품이 있는 경우 --%>
 							<c:when test="${cart != null }">
-								<c:forEach var="cart_item" items="${cart }" varStatus="productNum">
+								<input type="hidden" value="${cart.cart_id }" name="cartId">
+								<c:forEach var="products_item" items="${product }" varStatus="productNum">
 									<tr>
 									    <td class="form-group" style="vertical-align: middle;">
 										    <div>
 										        <label>
-										            <input id="check" type="checkbox" checked>
+										            <input class="check" id="check" type="checkbox" checked>
 										        </label>
 										    </div>
 										</td>
@@ -78,12 +80,14 @@ body {
 										<td class="form-group" style="vertical-align: middle;">
 											<div class="col-md-12 text-center" id="item_thumbnail">
 											    <a href="#" class="thumbnail">
-											        <input type="image" src="${path }/download?imageFile=${cart_item.product_image }" width="161" height="133" id="imageFile" name="imageFile" disabled>
+											        <input type="image" src="${path }/download?imageFile=${products_item.product_image }" width="161" height="133" disabled>
+											        <input type="hidden" class="imageFile" value="${products_item.product_image }" name="imageFile">
 											    </a>
 											</div>
 										</td>
 										<td class="form-group" style="vertical-align: middle;">
-										    <input class="form-control text-center productName" type="text" id="productName" name="productName" value="${cart_item.product_name }" disabled>
+										    <input class="form-control text-center productName" type="text" id="productName" value="${products_item.product_name }" disabled>
+											<input type="hidden" class="pdtName" name="productName" value="${products_item.product_name }">
 										</td>
 										<td class="form-inline" style="vertical-align: middle;">
 										    <div class="form-group">
@@ -93,8 +97,9 @@ body {
 										    </div>
 										</td>
 										<td class="form-group" style="vertical-align: middle;">
-											<input class="form-control text-center productPrice" type="text" id="productPrice" name="productPrice" disabled>
-											<input class="pdtPrice" type="hidden" value="${cart_item.product_price }">
+											<input class="form-control text-center productPrice" type="text" id="productPrice" disabled>
+											<input class="originPrice" type="hidden" value="${products_item.product_price }">
+											<input class="pdtPrice" type="hidden" name="productPrice">
 										</td>
 									</tr>
 								</c:forEach>
@@ -107,77 +112,194 @@ body {
 			</section>
 			<!-- 결재 금액 확인하기 -->
 			<section class="container">
-			    <form>
-			        <table class="table table-bordered">
-			            <tr align="center">
-			                <th class="text-center">전체 금액</th>
-			                <th class="text-center">배송비</th>
-			                <th class="text-center">총 금액</th>
-			            </tr>
-			            <c:choose>
-			            	<c:when test="${cart == null}">
-			            		<tr class="action">
-					                <td class="form-group">
-					                    <input class="form-control text-center" type="text" id="holePrice" name="holePrice" value="0" disabled>
-					                </td>
-					                <td class="form-group">
-					                    <input class="form-control text-center" type="text" id="deliveryFee" name="deliveryFee" value="0" disabled>
-					                </td>
-					                <td class="form-group">
-					                    <input class="form-control text-center" type="text" id="totalPrice" name="totalPrice" value="0" disabled>
-					                </td>
-					            </tr>
-			            	</c:when>
-			            	<c:when test="${cart != null }">
-			            		<tr class="action">
-					                <td class="form-group">
-					                    <input class="form-control text-center" type="text" id="holePrice" name="holePrice" value="0" disabled>
-					                </td>
-					                <td class="form-group">
-					                    <input class="form-control text-center" type="text" id="deliveryFee" name="deliveryFee" value="3000" disabled>
-					                </td>
-					                <td class="form-group">
-					                    <input class="form-control text-center" type="text" id="totalPrice" name="totalPrice" disabled>
-					                </td>
-					            </tr>
-			            	</c:when>
-			            </c:choose>
-			        </table>
-			        <div class="text-right">
-			            <button type="button" id="pay" name="pay" class="btn btn-primary" onclick="fnc_order()">결제하기</button>
-			        </div>
-			    </form>
+		    	<div class="row">
+			    	<div class="col-md-offset-8 col-md-4">
+				        <table class="table table-bordered" style="border: 0;">
+				            <tr align="center">
+				                <th class="text-center">전체 금액</th>
+				            </tr>
+				            <tr class="action">
+				            	<td class="form-group">
+				                    <input class="form-control text-center" type="text" id="totalPrice" disabled>
+				                    <input type="hidden" id="tolPrice" name="totalPrice">
+				                </td>
+				            </tr>
+				        </table>
+			       	</div>
+			    </div>
+			    <c:choose>
+			    	<%-- 장바구니에 상품이 없는 경우 --%>
+			    	<c:when test="${cart == null }">
+			    		<div class="row">
+			    			<div class="col-md-offset-8 col-md-4 text-right">
+					            <button type="submit" id="pay" class="btn btn-primary" disabled>결제하기</button>
+					        </div>
+			    		</div>
+			    	</c:when>
+			    	<%-- 장바구니에 상품이 있는 경우 --%>
+			    	<c:when test="${cart != null }">
+					    <div class="row">
+					    	<div class="col-md-offset-8 col-md-4 text-right">
+					            <button type="submit" id="pay" class="btn btn-primary">결제하기</button>
+					        </div>
+					    </div>
+				    </c:when>
+				</c:choose>
 			</section>
 		</div>
-	<!-- 결재 금액 확인하기 끝 -->
-	<br/><br/><br/><br/>
 	</div>
-	<br/>
+	</form>
+	<!-- 결재 금액 확인하기 끝 -->
+	<br/><br/><br/><br/><br/>
 	<div class="row">
 		<%@ include file="../include/footer.jsp" %>
 	</div>
 </body>
 <script>
+let count = document.getElementsByClassName("cnt");
+let price = document.getElementsByClassName("originPrice");
+let productprice = document.getElementsByClassName("productPrice");
+let pdtprice = document.getElementsByClassName("pdtPrice");
+
+let totalprice = document.getElementById("totalPrice");
+let tolprice = document.getElementById("tolPrice");
+
+for(var i = 0; i < price.length; i++){
+	productprice[i].value = price[i].value * count[i].value;
+	pdtprice[i].value = price[i].value * count[i].value;
+}
+
+// Final Price
+var t = 0;
+for(var i = 0; i < pdtprice.length; i++){
+	t += parseInt(pdtprice[i].value);
+}
+totalprice.value = t;
+tolprice.value = t;
+</script>
+
+<script>
 $(document).ready(function() {
-	// -, + 버튼 클릭시 수량 숫자 변경
-	$(".plus").on("click", function() {
-		let count = parseInt($(".cnt").val());
-		let price = parseInt($(".pdtPrice").val());
-		$(".cnt").prop("value", count + 1);
+	let sum = 0;
+	
+	$(".minus, .plus, .cnt, .originPrice, .productPrice, .pdtPrice, .check").each(function(idx) {
+		let plus = $(".plus:eq(" + idx + ")");
+		let minus = $(".minus:eq(" + idx + ")");
+		let count = $(".cnt:eq(" + idx + ")");
 		
-		alert(count);
-		alert(price);
+		let origin_price = $(".originPrice:eq(" + idx + ")");
+		let price = $(".productPrice:eq(" + idx + ")");
+		let pdtprice = $(".pdtPrice:eq(" + idx + ")");
+		
+		let check = $(".check:eq(" + idx + ")");
+		
+		let total_price = $("#totalPrice");
+		let tol_price = $("#tolPrice");
+//----------------------------------------------------------------------------------------------------------------
+		// +, - 버튼 클릭시 수량 숫자 변경
+		plus.on("click", function() {			
+			count.prop("value", parseInt(count.val()) + 1);
+			price.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+			pdtprice.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+			
+			// total_price 갱신
+			sum = 0;
+			for(var i = 0; i < $(".productName").length; i++) {
+				sum += parseInt($(".productPrice:eq(" + i + ")").val());
+			}
+			total_price.prop("value", sum);
+			tol_price.prop("value", sum);
+			
+//			console.log(count.val());
+//			console.log(origin_price.val());
+//			console.log(price.val());
+		});
+		minus.on("click", function() {
+			count.prop("value", parseInt(count.val()) - 1);
+			if(parseInt(count.val()) > 0){
+				price.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+				pdtprice.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+			}
+			
+			// total_price 갱신
+			sum = 0;
+			for(var i = 0; i < $(".productName").length; i++) {
+				sum += parseInt($(".productPrice:eq(" + i + ")").val());
+			}
+			total_price.prop("value", sum);
+			tol_price.prop("value", sum);
+			
+			// 수량이 1보다 작으면 default 값은 1
+			if(parseInt(count.val()) < 1) {
+				count.prop("value", 1);
+				price.val(origin_price.val());
+				pdtprice.val(origin_price.val());
+			}
+		});
+//----------------------------------------------------------------------------------------------------------------
+		// 숫자를 직접 입력했을 경우 제품 가격
+		count.on("input", function() {
+			price.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+			pdtprice.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+			
+			// total_price 갱신
+			sum = 0;
+			for(var i = 0; i < $(".productName").length; i++) {
+				sum += parseInt($(".productPrice:eq(" + i + ")").val());
+			}
+			total_price.prop("value", sum);
+			tol_price.prop("value", sum);
+		});
+//----------------------------------------------------------------------------------------------------------------	
+		// check 여부에 따른 total_price 변동
+		check.on("click", function() {
+			if(check.is(":checked")){
+//				console.log("true");			
+				// 모든 버튼 선택 활성화
+				count.attr("disabled", false);
+				plus.prop("disabled", false);
+				minus.prop("disabled", false);
+				
+				// 물건 값 넘기기
+				$(".pdtName:eq(" + idx + ")").prop("disabled", false);
+				$(".imageFile:eq(" + idx + ")").prop("disabled", false);
+				count.prop("disabled", false);
+				pdtprice.prop("disabled", false);
+				
+				// total_price 갱신
+				sum = 0;
+				for(var i = 0; i < $(".productName").length; i++) {
+					sum += parseInt($(".productPrice:eq(" + i + ")").val());
+				}
+				
+				total_price.prop("value", sum);
+				tol_price.prop("value", sum);
+			} else if(!check.is(":checked")) {
+//				console.log("false");			
+				// 모든 버튼 선택 불능
+				count.attr("disabled", true);
+				plus.prop("disabled", true);
+				minus.prop("disabled", true);
+				
+				// 물건 값 넘기지 않기
+				$(".pdtName:eq(" + idx + ")").prop("disabled", true);
+				$(".imageFile:eq(" + idx + ")").prop("disabled", true);
+				count.prop("disabled", true);
+				pdtprice.prop("disabled", true);
+				
+				// total_price 갱신
+				sum = 0;
+				for(var i = 0; i < $(".productName").length; i++) {
+					sum += parseInt($(".productPrice:eq(" + i + ")").val());
+				}
+				
+				sum -= parseInt(price.val());
+				total_price.prop("value", sum);
+				tol_price.prop("value", sum);
+			}
+		});
 	});
-	$(".minus").on("click", function() {
-		let count = parseInt($(".cnt").val());
-		$(".cnt").prop("value", count - 1);		
-
-		// 수량이 1보다 작으면 default 값은 1
-		if(parseInt($(".cnt").val()) < 1) {
-			$(".cnt").val(1);
-		}
-	});
-
+//----------------------------------------------------------------------------------------------------------------
 	// 수량이 1보다 작으면 default 값은 1
 	$(".cnt").on("input", count_change);
 	function count_change(event) {
@@ -193,68 +315,7 @@ $(document).ready(function() {
 	        $(this).val(inputValue.replace(/[^0-9]/g, "")); // 숫자 이외의 문자 제거
 	    }
 	}
-	
-	// 합계 구하는 ajax
-	$(".cnt").on("input", pdtList);
-	let length = $(".productName").length;
-	
-	function pdtList() {
-		var pdtName = new Array(length);
-		
-		for(var i = 0; i < length; i++) {
-			pdtName[i] = document.getElementsByClassName("productName")[i].value;
-		}
-	
-		$.ajax({
-			url: "/shopping/calculate",
-			type: "get",
-			dataType: "json",
-			data: {"product_name": $(".productName").val()},
-			success: function(data) {
-				var price = data;
-				
-				// alert(price);
-				
-				document.getElementsByClassName("productPrice")[0].value = 
-					document.getElementsByClassName("cnt")[0].value * price;
-				
-//				for(var value of $(".productPrice").val()) {
-//					$("#holePrice").prop("value", parseInt($("#holePrice").val()) + value);
-//				}
-
-//				for(let i = 0; i < $(".productPrice").length; i++) {
-//					$("#holePrice").prop("value", parseInt($("#holePrice").val()) + value);
-//				}
-			},
-			error: function(data) {
-				alert("error : " + data);
-			}
-		});
-	}
-	
-	// 합계 구하기
-	function sum_product(idx, price) {
-		document.getElementsByClassName("productPrice")[idx].value =
-			document.getElementsByClassName("cnt")[idx].value * price;
-	}
-	
-	// Final Price
-	var hole = $("#holePrice");				// 전체 금액
-	var delivery = $("#deliveryFee");		// 배송비
-	var total = $("#totalPrice");			// 총 금액
-	
-	alert($(".productName").length);
-	
-	for(var i = 0; i < $(".productName").length; i++) {
-		alert("1");
-	}
-	
-	total.prop("value", hole.val() - delivery.val());
+//----------------------------------------------------------------------------------------------------------------
 });
-
-// 주문하는 창으로 연결
-function fnc_order() {
-	location.href="/shopping/order";
-}
 </script>
 </html>
