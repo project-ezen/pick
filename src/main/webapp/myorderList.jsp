@@ -97,7 +97,7 @@
 					<td>${productDTO.product_count}</td>
 					<td>${productDisplayVO.product_price}</td>
 					<td>{orderDTO.}</td>
-					<td>{orderDTO.}</td>
+					<td>{orderDTO.//}</td>
 				</tr>
 			</tbody>
 		</table>
