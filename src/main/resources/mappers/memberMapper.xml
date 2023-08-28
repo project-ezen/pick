@@ -3,6 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberMapper">
+<!--  -->
 	
 	<!-- 로그인 POST : 아이디, 비밀번호, 이름을 추출하자 -->
 	<select id="login" parameterType="com.edu.member.dto.MemberDTO" resultType="com.edu.member.dto.MemberDTO">
@@ -21,10 +22,6 @@
 	 
 	<update id="update" parameterType="com.edu.member.dto.MemberDTO">
 		UPDATE	member
-<<<<<<< HEAD
-=======
-
->>>>>>> 09ae3365b3d2b6741cc0523acbda96742c41ece2
 		SET		member_passwd			= #{passwd},
 				member_repasswd			= #{repasswd},
 				member_name				= #{name},
