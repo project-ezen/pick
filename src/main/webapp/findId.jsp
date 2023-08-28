@@ -13,8 +13,6 @@
             padding-bottom: 10px; 
         }
         
-        .wapper { }
-        
         .input-width {
             max-width: 350px; 
             margin-left: 450px;
