@@ -47,7 +47,8 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 	*/
-
+	
+	// 게시글 작성
 	@Override
 	@RequestMapping(value="/board/write", method=RequestMethod.GET)
 	public ModelAndView articleForm() throws Exception {
