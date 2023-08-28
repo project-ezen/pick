@@ -60,7 +60,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-user"></span>
                             </span>
-                            <input type="text" class="form-control" id="id" name="id" maxlength="20" placeholder="User ID">
+                            <input type="text" class="form-control" id="m_id" name="m_id" maxlength="20" placeholder="User ID">
                         </div>
                     </div>
                     <div>
@@ -68,7 +68,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-lock"></span>
                             </span>
-                            <input type="password" class="form-control" id="passwd" name="passwd" maxlength="20" placeholder="Password">
+                            <input type="password" class="form-control" id="m_pw" name="m_pw" maxlength="20" placeholder="Password">
                         </div>
                     </div>
                 </div>
@@ -105,9 +105,9 @@
     			// 아이디와 비밀번호는 꼭 입력해야 한다.
     			// 아이디와 비밀번호는 4자리 이상 입력해야 한다.
     			
-    			if($("#id").val() == "") {
+    			if($("#m_id").val() == "") {
     				alert("이메일을 입력해주세요.");
-    				$("#Id").focus();
+    				$("#m_Id").focus();
     				return false;
     			}
     			

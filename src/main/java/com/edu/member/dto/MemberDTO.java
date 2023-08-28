@@ -3,102 +3,100 @@ package com.edu.member.dto;
 import java.sql.Date;
 
 public class MemberDTO {
-	private	String	id;
-	private String	passwd;
-	private	String	repasswd;
-	private	String	name;
-	private String 	nickname;
-	private String	phoneNumber;
-	private String 	gender;
-	private	Date	reg_date;
-	private String  zipcode;
-	private	String	address1;
-	private	String	addressDetail;
-	private int 	birthdate;
+	private	String	m_id;
+	private String	m_pw;
+	private	String	m_repw;
+	private	String	m_name;
+	private String 	m_nickname;
+	private String	m_tel;
+	private int 	m_birthdate;
+	private String 	m_gender;
+	private String  m_zipcode;
+	private	String	m_address;
+	private	String	m_addressDetail;
+	private	Date	m_datetime;
 	
-	public String getId() {
-		return id;
+	public String getM_id() {
+		return m_id;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
 	}
-	public String getPasswd() {
-		return passwd;
+	public String getM_pw() {
+		return m_pw;
 	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setM_pw(String m_pw) {
+		this.m_pw = m_pw;
 	}
-	public String getRepasswd() {
-		return repasswd;
+	public String getM_repw() {
+		return m_repw;
 	}
-	public void setRepasswd(String repasswd) {
-		this.repasswd = repasswd;
+	public void setM_repw(String m_repw) {
+		this.m_repw = m_repw;
 	}
-	public String getName() {
-		return name;
+	public String getM_name() {
+		return m_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getM_nickname() {
+		return m_nickname;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setM_nickname(String m_nickname) {
+		this.m_nickname = m_nickname;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getM_tel() {
+		return m_tel;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setM_tel(String m_tel) {
+		this.m_tel = m_tel;
 	}
-	public String getGender() {
-		return gender;
+	public int getM_birthdate() {
+		return m_birthdate;
 	}
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setM_birthdate(int m_birthdate) {
+		this.m_birthdate = m_birthdate;
 	}
-	public Date getReg_date() {
-		return reg_date;
+	public String getM_gender() {
+		return m_gender;
 	}
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
+	public void setM_gender(String m_gender) {
+		this.m_gender = m_gender;
 	}
-	public String getZipcode() {
-		return zipcode;
+	public String getM_zipcode() {
+		return m_zipcode;
 	}
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+	public void setM_zipcode(String m_zipcode) {
+		this.m_zipcode = m_zipcode;
 	}
-	public String getAddress1() {
-		return address1;
+	public String getM_address() {
+		return m_address;
 	}
-	public void setAddress1(String address1) {
-		this.address1 = address1;
+	public void setM_address(String m_address) {
+		this.m_address = m_address;
 	}
-	public String getAddressDetail() {
-		return addressDetail;
+	public String getM_addressDetail() {
+		return m_addressDetail;
 	}
-	public void setAddressDetail(String addressDetail) {
-		this.addressDetail = addressDetail;
+	public void setM_addressDetail(String m_addressDetail) {
+		this.m_addressDetail = m_addressDetail;
 	}
-	public int getBirthdate() {
-		return birthdate;
+	public Date getM_datetime() {
+		return m_datetime;
 	}
-	public void setBirthdate(int birthdate) {
-		this.birthdate = birthdate;
+	public void setM_datetime(Date m_datetime) {
+		this.m_datetime = m_datetime;
 	}
 	
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", passwd=" + passwd + ", repasswd=" + repasswd + ", name=" + name
-				+ ", nickname=" + nickname + ", phoneNumber=" + phoneNumber + ", gender=" + gender + ", reg_date="
-				+ reg_date + ", zipcode=" + zipcode + ", address1=" + address1 + ", addressDetail=" + addressDetail
-				+ ", birthdate=" + birthdate + "]";
+		return "MemberDTO [m_id=" + m_id + ", m_pw=" + m_pw + ", m_repw=" + m_repw + ", m_name=" + m_name
+				+ ", m_nickname=" + m_nickname + ", m_tel=" + m_tel + ", m_birthdate=" + m_birthdate + ", m_gender="
+				+ m_gender + ", m_zipcode=" + m_zipcode + ", m_address=" + m_address + ", m_addressDetail="
+				+ m_addressDetail + ", m_datetime=" + m_datetime + "]";
 	}
 	
-	
-
 	
 	
 }
