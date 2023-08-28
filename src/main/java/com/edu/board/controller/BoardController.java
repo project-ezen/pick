@@ -1,4 +1,8 @@
 package com.edu.board.controller;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6fa0901b806b0ee1d4ca9b68bba7b570e58cac9c
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +28,9 @@ public interface BoardController {
 	// 게시글 쓰기 처리
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception;
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 6fa0901b806b0ee1d4ca9b68bba7b570e58cac9c
 }
 
