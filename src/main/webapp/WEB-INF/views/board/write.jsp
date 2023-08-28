@@ -49,7 +49,7 @@ color: #fff;
 <%@ include file="../include/topMenu.jsp" %>
 <br/><br/>
 <div class="container">
-	<form class="form-horizontal" action="#" method="post">
+	<form class="form-horizontal" action="/board/articleList" method="post" name="articleFrom">
 		<div class="form-group">
 			<div>
 				<h2 align="center">글쓰기</h2>
@@ -59,7 +59,7 @@ color: #fff;
 		<div class="form-group">
 			<label class="control-label col-sm-3">작성자</label>
 			<div class="col-sm-7">
-				<input type="text" style="font-size: 20px;" class="form-control-plaintext reon" value="${member.member_nickname}" readonly/>
+				<input type="text" style="font-size: 20px;" class="form-control-plaintext reon" value="${member.m_nickname}" readonly/>
 			</div>
 		</div>
 		
