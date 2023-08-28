@@ -48,6 +48,20 @@ public class BoardControllerImpl implements BoardController {
 	
 		return mav;
 	}
-	
+
+
+	// 게시글
+		@Override
+		@RequestMapping(value="/board/write", method=RequestMethod.GET)
+		public ModelAndView articleForm() throws Exception {
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/board/write");
+			
+			return mav;
+		}
+		
+		// 게시글 번호에 해당하는 상세 정보
+		
 	
 }
