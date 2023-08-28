@@ -15,25 +15,24 @@
 		
 		<!-- 회원상세정보 -->
 	<select id="detail" parameterType="String" resultType="com.edu.member.dto.MemberDTO">
-		SELECT * FROM member WHERE id = #{id}
+		SELECT * FROM member WHERE m_id = #{m_id}
 	</select>
 	
 	<!--  회원 아이디에 해당하는 비밀번호, 비밀번호 확인, 이름, 전화번호, 주소를 변경한다.  -->
 	 
 	<update id="update" parameterType="com.edu.member.dto.MemberDTO">
 		UPDATE	member
-		SET		member_passwd			= #{passwd},
-				member_repasswd			= #{repasswd},
-				member_name				= #{name},
-				member_nickname			= #{nickname},
-				member_phoneNumber		= #{phoneNumber},
-				member_gender			= #{gender},
-				member_zipcode			= #{zipcode},
-				member_gender			= #{gender},
-				member_address			= #{address1},
-				member_addressdetail	= #{addressDetail},
-				member_birthdate		= #{birthdate}
-		WHERE	member_id				= #{id}
+		SET		m_pw			= #{m_pw},
+				m_repw			= #{m_repw},
+				m_name			= #{m_name},
+				m_nickname		= #{m_nickname},
+				m_tel			= #{m_tel},
+				m_birthdate		= #{m_birthdate}
+				m_gender		= #{m_gender},
+				m_zipcode		= #{m_zipcode},
+				m_address		= #{m_address},
+				m_addressdetail	= #{m_addressDetail},
+		WHERE	m_id			= #{m_id}
 	</update>
 	
 	
