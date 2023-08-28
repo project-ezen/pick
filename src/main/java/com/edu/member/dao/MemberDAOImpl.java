@@ -1,5 +1,8 @@
 package com.edu.member.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -45,6 +48,7 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.insert(namespace + ".join", memberDTO);
 	}
 	
+	
 	//회원 상세 정보 GET
 	@Override
 	public MemberDTO memberDetail(String id) throws Exception {
@@ -54,7 +58,7 @@ public class MemberDAOImpl implements MemberDAO {
 	//회원 정보 수정
 	@Override
 	public void memberUpdate(MemberDTO memberDTO) throws Exception {
-		sqlSession.update(namespace + ".update",memberDTO);
+		sqlSession.update(namespace + ".update", memberDTO);
 	}
 
 	//아이디 중복 검사
@@ -69,6 +73,7 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("닉네임 중복 검사 ==> " + memberDTO);
 		return sqlSession.selectOne(namespace + ".nickCheck", memberDTO);
 	}
+
 
 //-------------------------------------------------------------------------------------
 	

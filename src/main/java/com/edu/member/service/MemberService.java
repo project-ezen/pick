@@ -17,13 +17,12 @@ public interface MemberService {
 	//닉네임 중복 검사
 	public int nickCheck(MemberDTO memberDTO) throws Exception;
 	
-	
 	//아이디 찾기 post
 	
 	
 	//비밀번호 찾기 post
 	
-//--------------------------------------------------------------------------------------------------	
+	
 	//회원 상세 정보 수정 get
 	public MemberDTO memberDetail(String id) throws Exception;
 
