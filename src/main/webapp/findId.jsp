@@ -12,6 +12,7 @@
             border-bottom: 2px solid gray;
             padding-bottom: 10px; 
         }
+        
         .input-width {
             max-width: 350px; 
             margin-left: 450px;
@@ -21,7 +22,7 @@
         }
         .radio-label { 
             text-align: left;
-            padding-left: 450px;
+            padding-left: 500px;
         }
         .phone-container, .email-container, .confirm-container {
             display: flex; 
@@ -39,63 +40,66 @@
 <body>
 <%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
     <div class="container">
-        <h3 class="text-center">아이디 찾기</h3><br>
-        <div class="radio radio-label">
-            <label><input type="radio" name="findMethod" checked>휴대폰 번호로 찾기</label>
-        </div>
-        <div class="form-group input-width name-input">
-            <label>이름</label>
-            <input type="text" class="form-control">
-        </div>
-        <div class="form-group input-width phone-container">
-            <div class="phone-input"> 
-                <label>휴대전화</label>
-                <input type="text" class="form-control">
-            </div>&nbsp;&nbsp;&nbsp;
-            <div class="phone-button"> 
-                <label>&nbsp;</label> 
-                <button class="btn btn-Secondary btn-block">인증번호 받기</button>
-            </div>
-        </div>
-        <div class="form-group input-width confirm-container">
-            <div class="confirm-input">
-                <label>인증번호</label>
-                <input type="text" class="form-control">
-            </div>&nbsp;&nbsp;&nbsp;
-            <div class="confirm-button">
-                <label>&nbsp;</label>
-                <button class="btn btn-primary btn-block">확인</button>
-            </div>
-        </div>
-        
-        <br>
-        <div class="radio radio-label">
-            <label><input type="radio" name="findMethod"> 이메일로 찾기</label>
-        </div>
-        <div class="form-group input-width name-input">
-            <label>이름</label>
-            <input type="text" class="form-control">
-        </div>
-        <div class="form-group input-width email-container">
-            <div class="email-input">
-                <label>이메일</label>
-                <input type="text" class="form-control">
-            </div>&nbsp;&nbsp;&nbsp;
-            <div class="email-button">
-                <label>&nbsp;</label>
-                <button class="btn btn-Secondary btn-block">인증번호 받기</button>
-            </div>
-        </div>
-        <div class="form-group input-width confirm-container">
-            <div class="confirm-input">
-                <label>인증번호</label>
-                <input type="text" class="form-control">
-            </div>&nbsp;&nbsp;&nbsp;
-            <div class="confirm-button">
-                <label>&nbsp;</label>
-                <button class="btn btn-primary btn-block">확인</button>
-            </div>
-        </div>
+        <h1 class="text-center">아이디찾기</h1><hr/>
+        <div class=" wapper">
+	        <div class="radio radio-label">
+	            <label><input type="radio" name="findMethod" checked>휴대폰 번호로 찾기</label>
+	        </div><br/>
+	        <div class="form-group input-width name-input">
+	            <label>이름</label>
+	            <input type="text" class="form-control">
+	        </div>
+	        <div class="form-group input-width phone-container">
+	            <div class="phone-input"> 
+	                <label>휴대전화</label>
+	                <input type="text" class="form-control">
+	            </div>&nbsp;&nbsp;&nbsp;
+	            <div class="phone-button"> 
+	                <label>&nbsp;</label> 
+	                <button class="btn btn-Secondary btn-block">인증번호 받기</button>
+	            </div>
+	        </div>
+	        <div class="form-group input-width confirm-container">
+	            <div class="confirm-input">
+	                <label>인증번호</label>
+	                <input type="text" class="form-control">
+	            </div>&nbsp;&nbsp;&nbsp;
+	            <div class="confirm-button">
+	                <label>&nbsp;</label>
+	                <button class="btn btn-primary btn-block">확인</button>
+	            </div>
+	        </div>
+	        
+	        <br>
+	        <div class="radio radio-label">
+	            <label><input type="radio" name="findMethod"> 이메일로 찾기</label>
+	        </div><br/>
+	        <div class="form-group input-width name-input">
+	            <label>이름</label>
+	            <input type="text" class="form-control">
+	        </div>
+	        <div class="form-group input-width email-container">
+	            <div class="email-input">
+	                <label>이메일</label>
+	                <input type="text" class="form-control">
+	            </div>&nbsp;&nbsp;&nbsp;
+	            <div class="email-button">
+	                <label>&nbsp;</label>
+	                <button class="btn btn-Secondary btn-block">인증번호 받기</button>
+	            </div>
+	        </div>
+	        <div class="form-group input-width confirm-container">
+	            <div class="confirm-input">
+	                <label>인증번호</label>
+	                <input type="text" class="form-control">
+	            </div>&nbsp;&nbsp;&nbsp;
+	            <div class="confirm-button">
+	                <label>&nbsp;</label>
+	                <button class="btn btn-primary btn-block">확인</button>
+	            </div>
+	        </div>
+	    </div>
+        <br/><br/>
     </div>
     <br/><br/>
     <%@ include file="./WEB-INF/views/include/footer.jsp" %>

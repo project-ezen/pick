@@ -9,34 +9,29 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
-.container {
-background-color: #fff;
-min-height: 600px;
-}
-table {
-width: 100%;
-border: 2px solid #ddd;
-margin-left: auto;
-margin-right: auto;
-}
-th {
-background-color: #99A1D7;
-}
-th, td {
-border-bottom: 1px solid #ddd;
-padding: 10px;
-text-align: center;
-border: 1px solid #eee;
-}
-label {
-font-size: 20px;
-}
-#receipt_info {
-padding-bottom: 20px;
-}
-#cancel_info {
-padding-bottom: 20px;
-}
+	.container {
+		background-color: #fff;
+		min-height: 600px;
+	}
+	table {
+		width: 100%;
+		border: 2px solid #ddd;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	th { background-color: #99A1D7; }
+	
+	th, td {
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #eee;
+	}
+	
+	label { font-size: 20px; }
+	#receipt_info { padding-bottom: 20px; }
+	#cancel_info { padding-bottom: 20px; }
 
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -63,56 +58,20 @@ padding-bottom: 20px;
 					<th>이미지</th>
 					<th>상품정보</th>
 					<th>수량</th>
-					<th>상품구매내역</th>
+					<th>상품구매금액</th>
 					<th>주문처리상태</th>
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
+					<td>${orderDTO.order_id}</td>
+					<td>${productDisplayVO.product_image}</td>
+					<td>${productDisplayVO.product_info}</td>
+					<td>${productDTO.product_count}</td>
+					<td>${productDisplayVO.product_price}</td>
+					<td>{}</td>
+					<td>{}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -135,56 +94,20 @@ padding-bottom: 20px;
 					<th>이미지</th>
 					<th>상품정보</th>
 					<th>수량</th>
-					<th>상품구매내역</th>
+					<th>상품구매금역</th>
 					<th>주문처리상태</th>
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-				</tr>
-				<tr>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
-					<td>d</td>
+					<td>${orderDTO.order_id}</td>
+					<td>${productDisplayVO.product_image}</td>
+					<td>${productDisplayVO.product_info}</td>
+					<td>${productDTO.product_count}</td>
+					<td>${productDisplayVO.product_price}</td>
+					<td>{}</td>
+					<td>{}</td>
 				</tr>
 			</tbody>
 		</table>

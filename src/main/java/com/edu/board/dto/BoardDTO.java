@@ -4,12 +4,12 @@ import java.sql.Date;
 
 public class BoardDTO {
 	
-	private int b_id;	// 연결할 고유글번호
-	private String title;
-	private String content;
-	private Date writeDate;
-	private String image;
-	private String id;
+	private int 	b_id;	// 연결할 고유글번호
+	private String 	title;
+	private String 	content;
+	private Date 	writeDate;
+	private String 	image;
+	private String 	id;
 	
 	
 	public int getB_id() {

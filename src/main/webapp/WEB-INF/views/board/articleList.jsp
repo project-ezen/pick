@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>listArticle</title>
 <%@ include file="../include/header.jsp" %>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <style>
 
 
@@ -179,41 +180,51 @@ padding: 0px;
 				</select>
 			</div>
 		</div>
-	
-	<div style="width: 370px; height: 230px; float: left;">
-		<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
-			<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
-			<div class="lele">
-				<div class="top">
-					<p class="title">제목</p>
-					<p class="writer">작성자</p>
+	<c:choose>
+		<c:when test="${articleList == null}"> <!-- 게시글이 하나도 없는 경우 -->
+			<tr>
+				<td colspan="4">
+					<p align="center">
+						<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
+					</p>
+				</td>
+			</tr>
+		</c:when>
+		<c:when test="${articleList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
+			<c:forEach var="article" items="${articleList }" varStatus="articleNum">
+				<div style="width: 370px; height: 230px; float: left;">
+					<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
+						<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
+						<div class="lele">
+							<div class="top">
+								<p class="title">${article.title}</p>
+								<p class="writer">${article.member_id}</p>
+							</div>
+							<div class="bottom">
+								<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<i class="bi bi-heart"></i><span>100</span>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="bottom">
-					<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<i class="bi bi-heart"></i><span>100</span>
-				</div>
-			</div>
-		</div>
-	</div>
+			</c:forEach>
+		</c:when>
+	</c:choose>
+	<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
 	
-	
-	<button type="button" class="wbtn" onclick="location.href='${path}/board/write';">글쓰기</button>
-	<div class="page_wrap">
-	   <div class="page_nation">
-	      <a class="arrow prev" href="#"><i class="bi bi-caret-left-fill"></i></a>
-	      <a href="#" class="active">1</a>
-	      <a href="#">2</a>
-	      <a href="#">3</a>
-	      <a href="#">4</a>
-	      <a href="#">5</a>
-	      <a class="arrow next" href="#"><i class="bi bi-caret-right-fill"></i></a>
-	   </div>
-	</div> 
 <br/>
 </div>
 <%@ include file="../include/footer.jsp" %>
 <script>
+function fn_writeForm(isLogOn, articleForm, loginForm) {
+	if(isLogOn != '' && isLogOn != false){
+		location.href = articleForm;
+	} else {
+		alert("로그인 후 이용해주세요.");
+		location.href= loginForm + '?action=/board/articleForm';
+	}
+}
 </script>
 </body>
 </html>

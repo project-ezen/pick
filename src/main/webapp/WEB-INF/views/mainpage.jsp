@@ -78,7 +78,7 @@
                    	</div>
 
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="">MyPage</a></label>
+                       <label id="solo"><a href="${path}/member/mypage">MyPage</a></label>
                    	</div>
 
                    	<div style="margin-top: 50px;">
