@@ -11,5 +11,8 @@ public interface BoardController {
 	// 게시글 목록
 	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	// 게시글 작성 페이지
+		public ModelAndView articleForm() throws Exception;
+	
 }
 
