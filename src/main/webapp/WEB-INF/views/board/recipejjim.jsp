@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>JJIM</title>
-<%@ include file="./WEB-INF/views/include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <style>
 	
 	table {
@@ -14,7 +14,7 @@
   	}
   	
   	th {
-  		background-color: #8aa2b2;
+  		background-color: #ccd6d9;
   		position: sticky; 
   		top: 0; 
   		height: 20px;
@@ -37,6 +37,8 @@
 	.write	{ width: 20%; height:100px; }
 
 	.list {
+		margin-bottom: 20px;
+		float: right;
 		background-color:#8aa2b2;
 		border-radius:8px;
 		border:none;
@@ -44,9 +46,9 @@
 		cursor:pointer;
 		color:#ffffff;
 		font-family:Arial;
-		font-size:10px;
+		font-size:12px;
 		font-weight:bold;
-		padding:9px 26px;
+		padding:8px 18px;
 		text-decoration:none;
 		float: right;
 		margin-bottom:10px; 
@@ -59,7 +61,7 @@
 </style>
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
 	<div class="container">
 		<h1 align="center">찜한 게시물</h1>
 		<hr>
@@ -123,6 +125,6 @@
 		</table>
 	</div>
 	<br/><br/>
-	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+	<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

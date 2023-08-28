@@ -3,15 +3,15 @@ package com.edu.store.dto;
 // 거의 고정된 값
 public class ProductDisplayVO {
 
-	private String product_display_id;
-	private String product_name;
-	private String product_info;
-	private String capacity;
-	private String alcohol_content;
-	private String origin;
-	private String manufacturer;
-	private String product_image;
-	private int product_price;
+	private String 	product_display_id;
+	private String 	product_name;
+	private String 	product_info;
+	private String 	capacity;
+	private String 	alcohol_content;
+	private String 	origin;
+	private String 	manufacturer;
+	private String 	product_image;
+	private int 	product_price;
   
 	public int getProduct_price() {
 		return product_price;

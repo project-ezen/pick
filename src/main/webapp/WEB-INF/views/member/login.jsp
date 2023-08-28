@@ -94,6 +94,13 @@
         <div class="social-buttons">
             <button class="btn btn-danger" id="googleLogin">구글 로그인</button>
         </div>
+        
+        <!-- msg가 false인 경우 -->
+		<c:if test="${msg == false}">
+			<script>
+			alert("로그인을 실패하였습니다. 아이디와 비밀번호를 확인해주세요.");
+			</script>
+		</c:if>
     </form>
 </div>
     <%@ include file="../include/footer.jsp" %>
@@ -110,11 +117,17 @@
     				$("#m_Id").focus();
     				return false;
     			}
+    			if($("#m_pw").val() == "") {
+    				alert("비밀번호를 입력해주세요.");
+    				$("#m_pw").focus();
+    				return false;
+    			}
     			
     			
     			document.getElementById("loginForm").submit();
     			return false;
     		});
+    	});
     </script>
 </body>
 </html>

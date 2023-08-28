@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -30,6 +31,7 @@ public class MemberController {
 	// 컨트롤러는 서비스를 호출하고, 서비스는 DAO를 호출하고, DAO는 SqlSession을 호출한다.
 	//-----------------------------------------------------------------------------------------------------------
 	@Inject
+	@Autowired
 	private MemberService memberService;
 	
 	
@@ -101,16 +103,14 @@ public class MemberController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(MemberDTO memberDTO, HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=utf-8");
-		
-		logger.info("memberDTO COntroller" + memberDTO);
-		
 		// 아이디(이메일)이 존재하는지 먼저 검사한다.
 		int result = memberService.idCheck(memberDTO);
 		try {
+			
 			if(result == 1) {
+				
 				return "/member/join";
+				
 			} else if(result == 0) {
 				memberService.join(memberDTO);
 			}
@@ -118,7 +118,7 @@ public class MemberController {
 			throw new RuntimeException();
 		}
 		
-		return "redirect:/mypage.jsp";
+		return "redirect:/mypage";
 		
 	}
 	
@@ -160,29 +160,26 @@ public class MemberController {
 	
 	//비밀번호 찾기 post
 	
-	
-	
-	
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	//회원정보상세정보=>수정 GET
-	@RequestMapping(value="/memberDetail",method=RequestMethod.GET)
+	/*
+	//회원정보상세정보 => GET
+	@RequestMapping(value="/detail",method=RequestMethod.GET)
 	public void memberDetail(@RequestParam("id")String id,Model model) throws Exception {
 		 
-		MemberDTO memberDTO = memberService.memberDetail(id);   //id를 줘서 
+		MemberDTO memberDTO = memberService.detail(id);   //id를 줘서 
 		model.addAttribute("detail",memberDTO);
 		
 		System.out.println("상세 정보 :" + memberDTO);
-	}
+	} */
 	
 	
 	//회원정보수정 POST
-	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
-	public String MemberUpdate(MemberDTO memberDTO) throws Exception {
+	@RequestMapping(value="/edit", method=RequestMethod.POST)
+	public String edit(MemberDTO memberDTO) throws Exception {
 		
 		//client에서 보내오는 데이터들의 name이 맞으면 memberDTO에 알아서 값이 들어간다.
 		memberService.memberUpdate(memberDTO);
 		
-		return "redirect:/member/mypage"; 
+		return "redirect:/member/edit"; 
 		//redirect<요청을 해서 데이터도 같이 보여준다.> 
 		//redirect없이 쓰면 페이지형태만 보여준다.(/member/memberList로 넘어가지 않는다.)
 	}

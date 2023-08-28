@@ -51,11 +51,11 @@ img { float: left; }
 		<hr/>
 		<div id="contents" class="set1">
 		<img style=" padding-left: 15px; height:200px; width:30%; vertical-align:top; float: left;" src="./resources/images/alcohol.png" border="0">
-		<div>${member.name}<h2 class="nim">님, 어서오세요!</h2></div>
+		<div>${m.name}<h2 class="nim">님, 어서오세요!</h2></div>
 		</div>
 		<hr/>
 		<div class="set2">
-			<button class="order" type="button" onclick="fn_order(this.form)">주문한 내역</button>
+			<button class="order" type="button" onclick="fn_order(this.form)">주문 조회</button>
 			<button class="order" type="button" onclick="fn_jjim(this.form)'">찜한 레시피</button>
 			<button class="order" type="button" onclick="fn_mine(this.form)'">내가 쓴 게시물</button>
 			<button class="order" type="button" onclick="fn_insert(this.form)'">회원 정보 수정</button>
@@ -69,15 +69,15 @@ img { float: left; }
 
 //주문한 내역
 function fn_order(obj) {
-	alert("주문한 내역");
-	obj.action = "${path}/shopping/myorder.jsp";
+	alert("주문조회");
+	obj.action = "${path}/shopping/myorderList.jsp";
 	obj.submit();
 }	
 
-function fn_jjim(obj) {
+function fn_jjim(ob) {
 	alert("찜한 레시피");
-	obj.action = "${path}/board/recipejjim.jsp";
-	obj.submit();
+	ob.action = "${path}/board/recipejjim.jsp";
+	ob.submit();
 }	
 
 function fn_mine(obj) {
