@@ -27,8 +27,27 @@ public class BoardControllerImpl implements BoardController {
 	
 	@Autowired
 	private BoardService boardService;
+
+	// 게시글 목록
+	/*
+	@Override
+	@RequestMapping(value="/board/articleList", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		logger.info("게시글 목록 화면좀 나와라");
+		
+		String viewName = "./board/articleList";
+		ModelAndView mav = new ModelAndView();
+		
+		
+		List<BoardDTO> articlesList = boardService.recipeBoard();
+		mav.setViewName(viewName);
+		mav.addObject("articleList", articlesList);
 	
-	
+		return mav;
+	}
+	*/
+
 	@Override
 	@RequestMapping(value="/board/write", method=RequestMethod.GET)
 	public ModelAndView articleForm() throws Exception {
