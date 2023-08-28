@@ -3,7 +3,7 @@ package com.edu.shopping.dto;
 // 실어나르는 값
 public class OrderDTO {
 	private String receiver_name;
-	private int receiver_phonenum;
+	private String receiver_phonenum;
 	private String order_id;
 	private String cart_id;
 	private int final_price;
@@ -16,10 +16,10 @@ public class OrderDTO {
 	public void setReceiver_name(String receiver_name) {
 		this.receiver_name = receiver_name;
 	}
-	public int getReceiver_phonenum() {
+	public String getReceiver_phonenum() {
 		return receiver_phonenum;
 	}
-	public void setReceiver_phonenum(int receiver_phonenum) {
+	public void setReceiver_phonenum(String receiver_phonenum) {
 		this.receiver_phonenum = receiver_phonenum;
 	}
 	public String getOrder_id() {
