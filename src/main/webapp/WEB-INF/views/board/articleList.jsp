@@ -8,17 +8,33 @@
 <%@ include file="../include/header.jsp" %>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <style>
-
+.container {
+}
 
 img {
 margin-top: 50px;
-margin-left: 5px;
+margin-left: 10px;
 border-radius: 5px;
 }
 
+.outer_div {
+background-color: #946;
+}
+
 .inner_div {
-padding: 0px;
-margin: 15px 15px;
+margin-top: 20px;
+margin-right: 20px;
+margin-bottom: 10px;
+margin-left: 45px;
+display: inline-block;
+}
+
+.pagenav {
+display: inline-block;
+width: 50%;
+text-align: center;
+position: relative;
+left: 25%;
 }
 
  
@@ -115,7 +131,7 @@ span {
 font-size: 15px;
 }
 
-
+ 
 </style>
 </head>
 <body>
@@ -132,6 +148,7 @@ font-size: 15px;
 				</select>
 			</div>
 		</div>
+	<div class="outer_div">
 	<c:choose>
 		<c:when test="${articlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
 			<tr>
@@ -144,7 +161,6 @@ font-size: 15px;
 		</c:when>
 		<c:when test="${articlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
 			<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
-				<div style="width: 370px; height: 230px; float: left;">
 					<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
 						<img alt="" src="${path}/resources/images/cat1.jpg" width="100px" height="100px">
 						<div class="lele">
@@ -159,11 +175,10 @@ font-size: 15px;
 							</div>
 						</div>
 					</div>
-				</div>
 			</c:forEach>
 		
 		 <!-- 화면 하단의 페이지 영역 -->
-      <div class="col-sm-offset-3">
+      <div class="pagenav">
          <ul class="btn-group pagination">
             <c:if test="${pageMaker.prev}">
                <li>
@@ -191,7 +206,7 @@ font-size: 15px;
       </form>
       </c:when>
 	</c:choose>
-      
+    </div>  
       
      
       
