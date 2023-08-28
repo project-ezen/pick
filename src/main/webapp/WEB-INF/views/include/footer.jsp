@@ -42,7 +42,7 @@
 
 <footer class="jumbotron" id="footer_ft">
         <div class="row" style="width: 100%; overflow: hidden;" id="footer_ff">
-            <div class="col-sm-3 logo"><h2><a class="footer" href="/"><img src="./resources/images/alcohol.png"></a></h2></div>
+            <div class="col-sm-3 logo"><h2><a class="footer" href="/"><img style="height:100px; width:100px;"src="./resources/images/alcohol.png"></a></h2></div>
             <div class="col-sm-3 info">
 			<br/>
                 <b>(주)마녀의 Pick</b><br>
@@ -56,10 +56,10 @@
             <div class="col-sm-3 customer">
                 <h3>Customer Center</h3>
                 <h3>070-2222-2222</h3>
-                <br>
+                <br/>
                 <h5><b>교환/반품 주소지</b></h5>
                 <h5>서울특별시 종로구 종로 78 미려빌딩 6층</h5>
-                <br>
+                <br/>
                 <h5><b>계좌정보</b></h5>
                 <h5>국민 666666-00-001111</h5>
                 <h5>(주)마녀의 Pick</h5>
@@ -67,7 +67,7 @@
 
             <div class="col-sm-3 sns">
                 <h3><b>SNS</b></h3>
-                <br>
+                <br/>
                 <img style="height: 45px; width: 45px;" src="${path}/resources/images/youtube.png">
                	<img style="height: 45px; width: 45px;" src="${path}/resources/images/facebook.png">
                	<img style="height: 45px; width: 45px;" src="${path}/resources/images/instagram.png">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,21 +59,21 @@ color: #fff;
 		<div class="form-group">
 			<label class="control-label col-sm-3">작성자</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control-plaintext reon" value="닉네임" readonly/>
+				<input type="text" style="font-size: 20px;" class="form-control-plaintext reon" value="${member.member_nickname}" readonly/>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-3">제목</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" maxlength="100" style="width: 100%"/>
+				<input type="text" class="form-control" maxlength="100" style="width: 100%" name="title"/>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-3">내용</label>
 			<div class="col-sm-6">
-				<textarea class="form-control" rows="15"></textarea>
+				<textarea class="form-control" rows="15" name="content"></textarea>
 			</div>
 		</div>
 		<hr/>

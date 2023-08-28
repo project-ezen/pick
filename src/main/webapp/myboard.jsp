@@ -107,7 +107,7 @@ top: 50px;
 	페이징
 	</div>
 </div>
-
+<br/><br/>
 <%@ include file="./WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
