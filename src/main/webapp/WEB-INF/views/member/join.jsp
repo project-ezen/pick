@@ -48,7 +48,7 @@
 			<form id="join-form" method="post" action="/member/join">
                 <div class="form-group">
 					<label class="control-label">아이디</label>
-					<input type="text" class="form-control" id="id" name="id" placeholder="이메일을 입력하세요">
+					<input type="text" class="form-control" id="m_id" name="m_id" placeholder="이메일을 입력하세요">
 				</div>
                 <div class="form-group">
 					<label class="control-label">실시간 중복확인</label>
@@ -57,21 +57,21 @@
 				
 				<div class="form-group">
 					<label class="control-label">비밀번호</label>
-					<input type="password" class="form-control" id="passwd" name="passwd">
+					<input type="password" class="form-control" id="m_pw" name="m_pw">
 				</div>
 				<div class="form-group">
 					<label class="control-label">비밀번호 확인</label>
-					<input type="password" class="form-control" id="repasswd" name="repasswd">
+					<input type="password" class="form-control" id="m_repw" name="m_repw">
 				</div>
 				
 				<div class="form-group">
 					<label class="control-label">이름</label>
-					<input type="text" class="form-control" id="name" name="name">
+					<input type="text" class="form-control" id="m_name" name="m_name">
 				</div>
 				<div class="form-group">
 					<label class="control-label">닉네임</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="nickname" name="nickname">
+						<input type="text" class="form-control" id="m_nickname" name="m_nickname">
 						<span class="input-group-btn">
 							<button class="btn btn-info" type="button" id="nickCheck" onClick="fn_nickCheck()">중복확인</button>
 						</span>
@@ -79,33 +79,33 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label">연락처</label>
-					<input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="ex) 010-1234-5678">
+					<input type="text" class="form-control" id="m_tel" name="m_tel" placeholder="ex) 010-1234-5678">
 				</div>
 				<div class="form-group">
 					<label class="control-label">생년월일</label>
-					<input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="ex) 19980505">
+					<input type="text" class="form-control" id="m_birthdate" name="m_birthdate" placeholder="ex) 19980505">
 				</div>
 				<div class="form-group">
 					<label>성별</label><br>
 					<label class="control-label">
-						<input type="radio" name="gender" value="male"> 남성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="radio" name="m_gender" value="male"> 남성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</label>
 					<label class="control-label">
-						<input type="radio" name="gender" value="female"> 여성
+						<input type="radio" name="m_gender" value="female"> 여성
 					</label>
 				</div>
 				<div class="form-group">
 					<label class="control-label">우편번호</label>
-					<input type="text" class="form-control" id="zipcode" name="zipcode" readonly>
+					<input type="text" class="form-control" id="m_zipcode" name="m_zipcode" readonly>
 					<input type="button" class="form-control" onclick="daumZipCode()" value="우편번호검색"/>
 				</div>
 				<div class="form-group">
 					<label class="control-label">주소</label>
-					<input type="text" class="form-control" id="address1" name="address1">
+					<input type="text" class="form-control" id="m_address" name="m_address">
 				</div>
 				<div class="form-group">
 					<label class="control-label">상세주소</label>
-					<input type="text" class="form-control" id="address2" name="addressDetail">
+					<input type="text" class="form-control" id="m_addressDetail" name="m_addressDetail">
 				</div><br>
 
 				<div class="form-group">
@@ -363,8 +363,8 @@
 var nickIsValid = false; // 초기에 닉네임은 유효하지 않다고 가정
 
 function allCheck() {
-    var inputID = $('#id').val();
-    var nickname = $("#nickname").val();
+    var inputID = $('#m_id').val();
+    var nickname = $("#m_nickname").val();
     var infoChecked = $('#info').prop('checked');
     var info1Checked = $('#info1').prop('checked');
     
@@ -385,14 +385,14 @@ $(document).ready(function() {
 	});
 
 	// 실시간 중복 검사
-   $("#id").on("input", function() {
-       var inputID = $('#id').val();
+   $("#m_id").on("input", function() {
+       var inputID = $('#m_id').val();
 
        $.ajax({
            url: "/member/idCheck",
            type: "post",
            dataType: "json",
-           data: {"id": inputID},
+           data: {"m_id": inputID},
            success: function(data) {
         	   // alert(inputID + ":" + data);
                if (inputID === "" || !inputID.includes("@") || (!inputID.includes(".com") && !inputID.includes(".net"))) {
@@ -424,48 +424,48 @@ $(document).ready(function() {
 	// 아이디, 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
 	// 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
 	
-		if($("#id").val() == "") {
+		if($("#m_id").val() == "") {
 			alert("아이디를 입력하셔야 합니다.");
-			$("#userID").focus();
+			$("#m_id").focus();
 			return false;
 		}
-		if($("#passwd").val() == "") {
+		if($("#m_passwd").val() == "") {
 			alert("비밀번호를 입력하셔야 합니다.");
-			$("#passwd").focus();
+			$("#m_pw").focus();
 			return false;
 		}
-		if($("#repasswd").val() == "") {
+		if($("#m_repasswd").val() == "") {
 			alert("비밀번호확인을 입력하셔야 합니다.");
-			$("#repasswd").focus();
+			$("#m_repw").focus();
 			return false;
 		}
-		if($("#name").val() == "") {
+		if($("#m_name").val() == "") {
 			alert("이름을 입력하셔야 합니다.");
-			$("#name").focus();
+			$("#m_name").focus();
 			return false;
 		}
-		if($("#nickname").val() == "") {
+		if($("#m_nickname").val() == "") {
 			alert("닉네임을 입력하셔야 합니다.");
-			$("#nickname").focus();
+			$("#m_nickname").focus();
 			return false;
 		}
-		if($("#phoneNumber").val() == "") {
-			alert("전화번호를 입력하셔야 합니다.");
-			$("#phoneNumber").focus();
+		if($("#m_tel").val() == "") {
+			alert("연락처를 입력하셔야 합니다.");
+			$("#m_tel").focus();
 			return false;
 		}
-		if($("#birthdate").val() == "") {
+		if($("#m_birthdate").val() == "") {
 			alert("생년월일을 입력하셔야 합니다.");
-			$("#birthdate").focus();
+			$("#m_birthdate").focus();
 			return false;
 		}
-		if($("#address1").val() == "") {
+		if($("#m_address").val() == "") {
 			alert("주소를 입력하셔야 합니다.");
-			$("#address1").focus();
+			$("#m_address").focus();
 			return false;
 		}
 	
-		document.getElementById("address").value = $("#address1").val();
+		document.getElementById("m_address").value = $("m_address").val();
 	
 });
 
@@ -502,11 +502,11 @@ $(document).ready(function() {
 // 닉네임 중복 체크
 function fn_nickCheck() {
 
-	var nickname = $("#nickname").val();
+	var nickname = $("#m_nickname").val();
 
 	if (!nickname) { // 닉네임이 비어 있을 경우
 		alert("닉네임을 입력하십시오.");
-		$("#nickname").focus();
+		$("#m_nickname").focus();
 		return;
 	}
 
@@ -514,17 +514,17 @@ function fn_nickCheck() {
 		url:		"/member/nickCheck",
 		type:		"post",
 		dataType:	"json",
-		data:		{"nickname" : nickname},
+		data:		{"m_nickname" : nickname},
 		async:		false,
 		success:	function(data) {
 			
 			if(data == 1) {
 				alert("이미 사용 중인 닉네임입니다.\n다른 닉네임을 입력하십시오.");
-				$("#nickname").focus();
+				$("#m_nickname").focus();
 			} else if(data == 0) {
 				alert("사용 가능한 닉네임입니다.");
-				$("#nickCheck").attr("value", "Y");
-				$("#phoneNumber").focus();
+				$("#m_nickCheck").attr("value", "Y");
+				$("#m_tel").focus();
 				nickIsValid = true;
 			}
 			allCheck();
@@ -569,11 +569,11 @@ function daumZipCode() {
 			} // End - if(data.userSelectedType == 'R')
 				
 			// 추출한 우편번호와 주소정보를 입력항목에 나타낸다.
-			document.getElementById('zipcode').value	= data.zonecode;
-			document.getElementById('address1').value	= fullAddress;
+			document.getElementById('m_zipcode').value	= data.zonecode;
+			document.getElementById('m_address').value	= fullAddress;
 			
 			// 커서를 상세주소 입력란으로 이동시킨다.
-			document.getElementById('address2').focus();
+			document.getElementById('m_addressDetail').focus();
         }
     }).open({
     	// 우편번호 팝업 창이 여러개 뜨는 것을 방지하기 위해서 popupName을 사용한다.

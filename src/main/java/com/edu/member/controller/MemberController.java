@@ -57,6 +57,7 @@ public class MemberController {
 		
 		// 로그인 한 회원정보가 있는지 검사한다.
 		MemberDTO memberDTO = memberService.login(member);
+		logger.info("memberDTO : " + memberDTO);
 		
 		// 세션을 사용할 준비를 한다.
 		HttpSession session = request.getSession();
@@ -66,6 +67,7 @@ public class MemberController {
 			session.setAttribute("member", memberDTO);
 			session.setAttribute("isLogOn", true);
 			String action = (String)session.getAttribute("action");
+			
 			System.out.println("Login action : " + action);
 			
 			session.removeAttribute("action");
@@ -73,7 +75,7 @@ public class MemberController {
 			if(action != null) {
 				mav.setViewName("redirect:" + action);
 			} else {
-				mav.setViewName("redirect:/mainpage.jsp");
+				mav.setViewName("redirect:/mainpage");
 			}
 			
 		} else {	// 아이디와 비밀번호에 해당하는 정보가 없으면
