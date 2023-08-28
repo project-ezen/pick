@@ -39,10 +39,10 @@ public class PageMaker {
 		}
 		
 		// 이전 페이지 (prev) : startPage가 1이 아닌 경우에만 활성화시킨다.
-		prev = startPage == 1 ? false : true;
+		prev = (startPage == 1 ? false : true);
 		
 		// 다음 페이지 (next)
-		next = endPage * cri.getPageStart() < totalCount ? true : false;
+		next = (endPage * cri.getPageStart() >= totalCount ? false : true);
 		
 	} // End - 화면 하단에 보여줄 페이지를 계산한다
 	
