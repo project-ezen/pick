@@ -26,7 +26,14 @@ public class MemberDAOImpl implements MemberDAO {
 	//로그인 POST
 	@Override
 	public MemberDTO login(MemberDTO memberDTO) throws Exception {
-		return sqlSession.selectOne(namespace + ".login", memberDTO);
+		
+		logger.info("memberDTO : " + memberDTO);
+		
+		//  return sqlSession.selectOne(namespace + ".login", memberDTO);
+		
+		MemberDTO mDTO = sqlSession.selectOne(namespace + ".login", memberDTO);
+		System.out.println("DAO =====> " + mDTO);
+		return mDTO;
 	}
 	
 	//회원가입

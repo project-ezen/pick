@@ -8,8 +8,8 @@
 	<select id="login" parameterType="com.edu.member.dto.MemberDTO" resultType="com.edu.member.dto.MemberDTO">
 		SELECT	*
 		FROM	member
-		WHERE	member_id	= #{id}
-		AND		member_pw	= #{passwd}
+		WHERE	m_id	= #{m_id}
+		AND		m_pw	= #{m_pw}
 	</select>
 		
 		<!-- 회원상세정보 -->
@@ -21,10 +21,7 @@
 	 
 	<update id="update" parameterType="com.edu.member.dto.MemberDTO">
 		UPDATE	member
-<<<<<<< HEAD
-=======
 
->>>>>>> 09ae3365b3d2b6741cc0523acbda96742c41ece2
 		SET		member_passwd			= #{passwd},
 				member_repasswd			= #{repasswd},
 				member_name				= #{name},
@@ -44,21 +41,21 @@
 	<select id="idCheck" parameterType="com.edu.member.dto.MemberDTO" resultType="int">
 		SELECT	COUNT(*)
 		FROM	member
-		WHERE	member_id = #{id}
+		WHERE	m_id = #{m_id}
 	</select>
 	
 	<!-- 닉네임 중복 검사 -->
 	<select id="nickCheck" parameterType="com.edu.member.dto.MemberDTO" resultType="int">
 		SELECT	COUNT(*)
 		FROM	member
-		WHERE	member_nickname = #{nickname}
+		WHERE	m_nickname = #{m_nickname}
 	</select>
 	
 	<!-- 회원 가입  -->
 	<insert id="join" parameterType="com.edu.member.dto.MemberDTO">
 		INSERT INTO member
-				(member_id, member_pw, member_repw, member_name, member_nickname, member_phoneNumber, member_birthdate, member_gender, member_zipcode, member_address, member_addressdetail )
-		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name}, #{nickname}, #{phoneNumber}, #{birthdate}, #{gender}, #{zipcode}, #{address1}, #{addressDetail} )
+				(m_id, m_pw, m_repw, m_name, m_nickname, m_tel, m_birthdate, m_gender, m_zipcode, m_address, m_addressdetail, m_datetime )
+		VALUES	(#{m_id}, #{m_pw}, #{m_repw}, #{m_name}, #{m_nickname}, #{m_tel}, #{m_birthdate}, #{m_gender}, #{m_zipcode}, #{m_address}, #{m_addressDetail}, #{m_datetime} )
 	</insert>
 	
 </mapper>
