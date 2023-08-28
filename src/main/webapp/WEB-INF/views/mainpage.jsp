@@ -74,11 +74,11 @@
 	          		</li>
 	          		
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="#">나만의 레시피</a></label>
+                       <label id="solo"><a href="${path}/board/articleList">나만의 레시피</a></label>
                    	</div>
 
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="">MyPage</a></label>
+                       <label id="solo"><a href="${path}/member/mypage">MyPage</a></label>
                    	</div>
 
                    	<div style="margin-top: 50px;">

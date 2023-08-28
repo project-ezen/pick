@@ -26,7 +26,7 @@ public class PagingCriteria {
 	public PagingCriteria() {
 		// 최초 게시판에 진입할 때를 위해서 기본 값을 설정해야 한다.
 		this.page		= 1;
-		this.perPageNum	= 6;
+		this.perPageNum	= 2;
 	}
 	
 	public int getPage() {
@@ -56,7 +56,7 @@ public class PagingCriteria {
 	
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "PagingCriteria [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
 	
 	
