@@ -12,10 +12,6 @@ public interface BoardService {
 	
 	// 전체 게시글 수 구하기 (Paging 처리)
 	public int boardListTotalCount(PagingCriteria pcri) throws Exception;
-<<<<<<< HEAD
-=======
-
->>>>>>> 6fa0901b806b0ee1d4ca9b68bba7b570e58cac9c
 
 	// 게시글 목록 가져오기 (Paging)
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws Exception;
