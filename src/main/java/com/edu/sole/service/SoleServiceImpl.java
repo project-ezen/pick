@@ -9,8 +9,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.edu.sole.dao.SoleDAO;
+import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.SoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
+import com.edu.sole.dto.recipe.RecipeDTO;
 
 @Service
 public class SoleServiceImpl implements SoleService {
@@ -36,6 +38,20 @@ public class SoleServiceImpl implements SoleService {
 	public int solecount(SoleSearchCriteria solesearchcriteria) {
 		
 		return soledao.solecount(solesearchcriteria);
+	}
+	
+	// 술 레시피 구하는
+	@Override
+	public List<RecipeDTO> solerecipeDetail(String recipe_code) throws Exception {
+		
+		return soledao.solerecipeDetail(recipe_code);
+	}
+	
+	// 술 정보 보여주는
+	@Override
+	public RecipedSoleDTO solerecipe(String recipe_code) throws Exception {
+		
+		return soledao.solerecipe(recipe_code);
 	}
 
 }

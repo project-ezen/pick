@@ -49,7 +49,7 @@
 <body>
 <%@ include file="../include/topMenu.jsp" %>
     <div class="login" >
-    	<form  class="form-horizontal" action="/member/login" method="post"id="loginForm">
+    	<form  class="form-horizontal" action="/member/login" method="post" id="loginForm">
         <div class="login-header">
             <h1 class="text-center">Login</h1><br><br>
         </div>

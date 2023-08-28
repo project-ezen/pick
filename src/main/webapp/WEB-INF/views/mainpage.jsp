@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=divice-width, initial-scale=1">
 <title>Insert title here</title>
-<%@ include file="./WEB-INF/views/include/header.jsp" %>
+<%@ include file="./include/header.jsp" %>
     <style>
         body, html {
             height: 100%;
@@ -61,7 +60,7 @@
             <div class="col-sm-4">
                 <h1 style="margin-top: 50px;">logo</h1>
                 <div id="listid">          
-                    <li class="item" style="margin-top: 50px;">
+                    <li class="item" style="margin-top: 50px;"><!-- 잠시 -->
 	                   Alcohol
 	                   <ul>
 	                       <li id="lilist"><a href="#">진</a></li>

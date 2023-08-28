@@ -75,7 +75,7 @@ public class MemberController {
 			if(action != null) {
 				mav.setViewName("redirect:" + action);
 			} else {
-				mav.setViewName("redirect:/mainpage.jsp");
+				mav.setViewName("redirect:/mainpage");
 			}
 			
 		} else {	// 아이디와 비밀번호에 해당하는 정보가 없으면
