@@ -10,31 +10,47 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
 
-table {
-width: 100%;
-border: 2px solid #ddd;
-margin-left: auto;
-margin-right: auto;
-margin-bottom: 20px;
-}
+	table {
+		width: 100%;
+		border: 2px solid #ddd;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 20px;
+	}
+	
+	th { background-color: #ccd6d9 }
+	
+	th, td {
+		border-bottom: 1px solid #ddd;
+		padding: 10px;
+		text-align: center;
+		border: 1px solid #eee;
+	}
+	
+	label { font-size: 18px; }
+		
+	.relist {
+		margin-bottom: 20px;
+		float: right;
+		background-color:#8aa2b2;
+		border-radius:8px;
+		border:none;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;
+		font-family:Arial;
+		font-size:12px;
+		font-weight:bold;
+		padding:8px 18px;
+		text-decoration:none;
+		float: right;
+		margin-bottom:10px; 
+	}
+	
+	.relist:hover { background-color:#476e9e;}
+	
+	.relist:active { position:relative; top:1px; }
 
-th { background-color: #99A1D7; }
-
-th, td {
-border-bottom: 1px solid #ddd;
-padding: 10px;
-text-align: center;
-border: 1px solid #eee;
-}
-
-label { font-size: 18px; }
-
-.relist {
-margin-bottom: 20px;
-float: right;
-width: 160px;
-height: 30px;
-}
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
@@ -43,6 +59,7 @@ height: 30px;
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <div class="container">
 	<h3 style="text-align: center;">주문상세내역</h3>
+		<button type="button" class="relist" onclick="{path}/myorderList.jsp">주문목록으로 돌아가기</button>
 	<label>주문정보</label>
 		<table id="t1">
 		<colgroup>
@@ -51,19 +68,19 @@ height: 30px;
 			<tbody>
 				<tr>
 					<th>주문번호</th>
-					<td></td>
+					<td>{orderDTO.order_id}</td>
 				</tr>
 				<tr>
 					<th>주문일자</th>
-					<td></td>
+					<td>{orderDTO.order_date}</td>
 				</tr>
 				<tr>
 					<th>주문자</th>
-					<td></td>
+					<td>{memberDTO.m_id}</td>
 				</tr>
 				<tr>
 					<th>주문처리상태</th>
-					<td></td>
+					<td>{orderDTO.}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -75,11 +92,11 @@ height: 30px;
 			<tbody>
 				<tr>
 					<th>총 주문내역</th>
-					<td></td>
+					<td>{orderDTO.final_price}</td>
 				</tr>
 				<tr>
 					<th>총 결제금액</th>
-					<td></td>
+					<td>{orderDTO.pay_price}</td>
 				</tr>
 				<tr>
 					<th>결제수단</th>
@@ -95,20 +112,18 @@ height: 30px;
 					<th>상품정보</th>
 					<th>수량</th>
 					<th>상품구매내역</th>
-					<th>배송구분</th>
-					<th>주문처리상태</th>
+					<th>주문처리상태</th> <!-- 배송중/배송완료/  -->
 					<th>취소/교환/환불</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+				<tr> 
+					<td>{productDisplayVO.product_image}</td>
+					<td>{productDisplayVO.product_info}</td>
+					<td>{productDTO.product_count}</td>
+					<td>{productDisplayVO.product_price}</td>
+					<td>{orderDTO.}</td>
+					<td>{orderDTO.}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -120,28 +135,32 @@ height: 30px;
 			<tbody>
 				<tr>
 					<th>받으시는 분</th>
-					<td></td>
+					<td>{orderDTO.receiver_name}</td>
 				</tr>
 				<tr>
 					<th>우편번호</th>
-					<td></td>
+					<td>{orderDTO.receiver_name}</td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td></td>
+					<td>{orderDTO.receiver_address}</td>
+				</tr>
+				<tr>
+					<th>상세주소</th>
+					<td>{orderDTO.receiver_address_detail}</td>
 				</tr>
 				<tr>
 					<th>휴대전화</th>
-					<td></td>
+					<td>{orderDTO.receiver_phonenum}</td>
 				</tr>
 				<tr>
 					<th>배송메시지</th>
-					<td></td>
+					<td>{orderDTO.}</td>
 				</tr>
 			</tbody>
 		</table>
-		<button type="button" class="relist">주문목록으로 돌아가기</button>
 	</div>
+	<br/><br/>
 <%@ include file="./WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
