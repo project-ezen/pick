@@ -17,5 +17,6 @@ public interface BoardDAO {
 
 	// 게시글 목록 가져오기 (Paging)
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws DataAccessException;
+
 }
 

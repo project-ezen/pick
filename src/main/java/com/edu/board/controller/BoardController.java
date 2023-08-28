@@ -24,5 +24,12 @@ public interface BoardController {
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception;
 	
+	// 게시글 목록(페이징)화면 보여주기
+	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response,
+			PagingCriteria pcri) throws Exception;
+	
+	// 게시글 쓰기 처리
+	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+			throws Exception;
 }
 

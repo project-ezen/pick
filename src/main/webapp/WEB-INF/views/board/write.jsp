@@ -1,97 +1,97 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page session="true" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>글쓰기</title>
+<%@ include file="../include/header.jsp" %>
+
+<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+
 <style>
-#user_information_small {
-    display: none;
+
+input.reon {
+	border: none;
+	outline: none;
 }
 
-@media all and (max-width: 767px) {
-    #user_information_large {
-        display: none;
-    }
-    #user_information_small {
-        display: block;
-    }
+label {
+	font-size: 18px;
 }
-.container-fluid {
+
+.btn_sub {
+width: 70px;
+height: 35px;
+font-size: 15px;
+border-radius: 5px;
+border: 2px solid #586389;
+background-color: #687AB6;
 color: #fff;
 }
+
+.btn_cle {
+width: 70px;
+height: 35px;
+font-size: 15px;
+border-radius: 5px;
+border: 2px solid #B36E79;
+background-color: #E96F84;
+color: #fff;
+}
+
 </style>
-<c:if test="${member == null }">
-<section class="navbar navbar-light fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header" style="padding-top: 10px;">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Home</a>
-        </div>
-        <div class="navbar-footer" id="user_information_large">
 
-            <a class="navbar-right" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;"href="${path}/member/join">회원가입</a>
-            <a class="navbar-right" data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/login">로그인</a>
-        
-        </div>
-        <div class="collapse navbar-collapse" id="mainNavbar" style="padding-top: 10px;">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Alcohol</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">list</a></li>
-                    </ul>
-                </li>
-                <li><a href="${path }/board/articleList">My Own Recipe</a></li>
-                <li><a href="${path }/shopping/cart">Store</a></li>
-                
-                <li id="user_information_small">
+</head>
+<body>
+<%@ include file="../include/topMenu.jsp" %>
+<br/><br/>
+<div class="container">
+	<form class="form-horizontal" action="/board/articleList" method="post" name="articleFrom">
+		<div class="form-group">
+			<div>
+				<h2 align="center">글쓰기</h2>
+			</div>
+		</div>
+		<br/>
+		<div class="form-group">
+			<label class="control-label col-sm-3">작성자</label>
+			<div class="col-sm-7">
+				<input type="text" style="font-size: 20px;" class="form-control-plaintext reon" value="${member.m_nickname}" readonly/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-3">제목</label>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" maxlength="100" style="width: 100%" name="title"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-3">내용</label>
+			<div class="col-sm-6">
+				<textarea class="form-control" rows="15" name="content"></textarea>
+			</div>
+		</div>
+		<hr/>
+		<div class="form-group">
+			<div class="col-sm-6"></div>
+			<div class="col-sm-4" style="text-align: center; margin-left: 10px;">
+				<button class="btn_cle" type="button">취소</button>
+				&nbsp;
+				<button class="btn_sub" type="submit" id="submit">올리기</button>
+			</div>
+		</div>
+	</form>
+</div>
+<br/>
+<script>
 
-                    <a class="navbar-right" data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/login">로그인</a>
-                    <a class="navbar-right" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;"href="${path}/member/join">회원가입</a>
-                
-                </li> 
-            </ul>
-        </div>
-    </div>
-</section>
-</c:if>
-<c:if test="${member != null }">
-<section class="navbar navbar-light fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header" style="padding-top: 10px;">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Home</a>
-        </div>
-        <div class="navbar-footer" id="user_information_large">
+</script>
 
-            <a class="navbar-right" data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="/member/logout">로그아웃</a>
-            <a class="navbar-right" data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="#">내 페이지</a>
-
-        </div>
-        <div class="collapse navbar-collapse" id="mainNavbar" style="padding-top: 10px;">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Alcohol</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">list</a></li>
-                    </ul>
-                </li>
-                <li><a href="${path }/board/articleList">My Own Recipe</a></li>
-                <li><a href="${path }/shopping/cart">Store</a></li>
-                
-                <li id="user_information_small">
-
-                    <a class="navbar-right" data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="/member/logout">로그아웃</a>
-                    <a class="navbar-right" data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="#">내 페이지</a>
-                    
-                </li> 
-            </ul>
-        </div>
-    </div>
-</section>
-</c:if>
+<%@ include file="../include/footer.jsp" %>
+</body>
+</html>
