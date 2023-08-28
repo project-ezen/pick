@@ -13,7 +13,7 @@
 		AND		m_pw	= #{m_pw}
 	</select>
 		
-		<!-- 회원상세정보 -->
+	<!-- 회원상세정보 -->
 	<select id="detail" parameterType="String" resultType="com.edu.member.dto.MemberDTO">
 		SELECT * FROM member WHERE m_id = #{m_id}
 	</select>
@@ -53,8 +53,8 @@
 	<!-- 회원 가입  -->
 	<insert id="join" parameterType="com.edu.member.dto.MemberDTO">
 		INSERT INTO member
-				(m_id, m_pw, m_repw, m_name, m_nickname, m_tel, m_birthdate, m_gender, m_zipcode, m_address, m_addressdetail, m_datetime )
-		VALUES	(#{m_id}, #{m_pw}, #{m_repw}, #{m_name}, #{m_nickname}, #{m_tel}, #{m_birthdate}, #{m_gender}, #{m_zipcode}, #{m_address}, #{m_addressDetail}, #{m_datetime} )
+				(m_id, m_pw, m_repw, m_name, m_nickname, m_tel, m_birthdate, m_gender, m_zipcode, m_address, m_addressDetail)
+		VALUES	(#{m_id}, #{m_pw}, #{m_repw}, #{m_name}, #{m_nickname}, #{m_tel}, #{m_birthdate}, #{m_gender}, #{m_zipcode}, #{m_address}, #{m_addressDetail})
 	</insert>
-	
+
 </mapper>

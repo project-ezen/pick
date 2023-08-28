@@ -97,6 +97,7 @@
 		}
     </style>
 </head>
+
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 	<div class="container" id="class">
@@ -104,55 +105,55 @@
 			<h1 class="text-center">회원정보 수정</h1>
 			<form id="update-form">
 				<div class="form-group">
-					<label for="name">이름</label>
-					<input type="text" class="form-control" id="name" name="name">
+					<label>이름</label>
+					<input type="text" class="form-control" id="m_name" name="m_name">
 				</div>
 				<div class="form-group">
-					<label for="nickname">닉네임</label>
+					<label>닉네임</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="nickname" name="nickname">
+						<input type="text" class="form-control" id="m_nickname" name="m_nickname">
 						<span class="input-group-btn">
-							<a href="#" class="check" onclick="fn_nickCheck();"> 중복확인 </a>
+							<button class="btn btn-info" type="button" id="nickCheck" onClick="fn_nickCheck()">중복확인</button>
 						</span>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="password">비밀번호</label>
-					<input type="password" class="form-control" id="password" name="password">
+					<label>비밀번호</label>
+					<input type="password" class="form-control" id="m_pw" name="m_pw">
 				</div>
 				<div class="form-group">
-					<label for="confirm-password">비밀번호 확인</label>
-					<input type="password" class="form-control" id="confirm-password" name="confirm-password">
+					<label>비밀번호 확인</label>
+					<input type="password" class="form-control" id="m_repw" name="m_repw">
 				</div>
 				<div class="form-group">
-					<label for="contact">연락처</label>
-					<input type="tel" class="form-control" id="contact" name="contact">
+					<label>연락처</label>
+					<input type="tel" class="form-control" id="m_tel" name="m_tel">
 				</div>
 				<div class="form-group">
-					<label for="birthdate">생년월일</label>
-					<input type="date" class="form-control" id="birthdate" name="birthdate">
+					<label>생년월일</label>
+					<input type="date" class="form-control" id="m_birthdate" name="m_birthdate">
 				</div>
 				<div class="form-group">
 					<label>성별</label><br>
 					<label class="radio-inline">
-						<input type="radio" name="gender" value="male"> 남성
+						<input type="radio" name="m_gender" value="male"> 남성
 					</label>
 					<label class="radio-inline">
-						<input type="radio" name="gender" value="female"> 여성
+						<input type="radio" name="m_gender" value="female"> 여성
 					</label>
 				</div>
 				<div class="form-group">
-					<label for="zipcode">우편번호</label>
-					<input type="text" class="form-control" id="zipcode" name="zipcode" readonly>
+					<label>우편번호</label>
+					<input type="text" class="form-control" id="m_zipcode" name="m_zipcode" readonly>
 					<input type="button" class="form-control" onclick="daumZipCode()" value="우편번호검색"/>
 				</div>
 				<div class="form-group">
-					<label for="address">주소</label>
-					<input type="text" class="form-control" id="address" name="address">
+					<label>주소</label>
+					<input type="text" class="form-control" id="m_address" name="m_address">
 				</div>
 				<div class="form-group">
-					<label for="detail-address">상세주소</label>
-					<input type="text" class="form-control" id="detail-address" name="detail-address">
+					<label>상세주소</label>
+					<input type="text" class="form-control" id="m_addressDetail" name="m_addressDetail">
 				</div>
 				<div class="update-button-group">
 					<button type="submit" class="submit" id="insert-button">수정</button>
@@ -167,6 +168,95 @@
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+
+//닉네임 중복 체크
+function fn_nickCheck() {
+
+	var nickname = $("#m_nickname").val();
+
+	if (!nickname) { // 닉네임이 비어 있을 경우
+		alert("닉네임을 입력하십시오.");
+		$("#m_nickname").focus();
+		return;
+	}
+
+	$.ajax({
+		url:		"/member/nickCheck",
+		type:		"post",
+		dataType:	"json",
+		data:		{"m_nickname" : nickname},
+		async:		false,
+		success:	function(data) {
+			
+			if(data == 1) {
+				alert("이미 사용 중인 닉네임입니다.\n다른 닉네임을 입력하십시오.");
+				$("#m_nickname").focus();
+			} else if(data == 0) {
+				alert("사용 가능한 닉네임입니다.");
+				$("#m_nickCheck").attr("value", "Y");
+				$("#m_tel").focus();
+				nickIsValid = true;
+			}
+			allCheck();
+		}
+	});
+}
+
+$(document).ready(function() {	
+
+//빈칸 확인
+
+	$(".joinButton").on("click", function() {
+	// 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
+	// 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
+	
+		if($("#m_passwd").val() == "") {
+			alert("비밀번호를 입력하셔야 합니다.");
+			$("#m_pw").focus();
+			return false;
+		}
+		if($("#m_repasswd").val() == "") {
+			alert("비밀번호확인을 입력하셔야 합니다.");
+			$("#m_repw").focus();
+			return false;
+		}
+		if($("#pw").val() != $("#repw").val()) {
+	         alert("비밀번호 확인이 다릅니다.");
+	         $("#repw").focus();
+	         return false;
+	    }
+		if($("#m_name").val() == "") {
+			alert("이름을 입력하셔야 합니다.");
+			$("#m_name").focus();
+			return false;
+		}
+		if($("#m_nickname").val() == "") {
+			alert("닉네임을 입력하셔야 합니다.");
+			$("#m_nickname").focus();
+			return false;
+		}
+		if($("#m_tel").val() == "") {
+			alert("연락처를 입력하셔야 합니다.");
+			$("#m_tel").focus();
+			return false;
+		}
+		if($("#m_birthdate").val() == "") {
+			alert("생년월일을 입력하셔야 합니다.");
+			$("#m_birthdate").focus();
+			return false;
+		}
+		if($("#m_address").val() == "") {
+			alert("주소를 입력하셔야 합니다.");
+			$("#m_address").focus();
+			return false;
+		}
+		
+	
+		document.getElementById("m_address").value = $("#m_address").val();
+	
+	});
+});
+
 function daumZipCode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -199,16 +289,18 @@ function daumZipCode() {
 			} // End - if(data.userSelectedType == 'R')
 				
 			// 추출한 우편번호와 주소정보를 입력항목에 나타낸다.
-			document.getElementById('zipcode').value	= data.zonecode;
-			document.getElementById('address').value	= fullAddress;
+			document.getElementById('m_zipcode').value	= data.zonecode;
+			document.getElementById('m_address').value	= fullAddress;
 			
 			// 커서를 상세주소 입력란으로 이동시킨다.
-			document.getElementById('detail-address').focus();
+			document.getElementById('m_addressDetail').focus();
         }
     }).open({
     	// 우편번호 팝업 창이 여러개 뜨는 것을 방지하기 위해서 popupName을 사용한다.
 		popupName:	'postcodePopup'
     });
 }
+
 </script>
+
 </html>

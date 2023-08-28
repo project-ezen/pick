@@ -2,6 +2,7 @@ package com.edu.member.service;
 
 import javax.inject.Inject;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edu.member.dao.MemberDAO;
@@ -10,9 +11,9 @@ import com.edu.member.dto.MemberDTO;
 @Service
 public class MemberServiceImpl implements MemberService {
 	
-	@Inject
+	@Autowired
 	private MemberDAO memberDAO;
-
+	
 	
 	//로그인 post => 있는지 확인
 	@Override
@@ -55,6 +56,7 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.nickCheck(memberDTO);
 		return result;
 	}
+
 
 	
 	
