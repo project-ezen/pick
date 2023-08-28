@@ -181,7 +181,7 @@ padding: 0px;
 			</div>
 		</div>
 	<c:choose>
-		<c:when test="${articleList == null}"> <!-- 게시글이 하나도 없는 경우 -->
+		<c:when test="${articlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
 			<tr>
 				<td colspan="4">
 					<p align="center">
@@ -190,15 +190,15 @@ padding: 0px;
 				</td>
 			</tr>
 		</c:when>
-		<c:when test="${articleList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
-			<c:forEach var="article" items="${articleList }" varStatus="articleNum">
+		<c:when test="${articlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
+			<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
 				<div style="width: 370px; height: 230px; float: left;">
 					<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
 						<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
 						<div class="lele">
 							<div class="top">
 								<p class="title">${article.title}</p>
-								<p class="writer">${article.member_id}</p>
+								<p class="writer">${article.m_id}</p>
 							</div>
 							<div class="bottom">
 								<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
@@ -209,10 +209,43 @@ padding: 0px;
 					</div>
 				</div>
 			</c:forEach>
-		</c:when>
+		
+		 <!-- 화면 하단의 페이지 영역 -->
+      <div class="col-sm-offset-3">
+         <ul class="btn-group pagination">
+            <c:if test="${pageMaker.prev}">
+               <li>
+                  <a href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+               </li>
+            </c:if>
+            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+               <li>
+                  <a href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
+               </li>
+            </c:forEach>
+            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+               <li>
+                  <a href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+               </li>
+            </c:if>
+         </ul>
+      </div>
+      
+      <form id="formList" action="/board/listArticlesPaging" method="get">
+         <input type="hidden" name="page" />
+         <input type="hidden" name="size"/>
+         <input type="hidden" name="searchType"/>
+         <input type="hidden" name="keyword" />      
+      </form>
+      </c:when>
 	</c:choose>
+      
+      
+     
+      
 	<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
-<br/><br/>
+	
+<br/>
 </div>
 <%@ include file="../include/footer.jsp" %>
 <script>
@@ -221,7 +254,7 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 		location.href = articleForm;
 	} else {
 		alert("로그인 후 이용해주세요.");
-		location.href= loginForm + '?action=/board/articleForm';
+		location.href= loginForm + '?action=/board/write';
 	}
 }
 </script>
