@@ -8,7 +8,7 @@
     <title>아이디 찾기</title>
     <%@ include file="./WEB-INF/views/include/header.jsp" %>
     <style>
-        h3 {
+        h3 {  
             border-bottom: 2px solid gray;
             padding-bottom: 10px; 
         }
