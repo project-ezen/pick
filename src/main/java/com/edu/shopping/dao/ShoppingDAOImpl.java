@@ -1,6 +1,7 @@
 package com.edu.shopping.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -9,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dto.CartDTO;
+import com.edu.shopping.dto.OrderDTO;
 import com.edu.store.dto.ProductDisplayVO;
 
 @Repository("shoppingDAO")
@@ -21,12 +24,29 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	private SqlSession sqlsession;
 	
 	@Override
-	public List<ProductDisplayVO> cartProductsList(String productList) throws DataAccessException {
-		return sqlsession.selectList(namespace + ".cartList", productList);
+	public CartDTO cartList(String memberId) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".cartList", memberId);
+	}
+	
+	@Override
+	public List<ProductDisplayVO> cartProductsList(CartDTO productList) throws DataAccessException {
+		log.info("productList" + productList);
+		return sqlsession.selectList(namespace + ".productsDetailList", productList);
+  }
+
+	@Override
+	public MemberDTO memberInfo(String member_id) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".memberInfo", member_id);
+	}
+    
+	@Override
+	public void orderConfirm(OrderDTO orderDTO) throws DataAccessException {
+		sqlsession.insert(namespace + ".orderInsert", orderDTO);
 	}
 
 	@Override
-	public int productPrice(ProductDisplayVO productDisplayVO) throws DataAccessException {
-		return sqlsession.selectOne(namespace + ".productPrice", productDisplayVO);
+	public void dropProduct(Map<String, String> productMap) throws DataAccessException {
+		log.info("productMap : " + productMap.toString());
+		sqlsession.delete(namespace + ".deleteProduct", productMap);
 	}
 }
