@@ -24,10 +24,10 @@ public interface MemberService {
 	
 	
 	//회원 상세 정보 수정 get
-	public MemberDTO memberDetail(String id) throws Exception;
+	public MemberDTO detail(String id) throws Exception;
 
 	//회원 정보 수정 POST
-	public void memberUpdate(MemberDTO memberDTO) throws Exception;
+	public void edit(MemberDTO memberDTO) throws Exception;
 
 	//내가 쓴 게시물
 	//public MemberDTO myboard(String id) throws Exception;

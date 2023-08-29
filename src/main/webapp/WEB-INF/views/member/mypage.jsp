@@ -51,6 +51,7 @@ img { float: left; }
 		<hr/>
 		<div id="contents" class="set1">
 		<img style=" padding-left: 15px; height:200px; width:30%; vertical-align:top; float: left;" src="./resources/images/alcohol.png" border="0">
+
 		<div>${member.m_nickname}<h2 class="nim">님, 어서오세요!</h2></div>
 		</div>
 		<hr/>
@@ -86,7 +87,6 @@ function fn_mine() {
 function fn_insert() {
 	alert("회원정보수정");
 	location.href="${path}/member/edit";
-
 }	
 
 
