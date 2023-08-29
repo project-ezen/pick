@@ -147,29 +147,26 @@ public class MemberController {
 	}	
 	
 	
-	//로그아웃
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception {
-		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
-		session.invalidate();
-		return "redirect:/member/login";
-	}	
 	
 	//아이디 찾기 post
 	
 	
 	//비밀번호 찾기 post
 	
-	/*
+	
 	//회원정보상세정보 => GET
-	@RequestMapping(value="/detail",method=RequestMethod.GET)
-	public void memberDetail(@RequestParam("id")String id,Model model) throws Exception {
-		 
-		MemberDTO memberDTO = memberService.detail(id);   //id를 줘서 
-		model.addAttribute("detail",memberDTO);
+	@RequestMapping(value="/edit",method=RequestMethod.GET)
+	public void detail(HttpServletRequest request) throws Exception {
 		
+		
+		
+		HttpSession session = request.getSession(); 
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		String id = member.getM_id();
+		MemberDTO memberDTO = memberService.detail(id);
+			
 		System.out.println("상세 정보 :" + memberDTO);
-	} */
+	}
 	
 	
 	//회원정보수정 POST
@@ -177,13 +174,20 @@ public class MemberController {
 	public String edit(MemberDTO memberDTO) throws Exception {
 		
 		//client에서 보내오는 데이터들의 name이 맞으면 memberDTO에 알아서 값이 들어간다.
-		memberService.memberUpdate(memberDTO);
+		memberService.edit(memberDTO);
 		
-		return "redirect:/member/edit"; 
+		return "redirect:/member/mypage"; 
 		//redirect<요청을 해서 데이터도 같이 보여준다.> 
 		//redirect없이 쓰면 페이지형태만 보여준다.(/member/memberList로 넘어가지 않는다.)
 	}
 	
 	
+	//로그아웃
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception {
+		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
+		session.invalidate();
+		return "redirect:/member/login";
+	}	
 	
 }

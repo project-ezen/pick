@@ -49,17 +49,18 @@ img { float: left; }
 	<div class="container">
 		<h2 class="title">MyPage</h2>
 		<hr/>
+		<form>
 		<div id="contents" class="set1">
 		<img style=" padding-left: 15px; height:200px; width:30%; vertical-align:top; float: left;" src="./resources/images/alcohol.png" border="0">
-		<div>${m.name}<h2 class="nim">님, 어서오세요!</h2></div>
+		<div>${member.m_name}<h2 class="nim">님, 어서오세요!</h2></div>
 		</div>
 		<hr/>
 		<div class="set2">
 			<button class="order" type="button" onclick="fn_order(this.form)">주문 조회</button>
-			<button class="order" type="button" onclick="fn_jjim(this.form)'">찜한 레시피</button>
-			<button class="order" type="button" onclick="fn_mine(this.form)'">내가 쓴 게시물</button>
-			<button class="order" type="button" onclick="fn_insert(this.form)'">회원 정보 수정</button>
-		</div>
+			<button class="order" type="button" onclick="fn_jjim(this.form)">찜한 레시피</button>
+			<button class="order" type="button" onclick="fn_mine(this.form)">내가 쓴 게시물</button>
+			<button class="order" type="button" onclick="fn_insert(this.form)">회원 정보 수정</button>
+		</div></form>
 	</div>
 	<br/><br/>
 	<%@ include file="../include/footer.jsp" %>
@@ -88,7 +89,7 @@ function fn_mine(obj) {
 
 function fn_insert(obj) {
 	alert("회원정보수정");
-	obj.action = "${path}/member/insertInfo.jsp";
+	obj.action = "${path}/member/edit";
 	obj.submit();
 }	
 
