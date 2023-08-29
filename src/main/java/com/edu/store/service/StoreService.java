@@ -52,4 +52,11 @@ public List<ProductDisplayVO> productInfos(String product_id) throws Exception {
 	
 }
 	
+public void productToCart(String product_id, String quantity, String memberId) throws Exception {
+	
+	storeDAO.productToCart(product_id, quantity, memberId);
+
+}
+
+
 }
