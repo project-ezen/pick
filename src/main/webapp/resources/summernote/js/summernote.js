@@ -156,34 +156,32 @@
   });
 });
 
-	 
-	  $('#summernote').summernote({
-		  lang: 'ko-KR',
-		  height: 300,
-		 toolbar: [
-		    ['style', ['bold', 'italic', 'underline', 'clear']],
-		    ['font', ['strikethrough', 'superscript', 'subscript']],
-		    ['fontsize', ['fontsize']],
-		    ['color', ['color']],
-		    ['para', ['ul', 'ol', 'paragraph']],
-		    ['height', ['height']]
-		  ],
-		  buttons: {
-		  	hello: HelloButton
-		  }
-	  });
-var HelloButton = function (context) {
-  var ui = $.summernote.ui;
-
-  // create button
-  var button = ui.button({
-    contents: '<i class="fa fa-child"/> Hello',
-    tooltip: 'hello',
-    click: function () {
-      // invoke insertText method with 'hello' on editor module.
-      context.invoke('editor.insertText', 'hello');
-    }
+var fontList = ['굴림','굴림체','바탕','바탕체','돋움'];
+  $('#summernote').summernote({
+	  lang: 'ko-KR',
+	  height: 300,
+	  fontSizes: ['8','9','10','11','12','14','16','18','20','24','28','32'],
+	  fontNames: fontList,
+	  fontNamesIgnoreCheck: fontList,
+	  toolbar: [
+	    ['style', ['bold', 'italic', 'underline', 'clear']],
+	    ['font', ['strikethrough', 'superscript', 'subscript']],
+	    ['fontname', ['fontname']],
+	    ['fontsize', ['fontsize']],
+	    ['color', ['color']],
+	    ['para', ['ul', 'ol', 'paragraph']],
+	    ['insert', ['picture', 'link', 'video']],
+	    ['view', ['codeview', 'fullscreen', 'help']]
+	  ]
   });
+  
+  $('#summernote').summernote('fontName', '굴림');
+  $('#summernote').summernote('fontSize', '11');
 
-  return button.render();   // return button as jquery object
-}
+let buttons = $('.note-editor button[data-toggle="dropdown"]');
+
+buttons.each((fontsize, fontSizes)=>{
+  $(fontSizes).on('click', function(e){
+    $(this).closest('.note-btn-group').toggleClass('open');
+  });
+});
