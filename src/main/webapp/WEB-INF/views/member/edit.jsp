@@ -21,7 +21,7 @@
             text-align: center;
             margin-top: 20px;
         }
-		#insert-button {
+		#insertButton {
 			margin-right: 50px;
 		}
 		
@@ -103,10 +103,24 @@
 	<div class="container" id="class">
 		<div class="update-form">
 			<h1 class="text-center">회원정보 수정</h1>
-			<form id="update-form">
+			<form name="frm" id="update-form">
+			
+				<div class="form-group">
+					<label>아이디</label>
+					<input type="text" class="form-control" value="${member.m_id}" disabled>
+					<input type="hidden" name="m_id" value="${member.m_id}">
+				</div>
+				<div class="form-group">
+					<label>비밀번호</label>
+					<input type="password" class="form-control" id="m_pw" name="m_pw">
+				</div>
+				<div class="form-group">
+					<label>비밀번호 확인</label>
+					<input type="password" class="form-control" id="m_repw" name="m_repw">
+				</div>
 				<div class="form-group">
 					<label>이름</label>
-					<input type="text" class="form-control" id="m_name" name="m_name">
+					<input type="text" class="form-control" value="${member.m_name}" disabled>
 				</div>
 				<div class="form-group">
 					<label>닉네임</label>
@@ -118,46 +132,30 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label>비밀번호</label>
-					<input type="password" class="form-control" id="m_pw" name="m_pw">
-				</div>
-				<div class="form-group">
-					<label>비밀번호 확인</label>
-					<input type="password" class="form-control" id="m_repw" name="m_repw">
-				</div>
-				<div class="form-group">
 					<label>연락처</label>
-					<input type="tel" class="form-control" id="m_tel" name="m_tel">
+					<input type="tel" class="form-control" id="m_tel" name="m_tel" value="${member.m_tel}">
 				</div>
 				<div class="form-group">
 					<label>생년월일</label>
-					<input type="date" class="form-control" id="m_birthdate" name="m_birthdate">
+					<input type="text" class="form-control" value="${member.m_birthdate}" disabled>
 				</div>
-				<div class="form-group">
-					<label>성별</label><br>
-					<label class="radio-inline">
-						<input type="radio" name="m_gender" value="male"> 남성
-					</label>
-					<label class="radio-inline">
-						<input type="radio" name="m_gender" value="female"> 여성
-					</label>
-				</div>
+
 				<div class="form-group">
 					<label>우편번호</label>
-					<input type="text" class="form-control" id="m_zipcode" name="m_zipcode" readonly>
+					<input type="text" class="form-control" id="m_zipcode" name="m_zipcode" value="${member.m_zipcode}" readonly>
 					<input type="button" class="form-control" onclick="daumZipCode()" value="우편번호검색"/>
 				</div>
 				<div class="form-group">
 					<label>주소</label>
-					<input type="text" class="form-control" id="m_address" name="m_address">
+					<input type="text" class="form-control" id="m_address" name="m_address" value="${member.m_address}">
 				</div>
 				<div class="form-group">
 					<label>상세주소</label>
-					<input type="text" class="form-control" id="m_addressDetail" name="m_addressDetail">
+					<input type="text" class="form-control" id="m_addressDetail" name="m_addressDetail" value="${member.m_addressDetail}">
 				</div>
 				<div class="update-button-group">
-					<button type="submit" class="submit" id="insert-button">수정</button>
-					<button type="button" class="cancel" id="reset-button">취소</button>
+					<button type="submit" class="submit" id="insertButton">수정</button>
+					<button type="button" class="cancel" id="resetButton">취소</button>
 				</div>
 			</form>
 		</div>
@@ -197,13 +195,19 @@ function fn_nickCheck() {
 				$("#m_tel").focus();
 				nickIsValid = true;
 			}
-			allCheck();
 		}
 	});
 }
 
 $(document).ready(function() {	
 
+	// 수정하기 버튼을 클릭했을 경우
+	$(".submit").on("click", function() {
+		$("#update-form").prop("action", "/member/edit");
+		$("#update-form").prop("method", "post");
+	});
+	
+	
 //빈칸 확인
 
 	$(".joinButton").on("click", function() {
@@ -225,11 +229,6 @@ $(document).ready(function() {
 	         $("#repw").focus();
 	         return false;
 	    }
-		if($("#m_name").val() == "") {
-			alert("이름을 입력하셔야 합니다.");
-			$("#m_name").focus();
-			return false;
-		}
 		if($("#m_nickname").val() == "") {
 			alert("닉네임을 입력하셔야 합니다.");
 			$("#m_nickname").focus();
@@ -238,11 +237,6 @@ $(document).ready(function() {
 		if($("#m_tel").val() == "") {
 			alert("연락처를 입력하셔야 합니다.");
 			$("#m_tel").focus();
-			return false;
-		}
-		if($("#m_birthdate").val() == "") {
-			alert("생년월일을 입력하셔야 합니다.");
-			$("#m_birthdate").focus();
 			return false;
 		}
 		if($("#m_address").val() == "") {

@@ -1,6 +1,5 @@
 package com.edu.member.service;
 
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,17 +30,6 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 	
-	//회원 상세 정보 수정 get
-	@Override
-	public MemberDTO memberDetail(String id) throws Exception {
-		return memberDAO.memberDetail(id);
-	}
-	
-	//회원 정보 수정 POST
-	@Override
-	public void memberUpdate(MemberDTO memberDTO) throws Exception {
-		memberDAO.memberUpdate(memberDTO);	
-	}
 	
 	//아이디 중복 검사
 	@Override
@@ -57,11 +45,17 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
-
+	//회원 상세 정보 수정 get
+	@Override
+	public MemberDTO detail(String id) throws Exception {
+		return memberDAO.detail(id);
+	}
 	
-	
-//-------------------------------------------------------------------------------
-
+	//회원 정보 수정 POST
+	@Override
+	public void edit(MemberDTO memberDTO) throws Exception {
+		memberDAO.edit(memberDTO);	
+	}
 
 	
 

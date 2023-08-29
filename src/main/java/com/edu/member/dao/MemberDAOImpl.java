@@ -1,8 +1,5 @@
 package com.edu.member.dao;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -10,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.edu.member.controller.MemberController;
 import com.edu.member.dto.MemberDTO;
 
 @Repository
@@ -49,17 +45,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	
-	//회원 상세 정보 GET
-	@Override
-	public MemberDTO memberDetail(String id) throws Exception {
-		return sqlSession.selectOne(namespace + ".detail" , id);
-	}
-	
-	//회원 정보 수정
-	@Override
-	public void memberUpdate(MemberDTO memberDTO) throws Exception {
-		sqlSession.update(namespace + ".update", memberDTO);
-	}
 
 	//아이디 중복 검사
 	@Override
@@ -74,8 +59,18 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne(namespace + ".nickCheck", memberDTO);
 	}
 
+	//회원 상세 정보 GET
+	@Override
+	public MemberDTO detail(String id) throws Exception {
+		return sqlSession.selectOne(namespace + ".detail" , id);
+	}
+	
+	//회원 정보 수정
+	@Override
+	public void edit(MemberDTO memberDTO) throws Exception {
+		sqlSession.update(namespace + ".edit", memberDTO);
+	}
 
-//-------------------------------------------------------------------------------------
 	
 
 	
