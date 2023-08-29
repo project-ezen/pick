@@ -68,7 +68,16 @@ public class StoreDAO {
 	//--------------------------------------------------------------------------------------------
 	public List<ProductDisplayVO> productInfos(String product_id) {
 		return sqlSession.selectList(namespace + ".productInfos", product_id);
-		
-		
 	}
+	
+	public void productToCart(String product_id, String quantity, String memberId) throws Exception{
+		
+		Map<String, String> paramMap = new HashMap<>();
+		paramMap.put("product_id", product_id);
+	    paramMap.put("quantity", quantity);
+	    paramMap.put("memberId", memberId);
+	    
+		sqlSession.insert(namespace + ".productToCart", paramMap);
+	}
+	
 }

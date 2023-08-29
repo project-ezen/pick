@@ -55,53 +55,66 @@
 	<!-- 상품 리스트 -->
 	<select id="selectAllProductList" resultType="com.edu.store.dto.ProductDisplayVO" parameterType="com.edu.store.dto.ProductDisplayVO">
 		<![CDATA[
-			SELECT P.PRODUCT_ID, P.DISPLAY_PRODUCT_ID, 
-				   P.CATEGORY_CODE, D.PRODUCT_PRICE,
-				   D.PRODUCT_IMAGE, D.PRODUCT_NAME
-			FROM PRODUCT P, DISPLAY_PRODUCT D
-			WHERE P.DISPLAY_PRODUCT_ID = D.DISPLAY_PRODUCT_ID
+			SELECT DISPLAY_PRODUCT_ID, 
+				   CATEGORY_CODE, PRODUCT_PRICE,
+				   PRODUCT_IMAGE, PRODUCT_NAME
+			FROM DISPLAY_PRODUCT D
+			WHERE 1=1
 		]]>
 		<include refid="search"/>
 		<include refid="select"/>
 	</select>
 	
 	<select id="searchProductByKeyword" resultType="com.edu.store.dto.ProductDisplayVO" parameterType="com.edu.store.dto.ProductDisplayVO">
-			SELECT P.PRODUCT_ID, P.DISPLAY_PRODUCT_ID, 
-				   P.CATEGORY_CODE, D.PRODUCT_PRICE,
-				   D.PRODUCT_IMAGE, D.PRODUCT_NAME
-			FROM PRODUCT P, DISPLAY_PRODUCT D
-			WHERE P.DISPLAY_PRODUCT_ID = D.DISPLAY_PRODUCT_ID
-			AND D.PRODUCT_NAME LIKE '%' || #{searchKeyword} || '%'
+			SELECT DISPLAY_PRODUCT_ID, 
+				   CATEGORY_CODE, PRODUCT_PRICE,
+				   PRODUCT_IMAGE, PRODUCT_NAME
+			FROM  DISPLAY_PRODUCT 
+			WHERE 1=1
+			AND PRODUCT_NAME LIKE '%' || #{searchKeyword} || '%'
 			<include refid="select"/>
 	</select>
 	<!-- 상품 상세 보기 -->
 	<select id="productInfos" resultType="com.edu.store.dto.ProductDisplayVO">
 		<![CDATA[
 			SELECT
-				   D.PRODUCT_PRICE,
-				   D.PRODUCT_IMAGE,
-				   D.ALCOHOL_CONTENT,
-				   D.CAPACITY,
-				   D.PRODUCT_NAME,
-				   D.PRODUCT_INFO,
-				   D.ORIGIN,
-				   D.menufacturer
-			FROM PRODUCT P, DISPLAY_PRODUCT D
-			WHERE P.DISPLAY_PRODUCT_ID = D.DISPLAY_PRODUCT_ID	
-			AND D.DISPLAY_PRODUCT_ID = #{product_id}	
+				   PRODUCT_PRICE,
+				   PRODUCT_IMAGE,
+				   ALCOHOL_CONTENT,
+				   CAPACITY,
+				   PRODUCT_NAME,
+				   PRODUCT_INFO,
+				   ORIGIN,
+				   menufacturer
+			FROM DISPLAY_PRODUCT
+			WHERE DISPLAY_PRODUCT_ID = #{product_id}	
 		]]>
-		<include refid="select"/>
 	</select>
 	
 	<!-- 상품 상세 검색 보기 -->
 	<select id="searchProductByCategoryAndKeyword" resultType="com.edu.store.dto.ProductDisplayVO" parameterType="com.edu.store.dto.ProductDisplayVO">
-		SELECT P.PRODUCT_ID, P.DISPLAY_PRODUCT_ID, 
-				   P.CATEGORY_CODE, D.PRODUCT_PRICE,
-				   D.PRODUCT_IMAGE, D.PRODUCT_NAME
-			FROM PRODUCT P, DISPLAY_PRODUCT D
-			WHERE P.DISPLAY_PRODUCT_ID = D.DISPLAY_PRODUCT_ID
+		SELECT DISPLAY_PRODUCT_ID, 
+				   CATEGORY_CODE, PRODUCT_PRICE,
+				   PRODUCT_IMAGE, PRODUCT_NAME
+			FROM DISPLAY_PRODUCT
+			WHERE 1=1
 			<include refid="searchAndKeyword"/>
-			AND D.PRODUCT_NAME LIKE '%' || #{searchKeyword} || '%'
+			AND PRODUCT_NAME LIKE '%' || #{searchKeyword} || '%'
 			<include refid="select"/>
 	</select>
+	
+	<insert id="productToCart">
+		INSERT INTO PRODUCT VALUES(
+		(SELECT nvl(max(PRODUCT_ID), 0) + 1 FROM PRODUCT),
+		#{product_id},
+		(SELECT CART_ID FROM CART WHERE MEMBER_ID = #{memberId}),
+		 #{quantity})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
 </mapper>

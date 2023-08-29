@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -105,4 +106,21 @@ public class StoreController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="/store/addToCart", method=RequestMethod.GET)
+	public String productToCart(@RequestParam("display_product_id") String product_id,
+								@RequestParam("quantity") String quantity,
+								@RequestParam("cartOrStore") String cartOrStore,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		String memberId = (String)session.getAttribute("memberId");
+		
+		storeService.productToCart(product_id, quantity, memberId);
+		
+		 if ("cart".equals(cartOrStore)) {
+		        return "redirect:/shopping/cart";
+		    }
+		    return "redirect:/store/productInfo";
+	}
 }
+
