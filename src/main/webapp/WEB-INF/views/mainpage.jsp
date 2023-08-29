@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session ="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,9 +85,17 @@
                    	<div style="margin-top: 50px;">
                        <label id="solo"><a href="#">Store</a></label>
                    	</div>
-
                    	<div style="margin-top: 350px;" id="logindiv">
-                       <label><a href="${path}/member/login">login</a> | <a href="${path}/member/join">sign on</a></label>
+                   	<c:choose>
+						<%-- 로그인이 되지 않은 경우 --%>
+						<c:when test="${ isLogOn != true }">
+	                       <label><a href="${path}/member/login">login</a> | <a href="${path}/member/join">sign on</a></label>
+	                   	</c:when>
+	                   	<%-- 로그인이 된 경우 --%>
+	                	<c:when test="${ isLogOn == true }">
+	                       <label><a href="${path}/member/login">logout</a> | <a href="${path}/member/mypage">MyPage</a></label>
+	                   	</c:when>
+                   	</c:choose>
                    	</div>
                 </div>
             </div>

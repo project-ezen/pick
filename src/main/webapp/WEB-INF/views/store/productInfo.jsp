@@ -13,10 +13,7 @@
     
     .bg {
 		 background-image: url("/resources/images/background2.jpg");
-
          height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
 		 background-attachment: fixed, scroll;
          background-position: center;
          background-repeat: no-repeat;
@@ -24,8 +21,8 @@
 	}
     
     .container-fluid{
-    margin-left: 80px;
-    margin-right: auto;
+	    margin-left: 80px;
+	    margin-right: auto;
     }
       .carousel-inner img {
         width: 100%;

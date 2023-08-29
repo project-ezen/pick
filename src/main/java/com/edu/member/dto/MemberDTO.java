@@ -1,6 +1,9 @@
 package com.edu.member.dto;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.edu.board.dto.BoardDTO;
 
 public class MemberDTO {
 	private	String	m_id;
@@ -15,6 +18,9 @@ public class MemberDTO {
 	private	String	m_address;
 	private	String	m_addressDetail;
 	private	Date	m_datetime;
+	
+	//게시판 N 관계의 정보를 가져온 선언
+	private List<BoardDTO> myPageList;
 	
 	public String getM_id() {
 		return m_id;
@@ -89,14 +95,20 @@ public class MemberDTO {
 		this.m_datetime = m_datetime;
 	}
 	
+	public List<BoardDTO> getMyPageList() {
+		return myPageList;
+	}
+	public void setMyPageList(List<BoardDTO> myPageList) {
+		this.myPageList = myPageList;
+	}
+	
 	@Override
 	public String toString() {
 		return "MemberDTO [m_id=" + m_id + ", m_pw=" + m_pw + ", m_repw=" + m_repw + ", m_name=" + m_name
 				+ ", m_nickname=" + m_nickname + ", m_tel=" + m_tel + ", m_birthdate=" + m_birthdate + ", m_gender="
 				+ m_gender + ", m_zipcode=" + m_zipcode + ", m_address=" + m_address + ", m_addressDetail="
-				+ m_addressDetail + ", m_datetime=" + m_datetime + "]";
+				+ m_addressDetail + ", m_datetime=" + m_datetime + ", myPageList=" + myPageList + "]";
 	}
-	
 	
 	
 }

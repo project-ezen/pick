@@ -20,12 +20,14 @@
 		margin-right: auto;
 	}
 	th { background-color: #99A1D7; }
+	
 	th, td {
 		border-bottom: 1px solid #ddd;
 		padding: 10px;
 		text-align: center;
 		border: 1px solid #eee;
 	}
+	
 	#wrap {
 		position: relative;
 	
@@ -65,7 +67,7 @@
 <div class="container">
 	<h2 style="text-align: center;">내가 쓴 게시물</h2>
 	<br/>
-	<button type="button"  class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
+	<button type="button" onclick="${path}/" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
 	<div id="wrap">
 		<table id="table">
 			<thead>
@@ -74,21 +76,42 @@
 					<th>제목</th>
 					<th>작성자</th>
 					<th>작성일자</th>
+					<th>찜</th>
 				</tr>
 			</thead>
 			<tbody>
+				<c:if test="${empty myInfo.myPageList}">
+				<tr>
+					<td colspan="5"><div style="font-size: 17px; font-weight: bold;">작성글이 없습니다.</div></td>
+				</tr>
+				</c:if>
+				<c:forEach items="${myinfo.myPageList}" var="boardDTO">
 				<tr>
 					<td>{boardDTO.image}</td>
-					<td>{boardDTO.title}</td>
-					<td>{m.id}</td>
+					<td><a href="${path}/board/recipedetail.jsp">{boardDTO.title}</a></td>
+					<td>{boardDTO.m_id}</td>
 					<td>{boardDTO.writeDate}</td>
+					<td>{boardDTO.jjim}</td>
 				</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	<div style="width: 200px; height: 30px; background-color: #ddd; position: absolute; top: 580px; left: 44%;"> 페이징 </div>
 </div>
 <br/><br/>
+<script type="text/javascript">
+		$(function() {
+			$("tr").hide();
+			$("tr").slice(0, 4).show(); // 초기갯수
+			$("#moreView-btn").click(function(e) { // 더보기 버튼 클릭
+				e.preventDefault();
+				$("tr:hidden").slice(0, 4).show(); // 클릭시 리스트 갯수 지정
+				if ($("tr:hidden").length == 0) { // 컨텐츠 남아있는지 확인
+					$("#moreView-btn").hide(); //더이상의 리스트가 없다면 버튼 사라짐
+				}
+			});
+		});
+</script>
 <%@ include file="./WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
