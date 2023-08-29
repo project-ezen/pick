@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>listArticle</title>
 <%@ include file="../include/header.jsp" %>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
 <style>
 .container {
 }
@@ -130,7 +129,6 @@ text-align: center;
 span {
 font-size: 15px;
 }
-
  
 </style>
 </head>
