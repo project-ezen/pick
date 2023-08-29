@@ -16,7 +16,7 @@ public class MypageController {
 	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 	
 	
-	//mypage화면 get
+	//my page화면 get
 	@RequestMapping(value="/mypage", method=RequestMethod.GET)
 	public String mypage(MemberDTO memberDTO) {
 		

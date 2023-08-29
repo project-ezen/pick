@@ -10,7 +10,6 @@ public interface BoardService {
 	// 게시글 목록
 	public List<BoardDTO> recipeBoard() throws Exception;
 	
-	
 	// 전체 게시글 수 구하기 (Paging 처리)
 	public int boardListTotalCount(PagingCriteria pcri) throws Exception;
 
@@ -18,4 +17,3 @@ public interface BoardService {
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws Exception;
 		
 }
-

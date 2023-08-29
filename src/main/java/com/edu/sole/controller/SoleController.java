@@ -40,7 +40,7 @@ public class SoleController {
 			
 			//------------------------------------------------------------------------------------------
 			// 레시피 술 보여주는
-			@RequestMapping(value="/recipesole" , method=RequestMethod.GET)
+			@RequestMapping(value="/sole" , method=RequestMethod.GET)
 			public ModelAndView soleMain(HttpServletRequest request, HttpServletResponse response, SoleSearchCriteria solesearchcriteria) {
 				
 				ModelAndView mav = new ModelAndView();

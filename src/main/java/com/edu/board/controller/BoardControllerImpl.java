@@ -2,8 +2,6 @@ package com.edu.board.controller;
 
 import java.util.List;
 
-
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,17 +20,14 @@ import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
 import com.edu.board.service.BoardService;
 
-
-
 @Controller
 public class BoardControllerImpl implements BoardController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(BoardControllerImpl.class);
 	
 	@Autowired
 	private BoardService boardService;
-	
-	
+
 	// 게시글 목록
 	/*
 	@Override
@@ -85,13 +80,11 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	}
 
-	// 게시글 쓰기 처리
+	//게시글 쓰기 처리
 	@Override
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		return null;
 	}
-		
-		// 게시글 번호에 해당하는 상세 정보
-		
+
 }

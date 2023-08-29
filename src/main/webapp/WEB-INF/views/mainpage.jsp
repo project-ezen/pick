@@ -74,11 +74,7 @@
 	          		</li>
 	          		
                    	<div style="margin-top: 50px;">
-<<<<<<< HEAD
                        <label id="solo"><a href="${path}/board/articleList">나만의 레시피</a></label>
-=======
-                       <label id="solo"><a href="${path}/board/articleList.do">나만의 레시피</a></label>
->>>>>>> 4eac6f5c3f712778326c6c05268e67123e67033e
                    	</div>
 
                    	<div style="margin-top: 50px;">

@@ -439,6 +439,11 @@ $(document).ready(function() {
 			$("#m_repw").focus();
 			return false;
 		}
+		if($("#pw").val() != $("#repw").val()) {
+	         alert("비밀번호 확인이 다릅니다.");
+	         $("#repw").focus();
+	         return false;
+	    }
 		if($("#m_name").val() == "") {
 			alert("이름을 입력하셔야 합니다.");
 			$("#m_name").focus();
@@ -464,8 +469,9 @@ $(document).ready(function() {
 			$("#m_address").focus();
 			return false;
 		}
+		
 	
-		document.getElementById("m_address").value = $("m_address").val();
+		document.getElementById("m_address").value = $("#m_address").val();
 	
 });
 
