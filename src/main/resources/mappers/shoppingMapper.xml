@@ -2,21 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shopping.mapper">
-	<select id="cartList" parameterType="memberDTO" resultType="cartDTO">
+	<select id="cartList" parameterType="memberDTO" resultType="productDTO">
 		<![CDATA[
-			SELECT cart_id, m_id FROM cart WHERE m_id = #{m_id}
+			SELECT p.product_id, p.product_display_id, p.cart_id, p.category_code, p.count
+			FROM cart c, product p
+			WHERE c.m_id = #{m_id} AND c.cart_id = p.cart_id
 		]]>
 	</select>
 
-	<select id="productsDetailList" parameterType="cartDTO" resultType="productDisplayVO">
+	<select id="productsDetailList" parameterType="memberDTO" resultType="productDisplayVO">
 		<![CDATA[
 			SELECT d.product_display_id, d.product_name, d.product_info, d.capacity, d.alcohol_content, d.origin, d.manufacturer, d.product_image, d.product_price
-			FROM cart c, product p, product_display d 
-			WHERE p.cart_id = c.cart_id
+			FROM product p, product_display d 
+			WHERE p.cart_id = (SELECT cart_id FROM cart WHERE m_id = #{m_id})
 			AND p.product_display_id = d.product_display_id
-			AND c.cart_id = #{cart_id}
 		]]>
 	</select>
+	
+	<update id="changeCount" parameterType="productDTO">
+		<![CDATA[	
+			UPDATE product 
+			SET count = #{count}
+			WHERE product_id = #{product_id}
+		]]>
+	</update>
 	
 	<insert id="orderInsert" parameterType="orderDTO">
 		<![CDATA[

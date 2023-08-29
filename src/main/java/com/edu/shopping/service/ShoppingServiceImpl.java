@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dao.ShoppingDAO;
-import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.OrderDTO;
+import com.edu.store.dto.ProductDTO;
 import com.edu.store.dto.ProductDisplayVO;
 
 @Service("shoppingService")
@@ -22,13 +22,18 @@ public class ShoppingServiceImpl implements ShoppingService {
 	private ShoppingDAO shoppingDAO;
 
 	@Override
-	public CartDTO cartList(MemberDTO member) throws Exception {
+	public List<ProductDTO> cartList(MemberDTO member) throws Exception {
 		return shoppingDAO.cartList(member);
 	}
 	
 	@Override
-	public List<ProductDisplayVO> cartProductsList(CartDTO productList) throws Exception {
-		return shoppingDAO.cartProductsList(productList);
+	public List<ProductDisplayVO> cartProductsList(MemberDTO member) throws Exception {
+		return shoppingDAO.cartProductsList(member);
+	}
+
+	@Override
+	public void changeCount(ProductDTO count) throws Exception {
+		shoppingDAO.changeCount(count);
 	}
 
 	@Override

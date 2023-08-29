@@ -99,7 +99,6 @@
 	        <!-- 주문 상품 나열 끝 -->
 	        
 	        <div class="form-horizontal">
-	        	<input type="hidden" value="${cart_id }" name="cart_id">
 	            <div class="row">
 	                <!-- 배송 정보 -->
 	                <div class="col-md-6 col-sm-11">

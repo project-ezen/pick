@@ -13,16 +13,18 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.member.dto.MemberDTO;
-import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.DisplayOrderVO;
 import com.edu.shopping.dto.OrderDTO;
 import com.edu.shopping.service.ShoppingService;
+import com.edu.store.dto.ProductDTO;
 import com.edu.store.dto.ProductDisplayVO;
 
 @Controller
@@ -45,12 +47,12 @@ public class ShoppingController {
 		MemberDTO member = (MemberDTO)session.getAttribute("member");
 		log.info("memberDTO : " + member);
 		
-		// 해당 회원이 가진 장바구니
-		CartDTO cartList = shoppingService.cartList(member);
+		// 장바구니에 담긴 product List
+		List<ProductDTO> cartList = shoppingService.cartList(member);
 		log.info("cartList : " + cartList);
 		
-		// 장바구니에 담긴 product List
-		List<ProductDisplayVO> productDetailList = shoppingService.cartProductsList(cartList);
+		// product detail List
+		List<ProductDisplayVO> productDetailList = shoppingService.cartProductsList(member);
 		log.info("productDetailList : " + productDetailList);
 		
 		log.info("장바구니에 담긴 product List");
@@ -60,6 +62,15 @@ public class ShoppingController {
 		mav.addObject("product", productDetailList);
 		return mav;
 	}	// End - shoppingCart method
+//----------------------------------------------------------------------------------------------------------------	
+	// count change ajax
+	@ResponseBody
+	@RequestMapping(value="/countchange", method=RequestMethod.GET)
+	public void changeCount(@ModelAttribute ProductDTO count, HttpServletRequest request) throws Exception {
+		log.info("plus 실행 준비 " + count);
+		shoppingService.changeCount(count);
+		log.info("plus 실행 완료");
+	}
 //----------------------------------------------------------------------------------------------------------------	
 	// Order Controller
 	@RequestMapping(value="/order", method=RequestMethod.POST)
@@ -74,7 +85,6 @@ public class ShoppingController {
 		log.info("memberDTO : " + member);
 		
 		// 이전 페이지에서 보낸 데이터 가져오기
-		String cart_id = request.getParameter("cartId");
 		String image[] = request.getParameterValues("imageFile");
 		String product_name[] = request.getParameterValues("productName");
 		String product_price[] = request.getParameterValues("productPrice");
@@ -88,12 +98,10 @@ public class ShoppingController {
 			displayOrder.add(temp);
 		}
 		
-		log.info("cart_id : " + cart_id);
 		log.info("displayOrderVO : " + displayOrder);
 		log.info("total_price : " + total_price);
 		
 		mav.addObject("member", member);
-		mav.addObject("cart_id", cart_id);
 		mav.addObject("displayOrder", displayOrder);
 		mav.addObject("total_price", total_price);
 		mav.setViewName(viewName);
