@@ -24,20 +24,15 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	private SqlSession sqlsession;
 	
 	@Override
-	public CartDTO cartList(String memberId) throws DataAccessException {
-		return sqlsession.selectOne(namespace + ".cartList", memberId);
+	public CartDTO cartList(MemberDTO member) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".cartList", member);
 	}
 	
 	@Override
 	public List<ProductDisplayVO> cartProductsList(CartDTO productList) throws DataAccessException {
 		log.info("productList" + productList);
 		return sqlsession.selectList(namespace + ".productsDetailList", productList);
-  }
-
-	@Override
-	public MemberDTO memberInfo(String member_id) throws DataAccessException {
-		return sqlsession.selectOne(namespace + ".memberInfo", member_id);
-	}
+    }
     
 	@Override
 	public void orderConfirm(OrderDTO orderDTO) throws DataAccessException {
