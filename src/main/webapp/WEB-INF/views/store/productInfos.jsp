@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
    <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt"	uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ page session="true" %>
+ <%
+   String memberId = (String)session.getAttribute("memberId");
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -155,6 +159,48 @@
 	   white-space: pre-line;
 	}
 	
+	.modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: none;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      
+  	.modal-body {
+	  height: 600px;
+	  padding: 40px;
+	  text-align: center;
+	  border-radius: 10px;
+	}
+	
+	
+	.modal-content {
+	 background-color: rgba(0,0,0,0);
+	 box-shadow: none;
+	 border: 0px;
+	}
+	
+	#goToCart, #moreProduct {
+	 height: 80px;
+	 width: 30%;
+	 margin: 15px;
+	 margin-top: 100px;
+	}
+	
+	#cart_coment{
+	 color: #FFF;
+	 font-size: 30px;
+	 margin-top: 200px;
+	}
+	
+	#modal-icon {
+		font-size: 20px;
+
+	}
+	
       /*상세 설명, 리뷰*/
     </style>
   </head>
@@ -166,7 +212,7 @@
     <br />
     
    <c:forEach var="product" items="${product}">
-    <form>
+
       <div class="container">
         <div class="row">
           <!--상품 이미지-->
@@ -213,7 +259,7 @@
                 />
                 <button id="increase" class="btn btn-default">+</button>
                 <div class="buy-buttons col-md-12">
-                  <button class="btn buy-button add-to-cart">
+                  <button class="btn buy-button add-to-cart" data-toggle="modal" data-target="#info_modal">
                     장바구니 추가
                   </button>
                   <button class="btn buy-button buy-now">바로구매</button>
@@ -222,6 +268,7 @@
               <div class="bold-line"></div>
               <span id="totalkr">합계</span>
               <input type="text" id="total" readonly/>
+              <input type="hidden" id="displayParam" value="${param.display_product_id}"/>
             </div>
           </div>
         </div>
@@ -256,12 +303,89 @@
           </div>
         </div>
       </div>
-    </form>
+    
   </c:forEach>
+    	<!-- 개인 정보 수집 여부 label을 클릭했을 경우 modal(팝업)창 띄우기 -->
+            <div class="modal" id="info_modal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" align="center">
+                            <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+                            <h4 id="cart_coment">장바구니에 상품을 넣었습니다.</h4>
+                        <div class="modal-body">
+                            <div id="col-md-2 col-md-4" align="center">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="goToCart"><span class="glyphicon glyphicon-shopping-cart" id="modal-icon"></span><span>&nbsp;장바구니 바로 가기</span></button>
+                          	<button type="button" class="btn btn-primary" data-dismiss="modal" id="moreProduct"><span class="glyphicon glyphicon-repeat" id="modal-icon"></span><span>&nbsp;상품 더 담기</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Modal-->
+    
+    
     
 	<%@ include file="../include/footer.jsp" %>
-	
+
     <script>
+    
+    var memberId = '<%= memberId %>'; 
+    
+    /*$(document).ready(function(){
+    	$(".add-to-cart").on("click", function(){
+    		
+    		if(memberId != null || memberId != ""){
+   				alert("로그인 되어있음");
+    		
+    		}else{
+    			alert("로그인 하고와");
+    		}
+    	});
+    });*/
+    
+    
+    
+    // 장바구니 바로 가기 버튼
+    $(document).ready(function (){	
+    	$("#goToCart").on("click", function(){
+    		if(memberId != null || memberId != ""){
+   				alert("로그인 되어있음");
+   				
+    		var quantity = parseInt($("#quantity").val());
+    		var param = $("#displayParam").val();
+    		alert("param=" + param);
+    		var locate = "/store/addToCart?display_product_id=" + param + "&quantity=" + quantity + "&cartOrStore=cart";
+    		location.href = locate;
+    		
+    		
+    		}else{
+    			alert("로그인 하고와");
+    		}
+	
+    	});
+    });
+    
+    // 상품 더 담기 버튼
+    $(document).ready(function (){
+    	$("#moreProduct").on("click", function(){
+    		if(memberId != null || memberId != ""){
+   				alert("로그인 되어있음");
+   				
+    		var quantity = parseInt($("#quantity").val());
+    		var param = $("#displayParam").val();
+    		alert("param=" + param);
+    		var locate = "/store/addToCart?display_product_id=" + param + "&quantity=" + quantity + "&cartOrStore=store";
+    		location.href = locate;
+    		
+    		
+    		}else{
+    			alert("로그인 하고와");
+    		}
+	
+    	});
+    });
+    
+    
+    
       // 증가 버튼
       $(document).ready(function () {
         $("#increase").click(function (event) {
