@@ -64,7 +64,6 @@ body {
 							</c:when>
 							<%-- 장바구니에 상품이 있는 경우 --%>
 							<c:when test="${cart != null }">
-								<input type="hidden" value="${cart.cart_id }" name="cartId">
 								<c:forEach var="products_item" items="${product }" varStatus="productNum">
 									<tr>
 									    <td class="form-group" style="vertical-align: middle;">
@@ -88,11 +87,12 @@ body {
 										<td class="form-group" style="vertical-align: middle;">
 										    <input class="form-control text-center productName" type="text" id="productName" value="${products_item.product_name }" disabled>
 											<input type="hidden" class="pdtName" name="productName" value="${products_item.product_name }">
+											<input type="hidden" class="pdtId" name="productId" value="${cart[productNum.index].product_id }">
 										</td>
 										<td class="form-inline" style="vertical-align: middle;">
 										    <div class="form-group">
 										        <button type="button" class="btn btn-default minus"><span class="glyphicon glyphicon-minus"></span></button>
-										        <input class="form-control text-center cnt" width="30px" type="text" name="cnt" value="1">
+										        <input class="form-control text-center cnt" width="30px" type="text" name="cnt" value="${cart[productNum.index].count }">
 										        <button type="button" class="btn btn-default plus"><span class="glyphicon glyphicon-plus"></span></button>
 										    </div>
 										</td>
@@ -187,6 +187,8 @@ $(document).ready(function() {
 		let minus = $(".minus:eq(" + idx + ")");
 		let count = $(".cnt:eq(" + idx + ")");
 		
+		let pdtId = $(".pdtId:eq(" + idx + ")");
+		
 		let origin_price = $(".originPrice:eq(" + idx + ")");
 		let price = $(".productPrice:eq(" + idx + ")");
 		let pdtprice = $(".pdtPrice:eq(" + idx + ")");
@@ -197,10 +199,23 @@ $(document).ready(function() {
 		let tol_price = $("#tolPrice");
 //----------------------------------------------------------------------------------------------------------------
 		// +, - 버튼 클릭시 수량 숫자 변경
-		plus.on("click", function() {			
+		plus.on("click", function() {
 			count.prop("value", parseInt(count.val()) + 1);
 			price.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
 			pdtprice.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+			// 변경된 수량 database에 저장하기
+			$.ajax({
+				url: "/shopping/countchange",
+				type: "get",
+				dataType: "json",
+				data: {"count": count.val(), "product_id": pdtId.val()},
+				success: function(data) {
+					console.log("success : " + data);
+				}, 
+				error: function(data) {
+					console.log("error : " + data);
+				}
+			});
 			
 			// total_price 갱신
 			sum = 0;
@@ -220,6 +235,19 @@ $(document).ready(function() {
 				price.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
 				pdtprice.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
 			}
+			// 변경된 수량 database에 저장하기
+			$.ajax({
+				url: "/shopping/countchange",
+				type: "get",
+				dataType: "json",
+				data: {"count": count.val(), "product_id": pdtId.val()},
+				success: function(data) {
+					console.log("success : " + data);
+				}, 
+				error: function(data) {
+					console.log("error : " + data);
+				}
+			});
 			
 			// total_price 갱신
 			sum = 0;
@@ -241,6 +269,19 @@ $(document).ready(function() {
 		count.on("input", function() {
 			price.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
 			pdtprice.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+			// 변경된 수량 database에 저장하기
+			$.ajax({
+				url: "/shopping/countchange",
+				type: "get",
+				dataType: "json",
+				data: {"count": count.val(), "product_id": pdtId.val()},
+				success: function(data) {
+					console.log("success : " + data);
+				}, 
+				error: function(data) {
+					console.log("error : " + data);
+				}
+			});
 			
 			// total_price 갱신
 			sum = 0;
