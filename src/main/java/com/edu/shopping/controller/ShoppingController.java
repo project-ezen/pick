@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,18 +33,20 @@ public class ShoppingController {
 	@Inject
 	ShoppingService shoppingService;
 	
-	// Cart get Controller
+	// Cart Controller
 	@RequestMapping(value="/cart", method=RequestMethod.GET)
 	public ModelAndView shoppingCart(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = "/shopping/cart";
 		ModelAndView mav = new ModelAndView();
 		
-		// 회원 아이디 가져오기
-		String memberId = "101";
-		log.info("memberId : " + memberId);
+		// 세션 가져오기
+		HttpSession session = request.getSession();
+		// 회원 정보 가져오기
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		log.info("memberDTO : " + member);
 		
-		// 해당 회원 아이디가 가진 장바구니
-		CartDTO cartList = shoppingService.cartList(memberId);
+		// 해당 회원이 가진 장바구니
+		CartDTO cartList = shoppingService.cartList(member);
 		log.info("cartList : " + cartList);
 		
 		// 장바구니에 담긴 product List
@@ -57,7 +60,6 @@ public class ShoppingController {
 		mav.addObject("product", productDetailList);
 		return mav;
 	}	// End - shoppingCart method
-	
 //----------------------------------------------------------------------------------------------------------------	
 	// Order Controller
 	@RequestMapping(value="/order", method=RequestMethod.POST)
@@ -65,13 +67,11 @@ public class ShoppingController {
 		String viewName = "/shopping/order";
 		ModelAndView mav = new ModelAndView();
 		
-		// 회원 아이디 가져오기
-		String memberId = "101";
-		log.info("memberId : " + memberId);
-		
-		// 해당 회원이 가진 주소 및 전화번호 가져오기
-		MemberDTO member = shoppingService.memberInfo(memberId);
-		log.info("member : " + member);
+		// 세션 가져오기
+		HttpSession session = request.getSession();
+		// 회원 정보 가져오기
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		log.info("memberDTO : " + member);
 		
 		// 이전 페이지에서 보낸 데이터 가져오기
 		String cart_id = request.getParameter("cartId");
@@ -100,7 +100,7 @@ public class ShoppingController {
 		return mav;
 	}	// End shoppingOrder method
 //----------------------------------------------------------------------------------------------------------------	
-	// Cart Controller
+	// OrderDetail Controller
 	@RequestMapping(value="/orderdetail", method=RequestMethod.POST)
 	public ModelAndView orderComplete(@ModelAttribute("order")OrderDTO orderDTO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = "redirect:/shopping/cart";
@@ -116,16 +116,19 @@ public class ShoppingController {
 		shoppingService.orderConfirm(orderDTO);
 		log.info("주문내역 등록 완료");
 		
-		// 회원 아이디 가져오기
-		String m_id = "101";
-		log.info("memberId : " + m_id);
+		// 세션 가져오기
+		HttpSession session = request.getSession();
+		// 회원 정보 가져오기
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		log.info("memberDTO : " + member);
+		
 		// 구매한 물품 가져오기
 		String product[] = request.getParameterValues("productName");
 		
 		// 구매한 물품을 장바구니에서 제거하기
 		Map<String, String> productMap = new HashMap<String, String>();
 		for(int i = 0; i < product.length; i++) {
-			productMap.put("member_id", m_id);
+			productMap.put("member_id", member.getM_id());
 			productMap.put("product_name", product[i]);
 			shoppingService.dropProduct(productMap);
 		}
@@ -135,5 +138,4 @@ public class ShoppingController {
 		return mav;
 	}	// End orderComplete method
 //----------------------------------------------------------------------------------------------------------------	
-	
 }
