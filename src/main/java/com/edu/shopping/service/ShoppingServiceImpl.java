@@ -22,18 +22,13 @@ public class ShoppingServiceImpl implements ShoppingService {
 	private ShoppingDAO shoppingDAO;
 
 	@Override
-	public CartDTO cartList(String memberId) throws Exception {
-		return shoppingDAO.cartList(memberId);
+	public CartDTO cartList(MemberDTO member) throws Exception {
+		return shoppingDAO.cartList(member);
 	}
 	
 	@Override
 	public List<ProductDisplayVO> cartProductsList(CartDTO productList) throws Exception {
 		return shoppingDAO.cartProductsList(productList);
-	}
-
-	@Override
-	public MemberDTO memberInfo(String member_id) throws Exception {
-		return shoppingDAO.memberInfo(member_id);
 	}
 
 	@Override
