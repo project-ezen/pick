@@ -45,6 +45,14 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+
+//-------------------------------------------------------------------------------
+	//내가 쓴 게시물
+	//@Override
+	//public MemberDTO myboard(String id) throws Exception {
+		//return memberDAO.myboard(id);
+	//}
+
 	//회원 상세 정보 수정 get
 	@Override
 	public MemberDTO detail(String id) throws Exception {
@@ -56,6 +64,7 @@ public class MemberServiceImpl implements MemberService {
 	public void edit(MemberDTO memberDTO) throws Exception {
 		memberDAO.edit(memberDTO);	
 	}
+
 
 	
 

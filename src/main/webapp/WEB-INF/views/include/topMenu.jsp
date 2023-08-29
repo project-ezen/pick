@@ -37,14 +37,14 @@
             <ul class="nav navbar-nav navbar-right">
                 <c:choose>
                 	<%-- 로그인이 된 경우 --%>
-                	<c:when test="">
-						<li><a data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="#">로그아웃</a></li>
-						<li><a data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="#">내 페이지</a></li>
+                	<c:when test="${ isLogOn == true }">
+						<li><a data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/login">logout</a></li>
+						<li><a data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/mypage">MyPage</a></li>
 					</c:when>
 					<%-- 로그인이 되지 않은 경우 --%>
-					<c:when test="">
-						<li><a data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="#">로그인</a></li>
-						<li><a data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="#">회원가입</a></li>
+					<c:when test="${ isLogOn != true }">
+						<li><a data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/login">login</a></li>
+						<li><a data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/join">sign on</a></li>
 					</c:when>
 				</c:choose>
 			</ul>

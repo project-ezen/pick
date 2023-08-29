@@ -22,9 +22,12 @@ public interface MemberDAO {
 	//회원 상세 정보 GET
 	public MemberDTO detail(String id) throws Exception; 
 	
+//---------------------------------------------------------------------------
+	//내가 쓴 게시물
+	//public MemberDTO myboard(String id) throws Exception;
+
 	//회원 정보 수정 POST
 	public void edit(MemberDTO memberDTO) throws Exception;
-
 
 	
 }

@@ -7,6 +7,7 @@ public class ProductDTO {
 	private String product_id;
 	private int category_code;
 	private int count;
+	
 	public String getCart_id() {
 		return cart_id;
 	}

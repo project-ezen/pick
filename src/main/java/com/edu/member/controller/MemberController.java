@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.bytecode.analysis.MultiArrayType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,7 @@ public class MemberController {
 			// 세션을 발급한다.
 			session.setAttribute("member", memberDTO);
 			session.setAttribute("isLogOn", true);
+			
 			String action = (String)session.getAttribute("action");
 			
 			System.out.println("Login action : " + action);
@@ -189,5 +191,29 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/member/login";
 	}	
+	
+
+	//아이디 찾기 post
+	
+	
+	//비밀번호 찾기 post
+	
+	
+	
+	//====================================================================================================
+	//마이페이지에 나오는 부분들
+	
+	// 내가쓴 게시물 get 
+	//@RequestMapping(value="/myboard", method=RequestMethod.GET)
+	//public String myboard(HttpSession session, Model model) throws Exception {
+		
+		//String id = (String)session.getAttribute("isLogOn");
+		
+		
+		//MemberDTO userinfo = memberService.myboard(id);
+		//model.addAttribute("myInfo",userinfo);
+		
+		//return "member/myboard";
+	//}
 	
 }
