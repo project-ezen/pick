@@ -76,7 +76,11 @@ public class MemberDAOImpl implements MemberDAO {
 
 
 //-------------------------------------------------------------------------------------
-	
+	//내가 쓴 게시물
+	//public MemberDTO myboard(String id) throws Exception {
+		//System.out.println("내놔");
+		//return sqlSession.selectOne( namespace + "myboard", id);
+	//}
 
 	
 }

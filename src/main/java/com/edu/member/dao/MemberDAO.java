@@ -28,6 +28,7 @@ public interface MemberDAO {
 
 	
 //---------------------------------------------------------------------------
-
+	//내가 쓴 게시물
+	//public MemberDTO myboard(String id) throws Exception;
 	
 }

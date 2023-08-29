@@ -12,6 +12,7 @@ public class OrderDTO {
 	private String 	address;			//주소
 	private String 	address_detail;		//상세 주소
 	
+	
 	public String getReceiver_name() {
 		return receiver_name;
 	}

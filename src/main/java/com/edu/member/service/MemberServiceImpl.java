@@ -57,11 +57,12 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
-
-	
-	
 //-------------------------------------------------------------------------------
-
+	//내가 쓴 게시물
+	//@Override
+	//public MemberDTO myboard(String id) throws Exception {
+		//return memberDAO.myboard(id);
+	//}
 
 	
 

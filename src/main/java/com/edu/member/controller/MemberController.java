@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.bytecode.analysis.MultiArrayType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,7 @@ public class MemberController {
 			// 세션을 발급한다.
 			session.setAttribute("member", memberDTO);
 			session.setAttribute("isLogOn", true);
+			
 			String action = (String)session.getAttribute("action");
 			
 			System.out.println("Login action : " + action);
@@ -160,16 +162,20 @@ public class MemberController {
 	
 	//비밀번호 찾기 post
 	
-	/*
+	
+	
+	//====================================================================================================
+	//마이페이지에 나오는 부분들
+	
 	//회원정보상세정보 => GET
 	@RequestMapping(value="/detail",method=RequestMethod.GET)
 	public void memberDetail(@RequestParam("id")String id,Model model) throws Exception {
 		 
-		MemberDTO memberDTO = memberService.detail(id);   //id를 줘서 
+		MemberDTO memberDTO = memberService.memberDetail(id);   //id를 줘서 
 		model.addAttribute("detail",memberDTO);
 		
 		System.out.println("상세 정보 :" + memberDTO);
-	} */
+	} 
 	
 	
 	//회원정보수정 POST
@@ -184,6 +190,17 @@ public class MemberController {
 		//redirect없이 쓰면 페이지형태만 보여준다.(/member/memberList로 넘어가지 않는다.)
 	}
 	
-	
+	// 내가쓴 게시물 get 
+	//@RequestMapping(value="/myboard", method=RequestMethod.GET)
+	//public String myboard(HttpSession session, Model model) throws Exception {
+		
+		//String id = (String)session.getAttribute("isLogOn");
+		
+		
+		//MemberDTO userinfo = memberService.myboard(id);
+		//model.addAttribute("myInfo",userinfo);
+		
+		//return "member/myboard";
+	//}
 	
 }

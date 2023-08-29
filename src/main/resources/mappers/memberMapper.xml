@@ -3,7 +3,32 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberMapper">
-<!--  -->
+	
+	<!--  
+	<resultMap id="memberDTO" type="com.edu.member.dto.memberDTO" >
+		<result property="m_id" 			column="m_id"/>
+		<result property="m_pw" 			column="m_pw"/>
+		<result property="m_repw" 			column="m_repw"/>
+		<result property="m_name" 			column="m_name"/>
+		<result property="m_nickname" 		column="m_nickname"/>
+		<result property="m_tel" 			column="m_tel"/>
+		<result property="m_birthdate" 		column="m_birthdate"/>
+		<result property="m_gender" 		column="m_gender"/>
+		<result property="m_zipcode" 		column="m_zipcode"/>
+		<result property="m_address" 		column="m_address"/>
+		<result property="m_addressDetail" 	column="m_addressDetail"/>
+		<result property="m_datetime" 		column="m_datetime"/>
+		<collection property="mypageList" 	resultMap="boardDTO"/>
+	</resultMap>
+
+	<resultMap id="boardDTO" type="com.edu.board.dto.boardDTO" >
+		<result property="board_id" 	column="board_id"/>
+		<result property="title" 		column="title"/>
+		<result property="content" 		column="content"/>
+		<result property="writeDate" 	column="writDate"/>
+		<result property="image" 		column="image"/>
+		<result property="m_id" 		column="m_id"/>
+	</resultMap>-->
 	
 	<!-- 로그인 POST : 아이디, 비밀번호, 이름을 추출하자 -->
 	<select id="login" parameterType="com.edu.member.dto.MemberDTO" resultType="com.edu.member.dto.MemberDTO">
@@ -57,4 +82,16 @@
 		VALUES	(#{m_id}, #{m_pw}, #{m_repw}, #{m_name}, #{m_nickname}, #{m_tel}, #{m_birthdate}, #{m_gender}, #{m_zipcode}, #{m_address}, #{m_addressDetail})
 	</insert>
 
+	<!-- 내가 쓴 게시물 -->
+	<!--  <select id="myboard" parameterType="memberDTO" >
+		SELECT m.m_id, b.title , b.writer , b.writedate ,b_image,
+		FROM  member m
+		LEFT OUTER JOIN board b
+		ON m.m_id = b.m_id
+		WHERE m.m_id = #{m_id}
+		
+			
+	</select>
+	-->
+	
 </mapper>

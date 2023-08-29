@@ -76,7 +76,7 @@
 				</tr>
 				<tr>
 					<th>주문자</th>
-					<td>{memberDTO.m_id}</td>
+					<td>{member.m_id}</td>
 				</tr>
 				<tr>
 					<th>주문처리상태</th>
@@ -92,11 +92,11 @@
 			<tbody>
 				<tr>
 					<th>총 주문내역</th>
-					<td>{orderDTO.final_price}</td>
+					<td>{orderDTO.final_price}</td> 	<!-- 배송비 포함 -->
 				</tr>
 				<tr>
 					<th>총 결제금액</th>
-					<td>{orderDTO.pay_price}</td>
+					<td>{orderDTO.pay_price}</td>		<!-- 배송비 미포함 -->
 				</tr>
 				<tr>
 					<th>결제수단</th>
@@ -120,7 +120,7 @@
 				<tr> 
 					<td>{productDisplayVO.product_image}</td>
 					<td>{productDisplayVO.product_info}</td>
-					<td>{productDTO.product_count}</td>
+					<td>{productDTO.count}</td>
 					<td>{productDisplayVO.product_price}</td>
 					<td>{orderDTO.}</td>
 					<td>{orderDTO.}</td>

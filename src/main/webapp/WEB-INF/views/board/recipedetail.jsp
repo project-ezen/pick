@@ -55,7 +55,7 @@ border: 1px solid #656562;
 			<tbody>
 				<tr>
 					<th>글 유형</th>
-					<td>나만의 레시피/</td>
+					<td>나만의 레시피</td>
 					
 					<th>작성일자</th>
 					<td>날짜</td>

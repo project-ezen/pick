@@ -29,4 +29,7 @@ public interface MemberService {
 	//회원 정보 수정 POST
 	public void memberUpdate(MemberDTO memberDTO) throws Exception;
 
+	//내가 쓴 게시물
+	//public MemberDTO myboard(String id) throws Exception;
+	
 }
