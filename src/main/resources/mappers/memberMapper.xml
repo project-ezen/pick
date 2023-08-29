@@ -20,18 +20,15 @@
 	
 	<!--  회원 아이디에 해당하는 비밀번호, 비밀번호 확인, 이름, 전화번호, 주소를 변경한다.  -->
 	 
-	<update id="update" parameterType="com.edu.member.dto.MemberDTO">
+	<update id="edit" parameterType="com.edu.member.dto.MemberDTO">
 		UPDATE	member
 		SET		m_pw			= #{m_pw},
 				m_repw			= #{m_repw},
-				m_name			= #{m_name},
 				m_nickname		= #{m_nickname},
 				m_tel			= #{m_tel},
-				m_birthdate		= #{m_birthdate}
-				m_gender		= #{m_gender},
 				m_zipcode		= #{m_zipcode},
 				m_address		= #{m_address},
-				m_addressdetail	= #{m_addressDetail},
+				m_addressdetail	= #{m_addressDetail}
 		WHERE	m_id			= #{m_id}
 	</update>
 	

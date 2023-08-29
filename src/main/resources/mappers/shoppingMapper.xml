@@ -2,10 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shopping.mapper">
-
-	<select id="cartList" parameterType="String" resultType="cartDTO">
+	<select id="cartList" parameterType="memberDTO" resultType="cartDTO">
 		<![CDATA[
-			SELECT c.cart_id, c.member_id FROM cart c, member m WHERE c.member_id = m.member_id and m.member_id = #{member_id}
+			SELECT cart_id, m_id FROM cart WHERE m_id = #{m_id}
 		]]>
 	</select>
 
@@ -16,14 +15,6 @@
 			WHERE p.cart_id = c.cart_id
 			AND p.product_display_id = d.product_display_id
 			AND c.cart_id = #{cart_id}
-		]]>
-	</select>
-	
-	<select id="memberInfo" parameterType="String" resultType="memberDTO">
-		<![CDATA[
-			SELECT *
-			FROM member
-			WHERE member_id = #{member_id}
 		]]>
 	</select>
 	
@@ -39,7 +30,7 @@
 			DELETE
 			FROM (SELECT * 
 			      FROM product
-			      WHERE cart_id IN (SELECT cart_id FROM cart WHERE member_id = #{member_id}))
+			      WHERE cart_id IN (SELECT cart_id FROM cart WHERE m_id = #{m_id}))
 			WHERE product_display_id IN (SELECT product_display_id FROM product_display WHERE product_name = #{product_name})
 		]]>
 	</delete>

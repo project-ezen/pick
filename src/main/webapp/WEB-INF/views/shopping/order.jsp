@@ -106,31 +106,31 @@
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">수령인</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_name }" name="receiver_name" id="name">
+	                            <input type="text" class="form-control text-center" value="${member.m_name }" name="receiver_name" id="name">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">전화번호</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_phoneNumber }" name="receiver_phonenum" id="phone">
+	                            <input type="text" class="form-control text-center" value="${member.m_tel }" name="receiver_phonenum" id="phone">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">우편번호</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_zipcode }" name="zipcode" id="zipcode">
+	                            <input type="text" class="form-control text-center" value="${member.m_zipcode }" name="zipcode" id="zipcode">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">주소</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_address }" name="address" id="address">
+	                            <input type="text" class="form-control text-center" value="${member.m_address }" name="address" id="address">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
 	                        <label class="control-label col-sm-2">상세주소</label>
 	                        <div class="col-sm-10">
-	                            <input type="text" class="form-control text-center" value="${member.member_address_detail }" name="address_detail" id="address_detail">
+	                            <input type="text" class="form-control text-center" value="${member.m_addressDetail }" name="address_detail" id="address_detail">
 	                        </div>
 	                    </div>
 	                </div>
