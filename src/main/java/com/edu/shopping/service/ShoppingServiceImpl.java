@@ -42,7 +42,7 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 
 	@Override
-	public void dropProduct(Map<String, String> productMap) throws Exception {
-		shoppingDAO.dropProduct(productMap);
+	public void updateProduct(Map<String, String> productMap) throws Exception {
+		shoppingDAO.updateProduct(productMap);
 	}
 }
