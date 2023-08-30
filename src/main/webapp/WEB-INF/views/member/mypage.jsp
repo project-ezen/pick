@@ -47,12 +47,12 @@ img { float: left; }
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 	<div class="container">
-		<h2 class="title">MyPage</h2>
-		<hr/>
+		<h2 class="title" style="text-align : center;">MyPage</h2>
+		<hr/>		
 		<div id="contents" class="set1">
 		<img style=" padding-left: 15px; height:200px; width:30%; vertical-align:top; float: left;" src="./resources/images/alcohol.png" border="0">
 
-		<div>${member.m_nickname}<h2 class="nim">님, 어서오세요!</h2></div>
+		<div><h2 class="nim">${member.m_nickname}님, 어서오세요!</h2></div>
 		</div>
 		<hr/>
 		<div class="set2">
