@@ -1,5 +1,6 @@
 package com.edu.member.controller;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -148,17 +150,63 @@ public class MemberController {
 	}	
 	
 	
+	//아이디 / 비밀번호 찾기 get
+	@RequestMapping(value="/find")
+	public void find(MemberDTO memberDTO) throws Exception {
+
+	}
 	
-	//아이디 찾기 post
+	//아이디 찾기 Post
+	@ResponseBody
+	@RequestMapping(value="/checkNameAndTel", method=RequestMethod.POST)
+	public int checkNameAndTel(@RequestBody MemberDTO memberDTO) throws Exception {
+		
+	    int result = memberService.checkNameAndTel(memberDTO);
+	    
+	    return result;
+	} // 이름과 전화번호로 인증번호 받기
+	
+	@ResponseBody
+	@RequestMapping(value="/checkNameAndNick", method=RequestMethod.POST)
+	public int checkNameAndNick(@RequestBody MemberDTO memberDTO) throws Exception {
+		
+		System.out.println("MemberDTO : " + memberDTO);
+		
+		int result = memberService.checkNameAndNick(memberDTO);
+		
+		return result;
+	} // 이름과 닉네임으로 인증번호 받기
+	
+	/*@RequestMapping(value="findID", method=RequestMethod.POST)
+	public String findID(MemberDTO memberDTO) throws Exception {
+		
+		String m_id = memberService.findID(memberDTO);
+		
+		return m_id;
+	}*/
+	
+	//비밀번호 찾기 Post
+	@ResponseBody
+	@RequestMapping(value="/checkIDAndTel", method=RequestMethod.POST)
+	public int checkIDAndTel(@RequestBody MemberDTO memberDTO) throws Exception {
+		
+		System.out.println("MemberDTO : " + memberDTO);
+		
+		int result = memberService.checkIDAndTel(memberDTO);
+		
+		return result;
+	} // 아이디와 전화번호로 인증번호 받기
+		
+	/*@RequestMapping(value="findPW", method=RequestMethod.POST)
+	public String findId(MemberDTO memberDTO) throws Exception {
+		
+		return 
+	}*/
 	
 	
-	//비밀번호 찾기 post
-	
-	
-	//회원정보상세정보 => GET
+	//회원 상세 정보 => GET
 	@RequestMapping(value="/edit",method=RequestMethod.GET)
 	public void detail(HttpServletRequest request) throws Exception {
-		
 		
 		
 		HttpSession session = request.getSession(); 
@@ -191,12 +239,6 @@ public class MemberController {
 
 		return "redirect:/member/login";
 	}	
-	
-
-	//아이디 찾기 post
-	
-	
-	//비밀번호 찾기 post
 	
 	
 	
