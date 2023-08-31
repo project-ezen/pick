@@ -16,9 +16,6 @@ margin-left: 10px;
 border-radius: 5px;
 }
 
-.outer_div {
-background-color: #946;
-}
 
 .inner_div {
 margin-top: 20px;
@@ -149,13 +146,7 @@ font-size: 15px;
 	<div class="outer_div">
 	<c:choose>
 		<c:when test="${articlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
-			<tr>
-				<td colspan="4">
-					<p align="center">
-						<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
-					</p>
-				</td>
-			</tr>
+			<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
 		</c:when>
 		<c:when test="${articlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
 			<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
@@ -163,8 +154,8 @@ font-size: 15px;
 						<img alt="" src="${path}/resources/images/cat1.jpg" width="100px" height="100px">
 						<div class="lele">
 							<div class="top">
-								<p class="title">${article.title}</p>
-								<p class="writer">${article.m_id}</p>
+								<p class="title"><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
+								<p class="writer">${article.writer}</p>
 							</div>
 							<div class="bottom">
 								<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
@@ -195,13 +186,6 @@ font-size: 15px;
             </c:if>
          </ul>
       </div>
-      
-      <form id="formList" action="/board/listArticlesPaging" method="get">
-         <input type="hidden" name="page" />
-         <input type="hidden" name="size"/>
-         <input type="hidden" name="searchType"/>
-         <input type="hidden" name="keyword" />      
-      </form>
       </c:when>
 	</c:choose>
     </div>  

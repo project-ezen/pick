@@ -2,16 +2,29 @@ package com.edu.board.dto;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
+import com.edu.member.dto.MemberDTO;
+
+@Component("boardDTO")
 public class BoardDTO {
 	
+	private int recNum;
 	private int board_id;
 	private String title;
 	private String content;
 	private Date writeDate;
 	private String image;
-	private String m_id;
+	private String writer;
 	
+	private MemberDTO memberDTO;
 	
+	public int getRecNum() {
+		return recNum;
+	}
+	public void setRecNum(int recNum) {
+		this.recNum = recNum;
+	}
 	public int getBoard_id() {
 		return board_id;
 	}
@@ -42,17 +55,23 @@ public class BoardDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getM_id() {
-		return m_id;
+	public String getWriter() {
+		return writer;
 	}
-	public void setM_id(String m_id) {
-		this.m_id = m_id;
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public MemberDTO getMemberDTO() {
+		return memberDTO;
+	}
+	public void setMemberDTO(MemberDTO memberDTO) {
+		this.memberDTO = memberDTO;
 	}
 	@Override
 	public String toString() {
-		return "BoardDTO [board_id=" + board_id + ", title=" + title + ", content=" + content + ", writeDate="
-				+ writeDate + ", image=" + image + ", m_id=" + m_id + "]";
+		return "BoardDTO [recNum=" + recNum + ", board_id=" + board_id + ", title=" + title + ", content=" + content
+				+ ", writeDate=" + writeDate + ", image=" + image + ", writer=" + writer + ", memberDTO=" + memberDTO
+				+ "]";
 	}
-	
 	
 }

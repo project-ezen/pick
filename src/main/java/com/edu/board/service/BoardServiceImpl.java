@@ -34,5 +34,13 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws Exception {
 		return boardDAO.boardListPaging(pcri);
 	}
+	
+	// 게시글번호에 해당하는 상세정보
+	@Override
+	public BoardDTO articleDetail(int board_id) throws Exception {
+		BoardDTO boardDTO = boardDAO.selectArticle(board_id);
+		return boardDTO;
+	}
+	
 
 }

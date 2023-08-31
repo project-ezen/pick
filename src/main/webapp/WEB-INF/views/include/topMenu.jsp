@@ -27,11 +27,10 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Alcohol</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">list</a></li>
+                        <li><a href="${path}/sole/sole">list</a></li>
                     </ul>
                 </li>
-                <li><a href="#">My Own Recipe</a></li>
-                <li><a href="#">Board</a></li>
+                <li><a href="${path}/board/articleList">My Own Recipe</a></li>
                 <li><a href="${path }/shopping/cart">Store</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
