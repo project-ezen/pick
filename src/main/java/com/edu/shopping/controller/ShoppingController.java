@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.member.dto.MemberDTO;
+import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.DisplayOrderVO;
 import com.edu.shopping.dto.OrderDTO;
 import com.edu.shopping.service.ShoppingService;
@@ -48,25 +49,23 @@ public class ShoppingController {
 		log.info("memberDTO : " + member);
 		
 		// 장바구니에 담긴 product List
-		List<ProductDTO> cartList = shoppingService.cartList(member);
+		List<CartDTO> cartList = shoppingService.cartList(member);
 		log.info("cartList : " + cartList);
 		
 		// product detail List
-		List<ProductDisplayVO> productDetailList = shoppingService.cartProductsList(member);
-		log.info("productDetailList : " + productDetailList);
-		
-		log.info("장바구니에 담긴 product List");
+		List<ProductDTO> productList = shoppingService.cartProductsList(member);
+		log.info("productDetailList : " + productList);
 		
 		mav.setViewName(viewName);
 		mav.addObject("cart", cartList);
-		mav.addObject("product", productDetailList);
+		mav.addObject("product", productList);
 		return mav;
 	}	// End - shoppingCart method
 //----------------------------------------------------------------------------------------------------------------	
 	// count change ajax
 	@ResponseBody
 	@RequestMapping(value="/countchange", method=RequestMethod.GET)
-	public void changeCount(@ModelAttribute ProductDTO count, HttpServletRequest request) throws Exception {
+	public void changeCount(@ModelAttribute CartDTO count, HttpServletRequest request) throws Exception {
 		log.info("Count change 준비 " + count);
 		shoppingService.changeCount(count);
 		log.info("Count change 완료");

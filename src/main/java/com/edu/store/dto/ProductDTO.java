@@ -4,7 +4,7 @@ package com.edu.store.dto;
 public class ProductDTO {
 	private String product_id;
 	private String product_display_id;
-	private String name;
+	private String product_name;
 	private String product_image;
 	private int product_price;
 	private int category_code;
@@ -20,11 +20,11 @@ public class ProductDTO {
 	public void setProduct_display_id(String product_display_id) {
 		this.product_display_id = product_display_id;
 	}
-	public String getName() {
-		return name;
+	public String getProduct_name() {
+		return product_name;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
 	}
 	public String getProduct_image() {
 		return product_image;
@@ -46,8 +46,8 @@ public class ProductDTO {
 	}
 	@Override
 	public String toString() {
-		return "ProductDTO [product_id=" + product_id + ", product_display_id=" + product_display_id + ", name=" + name
-				+ ", product_image=" + product_image + ", product_price=" + product_price + ", category_code="
-				+ category_code + "]";
+		return "ProductDTO [product_id=" + product_id + ", product_display_id=" + product_display_id + ", product_name="
+				+ product_name + ", product_image=" + product_image + ", product_price=" + product_price
+				+ ", category_code=" + category_code + "]";
 	}
 }
