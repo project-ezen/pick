@@ -67,7 +67,7 @@
 <div class="container">
 	<h2 style="text-align: center;">내가 쓴 게시물</h2>
 	<br/>
-	<button type="button" onclick="${path}/" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
+	<button type="button" onclick="${path}/member/mypage" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
 	<div id="wrap">
 		<table id="table">
 			<thead>
