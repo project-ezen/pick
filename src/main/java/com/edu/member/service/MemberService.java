@@ -18,12 +18,15 @@ public interface MemberService {
 	public int nickCheck(MemberDTO memberDTO) throws Exception;
 	
 	//아이디 찾기 post
+	public int checkNameAndTel(MemberDTO memberDTO) throws Exception; // 이름과 전화번호로 인증번호 받기
+	public int checkNameAndNick(MemberDTO memberDTO) throws Exception; // 이름과 닉네임으로 인증번호 받기
 	
 	
 	//비밀번호 찾기 post
+	public int checkIDAndTel(MemberDTO memberDTO) throws Exception; // 아이디와 전화번호로 인증번호 받기
 	
 	
-	//회원 상세 정보 수정 get
+	//회원 상세 정보 get
 	public MemberDTO detail(String id) throws Exception;
 
 	//회원 정보 수정 POST

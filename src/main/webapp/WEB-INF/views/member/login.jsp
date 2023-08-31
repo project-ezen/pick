@@ -80,7 +80,7 @@
             </div>
             <div class="form-group">                            
                 <div class="text-center">
-                    <a href="/find.jsp">아이디 / 비밀번호 찾기&nbsp;&nbsp;</a> |
+                    <a href="/member/find">아이디 / 비밀번호 찾기&nbsp;&nbsp;</a> |
                     <a href="/member/join">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
                 </div>
             </div><br>
