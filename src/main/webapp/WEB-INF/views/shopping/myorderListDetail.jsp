@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>주문상세내역</title>
-<%@ include file="./WEB-INF/views/include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
@@ -55,7 +55,7 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <div class="container">
 	<h3 style="text-align: center;">주문상세내역</h3>
@@ -161,6 +161,6 @@
 		</table>
 	</div>
 	<br/><br/>
-<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
