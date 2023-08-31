@@ -36,5 +36,12 @@ public class BoardDAOImpl implements BoardDAO {
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws DataAccessException {
 		return sqlSession.selectList(namespace + ".boardListPaging", pcri);
 	}
+	
+	// 게시글 번호에 해당하는 상세정보
+	@Override
+	public BoardDTO selectArticle(int board_id) throws DataAccessException {
+		return sqlSession.selectOne(namespace + ".selectArticle", board_id);
+	}
+	
 }
 		
