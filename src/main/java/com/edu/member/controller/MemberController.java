@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -212,17 +213,17 @@ public class MemberController {
 			return mav;
 		}
 	
-	// 내가쓴 게시물 get 
-	//@RequestMapping(value="/myboard", method=RequestMethod.GET)
-	//public String myboard(HttpSession session, Model model) throws Exception {
+	//내가쓴 게시물 get 
+	@RequestMapping(value="/myboard", method=RequestMethod.GET)
+	public String myboard(HttpSession session, Model model) throws Exception {
 		
-		//String id = (String)session.getAttribute("isLogOn");
+		String id = (String)session.getAttribute("isLogOn");
 		
 		
 		//MemberDTO userinfo = memberService.myboard(id);
 		//model.addAttribute("myInfo",userinfo);
 		
-		//return "member/myboard";
-	//}
+		return "member/myboard";
+	}
 	
 }

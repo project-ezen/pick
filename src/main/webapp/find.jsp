@@ -13,10 +13,14 @@
         margin:	 		auto;
         margin-top:		150PX ;
 		margin-bottom: 	150px;
+    	min-width: 		500px; 
     }
     .offset {
     	margin-left: 12%;
     }
+    
+    
+    
 </style>
 
 <script>
