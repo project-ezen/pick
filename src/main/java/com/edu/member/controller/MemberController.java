@@ -79,7 +79,7 @@ public class MemberController {
 			if(action != null) {
 				mav.setViewName("redirect:" + action);
 			} else {
-				mav.setViewName("redirect:/mainpage");
+				mav.setViewName("redirect:/");
 			}
 			
 		} else {	// 아이디와 비밀번호에 해당하는 정보가 없으면
@@ -235,6 +235,7 @@ public class MemberController {
 	public String logout(HttpSession session) throws Exception {
 		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
 		session.invalidate();
+
 		return "redirect:/member/login";
 	}	
 	
@@ -242,6 +243,16 @@ public class MemberController {
 	
 	//====================================================================================================
 	//마이페이지에 나오는 부분들
+	//my page화면 get
+		@RequestMapping(value="/mypage", method=RequestMethod.GET)
+		public ModelAndView mypage() throws Exception {
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/member/mypage");
+			logger.info("아이디내놔");
+			
+			return mav;
+		}
 	
 	// 내가쓴 게시물 get 
 	//@RequestMapping(value="/myboard", method=RequestMethod.GET)

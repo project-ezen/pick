@@ -11,10 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 	
-	@RequestMapping(value="/mainpage", method=RequestMethod.GET)
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public ModelAndView mainPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView("/mainpage");
 		
+		ModelAndView mav = new ModelAndView("/mainpage");
 		return mav;
 	}
 }

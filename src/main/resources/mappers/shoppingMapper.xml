@@ -4,15 +4,16 @@
 <mapper namespace="shopping.mapper">
 	<select id="cartList" parameterType="memberDTO" resultType="productDTO">
 		<![CDATA[
-			SELECT p.product_id, p.product_display_id, p.cart_id, p.category_code, p.count
+			SELECT p.product_id, p.product_display_id, p.cart_id, p.count
 			FROM cart c, product p
 			WHERE c.m_id = #{m_id} AND c.cart_id = p.cart_id
+			ORDER BY product_id
 		]]>
 	</select>
 
 	<select id="productsDetailList" parameterType="memberDTO" resultType="productDisplayVO">
 		<![CDATA[
-			SELECT d.product_display_id, d.product_name, d.product_info, d.capacity, d.alcohol_content, d.origin, d.manufacturer, d.product_image, d.product_price
+			SELECT d.product_display_id, d.product_name, d.product_info, d.capacity, d.alcohol_content, d.origin, d.manufacturer, d.product_image, d.product_price, d.category_code
 			FROM product p, product_display d 
 			WHERE p.cart_id = (SELECT cart_id FROM cart WHERE m_id = #{m_id})
 			AND p.product_display_id = d.product_display_id
@@ -29,18 +30,21 @@
 	
 	<insert id="orderInsert" parameterType="orderDTO">
 		<![CDATA[
-			INSERT INTO product_order
-			VALUES (#{order_id}, #{cart_id}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{final_price})
+			INSERT INTO product_order (order_id, m_id, receiver_name, receiver_phoneNum, zipcode, address, address_detail, final_price)
+			VALUES (#{order_id}, #{m_id}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{final_price})
 		]]>
 	</insert>
 	
-	<delete id="deleteProduct" parameterType="java.util.Map">
+	<update id="updateProduct" parameterType="java.util.Map">
 		<![CDATA[
-			DELETE
-			FROM (SELECT * 
-			      FROM product
-			      WHERE cart_id IN (SELECT cart_id FROM cart WHERE m_id = #{m_id}))
-			WHERE product_display_id IN (SELECT product_display_id FROM product_display WHERE product_name = #{product_name})
+			UPDATE
+				(SELECT *
+				FROM (SELECT * 
+				      FROM product
+				      WHERE cart_id IN (SELECT cart_id FROM cart WHERE m_id = #{member_id}))
+				WHERE product_display_id 
+				IN (SELECT product_display_id FROM product_display WHERE product_name = #{product_name}))
+			SET order_id = #{order_id}, cart_id = null
 		]]>
-	</delete>
+	</update>
 </mapper>

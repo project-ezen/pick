@@ -93,7 +93,7 @@
 				<tr>
 					<td>${orderDTO.order_id}</td>
 					<td>${productDisplayVO.product_image}</td>
-					<td>${productDisplayVO.product_info}</td>
+					<td>${productDisplayVO.product_name}</td>
 					<td>${productDTO.product_count}</td>
 					<td>${productDisplayVO.product_price}</td>
 					<td>{orderDTO.}</td>

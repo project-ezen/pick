@@ -19,6 +19,6 @@ public interface ShoppingService {
 
 	// 주문 내역 등록하기
 	public void orderConfirm(OrderDTO orderDTO) throws Exception;
-	// 구매한 물품을 장바구니에서 제거하기
-	public void dropProduct(Map<String, String> productMap) throws Exception;
+	// 구매한 물품을 장바구니에서 주문내역으로 변경하기
+	public void updateProduct(Map<String, String> productMap) throws Exception;
 }

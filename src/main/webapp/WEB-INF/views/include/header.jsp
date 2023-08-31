@@ -25,6 +25,5 @@ background-size: cover;
 background-color: #fff;
 min-height: 600px;
 border-radius: 10px;
-
 }
 </style>

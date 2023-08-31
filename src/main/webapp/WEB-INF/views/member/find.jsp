@@ -119,7 +119,7 @@ function checkIDAndTel() {
                 var verificationCode = Math.floor(Math.random() * 900000) + 100000;
                 alert("인증번호: " + verificationCode);
             } else {
-                alert("이름과 닉네임이 일치하지 않습니다.");
+                alert("아이디와 전화번호가 일치하지 않습니다.");
             }
         },
         error: function(error) {
