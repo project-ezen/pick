@@ -9,8 +9,10 @@
 </head>
 <style>
     .container {
-        width: 25%;
-        margin: auto;
+        width: 			25%;
+        margin:	 		auto;
+        margin-top:		150PX ;
+		margin-bottom: 	150px;
     }
     .offset {
     	margin-left: 12%;
@@ -41,12 +43,13 @@ $(document).ready(function(){
 <body>
 	<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
     <div class="container">
+    <br/>
         <h2 class="text-center">아이디 / 비밀번호 찾기</h2><br/><br/>
         <ul class="nav nav-tabs text-center" style="width: 100%;">
 		    <li class="active" style="width: 50%;"><a class="text-center" data-toggle="tab" href="#findID">아이디 찾기</a></li>
 		    <li style="width: 50%;"><a class="text-center" data-toggle="tab" href="#findPW">비밀번호 찾기</a></li>
 		</ul>
-
+	<br/>
         <div class="tab-content">
             <div id="findID" class="tab-pane fade in active"><br/>
 			    <h3 class="text-center">아이디 찾기</h3>
@@ -126,8 +129,6 @@ $(document).ready(function(){
 				      	</div>
 				    </div>
 				</form>
-
-
 			</div>
 
 			 <div id="findPW" class="tab-pane fade"><br/>
@@ -175,7 +176,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
-
+	<br/><br/>
     <%@ include file="./WEB-INF/views/include/footer.jsp" %>
 </body>
 </html>
