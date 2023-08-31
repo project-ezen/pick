@@ -37,26 +37,29 @@
 		WHERE	m_id	= #{m_id}
 		AND		m_pw	= #{m_pw}
 	</select>
-		
-	<!-- 회원상세정보 -->
-	<select id="detail" parameterType="String" resultType="com.edu.member.dto.MemberDTO">
-		SELECT * FROM member WHERE m_id = #{m_id}
-	</select>
 	
-	<!--  회원 아이디에 해당하는 비밀번호, 비밀번호 확인, 이름, 전화번호, 주소를 변경한다.  -->
-	 
-	<update id="edit" parameterType="com.edu.member.dto.MemberDTO">
-		UPDATE	member
-		SET		m_pw			= #{m_pw},
-				m_repw			= #{m_repw},
-				m_nickname		= #{m_nickname},
-				m_tel			= #{m_tel},
-				m_zipcode		= #{m_zipcode},
-				m_address		= #{m_address},
-				m_addressdetail	= #{m_addressDetail}
-		WHERE	m_id			= #{m_id}
-	</update>
+	<!-- 아이디 찾기 -->
+	<!-- 이름과 전화번호로 인증번호 받기 -->
+	<select id="checkNameAndTel" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE m_name = #{m_name} AND m_tel = #{m_tel}
+    </select> 
+    
+    <!-- 이름과 이메일로 인증번호 받기 -->
+	<select id="checkNameAndNick" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE m_name = #{m_name} AND m_nickname = #{m_nickname}
+    </select> 
 	
+	<!-- 비밀번호 찾기 -->
+	<!-- 아이디와 전화번호로 인증번호 받기 -->
+	<select id="checkIDAndTel" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE m_id = #{m_id} AND m_tel = #{m_tel}
+    </select> 
 	
 	<!-- 아이디(이메일) 중복 검사 -->
 	<select id="idCheck" parameterType="com.edu.member.dto.MemberDTO" resultType="int">
@@ -79,6 +82,25 @@
 		VALUES	(#{m_id}, #{m_pw}, #{m_repw}, #{m_name}, #{m_nickname}, #{m_tel}, #{m_birthdate}, #{m_gender}, #{m_zipcode}, #{m_address}, #{m_addressDetail})
 	</insert>
 
+	
+	<!-- 회원상세정보 -->
+	<select id="detail" parameterType="String" resultType="com.edu.member.dto.MemberDTO">
+		SELECT * FROM member WHERE m_id = #{m_id}
+	</select>
+	
+	<!--  회원 아이디에 해당하는 비밀번호, 비밀번호 확인, 이름, 전화번호, 주소를 변경한다.  -->
+	<update id="edit" parameterType="com.edu.member.dto.MemberDTO">
+		UPDATE	member
+		SET		m_pw			= #{m_pw},
+				m_repw			= #{m_repw},
+				m_nickname		= #{m_nickname},
+				m_tel			= #{m_tel},
+				m_zipcode		= #{m_zipcode},
+				m_address		= #{m_address},
+				m_addressdetail	= #{m_addressDetail}
+		WHERE	m_id			= #{m_id}
+	</update>
+	
 	<!-- 내가 쓴 게시물 -->
 	<!--  <select id="myboard" parameterType="memberDTO" >
 		SELECT m.m_id, b.title , b.writer , b.writedate ,b_image,

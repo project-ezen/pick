@@ -79,7 +79,7 @@
                    	</div>
 
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="${path}/member/mypage">MyPage</a></label>
+                       <label id="solo"><a href="javascript:fn_mypage('${isLogOn}','${path}/member/mypage','${path}/member/login')">MyPage</a></label>
                    	</div>
 
                    	<div style="margin-top: 50px;">
@@ -93,7 +93,7 @@
 	                   	</c:when>
 	                   	<%-- 로그인이 된 경우 --%>
 	                	<c:when test="${ isLogOn == true }">
-	                       <label><a href="${path}/member/login">logout</a> | <a href="${path}/member/mypage">MyPage</a></label>
+	                       <label><a href="${path}/member/logout">logout</a></label>
 	                   	</c:when>
                    	</c:choose>
                    	</div>
@@ -103,7 +103,14 @@
     </div>
 
     <script>
-        
+        function fn_mypage( isLogOn , mypageForm , loginForm) {
+        	if(isLogOn != '' && isLogOn != 'false') {
+        		location.href = mypageForm;
+    		} else{
+    			alert("로그인을 해주세요");
+    			location.href = loginForm + '?action=/member/mypage';
+    		} 
+        }
     </script>
 </body>
 </html>

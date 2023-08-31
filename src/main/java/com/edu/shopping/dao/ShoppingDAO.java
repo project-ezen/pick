@@ -21,6 +21,13 @@ public interface ShoppingDAO {
 
 	// 주문 내역 등록하기
 	public void orderConfirm(OrderDTO orderDTO) throws DataAccessException;
-	// 구매한 물품을 장바구니에서 제거하기
-	public void dropProduct(Map<String, String> productMap) throws DataAccessException;
+	// 구매한 물품을 장바구니에서 주문내역으로 변경하기
+	public void updateProduct(Map<String, String> productMap) throws DataAccessException;
+	
+	// 회원이 주문한 주문 정보 가져오기
+	public List<OrderDTO> orderInfo(MemberDTO member) throws DataAccessException;
+	// 주문한 상품 목록 가져오기
+	public List<ProductDTO> orderList(OrderDTO order) throws DataAccessException;
+	// 상품 상세 정보
+	public ProductDisplayVO orderListDetail(ProductDTO product) throws DataAccessException;
 }

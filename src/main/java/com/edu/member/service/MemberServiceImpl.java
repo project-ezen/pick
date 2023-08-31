@@ -44,7 +44,27 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.nickCheck(memberDTO);
 		return result;
 	}
-
+	
+	//아이디 찾기 POST
+	@Override
+	public int checkNameAndTel(MemberDTO memberDTO) throws Exception {
+		int result = memberDAO.checkNameAndTel(memberDTO);
+		return result;
+    } // 이름과 전화번호로 인증번호 받기
+	
+	@Override
+	public int checkNameAndNick(MemberDTO memberDTO) throws Exception {
+		int result = memberDAO.checkNameAndNick(memberDTO);
+		return result;
+	} // 이름과 닉네임으로 인증번호 받기
+	
+	//비밀번호 찾기 POST
+	@Override
+	public int checkIDAndTel(MemberDTO memberDTO) throws Exception {
+		int result = memberDAO.checkIDAndTel(memberDTO);
+		return result;
+	} // 아이디와 전화번호로 인증번호 받기
+	
 
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
@@ -53,7 +73,7 @@ public class MemberServiceImpl implements MemberService {
 		//return memberDAO.myboard(id);
 	//}
 
-	//회원 상세 정보 수정 get
+	//회원 상세 정보 get
 	@Override
 	public MemberDTO detail(String id) throws Exception {
 		return memberDAO.detail(id);

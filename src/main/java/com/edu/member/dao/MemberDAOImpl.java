@@ -58,6 +58,23 @@ public class MemberDAOImpl implements MemberDAO {
 		System.out.println("닉네임 중복 검사 ==> " + memberDTO);
 		return sqlSession.selectOne(namespace + ".nickCheck", memberDTO);
 	}
+	
+	//아이디 찾기 POST
+	@Override
+	public int checkNameAndTel(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne(namespace + ".checkNameAndTel", memberDTO);
+    } // 이름과 전화번호로 인증번호 받기
+	
+	@Override
+	public int checkNameAndNick(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne(namespace + ".checkNameAndNick", memberDTO);
+	} // 이름과 이메일로 인증번호 받기
+	
+	//비밀번호 찾기 POST
+	@Override
+	public int checkIDAndTel(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne(namespace + ".checkIDAndTel", memberDTO);
+	} // 아이디와 전화번호로 인증번호 받기
 
 	//회원 상세 정보 GET
 	@Override

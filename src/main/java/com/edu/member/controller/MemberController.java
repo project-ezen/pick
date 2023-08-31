@@ -1,17 +1,18 @@
 package com.edu.member.controller;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.bytecode.analysis.MultiArrayType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -79,7 +80,7 @@ public class MemberController {
 			if(action != null) {
 				mav.setViewName("redirect:" + action);
 			} else {
-				mav.setViewName("redirect:/mainpage");
+				mav.setViewName("redirect:/");
 			}
 			
 		} else {	// 아이디와 비밀번호에 해당하는 정보가 없으면
@@ -149,17 +150,63 @@ public class MemberController {
 	}	
 	
 	
+	//아이디 / 비밀번호 찾기 get
+	@RequestMapping(value="/find")
+	public void find(MemberDTO memberDTO) throws Exception {
+
+	}
 	
-	//아이디 찾기 post
+	//아이디 찾기 Post
+	@ResponseBody
+	@RequestMapping(value="/checkNameAndTel", method=RequestMethod.POST)
+	public int checkNameAndTel(@RequestBody MemberDTO memberDTO) throws Exception {
+		
+	    int result = memberService.checkNameAndTel(memberDTO);
+	    
+	    return result;
+	} // 이름과 전화번호로 인증번호 받기
+	
+	@ResponseBody
+	@RequestMapping(value="/checkNameAndNick", method=RequestMethod.POST)
+	public int checkNameAndNick(@RequestBody MemberDTO memberDTO) throws Exception {
+		
+		System.out.println("MemberDTO : " + memberDTO);
+		
+		int result = memberService.checkNameAndNick(memberDTO);
+		
+		return result;
+	} // 이름과 닉네임으로 인증번호 받기
+	
+	/*@RequestMapping(value="findID", method=RequestMethod.POST)
+	public String findID(MemberDTO memberDTO) throws Exception {
+		
+		String m_id = memberService.findID(memberDTO);
+		
+		return m_id;
+	}*/
+	
+	//비밀번호 찾기 Post
+	@ResponseBody
+	@RequestMapping(value="/checkIDAndTel", method=RequestMethod.POST)
+	public int checkIDAndTel(@RequestBody MemberDTO memberDTO) throws Exception {
+		
+		System.out.println("MemberDTO : " + memberDTO);
+		
+		int result = memberService.checkIDAndTel(memberDTO);
+		
+		return result;
+	} // 아이디와 전화번호로 인증번호 받기
+		
+	/*@RequestMapping(value="findPW", method=RequestMethod.POST)
+	public String findId(MemberDTO memberDTO) throws Exception {
+		
+		return 
+	}*/
 	
 	
-	//비밀번호 찾기 post
-	
-	
-	//회원정보상세정보 => GET
+	//회원 상세 정보 => GET
 	@RequestMapping(value="/edit",method=RequestMethod.GET)
 	public void detail(HttpServletRequest request) throws Exception {
-		
 		
 		
 		HttpSession session = request.getSession(); 
@@ -189,31 +236,36 @@ public class MemberController {
 	public String logout(HttpSession session) throws Exception {
 		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
 		session.invalidate();
+
 		return "redirect:/member/login";
 	}	
-	
-
-	//아이디 찾기 post
-	
-	
-	//비밀번호 찾기 post
 	
 	
 	
 	//====================================================================================================
 	//마이페이지에 나오는 부분들
+	//my page화면 get
+		@RequestMapping(value="/mypage", method=RequestMethod.GET)
+		public ModelAndView mypage() throws Exception {
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/member/mypage");
+			logger.info("아이디내놔");
+			
+			return mav;
+		}
 	
-	// 내가쓴 게시물 get 
-	//@RequestMapping(value="/myboard", method=RequestMethod.GET)
-	//public String myboard(HttpSession session, Model model) throws Exception {
+	//내가쓴 게시물 get 
+	@RequestMapping(value="/myboard", method=RequestMethod.GET)
+	public String myboard(HttpSession session, Model model) throws Exception {
 		
-		//String id = (String)session.getAttribute("isLogOn");
+		String id = (String)session.getAttribute("isLogOn");
 		
 		
 		//MemberDTO userinfo = memberService.myboard(id);
 		//model.addAttribute("myInfo",userinfo);
 		
-		//return "member/myboard";
-	//}
+		return "member/myboard";
+	}
 	
 }
