@@ -8,7 +8,6 @@ public class ProductDTO {
 	private String product_image;
 	private int product_price;
 	private int category_code;
-	private int count;
 	public String getProduct_id() {
 		return product_id;
 	}
@@ -45,16 +44,10 @@ public class ProductDTO {
 	public void setCategory_code(int category_code) {
 		this.category_code = category_code;
 	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
 	@Override
 	public String toString() {
 		return "ProductDTO [product_id=" + product_id + ", product_display_id=" + product_display_id + ", name=" + name
 				+ ", product_image=" + product_image + ", product_price=" + product_price + ", category_code="
-				+ category_code + ", count=" + count + "]";
+				+ category_code + "]";
 	}
 }
