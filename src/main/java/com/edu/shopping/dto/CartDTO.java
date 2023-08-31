@@ -3,7 +3,7 @@ package com.edu.shopping.dto;
 //실어나르는 값
 public class CartDTO {
 	private String cart_id;
-	private String member_id;
+	private String m_id;
 	private String product_id;
 	private int cart_number;
 	private int count;
@@ -20,11 +20,11 @@ public class CartDTO {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public String getMember_id() {
-		return member_id;
+	public String getM_id() {
+		return m_id;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
 	}
 	public String getProduct_id() {
 		return product_id;
@@ -40,7 +40,7 @@ public class CartDTO {
 	}
 	@Override
 	public String toString() {
-		return "CartDTO [cart_id=" + cart_id + ", member_id=" + member_id + ", product_id=" + product_id
-				+ ", cart_number=" + cart_number + ", count=" + count + "]";
+		return "CartDTO [cart_id=" + cart_id + ", m_id=" + m_id + ", product_id=" + product_id + ", cart_number="
+				+ cart_number + ", count=" + count + "]";
 	}
 }
