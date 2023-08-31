@@ -10,6 +10,7 @@ public class OrderDTO {
 	private String 	m_id;				//회원 아이디
 	private String  product_id;			//제품 아이디
 	private int		order_number;		//주문 번호
+	private int		count;				//주문 물품 수량
 	private int 	final_price;		//최종가격
 	private int 	zipcode;			//우편번호
 	private String 	address;			//주소
@@ -53,6 +54,12 @@ public class OrderDTO {
 	}
 	public void setOrder_number(int order_number) {
 		this.order_number = order_number;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	public int getFinal_price() {
 		return final_price;
@@ -100,8 +107,8 @@ public class OrderDTO {
 	public String toString() {
 		return "OrderDTO [receiver_name=" + receiver_name + ", receiver_phonenum=" + receiver_phonenum + ", order_id="
 				+ order_id + ", m_id=" + m_id + ", product_id=" + product_id + ", order_number=" + order_number
-				+ ", final_price=" + final_price + ", zipcode=" + zipcode + ", address=" + address + ", address_detail="
-				+ address_detail + ", order_date=" + order_date + ", order_status=" + order_status
+				+ ", count=" + count + ", final_price=" + final_price + ", zipcode=" + zipcode + ", address=" + address
+				+ ", address_detail=" + address_detail + ", order_date=" + order_date + ", order_status=" + order_status
 				+ ", order_complaint=" + order_complaint + "]";
 	}
 }
