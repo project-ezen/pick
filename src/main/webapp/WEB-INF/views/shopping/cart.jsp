@@ -53,17 +53,17 @@ body {
 						<!-- 장바구니 상품 나열하기 -->
 						<c:choose>
 							<%-- 장바구니에 상품이 없는 경우 --%>
-							<c:when test="${cart == null }">
+							<c:when test="${product == '[]' }">
 								<tr>
 								    <td align="center" colspan="6">
 									    <div class="col-md-offset-3 col-md-6">
-									    	<input class="form-control text-center" style="font-size: 18px;" value="담은 상품이 존재하지 않습니다." disabled>
+									    	<label class="text-center" style="font-size: 18px; padding-top: 7px;">담은 상품이 존재하지 않습니다.</label>
 								    	</div>
 									</td>
 								</tr>
 							</c:when>
 							<%-- 장바구니에 상품이 있는 경우 --%>
-							<c:when test="${cart != null }">
+							<c:when test="${product != '[]' }">
 								<c:forEach var="products_item" items="${product }" varStatus="productNum">
 									<tr>
 									    <td class="form-group" style="vertical-align: middle;">
@@ -129,7 +129,7 @@ body {
 			    </div>
 			    <c:choose>
 			    	<%-- 장바구니에 상품이 없는 경우 --%>
-			    	<c:when test="${cart == null }">
+			    	<c:when test="${product == '[]' }">
 			    		<div class="row">
 			    			<div class="col-md-offset-8 col-md-4 text-right">
 					            <button type="submit" id="pay" class="btn btn-primary" disabled>결제하기</button>
@@ -137,7 +137,7 @@ body {
 			    		</div>
 			    	</c:when>
 			    	<%-- 장바구니에 상품이 있는 경우 --%>
-			    	<c:when test="${cart != null }">
+			    	<c:when test="${product != '[]' }">
 					    <div class="row">
 					    	<div class="col-md-offset-8 col-md-4 text-right">
 					            <button type="submit" id="pay" class="btn btn-primary">결제하기</button>

@@ -47,6 +47,21 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	@Override
 	public void updateProduct(Map<String, String> productMap) throws DataAccessException {
 		log.info("productMap : " + productMap.toString());
-		ProductDTO product = sqlsession.selectOne(namespace + ".updateProduct", productMap);
+		sqlsession.selectOne(namespace + ".updateProduct", productMap);
+	}
+
+	@Override
+	public List<OrderDTO> orderInfo(MemberDTO member) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".orderInfo", member);
+	}
+
+	@Override
+	public List<ProductDTO> orderList(OrderDTO order) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".orderList", order);
+	}
+
+	@Override
+	public ProductDisplayVO orderListDetail(ProductDTO product) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".orderListDetail", product);
 	}
 }

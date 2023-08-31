@@ -4,7 +4,7 @@
 <mapper namespace="shopping.mapper">
 	<select id="cartList" parameterType="memberDTO" resultType="productDTO">
 		<![CDATA[
-			SELECT p.product_id, p.product_display_id, p.cart_id, p.count
+			SELECT p.product_id, p.product_display_id, p.cart_id, p.order_id, p.count
 			FROM cart c, product p
 			WHERE c.m_id = #{m_id} AND c.cart_id = p.cart_id
 			ORDER BY product_id
@@ -30,8 +30,8 @@
 	
 	<insert id="orderInsert" parameterType="orderDTO">
 		<![CDATA[
-			INSERT INTO product_order (order_id, m_id, receiver_name, receiver_phoneNum, zipcode, address, address_detail, final_price)
-			VALUES (#{order_id}, #{m_id}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{final_price})
+			INSERT INTO product_order (order_id, m_id, receiver_name, receiver_phoneNum, zipcode, address, address_detail, order_status, final_price)
+			VALUES (#{order_id}, #{m_id}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{order_status}, #{final_price})
 		]]>
 	</insert>
 	
@@ -47,4 +47,28 @@
 			SET order_id = #{order_id}, cart_id = null
 		]]>
 	</update>
+	
+	<select id="orderInfo" parameterType="memberDTO" resultType="orderDTO">
+		<![CDATA[
+			SELECT * 
+			FROM product_order
+			WHERE m_id = #{m_id}
+		]]>
+	</select>
+	
+	<select id="orderList" parameterType="orderDTO" resultType="productDTO">
+		<![CDATA[
+			SELECT * 
+			FROM product
+			WHERE order_id = #{order_id}
+		]]>
+	</select>
+	
+	<select id="orderListDetail" parameterType="orderDTO" resultType="productDisplayVO">
+		<![CDATA[
+			SELECT * 
+			FROM product_display
+			WHERE product_display_id = #{product_display_id}
+		]]>
+	</select>
 </mapper>

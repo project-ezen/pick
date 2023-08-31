@@ -45,4 +45,19 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public void updateProduct(Map<String, String> productMap) throws Exception {
 		shoppingDAO.updateProduct(productMap);
 	}
+
+	@Override
+	public List<OrderDTO> orderInfo(MemberDTO member) throws Exception {
+		return shoppingDAO.orderInfo(member);
+	}
+
+	@Override
+	public List<ProductDTO> orderList(OrderDTO order) throws Exception {
+		return shoppingDAO.orderList(order);
+	}
+
+	@Override
+	public ProductDisplayVO orderListDetail(ProductDTO product) throws Exception {
+		return shoppingDAO.orderListDetail(product);
+	}
 }
