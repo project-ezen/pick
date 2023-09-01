@@ -11,7 +11,6 @@ public class BoardDTO {
 	private String image;
 	private String m_id;
 	
-	
 	public int getBoard_id() {
 		return board_id;
 	}
