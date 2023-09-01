@@ -13,7 +13,7 @@
 		<result property="board_id" 	column="board_id"/>
 		<result property="title" 		column="title"/>
 		<result property="content" 		column="content"/>
-		<result property="writeDate" 	column="writDate"/>
+		<result property="writeDate" 	column="writeDate"/>
 		<result property="image" 		column="image"/>
 		<result property="m_id" 		column="M_ID"/>
 	</resultMap>
@@ -92,7 +92,7 @@
 	<!-- 내가 쓴 게시물 -->
 	 <select id="myboard" parameterType="String" resultMap="member">
 	 <![CDATA[
-		SELECT m.m_id, b.board_id, b.title , b.writedate ,b.image
+		SELECT m.m_id, b.board_id, b.title , b.writeDate ,b.image
 		FROM  member m
 		LEFT OUTER JOIN board b
 		ON m.m_id = b.m_id

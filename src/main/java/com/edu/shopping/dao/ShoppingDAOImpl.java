@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.edu.member.dto.MemberDTO;
+import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.OrderDTO;
 import com.edu.store.dto.ProductDTO;
 import com.edu.store.dto.ProductDisplayVO;
@@ -24,18 +25,17 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	private SqlSession sqlsession;
 	
 	@Override
-	public List<ProductDTO> cartList(MemberDTO member) throws DataAccessException {
+	public List<CartDTO> cartList(MemberDTO member) throws DataAccessException {
 		return sqlsession.selectList(namespace + ".cartList", member);
 	}
 	
 	@Override
-	public List<ProductDisplayVO> cartProductsList(MemberDTO member) throws DataAccessException {
-		log.info("MemberDTO : " + member);
-		return sqlsession.selectList(namespace + ".productsDetailList", member);
+	public List<ProductDTO> cartProductsList(MemberDTO member) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".productList", member);
     }
 
 	@Override
-	public void changeCount(ProductDTO count) throws DataAccessException {
+	public void changeCount(CartDTO count) throws DataAccessException {
 		sqlsession.update(namespace + ".changeCount", count);
 	}
     
@@ -47,6 +47,21 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	@Override
 	public void updateProduct(Map<String, String> productMap) throws DataAccessException {
 		log.info("productMap : " + productMap.toString());
-		ProductDTO product = sqlsession.selectOne(namespace + ".updateProduct", productMap);
+		sqlsession.selectOne(namespace + ".updateProduct", productMap);
+	}
+
+	@Override
+	public List<OrderDTO> orderInfo(MemberDTO member) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".orderInfo", member);
+	}
+
+	@Override
+	public List<ProductDTO> orderList(OrderDTO order) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".orderList", order);
+	}
+
+	@Override
+	public ProductDisplayVO orderListDetail(ProductDTO product) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".orderListDetail", product);
 	}
 }

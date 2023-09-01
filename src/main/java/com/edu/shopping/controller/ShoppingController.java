@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.member.dto.MemberDTO;
+import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.DisplayOrderVO;
 import com.edu.shopping.dto.OrderDTO;
 import com.edu.shopping.service.ShoppingService;
@@ -48,25 +49,23 @@ public class ShoppingController {
 		log.info("memberDTO : " + member);
 		
 		// 장바구니에 담긴 product List
-		List<ProductDTO> cartList = shoppingService.cartList(member);
+		List<CartDTO> cartList = shoppingService.cartList(member);
 		log.info("cartList : " + cartList);
 		
 		// product detail List
-		List<ProductDisplayVO> productDetailList = shoppingService.cartProductsList(member);
-		log.info("productDetailList : " + productDetailList);
-		
-		log.info("장바구니에 담긴 product List");
+		List<ProductDTO> productList = shoppingService.cartProductsList(member);
+		log.info("productDetailList : " + productList);
 		
 		mav.setViewName(viewName);
 		mav.addObject("cart", cartList);
-		mav.addObject("product", productDetailList);
+		mav.addObject("product", productList);
 		return mav;
 	}	// End - shoppingCart method
 //----------------------------------------------------------------------------------------------------------------	
 	// count change ajax
 	@ResponseBody
 	@RequestMapping(value="/countchange", method=RequestMethod.GET)
-	public void changeCount(@ModelAttribute ProductDTO count, HttpServletRequest request) throws Exception {
+	public void changeCount(@ModelAttribute CartDTO count, HttpServletRequest request) throws Exception {
 		log.info("Count change 준비 " + count);
 		shoppingService.changeCount(count);
 		log.info("Count change 완료");
@@ -123,6 +122,7 @@ public class ShoppingController {
 		String order_id = "301";
 		orderDTO.setM_id(member.getM_id());
 		orderDTO.setOrder_id(order_id);
+		orderDTO.setOrder_status("delivery-progressing");
 		
 		log.info("orderDTO : " + orderDTO);
 		
@@ -158,8 +158,29 @@ public class ShoppingController {
 		// 회원 정보 가져오기
 		MemberDTO member = (MemberDTO)session.getAttribute("member");
 		
-		// 주문 정보 가져오기
-		//OrderDTO order = shoppingService.buyProductList(member);
+		// 회원이 주문한 주문 정보 가져오기
+		List<OrderDTO> order = shoppingService.orderInfo(member);
+		log.info("order_list : " + order);
+		
+		// 주문한 상품 목록 가져오기 - 주문번호 한 개에 담겨있는 상품 목록 2차원 List에 저장
+		List<List<ProductDTO>> product = new ArrayList<>();
+		for(int i = 0; i < order.size(); i++) {			
+			product.add(shoppingService.orderList(order.get(i)));
+		}
+		log.info("product : " + product);
+		
+		// 상품 상세 정보
+		List<ProductDisplayVO> productInfo = new ArrayList<ProductDisplayVO>();
+		for(int i = 0; i < product.size(); i++) {
+			for(int j = 0; j < product.get(i).size(); j++) {
+				productInfo.add(shoppingService.orderListDetail(product.get(i).get(j)));
+			}
+		}
+		log.info("productInfo : " + productInfo);
+		
+		mav.addObject("order", order);
+		mav.addObject("product", product);
+		mav.addObject("productInfo", productInfo);
 		return mav;
 	}
 	

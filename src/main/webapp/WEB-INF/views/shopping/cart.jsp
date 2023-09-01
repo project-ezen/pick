@@ -53,20 +53,21 @@ body {
 						<!-- 장바구니 상품 나열하기 -->
 						<c:choose>
 							<%-- 장바구니에 상품이 없는 경우 --%>
-							<c:when test="${cart == null }">
+							<c:when test="${cart == '[]' }">
 								<tr>
 								    <td align="center" colspan="6">
 									    <div class="col-md-offset-3 col-md-6">
-									    	<input class="form-control text-center" style="font-size: 18px;" value="담은 상품이 존재하지 않습니다." disabled>
+									    	<label class="text-center" style="font-size: 18px; padding-top: 7px;">담은 상품이 존재하지 않습니다.</label>
 								    	</div>
 									</td>
 								</tr>
 							</c:when>
 							<%-- 장바구니에 상품이 있는 경우 --%>
-							<c:when test="${cart != null }">
+							<c:when test="${cart != '[]' }">
 								<c:forEach var="products_item" items="${product }" varStatus="productNum">
 									<tr>
 									    <td class="form-group" style="vertical-align: middle;">
+											<input type="hidden" class="ctId" name="cartId" value="${cart[productNum.index].cart_id }">
 										    <div>
 										        <label>
 										            <input class="check" id="check" type="checkbox" checked>
@@ -87,7 +88,6 @@ body {
 										<td class="form-group" style="vertical-align: middle;">
 										    <input class="form-control text-center productName" type="text" id="productName" value="${products_item.product_name }" disabled>
 											<input type="hidden" class="pdtName" name="productName" value="${products_item.product_name }">
-											<input type="hidden" class="pdtId" name="productId" value="${cart[productNum.index].product_id }">
 										</td>
 										<td class="form-inline" style="vertical-align: middle;">
 										    <div class="form-group">
@@ -129,7 +129,7 @@ body {
 			    </div>
 			    <c:choose>
 			    	<%-- 장바구니에 상품이 없는 경우 --%>
-			    	<c:when test="${cart == null }">
+			    	<c:when test="${cart == '[]' }">
 			    		<div class="row">
 			    			<div class="col-md-offset-8 col-md-4 text-right">
 					            <button type="submit" id="pay" class="btn btn-primary" disabled>결제하기</button>
@@ -137,7 +137,7 @@ body {
 			    		</div>
 			    	</c:when>
 			    	<%-- 장바구니에 상품이 있는 경우 --%>
-			    	<c:when test="${cart != null }">
+			    	<c:when test="${cart != '[]' }">
 					    <div class="row">
 					    	<div class="col-md-offset-8 col-md-4 text-right">
 					            <button type="submit" id="pay" class="btn btn-primary">결제하기</button>
@@ -187,7 +187,7 @@ $(document).ready(function() {
 		let minus = $(".minus:eq(" + idx + ")");
 		let count = $(".cnt:eq(" + idx + ")");
 		
-		let pdtId = $(".pdtId:eq(" + idx + ")");
+		let ctId = $(".ctId:eq(" + idx + ")");
 		
 		let origin_price = $(".originPrice:eq(" + idx + ")");
 		let price = $(".productPrice:eq(" + idx + ")");
@@ -208,7 +208,7 @@ $(document).ready(function() {
 				url: "/shopping/countchange",
 				type: "get",
 				dataType: "json",
-				data: {"count": count.val(), "product_id": pdtId.val()},
+				data: {"count": count.val(), "cart_id": ctId.val()},
 				success: function(data) {
 					console.log("success : " + data);
 				}, 
@@ -243,7 +243,7 @@ $(document).ready(function() {
 				url: "/shopping/countchange",
 				type: "get",
 				dataType: "json",
-				data: {"count": count.val(), "product_id": pdtId.val()},
+				data: {"count": count.val(), "cart_id": ctId.val()},
 				success: function(data) {
 					console.log("success : " + data);
 				}, 
@@ -284,7 +284,7 @@ $(document).ready(function() {
 				url: "/shopping/countchange",
 				type: "get",
 				dataType: "json",
-				data: {"count": count.val(), "product_id": pdtId.val()},
+				data: {"count": count.val(), "cart_id": ctId.val()},
 				success: function(data) {
 					console.log("success : " + data);
 				}, 

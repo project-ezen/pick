@@ -15,5 +15,9 @@ public interface BoardService {
 
 	// 게시글 목록 가져오기 (Paging)
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws Exception;
-		
+	
+	// 게시글번호에 해당하는 상세정보
+	public BoardDTO articleDetail(int board_id) throws Exception;
+	
+	
 }

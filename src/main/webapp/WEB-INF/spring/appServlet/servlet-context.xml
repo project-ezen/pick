@@ -29,6 +29,7 @@
 	<context:component-scan base-package="com.edu.sole" />
 	<context:component-scan base-package="com.edu.common"/>
 	
+	<context:annotation-config/>
 	<!-- 파일 업로드 관련 설정을 한다. : 파일 업로드에 대한 규칙(multiparResolver)을 적용한다. -->
 	<!-- springframework에 내장된 CommonsMultipartResolver를 등록한다. -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
