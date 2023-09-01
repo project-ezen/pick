@@ -1,5 +1,7 @@
 package com.edu.member.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.edu.board.dto.BoardDTO;
 import com.edu.member.dto.MemberDTO;
 
 @Repository
@@ -44,7 +47,20 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.insert(namespace + ".join", memberDTO);
 	}
 	
+	//회원 상세 정보 GET
+	@Override
+	public MemberDTO detail(String id) throws Exception {
+		return sqlSession.selectOne(namespace + ".detail" , id);
+	}
 	
+	//회원 정보 수정
+	@Override
+	public void edit(MemberDTO memberDTO) throws Exception {
+		sqlSession.update(namespace + ".edit", memberDTO);
+	}
+
+//---------------------------------------------------------------------------
+
 
 	//아이디 중복 검사
 	@Override
@@ -76,25 +92,16 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne(namespace + ".checkIDAndTel", memberDTO);
 	} // 아이디와 전화번호로 인증번호 받기
 
-	//회원 상세 정보 GET
-	@Override
-	public MemberDTO detail(String id) throws Exception {
-		return sqlSession.selectOne(namespace + ".detail" , id);
-	}
-	
-	//회원 정보 수정
-	@Override
-	public void edit(MemberDTO memberDTO) throws Exception {
-		sqlSession.update(namespace + ".edit", memberDTO);
-	}
 
+	
 //-------------------------------------------------------------------------------------
 	//내가 쓴 게시물
-	//public MemberDTO myboard(String id) throws Exception {
-		//System.out.println("내놔");
-		//return sqlSession.selectOne( namespace + "myboard", id);
-	//}
 
+	@Override
+	public MemberDTO myboardList(String m_id) throws Exception {
+	
+		return sqlSession.selectOne(namespace + ".myboard" , m_id);
+	}
 
 	
 }

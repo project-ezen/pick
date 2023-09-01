@@ -10,6 +10,8 @@
     .container {
         width: 25%;
         margin: auto;
+        margin-top:		150PX ;
+		margin-bottom: 150px;
     }
 </style>
 </head>
@@ -151,15 +153,16 @@ $(document).ready(function(){
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
     <div class="container">
+    <br/>
         <h2 class="text-center">아이디 / 비밀번호 찾기</h2><br/><br/>
         <ul class="nav nav-tabs text-center" style="width: 100%;">
 		    <li class="active" style="width: 50%;"><a class="text-center" data-toggle="tab" href="#findID">아이디 찾기</a></li>
 		    <li style="width: 50%;"><a class="text-center" data-toggle="tab" href="#findPW">비밀번호 찾기</a></li>
 		</ul>
-
         <div class="tab-content">
             <div id="findID" class="tab-pane fade in active"><br/>
 			    <h3 class="text-center">아이디 찾기</h3>
+				<br/>
 			    <form action="/member/findID" method="post">
 				    <div class="form-group text-center">
 				        <div class="radio" style="display:inline-block; margin-right:10px;">
@@ -285,7 +288,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</div>
-
+	<br/><br/>
     <%@ include file="../include/footer.jsp" %>
 </body>
 

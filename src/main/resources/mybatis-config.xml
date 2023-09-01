@@ -16,12 +16,14 @@
 		
 		<typeAlias type="com.edu.board.dto.BoardDTO" alias="boardDTO"/>
 		
+ 
 		<!--<typeAlias type="com.edu.sole.dto.LiveSoleDTO" alias="liveSoleDTO"/>
 		<typeAlias type="com.edu.sole.dto.RecipedSoleDTO" alias="recipedSoleDTO"/>
 		<typeAlias type="com.edu.sole.dto.SoleCriteria" alias="soleCriteria"/>
 		<typeAlias type="com.edu.sole.dto.SolePageMaker" alias="solePageMaker"/>
 		<typeAlias type="com.edu.sole.dto.SoleSearchCriteria" alias="soleSearchCriteria"/>
 		<typeAlias type="com.edu.sole.dto.recipe.RecipeDTO" alias="recipeDTO"/>-->
+		
 	</typeAliases>
 	
 </configuration>

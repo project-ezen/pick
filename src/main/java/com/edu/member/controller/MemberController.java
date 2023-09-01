@@ -1,6 +1,8 @@
 package com.edu.member.controller;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.edu.board.dto.BoardDTO;
 import com.edu.member.dto.MemberDTO;
 import com.edu.member.service.MemberService;
 
@@ -237,7 +240,7 @@ public class MemberController {
 		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
 		session.invalidate();
 
-		return "redirect:/member/login";
+		return "redirect:/";
 	}	
 	
 	
@@ -255,17 +258,21 @@ public class MemberController {
 			return mav;
 		}
 	
-	//내가쓴 게시물 get 
-	@RequestMapping(value="/myboard", method=RequestMethod.GET)
-	public String myboard(HttpSession session, Model model) throws Exception {
+	//내가 쓴 게시물 get 
+	@RequestMapping(value="/myboard",method= {RequestMethod.GET, RequestMethod.POST})
+	public String myboard(HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
 		
-		String id = (String)session.getAttribute("isLogOn");
+
+		HttpSession session = request.getSession(); 		
 		
+		MemberDTO mid = (MemberDTO) session.getAttribute("member");
+		String m_id = mid.getM_id();
+		logger.info("이힝");
+
+		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
+		model.addAttribute("member", member);
 		
-		//MemberDTO userinfo = memberService.myboard(id);
-		//model.addAttribute("myInfo",userinfo);
-		
-		return "member/myboard";
+		return "/member/myboard";
 	}
 	
 }
