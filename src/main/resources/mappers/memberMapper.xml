@@ -39,7 +39,20 @@
         SELECT COUNT(*)
         FROM member
         WHERE m_name = #{m_name} AND m_nickname = #{m_nickname}
-    </select> 
+    </select>
+    
+    <!-- 인증번호가 맞으면 ID 가져오기 -->
+     <select id="findID" parameterType="String" resultType="String">
+        SELECT m_id
+        FROM member
+        WHERE m_tel = #{m_tel}
+    </select>
+    
+     <select id="findID2" parameterType="String" resultType="String">
+        SELECT m_id
+        FROM member
+        WHERE m_nickname = #{m_nickname}
+    </select>
 	
 	<!-- 비밀번호 찾기 -->
 	<!-- 아이디와 전화번호로 인증번호 받기 -->
@@ -48,6 +61,13 @@
         FROM member
         WHERE m_id = #{m_id} AND m_tel = #{m_tel}
     </select> 
+    
+    <!-- 인증번호가 맞으면 PW 가져오기 -->
+     <select id="findPW" parameterType="String" resultType="String">
+        SELECT m_pw
+        FROM member
+        WHERE m_id = #{m_id}
+     </select>
 	
 	<!-- 아이디(이메일) 중복 검사 -->
 	<select id="idCheck" parameterType="com.edu.member.dto.MemberDTO" resultType="int">

@@ -76,6 +76,15 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	} // 이름과 닉네임으로 인증번호 받기
 	
+	public String findID(String m_tel) throws Exception {
+		return memberDAO.findID(m_tel);
+	} // 인증번호 맞으면 아이디 받아오기
+	
+	public String findID2(String m_nickname) throws Exception {
+		return memberDAO.findID2(m_nickname);
+	} // 인증번호 맞으면 아이디 받아오기
+	
+	
 	//비밀번호 찾기 POST
 	@Override
 	public int checkIDAndTel(MemberDTO memberDTO) throws Exception {
@@ -84,6 +93,9 @@ public class MemberServiceImpl implements MemberService {
 	} // 아이디와 전화번호로 인증번호 받기
 
 	
+	public String findPW(String m_id) throws Exception {
+		return memberDAO.findPW(m_id);
+	} // 인증번호 맞으면 아이디 받아오기
 
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
