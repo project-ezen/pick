@@ -44,13 +44,13 @@ a:hover { text-decoration: none; color: #ccd6d9; }
 		<div id="contents" class="set1">
 		<img style=" padding-left: 15px; height:200px; width:30%; vertical-align:top; float: left;" src="${path}/resources/images/alcohol.png" border="0">
 
-		<div><h2 class="nim">${member.m_nickname}님, 어서오세요!</h2></div>
+		<div><h2 class="nim">${member.m_id}님, 어서오세요!</h2></div>
 		</div>
 		<hr/>
 		<div class="set2">
 			<div class="box_1"><a href="${path}/shopping/myorderList.jsp">주문 조회</a></div>
 			<div class="box_2"><a href="${path}/board/recipejjim.jsp">찜한 레시피</a></div>
-			<div class="box_3"><a href="${path}/board/myboard.jsp">내가 쓴 게시물</a></div>
+			<div class="box_3"><a href="${path}/member/myboard">내가 쓴 게시물</a></div>
 			<div class="box_4"><a href="${path}/member/edit">회원 정보 수정</a></div>
 		</div>
 		

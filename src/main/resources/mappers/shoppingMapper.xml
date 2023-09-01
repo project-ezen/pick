@@ -7,6 +7,7 @@
 			SELECT *
 			FROM cart
 			WHERE m_id = #{m_id}
+			AND cart_number = (SELECT MIN(cart_number) FROM cart WHERE m_id = '101')
 		]]>
 	</select>
 
@@ -14,8 +15,10 @@
 		<![CDATA[
 			SELECT *
 			FROM product
-			WHERE product_id IN 
-							(SELECT product_id FROM cart WHERE m_id = #{m_id})
+			WHERE product_id IN (SELECT product_id 
+								 FROM cart 
+								 WHERE m_id = #{m_id}
+								 AND cart_number = (SELECT min(cart_number) FROM cart WHERE m_id = #{m_id}))
 		]]>
 	</select>
 	
@@ -27,25 +30,41 @@
 		]]>
 	</update>
 	
+	<select id="searchProductId" parameterType="String" resultType="int">
+		<![CDATA[
+			SELECT product_id
+			FROM product
+			WHERE product_name = #{product_name}
+		]]>
+	</select>
+	
 	<insert id="orderInsert" parameterType="orderDTO">
 		<![CDATA[
-			INSERT INTO product_order (order_id, m_id, receiver_name, receiver_phoneNum, zipcode, address, address_detail, order_status, final_price)
-			VALUES (#{order_id}, #{m_id}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{order_status}, #{final_price})
+			INSERT INTO product_order (order_id, m_id, product_id, order_number, receiver_name, receiver_phoneNum, zipcode, address, address_detail, order_status, count, final_price)
+			VALUES (#{order_id}, #{m_id}, #{product_id}, #{order_number}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{order_status}, #{count}, #{final_price})
 		]]>
 	</insert>
 	
-	<update id="updateProduct" parameterType="java.util.Map">
+	<delete id="deleteProduct" parameterType="String">
 		<![CDATA[
-			UPDATE
-				(SELECT *
-				FROM (SELECT * 
-				      FROM product
-				      WHERE cart_id IN (SELECT cart_id FROM cart WHERE m_id = #{member_id}))
-				WHERE product_display_id 
-				IN (SELECT product_display_id FROM product_display WHERE product_name = #{product_name}))
-			SET order_id = #{order_id}, cart_id = null
+			DELETE FROM cart
+			WHERE cart_id = #{cart_id}
 		]]>
-	</update>
+	</delete>
+	
+	<select id="checkOrderId" resultType="String">
+		<![CDATA[
+			SELECT order_id
+			FROM order
+		]]>
+	</select>
+	<select id="checkOrderNum" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT order_number
+			FROM order
+			WHERE m_id = #{m_id}
+		]]>
+	</select>
 	
 	<select id="orderInfo" parameterType="memberDTO" resultType="orderDTO">
 		<![CDATA[

@@ -25,6 +25,7 @@ public class BoardDTO {
 	public void setRecNum(int recNum) {
 		this.recNum = recNum;
 	}
+
 	public int getBoard_id() {
 		return board_id;
 	}

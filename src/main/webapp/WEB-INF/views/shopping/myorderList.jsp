@@ -34,7 +34,6 @@
 	#cancel_info { padding-bottom: 20px; }
 
 	.list {
-		margin-bottom: 20px;
 		float: right;
 		background-color:#8aa2b2;
 		border-radius:8px;
@@ -47,8 +46,7 @@
 		font-weight:bold;
 		padding:8px 18px;
 		text-decoration:none;
-		float: right;
-		margin-bottom:10px; 
+		float: right; 
 	}
 	
 	.list:hover { background-color:#476e9e; }
@@ -65,16 +63,26 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <div class="container">
 	<h3 style="text-align: center;">주문 조회</h3>
-	<button type="button" class="list" style="margin-bottom: 20px; float: right;">목록으로 돌아가기</button>
+	<button type="button" class="list" style="float: right;">목록으로 돌아가기</button>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+	<!-- 구매 내역 -->
 	<div id="receipt_info">
 	<form>
-		<label>구매내역</label>
+		<label class="control-label">&nbsp;&nbsp;&nbsp;구매 내역</label>
 		<br/>
-		<div>
-			<input type="text" id="datepicker1" placeholder="날짜를 선택하십시오."/>
-			<b>~</b>
-			<input type="text" id="datepicker2" placeholder="날짜를 선택하십시오."/>
-			<button type="submit">조회</button>
+		<div class="form-group">
+			<div class="col-md-4 col-sm-4">
+				<input class="form-control" type="text" id="datepicker1" placeholder="날짜를 선택하십시오."/>
+			</div>
+			<div class="col-md-1 col-sm-1" align="center">
+				<b>~</b>
+			</div>
+			<div class="col-md-4 col-sm-4">
+				<input class="form-control" type="text" id="datepicker2" placeholder="날짜를 선택하십시오."/>
+			</div>
+			<div class="col-md-2 col-sm-2" style="margin-bottom: 10px;">
+				<button class="form-control btn btn-default" type="submit">조회</button>
+			</div>
 		</div>
 	</form>
 		<table id="t1">
@@ -82,36 +90,75 @@
 				<tr>
 					<th>주문번호</th>
 					<th>이미지</th>
-					<th>상품정보</th>
+					<th>상품명</th>
 					<th>수량</th>
-					<th>상품구매금액</th>
+					<th>주문금액</th>
 					<th>주문처리상태</th>
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>${orderDTO.order_id}</td>
-					<td>${productDisplayVO.product_image}</td>
-					<td>${productDisplayVO.product_name}</td>
-					<td>${productDTO.product_count}</td>
-					<td>${productDisplayVO.product_price}</td>
-					<td>{orderDTO.}</td>
-					<td>{orderDTO.//}</td>
-				</tr>
-			</tbody>
+			<c:forEach var="order" items="${order }" varStatus="o_status">
+				<tbody>
+					<tr>
+						<td class="orderId">${order.order_id}</td>
+						<td class="pdtImage"></td>
+						<td class="pdtName"></td>
+						<td class="pdtCount">${productDisplayVO.product_price}</td>
+						<td class="orderPrice">${order.final_price}</td>
+						<td class="orderStatus">${order.order_status}</td>
+						<td>
+							<c:if test="${order.order_status} == 'delivery-progressing'">
+								<input type="button" class="btn btn-default" data-toggle="modal" data-target="#cancel" value="취소">
+							</c:if>
+							<c:if test="${order.order_status} == 'delivery-successed'">
+								<input type="button" class="btn btn-default" data-toggle="modal" data-target="#change" value="교환">
+								<input type="button" class="btn btn-default" data-toggle="modal" data-target="#refund" value="반품">
+							</c:if>
+						</td>
+					</tr>
+				</tbody>
+			</c:forEach>
 		</table>
+		
+		<div class="modal fade" id="p_info">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header text-center">
+						<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+						<h3>title</h3>
+					</div>
+					<div class="modal-body">
+						<c:forEach var="i" begin="0" end="3">
+						</c:forEach>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-primary" data-dismiss="modal" value="확인">
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<hr/>
+	
+<!-- ----------------------------------------------------------------------------------------------------------- -->
+	<!-- 취소 내역 -->
 	<div id="cancel_info">
 	<form>
-		<label>취소내역</label>
+		<label class="control-label">&nbsp;&nbsp;&nbsp;취소/반품 내역</label>
 		<br/>
-		<div>
-			<input type="text" id="datepicker3" placeholder="날짜를 선택하십시오."/>
-			<b>~</b>
-			<input type="text" id="datepicker4" placeholder="날짜를 선택하십시오."/>
-			<button type="submit">조회</button>
+		<div class="form-group">
+			<div class="col-md-4">
+				<input class="form-control" type="text" id="datepicker3" placeholder="날짜를 선택하십시오."/>
+			</div>
+			<div class="col-md-1" align="center">
+				<b>~</b>
+			</div>
+			<div class="col-md-4">
+				<input class="form-control" type="text" id="datepicker4" placeholder="날짜를 선택하십시오."/>
+			</div>
+			<div class="col-md-2" style="margin-bottom: 10px;">
+				<button class="form-control btn btn-default" type="submit">조회</button>
+			</div>
 		</div>
 	</form>
 		<table id="t2">
@@ -120,31 +167,30 @@
 					<th>주문번호</th>
 					<th>이미지</th>
 					<th>상품정보</th>
-					<th>수량</th>
 					<th>상품구매금역</th>
 					<th>주문처리상태</th>
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>${orderDTO.order_id}</td>
-					<td>${productDisplayVO.product_image}</td>
-					<td>${productDisplayVO.product_info}</td>
-					<td>${productDTO.product_count}</td>
-					<td>${productDisplayVO.product_price}</td>
-					<td>{orderDTO.}</td>
-					<td>{orderDTO.}</td>
-				</tr>
-			</tbody>
+			<c:forEach var="i" begin="0" end="3">
+				<tbody>
+					<tr>
+						<td>${orderDTO.order_id}</td>
+						<td>${productDisplayVO.product_image}</td>
+						<td>${productDisplayVO.product_name}</td>
+						<td>${productDisplayVO.product_price}</td>
+						<td>{orderDTO.}</td>
+						<td>{orderDTO.}</td>
+					</tr>
+				</tbody>
+			</c:forEach>
 		</table>
 	</div>
+<!-- ----------------------------------------------------------------------------------------------------------- -->
 </div>
 <br/><br/>
 <script>
-$("#datepicker1, #datepicker2, #datepicker3, #datepicker4").datepicker({
-	
-});
+$("#datepicker1, #datepicker2, #datepicker3, #datepicker4").datepicker();
 
 $.datepicker.setDefaults({
 	minDate:		"-3y",				// 3년전 날짜까지 보여준다.

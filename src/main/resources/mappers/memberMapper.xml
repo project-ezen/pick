@@ -3,32 +3,20 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberMapper">
-	
-	<!--  
-	<resultMap id="memberDTO" type="com.edu.member.dto.memberDTO" >
-		<result property="m_id" 			column="m_id"/>
-		<result property="m_pw" 			column="m_pw"/>
-		<result property="m_repw" 			column="m_repw"/>
-		<result property="m_name" 			column="m_name"/>
-		<result property="m_nickname" 		column="m_nickname"/>
-		<result property="m_tel" 			column="m_tel"/>
-		<result property="m_birthdate" 		column="m_birthdate"/>
-		<result property="m_gender" 		column="m_gender"/>
-		<result property="m_zipcode" 		column="m_zipcode"/>
-		<result property="m_address" 		column="m_address"/>
-		<result property="m_addressDetail" 	column="m_addressDetail"/>
-		<result property="m_datetime" 		column="m_datetime"/>
-		<collection property="mypageList" 	resultMap="boardDTO"/>
+	  
+	<resultMap id="member" type="com.edu.member.dto.MemberDTO" >
+		<result property="m_id" 			column="M_ID"/>
+		<collection property="myPageList" 	resultMap="board"/>
 	</resultMap>
 
-	<resultMap id="boardDTO" type="com.edu.board.dto.boardDTO" >
+	<resultMap id="board" type="com.edu.board.dto.BoardDTO" >
 		<result property="board_id" 	column="board_id"/>
 		<result property="title" 		column="title"/>
 		<result property="content" 		column="content"/>
-		<result property="writeDate" 	column="writDate"/>
+		<result property="writeDate" 	column="writeDate"/>
 		<result property="image" 		column="image"/>
-		<result property="m_id" 		column="m_id"/>
-	</resultMap>-->
+		<result property="writer" 		column="M_ID"/>
+	</resultMap>
 	
 	<!-- 로그인 POST : 아이디, 비밀번호, 이름을 추출하자 -->
 	<select id="login" parameterType="com.edu.member.dto.MemberDTO" resultType="com.edu.member.dto.MemberDTO">
@@ -51,7 +39,20 @@
         SELECT COUNT(*)
         FROM member
         WHERE m_name = #{m_name} AND m_nickname = #{m_nickname}
-    </select> 
+    </select>
+    
+    <!-- 인증번호가 맞으면 ID 가져오기 -->
+     <select id="findID" parameterType="String" resultType="String">
+        SELECT m_id
+        FROM member
+        WHERE m_tel = #{m_tel}
+    </select>
+    
+     <select id="findID2" parameterType="String" resultType="String">
+        SELECT m_id
+        FROM member
+        WHERE m_nickname = #{m_nickname}
+    </select>
 	
 	<!-- 비밀번호 찾기 -->
 	<!-- 아이디와 전화번호로 인증번호 받기 -->
@@ -60,6 +61,13 @@
         FROM member
         WHERE m_id = #{m_id} AND m_tel = #{m_tel}
     </select> 
+    
+    <!-- 인증번호가 맞으면 PW 가져오기 -->
+     <select id="findPW" parameterType="String" resultType="String">
+        SELECT m_pw
+        FROM member
+        WHERE m_id = #{m_id}
+     </select>
 	
 	<!-- 아이디(이메일) 중복 검사 -->
 	<select id="idCheck" parameterType="com.edu.member.dto.MemberDTO" resultType="int">
@@ -102,15 +110,15 @@
 	</update>
 	
 	<!-- 내가 쓴 게시물 -->
-	<!--  <select id="myboard" parameterType="memberDTO" >
-		SELECT m.m_id, b.title , b.writer , b.writedate ,b_image,
+	 <select id="myboard" parameterType="String" resultMap="member">
+	 <![CDATA[
+		SELECT b.m_id, b.board_id, b.title , b.writeDate ,b.image
 		FROM  member m
 		LEFT OUTER JOIN board b
 		ON m.m_id = b.m_id
 		WHERE m.m_id = #{m_id}
-		
-			
+		ORDER BY b.board_id ASC
+		]]>
 	</select>
-	-->
 	
 </mapper>

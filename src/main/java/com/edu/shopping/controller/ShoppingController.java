@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -84,6 +85,7 @@ public class ShoppingController {
 		log.info("memberDTO : " + member);
 		
 		// 이전 페이지에서 보낸 데이터 가져오기
+		String cart_id[] = request.getParameterValues("cartId");
 		String image[] = request.getParameterValues("imageFile");
 		String product_name[] = request.getParameterValues("productName");
 		String product_price[] = request.getParameterValues("productPrice");
@@ -92,7 +94,7 @@ public class ShoppingController {
 		
 		List<DisplayOrderVO> displayOrder = new ArrayList<DisplayOrderVO>();
 		for(int i = 0; i < count.length; i++) {
-			DisplayOrderVO temp = new DisplayOrderVO(image[i], product_name[i], product_price[i], count[i]);
+			DisplayOrderVO temp = new DisplayOrderVO(cart_id[i], image[i], product_name[i], product_price[i], count[i]);
 			
 			displayOrder.add(temp);
 		}
@@ -118,30 +120,40 @@ public class ShoppingController {
 		HttpSession session = request.getSession();
 		// 회원 정보 가져오기
 		MemberDTO member = (MemberDTO)session.getAttribute("member");
-		// 주문 번호 부여하기
-		String order_id = "301";
-		orderDTO.setM_id(member.getM_id());
-		orderDTO.setOrder_id(order_id);
-		orderDTO.setOrder_status("delivery-progressing");
 		
-		log.info("orderDTO : " + orderDTO);
-		
-		// 주문 내역 등록하기
-		shoppingService.orderConfirm(orderDTO);
-		log.info("주문내역 등록 완료");
-		
-		// 구매한 물품 가져오기
+		// 구매한 물품 정보 가져오기
 		String product[] = request.getParameterValues("productName");
+		String count[] = request.getParameterValues("productCount");
 		
-		// 구매한 물품을 장바구니에서 주문내역으로 변경하기
-		Map<String, String> productMap = new HashMap<String, String>();
+		// 주문 번호 부여하기
+		int order_num = getOrderNum(member.getM_id());
+		orderDTO.setM_id(member.getM_id());
+		orderDTO.setOrder_number(order_num);
+		orderDTO.setOrder_status("delivery-progressing");
+		log.info("orderDTO : " + orderDTO);
+
+		// 구매한 물품을 장바구니에서 주문내역으로 이동하기
 		for(int i = 0; i < product.length; i++) {
-			productMap.put("member_id", member.getM_id());
-			productMap.put("product_name", product[i]);
-			productMap.put("order_id", order_id);
-			shoppingService.updateProduct(productMap);
+			// 무작위 8자리 장바구니 번호 부여하기
+			String order_id = getOrderId();
+			orderDTO.setOrder_id(order_id);
+			
+			// 상품 id 가져오기
+			int product_id = shoppingService.searchProductId(product[i]);
+			orderDTO.setProduct_id(product_id);
+			orderDTO.setCount(Integer.parseInt(count[i]));
+			System.out.println("orderDTOorderDTOorderDTO ===> " + orderDTO);
+			shoppingService.orderConfirm(orderDTO);
 		}
-		log.info("장바구니 변경 완료");
+		log.info("주문내역 등록 완료");
+
+		// 장바구니 가져오기
+		String cart_id[] = request.getParameterValues("cart");
+				
+		for(int i = 0; i < product.length; i++) {
+			shoppingService.deleteProduct(cart_id[i]);
+		}
+		log.info("장바구니 삭제 완료");
 		
 		mav.setViewName(viewName);
 		return mav;
@@ -191,5 +203,48 @@ public class ShoppingController {
 		ModelAndView mav = new ModelAndView(viewName);
 		
 		return mav;
+	}
+//----------------------------------------------------------------------------------------------------------------	
+	// Random String
+	static public String getRandomString(int length) {
+		StringBuffer buffer = new StringBuffer();
+		Random random = new Random();
+		
+		String chars[] = "A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,1,2,3,4,5,6,7,8,9,0".split(",");
+		
+		for (int i = 0; i < length; i++) {
+			buffer.append(chars[random.nextInt(chars.length)]);
+		}
+		return buffer.toString();
+	}
+	// get orderId
+	public String getOrderId() throws Exception {
+		String order = getRandomString(8);
+		List<String> check_order = shoppingService.checkOrderId();
+		for(int i = 0; i < check_order.size(); i++) {
+			if(order == check_order.get(i)) {
+				break;
+			}
+			else {
+				order = getRandomString(8);
+				break;
+			}
+		}
+		return order;
+	}
+	// get orderNumber
+	public int getOrderNum(String m_id) throws Exception {
+		int order = (int)(Math.random() * 10000);
+		List<String> check_order = shoppingService.checkOrderNum(m_id);
+		for(int i = 0; i < check_order.size(); i++) {
+			if(order == Integer.parseInt(check_order.get(i))) {
+				break;
+			}
+			else {
+				order = (int)(Math.random() * 10000);
+				break;
+			}
+		}
+		return order;
 	}
 }

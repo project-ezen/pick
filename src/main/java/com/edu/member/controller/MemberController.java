@@ -1,6 +1,5 @@
 package com.edu.member.controller;
 
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.edu.member.dto.MemberDTO;
 import com.edu.member.service.MemberService;
@@ -121,7 +121,7 @@ public class MemberController {
 			throw new RuntimeException();
 		}
 		
-		return "redirect:/mypage";
+		return "redirect:/";
 		
 	}
 	
@@ -170,20 +170,26 @@ public class MemberController {
 	@RequestMapping(value="/checkNameAndNick", method=RequestMethod.POST)
 	public int checkNameAndNick(@RequestBody MemberDTO memberDTO) throws Exception {
 		
-		System.out.println("MemberDTO : " + memberDTO);
 		
 		int result = memberService.checkNameAndNick(memberDTO);
 		
+		System.out.println("MemberDTO : " + memberDTO);
 		return result;
 	} // 이름과 닉네임으로 인증번호 받기
 	
-	/*@RequestMapping(value="findID", method=RequestMethod.POST)
-	public String findID(MemberDTO memberDTO) throws Exception {
-		
-		String m_id = memberService.findID(memberDTO);
-		
-		return m_id;
-	}*/
+	@ResponseBody
+	@RequestMapping(value="findID", method=RequestMethod.POST)
+	public String findID(@RequestBody String m_tel) throws Exception {
+	    String result = memberService.findID(m_tel);
+	    return result;
+	} // 인증번호가 맞으면 아이디 받아오기(이름 전화번호)
+	
+	@ResponseBody
+	@RequestMapping(value="findID2", method=RequestMethod.POST)
+	public String findID2(@RequestBody String m_nickname) throws Exception {
+	    String result = memberService.findID2(m_nickname);
+	    return result;
+	} // 인증번호가 맞으면 아이디 받아오기(이름 닉네임)
 	
 	//비밀번호 찾기 Post
 	@ResponseBody
@@ -197,11 +203,12 @@ public class MemberController {
 		return result;
 	} // 아이디와 전화번호로 인증번호 받기
 		
-	/*@RequestMapping(value="findPW", method=RequestMethod.POST)
-	public String findId(MemberDTO memberDTO) throws Exception {
-		
-		return 
-	}*/
+	@ResponseBody
+	@RequestMapping(value="findPW", method=RequestMethod.POST)
+	public String findPW(@RequestBody String m_id) throws Exception {
+	    String result = memberService.findPW(m_id);
+	    return result;
+	} // 인증번호가 맞으면 비밀번호
 	
 	
 	//회원 상세 정보 => GET
@@ -237,7 +244,7 @@ public class MemberController {
 		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
 		session.invalidate();
 
-		return "redirect:/member/login";
+		return "redirect:/";
 	}	
 	
 	
@@ -255,17 +262,22 @@ public class MemberController {
 			return mav;
 		}
 	
-	//내가쓴 게시물 get 
-	@RequestMapping(value="/myboard", method=RequestMethod.GET)
-	public String myboard(HttpSession session, Model model) throws Exception {
-		
-		String id = (String)session.getAttribute("isLogOn");
-		
-		
-		//MemberDTO userinfo = memberService.myboard(id);
-		//model.addAttribute("myInfo",userinfo);
-		
-		return "member/myboard";
-	}
 	
-}
+	//내가 쓴 게시물 get 
+	@RequestMapping(value="/myboard",method= {RequestMethod.GET, RequestMethod.POST})
+	public String myboard(HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
+		
+
+		HttpSession session = request.getSession(); 		
+		MemberDTO mid = (MemberDTO) session.getAttribute("member");
+		String m_id = mid.getM_id();
+
+		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
+		model.addAttribute("member", member);
+		
+		return "/member/myboard";
+	}
+		
+	//찜한 게시물 get/ post
+	
+}	

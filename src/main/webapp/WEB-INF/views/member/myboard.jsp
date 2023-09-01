@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session ="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,55 +63,45 @@
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
-
 <div class="container">
 	<h2 style="text-align: center;">내가 쓴 게시물</h2>
 	<br/>
-	<button type="button" onclick="${path}/member/mypage" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
+	<button type="button" onclick="location.href='${path}/member/mypage'" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
 	<div id="wrap">
 		<table id="table">
 			<thead>
 				<tr>
+					<th>번호</th>
 					<th>이미지</th>
 					<th>제목</th>
 					<th>작성자</th>
 					<th>작성일자</th>
-					<th>찜</th>
+					<!--  <th>찜</th>-->
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${empty myInfo.myPageList}">
+				<c:if test="${empty member.myPageList}">
 				<tr>
 					<td colspan="5"><div style="font-size: 17px; font-weight: bold;">작성글이 없습니다.</div></td>
 				</tr>
 				</c:if>
-				<c:forEach items="${myinfo.myPageList}" var="boardDTO">
+				<c:forEach items="${member.myPageList}" var="dto">
 				<tr>
-					<td>{boardDTO.image}</td>
-					<td><a href="${path}/board/recipedetail.jsp">{boardDTO.title}</a></td>
-					<td>{boardDTO.m_id}</td>
-					<td>{boardDTO.writeDate}</td>
-					<td>{boardDTO.jjim}</td>
+					<td>${dto.board_id}</td>
+					<td>${dto.image}</td>
+					<td><a href="${path}/board/recipedetail?board_id=${dto.board_id}">${dto.title}</a></td>
+					<td>${dto.writer}</td>
+					<td>${dto.writeDate}</td>
+					<!--  <td>{boardDTO.jjim}</td>-->
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		
 	</div>
 </div>
 <br/><br/>
-<script type="text/javascript">
-		$(function() {
-			$("tr").hide();
-			$("tr").slice(0, 4).show(); // 초기갯수
-			$("#moreView-btn").click(function(e) { // 더보기 버튼 클릭
-				e.preventDefault();
-				$("tr:hidden").slice(0, 4).show(); // 클릭시 리스트 갯수 지정
-				if ($("tr:hidden").length == 0) { // 컨텐츠 남아있는지 확인
-					$("#moreView-btn").hide(); //더이상의 리스트가 없다면 버튼 사라짐
-				}
-			});
-		});
-</script>
+
 <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

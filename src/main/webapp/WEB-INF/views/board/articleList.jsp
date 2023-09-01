@@ -193,9 +193,9 @@ font-size: 15px;
      
       
 	<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
-	
-<br/>
+	<br/>
 </div>
+<br/><br/>
 <%@ include file="../include/footer.jsp" %>
 <script>
 function fn_writeForm(isLogOn, articleForm, loginForm) {
