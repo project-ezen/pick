@@ -17,6 +17,10 @@ public interface BoardDAO {
 
 	// 게시글 목록 가져오기 (Paging)
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws DataAccessException;
-
+	
+	// 게시글 번호에 해당하는 상세정보
+	public BoardDTO selectArticle(int board_id) throws DataAccessException;
+	
+	
 }
 

@@ -4,16 +4,20 @@ import java.sql.Date;
 
 // 실어나르는 값
 public class OrderDTO {
-
 	private String 	receiver_name;		//받는이
 	private String 	receiver_phonenum;	//받는사람 번호	
 	private String 	order_id;			//주문번호
 	private String 	m_id;				//회원 아이디
+	private String  product_id;			//제품 아이디
+	private int		order_number;		//주문 번호
+	private int		count;				//주문 물품 수량
 	private int 	final_price;		//최종가격
 	private int 	zipcode;			//우편번호
 	private String 	address;			//주소
 	private String 	address_detail;		//상세 주소
 	private Date	order_date;			//주문 날짜
+	private String  order_status;		//배송 상태
+	private String  order_complaint;	//취소/환불/교환
 	
 	public String getReceiver_name() {
 		return receiver_name;
@@ -38,6 +42,24 @@ public class OrderDTO {
 	}
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
+	}
+	public String getProduct_id() {
+		return product_id;
+	}
+	public void setProduct_id(String product_id) {
+		this.product_id = product_id;
+	}
+	public int getOrder_number() {
+		return order_number;
+	}
+	public void setOrder_number(int order_number) {
+		this.order_number = order_number;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 	public int getFinal_price() {
 		return final_price;
@@ -69,10 +91,24 @@ public class OrderDTO {
 	public void setOrder_date(Date order_date) {
 		this.order_date = order_date;
 	}
+	public String getOrder_status() {
+		return order_status;
+	}
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
+	public String getOrder_complaint() {
+		return order_complaint;
+	}
+	public void setOrder_complaint(String order_complaint) {
+		this.order_complaint = order_complaint;
+	}
 	@Override
 	public String toString() {
 		return "OrderDTO [receiver_name=" + receiver_name + ", receiver_phonenum=" + receiver_phonenum + ", order_id="
-				+ order_id + ", m_id=" + m_id + ", final_price=" + final_price + ", zipcode=" + zipcode + ", address="
-				+ address + ", address_detail=" + address_detail + ", order_date=" + order_date + "]";
+				+ order_id + ", m_id=" + m_id + ", product_id=" + product_id + ", order_number=" + order_number
+				+ ", count=" + count + ", final_price=" + final_price + ", zipcode=" + zipcode + ", address=" + address
+				+ ", address_detail=" + address_detail + ", order_date=" + order_date + ", order_status=" + order_status
+				+ ", order_complaint=" + order_complaint + "]";
 	}
 }

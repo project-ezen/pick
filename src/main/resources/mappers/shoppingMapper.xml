@@ -2,36 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shopping.mapper">
-	<select id="cartList" parameterType="memberDTO" resultType="productDTO">
+	<select id="cartList" parameterType="memberDTO" resultType="cartDTO">
 		<![CDATA[
-			SELECT p.product_id, p.product_display_id, p.cart_id, p.count
-			FROM cart c, product p
-			WHERE c.m_id = #{m_id} AND c.cart_id = p.cart_id
-			ORDER BY product_id
+			SELECT *
+			FROM cart
+			WHERE m_id = #{m_id}
 		]]>
 	</select>
 
-	<select id="productsDetailList" parameterType="memberDTO" resultType="productDisplayVO">
+	<select id="productList" parameterType="memberDTO" resultType="productDTO">
 		<![CDATA[
-			SELECT d.product_display_id, d.product_name, d.product_info, d.capacity, d.alcohol_content, d.origin, d.manufacturer, d.product_image, d.product_price, d.category_code
-			FROM product p, product_display d 
-			WHERE p.cart_id = (SELECT cart_id FROM cart WHERE m_id = #{m_id})
-			AND p.product_display_id = d.product_display_id
+			SELECT *
+			FROM product
+			WHERE product_id IN 
+							(SELECT product_id FROM cart WHERE m_id = #{m_id})
 		]]>
 	</select>
 	
-	<update id="changeCount" parameterType="productDTO">
+	<update id="changeCount" parameterType="cartDTO">
 		<![CDATA[	
-			UPDATE product 
+			UPDATE cart
 			SET count = #{count}
-			WHERE product_id = #{product_id}
+			WHERE cart_id = #{cart_id}
 		]]>
 	</update>
 	
 	<insert id="orderInsert" parameterType="orderDTO">
 		<![CDATA[
-			INSERT INTO product_order (order_id, m_id, receiver_name, receiver_phoneNum, zipcode, address, address_detail, final_price)
-			VALUES (#{order_id}, #{m_id}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{final_price})
+			INSERT INTO product_order (order_id, m_id, receiver_name, receiver_phoneNum, zipcode, address, address_detail, order_status, final_price)
+			VALUES (#{order_id}, #{m_id}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{order_status}, #{final_price})
 		]]>
 	</insert>
 	
@@ -47,4 +46,28 @@
 			SET order_id = #{order_id}, cart_id = null
 		]]>
 	</update>
+	
+	<select id="orderInfo" parameterType="memberDTO" resultType="orderDTO">
+		<![CDATA[
+			SELECT * 
+			FROM product_order
+			WHERE m_id = #{m_id}
+		]]>
+	</select>
+	
+	<select id="orderList" parameterType="orderDTO" resultType="productDTO">
+		<![CDATA[
+			SELECT * 
+			FROM product
+			WHERE order_id = #{order_id}
+		]]>
+	</select>
+	
+	<select id="orderListDetail" parameterType="orderDTO" resultType="productDisplayVO">
+		<![CDATA[
+			SELECT * 
+			FROM product_display
+			WHERE product_display_id = #{product_display_id}
+		]]>
+	</select>
 </mapper>
