@@ -173,20 +173,26 @@ public class MemberController {
 	@RequestMapping(value="/checkNameAndNick", method=RequestMethod.POST)
 	public int checkNameAndNick(@RequestBody MemberDTO memberDTO) throws Exception {
 		
-		System.out.println("MemberDTO : " + memberDTO);
 		
 		int result = memberService.checkNameAndNick(memberDTO);
 		
+		System.out.println("MemberDTO : " + memberDTO);
 		return result;
 	} // 이름과 닉네임으로 인증번호 받기
 	
-	/*@RequestMapping(value="findID", method=RequestMethod.POST)
-	public String findID(MemberDTO memberDTO) throws Exception {
-		
-		String m_id = memberService.findID(memberDTO);
-		
-		return m_id;
-	}*/
+	@ResponseBody
+	@RequestMapping(value="findID", method=RequestMethod.POST)
+	public String findID(@RequestBody String m_tel) throws Exception {
+	    String result = memberService.findID(m_tel);
+	    return result;
+	} // 인증번호가 맞으면 아이디 받아오기(이름 전화번호)
+	
+	@ResponseBody
+	@RequestMapping(value="findID2", method=RequestMethod.POST)
+	public String findID2(@RequestBody String m_nickname) throws Exception {
+	    String result = memberService.findID2(m_nickname);
+	    return result;
+	} // 인증번호가 맞으면 아이디 받아오기(이름 닉네임)
 	
 	//비밀번호 찾기 Post
 	@ResponseBody
@@ -200,11 +206,12 @@ public class MemberController {
 		return result;
 	} // 아이디와 전화번호로 인증번호 받기
 		
-	/*@RequestMapping(value="findPW", method=RequestMethod.POST)
-	public String findId(MemberDTO memberDTO) throws Exception {
-		
-		return 
-	}*/
+	@ResponseBody
+	@RequestMapping(value="findPW", method=RequestMethod.POST)
+	public String findPW(@RequestBody String m_id) throws Exception {
+	    String result = memberService.findPW(m_id);
+	    return result;
+	} // 인증번호가 맞으면 비밀번호
 	
 	
 	//회원 상세 정보 => GET
