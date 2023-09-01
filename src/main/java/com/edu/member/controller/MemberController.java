@@ -124,7 +124,7 @@ public class MemberController {
 			throw new RuntimeException();
 		}
 		
-		return "redirect:/mypage";
+		return "redirect:/";
 		
 	}
 	
@@ -265,21 +265,21 @@ public class MemberController {
 			return mav;
 		}
 	
+	
 	//내가 쓴 게시물 get 
 	@RequestMapping(value="/myboard",method= {RequestMethod.GET, RequestMethod.POST})
 	public String myboard(HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
 		
 
 		HttpSession session = request.getSession(); 		
-		
 		MemberDTO mid = (MemberDTO) session.getAttribute("member");
 		String m_id = mid.getM_id();
-		logger.info("이힝");
 
 		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
 		model.addAttribute("member", member);
 		
 		return "/member/myboard";
 	}
+	
 	
 }
