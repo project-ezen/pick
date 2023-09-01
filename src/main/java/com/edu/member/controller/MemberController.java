@@ -265,18 +265,6 @@ public class MemberController {
 			return mav;
 		}
 	
-	/*내가 쓴 게시물 get 
-	@RequestMapping(value="/myboard",method= {RequestMethod.GET, RequestMethod.POST})
-	public String myboard(HttpSession session, Model model) throws Exception {
-		
-		String m_id = (String) session.getAttribute("member");
-		logger.info("이힝");
-
-		MemberDTO myboard = memberService.myboardList(m_id);
-		model.addAttribute("mb", myboard);
-		
-		return "/member/myboard";
-	}*/
 	
 	//내가 쓴 게시물 get 
 	@RequestMapping(value="/myboard",method= {RequestMethod.GET, RequestMethod.POST})
