@@ -27,11 +27,18 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Alcohol</a>
                     <ul class="dropdown-menu">
-                        <li><a href="${path}/sole/sole">list</a></li>
+                        <li><a href="#">list</a></li>
                     </ul>
                 </li>
+                <li><a href="#">My Own Recipe</a></li>
+                <li><a href="#">Board</a></li>
+                <li><a href="${path}/shopping/cart">Store</a></li>
                 <li><a href="${path}/board/articleList">My Own Recipe</a></li>
+<<<<<<< HEAD
+                <li><a href="${path}/shopping/cart">Store</a></li>
+=======
                 <li><a href="${path }/shopping/cart">Store</a></li>
+>>>>>>> 9364e94f25cf4977de2adf5ddd91fba804e972db
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <c:choose>

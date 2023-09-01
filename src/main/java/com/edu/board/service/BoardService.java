@@ -5,6 +5,7 @@ import java.util.List;
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PagingCriteria;
 
+
 public interface BoardService {
 	
 	// 게시글 목록
@@ -19,5 +20,7 @@ public interface BoardService {
 	// 게시글번호에 해당하는 상세정보
 	public BoardDTO articleDetail(int board_id) throws Exception;
 	
+	// 게시글 작성 (post)
+	public void create(BoardDTO boardDTO) throws Exception;
 	
 }

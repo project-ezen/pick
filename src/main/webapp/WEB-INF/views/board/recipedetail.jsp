@@ -71,11 +71,11 @@ border: 1px solid #656562;
 				</tr>
 				<tr>
                 	<th scope="row">제목</th>
-                	<td colspan="3"><input type="text"   value="${article.title }" name="title" id="i_title" disabled/></td>
+                	<td colspan="3"><input type="text"   value="${article.title }" name="title" id="title" disabled/></td>
                 </tr>
                 <tr>
                     <th scope="row">내용</th>
-                    <td colspan="3"><textarea rows="20" name="content" id="i_content" style="width: 100%" disabled>${article.content }</textarea></td>
+                    <td colspan="3"><textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content }</textarea></td>
                 </tr>
 				<tr>
 					<td colspan="2">
@@ -92,7 +92,7 @@ border: 1px solid #656562;
 					<tr id="ddd">
 						<td colspan="4" style="text-align: right;">
 							<input type="button" class="btn5" value="수정 취소" onClick="backToForm(this.form)"/>
-							<input type="button" class="btn4" value="올리기" onClick="fn_modify_article(viewArticle)"/>
+							<input type="button" class="btn4" value="올리기" id="updatewrite"/>
 						</td>
 					</tr>
 				</c:if>
@@ -121,20 +121,63 @@ border: 1px solid #656562;
 <script>
 
 function fn_enable(obj){
-	document.getElementById("i_title").disabled				= false;
-	document.getElementById("i_content").disabled			= false;
-	document.getElementById("i_imageFileName").disabled		= false;
+	document.getElementById("title").disabled			= false;
+	document.getElementById("content").disabled			= false;
+	document.getElementById("imageFileName").disabled	= false;
 }
 
 function backToForm(obj){
-	document.getElementById("i_title").disabled = true;
-	document.getElementById("i_content").disabled = true;
+	document.getElementById("title").disabled = true;
+	document.getElementById("content").disabled = true;
 }
 
 function backToList(obj){
 	location.href = "${path}/board/articleList";
 }
+
+$(document).ready(function(){
+	
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "content",
+		sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
+		fCreator: "createSEditor2",
+		htParams: {
+			bUseModeChanger: false
+		}
+	});
+
+	$("#updatewrite").click(function(){
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		
+		var title = $("#title").val();
+		var content = document.getElementById("content").value;
+		var writer = $("#writer").val();
+		
+		if (title == null || title == ""){
+			alert("제목을 입력하세요");
+			$("#title").focus();
+			return false;
+		}
+		if(content == "" || content == null || content == '&nbsp;'
+		|| content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
+			alert("내용을 입력하세요");
+			return false;
+		}
+		
+		if(!confirm("발행하겠습니까?")){
+			alert("취소되었습니다");
+			return false;
+		} else {
+			
+			console.log(content);
+		}
+	});
+});
 </script>
+<script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

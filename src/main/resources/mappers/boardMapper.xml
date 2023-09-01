@@ -60,10 +60,18 @@
 	<!-- 새로운 게시글에 사용할 번호 추출하기 : 게시글 테이블에서 -->
 	<select id="selectNewArticleNO" resultType="int">
 		<![CDATA[
-			SELECT	NVL(MAX(articleNO), 0) + 1
+			SELECT	NVL(MAX(board_id), 0) + 1
 			FROM	board
 		]]>
 	</select>
+	
+	<!-- 게시글 작성(post) -->
+	<insert id="create" parameterType="boardDTO">
+		<![CDATA[
+			insert into board (board_id, title, content, image, m_id)
+			values (#{board_id}, #{title}, #{content}, #{image, jdbcType=VARCHAR}, #{writer})
+		]]>
+	</insert>
 	
 </mapper>
 
