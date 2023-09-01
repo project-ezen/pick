@@ -1,8 +1,5 @@
 package com.edu.member.controller;
 
-
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.edu.board.dto.BoardDTO;
+
 import com.edu.member.dto.MemberDTO;
 import com.edu.member.service.MemberService;
 
@@ -280,6 +277,7 @@ public class MemberController {
 		
 		return "/member/myboard";
 	}
+		
+	//찜한 게시물 get/ post
 	
-	
-}
+}	
