@@ -67,6 +67,7 @@
 	                	<c:forEach var="display" items="${displayOrder }" varStatus="displayStatus">
 	 	                    <tr>
 		                        <td class="form-group" style="vertical-align: middle;">
+		                        	<input type="hidden" name="cart" value="${display.cart_id }">
 								    <div><span>${displayStatus.count }</span></div>
 								</td>
 								<td class="form-group" style="vertical-align: middle;">
@@ -83,6 +84,7 @@
 								<td class="form-inline" style="vertical-align: middle;">
 								    <div class="form-group">
 								        <input class="form-control text-center cnt" width="30px" type="text" value="${display.count }" disabled>
+								        <input type="hidden" name="productCount" value="${display.count }">
 								    </div>
 								</td>
 								<td class="form-group" style="vertical-align: middle;">

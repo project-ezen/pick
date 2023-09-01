@@ -36,17 +36,30 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public void changeCount(CartDTO count) throws Exception {
 		shoppingDAO.changeCount(count);
 	}
+//=====================================================================================================
+	@Override
+	public int searchProductId(String product_name) throws Exception {
+		return shoppingDAO.searchProductId(product_name);
+	}
 
 	@Override
 	public void orderConfirm(OrderDTO orderDTO) throws Exception {
 		shoppingDAO.orderConfirm(orderDTO);
 	}
-
 	@Override
-	public void updateProduct(Map<String, String> productMap) throws Exception {
-		shoppingDAO.updateProduct(productMap);
+	public void deleteProduct(String productMap) throws Exception {
+		shoppingDAO.deleteProduct(productMap);
 	}
 
+	@Override
+	public List<String> checkOrderId() throws Exception {
+		return shoppingDAO.checkOrderId();
+	}
+	@Override
+	public List<String> checkOrderNum(String m_id) throws Exception {
+		return shoppingDAO.checkOrderNum(m_id);
+	}
+//=====================================================================================================
 	@Override
 	public List<OrderDTO> orderInfo(MemberDTO member) throws Exception {
 		return shoppingDAO.orderInfo(member);

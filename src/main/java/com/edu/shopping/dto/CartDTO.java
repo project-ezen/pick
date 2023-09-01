@@ -4,7 +4,7 @@ package com.edu.shopping.dto;
 public class CartDTO {
 	private String cart_id;
 	private String m_id;
-	private String product_id;
+	private int product_id;
 	private int cart_number;
 	private int count;
 	
@@ -26,10 +26,10 @@ public class CartDTO {
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-	public String getProduct_id() {
+	public int getProduct_id() {
 		return product_id;
 	}
-	public void setProduct_id(String product_id) {
+	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
 	public int getCart_number() {
