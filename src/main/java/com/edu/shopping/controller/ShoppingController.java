@@ -67,9 +67,9 @@ public class ShoppingController {
 	@ResponseBody
 	@RequestMapping(value="/countchange", method=RequestMethod.GET)
 	public void changeCount(@ModelAttribute ProductDTO count, HttpServletRequest request) throws Exception {
-		log.info("plus 실행 준비 " + count);
+		log.info("Count change 준비 " + count);
 		shoppingService.changeCount(count);
-		log.info("plus 실행 완료");
+		log.info("Count change 완료");
 	}
 //----------------------------------------------------------------------------------------------------------------	
 	// Order Controller
@@ -115,35 +115,82 @@ public class ShoppingController {
 		ModelAndView mav = new ModelAndView();
 		
 		log.info("orderDTO : " + orderDTO);
+		// 세션 가져오기
+		HttpSession session = request.getSession();
+		// 회원 정보 가져오기
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
 		// 주문 번호 부여하기
 		String order_id = "301";
+		orderDTO.setM_id(member.getM_id());
 		orderDTO.setOrder_id(order_id);
+		orderDTO.setOrder_status("delivery-progressing");
+		
 		log.info("orderDTO : " + orderDTO);
 		
 		// 주문 내역 등록하기
 		shoppingService.orderConfirm(orderDTO);
 		log.info("주문내역 등록 완료");
 		
-		// 세션 가져오기
-		HttpSession session = request.getSession();
-		// 회원 정보 가져오기
-		MemberDTO member = (MemberDTO)session.getAttribute("member");
-		log.info("memberDTO : " + member);
-		
 		// 구매한 물품 가져오기
 		String product[] = request.getParameterValues("productName");
 		
-		// 구매한 물품을 장바구니에서 제거하기
+		// 구매한 물품을 장바구니에서 주문내역으로 변경하기
 		Map<String, String> productMap = new HashMap<String, String>();
 		for(int i = 0; i < product.length; i++) {
 			productMap.put("member_id", member.getM_id());
 			productMap.put("product_name", product[i]);
-			shoppingService.dropProduct(productMap);
+			productMap.put("order_id", order_id);
+			shoppingService.updateProduct(productMap);
 		}
-		log.info("장바구니 비우기 완료");
+		log.info("장바구니 변경 완료");
 		
 		mav.setViewName(viewName);
 		return mav;
 	}	// End orderComplete method
 //----------------------------------------------------------------------------------------------------------------	
+	// myOrderList Controller
+	@RequestMapping(value="/myOrderList", method=RequestMethod.GET)
+	public ModelAndView myOrderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = "/shopping/myOrderList";
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		// 세션 준비하기
+		HttpSession session = request.getSession();
+		// 회원 정보 가져오기
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		
+		// 회원이 주문한 주문 정보 가져오기
+		List<OrderDTO> order = shoppingService.orderInfo(member);
+		log.info("order_list : " + order);
+		
+		// 주문한 상품 목록 가져오기 - 주문번호 한 개에 담겨있는 상품 목록 2차원 List에 저장
+		List<List<ProductDTO>> product = new ArrayList<>();
+		for(int i = 0; i < order.size(); i++) {			
+			product.add(shoppingService.orderList(order.get(i)));
+		}
+		log.info("product : " + product);
+		
+		// 상품 상세 정보
+		List<ProductDisplayVO> productInfo = new ArrayList<ProductDisplayVO>();
+		for(int i = 0; i < product.size(); i++) {
+			for(int j = 0; j < product.get(i).size(); j++) {
+				productInfo.add(shoppingService.orderListDetail(product.get(i).get(j)));
+			}
+		}
+		log.info("productInfo : " + productInfo);
+		
+		mav.addObject("order", order);
+		mav.addObject("product", product);
+		mav.addObject("productInfo", productInfo);
+		return mav;
+	}
+	
+	// myOrderListDetail Controller
+	@RequestMapping(value="/myOrderListDetail", method=RequestMethod.GET)
+	public ModelAndView myOrderListDetail() throws Exception {
+		String viewName = "/shopping/myOrderListDetail";
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		return mav;
+	}
 }

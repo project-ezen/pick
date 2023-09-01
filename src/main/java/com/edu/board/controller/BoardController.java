@@ -22,6 +22,7 @@ public interface BoardController {
 		// 게시글 작성 화면
 		public ModelAndView articleForm() throws Exception;
 
+
 		// 게시글 목록(페이징)화면 보여주기
 		public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response,
 				PagingCriteria pcri) throws Exception;
@@ -32,4 +33,5 @@ public interface BoardController {
 		
 		
 		
+
 }

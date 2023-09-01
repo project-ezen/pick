@@ -53,17 +53,17 @@ body {
 						<!-- 장바구니 상품 나열하기 -->
 						<c:choose>
 							<%-- 장바구니에 상품이 없는 경우 --%>
-							<c:when test="${cart == null }">
+							<c:when test="${product == '[]' }">
 								<tr>
 								    <td align="center" colspan="6">
 									    <div class="col-md-offset-3 col-md-6">
-									    	<input class="form-control text-center" style="font-size: 18px;" value="담은 상품이 존재하지 않습니다." disabled>
+									    	<label class="text-center" style="font-size: 18px; padding-top: 7px;">담은 상품이 존재하지 않습니다.</label>
 								    	</div>
 									</td>
 								</tr>
 							</c:when>
 							<%-- 장바구니에 상품이 있는 경우 --%>
-							<c:when test="${cart != null }">
+							<c:when test="${product != '[]' }">
 								<c:forEach var="products_item" items="${product }" varStatus="productNum">
 									<tr>
 									    <td class="form-group" style="vertical-align: middle;">
@@ -129,7 +129,7 @@ body {
 			    </div>
 			    <c:choose>
 			    	<%-- 장바구니에 상품이 없는 경우 --%>
-			    	<c:when test="${cart == null }">
+			    	<c:when test="${product == '[]' }">
 			    		<div class="row">
 			    			<div class="col-md-offset-8 col-md-4 text-right">
 					            <button type="submit" id="pay" class="btn btn-primary" disabled>결제하기</button>
@@ -137,7 +137,7 @@ body {
 			    		</div>
 			    	</c:when>
 			    	<%-- 장바구니에 상품이 있는 경우 --%>
-			    	<c:when test="${cart != null }">
+			    	<c:when test="${product != '[]' }">
 					    <div class="row">
 					    	<div class="col-md-offset-8 col-md-4 text-right">
 					            <button type="submit" id="pay" class="btn btn-primary">결제하기</button>
@@ -220,14 +220,17 @@ $(document).ready(function() {
 			// total_price 갱신
 			sum = 0;
 			for(var i = 0; i < $(".productName").length; i++) {
-				sum += parseInt($(".productPrice:eq(" + i + ")").val());
+				// 넘어갈 값이 disabled 되지 않았을 경우
+				if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+					sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+				}
+				// 넘어갈 값이 disabled 되었을 경우
+				else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+					sum += 0;
+				}
 			}
 			total_price.prop("value", sum);
 			tol_price.prop("value", sum);
-			
-//			console.log(count.val());
-//			console.log(origin_price.val());
-//			console.log(price.val());
 		});
 		minus.on("click", function() {
 			count.prop("value", parseInt(count.val()) - 1);
@@ -252,7 +255,14 @@ $(document).ready(function() {
 			// total_price 갱신
 			sum = 0;
 			for(var i = 0; i < $(".productName").length; i++) {
-				sum += parseInt($(".productPrice:eq(" + i + ")").val());
+				// 넘어갈 값이 disabled 되지 않았을 경우
+				if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+					sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+				}
+				// 넘어갈 값이 disabled 되었을 경우
+				else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+					sum += 0;
+				}
 			}
 			total_price.prop("value", sum);
 			tol_price.prop("value", sum);
@@ -286,7 +296,14 @@ $(document).ready(function() {
 			// total_price 갱신
 			sum = 0;
 			for(var i = 0; i < $(".productName").length; i++) {
-				sum += parseInt($(".productPrice:eq(" + i + ")").val());
+				// 넘어갈 값이 disabled 되지 않았을 경우
+				if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+					sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+				}
+				// 넘어갈 값이 disabled 되었을 경우
+				else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+					sum += 0;
+				}
 			}
 			total_price.prop("value", sum);
 			tol_price.prop("value", sum);
@@ -294,6 +311,7 @@ $(document).ready(function() {
 //----------------------------------------------------------------------------------------------------------------	
 		// check 여부에 따른 total_price 변동
 		check.on("click", function() {
+			// checked true
 			if(check.is(":checked")){
 //				console.log("true");			
 				// 모든 버튼 선택 활성화
@@ -310,11 +328,18 @@ $(document).ready(function() {
 				// total_price 갱신
 				sum = 0;
 				for(var i = 0; i < $(".productName").length; i++) {
-					sum += parseInt($(".productPrice:eq(" + i + ")").val());
+					// 넘어갈 값이 disabled 되지 않았을 경우
+					if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+						sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+					}
+					// 넘어갈 값이 disabled 되었을 경우
+					else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+						sum += 0;
+					}
 				}
-				
 				total_price.prop("value", sum);
 				tol_price.prop("value", sum);
+			// checked false
 			} else if(!check.is(":checked")) {
 //				console.log("false");			
 				// 모든 버튼 선택 불능
@@ -331,10 +356,15 @@ $(document).ready(function() {
 				// total_price 갱신
 				sum = 0;
 				for(var i = 0; i < $(".productName").length; i++) {
-					sum += parseInt($(".productPrice:eq(" + i + ")").val());
+					// 넘어갈 값이 disabled 되지 않았을 경우
+					if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+						sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+					}
+					// 넘어갈 값이 disabled 되었을 경우
+					else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+						sum += 0;
+					}
 				}
-				
-				sum -= parseInt(price.val());
 				total_price.prop("value", sum);
 				tol_price.prop("value", sum);
 			}

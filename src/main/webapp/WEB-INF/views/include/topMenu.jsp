@@ -27,17 +27,18 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Alcohol</a>
                     <ul class="dropdown-menu">
-                        <li><a href="${path}/sole/sole">list</a></li>
+                        <li><a href="#">list</a></li>
                     </ul>
                 </li>
-                <li><a href="${path}/board/articleList">My Own Recipe</a></li>
-                <li><a href="${path }/shopping/cart">Store</a></li>
+                <li><a href="#">My Own Recipe</a></li>
+                <li><a href="#">Board</a></li>
+                <li><a href="${path}/shopping/cart">Store</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <c:choose>
                 	<%-- 로그인이 된 경우 --%>
                 	<c:when test="${ isLogOn == true }">
-						<li><a data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/login">logout</a></li>
+						<li><a data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/logout">logout</a></li>
 						<li><a data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/mypage">MyPage</a></li>
 					</c:when>
 					<%-- 로그인이 되지 않은 경우 --%>

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>내가 쓴 게시물</title>
-<%@ include file="./WEB-INF/views/include/header.jsp" %>
+<%@ include file="../include/header.jsp" %>
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
@@ -19,7 +19,7 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
-	th { background-color: #99A1D7; }
+	th { background-color: #ccd6d9; }
 	
 	th, td {
 		border-bottom: 1px solid #ddd;
@@ -62,12 +62,12 @@
 </style>
 </head>
 <body>
-<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
 
 <div class="container">
 	<h2 style="text-align: center;">내가 쓴 게시물</h2>
 	<br/>
-	<button type="button" onclick="${path}/" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
+	<button type="button" onclick="${path}/member/mypage" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
 	<div id="wrap">
 		<table id="table">
 			<thead>
@@ -112,6 +112,6 @@
 			});
 		});
 </script>
-<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
