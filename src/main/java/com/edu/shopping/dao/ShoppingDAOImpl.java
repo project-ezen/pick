@@ -38,18 +38,31 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	public void changeCount(CartDTO count) throws DataAccessException {
 		sqlsession.update(namespace + ".changeCount", count);
 	}
+//=====================================================================================================
+	@Override
+	public int searchProductId(String product_name) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".searchProductId", product_name);
+	}
     
 	@Override
 	public void orderConfirm(OrderDTO orderDTO) throws DataAccessException {
 		sqlsession.insert(namespace + ".orderInsert", orderDTO);
 	}
-
 	@Override
-	public void updateProduct(Map<String, String> productMap) throws DataAccessException {
-		log.info("productMap : " + productMap.toString());
-		sqlsession.selectOne(namespace + ".updateProduct", productMap);
+	public void deleteProduct(String cart_id) throws DataAccessException {
+		log.info("cart : " + cart_id);
+		sqlsession.delete(namespace + ".deleteProduct", cart_id);
 	}
 
+	@Override
+	public List<String> checkOrderId() throws DataAccessException {
+		return sqlsession.selectList(namespace + ".checkOrderId");
+	}
+	@Override
+	public List<String> checkOrderNum(String m_id) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".checkOrderNum", m_id);
+	}
+//=====================================================================================================
 	@Override
 	public List<OrderDTO> orderInfo(MemberDTO member) throws DataAccessException {
 		return sqlsession.selectList(namespace + ".orderInfo", member);
