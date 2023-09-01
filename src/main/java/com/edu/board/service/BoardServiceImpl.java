@@ -1,6 +1,7 @@
 package com.edu.board.service;
 
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PagingCriteria;
+
+import oracle.jdbc.proxy.annotation.Post;
+
 import com.edu.board.dao.BoardDAO;
 
 @Service("BoardService")
@@ -40,6 +44,12 @@ public class BoardServiceImpl implements BoardService {
 	public BoardDTO articleDetail(int board_id) throws Exception {
 		BoardDTO boardDTO = boardDAO.selectArticle(board_id);
 		return boardDTO;
+	}
+	
+	// 게시글 작성(post)
+	@Override
+	public void create(BoardDTO boardDTO) throws SQLException {
+		boardDAO.create(boardDTO);
 	}
 	
 

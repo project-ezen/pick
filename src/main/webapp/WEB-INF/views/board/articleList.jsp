@@ -145,8 +145,8 @@ font-size: 15px;
 		</div>
 	<div class="outer_div">
 	<c:choose>
-		<c:when test="${articlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
-			<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
+		<c:when test="${empty articlesList}"> <!-- 게시글이 하나도 없는 경우 -->
+			<h3 style="font-size:22px; text-align: center;"><b>등록된 게시글이 없습니다.</b></h3>
 		</c:when>
 		<c:when test="${articlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
 			<c:forEach var="article" items="${articlesList }" varStatus="articleNum">

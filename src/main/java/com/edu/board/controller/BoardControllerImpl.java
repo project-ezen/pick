@@ -8,12 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.board.dto.BoardDTO;
@@ -21,6 +20,7 @@ import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
 import com.edu.board.service.BoardService;
 import com.edu.member.dto.MemberDTO;
+
 
 @Controller("BoardController")
 public class BoardControllerImpl implements BoardController {
@@ -103,6 +103,19 @@ public class BoardControllerImpl implements BoardController {
 		
 		return mav;
 	}
+
+
+	// 게시글 작성(post)
+	@Override
+	@RequestMapping(value="/board/addNewArticle", method=RequestMethod.POST)
+	public String addNewArticle(BoardDTO boardDTO, Model model) throws Exception {
+		model.addAttribute("board", boardDTO);
+		boardService.create(boardDTO);
+		return "/board/articleList"; // 수정 중
+	}
+
+
+	
 
 	
 

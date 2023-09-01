@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PagingCriteria;
 
+
 @Repository("BoardDAO")
 public class BoardDAOImpl implements BoardDAO {
 	
@@ -41,6 +42,19 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public BoardDTO selectArticle(int board_id) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".selectArticle", board_id);
+	}
+	
+	// 게시글 작성 (post)
+	@Override
+	public void create(BoardDTO boardDTO) throws DataAccessException {
+		int board_id = selectNewArticleNO();
+		boardDTO.setBoard_id(board_id);
+		sqlSession.insert(namespace + ".create", boardDTO);
+	}
+	
+	// 새로운 게시글 번호 추출
+	private int selectNewArticleNO() throws DataAccessException {
+		return sqlSession.selectOne(namespace + ".selectNewArticleNO");
 	}
 	
 }

@@ -33,6 +33,8 @@
                 <li><a href="#">My Own Recipe</a></li>
                 <li><a href="#">Board</a></li>
                 <li><a href="${path}/shopping/cart">Store</a></li>
+                <li><a href="${path}/board/articleList">My Own Recipe</a></li>
+                <li><a href="${path}/shopping/cart">Store</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <c:choose>
