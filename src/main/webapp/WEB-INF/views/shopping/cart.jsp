@@ -53,7 +53,7 @@ body {
 						<!-- 장바구니 상품 나열하기 -->
 						<c:choose>
 							<%-- 장바구니에 상품이 없는 경우 --%>
-							<c:when test="${cart == null }">
+							<c:when test="${cart == '[]' }">
 								<tr>
 								    <td align="center" colspan="6">
 									    <div class="col-md-offset-3 col-md-6">
@@ -63,7 +63,7 @@ body {
 								</tr>
 							</c:when>
 							<%-- 장바구니에 상품이 있는 경우 --%>
-							<c:when test="${cart != null }">
+							<c:when test="${cart != '[]' }">
 								<c:forEach var="products_item" items="${product }" varStatus="productNum">
 									<tr>
 									    <td class="form-group" style="vertical-align: middle;">
@@ -129,7 +129,7 @@ body {
 			    </div>
 			    <c:choose>
 			    	<%-- 장바구니에 상품이 없는 경우 --%>
-			    	<c:when test="${cart == null }">
+			    	<c:when test="${cart == '[]' }">
 			    		<div class="row">
 			    			<div class="col-md-offset-8 col-md-4 text-right">
 					            <button type="submit" id="pay" class="btn btn-primary" disabled>결제하기</button>
@@ -137,10 +137,9 @@ body {
 			    		</div>
 			    	</c:when>
 			    	<%-- 장바구니에 상품이 있는 경우 --%>
-			    	<c:when test="${cart != null }">
+			    	<c:when test="${cart != '[]' }">
 					    <div class="row">
 					    	<div class="col-md-offset-8 col-md-4 text-right">
-					    		<input type="hidden" name="cartNum" value="${cart.cart_number }">
 					            <button type="submit" id="pay" class="btn btn-primary">결제하기</button>
 					        </div>
 					    </div>
