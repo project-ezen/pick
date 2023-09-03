@@ -30,6 +30,7 @@
  	color: #fff;
  	position: relative;
  	margin-bottom: 0px;
+ 	height:356px;
  	}
  	
  	footer {
