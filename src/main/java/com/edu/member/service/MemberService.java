@@ -41,6 +41,9 @@ public interface MemberService {
 
 	//회원 정보 수정 POST
 	public void edit(MemberDTO memberDTO) throws Exception;
+	
+	// 회원목록 가져오기
+	public List<MemberDTO> selectMember() throws Exception;
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
 

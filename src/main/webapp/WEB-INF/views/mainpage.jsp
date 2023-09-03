@@ -79,7 +79,7 @@
                    	</div>
 
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="/store/productInfo">Store</a></label>
+                       <label id="solo"><a href="#">Store</a></label>
                    	</div>
                    	<div style="margin-top: 350px;" id="logindiv">
                    	<c:choose>

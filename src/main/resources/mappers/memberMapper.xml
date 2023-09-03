@@ -18,6 +18,11 @@
 		<result property="writer" 		column="M_ID"/>
 	</resultMap>
 	
+	<!-- 회원목록 가져오기 -->
+	<select id="selectMember" resultType="memberDTO">
+		SELECT * FROM member
+	</select>
+	
 	<!-- 로그인 POST : 아이디, 비밀번호, 이름을 추출하자 -->
 	<select id="login" parameterType="com.edu.member.dto.MemberDTO" resultType="com.edu.member.dto.MemberDTO">
 		SELECT	*

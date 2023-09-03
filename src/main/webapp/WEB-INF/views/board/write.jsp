@@ -48,7 +48,7 @@ color: #fff;
 <%@ include file="../include/topMenu.jsp" %>
 <br/><br/>
 <div class="container">
-	<form class="form-horizontal" action="${path}/board/addNewArticle" method="post" name="articleFrom">
+	<form class="form-horizontal" action="${path}/board/addNewArticle" method="post" name="articleForm" id="articleForm">
 		<div class="form-group">
 			<div>
 				<h2 align="center">글쓰기</h2>
@@ -58,7 +58,8 @@ color: #fff;
 		<div class="form-group">
 			<label class="control-label col-sm-3">작성자</label>
 			<div class="col-sm-7">
-				<input type="text" id="writer" name="writer" style="font-size: 20px;" class="form-control-plaintext reon" value="${member.m_id}" readonly/>
+				<input type="text" style="font-size: 20px;" class="form-control-plaintext reon" value="${member.m_nickname}" readonly/>
+				<input type="hidden" id="writer" name="writer" style="font-size: 20px;" class="form-control-plaintext reon" value="${member.m_id}" readonly/>
 			</div>
 		</div>
 		
@@ -118,9 +119,14 @@ $(document).ready(function(){
 	$("#wsubmit").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		
-		var title = $('#title').val();
-		var content = document.getElementById("content").value;
+		if (ajaxRequest !== null){
+			ajaxRequest.abort();
+		}
+		
 		var writer = document.getElementById("writer").value;
+		var title = $('#title').val();
+		var image = $('#image').val();
+		var content = document.getElementById("content").value;
 		
 		if (title == null || title == ""){
 			alert("제목을 입력하세요");
@@ -138,22 +144,19 @@ $(document).ready(function(){
 			return false;
 		} else {
 			
-			$.ajax({
+			ajaxRequest = $.ajax({
+				type: "post",
 				url: "/board/addNewArticle",
-				type: 'post',
-				datatype: 'json',
-				data: {
-					"title" : title,
-					"content" : content,
-					"writer" : writer
-				},
+				datatype: "json",
+				contentType: "application/json",
+				data: JSON.stringify({"title":title,"content":content,"writer":writer, "image":image}),
 				success: function(data){
-					console.log('success')
-					alert('성공');
-					location.href = "/board/articleList";
+					alert("성공");
+					location.href = "/board/addNewArticle";
 				},
 				error: function(data){
-					console.log('오류');
+					alert("오류");
+					return false;
 				}
 			});
 		}
