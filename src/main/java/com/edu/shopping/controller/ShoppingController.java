@@ -1,9 +1,7 @@
 package com.edu.shopping.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -27,7 +25,6 @@ import com.edu.shopping.dto.DisplayOrderVO;
 import com.edu.shopping.dto.OrderDTO;
 import com.edu.shopping.service.ShoppingService;
 import com.edu.store.dto.ProductDTO;
-import com.edu.store.dto.ProductDisplayVO;
 
 @Controller
 @RequestMapping(value="/shopping")
@@ -174,25 +171,15 @@ public class ShoppingController {
 		List<OrderDTO> order = shoppingService.orderInfo(member);
 		log.info("order_list : " + order);
 		
-		// 주문한 상품 목록 가져오기 - 주문번호 한 개에 담겨있는 상품 목록 2차원 List에 저장
-		List<List<ProductDTO>> product = new ArrayList<>();
-		for(int i = 0; i < order.size(); i++) {			
+		// 주문한 상품 목록 가져오기 - 주문번호 한 개에 담겨있는 상품 목록 List에 저장
+		List<ProductDTO> product = new ArrayList<ProductDTO>();
+		for(int i = 0; i < order.size(); i++) {
 			product.add(shoppingService.orderList(order.get(i)));
 		}
 		log.info("product : " + product);
 		
-		// 상품 상세 정보
-		List<ProductDisplayVO> productInfo = new ArrayList<ProductDisplayVO>();
-		for(int i = 0; i < product.size(); i++) {
-			for(int j = 0; j < product.get(i).size(); j++) {
-				productInfo.add(shoppingService.orderListDetail(product.get(i).get(j)));
-			}
-		}
-		log.info("productInfo : " + productInfo);
-		
 		mav.addObject("order", order);
 		mav.addObject("product", product);
-		mav.addObject("productInfo", productInfo);
 		return mav;
 	}
 	

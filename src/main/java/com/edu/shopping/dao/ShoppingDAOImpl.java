@@ -1,7 +1,6 @@
 package com.edu.shopping.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.OrderDTO;
 import com.edu.store.dto.ProductDTO;
-import com.edu.store.dto.ProductDisplayVO;
 
 @Repository("shoppingDAO")
 public class ShoppingDAOImpl implements ShoppingDAO {
@@ -67,14 +65,9 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	public List<OrderDTO> orderInfo(MemberDTO member) throws DataAccessException {
 		return sqlsession.selectList(namespace + ".orderInfo", member);
 	}
-
+	
 	@Override
-	public List<ProductDTO> orderList(OrderDTO order) throws DataAccessException {
-		return sqlsession.selectList(namespace + ".orderList", order);
-	}
-
-	@Override
-	public ProductDisplayVO orderListDetail(ProductDTO product) throws DataAccessException {
-		return sqlsession.selectOne(namespace + ".orderListDetail", product);
+	public ProductDTO orderList(OrderDTO order) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".orderList", order);
 	}
 }
