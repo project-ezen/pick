@@ -29,7 +29,7 @@
 			WHERE cart_id = #{cart_id}
 		]]>
 	</update>
-	
+	<!-- ============================================================================================================================================================================================= -->
 	<select id="searchProductId" parameterType="String" resultType="int">
 		<![CDATA[
 			SELECT product_id
@@ -55,22 +55,23 @@
 	<select id="checkOrderId" resultType="String">
 		<![CDATA[
 			SELECT order_id
-			FROM order
+			FROM product_order
 		]]>
 	</select>
 	<select id="checkOrderNum" parameterType="String" resultType="String">
 		<![CDATA[
 			SELECT order_number
-			FROM order
+			FROM product_order
 			WHERE m_id = #{m_id}
 		]]>
 	</select>
-	
+	<!-- ============================================================================================================================================================================================= -->
 	<select id="orderInfo" parameterType="memberDTO" resultType="orderDTO">
 		<![CDATA[
 			SELECT * 
 			FROM product_order
 			WHERE m_id = #{m_id}
+			ORDER BY order_date
 		]]>
 	</select>
 	
@@ -78,15 +79,8 @@
 		<![CDATA[
 			SELECT * 
 			FROM product
-			WHERE order_id = #{order_id}
-		]]>
-	</select>
-	
-	<select id="orderListDetail" parameterType="orderDTO" resultType="productDisplayVO">
-		<![CDATA[
-			SELECT * 
-			FROM product_display
-			WHERE product_display_id = #{product_display_id}
+			WHERE product_id 
+			IN (SELECT product_id FROM product_order WHERE order_id = #{order_id})
 		]]>
 	</select>
 </mapper>
