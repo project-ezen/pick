@@ -3,6 +3,7 @@ package com.edu.board.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +21,13 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
 	
-	// 게시글 목록
+	/* 게시글 목록
 	@Override
 	public List<BoardDTO> recipeBoard() throws Exception {
 		List<BoardDTO> articlesList = boardDAO.selectAllArticlesList();
 		return articlesList;
 	}
+	*/
 	
 	// 전체 게시글 수 구하기 (Paging 처리)
 	@Override
@@ -51,6 +53,15 @@ public class BoardServiceImpl implements BoardService {
 	public void create(BoardDTO boardDTO) throws SQLException {
 		boardDAO.create(boardDTO);
 	}
+	
+	// 게시글 삭제
+	@Override
+	public void delete(int board_id) throws Exception {
+		boardDAO.delete(board_id);
+	}
+	
+	
+	
 	
 
 }

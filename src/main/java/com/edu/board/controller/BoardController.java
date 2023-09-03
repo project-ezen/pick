@@ -1,16 +1,20 @@
 package com.edu.board.controller;
 
+
+
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PagingCriteria;
+
 
 @Controller("BoardController")
 public interface BoardController {
@@ -33,6 +37,12 @@ public interface BoardController {
 		
 		// 게시글 작성(post)
 		public String addNewArticle(BoardDTO boardDTO, Model model) throws Exception;
+		
+		// 게시글 삭제
+		public String articleDelete(int board_id) throws Exception;
+		
+		// 멀티이미지 업로드
+		public void multiImageUploader(HttpServletRequest request, HttpServletResponse response) throws Exception;
 		
 }
 

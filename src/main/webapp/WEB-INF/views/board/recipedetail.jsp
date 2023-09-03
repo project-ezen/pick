@@ -64,18 +64,18 @@ border: 1px solid #656562;
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text"   value="${article.writer}" name="writer" disabled/></td>
+					<td><input type="text"   value="${article.nickname}" name="nickname" disabled/></td>
 					
 					<th>찜 개수</th>
 					<td>{100}</td>
 				</tr>
 				<tr>
                 	<th scope="row">제목</th>
-                	<td colspan="3"><input type="text"   value="${article.title }" name="title" id="title" disabled/></td>
+                	<td colspan="3"><input type="text"   value="${article.title}" name="title" id="title" disabled/></td>
                 </tr>
                 <tr>
                     <th scope="row">내용</th>
-                    <td colspan="3"><textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content }</textarea></td>
+                    <td colspan="3"><textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea></td>
                 </tr>
 				<tr>
 					<td colspan="2">
@@ -84,7 +84,7 @@ border: 1px solid #656562;
 					<td colspan="2" style="text-align: right;">
 						<c:if test="${member.m_id == article.writer}">
 							<input type="button" class="btn2" value="수정" onClick="fn_enable(this.form)"/>
-							<input type="button" class="btn3"  value="삭제" onClick="fn_remove('#', ${article.board_id})"/>
+							<input type="button" class="btn3"  value="삭제" onClick="fn_remove('${path}/board/delete.do', ${article.board_id})"/>
 						</c:if>
 					</td>
 				</tr>
@@ -175,6 +175,22 @@ $(document).ready(function(){
 		}
 	});
 });
+
+function fn_remove(url, board_id){
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", url);
+	
+	var boardIdInput = document.createElement("input");
+	boardIdInput.setAttribute("type", "hidden");
+	boardIdInput.setAttribute("name", "board_id");
+	boardIdInput.setAttribute("value", board_id);
+	
+	form.appendChild(boardIdInput);
+	document.body.appendChild(form);
+	form.submit();
+	
+}
 </script>
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>

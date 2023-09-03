@@ -107,7 +107,11 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.update(namespace + ".edit", memberDTO);
 	}
 
-	
+	// 회원 목록 가져오기
+	@Override
+	public List<MemberDTO> selectMember() throws Exception {
+		return sqlSession.selectList(namespace + ".selectMember");
+	}
 //-------------------------------------------------------------------------------------
 	//내가 쓴 게시물
 
