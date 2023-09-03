@@ -10,7 +10,6 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
-<<<<<<< HEAD
 .foot { padding-bottom: 100px; padding-top: 100px;}
 .container { min-height: 600px; }
 table {
