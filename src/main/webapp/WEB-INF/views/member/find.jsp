@@ -7,11 +7,12 @@
     <%@ include file="../include/header.jsp" %>
 <style>
     .container {
-        width: 25%;
-        margin: auto;
-        margin-top:		150PX ;
-		margin-bottom: 150px;
+        width: 			25%;
+        margin: 		auto;
+        margin-bottom: 150px; 
+		margin-top: 	150px;
     }
+    .foot { padding-bottom: 50px; padding-top: 	50px; }
 </style>
 </head>
 
@@ -232,6 +233,7 @@ $(document).ready(function() {
 
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
+<div class="foot">	
     <div class="container">
     <br/>
         <h2 class="text-center">아이디 / 비밀번호 찾기</h2><br/><br/>
@@ -369,6 +371,7 @@ $(document).ready(function() {
 		</div>
 	</div>
 	<br/><br/>
+</div>	
     <%@ include file="../include/footer.jsp" %>
 </body>
 

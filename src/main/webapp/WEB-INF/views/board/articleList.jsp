@@ -8,6 +8,9 @@
 <%@ include file="../include/header.jsp" %>
 <style>
 
+.foot { padding-bottom: 100px; padding-top: 100px; }
+
+
 img {
 margin-top: 50px;
 margin-left: 10px;
@@ -128,73 +131,71 @@ font-size: 15px;
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
-<div class="container" style="background-color: white;">
-	<h2 align="center">나만의 레시피</h2>
-	<br/>
-	<div style="display: flex;">
-		<div class="searchbar">
-			<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="검색"/>
+<div class="foot">
+	<div class="container" style="background-color: white;">
+		<h2 align="center">나만의 레시피</h2>
+		<br/>
+		<div style="display: flex;">
+			<div class="searchbar">
+				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="검색"/>
+			</div>
+			<div class="selectbtn">
+				<select class="btnsub">
+					<option>최신순</option>
+					<option>찜 많은순</option>
+				</select>
+			</div>
 		</div>
-		<div class="selectbtn">
-			<select class="btnsub">
-				<option>최신순</option>
-				<option>찜 많은순</option>
-			</select>
-		</div>
-	</div>
-	<div class="outer_div">
-	<c:choose>
-		<c:when test="${empty articlesList}"> <!-- 게시글이 하나도 없는 경우 -->
-			<h3 style="font-size:22px; text-align: center;"><b>등록된 게시글이 없습니다.</b></h3>
-		</c:when>
-		<c:when test="${not empty articlesList}"> <!-- 게시글이 하나라도 있는 경우 -->
-			<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
-					<div class="inner_div" style="background-color: #888; height: 200px; width: 300px; border-radius: 10px;">
-						<img alt="" src="${path}/resources/images/cat1.jpg" width="100px" height="100px">
-						<div class="lele">
-							<div class="top">
-								<p class="title"><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
-								<p class="writer">${article.nickname}</p>
-							</div>
-							<div class="bottom">
-								<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<i class="bi bi-heart"></i><span>100</span>
+		<div class="outer_div">
+		<c:choose>
+			<c:when test="${empty articlesList}"> <!-- 게시글이 하나도 없는 경우 -->
+				<h3 style="font-size:22px; text-align: center;"><b>등록된 게시글이 없습니다.</b></h3>
+			</c:when>
+			<c:when test="${not empty articlesList}"> <!-- 게시글이 하나라도 있는 경우 -->
+				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
+						<div class="inner_div" style="background-color: #888; height: 200px; width: 300px; border-radius: 10px;">
+							<img alt="" src="${path}/resources/images/cat1.jpg" width="100px" height="100px">
+							<div class="lele">
+								<div class="top">
+									<p class="title"><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
+									<p class="writer">${article.nickname}</p>
+								</div>
+								<div class="bottom">
+									<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<i class="bi bi-heart"></i><span>100</span>
+								</div>
 							</div>
 						</div>
-					</div>
-			</c:forEach>
-		
-		 <!-- 화면 하단의 페이지 영역 -->
-      </c:when>
-	</c:choose>
-    </div>  
-      
-      <div class="pagenav">
-         <ul class="btn-group pagination">
-            <c:if test="${pageMaker.prev}">
-               <li>
-                  <a href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
-               </li>
-            </c:if>
-            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-               <li>
-                  <a href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
-               </li>
-            </c:forEach>
-            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-               <li>
-                  <a href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
-               </li>
-            </c:if>
-         </ul>
-      </div>
-     
-      
-	<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
-	<br/>
-</div>
+				</c:forEach>
+			 <!-- 화면 하단의 페이지 영역 -->
+	      </c:when>
+		</c:choose>
+	    </div>  
+	      <div class="pagenav">
+	         <ul class="btn-group pagination">
+	            <c:if test="${pageMaker.prev}">
+	               <li>
+	                  <a href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	               </li>
+	            </c:if>
+	            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+	               <li>
+	                  <a href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
+	               </li>
+	            </c:forEach>
+	            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+	               <li>
+	                  <a href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+	               </li>
+	            </c:if>
+	         </ul>
+	      </div>
+		<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
+		<br/>
+	</div>
 <br/><br/>
+</div>
 <%@ include file="../include/footer.jsp" %>
 <script>
 function fn_writeForm(isLogOn, articleForm, loginForm) {
