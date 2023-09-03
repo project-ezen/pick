@@ -7,6 +7,10 @@
     <%@ include file="../include/header.jsp" %>
     
     <style>
+    	.container { background-color: rgba(255, 255, 255, 0.88);}
+    	
+    	.foot { padding-bottom: 100px; padding-top: 100px;}
+    	
         .update-form {
             width: 600px;
             margin: auto;
@@ -100,6 +104,7 @@
 
 <body>
 <%@ include file="../include/topMenu.jsp" %>
+<div class="foot">
 	<div class="container" id="class">
 		<div class="update-form">
 			<h1 class="text-center">회원정보 수정</h1>
@@ -160,7 +165,8 @@
 			</form>
 		</div>
 	</div>
-	<br/>
+	<br/><br/>
+	</div>
 	<%@ include file="../include/footer.jsp" %>
 </body>
 
