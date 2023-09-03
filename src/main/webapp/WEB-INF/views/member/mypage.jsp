@@ -13,7 +13,7 @@
   }
 }
 
-.class 	{ width: 900px; background-color: #fff; min-height: 600px; border-radius: 10px; margin:auto;  background-color: rgba( 255, 255, 255, 0.8 ); }
+.class 	{ width: 900px; min-height: 600px; border-radius: 10px; margin:auto;  background-color: rgba( 255, 255, 255, 0.8 ); }
 
 .foot 	{ padding-bottom: 100px; padding-top: 100px; margin:auto; }
 

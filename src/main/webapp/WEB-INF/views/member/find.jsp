@@ -13,6 +13,7 @@
 		margin-top: 	150px;
     }
     .foot { padding-bottom: 50px; padding-top: 	50px; }
+    
 </style>
 </head>
 

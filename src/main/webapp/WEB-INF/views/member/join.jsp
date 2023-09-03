@@ -8,7 +8,7 @@
     <style>
     	.foot {padding-bottom: 100px; padding-top: 100px; }
     
-    	.container { background-color: rgba(255, 255, 255, 0.88);}
+    	.container { background-color: rgba(255, 255, 255, 0.88); }
     
         .join-form {
             margin: auto;

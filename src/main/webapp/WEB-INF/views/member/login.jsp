@@ -21,10 +21,7 @@
         
         .foot { padding-bottom: 100px; padding-top: 100px; margin:auto;  }
         
-        .social-buttons {
-            text-align: center;
-            margin-top: 15px;
-        }
+        .social-buttons {  text-align: center;  margin-top: 15px; }
         
         #kakaoLogin,
         #naverLogin,
