@@ -8,11 +8,7 @@
 <title>Insert title here</title>
 <%@ include file="./include/header.jsp" %>
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            color: white;
-        }
+        body, html {  height: 100%;  margin: 0;  color: white; }
         .bg {
             background-image: url("./resources/images/background2.jpg");
             background-attachment: scroll;

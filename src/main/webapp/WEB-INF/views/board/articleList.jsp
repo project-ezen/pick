@@ -10,8 +10,7 @@
 
 .foot { padding-bottom: 100px; padding-top: 100px; }
 
-.container {
-}
+.container { }
 
 img {
 margin-top: 50px;

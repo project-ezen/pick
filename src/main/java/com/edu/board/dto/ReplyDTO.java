@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class ReplyDTO {
 
+	
 		private int 	replyNum;
 		private int 	board_id;
 		private String  r_writer;
