@@ -1,13 +1,11 @@
 package com.edu.sole.controller;
 
-<<<<<<< HEAD
 
 import java.io.File;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
-=======
->>>>>>> dcc4718cdebfec287dd19485cbe32c1d1e32c561
+
 import java.util.List;
 import java.util.Map;
 
@@ -212,7 +210,7 @@ public class SoleController {
 		
 		return image;
 
-<<<<<<< HEAD
+
 	} 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ajax
@@ -243,6 +241,3 @@ public class SoleController {
 	
 } // end class
 
-=======
-}
->>>>>>> dcc4718cdebfec287dd19485cbe32c1d1e32c561
