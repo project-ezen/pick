@@ -1,1 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.edu.board.mappers.replyMapper">
+	
+	<select id="replyList" parameterType="int" resultType="com.edu.board.dto.ReplyDTO">
+		select reply_num, b_id, r_writer, content, writeDate
+		from reply
+		where b_id = #{board_id}			
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="replyWrite" parameterType="com.edu.board.dto.ReplyDTO">
+		insert into reply(reply_num, b_id, r_writer, content, writeDate)
+			value(#{replyNum},#{board_id}, #{r_writer}, #{content}, #{writeDate})
+	</insert>
+		
+	<!-- 댓글 수정 -->
+	<update id="replyUpdate" parameterType="com.edu.board.dto.ReplyDTO">
+		update reply set
+			r_writer = #{r_writer},
+			content = #{content}
+		where replyNum = #{replyNum}
+			and b_id = ${board_id}		
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="replyDelete" parameterType="com.edu.board.dto.ReplyDTO">
+		delete from tbl_reply
+		where reply_num = #{replyNum}
+			and b_id = ${board_id}	
+	</delete>
+
+	
+	
+</mapper>
