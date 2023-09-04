@@ -1,6 +1,7 @@
 package com.edu.shopping.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,6 +67,16 @@ public class ShoppingServiceImpl implements ShoppingService {
 	@Override
 	public ProductDTO orderList(OrderDTO order) throws Exception {
 		return shoppingDAO.orderList(order);
+	}
+
+	@Override
+	public void overwriteOrder(Map<String, String> map) throws Exception {
+		shoppingDAO.overwriteOrder(map);
+	}
+//=====================================================================================================
+	@Override
+	public List<OrderDTO> orderNumInfo(int order_num) throws Exception {
+		return shoppingDAO.orderNumInfo(order_num);
 	}
 
 }
