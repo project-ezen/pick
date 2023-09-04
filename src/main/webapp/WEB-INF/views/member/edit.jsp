@@ -130,7 +130,7 @@
 				<div class="form-group">
 					<label>닉네임</label>
 					<div class="input-group">
-						<input type="text" class="form-control" id="m_nickname" name="m_nickname">
+						<input type="text" class="form-control" id="m_nickname" name="m_nickname" value="${member.m_nickname}">
 						<span class="input-group-btn">
 							<button class="btn btn-info" type="button" id="nickCheck" onClick="fn_nickCheck()">중복확인</button>
 						</span>
