@@ -37,7 +37,10 @@ border: 1px solid #656562;
 width: 80px;
 height: 30px;
 border-radius: 10px;
-border: 1px solid #656562;
+display :inline-block; 
+background-color: #687AB6; 
+color: #fff; 
+border: none;
 }
 </style>
 </head>
@@ -104,30 +107,31 @@ border: 1px solid #656562;
 	<hr/>
 	<div id="replyList"> 
 		<table style="margin-bottom: 20px;">
-			<colgroup>
-				<col style="width:15%;" /><col style="width:75%;"/><col style="width:10%;"/>
-			</colgroup>
 			<c:forEach items="${reply}" var="reply">
 			<tr>
-				<th style="text-align: center;">${reply.writer}/<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd" /></th>
-				<td>${reply.content}</td>
+				<th style="text-align: center; width:15%;">${reply.writer}(<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd" />)</th>
+				<td style="width:75%;">${reply.content}</td>
+				<c:if test="${member.m_id == reply.writer}">
+				<td style="width:8%;"><button class="btn_2" type="button">수정</button>/<button class="btn_2" type="button">삭제</button></td>
+				</c:if>
 			</tr>
 			</c:forEach>
-		</table>		
+		</table>
+		<form method="post" action="/reply/replywrite">
 		<table style="margin-bottom: 20px;">
-			<colgroup>
-				<col style="width:15%;" /><col style="width:75%;"/><col style="width:10%;"/>
-			</colgroup>
+		<c:if test="${isLogOn == true }">
 			<tr>
-				<th style="text-align: center;">닉네임</th>
-				<td>${member.m_nickname}</td>
+				<th style="text-align: center; width:15%;">닉네임</th>
+				<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_id}" readonly/></td>
 			</tr>
 			<tr>	
-				<th style="text-align: center;">내용</th>
-				<td><textarea rows="5" cols="50" style="width:100%"></textarea></td>
-				<td><button class="btn_2" type="button"  style="display :inline-block; background-color: #687AB6; color: #fff; border: none;">댓글쓰기</button></td>
+				<th style="text-align: center; width:15%;">내용</th>
+				<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
+				<td style="width:8%;"><button class="btn_2" type="submit" id="replyBTN">댓글 작성</button></td>
 			</tr>
-		</table>	
+		</c:if>
+		</table>
+		</form>
 	</div>
 </div>
 <br/>
@@ -205,16 +209,39 @@ function fn_remove(url, board_id){
 	
 }
 
-<!-- 댓글 
-function replyList() {
-	$.ajax ({
+
+$(document).ready(function() {
+	
+	replyList();
+	
+	$("#replyBTN").click(function() {
+		var replytext 	= $("#replytext").val();
+		var b_id 		= "${article.board_id}"
+		var param		= "replytext=" +replytext +"&board_id="+b_id;
+		
+		$.ajax({
+			type: "post",
+			url: "${path}/reply/replywrite",
+			data: param,
+			success: function() {
+				alert("댓글이 등록되었습니다.");
+				RreplyList();
+			}
+		});
+		
+	});
+		
+		function replyList() {
+		$.ajax ({
 		type: "get",
-		url: "${path}/board/articleList?board_id=${board_id}",
+		url: "${path}/board/articleList?board_id=${article.board_id}",
 		success: function(result) {
 			$("#replyList").html(result);
 		}
 	})
-} -->
+
+	
+}
 
 
 

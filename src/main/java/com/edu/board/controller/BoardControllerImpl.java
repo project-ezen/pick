@@ -104,9 +104,15 @@ public class BoardControllerImpl implements BoardController {
 	public void articleDetail(@RequestParam("board_id")int board_id, Model model) throws Exception {
 		
 		BoardDTO boardDTO = boardService.articleDetail(board_id);
-		System.out.println("BCI articleDetail() : " + boardDTO);
-		
+		//System.out.println("BCI articleDetail() : " + boardDTO);
 		model.addAttribute("article",boardDTO);
+		
+		
+		System.out.println(board_id);
+		List<ReplyDTO> reply =replyService.list(board_id);
+		
+		System.out.println(reply);
+		model.addAttribute("reply", reply);
 		
 	}
 

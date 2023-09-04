@@ -7,13 +7,13 @@
 	<select id="replyList" parameterType="int" resultType="com.edu.board.dto.ReplyDTO">
 		select reply_num, b_id, r_writer, content, writeDate
 		from reply
-		where b_id = #{board_id}		
+		where b_id = #{board_id}			
 	</select>
 
 	<!-- 댓글 작성 -->
 	<insert id="replyWrite" parameterType="com.edu.board.dto.ReplyDTO">
-		insert into reply(b_id, r_writer, content, writeDate)
-			value(#{board_id}, #{r_writer}, #{content}, #{writeDate})
+		insert into reply(reply_num, b_id, r_writer, content, writeDate)
+			value(#{replyNum},#{board_id}, #{r_writer}, #{content}, #{writeDate})
 	</insert>
 		
 	<!-- 댓글 수정 -->
