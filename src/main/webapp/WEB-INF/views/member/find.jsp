@@ -7,6 +7,11 @@
     <%@ include file="../include/header.jsp" %>
 <style>
     .container {
+        width: 25%;
+        margin: auto;
+        margin-top:		150PX ;
+		margin-bottom: 150px;
+		min-width: 500px;
         width: 			25%;
         margin: 		auto;
         margin-bottom: 150px; 
@@ -242,6 +247,7 @@ $(document).ready(function() {
 		    <li class="active" style="width: 50%;"><a class="text-center" data-toggle="tab" href="#findID">아이디 찾기</a></li>
 		    <li style="width: 50%;"><a class="text-center" data-toggle="tab" href="#findPW">비밀번호 찾기</a></li>
 		</ul>
+		
         <div class="tab-content">
             <div id="findID" class="tab-pane fade in active"><br/>
 			    <h3 class="text-center">아이디 찾기</h3>
@@ -255,6 +261,8 @@ $(document).ready(function() {
 				            <label><input type="radio" name="searchOption" value="nickname">닉네임으로 찾기</label>
 				        </div>
 				    </div>
+				    
+				    <!-- 이름 / 전화번호로 찾기 -->
 				    <div class="form-group">
 				    <div class="row col-md-offset-2">
 					    <label>이름</label>
@@ -294,6 +302,7 @@ $(document).ready(function() {
 					    </div>
 				    </div>
 				    
+				    <!-- 이름 / 닉네임으로 찾기 -->
 				    <div class="form-group" id="m_nickname_div" style="display:none;">
 				    <div class="row col-md-offset-2">
 				        <label>닉네임</label>
