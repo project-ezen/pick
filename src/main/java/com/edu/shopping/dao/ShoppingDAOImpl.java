@@ -1,6 +1,7 @@
 package com.edu.shopping.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -69,5 +70,15 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	@Override
 	public ProductDTO orderList(OrderDTO order) throws DataAccessException {
 		return sqlsession.selectOne(namespace + ".orderList", order);
+	}
+
+	@Override
+	public void overwriteOrder(Map<String, String> map) throws DataAccessException {
+		sqlsession.update(namespace + ".cancelProgress", map);
+	}
+//=====================================================================================================
+	@Override
+	public List<OrderDTO> orderNumInfo(int order_num) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".orderNumInfo", order_num);
 	}
 }

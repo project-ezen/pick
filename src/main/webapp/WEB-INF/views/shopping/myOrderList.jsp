@@ -65,6 +65,12 @@
 		font-size: 16px;
 		resize: none;
 	}	
+	
+	.orderNum {
+		cursor:	pointer;
+		text-decoration-line: none;
+		color: black;
+	}
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
@@ -73,7 +79,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <div class="container">
 	<h3 style="text-align: center;">주문 조회</h3>
-	<button type="button" class="list" style="float: right;">목록으로 돌아가기</button>
 <!-- ----------------------------------------------------------------------------------------------------------- -->
 	<!-- 구매 내역 -->
 	<div id="receipt_info">
@@ -81,21 +86,24 @@
 		<label class="control-label">&nbsp;&nbsp;&nbsp;구매 내역</label>
 		<br/>
 		<div class="form-group">
-			<div class="col-md-4 col-sm-4">
+			<div class="col-md-3 col-sm-3">
 				<input class="form-control" type="text" id="datepicker1" placeholder="날짜를 선택하십시오."/>
 			</div>
 			<div class="col-md-1 col-sm-1" align="center">
 				<b>~</b>
 			</div>
-			<div class="col-md-4 col-sm-4">
+			<div class="col-md-3 col-sm-3">
 				<input class="form-control" type="text" id="datepicker2" placeholder="날짜를 선택하십시오."/>
 			</div>
 			<div class="col-md-2 col-sm-2" style="margin-bottom: 10px;">
 				<button class="form-control btn btn-default" type="submit">조회</button>
 			</div>
+			<div class="col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2" style="margin-bottom: 10px;">
+				<button type="button" class="list" style="float: right;">목록으로 돌아가기</button>
+			</div>
 		</div>
 	</form>
-		<form>
+		<form id="order_list">
 		<table id="t1">
 			<thead>
 				<tr>
@@ -112,29 +120,79 @@
 			<c:if test="${order.order_complaint == null }">
 				<tbody>
 					<tr>
-						<td class="orderNum">
-							${order.order_number}
+						<td>
+							<a class="orderNum">${order.order_number}</a>
 						</td>
 						<td>
 							<div class="col-md-12 text-center" id="item_thumbnail">
 							    <a href="#" class="thumbnail">
 							        <input type="image" src="${path }/download?imageFile=${product[o_status.index].product_image }" width="161" height="133" disabled>
 							        <input type="hidden" class="pdtImage" value="${product[o_status.index].product_image }" name="imageFile">
-							        <input type="hidden" class="orderId" value="${order.order_id }">
+							        <input type="hidden" class="orderId" name="orderId" value="${order.order_id }">
 							    </a>
 							</div>
 						</td>
 						<td class="pdtName">${product[o_status.index].product_name }</td>
 						<td class="pdtCount">${order.count}</td>
-						<td class="orderPrice">${order.final_price}</td>
-						<td class="orderStatus">${order.order_status}</td>
+						<td class="orderPrice">${product[o_status.index].product_price * order.count}</td>
+						<td class="orderStatus">
+							${order.order_status}
+						</td>
 						<td>
 							<c:if test="${order.order_status == 'delivery-progressing'}">
-								<input type="button" class="btn btn-default cn" data-toggle="modal" data-target="#cancel" value="취소">
+								<input type="button" class="btn btn-default cancel" data-toggle="modal" data-target=".cancel${o_status.index }" value="취소">
+								<div class="modal fade cancel${o_status.index }">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header text-center">
+												<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+												<h3>Cancel Progressing</h3>
+											</div>
+											<div class="modal-body">
+												<textarea class="cancel_reason" name="cancel_reason" placeholder="please write the reason"></textarea>
+											</div>
+											<div class="modal-footer">
+												<input type="button" class="btn btn-primary cancel_order" data-dismiss="modal" value="확인">
+											</div>
+										</div>
+									</div>
+								</div>
 							</c:if>
 							<c:if test="${order.order_status == 'delivery-successed'}">
-								<input type="button" class="btn btn-default cg" data-toggle="modal" data-target="#change" value="교환">
-								<input type="button" class="btn btn-default rf" data-toggle="modal" data-target="#refund" value="반품">
+								<input type="button" class="btn btn-default change" data-toggle="modal" data-target=".change${o_status.index }" value="교환">
+								<input type="button" class="btn btn-default refund" data-toggle="modal" data-target=".refund${o_status.index }" value="반품">
+								<div class="modal fade cancel${o_status.index }">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header text-center">
+												<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+												<h3>Change Progressing</h3>
+											</div>
+											<div class="modal-body">
+												<textarea class="change_reason" name="change_reason" placeholder="please write the reason"></textarea>
+											</div>
+											<div class="modal-footer">
+												<input type="button" class="btn btn-primary change_order" data-dismiss="modal" value="확인">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal fade refund${o_status.index }">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header text-center">
+												<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+												<h3>Refund Progressing</h3>
+											</div>
+											<div class="modal-body">
+												<textarea class="refund_reason" name="refund_reason" placeholder="please write the reason"></textarea>
+											</div>
+											<div class="modal-footer">
+												<input type="button" class="btn btn-primary refund_order" data-dismiss="modal" value="확인">
+											</div>
+										</div>
+									</div>
+								</div>
 							</c:if>
 						</td>
 					</tr>
@@ -142,24 +200,6 @@
 			</c:if>
 			</c:forEach>
 		</table>
-		
-		<div class="modal fade" id="cancel">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header text-center">
-						<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-						<input type="hidden" id="clicked_order_id">
-						<h3>Cancel Progressing</h3>
-					</div>
-					<div class="modal-body">
-						<textarea placeholder="please write the reason"></textarea>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-primary" id="cancel_order" data-dismiss="modal" value="확인">
-					</div>
-				</div>
-			</div>
-		</div>
 		</form>
 	</div>
 	<hr/>
@@ -171,16 +211,16 @@
 		<label class="control-label">&nbsp;&nbsp;&nbsp;취소/반품 내역</label>
 		<br/>
 		<div class="form-group">
-			<div class="col-md-4">
+			<div class="col-md-3 col-sm-3">
 				<input class="form-control" type="text" id="datepicker3" placeholder="날짜를 선택하십시오."/>
 			</div>
 			<div class="col-md-1" align="center">
 				<b>~</b>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3 col-sm-3">
 				<input class="form-control" type="text" id="datepicker4" placeholder="날짜를 선택하십시오."/>
 			</div>
-			<div class="col-md-2" style="margin-bottom: 10px;">
+			<div class="col-md-2 col-sm-2" style="margin-bottom: 10px;">
 				<button class="form-control btn btn-default" type="submit">조회</button>
 			</div>
 		</div>
@@ -200,8 +240,8 @@
 			<c:if test="${order.order_complaint != null }">
 				<tbody>
 					<tr>
-						<td class="orderNum">
-							${order.order_number}
+						<td>
+							<a class="orderNum">${order.order_number}</a>
 						</td>
 						<td>
 							<div class="col-md-12 text-center" id="item_thumbnail">
@@ -214,7 +254,7 @@
 						</td>
 						<td class="pdtName">${product[o_status.index].product_name }</td>
 						<td class="pdtCount">${order.count}</td>
-						<td class="orderPrice">${order.final_price}</td>
+						<td class="orderPrice">${product[o_status.index].product_price * order.count}</td>
 						<td class="orderStatus">${order.order_status}</td>
 					</tr>
 				</tbody>
@@ -227,16 +267,31 @@
 <br/><br/>
 <script>
 $(document).ready(function() {
-	$(".cn, .cg, .rf").each(function(idx) {
-		$(".cn:eq[" + idx + "]").on("click", function() {
-			$("#clicked_order_id").prop("value", $("orderId[" + idx + "]"));
+	// 주문 취소하기
+	$(".cancel_order, .orderId, .cancel_reason").each(function(idx) {
+		$(".cancel_order:eq(" + idx + ")").on("click", function() {
+			console.log($(".orderId:eq(" + idx + ")").val() + " " + $(".cancel_reason:eq(" + idx + ")").val());
+			
+			$.ajax({
+				url: "/shopping/reason",
+				type: "post",
+				dataType: "text",
+				data: {"id" : $(".orderId:eq(" + idx + ")").val(), "reason": $(".cancel_reason:eq(" + idx + ")").val()},
+				success: function(){
+					console.log("succeed");
+					document.location.reload();
+				},
+				error: function() {
+					console.log("error");
+				}
+			});
 		});
 	});
 	
-	$("#cancel_order").on("click", function() {
-		$ajax{(
-				
-		)};
+	$(".orderNum").each(function(idx) {
+		$(".orderNum:eq(" + idx + ")").on("click", function() {
+			location.href = "/shopping/myOrderListDetail?order_number=" + $(".orderNum:eq(" + idx + ")").text();
+		});
 	});
 });
 //===================================================================================================================
