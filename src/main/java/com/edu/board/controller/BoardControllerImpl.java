@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,7 +26,9 @@ import com.edu.board.dao.BoardDAO;
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
+import com.edu.board.dto.ReplyDTO;
 import com.edu.board.service.BoardService;
+import com.edu.board.service.ReplyService;
 
 
 @Controller("BoardController")
@@ -40,7 +43,11 @@ public class BoardControllerImpl implements BoardController {
 	@Autowired
 	private BoardDAO boardDAO;
 	
-
+	//댓글
+	@Inject
+	@Autowired
+	private ReplyService replyService;
+	
 	// 게시글 목록
 	/*
 	@Override
@@ -94,20 +101,13 @@ public class BoardControllerImpl implements BoardController {
 	// 게시글 번호에 해당하는 상세정보
 	@Override
 	@RequestMapping(value="/board/recipedetail", method=RequestMethod.GET)
-	public ModelAndView articleDetail(@RequestParam("board_id")int board_id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
+	public void articleDetail(@RequestParam("board_id")int board_id, Model model) throws Exception {
 		
-		boardDTO = boardService.articleDetail(board_id);
+		BoardDTO boardDTO = boardService.articleDetail(board_id);
 		System.out.println("BCI articleDetail() : " + boardDTO);
 		
+		model.addAttribute("article",boardDTO);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("article", boardDTO);
-		
-		
-		return mav;
 	}
 
 

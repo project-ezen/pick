@@ -26,14 +26,11 @@ public interface BoardController {
 		// 게시글 작성 화면
 		public ModelAndView articleForm() throws Exception;
 
-
 		// 게시글 목록(페이징)화면 보여주기
-		public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response,
-				PagingCriteria pcri) throws Exception;
+		public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception;
 
 		// 게시글 번호에 해당하는 상세내역
-		public ModelAndView articleDetail(@RequestParam("board_id") int board_id,
-				HttpServletRequest request, HttpServletResponse response) throws Exception;
+		public void articleDetail(@RequestParam("board_id") int board_id, Model model) throws Exception;
 		
 		// 게시글 작성(post)
 		public String addNewArticle(BoardDTO boardDTO, Model model) throws Exception;

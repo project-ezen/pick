@@ -1,5 +1,6 @@
 <!-- session을 체트하기 위해서 상단에 page session값을 true로 설정해야 한다 -->
 <%@ page session="true"%>
+<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,7 @@
             width: 400px;
         }
         
-        .foot { padding-bottom: 100px; padding-top: 100px; margin:auto;  }
+        .foot { padding-bottom: 20px; padding-top: 20px; margin:auto; }
         
         .social-buttons {  text-align: center;  margin-top: 15px; }
         
@@ -83,25 +84,26 @@
                     <a href="/member/find">아이디 / 비밀번호 찾기&nbsp;&nbsp;</a> |
                     <a href="/member/join">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
                 </div>
-            </div><br>
-        <div class="social-buttons">
-            <button class="btn btn-warning" id="kakaoLogin">카카오 로그인</button>
-        </div>
-        <div class="social-buttons">
-            <button class="btn btn-success" id="naverLogin">네이버 로그인</button>
-        </div>
-        <div class="social-buttons">
-            <button class="btn btn-danger" id="googleLogin">구글 로그인</button>
-        </div>
-        
-        <!-- msg가 false인 경우 -->
-		<c:if test="${msg == false}">
-			<script>
-			alert("로그인을 실패하였습니다. 아이디와 비밀번호를 확인해주세요.");
-			</script>
-		</c:if>
-    </form>
-</div>
+	        </div>
+	        <br>
+	        <div class="social-buttons">
+	            <button class="btn btn-warning" id="kakaoLogin">카카오 로그인</button>
+	        </div>
+	        <div class="social-buttons">
+	            <button class="btn btn-success" id="naverLogin">네이버 로그인</button>
+	        </div>
+	        <div class="social-buttons">
+	            <button class="btn btn-danger" id="googleLogin">구글 로그인</button>
+	        </div>
+	        
+	        <!-- msg가 false인 경우 -->
+			<c:if test="${msg == false}">
+				<script>
+				alert("로그인을 실패하였습니다. 아이디와 비밀번호를 확인해주세요.");
+				</script>
+			</c:if>
+	    </form>
+	</div>
 </div>
     <%@ include file="../include/footer.jsp" %>
     

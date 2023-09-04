@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page session="true"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,28 +54,28 @@ border: 1px solid #656562;
 			</colgroup>
 			<tbody>
 				<tr>
-					<th>글번호</th>
+					<th style="text-align: center;">글번호</th>
 					<td>
 						<input type="text"   value="${article['board_id']}" disabled/>
 						<input type="hidden" value="${article['board_id']}" name="board_id"/>
 					</td>
 					
-					<th>작성일자</th>
+					<th style="text-align: center;">작성일자</th>
 					<td><input type="text"   value="${article.writeDate}" name="writeDate" disabled/></td>
 				</tr>
 				<tr>
-					<th>작성자</th>
+					<th style="text-align: center;">작성자</th>
 					<td><input type="text"   value="${article.nickname}" name="nickname" disabled/></td>
 					
-					<th>찜 개수</th>
+					<th style="text-align: center;">찜 개수</th>
 					<td>{100}</td>
 				</tr>
 				<tr>
-                	<th scope="row">제목</th>
+                	<th scope="row" style="text-align: center;">제목</th>
                 	<td colspan="3"><input type="text"   value="${article.title}" name="title" id="title" disabled/></td>
                 </tr>
                 <tr>
-                    <th scope="row">내용</th>
+                    <th scope="row" style="text-align: center;">내용</th>
                     <td colspan="3"><textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea></td>
                 </tr>
 				<tr>
@@ -100,20 +102,32 @@ border: 1px solid #656562;
 	</form>
 	<br/>
 	<hr/>
-	<div style="text-align: right; margin-bottom: 10px;">
-		<button class="btn_2" type="button" style="display :inline-block; background-color: #687AB6; color: #fff;">댓글쓰기</button>
-	</div>
-	<div>
+	<div id="replyList"> 
+		<table style="margin-bottom: 20px;">
+			<colgroup>
+				<col style="width:15%;" /><col style="width:75%;"/><col style="width:10%;"/>
+			</colgroup>
+			<c:forEach items="${reply}" var="reply">
+			<tr>
+				<th style="text-align: center;">${reply.writer}/<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd" /></th>
+				<td>${reply.content}</td>
+			</tr>
+			</c:forEach>
+		</table>		
 		<table style="margin-bottom: 20px;">
 			<colgroup>
 				<col style="width:15%;" /><col style="width:75%;"/><col style="width:10%;"/>
 			</colgroup>
 			<tr>
-				<th style="text-align: center;">{작성자 닉네임}</th>
-				<td>{댓글 텍스트}</td>
-				<td><button class="btn_2" type="button" style="background-color: #8A9BD4; color: #fff;">답댓쓰기</button></td>
+				<th style="text-align: center;">닉네임</th>
+				<td>${member.m_nickname}</td>
 			</tr>
-		</table>		
+			<tr>	
+				<th style="text-align: center;">내용</th>
+				<td><textarea rows="5" cols="50" style="width:100%"></textarea></td>
+				<td><button class="btn_2" type="button"  style="display :inline-block; background-color: #687AB6; color: #fff; border: none;">댓글쓰기</button></td>
+			</tr>
+		</table>	
 	</div>
 </div>
 <br/>
@@ -190,6 +204,20 @@ function fn_remove(url, board_id){
 	form.submit();
 	
 }
+
+<!-- 댓글 
+function replyList() {
+	$.ajax ({
+		type: "get",
+		url: "${path}/board/articleList?board_id=${board_id}",
+		success: function(result) {
+			$("#replyList").html(result);
+		}
+	})
+} -->
+
+
+
 </script>
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>

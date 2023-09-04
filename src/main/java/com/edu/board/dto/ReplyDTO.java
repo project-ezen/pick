@@ -42,7 +42,6 @@ public class ReplyDTO {
 		public void setWriteDate(Date writeDate) {
 			this.writeDate = writeDate;
 		}
-		
 		@Override
 		public String toString() {
 			return "ReplyDTO [replyNum=" + replyNum + ", board_id=" + board_id + ", r_writer=" + r_writer + ", content="
