@@ -4,6 +4,7 @@
 	
 <mapper namespace="com.edu.board.mappers.replyMapper">
 	
+	<!-- 댓글목록 -->
 	<select id="replyList" parameterType="int" resultType="com.edu.board.dto.ReplyDTO">
 		select reply_num, b_id, r_writer, content, writeDate
 		from reply
