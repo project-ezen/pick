@@ -1,8 +1,5 @@
 package com.edu.member.controller;
 
-
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,9 +47,9 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
 		
-		
 		return "/member/login";
 	}
+	
 	
 	//로그인 => 있는지 확인
 	@RequestMapping(value="/login", method=RequestMethod.POST)
@@ -91,9 +88,7 @@ public class MemberController {
 			rAttr.addFlashAttribute("msg",  false);
 			mav.setViewName("redirect:/member/login");
 		}
-		
-		return mav;
-		
+			return mav;
 	}
 	
 	
@@ -123,10 +118,9 @@ public class MemberController {
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
-		
 		return "redirect:/mypage";
-		
 	}
+	
 	
 	//아이디 중복 검사
 	@ResponseBody
@@ -139,6 +133,7 @@ public class MemberController {
 		//			   0이면 아이디에 해당하는 정보가 존재하지 않는다.
 		return result;
 	}
+	
 	
 	//닉네임 중복 검사
 	@ResponseBody
@@ -158,6 +153,7 @@ public class MemberController {
 	public void find(MemberDTO memberDTO) throws Exception {
 
 	}
+	
 	
 	//아이디 찾기 Post
 	@ResponseBody
@@ -193,6 +189,7 @@ public class MemberController {
 	    String result = memberService.findID2(m_nickname);
 	    return result;
 	} // 인증번호가 맞으면 아이디 받아오기(이름 닉네임)
+	
 	
 	//비밀번호 찾기 Post
 	@ResponseBody

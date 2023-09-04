@@ -33,6 +33,88 @@ a:hover { text-decoration: none; color: #ccd6d9; }
 
 .box_1 	{ margin-left: 30px; }
 
+/* 추가된 모달 스타일 */
+.modal-open {
+    overflow: hidden;
+}
+
+.modal-open .backdrop {
+    display: block;  /* backdrop를 활성화 */
+}
+
+#passwordModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 300px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+    z-index: 2;
+    display: none;
+}
+
+.passwordField {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.confirmButton {
+    margin-right: 15px;  /* 이 부분을 추가합니다 */
+    padding: 5px 10px;
+    border: none;
+    background-color: #2ECC71;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.closeButton {
+    padding: 5px 10px;
+    border: none;
+    background-color: #E74C3C;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.closeButton:hover {
+    background-color: #C0392B;
+}
+
+.confirmButton:hover {
+    background-color: #34495E;
+}
+.backdrop {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0,0.5); 
+    z-index: 1; 
+    display: none; 
+}
+.closeButton {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #E74C3C;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.closeButton:hover {
+    background-color: #C0392B;
+}
+
 </style>
 </head>
 <body>
@@ -51,11 +133,67 @@ a:hover { text-decoration: none; color: #ccd6d9; }
 			<div class="box_1"><a href="${path}/shopping/myorderList.jsp">주문 조회</a></div>
 			<div class="box_2"><a href="${path}/board/recipejjim.jsp">찜한 레시피</a></div>
 			<div class="box_3"><a href="${path}/member/myboard">내가 쓴 게시물</a></div>
-			<div class="box_4"><a href="${path}/member/edit">회원 정보 수정</a></div>
+			<div class="box_4"><a href="javascript:void(0);" onclick="openModal()">회원 정보 수정</a></div>
 		</div>
 		
 	</div>
 	<br/><br/>
 	<%@ include file="../include/footer.jsp" %>
+	
+	<div class="backdrop" id="backdrop"></div>
+	<!-- 추가된 비밀번호 확인 모달 -->
+    <div id="passwordModal">
+	    <div style="text-align: center;">
+	        <h2>비밀번호 확인</h2>
+	        <input type="password" id="passwordInput" class="passwordField" placeholder="비밀번호를 입력하세요">
+	        <br>
+	        <button onclick="checkPassword()" class="confirmButton">확인</button>
+	        <button onclick="closeModal()" class="closeButton">닫기</button>
+	    </div>
+	</div>
+    
+    <!-- 추가된 JavaScript -->
+    <script>
+    function openModal() {
+        document.getElementById("passwordModal").style.display = "block";
+        document.body.classList.add("modal-open");  // 클래스 추가
+
+        // 모달 외의 배경을 클릭하면 모달이 닫히도록 이벤트 추가
+        document.getElementById("backdrop").addEventListener('click', closeModal);
+        
+        // passwordInput에 자동 포커스
+        var passwordInput = document.getElementById('passwordInput');
+        passwordInput.focus();
+
+        // passwordInput에서 엔터 키를 감지하여 checkPassword 함수 실행
+        passwordInput.addEventListener('keydown', function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    }
+
+    function closeModal() {
+        document.getElementById("passwordModal").style.display = "none";
+        document.body.classList.remove("modal-open");  // 클래스 제거
+
+    	 // 비밀번호 입력 필드 값 초기화
+        document.getElementById('passwordInput').value = "";
+        
+        // 모달 외의 배경 클릭 이벤트 제거
+        document.getElementById("backdrop").removeEventListener('click', closeModal);
+    }
+
+        function checkPassword() {
+            var inputPassword = document.getElementById('passwordInput').value;
+    
+            // Simple password check, replace with actual server check
+            if (inputPassword === "${member.m_pw}") {
+                window.location.href = "${path}/member/edit";
+            } else {
+                alert("비밀번호가 틀렸습니다.");
+            }
+        }
+    </script>
 </body>
 </html>

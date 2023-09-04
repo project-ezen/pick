@@ -7,8 +7,10 @@
     <%@ include file="../include/header.jsp" %>
     
     <style>
+    	.container {
+    		width: 500px;
+    	}
         .update-form {
-            width: 600px;
             margin: auto;
             padding: 30px;
         }
