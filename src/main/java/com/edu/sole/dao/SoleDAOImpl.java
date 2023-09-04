@@ -1,6 +1,7 @@
 package com.edu.sole.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -13,6 +14,8 @@ import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.SoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
+import com.edu.sole.dto.recipe.RecipeReviewDTO;
+import com.edu.sole.dto.recipe.ReviewCriteria;
 
 @Repository
 public class SoleDAOImpl implements SoleDAO {
@@ -56,5 +59,40 @@ public class SoleDAOImpl implements SoleDAO {
 
 		return sqlSession.selectOne(namespace + ".solerecipe", recipe_code);
 	}
+	
+	// 리뷰 Insert
+	@Override
+	public void soleReviewInsert(Map articleMap) throws Exception {
+		
+		String review_id = selectReviewID();
+		
+		logger.info("review_id" + review_id);
+		
+		articleMap.put("review_id", review_id);
+		sqlSession.insert(namespace + ".soleReviewInsert", articleMap);
+		
+	}
+	
+	// review_id 정하는 메소드
+	private String selectReviewID() throws Exception {
+		
+		String review_id = sqlSession.selectOne(namespace + ".selectReviewID");
+		
+		return review_id; 
+	}
+	
+	// 리뷰 정보 끌어오는
+	@Override
+	public List<RecipeReviewDTO> selectReview(ReviewCriteria reviewcri) throws Exception {
+		
+		return sqlSession.selectList(namespace + ".selectReview", reviewcri);
+	}
+	
+	// 리뷰 총 개수
+	@Override
+	public int reviewcount(ReviewCriteria reviewcri) throws Exception {
+		
+		return sqlSession.selectOne(namespace + ".reviewcount", reviewcri);
+	}
 
-}
+} // end class

@@ -9,14 +9,14 @@ import com.edu.member.dto.MemberDTO;
 @Component("boardDTO")
 public class BoardDTO {
 	
-	private int recNum;
-	private int board_id;
-	private String title;
-	private String content;
-	private Date writeDate;
-	private String image;
-	private String writer;
-	private String nickname;
+	private int 	recNum;
+	private int 	board_id;
+	private String 	title;
+	private String 	content;
+	private Date 	writeDate;
+	private String 	image;
+	private String 	writer;
+	private String 	nickname;
 	
 	private MemberDTO memberDTO;
 
