@@ -103,6 +103,18 @@
 	  	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99); 
 	  	color: transparent;
 	  }
+	  .nojjim {
+	  	font-size: 3em;
+		color: transparent;
+		text-shadow: 0 0 0 #f0f0f0;
+		cursor: default;
+	  }
+	  .jjim {
+	  	font-size: 3em;
+	  	color: transparent;
+	  	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	  	cursor: default;
+	  }
 	  
     </style>
   </head>
@@ -288,7 +300,15 @@
 		        var pageNum = $(this).data("page"); // data-page 속성에서 페이지 번호 가져오기
 		        loadReviews(pageNum);
 		    });
+		 
+		    // 찜 하는 부분			
+		    $(document).on("click", ".nojjim", function() {
+		        $(this).removeClass("nojjim").addClass("jjim");
+		    });
 
+		    $(document).on("click", ".jjim", function() {
+		        $(this).removeClass("jjim").addClass("nojjim");
+		    });
 			
 		});   /// end $
     </script>
