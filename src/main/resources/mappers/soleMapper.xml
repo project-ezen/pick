@@ -91,5 +91,44 @@
 			where recipe_code = #{recipe_code}
 		]]>
 	</select>
+	
+	<!-- review_id 생성하는 -->
+	<select id="selectReviewID" resultType="String">
+		<![CDATA[
+			select nvl(max(to_number(review_id)),0)+1
+  			from alcohole_review
+		]]>
+	</select>
+	
+	<!-- review Insert -->
+	<insert id="soleReviewInsert" parameterType="java.util.Map">
+		<![CDATA[
+			insert into alcohole_review
+					(review_id, m_id, recipe_code, ingredient_number, content, image, star)
+			values  (#{review_id}, #{m_id}, #{recipe_code}, '1', #{content}, #{image}, #{star}) 
+		]]>
+	</insert>
+	
+	<!-- 리뷰 정보 가져오는 -->
+	<select id="selectReview" resultType="com.edu.sole.dto.recipe.RecipeReviewDTO" parameterType="com.edu.sole.dto.recipe.ReviewCriteria">
+		<![CDATA[
+			select *
+			from	
+					(select rownum as rwm, review_id, m_id, recipe_code, ingredient_number, content, image, writedate, star
+				 	 from alcohole_review
+				 	 where recipe_code = #{recipe_code})
+			where rwm between (#{page} -1) * #{perPageNum} + 1 and #{perPageNum} * #{page}
+		]]>
+	</select>
+	
+	<!-- 리뷰 카운트 -->
+	<select id="reviewcount" parameterType="com.edu.sole.dto.recipe.ReviewCriteria" resultType="int">
+		<![CDATA[
+			select count(*)
+			from alcohole_review
+			where recipe_code = #{recipe_code}
+		]]>
+		
+	</select>
 
 </mapper>
