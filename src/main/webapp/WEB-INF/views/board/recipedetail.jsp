@@ -10,9 +10,8 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
-.container {
-min-height: 600px;
-}
+.foot { padding-bottom: 100px; padding-top: 100px;}
+.container { min-height: 600px; }
 table {
 width: 100%;
 border: 2px solid #ddd;
@@ -64,18 +63,18 @@ border: 1px solid #656562;
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text"   value="${article.writer}" name="writer" disabled/></td>
+					<td><input type="text"   value="${article.nickname}" name="nickname" disabled/></td>
 					
 					<th>찜 개수</th>
 					<td>{100}</td>
 				</tr>
 				<tr>
                 	<th scope="row">제목</th>
-                	<td colspan="3"><input type="text"   value="${article.title }" name="title" id="i_title" disabled/></td>
+                	<td colspan="3"><input type="text"   value="${article.title}" name="title" id="title" disabled/></td>
                 </tr>
                 <tr>
                     <th scope="row">내용</th>
-                    <td colspan="3"><textarea rows="20" name="content" id="i_content" style="width: 100%" disabled>${article.content }</textarea></td>
+                    <td colspan="3"><textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea></td>
                 </tr>
 				<tr>
 					<td colspan="2">
@@ -84,7 +83,7 @@ border: 1px solid #656562;
 					<td colspan="2" style="text-align: right;">
 						<c:if test="${member.m_id == article.writer}">
 							<input type="button" class="btn2" value="수정" onClick="fn_enable(this.form)"/>
-							<input type="button" class="btn3"  value="삭제" onClick="fn_remove('#', ${article.board_id})"/>
+							<input type="button" class="btn3"  value="삭제" onClick="fn_remove('${path}/board/delete.do', ${article.board_id})"/>
 						</c:if>
 					</td>
 				</tr>
@@ -92,7 +91,7 @@ border: 1px solid #656562;
 					<tr id="ddd">
 						<td colspan="4" style="text-align: right;">
 							<input type="button" class="btn5" value="수정 취소" onClick="backToForm(this.form)"/>
-							<input type="button" class="btn4" value="올리기" onClick="fn_modify_article(viewArticle)"/>
+							<input type="button" class="btn4" value="올리기" id="updatewrite"/>
 						</td>
 					</tr>
 				</c:if>
@@ -121,20 +120,79 @@ border: 1px solid #656562;
 <script>
 
 function fn_enable(obj){
-	document.getElementById("i_title").disabled				= false;
-	document.getElementById("i_content").disabled			= false;
-	document.getElementById("i_imageFileName").disabled		= false;
+	document.getElementById("title").disabled			= false;
+	document.getElementById("content").disabled			= false;
+	document.getElementById("imageFileName").disabled	= false;
 }
 
 function backToForm(obj){
-	document.getElementById("i_title").disabled = true;
-	document.getElementById("i_content").disabled = true;
+	document.getElementById("title").disabled = true;
+	document.getElementById("content").disabled = true;
 }
 
 function backToList(obj){
 	location.href = "${path}/board/articleList";
 }
+
+$(document).ready(function(){
+	
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "content",
+		sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
+		fCreator: "createSEditor2",
+		htParams: {
+			bUseModeChanger: false
+		}
+	});
+
+	$("#updatewrite").click(function(){
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		
+		var title = $("#title").val();
+		var content = document.getElementById("content").value;
+		var writer = $("#writer").val();
+		
+		if (title == null || title == ""){
+			alert("제목을 입력하세요");
+			$("#title").focus();
+			return false;
+		}
+		if(content == "" || content == null || content == '&nbsp;'
+		|| content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
+			alert("내용을 입력하세요");
+			return false;
+		}
+		
+		if(!confirm("발행하겠습니까?")){
+			alert("취소되었습니다");
+			return false;
+		} else {
+			
+			console.log(content);
+		}
+	});
+});
+
+function fn_remove(url, board_id){
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", url);
+	
+	var boardIdInput = document.createElement("input");
+	boardIdInput.setAttribute("type", "hidden");
+	boardIdInput.setAttribute("name", "board_id");
+	boardIdInput.setAttribute("value", board_id);
+	
+	form.appendChild(boardIdInput);
+	document.body.appendChild(form);
+	form.submit();
+	
+}
 </script>
+<script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

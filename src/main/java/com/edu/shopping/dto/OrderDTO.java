@@ -8,7 +8,7 @@ public class OrderDTO {
 	private String 	receiver_phonenum;	//받는사람 번호	
 	private String 	order_id;			//주문번호
 	private String 	m_id;				//회원 아이디
-	private String  product_id;			//제품 아이디
+	private int  product_id;			//제품 아이디
 	private int		order_number;		//주문 번호
 	private int		count;				//주문 물품 수량
 	private int 	final_price;		//최종가격
@@ -43,10 +43,10 @@ public class OrderDTO {
 	public void setM_id(String m_id) {
 		this.m_id = m_id;
 	}
-	public String getProduct_id() {
+	public int getProduct_id() {
 		return product_id;
 	}
-	public void setProduct_id(String product_id) {
+	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
 	public int getOrder_number() {

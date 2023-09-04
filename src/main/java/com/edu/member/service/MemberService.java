@@ -1,5 +1,7 @@
 package com.edu.member.service;
 
+import java.util.List;
+
 import com.edu.board.dto.BoardDTO;
 import com.edu.member.dto.MemberDTO;
 
@@ -45,6 +47,8 @@ public interface MemberService {
 	//회원 정보 수정 POST
 	public void edit(MemberDTO memberDTO) throws Exception;
 	
+	// 회원목록 가져오기
+	public List<MemberDTO> selectMember() throws Exception;
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
 

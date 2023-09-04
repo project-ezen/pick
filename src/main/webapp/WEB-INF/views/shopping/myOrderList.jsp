@@ -55,6 +55,16 @@
 	
 	label { margin-bottom:15px; }
 	
+	textarea {
+		width: 100%;
+		height: 200px;
+		padding: 10px;
+		box-sizing: border-box;
+		border: solid 2px #1E90FF;
+		border-radius: 5px;
+		font-size: 16px;
+		resize: none;
+	}	
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
@@ -85,6 +95,7 @@
 			</div>
 		</div>
 	</form>
+		<form>
 		<table id="t1">
 			<thead>
 				<tr>
@@ -98,45 +109,58 @@
 				</tr>
 			</thead>
 			<c:forEach var="order" items="${order }" varStatus="o_status">
+			<c:if test="${order.order_complaint == null }">
 				<tbody>
 					<tr>
-						<td class="orderId">${order.order_id}</td>
-						<td class="pdtImage"></td>
-						<td class="pdtName"></td>
-						<td class="pdtCount">${productDisplayVO.product_price}</td>
+						<td class="orderNum">
+							${order.order_number}
+						</td>
+						<td>
+							<div class="col-md-12 text-center" id="item_thumbnail">
+							    <a href="#" class="thumbnail">
+							        <input type="image" src="${path }/download?imageFile=${product[o_status.index].product_image }" width="161" height="133" disabled>
+							        <input type="hidden" class="pdtImage" value="${product[o_status.index].product_image }" name="imageFile">
+							        <input type="hidden" class="orderId" value="${order.order_id }">
+							    </a>
+							</div>
+						</td>
+						<td class="pdtName">${product[o_status.index].product_name }</td>
+						<td class="pdtCount">${order.count}</td>
 						<td class="orderPrice">${order.final_price}</td>
 						<td class="orderStatus">${order.order_status}</td>
 						<td>
-							<c:if test="${order.order_status} == 'delivery-progressing'">
-								<input type="button" class="btn btn-default" data-toggle="modal" data-target="#cancel" value="취소">
+							<c:if test="${order.order_status == 'delivery-progressing'}">
+								<input type="button" class="btn btn-default cn" data-toggle="modal" data-target="#cancel" value="취소">
 							</c:if>
-							<c:if test="${order.order_status} == 'delivery-successed'">
-								<input type="button" class="btn btn-default" data-toggle="modal" data-target="#change" value="교환">
-								<input type="button" class="btn btn-default" data-toggle="modal" data-target="#refund" value="반품">
+							<c:if test="${order.order_status == 'delivery-successed'}">
+								<input type="button" class="btn btn-default cg" data-toggle="modal" data-target="#change" value="교환">
+								<input type="button" class="btn btn-default rf" data-toggle="modal" data-target="#refund" value="반품">
 							</c:if>
 						</td>
 					</tr>
 				</tbody>
+			</c:if>
 			</c:forEach>
 		</table>
 		
-		<div class="modal fade" id="p_info">
+		<div class="modal fade" id="cancel">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header text-center">
 						<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-						<h3>title</h3>
+						<input type="hidden" id="clicked_order_id">
+						<h3>Cancel Progressing</h3>
 					</div>
 					<div class="modal-body">
-						<c:forEach var="i" begin="0" end="3">
-						</c:forEach>
+						<textarea placeholder="please write the reason"></textarea>
 					</div>
 					<div class="modal-footer">
-						<input type="button" class="btn btn-primary" data-dismiss="modal" value="확인">
+						<input type="button" class="btn btn-primary" id="cancel_order" data-dismiss="modal" value="확인">
 					</div>
 				</div>
 			</div>
 		</div>
+		</form>
 	</div>
 	<hr/>
 	
@@ -166,23 +190,35 @@
 				<tr>
 					<th>주문번호</th>
 					<th>이미지</th>
-					<th>상품정보</th>
-					<th>상품구매금역</th>
-					<th>주문처리상태</th>
-					<th>취소/교환/반품</th>
+					<th>상품명</th>
+					<th>수량</th>
+					<th>주문금액</th>
+					<th>취소/반품처리상태</th>
 				</tr>
 			</thead>
-			<c:forEach var="i" begin="0" end="3">
+			<c:forEach var="order" items="${order }" varStatus="o_status">
+			<c:if test="${order.order_complaint != null }">
 				<tbody>
 					<tr>
-						<td>${orderDTO.order_id}</td>
-						<td>${productDisplayVO.product_image}</td>
-						<td>${productDisplayVO.product_name}</td>
-						<td>${productDisplayVO.product_price}</td>
-						<td>{orderDTO.}</td>
-						<td>{orderDTO.}</td>
+						<td class="orderNum">
+							${order.order_number}
+						</td>
+						<td>
+							<div class="col-md-12 text-center" id="item_thumbnail">
+							    <a href="#" class="thumbnail">
+							        <input type="image" src="${path }/download?imageFile=${product[o_status.index].product_image }" width="161" height="133" disabled>
+							        <input type="hidden" class="pdtImage" value="${product[o_status.index].product_image }" name="imageFile">
+							        <input type="hidden" class="orderId" value="${order.order_id }">
+							    </a>
+							</div>
+						</td>
+						<td class="pdtName">${product[o_status.index].product_name }</td>
+						<td class="pdtCount">${order.count}</td>
+						<td class="orderPrice">${order.final_price}</td>
+						<td class="orderStatus">${order.order_status}</td>
 					</tr>
 				</tbody>
+			</c:if>
 			</c:forEach>
 		</table>
 	</div>
@@ -190,6 +226,21 @@
 </div>
 <br/><br/>
 <script>
+$(document).ready(function() {
+	$(".cn, .cg, .rf").each(function(idx) {
+		$(".cn:eq[" + idx + "]").on("click", function() {
+			$("#clicked_order_id").prop("value", $("orderId[" + idx + "]"));
+		});
+	});
+	
+	$("#cancel_order").on("click", function() {
+		$ajax{(
+				
+		)};
+	});
+});
+//===================================================================================================================
+// 날짜 조회
 $("#datepicker1, #datepicker2, #datepicker3, #datepicker4").datepicker();
 
 $.datepicker.setDefaults({

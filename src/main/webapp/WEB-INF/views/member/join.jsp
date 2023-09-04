@@ -9,6 +9,10 @@
     	.container {
     		width: 500px;
     	}
+    	.foot {padding-bottom: 100px; padding-top: 100px; }
+    
+    	.container { background-color: rgba(255, 255, 255, 0.88); }
+    
         .join-form {
             margin: auto;
             padding: 30px;
@@ -44,6 +48,7 @@
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
+<div class="foot">
 	<div class="container">
 		<div class="join-form">
 			<h1 class="text-center">회원 가입</h1><hr/>
@@ -359,7 +364,8 @@
 		</div>
 	</div>
 	<br><br>
-	<%@ include file="../include/footer.jsp" %>
+</div>	
+<%@ include file="../include/footer.jsp" %>
 </body>
 
 

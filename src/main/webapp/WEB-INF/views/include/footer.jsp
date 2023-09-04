@@ -18,11 +18,6 @@
    .sns {
      /*  width: 270px; */
    }
-   
-   html,body {
-   padding: 0px;
-   margin: 0px;
- 	}
  	
  	#footer_ft {
  	background-color: rgba(255,255,255,0.3);
@@ -30,6 +25,7 @@
  	color: #fff;
  	position: relative;
  	margin-bottom: 0px;
+ 	height:356px;
  	}
  	
  	footer {

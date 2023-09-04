@@ -10,6 +10,10 @@
     	.container {
     		width: 500px;
     	}
+    	.container { background-color: rgba(255, 255, 255, 0.88); }
+    	
+    	.foot { padding-bottom: 100px; padding-top: 100px; }
+    	
         .update-form {
             margin: auto;
             padding: 30px;
@@ -102,6 +106,7 @@
 
 <body>
 <%@ include file="../include/topMenu.jsp" %>
+<div class="foot">
 	<div class="container" id="class">
 		<div class="update-form">
 			<h1 class="text-center">회원정보 수정</h1>
@@ -162,7 +167,8 @@
 			</form>
 		</div>
 	</div>
-	<br/>
+	<br/><br/>
+	</div>
 	<%@ include file="../include/footer.jsp" %>
 </body>
 

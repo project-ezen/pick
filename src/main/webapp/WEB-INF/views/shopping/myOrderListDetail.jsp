@@ -9,7 +9,6 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
-
 	table {
 		width: 100%;
 		border: 2px solid #ddd;
@@ -50,7 +49,6 @@
 	.relist:hover { background-color:#476e9e;}
 	
 	.relist:active { position:relative; top:1px; }
-
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
@@ -164,3 +162,17 @@
 <%@ include file="../include/footer.jsp" %>
 </body>
 </html>
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

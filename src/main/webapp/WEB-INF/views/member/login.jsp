@@ -19,10 +19,9 @@
             width: 400px;
         }
         
-        .social-buttons {
-            text-align: center;
-            margin-top: 15px;
-        }
+        .foot { padding-bottom: 100px; padding-top: 100px; margin:auto;  }
+        
+        .social-buttons {  text-align: center;  margin-top: 15px; }
         
         #kakaoLogin,
         #naverLogin,
@@ -48,6 +47,7 @@
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
+<div class="foot">
     <div class="login" >
     	<form  class="form-horizontal" action="/member/login" method="post" id="loginForm">
         <div class="login-header">
@@ -101,6 +101,7 @@
 			</script>
 		</c:if>
     </form>
+</div>
 </div>
     <%@ include file="../include/footer.jsp" %>
     

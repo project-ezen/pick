@@ -15,8 +15,13 @@
 		<result property="content" 		column="content"/>
 		<result property="writeDate" 	column="writeDate"/>
 		<result property="image" 		column="image"/>
-		<result property="m_id" 		column="M_ID"/>
+		<result property="writer" 		column="M_ID"/>
 	</resultMap>
+	
+	<!-- 회원목록 가져오기 -->
+	<select id="selectMember" resultType="memberDTO">
+		SELECT * FROM member
+	</select>
 	
 	<!-- 로그인 POST : 아이디, 비밀번호, 이름을 추출하자 -->
 	<select id="login" parameterType="com.edu.member.dto.MemberDTO" resultType="com.edu.member.dto.MemberDTO">
@@ -112,12 +117,12 @@
 	<!-- 내가 쓴 게시물 -->
 	 <select id="myboard" parameterType="String" resultMap="member">
 	 <![CDATA[
-		SELECT m.m_id, b.board_id, b.title , b.writeDate ,b.image
+		SELECT b.m_id, b.board_id, b.title , b.writeDate ,b.image
 		FROM  member m
 		LEFT OUTER JOIN board b
 		ON m.m_id = b.m_id
 		WHERE m.m_id = #{m_id}
-		ORDER BY b.writedate desc
+		ORDER BY b.board_id ASC
 		]]>
 	</select>
 	

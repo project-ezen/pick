@@ -2,16 +2,16 @@ package com.edu.store.dto;
 
 // 실어 나르는 값
 public class ProductDTO {
-	private String product_id;
+	private int product_id;
 	private String product_display_id;
 	private String product_name;
 	private String product_image;
 	private int product_price;
 	private int category_code;
-	public String getProduct_id() {
+	public int getProduct_id() {
 		return product_id;
 	}
-	public void setProduct_id(String product_id) {
+	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
 	public String getProduct_display_id() {

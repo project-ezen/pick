@@ -1,17 +1,29 @@
 package com.edu.sole.controller;
 
+
+import java.io.File;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.member.controller.MemberController;
@@ -21,6 +33,10 @@ import com.edu.sole.dto.SoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
 import com.edu.sole.service.SoleService;
+import com.edu.sole.dto.recipe.RecipeReviewDTO;
+import com.edu.sole.dto.recipe.ReviewCriteria;
+import com.edu.sole.dto.recipe.ReviewPageMaker;
+import com.edu.sole.dto.recipe.RecipeDTO;
 
 @Controller
 @RequestMapping("/sole")
@@ -74,7 +90,7 @@ public class SoleController {
 	//------------------------------------------------------------------------------------------------------
 	// sole detail
 	@RequestMapping(value="/soleDetail", method=RequestMethod.GET)
-	public ModelAndView soleDetail(HttpServletRequest request, HttpServletResponse response, @RequestParam("recipe_code") String recipe_code) throws Exception{
+	public ModelAndView soleDetail(HttpServletRequest request, HttpServletResponse response, @RequestParam("recipe_code") String recipe_code, int page) throws Exception{
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -86,6 +102,26 @@ public class SoleController {
 		
 		recipeDTO = soleservice.solerecipe(recipe_code);        // 술 정보를 보여주는
 		
+		// 리뷰정보 끌어오는 부분
+		ReviewPageMaker rpgm = new ReviewPageMaker();
+		ReviewCriteria  reviewcri   = new ReviewCriteria();
+		reviewcri.setRecipe_code(recipe_code);     // 레시피 코드를 설정한다.
+		rpgm.setCri(reviewcri);
+		
+		if(page == 0) {
+			page = 1;
+		}
+		
+		reviewcri.setPage(page);
+		rpgm.setTotalCount(soleservice.reviewcount(reviewcri));
+		
+		List<RecipeReviewDTO> selectReview = soleservice.selectReview(reviewcri);
+		logger.info("TOSTRING : " + selectReview.toString());
+		
+		logger.info("dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd : " + rpgm);
+		
+		mav.addObject("rpgm", rpgm);
+		mav.addObject("selectReview", selectReview);
 		mav.addObject("recipeDetail", recipeDetailDTO);
 		mav.addObject("recipe", recipeDTO);
 		
@@ -96,16 +132,111 @@ public class SoleController {
 	//---------------------------------------------------------------------------------------------------------------
 	// sole detail / review
 	@RequestMapping(value="/soleReview", method=RequestMethod.GET)
-	public ModelAndView soleReview(@RequestParam("recipe_code") String recipe_code) {
+	public ModelAndView soleReview(HttpServletRequest request, HttpServletResponse response, @RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		logger.info("recipe_code :" + recipe_code);
 		
+		
 		mav.addObject("recipe_code", recipe_code);
+		mav.addObject("m_id", m_id);
 		
 		return mav;
 		
 	}
+	
+	//------------------------------------------------------------------------------------------------------------------
+	// sole detail / reviewInsert
+	@RequestMapping(value="/soleReviewInsert", method=RequestMethod.POST)
+	public ModelAndView soleReviewInsert(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+		
+		logger.info("컨트롤러 입장");
+		
+		ModelAndView mav = new ModelAndView();
+		
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		
+		Enumeration enu = multipartRequest.getParameterNames();
+		
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			
+			System.out.println("name : " + name);
+			System.out.println("value : " + value);
+			
+			articleMap.put(name, value);
+		}
+		
+		String image = upload(multipartRequest);
+		articleMap.put("image", image);
+		soleservice.soleReviewInsert(articleMap);
+		
+		if(image != null && image.length() != 0) {
+			File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + image);
+			File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleMap.get("review_id"));
+			FileUtils.moveToDirectory(srcDir, destDir, true);     // moveToDirectory(이동할 파일 또는 디렉토리, 대상 디렉토리, true이면 대상 디렉토리를 만들고 그렇지 않으면 false이면 IOException을 발생시킵니다.)
+		}
+		
+		mav.setViewName("redirect:/sole/soleDetail?recipe_code=" + articleMap.get("recipe_code") + "&page=1");
+		
+		return mav;
+		
+	}
+	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\board\\review_image";
+	////////////////////////////////////////////////////////////////////////////////////////////
+	// review image 등록
+	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+		
+		String image = null;
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		while(fileNames.hasNext()) {
+			String fileName = fileNames.next();
+			
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			
+			image = mFile.getOriginalFilename();
+			
+			File file = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + image);
+			if(mFile.getSize() != 0) {
+				if(!file.exists()) {   // 파일을 올릴 경로에 파일이 존재하지 않는다면
+					file.getParentFile().mkdirs();  // 경로에 해당하는 디렉토리를 생성한다.
+					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + image)); 
+				}
+			}
+		}
+		
+		return image;
 
-}
+	} 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// ajax
+	@RequestMapping(value="/soleDetailAjax", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Map soleDetailAjax(@RequestParam("recipe_code") String recipe_code, @RequestParam("page") int page) throws Exception{
+		
+		logger.info("recipe_codeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd : " + recipe_code);
+		
+		Map ajaxMap = new HashMap();
+		
+		ReviewPageMaker rpgm = new ReviewPageMaker();
+		ReviewCriteria  reviewcri   = new ReviewCriteria();
+		reviewcri.setRecipe_code(recipe_code);     // 레시피 코드를 설정한다.
+		
+		reviewcri.setPage(page);
+		
+		rpgm.setCri(reviewcri);
+		rpgm.setTotalCount(soleservice.reviewcount(reviewcri));
+		
+		List<RecipeReviewDTO> selectReview = soleservice.selectReview(reviewcri);
+		
+		ajaxMap.put("reviewList", selectReview);
+		ajaxMap.put("rpgm", rpgm);
+		
+		return ajaxMap;
+	}
+	
+} // end class
+

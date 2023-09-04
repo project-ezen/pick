@@ -1,6 +1,7 @@
 package com.edu.sole.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -13,6 +14,8 @@ import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.SoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
+import com.edu.sole.dto.recipe.RecipeReviewDTO;
+import com.edu.sole.dto.recipe.ReviewCriteria;
 
 @Service
 public class SoleServiceImpl implements SoleService {
@@ -52,6 +55,28 @@ public class SoleServiceImpl implements SoleService {
 	public RecipedSoleDTO solerecipe(String recipe_code) throws Exception {
 		
 		return soledao.solerecipe(recipe_code);
+	}
+
+	// 술 Insert
+	@Override
+	public void soleReviewInsert(Map articleMap) throws Exception {
+		
+		soledao.soleReviewInsert(articleMap);
+		
+	}
+	
+	// 리뷰 정보 끌어오는
+	@Override
+	public List<RecipeReviewDTO> selectReview(ReviewCriteria reviewcri) throws Exception {
+		
+		return soledao.selectReview(reviewcri);
+	}
+	
+	// 리뷰 개수 끌어오는
+	@Override
+	public int reviewcount(ReviewCriteria reviewcri) throws Exception {
+		
+		return soledao.reviewcount(reviewcri);
 	}
 
 }

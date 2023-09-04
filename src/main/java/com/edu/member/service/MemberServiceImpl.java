@@ -97,6 +97,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.findPW(m_id);
 	} // 인증번호 맞으면 아이디 받아오기
 
+	// 회원목록 가져오기
+	@Override
+	public List<MemberDTO> selectMember() throws Exception {
+		return memberDAO.selectMember();
+	}
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
 	@Override
@@ -104,6 +109,7 @@ public class MemberServiceImpl implements MemberService {
 		logger.info("아아");
 		return memberDAO.myboardList(m_id);
 	}
+
 
 
 }
