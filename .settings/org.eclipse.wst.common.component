@@ -1,23 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
             
     
     
     <wb-module deploy-name="main-1.0.0-BUILD-SNAPSHOT">
                                                                     
+=======
+                        
+    
+    
+    
+    
+    
+    <wb-module deploy-name="main-1.0.0-BUILD-SNAPSHOT">
+                                                                                            
+        
+        
+        
+>>>>>>> dcc4718cdebfec287dd19485cbe32c1d1e32c561
         
         
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
                         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
                           
+=======
+                                                
+        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+                                                  
+>>>>>>> dcc4718cdebfec287dd19485cbe32c1d1e32c561
         
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+<<<<<<< HEAD
                 
 
         
@@ -32,5 +57,33 @@
     
     </wb-module>
         
+=======
+                                
+
+        
+        
+        
+        
+        
+        <property name="java-output-path" value="/pick/target/classes"/>
+                                                        
+        
+        
+        
+        
+        
+        <property name="context-root" value="main"/>
+                                                                                            
+    
+    
+    
+    
+    
+    </wb-module>
+                    
+
+
+
+>>>>>>> dcc4718cdebfec287dd19485cbe32c1d1e32c561
 
 </project-modules>

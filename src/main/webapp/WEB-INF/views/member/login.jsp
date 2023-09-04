@@ -19,10 +19,9 @@
             width: 400px;
         }
         
-        .social-buttons {
-            text-align: center;
-            margin-top: 15px;
-        }
+        .foot { padding-bottom: 100px; padding-top: 100px; margin:auto;  }
+        
+        .social-buttons {  text-align: center;  margin-top: 15px; }
         
         #kakaoLogin,
         #naverLogin,
@@ -48,8 +47,9 @@
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
+<div class="foot">
     <div class="login" >
-    	<form  class="form-horizontal" action="/member/login" method="post"id="loginForm">
+    	<form  class="form-horizontal" action="/member/login" method="post" id="loginForm">
         <div class="login-header">
             <h1 class="text-center">Login</h1><br><br>
         </div>
@@ -60,7 +60,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-user"></span>
                             </span>
-                            <input type="text" class="form-control" id="id" name="id" maxlength="20" placeholder="User ID">
+                            <input type="text" class="form-control" id="m_id" name="m_id" maxlength="20" placeholder="User ID">
                         </div>
                     </div>
                     <div>
@@ -68,7 +68,7 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-lock"></span>
                             </span>
-                            <input type="password" class="form-control" id="passwd" name="passwd" maxlength="20" placeholder="Password">
+                            <input type="password" class="form-control" id="m_pw" name="m_pw" maxlength="20" placeholder="Password">
                         </div>
                     </div>
                 </div>
@@ -80,8 +80,7 @@
             </div>
             <div class="form-group">                            
                 <div class="text-center">
-                    <a href="/findId.jsp">아이디 찾기&nbsp;&nbsp;</a> |
-                    <a href="/findPassword.jsp">&nbsp;&nbsp;비밀번호 찾기&nbsp;&nbsp;</a> |
+                    <a href="/member/find">아이디 / 비밀번호 찾기&nbsp;&nbsp;</a> |
                     <a href="/member/join">&nbsp;&nbsp;회원 가입&nbsp;&nbsp;</a>
                 </div>
             </div><br>
@@ -94,7 +93,15 @@
         <div class="social-buttons">
             <button class="btn btn-danger" id="googleLogin">구글 로그인</button>
         </div>
+        
+        <!-- msg가 false인 경우 -->
+		<c:if test="${msg == false}">
+			<script>
+			alert("로그인을 실패하였습니다. 아이디와 비밀번호를 확인해주세요.");
+			</script>
+		</c:if>
     </form>
+</div>
 </div>
     <%@ include file="../include/footer.jsp" %>
     
@@ -105,9 +112,14 @@
     			// 아이디와 비밀번호는 꼭 입력해야 한다.
     			// 아이디와 비밀번호는 4자리 이상 입력해야 한다.
     			
-    			if($("#id").val() == "") {
+    			if($("#m_id").val() == "") {
     				alert("이메일을 입력해주세요.");
-    				$("#Id").focus();
+    				$("#m_Id").focus();
+    				return false;
+    			}
+    			if($("#m_pw").val() == "") {
+    				alert("비밀번호를 입력해주세요.");
+    				$("#m_pw").focus();
     				return false;
     			}
     			
@@ -115,6 +127,7 @@
     			document.getElementById("loginForm").submit();
     			return false;
     		});
+    	});
     </script>
 </body>
 </html>

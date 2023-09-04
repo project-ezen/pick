@@ -3,59 +3,127 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="memberMapper">
-<!--  -->
+	  
+	<resultMap id="member" type="com.edu.member.dto.MemberDTO" >
+		<result property="m_id" 			column="M_ID"/>
+		<collection property="myPageList" 	resultMap="board"/>
+	</resultMap>
+
+	<resultMap id="board" type="com.edu.board.dto.BoardDTO" >
+		<result property="board_id" 	column="board_id"/>
+		<result property="title" 		column="title"/>
+		<result property="content" 		column="content"/>
+		<result property="writeDate" 	column="writeDate"/>
+		<result property="image" 		column="image"/>
+		<result property="writer" 		column="M_ID"/>
+	</resultMap>
+	
+	<!-- 회원목록 가져오기 -->
+	<select id="selectMember" resultType="memberDTO">
+		SELECT * FROM member
+	</select>
 	
 	<!-- 로그인 POST : 아이디, 비밀번호, 이름을 추출하자 -->
 	<select id="login" parameterType="com.edu.member.dto.MemberDTO" resultType="com.edu.member.dto.MemberDTO">
 		SELECT	*
 		FROM	member
-		WHERE	member_id	= #{id}
-		AND		member_pw	= #{passwd}
-	</select>
-		
-		<!-- 회원상세정보 -->
-	<select id="detail" parameterType="String" resultType="com.edu.member.dto.MemberDTO">
-		SELECT * FROM member WHERE id = #{id}
+		WHERE	m_id	= #{m_id}
+		AND		m_pw	= #{m_pw}
 	</select>
 	
-	<!--  회원 아이디에 해당하는 비밀번호, 비밀번호 확인, 이름, 전화번호, 주소를 변경한다.  -->
-	 
-	<update id="update" parameterType="com.edu.member.dto.MemberDTO">
-		UPDATE	member
-		SET		member_passwd			= #{passwd},
-				member_repasswd			= #{repasswd},
-				member_name				= #{name},
-				member_nickname			= #{nickname},
-				member_phoneNumber		= #{phoneNumber},
-				member_gender			= #{gender},
-				member_zipcode			= #{zipcode},
-				member_gender			= #{gender},
-				member_address			= #{address1},
-				member_addressdetail	= #{addressDetail},
-				member_birthdate		= #{birthdate}
-		WHERE	member_id				= #{id}
-	</update>
+	<!-- 아이디 찾기 -->
+	<!-- 이름과 전화번호로 인증번호 받기 -->
+	<select id="checkNameAndTel" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE m_name = #{m_name} AND m_tel = #{m_tel}
+    </select> 
+    
+    <!-- 이름과 이메일로 인증번호 받기 -->
+	<select id="checkNameAndNick" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE m_name = #{m_name} AND m_nickname = #{m_nickname}
+    </select>
+    
+    <!-- 인증번호가 맞으면 ID 가져오기 -->
+     <select id="findID" parameterType="String" resultType="String">
+        SELECT m_id
+        FROM member
+        WHERE m_tel = #{m_tel}
+    </select>
+    
+     <select id="findID2" parameterType="String" resultType="String">
+        SELECT m_id
+        FROM member
+        WHERE m_nickname = #{m_nickname}
+    </select>
 	
+	<!-- 비밀번호 찾기 -->
+	<!-- 아이디와 전화번호로 인증번호 받기 -->
+	<select id="checkIDAndTel" resultType="int">
+        SELECT COUNT(*)
+        FROM member
+        WHERE m_id = #{m_id} AND m_tel = #{m_tel}
+    </select> 
+    
+    <!-- 인증번호가 맞으면 PW 가져오기 -->
+     <select id="findPW" parameterType="String" resultType="String">
+        SELECT m_pw
+        FROM member
+        WHERE m_id = #{m_id}
+     </select>
 	
 	<!-- 아이디(이메일) 중복 검사 -->
 	<select id="idCheck" parameterType="com.edu.member.dto.MemberDTO" resultType="int">
 		SELECT	COUNT(*)
 		FROM	member
-		WHERE	member_id = #{id}
+		WHERE	m_id = #{m_id}
 	</select>
 	
 	<!-- 닉네임 중복 검사 -->
 	<select id="nickCheck" parameterType="com.edu.member.dto.MemberDTO" resultType="int">
 		SELECT	COUNT(*)
 		FROM	member
-		WHERE	member_nickname = #{nickname}
+		WHERE	m_nickname = #{m_nickname}
 	</select>
 	
 	<!-- 회원 가입  -->
 	<insert id="join" parameterType="com.edu.member.dto.MemberDTO">
 		INSERT INTO member
-				(member_id, member_pw, member_repw, member_name, member_nickname, member_phoneNumber, member_birthdate, member_gender, member_zipcode, member_address, member_addressdetail )
-		VALUES	(#{id},	#{passwd}, #{repasswd}, #{name}, #{nickname}, #{phoneNumber}, #{birthdate}, #{gender}, #{zipcode}, #{address1}, #{addressDetail} )
+				(m_id, m_pw, m_repw, m_name, m_nickname, m_tel, m_birthdate, m_gender, m_zipcode, m_address, m_addressDetail)
+		VALUES	(#{m_id}, #{m_pw}, #{m_repw}, #{m_name}, #{m_nickname}, #{m_tel}, #{m_birthdate}, #{m_gender}, #{m_zipcode}, #{m_address}, #{m_addressDetail})
 	</insert>
+
+	
+	<!-- 회원상세정보 -->
+	<select id="detail" parameterType="String" resultType="com.edu.member.dto.MemberDTO">
+		SELECT * FROM member WHERE m_id = #{m_id}
+	</select>
+	
+	<!--  회원 아이디에 해당하는 비밀번호, 비밀번호 확인, 이름, 전화번호, 주소를 변경한다.  -->
+	<update id="edit" parameterType="com.edu.member.dto.MemberDTO">
+		UPDATE	member
+		SET		m_pw			= #{m_pw},
+				m_repw			= #{m_repw},
+				m_nickname		= #{m_nickname},
+				m_tel			= #{m_tel},
+				m_zipcode		= #{m_zipcode},
+				m_address		= #{m_address},
+				m_addressdetail	= #{m_addressDetail}
+		WHERE	m_id			= #{m_id}
+	</update>
+	
+	<!-- 내가 쓴 게시물 -->
+	 <select id="myboard" parameterType="String" resultMap="member">
+	 <![CDATA[
+		SELECT b.m_id, b.board_id, b.title , b.writeDate ,b.image
+		FROM  member m
+		LEFT OUTER JOIN board b
+		ON m.m_id = b.m_id
+		WHERE m.m_id = #{m_id}
+		ORDER BY b.board_id ASC
+		]]>
+	</select>
 	
 </mapper>

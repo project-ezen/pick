@@ -1,10 +1,13 @@
 package com.edu.sole.controller;
 
+<<<<<<< HEAD
 
 import java.io.File;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+=======
+>>>>>>> dcc4718cdebfec287dd19485cbe32c1d1e32c561
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +43,7 @@ import com.edu.sole.dto.recipe.RecipeDTO;
 @Controller
 @RequestMapping("/sole")
 public class SoleController {
-	
+
 	@Inject
 	SoleService soleservice;
 	
@@ -48,43 +51,43 @@ public class SoleController {
 	
 	//------------------------------------------------------------------------------------------
 	// 술 메인
-	@RequestMapping(value="/Main", method=RequestMethod.GET)
-	public String MainPage() {
-		return "/sole/Main";
-	}
-	
-	//------------------------------------------------------------------------------------------
-	// 레시피 술 보여주는
-	@RequestMapping(value="/sole" , method=RequestMethod.GET)
-	public ModelAndView soleMain(HttpServletRequest request, HttpServletResponse response, SoleSearchCriteria solesearchcriteria) {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		
-		logger.info("solesearchcriteria " + solesearchcriteria.toString());
-		SolePageMaker pgm = new SolePageMaker();
-		//logger.info("alcohole_category: "+ alcohole_category);
-		
-		//category.setCategory_code(alcohole_category);
-		
-		pgm.setCri(solesearchcriteria);
-		logger.info("2");
-		pgm.setTotalCount(soleservice.solecount(solesearchcriteria));   // cri로 검색한 총 건수를 totalCount 변수에 저장한다.
-		logger.info("3");
-		List<LiveSoleDTO> soleMain = soleservice.soleMain(solesearchcriteria);
-		logger.info("4");
-		mav.addObject("sole", soleMain);
-		logger.info("5");
-		mav.addObject("pagemaker", pgm);	
-		logger.info("6");
-		mav.addObject("cri",solesearchcriteria);
-		logger.info("7");
-		
-		System.out.println("pgm" + " "+ pgm);
-		
-		return mav;
-		
-	}/////////////////////////////////////////////////////////////////////////////////////////////////////
+			@RequestMapping(value="/Main", method=RequestMethod.GET)
+			public String MainPage() {
+				return "/sole/Main";
+			}
+			
+			//------------------------------------------------------------------------------------------
+			// 레시피 술 보여주는
+			@RequestMapping(value="/sole" , method=RequestMethod.GET)
+			public ModelAndView soleMain(HttpServletRequest request, HttpServletResponse response, SoleSearchCriteria solesearchcriteria) {
+				
+				ModelAndView mav = new ModelAndView();
+				
+				
+				logger.info("solesearchcriteria " + solesearchcriteria.toString());
+				SolePageMaker pgm = new SolePageMaker();
+				//logger.info("alcohole_category: "+ alcohole_category);
+				
+				//category.setCategory_code(alcohole_category);
+				
+				pgm.setCri(solesearchcriteria);
+				logger.info("2");
+				pgm.setTotalCount(soleservice.solecount(solesearchcriteria));   // cri로 검색한 총 건수를 totalCount 변수에 저장한다.
+				logger.info("3");
+				List<LiveSoleDTO> soleMain = soleservice.soleMain(solesearchcriteria);
+				logger.info("4");
+				mav.addObject("sole", soleMain);
+				logger.info("5");
+				mav.addObject("pagemaker", pgm);	
+				logger.info("6");
+				mav.addObject("cri",solesearchcriteria);
+				logger.info("7");
+				
+				System.out.println("pgm" + " "+ pgm);
+				
+				return mav;
+				
+			}/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	//------------------------------------------------------------------------------------------------------
 	// sole detail
@@ -209,6 +212,7 @@ public class SoleController {
 		
 		return image;
 
+<<<<<<< HEAD
 	} 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// ajax
@@ -239,3 +243,6 @@ public class SoleController {
 	
 } // end class
 
+=======
+}
+>>>>>>> dcc4718cdebfec287dd19485cbe32c1d1e32c561

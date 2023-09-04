@@ -1,7 +1,6 @@
 package com.edu.shopping.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -13,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.OrderDTO;
-import com.edu.store.dto.ProductDisplayVO;
+import com.edu.store.dto.ProductDTO;
 
 @Repository("shoppingDAO")
 public class ShoppingDAOImpl implements ShoppingDAO {
@@ -24,29 +23,51 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	private SqlSession sqlsession;
 	
 	@Override
-	public CartDTO cartList(String memberId) throws DataAccessException {
-		return sqlsession.selectOne(namespace + ".cartList", memberId);
+	public List<CartDTO> cartList(MemberDTO member) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".cartList", member);
 	}
 	
 	@Override
-	public List<ProductDisplayVO> cartProductsList(CartDTO productList) throws DataAccessException {
-		log.info("productList" + productList);
-		return sqlsession.selectList(namespace + ".productsDetailList", productList);
-  }
+	public List<ProductDTO> cartProductsList(MemberDTO member) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".productList", member);
+    }
 
 	@Override
-	public MemberDTO memberInfo(String member_id) throws DataAccessException {
-		return sqlsession.selectOne(namespace + ".memberInfo", member_id);
+	public void changeCount(CartDTO count) throws DataAccessException {
+		sqlsession.update(namespace + ".changeCount", count);
+	}
+//=====================================================================================================
+	@Override
+	public int searchProductId(String product_name) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".searchProductId", product_name);
 	}
     
 	@Override
 	public void orderConfirm(OrderDTO orderDTO) throws DataAccessException {
 		sqlsession.insert(namespace + ".orderInsert", orderDTO);
 	}
+	@Override
+	public void deleteProduct(String cart_id) throws DataAccessException {
+		log.info("cart : " + cart_id);
+		sqlsession.delete(namespace + ".deleteProduct", cart_id);
+	}
 
 	@Override
-	public void dropProduct(Map<String, String> productMap) throws DataAccessException {
-		log.info("productMap : " + productMap.toString());
-		sqlsession.delete(namespace + ".deleteProduct", productMap);
+	public List<String> checkOrderId() throws DataAccessException {
+		return sqlsession.selectList(namespace + ".checkOrderId");
+	}
+	@Override
+	public List<String> checkOrderNum(String m_id) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".checkOrderNum", m_id);
+	}
+//=====================================================================================================
+	@Override
+	public List<OrderDTO> orderInfo(MemberDTO member) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".orderInfo", member);
+	}
+	
+	@Override
+	public ProductDTO orderList(OrderDTO order) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".orderList", order);
 	}
 }

@@ -7,15 +7,18 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 import com.edu.member.dto.MemberDTO;
 import com.edu.member.service.MemberService;
@@ -30,6 +33,7 @@ public class MemberController {
 	// 컨트롤러는 서비스를 호출하고, 서비스는 DAO를 호출하고, DAO는 SqlSession을 호출한다.
 	//-----------------------------------------------------------------------------------------------------------
 	@Inject
+	@Autowired
 	private MemberService memberService;
 	
 	
@@ -57,6 +61,7 @@ public class MemberController {
 		
 		// 로그인 한 회원정보가 있는지 검사한다.
 		MemberDTO memberDTO = memberService.login(member);
+		logger.info("memberDTO : " + memberDTO);
 		
 		// 세션을 사용할 준비를 한다.
 		HttpSession session = request.getSession();
@@ -65,7 +70,9 @@ public class MemberController {
 			// 세션을 발급한다.
 			session.setAttribute("member", memberDTO);
 			session.setAttribute("isLogOn", true);
+			
 			String action = (String)session.getAttribute("action");
+			
 			System.out.println("Login action : " + action);
 			
 			session.removeAttribute("action");
@@ -73,7 +80,7 @@ public class MemberController {
 			if(action != null) {
 				mav.setViewName("redirect:" + action);
 			} else {
-				mav.setViewName("redirect:/mainpage.jsp");
+				mav.setViewName("redirect:/");
 			}
 			
 		} else {	// 아이디와 비밀번호에 해당하는 정보가 없으면
@@ -99,16 +106,14 @@ public class MemberController {
 	@RequestMapping(value="/join", method=RequestMethod.POST)
 	public String join(MemberDTO memberDTO, HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=utf-8");
-		
-		logger.info("memberDTO COntroller" + memberDTO);
-		
 		// 아이디(이메일)이 존재하는지 먼저 검사한다.
 		int result = memberService.idCheck(memberDTO);
 		try {
+			
 			if(result == 1) {
+				
 				return "/member/join";
+				
 			} else if(result == 0) {
 				memberService.join(memberDTO);
 			}
@@ -116,7 +121,7 @@ public class MemberController {
 			throw new RuntimeException();
 		}
 		
-		return "redirect:/mypage.jsp";
+		return "redirect:/";
 		
 	}
 	
@@ -145,40 +150,87 @@ public class MemberController {
 	}	
 	
 	
-	//로그아웃
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception {
-		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
-		session.invalidate();
-		return "redirect:/member/login";
-	}	
+	//아이디 / 비밀번호 찾기 get
+	@RequestMapping(value="/find")
+	public void find(MemberDTO memberDTO) throws Exception {
+
+	}
 	
-	//아이디 찾기 post
-	
-	
-	//비밀번호 찾기 post
-	
-	
-	
-	
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	//회원정보상세정보=>수정 GET
-	@RequestMapping(value="/memberDetail",method=RequestMethod.GET)
-	public void memberDetail(@RequestParam("id")String id,Model model) throws Exception {
-		 
-		MemberDTO memberDTO = memberService.memberDetail(id);   //id를 줘서 
-		model.addAttribute("detail",memberDTO);
+	//아이디 찾기 Post
+	@ResponseBody
+	@RequestMapping(value="/checkNameAndTel", method=RequestMethod.POST)
+	public int checkNameAndTel(@RequestBody MemberDTO memberDTO) throws Exception {
 		
+	    int result = memberService.checkNameAndTel(memberDTO);
+	    
+	    return result;
+	} // 이름과 전화번호로 인증번호 받기
+	
+	@ResponseBody
+	@RequestMapping(value="/checkNameAndNick", method=RequestMethod.POST)
+	public int checkNameAndNick(@RequestBody MemberDTO memberDTO) throws Exception {
+		
+		
+		int result = memberService.checkNameAndNick(memberDTO);
+		
+		System.out.println("MemberDTO : " + memberDTO);
+		return result;
+	} // 이름과 닉네임으로 인증번호 받기
+	
+	@ResponseBody
+	@RequestMapping(value="findID", method=RequestMethod.POST)
+	public String findID(@RequestBody String m_tel) throws Exception {
+	    String result = memberService.findID(m_tel);
+	    return result;
+	} // 인증번호가 맞으면 아이디 받아오기(이름 전화번호)
+	
+	@ResponseBody
+	@RequestMapping(value="findID2", method=RequestMethod.POST)
+	public String findID2(@RequestBody String m_nickname) throws Exception {
+	    String result = memberService.findID2(m_nickname);
+	    return result;
+	} // 인증번호가 맞으면 아이디 받아오기(이름 닉네임)
+	
+	//비밀번호 찾기 Post
+	@ResponseBody
+	@RequestMapping(value="/checkIDAndTel", method=RequestMethod.POST)
+	public int checkIDAndTel(@RequestBody MemberDTO memberDTO) throws Exception {
+		
+		System.out.println("MemberDTO : " + memberDTO);
+		
+		int result = memberService.checkIDAndTel(memberDTO);
+		
+		return result;
+	} // 아이디와 전화번호로 인증번호 받기
+		
+	@ResponseBody
+	@RequestMapping(value="findPW", method=RequestMethod.POST)
+	public String findPW(@RequestBody String m_id) throws Exception {
+	    String result = memberService.findPW(m_id);
+	    return result;
+	} // 인증번호가 맞으면 비밀번호
+	
+	
+	//회원 상세 정보 => GET
+	@RequestMapping(value="/edit",method=RequestMethod.GET)
+	public void detail(HttpServletRequest request) throws Exception {
+		
+		
+		HttpSession session = request.getSession(); 
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		String id = member.getM_id();
+		MemberDTO memberDTO = memberService.detail(id);
+			
 		System.out.println("상세 정보 :" + memberDTO);
 	}
 	
 	
 	//회원정보수정 POST
-	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
-	public String MemberUpdate(MemberDTO memberDTO) throws Exception {
+	@RequestMapping(value="/edit", method=RequestMethod.POST)
+	public String edit(MemberDTO memberDTO) throws Exception {
 		
 		//client에서 보내오는 데이터들의 name이 맞으면 memberDTO에 알아서 값이 들어간다.
-		memberService.memberUpdate(memberDTO);
+		memberService.edit(memberDTO);
 		
 		return "redirect:/member/mypage"; 
 		//redirect<요청을 해서 데이터도 같이 보여준다.> 
@@ -186,5 +238,46 @@ public class MemberController {
 	}
 	
 	
+	//로그아웃
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpSession session) throws Exception {
+		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
+		session.invalidate();
+
+		return "redirect:/";
+	}	
 	
-}
+	
+	
+	//====================================================================================================
+	//마이페이지에 나오는 부분들
+	//my page화면 get
+		@RequestMapping(value="/mypage", method=RequestMethod.GET)
+		public ModelAndView mypage() throws Exception {
+			
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("/member/mypage");
+			logger.info("아이디내놔");
+			
+			return mav;
+		}
+	
+	
+	//내가 쓴 게시물 get 
+	@RequestMapping(value="/myboard",method= {RequestMethod.GET, RequestMethod.POST})
+	public String myboard(HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
+		
+
+		HttpSession session = request.getSession(); 		
+		MemberDTO mid = (MemberDTO) session.getAttribute("member");
+		String m_id = mid.getM_id();
+
+		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
+		model.addAttribute("member", member);
+		
+		return "/member/myboard";
+	}
+		
+	//찜한 게시물 get/ post
+	
+}	

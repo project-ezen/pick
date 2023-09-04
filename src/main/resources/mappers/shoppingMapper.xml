@@ -2,45 +2,85 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="shopping.mapper">
-
-	<select id="cartList" parameterType="String" resultType="cartDTO">
+	<select id="cartList" parameterType="memberDTO" resultType="cartDTO">
 		<![CDATA[
-			SELECT c.cart_id, c.member_id FROM cart c, member m WHERE c.member_id = m.member_id and m.member_id = #{member_id}
+			SELECT *
+			FROM cart
+			WHERE m_id = #{m_id}
+			AND cart_number = (SELECT MIN(cart_number) FROM cart WHERE m_id = '101')
 		]]>
 	</select>
 
-	<select id="productsDetailList" parameterType="cartDTO" resultType="productDisplayVO">
+	<select id="productList" parameterType="memberDTO" resultType="productDTO">
 		<![CDATA[
-			SELECT d.product_display_id, d.product_name, d.product_info, d.capacity, d.alcohol_content, d.origin, d.manufacturer, d.product_image, d.product_price
-			FROM cart c, product p, product_display d 
-			WHERE p.cart_id = c.cart_id
-			AND p.product_display_id = d.product_display_id
-			AND c.cart_id = #{cart_id}
+			SELECT *
+			FROM product
+			WHERE product_id IN (SELECT product_id 
+								 FROM cart 
+								 WHERE m_id = #{m_id}
+								 AND cart_number = (SELECT min(cart_number) FROM cart WHERE m_id = #{m_id}))
 		]]>
 	</select>
 	
-	<select id="memberInfo" parameterType="String" resultType="memberDTO">
+	<update id="changeCount" parameterType="cartDTO">
+		<![CDATA[	
+			UPDATE cart
+			SET count = #{count}
+			WHERE cart_id = #{cart_id}
+		]]>
+	</update>
+	<!-- ============================================================================================================================================================================================= -->
+	<select id="searchProductId" parameterType="String" resultType="int">
 		<![CDATA[
-			SELECT *
-			FROM member
-			WHERE member_id = #{member_id}
+			SELECT product_id
+			FROM product
+			WHERE product_name = #{product_name}
 		]]>
 	</select>
 	
 	<insert id="orderInsert" parameterType="orderDTO">
 		<![CDATA[
-			INSERT INTO product_order
-			VALUES (#{order_id}, #{cart_id}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{final_price})
+			INSERT INTO product_order (order_id, m_id, product_id, order_number, receiver_name, receiver_phoneNum, zipcode, address, address_detail, order_status, count, final_price)
+			VALUES (#{order_id}, #{m_id}, #{product_id}, #{order_number}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{order_status}, #{count}, #{final_price})
 		]]>
 	</insert>
 	
-	<delete id="deleteProduct" parameterType="java.util.Map">
+	<delete id="deleteProduct" parameterType="String">
 		<![CDATA[
-			DELETE
-			FROM (SELECT * 
-			      FROM product
-			      WHERE cart_id IN (SELECT cart_id FROM cart WHERE member_id = #{member_id}))
-			WHERE product_display_id IN (SELECT product_display_id FROM product_display WHERE product_name = #{product_name})
+			DELETE FROM cart
+			WHERE cart_id = #{cart_id}
 		]]>
 	</delete>
+	
+	<select id="checkOrderId" resultType="String">
+		<![CDATA[
+			SELECT order_id
+			FROM product_order
+		]]>
+	</select>
+	<select id="checkOrderNum" parameterType="String" resultType="String">
+		<![CDATA[
+			SELECT order_number
+			FROM product_order
+			WHERE m_id = #{m_id}
+		]]>
+	</select>
+	<!-- ============================================================================================================================================================================================= -->
+	<select id="orderInfo" parameterType="memberDTO" resultType="orderDTO">
+		<![CDATA[
+			SELECT * 
+			FROM product_order
+			WHERE m_id = #{m_id}
+			ORDER BY order_date
+		]]>
+	</select>
+	
+	<select id="orderList" parameterType="orderDTO" resultType="productDTO">
+		<![CDATA[
+			SELECT * 
+			FROM product
+			WHERE product_id 
+			IN (SELECT product_id FROM product_order WHERE order_id = #{order_id})
+		]]>
+	</select>
 </mapper>

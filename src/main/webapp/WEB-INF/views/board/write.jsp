@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>글쓰기</title>
 <%@ include file="../include/header.jsp" %>
-
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
-
 <style>
+.summernote {border:1px solid #a9a9a9;position:relative}
 
 input.reon {
 	border: none;
@@ -48,7 +48,7 @@ color: #fff;
 <%@ include file="../include/topMenu.jsp" %>
 <br/><br/>
 <div class="container">
-	<form class="form-horizontal" action="#" method="post">
+	<form class="form-horizontal" action="${path}/board/addNewArticle" method="post" name="articleForm" id="articleForm">
 		<div class="form-group">
 			<div>
 				<h2 align="center">글쓰기</h2>
@@ -58,30 +58,38 @@ color: #fff;
 		<div class="form-group">
 			<label class="control-label col-sm-3">작성자</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control-plaintext reon" value="닉네임" readonly/>
+				<input type="text" style="font-size: 20px;" class="form-control-plaintext reon" value="${member.m_nickname}" readonly/>
+				<input type="hidden" id="writer" name="writer" style="font-size: 20px;" class="form-control-plaintext reon" value="${member.m_id}" readonly/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label class="control-label col-sm-3">대표사진</label>
+			<div class="col-sm-6">
+				<input type="file" name="image" onchange="readURL(this);"/>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-3">제목</label>
 			<div class="col-sm-6">
-				<input type="text" class="form-control" maxlength="100" style="width: 100%"/>
+				<input type="text" class="form-control" maxlength="100" style="width: 100%" id="title" name="title"/>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-3">내용</label>
-			<div class="col-sm-6">
-				<textarea class="form-control" rows="15"></textarea>
+			<div class="col-sm-7" id="smarteditor">
+				<textarea id="content" name="content" rows="20"></textarea>
 			</div>
 		</div>
 		<hr/>
 		<div class="form-group">
 			<div class="col-sm-6"></div>
 			<div class="col-sm-4" style="text-align: center; margin-left: 10px;">
-				<button class="btn_cle" type="button">취소</button>
+				<button class="btn_cle" type="button" onClick="backToList(this.form)">취소</button>
 				&nbsp;
-				<button class="btn_sub" type="submit" id="submit">올리기</button>
+				<button class="btn_sub" id="wsubmit" type="submit">올리기</button>
 			</div>
 		</div>
 	</form>
@@ -89,8 +97,72 @@ color: #fff;
 <br/>
 <script>
 
+function backToList(obj) {
+	location.href = "${path}/board/articleList";
+}
 </script>
+<script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+		oAppRef: oEditors,
+		elPlaceHolder: "content",
+		sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
+		fCreator: "createSEditor2",
+		htParams: {
+			bUseModeChanger: false
+		}
+	});
 
+	$("#wsubmit").click(function(){
+		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+		
+		if (ajaxRequest !== null){
+			ajaxRequest.abort();
+		}
+		
+		var writer = document.getElementById("writer").value;
+		var title = $('#title').val();
+		var image = $('#image').val();
+		var content = document.getElementById("content").value;
+		
+		if (title == null || title == ""){
+			alert("제목을 입력하세요");
+			$("#title").focus();
+			return false;
+		}
+		if(content == "" || content == null || content == '&nbsp;'
+		|| content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
+			alert("내용을 입력하세요");
+			return false;
+		}
+		
+		if(!confirm("발행하겠습니까?")){
+			alert("취소되었습니다");
+			return false;
+		} else {
+			
+			ajaxRequest = $.ajax({
+				type: "post",
+				url: "/board/addNewArticle",
+				datatype: "json",
+				contentType: "application/json",
+				data: JSON.stringify({"title":title,"content":content,"writer":writer, "image":image}),
+				success: function(data){
+					alert("성공");
+					location.href = "/board/addNewArticle";
+				},
+				error: function(data){
+					alert("오류");
+					return false;
+				}
+			});
+		}
+	});
+});
+</script>
 <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

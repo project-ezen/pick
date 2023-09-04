@@ -53,21 +53,21 @@ body {
 						<!-- 장바구니 상품 나열하기 -->
 						<c:choose>
 							<%-- 장바구니에 상품이 없는 경우 --%>
-							<c:when test="${cart == null }">
+							<c:when test="${cart == '[]' }">
 								<tr>
 								    <td align="center" colspan="6">
 									    <div class="col-md-offset-3 col-md-6">
-									    	<input class="form-control text-center" style="font-size: 18px;" value="담은 상품이 존재하지 않습니다." disabled>
+									    	<label class="text-center" style="font-size: 18px; padding-top: 7px;">담은 상품이 존재하지 않습니다.</label>
 								    	</div>
 									</td>
 								</tr>
 							</c:when>
 							<%-- 장바구니에 상품이 있는 경우 --%>
-							<c:when test="${cart != null }">
-								<input type="hidden" value="${cart.cart_id }" name="cartId">
+							<c:when test="${cart != '[]' }">
 								<c:forEach var="products_item" items="${product }" varStatus="productNum">
 									<tr>
 									    <td class="form-group" style="vertical-align: middle;">
+											<input type="hidden" class="ctId" name="cartId" value="${cart[productNum.index].cart_id }">
 										    <div>
 										        <label>
 										            <input class="check" id="check" type="checkbox" checked>
@@ -92,7 +92,7 @@ body {
 										<td class="form-inline" style="vertical-align: middle;">
 										    <div class="form-group">
 										        <button type="button" class="btn btn-default minus"><span class="glyphicon glyphicon-minus"></span></button>
-										        <input class="form-control text-center cnt" width="30px" type="text" name="cnt" value="1">
+										        <input class="form-control text-center cnt" width="30px" type="text" name="cnt" value="${cart[productNum.index].count }">
 										        <button type="button" class="btn btn-default plus"><span class="glyphicon glyphicon-plus"></span></button>
 										    </div>
 										</td>
@@ -129,7 +129,7 @@ body {
 			    </div>
 			    <c:choose>
 			    	<%-- 장바구니에 상품이 없는 경우 --%>
-			    	<c:when test="${cart == null }">
+			    	<c:when test="${cart == '[]' }">
 			    		<div class="row">
 			    			<div class="col-md-offset-8 col-md-4 text-right">
 					            <button type="submit" id="pay" class="btn btn-primary" disabled>결제하기</button>
@@ -137,7 +137,7 @@ body {
 			    		</div>
 			    	</c:when>
 			    	<%-- 장바구니에 상품이 있는 경우 --%>
-			    	<c:when test="${cart != null }">
+			    	<c:when test="${cart != '[]' }">
 					    <div class="row">
 					    	<div class="col-md-offset-8 col-md-4 text-right">
 					            <button type="submit" id="pay" class="btn btn-primary">결제하기</button>
@@ -187,6 +187,8 @@ $(document).ready(function() {
 		let minus = $(".minus:eq(" + idx + ")");
 		let count = $(".cnt:eq(" + idx + ")");
 		
+		let ctId = $(".ctId:eq(" + idx + ")");
+		
 		let origin_price = $(".originPrice:eq(" + idx + ")");
 		let price = $(".productPrice:eq(" + idx + ")");
 		let pdtprice = $(".pdtPrice:eq(" + idx + ")");
@@ -197,22 +199,38 @@ $(document).ready(function() {
 		let tol_price = $("#tolPrice");
 //----------------------------------------------------------------------------------------------------------------
 		// +, - 버튼 클릭시 수량 숫자 변경
-		plus.on("click", function() {			
+		plus.on("click", function() {
 			count.prop("value", parseInt(count.val()) + 1);
 			price.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
 			pdtprice.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+			// 변경된 수량 database에 저장하기
+			$.ajax({
+				url: "/shopping/countchange",
+				type: "get",
+				dataType: "json",
+				data: {"count": count.val(), "cart_id": ctId.val()},
+				success: function(data) {
+					console.log("success : " + data);
+				}, 
+				error: function(data) {
+					console.log("error : " + data);
+				}
+			});
 			
 			// total_price 갱신
 			sum = 0;
 			for(var i = 0; i < $(".productName").length; i++) {
-				sum += parseInt($(".productPrice:eq(" + i + ")").val());
+				// 넘어갈 값이 disabled 되지 않았을 경우
+				if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+					sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+				}
+				// 넘어갈 값이 disabled 되었을 경우
+				else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+					sum += 0;
+				}
 			}
 			total_price.prop("value", sum);
 			tol_price.prop("value", sum);
-			
-//			console.log(count.val());
-//			console.log(origin_price.val());
-//			console.log(price.val());
 		});
 		minus.on("click", function() {
 			count.prop("value", parseInt(count.val()) - 1);
@@ -220,11 +238,31 @@ $(document).ready(function() {
 				price.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
 				pdtprice.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
 			}
+			// 변경된 수량 database에 저장하기
+			$.ajax({
+				url: "/shopping/countchange",
+				type: "get",
+				dataType: "json",
+				data: {"count": count.val(), "cart_id": ctId.val()},
+				success: function(data) {
+					console.log("success : " + data);
+				}, 
+				error: function(data) {
+					console.log("error : " + data);
+				}
+			});
 			
 			// total_price 갱신
 			sum = 0;
 			for(var i = 0; i < $(".productName").length; i++) {
-				sum += parseInt($(".productPrice:eq(" + i + ")").val());
+				// 넘어갈 값이 disabled 되지 않았을 경우
+				if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+					sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+				}
+				// 넘어갈 값이 disabled 되었을 경우
+				else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+					sum += 0;
+				}
 			}
 			total_price.prop("value", sum);
 			tol_price.prop("value", sum);
@@ -241,11 +279,31 @@ $(document).ready(function() {
 		count.on("input", function() {
 			price.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
 			pdtprice.prop("value", parseInt(count.val()) * parseInt(origin_price.val()));
+			// 변경된 수량 database에 저장하기
+			$.ajax({
+				url: "/shopping/countchange",
+				type: "get",
+				dataType: "json",
+				data: {"count": count.val(), "cart_id": ctId.val()},
+				success: function(data) {
+					console.log("success : " + data);
+				}, 
+				error: function(data) {
+					console.log("error : " + data);
+				}
+			});
 			
 			// total_price 갱신
 			sum = 0;
 			for(var i = 0; i < $(".productName").length; i++) {
-				sum += parseInt($(".productPrice:eq(" + i + ")").val());
+				// 넘어갈 값이 disabled 되지 않았을 경우
+				if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+					sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+				}
+				// 넘어갈 값이 disabled 되었을 경우
+				else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+					sum += 0;
+				}
 			}
 			total_price.prop("value", sum);
 			tol_price.prop("value", sum);
@@ -253,6 +311,7 @@ $(document).ready(function() {
 //----------------------------------------------------------------------------------------------------------------	
 		// check 여부에 따른 total_price 변동
 		check.on("click", function() {
+			// checked true
 			if(check.is(":checked")){
 //				console.log("true");			
 				// 모든 버튼 선택 활성화
@@ -269,11 +328,18 @@ $(document).ready(function() {
 				// total_price 갱신
 				sum = 0;
 				for(var i = 0; i < $(".productName").length; i++) {
-					sum += parseInt($(".productPrice:eq(" + i + ")").val());
+					// 넘어갈 값이 disabled 되지 않았을 경우
+					if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+						sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+					}
+					// 넘어갈 값이 disabled 되었을 경우
+					else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+						sum += 0;
+					}
 				}
-				
 				total_price.prop("value", sum);
 				tol_price.prop("value", sum);
+			// checked false
 			} else if(!check.is(":checked")) {
 //				console.log("false");			
 				// 모든 버튼 선택 불능
@@ -290,10 +356,15 @@ $(document).ready(function() {
 				// total_price 갱신
 				sum = 0;
 				for(var i = 0; i < $(".productName").length; i++) {
-					sum += parseInt($(".productPrice:eq(" + i + ")").val());
+					// 넘어갈 값이 disabled 되지 않았을 경우
+					if(!$(".pdtPrice:eq(" + i + ")").is(":disabled")){
+						sum += parseInt($(".pdtPrice:eq(" + i + ")").val());
+					}
+					// 넘어갈 값이 disabled 되었을 경우
+					else if($(".pdtPrice:eq(" + i + ")").is(":disabled")) {
+						sum += 0;
+					}
 				}
-				
-				sum -= parseInt(price.val());
 				total_price.prop("value", sum);
 				tol_price.prop("value", sum);
 			}

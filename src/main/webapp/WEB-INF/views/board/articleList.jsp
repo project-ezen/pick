@@ -8,55 +8,69 @@
 <%@ include file="../include/header.jsp" %>
 <style>
 
+.foot { padding-bottom: 100px; padding-top: 100px; }
+
 
 img {
 margin-top: 50px;
-margin-left: 5px;
+margin-left: 10px;
 border-radius: 5px;
 }
 
+.outer_div {
+min-height: 534px;
+}
+
 .inner_div {
-padding: 0px;
-margin: 15px 15px;
-}
-
- 
-.search {
-width: 700px;
-position: relative;
-margin-left: 400px;
-justify-content: flex-start;
+margin-top: 20px;
+margin-right: 20px;
 margin-bottom: 10px;
+margin-left: 45px;
+display: inline-block;
 }
 
-.search input {
-  width: 43%;
-  height: 30px;
-  font-size: 15px;
-  border: 0;
-  border-radius: 15px;
-  outline: none;
-  background-color: rgb(233, 233, 233);
-  margin: 0;
-  padding: 10px 12px;
-  text-align: center;
+.pagenav {
+display: inline-block;
+width: 50%;
+text-align: center;
+position: relative;
+left: 25%;
+bottom: 20px;
 }
 
-.bis {
-position: absolute;
-left: 15px;
-top: 5px;
-margin: 0;
+.searchbar {
+width: 300px;
+height: 30px;
+border-radius: 5px;
+border: solid 1px rgba(0,0,0,0.3);
+display: flex;
+justify-content: center;
+align-items: center;
+opacity: 1;
+background-color: rgb(233, 233, 233);
+margin-left: 36%;
+}
+
+.searchinput {
+width: 250px;
+border: none;
+margin-left: 10px;
+overflow: auto;
+font-size: 16px;
+background-color: rgb(233, 233, 233);
+outline: none;
+}
+.selectbtn {
+width: 150px;
+margin-left: auto;
 }
 
 .btnsub {
- border-radius: 10px;
- border: 2px solid #586389;
-}
-
-select {
+border-radius: 10px;
+border: 2px solid #586389;
 width: 90px;
 height: 30px;
+text-align: center;
 }
 
 .wbtn {
@@ -68,53 +82,6 @@ background-color: #687AB6;
 color: #fff;
 float: right;
 margin-right: 50px;
-margin-bottom: 20px;
-}
-
-.page_wrap {
-	width: 100%;
-	text-align:center;
-	font-size:0;
-	height: 40px;
-	margin-left: 100px;
- }
-.page_nation {
-	display:inline-block;
-	padding-top: 7px;
-}
-.page_nation .none {
-	display:none;
-}
-.page_nation a {
-	display:block;
-	margin:0 3px;
-	float:left;
-	border:1px solid #e6e6e6;
-	width:28px;
-	height:28px;
-	line-height:28px;
-	text-align:center;
-	background-color:#fff;
-	font-size:13px;
-	color:#999999;
-	text-decoration:none;
-}
-.page_nation .arrow {
-	border:1px solid #ccc;
-}
-
-.page_nation .prev {
-	background:#f8f8f8 url('img/page_prev.png') no-repeat center center;
-	margin-right:7px;
-}
-.page_nation .next {
-	background:#f8f8f8 url('img/page_next.png') no-repeat center center;
-	margin-left:7px;
-}
-.page_nation a.active {
-	background-color:#42454c;
-	color:#fff;
-	border:1px solid #42454c;
 }
 
 .lele {
@@ -159,61 +126,86 @@ text-align: center;
 span {
 font-size: 15px;
 }
-.container {
-padding: 0px;
-}
-
+ 
 </style>
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
-<div class="container" style="background-color: white;">
-	<h2 align="center">나만의 레시피</h2>
-	<br/>
-		<div class="search">
-			<i class="bi bi-search bis"></i><input type="text" placeholder="검색"/>
-			<div style="width: 100px; float: right;">
+<div class="foot">
+	<div class="container" style="background-color: white;">
+		<h2 align="center">나만의 레시피</h2>
+		<br/>
+		<div style="display: flex;">
+			<div class="searchbar">
+				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="검색"/>
+			</div>
+			<div class="selectbtn">
 				<select class="btnsub">
 					<option>최신순</option>
 					<option>찜 많은순</option>
 				</select>
 			</div>
 		</div>
-	
-	<div style="width: 370px; height: 230px; float: left;">
-		<div class="inner_div" style="background-color: #888; height: 200px; width: 300px">
-			<img alt="" src="./resources/images/cat1.jpg" width="100px" height="100px">
-			<div class="lele">
-				<div class="top">
-					<p class="title">제목</p>
-					<p class="writer">작성자</p>
-				</div>
-				<div class="bottom">
-					<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
-					&nbsp;&nbsp;&nbsp;&nbsp;
-					<i class="bi bi-heart"></i><span>100</span>
-				</div>
-			</div>
-		</div>
+		<div class="outer_div">
+		<c:choose>
+			<c:when test="${empty articlesList}"> <!-- 게시글이 하나도 없는 경우 -->
+				<h3 style="font-size:22px; text-align: center;"><b>등록된 게시글이 없습니다.</b></h3>
+			</c:when>
+			<c:when test="${not empty articlesList}"> <!-- 게시글이 하나라도 있는 경우 -->
+				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
+						<div class="inner_div" style="background-color: #888; height: 200px; width: 300px; border-radius: 10px;">
+							<img alt="" src="${path}/resources/images/cat1.jpg" width="100px" height="100px">
+							<div class="lele">
+								<div class="top">
+									<p class="title"><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
+									<p class="writer">${article.nickname}</p>
+								</div>
+								<div class="bottom">
+									<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<i class="bi bi-heart"></i><span>100</span>
+								</div>
+							</div>
+						</div>
+				</c:forEach>
+			 <!-- 화면 하단의 페이지 영역 -->
+	      </c:when>
+		</c:choose>
+	    </div>  
+	      <div class="pagenav">
+	         <ul class="btn-group pagination">
+	            <c:if test="${pageMaker.prev}">
+	               <li>
+	                  <a href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	               </li>
+	            </c:if>
+	            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+	               <li>
+	                  <a href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
+	               </li>
+	            </c:forEach>
+	            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+	               <li>
+	                  <a href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+	               </li>
+	            </c:if>
+	         </ul>
+	      </div>
+		<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
+		<br/>
 	</div>
-	
-	
-	<button type="button" class="wbtn" onclick="location.href='${path}/board/write';">글쓰기</button>
-	<div class="page_wrap">
-	   <div class="page_nation">
-	      <a class="arrow prev" href="#"><i class="bi bi-caret-left-fill"></i></a>
-	      <a href="#" class="active">1</a>
-	      <a href="#">2</a>
-	      <a href="#">3</a>
-	      <a href="#">4</a>
-	      <a href="#">5</a>
-	      <a class="arrow next" href="#"><i class="bi bi-caret-right-fill"></i></a>
-	   </div>
-	</div> 
-<br/>
+<br/><br/>
 </div>
 <%@ include file="../include/footer.jsp" %>
 <script>
+function fn_writeForm(isLogOn, articleForm, loginForm) {
+	if(isLogOn != '' && isLogOn != false){
+		location.href = articleForm;
+	} else {
+		alert("로그인 후 이용해주세요.");
+		location.href= loginForm + '?action=/board/write';
+	}
+}
 </script>
 </body>
 </html>

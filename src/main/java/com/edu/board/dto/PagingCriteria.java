@@ -56,7 +56,7 @@ public class PagingCriteria {
 	
 	@Override
 	public String toString() {
-		return "Criteria [page=" + page + ", perPageNum=" + perPageNum + "]";
+		return "PagingCriteria [page=" + page + ", perPageNum=" + perPageNum + "]";
 	}
 	
 	

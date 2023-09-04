@@ -5,11 +5,18 @@ public class DisplayOrderVO {
 	private String name;
 	private String price;
 	private String count;
-	public DisplayOrderVO(String image, String name, String price, String count) {
-		this.image = image; this.name = name; this.price = price; this.count = count;
+	private String cart_id;
+	public DisplayOrderVO(String cart_id, String image, String name, String price, String count) {
+		this.cart_id = cart_id; this.image = image; this.name = name; this.price = price; this.count = count;
 	}
 	public DisplayOrderVO() {
 		
+	}
+	public String getCart_id() {
+		return cart_id;
+	}
+	public void setCart_id(String cart_id) {
+		this.cart_id = cart_id;
 	}
 	public String getImage() {
 		return image;
@@ -37,6 +44,7 @@ public class DisplayOrderVO {
 	}
 	@Override
 	public String toString() {
-		return "DisplayOrderDTO [image=" + image + ", name=" + name + ", price=" + price + ", count=" + count + "]";
+		return "DisplayOrderVO [image=" + image + ", name=" + name + ", price=" + price + ", count=" + count
+				+ ", cart_id=" + cart_id + "]";
 	}
 }

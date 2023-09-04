@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session ="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +8,7 @@
 <title>Insert title here</title>
 <%@ include file="./include/header.jsp" %>
     <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            color: white;
-        }
+        body, html {  height: 100%;  margin: 0;  color: white; }
         .bg {
             background-image: url("./resources/images/background2.jpg");
             background-attachment: scroll;
@@ -74,19 +71,27 @@
 	          		</li>
 	          		
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="#">나만의 레시피</a></label>
+                       <label id="solo"><a href="${path}/board/articleList">나만의 레시피</a></label>
                    	</div>
 
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="">MyPage</a></label>
+                       <label id="solo"><a href="javascript:fn_mypage('${isLogOn}','${path}/member/mypage','${path}/member/login')">MyPage</a></label>
                    	</div>
 
                    	<div style="margin-top: 50px;">
                        <label id="solo"><a href="#">Store</a></label>
                    	</div>
-
                    	<div style="margin-top: 350px;" id="logindiv">
-                       <label><a href="${path}/member/login">login</a> | <a href="${path}/member/join">sign on</a></label>
+                   	<c:choose>
+						<%-- 로그인이 되지 않은 경우 --%>
+						<c:when test="${ isLogOn != true }">
+	                       <label><a href="${path}/member/login">login</a> | <a href="${path}/member/join">sign on</a></label>
+	                   	</c:when>
+	                   	<%-- 로그인이 된 경우 --%>
+	                	<c:when test="${ isLogOn == true }">
+	                       <label><a href="${path}/member/logout">logout</a></label>
+	                   	</c:when>
+                   	</c:choose>
                    	</div>
                 </div>
             </div>
@@ -94,7 +99,14 @@
     </div>
 
     <script>
-        
+        function fn_mypage( isLogOn , mypageForm , loginForm) {
+        	if(isLogOn != '' && isLogOn != 'false') {
+        		location.href = mypageForm;
+    		} else{
+    			alert("로그인을 해주세요");
+    			location.href = loginForm + '?action=/member/mypage';
+    		} 
+        }
     </script>
 </body>
 </html>
