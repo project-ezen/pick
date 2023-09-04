@@ -7,12 +7,14 @@
     <%@ include file="../include/header.jsp" %>
     
     <style>
+    	.container {
+    		width: 500px;
+    	}
     	.container { background-color: rgba(255, 255, 255, 0.88); }
     	
     	.foot { padding-bottom: 100px; padding-top: 100px; }
     	
         .update-form {
-            width: 600px;
             margin: auto;
             padding: 30px;
         }

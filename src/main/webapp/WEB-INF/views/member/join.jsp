@@ -6,6 +6,9 @@
     <title>회원 가입</title>
     <%@ include file="../include/header.jsp" %>
     <style>
+    	.container {
+    		width: 500px;
+    	}
     	.foot {padding-bottom: 100px; padding-top: 100px; }
     
     	.container { background-color: rgba(255, 255, 255, 0.88); }
@@ -48,7 +51,7 @@
 <div class="foot">
 	<div class="container">
 		<div class="join-form">
-			<h1 class="text-center">회원 가입</h1>
+			<h1 class="text-center">회원 가입</h1><hr/>
 			
 			<form id="join-form" method="post" action="/member/join">
                 <div class="form-group">
@@ -127,6 +130,7 @@
                     <div class="checkbox">
                         <label data-toggle="modal" data-target="#info_modal1">
                             <input type="checkbox" id="info1" name="info1" value="false" disabled> [필수] 이용약관에 동의합니다.
+                            
                         </label>
                     </div>
                 </div>
