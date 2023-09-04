@@ -83,4 +83,20 @@
 			IN (SELECT product_id FROM product_order WHERE order_id = #{order_id})
 		]]>
 	</select>
+	
+	<update id="cancelProgress" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE product_order
+			SET order_complaint = #{reason}, order_status = #{status}
+			WHERE order_id = #{id}
+		]]>
+	</update>
+	<!-- ============================================================================================================================================================================================= -->
+	<select id="orderNumInfo" parameterType="int" resultType="orderDTO">
+		<![CDATA[
+			SELECT * 
+			FROM product_order
+			WHERE order_number = #{order_num , jdbcType=VARCHAR}
+		]]>
+	</select>
 </mapper>
