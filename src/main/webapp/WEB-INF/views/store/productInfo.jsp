@@ -13,7 +13,10 @@
     
     .bg {
 		 background-image: url("/resources/images/background2.jpg");
+
          height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
+         
+         
 		 background-attachment: fixed, scroll;
          background-position: center;
          background-repeat: no-repeat;
@@ -21,8 +24,8 @@
 	}
     
     .container-fluid{
-	    margin-left: 80px;
-	    margin-right: auto;
+    margin-left: 80px;
+    margin-right: auto;
     }
       .carousel-inner img {
         width: 100%;
@@ -32,9 +35,9 @@
       /* 글리피콘 세모*/
       #btnDown {
         color: #05224e;
-        margin-top: 40px;
-        margin-left: 60px;
+        margin-top: 75px;
         display: none;
+        font-size: 50px;
       }
       /* 글리피콘 세모*/
 
@@ -59,8 +62,8 @@
       #furSearchBtn,
       #jucSearchBtn {
         margin-left: 30px;
-        width: 100px;
-        height: 30px;
+        width: 200px;
+        height: 60px;
         border: none;
         display: inline-block;
         text-transform: uppercase;
@@ -190,82 +193,87 @@
       /*상품 정보*/
 
       /*검색 버튼*/
-      #search_fromKeyword {
-        margin-right: 30px;
-        text-align: center;
-        font-size: 20px;
-        float: right;
-      }
-
-      #searchBtn_fromKeyword {
-        width: 40px;
-        height: 40px;
-        color: #f7eeee;
-      }
-      #searchBtn_fromKeyword:hover {
-        background-color: rgb(255, 255, 255);
-      }
-
-      #searchBtn_fromKeyword {
-        line-height: 40px;
-        padding: 0;
-        background: transparent;
-        position: relative;
-        z-index: 2;
-        color: #fff;
-        -webkit-perspective: 300px;
-        perspective: 300px;
-        -webkit-transform-style: preserve-3d;
-        transform-style: preserve-3d;
-      }
-      #searchBtn_fromKeyword:hover {
-        color: #000;
-      }
-      #searchBtn_fromKeyword:after {
-        position: absolute;
-        content: "";
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #000;
-        z-index: -1;
-        transform-origin: center bottom;
-        transition: all 0.5s ease;
-      }
-      #searchBtn_fromKeyword:hover:after {
-        -webkit-transform: rotateX(-180deg);
-        transform: rotateX(-180deg);
-      }
-      body {
-      background-color: white;
-      }
-      
+		      * {
+		    box-sizing: border-box;
+		  }
+		  #search_fromKeyword {
+		    width: fit-content;
+		    height: fit-content;
+		    position: absolute;
+		  	top:10px;
+		  	right:20px;
+		  }
+		  #searchKeyword {
+		    height: 50px;
+		    width: 50px;
+		    border-style: none;
+		    padding: 10px;
+		    font-size: 18px;
+		    letter-spacing: 2px;
+		    outline: none;
+		    border-radius: 25px;
+		    transition: all 0.5s ease-in-out;
+		    background-color: #22a6b3;
+		    padding-right: 40px;
+		    color: #fff;
+		  }
+		  #searchKeyword::placeholder {
+		    color: rgba(255, 255, 255, 0.5);
+		    font-size: 18px;
+		    letter-spacing: 2px;
+		    font-weight: 100;
+		  }
+		  .btn-search {
+		    width: 50px;
+		    height: 50px;
+		    border-style: none;
+		    font-size: 20px;
+		    font-weight: bold;
+		    outline: none;
+		    cursor: pointer;
+		    border-radius: 50%;
+		    position: absolute;
+		    right: 0px;
+		    color: #ffffff;
+		    background-color: transparent;
+		    pointer-events: painted;
+		  }
+		  	.btn-search:focus ~ #searchKeyword,
+			#searchKeyword:focus,
+			#searchButton:focus ~ #searchKeyword {
+			  width: 300px;
+			  border-radius: 0px;
+			  background-color: transparent;
+			  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+			  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+			}
       /*검색 버튼*/
 	  
 	  /*select css*/
 	  .selectSearch{
-	    margin-top: 30px;
+	    position:absolute;
+	    top: 80px;
+	    right: 30px;
 	    border-style: none;
 	    background-color: rgba(0, 0, 0, 0);
 	    color:	#FFF;
 	    width: 150px;
 	    font-size: 17px;
+
+	   
 	  }     
 	  .selectSearch:focus{
 	  	border-style: none;
 	  	outline: none;
 	  }
       /*select css*/
-      
+     
 	  option {
-	  	color: black;
+	   color: rgba(0,0,0,1);
+	   background-color: rgba(0,0,0,0);
 	  }
-	   option:hover {
-	  	background-color: black;
-	  	color: white;
-	  }
-      
+	  
+	  
     </style>
   </head>
   <body class="bg">
@@ -334,35 +342,35 @@
           <span>과일</span>
         </button>
         
-<!-- 검색 버튼 -->
     <div>
       <span
         id="btnDown"
         class="glyphicon glyphicon-triangle-bottom"
-        style="font-size: 30px"
       ></span>
     </div>
-	
-	 <div id="search_fromKeyword">
-	    <form action="/store/productInfo" method="GET">
-	        <input type="hidden" name="category" value="${param.category}" />
-	        <input type="text" id="searchKeyword" name="searchKeyword" value="${param.searchKeyword.trim()}"/>	
-	        <button type="submit" id="searchBtn_fromKeyword" class="glyphicon glyphicon-search"></button>
-	    </form>
+<!-- 검색 버튼 -->
+	<div id="search_fromKeyword">
+    <form action="/store/productInfo" method="GET" id="searchForm">
+        <input type="hidden" name="category" value="${param.category}" />
+        <button class="btn-search" type="button" onclick="handleButtonClick();"><i class="glyphicon glyphicon-search"></i></button>
+        <input type="text" id="searchKeyword" name="searchKeyword" value="${param.searchKeyword.trim()}" placeholder="찾으시는 술이 있나요?"/>    
+    </form>
+	</div>
+
+	<div>
       <select class="selectSearch" name="select" onchange="selectSearch()" id="select">
       	<option value="def" <c:if test="${param.select eq 'def'}">selected</c:if>>기본</option>
       	<option value="lowPrice" <c:if test="${param.select eq 'lowPrice'}">selected</c:if>>낮은 가격순</option>
       	<option value="highPrice" <c:if test="${param.select eq 'highPrice'}">selected</c:if>>높은 가격순</option>
       </select>
-	</div>
-    
+    </div>
     <br />
     <br />
     
 	<div class="container-fluid">
 	<div class="row text-center" id="productInfo">
 		<c:forEach var="product" items="${productList}">
-			<a href="/store/productInfos?display_product_id=${product.display_product_id}">
+			<a href="/store/productInfos?product_display_id=${product.product_display_id}">
 				<div class="col-sm-3 productInfo_in">
 					<img src="${path}/download.do?imageFileName=${product.product_image}" align="center"/>
 					<p align="center">상품명 : ${product.product_name }</p>
@@ -371,10 +379,10 @@
 			</a>
 		</c:forEach>
 	</div>
+  </div>
       
          
          
-  </div>
  <div align="center">
     <nav aria-label="Page navigation">
         <ul class="pagination">
@@ -407,6 +415,25 @@
   </body>
 
   <script>
+  var buttonClicked = false; // 버튼이 클릭되었는지 여부를 나타내는 변수
+
+  function handleButtonClick() {
+      var searchKeywordBtn = document.getElementById('searchKeyword').value; // 버튼 클릭 시점에 값 가져오기
+      
+      if (buttonClicked) {
+          // 버튼이 이미 클릭된 상태라면 폼 제출
+          if (searchKeywordBtn != null && searchKeywordBtn != "") {
+              document.getElementById('searchForm').submit();
+          }
+      } else {
+          // 버튼이 처음 클릭된 경우 버튼 상태 변경
+          buttonClicked = true;
+      }
+  }
+  
+
+
+
   function selectSearch() {
 	  var select = document.getElementById("select");
 	  var choose = select.options[select.selectedIndex].value;
@@ -560,15 +587,15 @@
         $("#jucSearchBtn").css("background-image", "none");
 
         // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-470px");
+        $("#btnDown").css("margin-left", "-850px");
         $("#btnDown").css("display", "inline-block");
         $("#productInfo").css("margin-top", "0px");
 
         // 높이 바꾸기
-        $("#alcSearchBtn").css("height", "50px");
-        $("#doguSearchBtn").css("height", "30px");
-        $("#furSearchBtn").css("height", "30px");
-        $("#jucSearchBtn").css("height", "30px");
+        $("#alcSearchBtn").css("height", "90px");
+        $("#doguSearchBtn").css("height", "60px");
+        $("#furSearchBtn").css("height", "60px");
+        $("#jucSearchBtn").css("height", "60px");
     }
     
     // 도구 펑션
@@ -588,15 +615,15 @@
         $("#jucSearchBtn").css("background-image", "none");
 
         // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-210px");
+        $("#btnDown").css("margin-left", "-380px");
         $("#btnDown").css("display", "inline-block");
         $("#productInfo").css("margin-top", "0px");
 
         // 높이 바꾸기
-        $("#alcSearchBtn").css("height", "30px");
-        $("#doguSearchBtn").css("height", "50px");
-        $("#furSearchBtn").css("height", "30px");
-        $("#jucSearchBtn").css("height", "30px");
+        $("#alcSearchBtn").css("height", "60px");
+        $("#doguSearchBtn").css("height", "90px");
+        $("#furSearchBtn").css("height", "60px");
+        $("#jucSearchBtn").css("height", "60px");
     }
     
     // 과일 펑션
@@ -617,15 +644,15 @@
         $("#jucSearchBtn").css("background-image", "none");
 
         // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-80px");
+        $("#btnDown").css("margin-left", "-160px");
         $("#btnDown").css("display", "inline-block");
         $("#productInfo").css("margin-top", "0px");
 
         // 높이 바꾸기
-        $("#alcSearchBtn").css("height", "30px");
-        $("#doguSearchBtn").css("height", "30px");
-        $("#furSearchBtn").css("height", "50px");
-        $("#jucSearchBtn").css("height", "30px");
+        $("#alcSearchBtn").css("height", "60px");
+        $("#doguSearchBtn").css("height", "60px");
+        $("#furSearchBtn").css("height", "90px");
+        $("#jucSearchBtn").css("height", "60px");
     }
     
     // 음료 펑션
@@ -645,15 +672,15 @@
         $("#furSearchBtn").css("background-image", "none");
 
         // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-340px");
+        $("#btnDown").css("margin-left", "-615px");
         $("#btnDown").css("display", "inline-block");
         $("#productInfo").css("margin-top", "0px");
 
         // 높이 바꾸기
-        $("#alcSearchBtn").css("height", "30px");
-        $("#doguSearchBtn").css("height", "30px");
-        $("#furSearchBtn").css("height", "30px");
-        $("#jucSearchBtn").css("height", "50px");
+        $("#alcSearchBtn").css("height", "60px");
+        $("#doguSearchBtn").css("height", "60px");
+        $("#furSearchBtn").css("height", "60px");
+        $("#jucSearchBtn").css("height", "90px");
     }
     
     function backStore(){
