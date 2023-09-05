@@ -228,42 +228,6 @@ function fn_remove(url, board_id){
 	
 }
 
-/*
-$(document).ready(function() {
-	
-	replyList();
-	
-	$("#replyBTN").click(function() {
-		var replytext 	= $("#replytext").val();
-		var b_id 		= "${article.board_id}"
-		var param		= "replytext=" +replytext +"&board_id="+b_id;
-		
-		$.ajax({
-			type: "post",
-			url: "${path}/reply/replywrite",
-			data: param,
-			success: function() {
-				alert("댓글이 등록되었습니다.");
-				RreplyList();
-			}
-		});
-		
-	});
-		
-		function replyList() {
-		$.ajax ({
-		type: "get",
-		url: "${path}/board/articleList?board_id=${article.board_id}",
-		success: function(result) {
-			$("#replyList").html(result);
-		}
-	})
-
-	
-}
-*/
-
-
 </script>
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
