@@ -69,8 +69,10 @@ border: 1px solid #656562;
 					<td>{100}</td>
 				</tr>
 				<tr>
-                	<th scope="row">제목</th>
-                	<td colspan="3"><input type="text"   value="${article.title}" name="title" id="title" disabled/></td>
+                	<th>제목</th>
+                	<td><input type="text" value="${article.title}" name="title" id="title" disabled/></td>
+                	<th>대표사진</th>
+                	<td><input type="file" name="thumbnail" id="thumbnail" disabled/></td>
                 </tr>
                 <tr>
                     <th scope="row">내용</th>
@@ -122,12 +124,13 @@ border: 1px solid #656562;
 function fn_enable(obj){
 	document.getElementById("title").disabled			= false;
 	document.getElementById("content").disabled			= false;
-	document.getElementById("imageFileName").disabled	= false;
+	document.getElementById("thumbnail").disabled	= false;
 }
 
 function backToForm(obj){
 	document.getElementById("title").disabled = true;
 	document.getElementById("content").disabled = true;
+	document.getElementById("thumbnail").disabled	= false;
 }
 
 function backToList(obj){

@@ -3,6 +3,7 @@ package com.edu.board.dto;
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.member.dto.MemberDTO;
 
@@ -17,9 +18,12 @@ public class BoardDTO {
 	private String image;
 	private String writer;
 	private String nickname;
+	private String thumbnail;
+	private int reply_num;
 	
 	private MemberDTO memberDTO;
 
+	
 	public int getRecNum() {
 		return recNum;
 	}
@@ -92,11 +96,27 @@ public class BoardDTO {
 		this.nickname = nickname;
 	}
 
+	public int getReply_num() {
+		return reply_num;
+	}
+
+	public void setReply_num(int reply_num) {
+		this.reply_num = reply_num;
+	}
+
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardDTO [recNum=" + recNum + ", board_id=" + board_id + ", title=" + title + ", content=" + content
 				+ ", writeDate=" + writeDate + ", image=" + image + ", writer=" + writer + ", nickname=" + nickname
-				+ ", memberDTO=" + memberDTO + "]";
+				+ ", thumbnail=" + thumbnail + ", reply_num=" + reply_num + ", memberDTO=" + memberDTO + "]";
 	}
 
 	
