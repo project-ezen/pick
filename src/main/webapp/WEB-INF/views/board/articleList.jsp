@@ -11,7 +11,7 @@
 .foot { padding-bottom: 100px; padding-top: 100px; }
 
 
-img {
+.thumb {
 margin-top: 50px;
 margin-left: 10px;
 border-radius: 5px;
@@ -28,6 +28,9 @@ margin-bottom: 10px;
 margin-left: 45px;
 display: inline-block;
 }
+
+a:link{text-decoration: none; color: #000}
+a:visited,a:active{color: #000;}
 
 .pagenav {
 display: inline-block;
@@ -153,8 +156,17 @@ font-size: 15px;
 			</c:when>
 			<c:when test="${not empty articlesList}"> <!-- 게시글이 하나라도 있는 경우 -->
 				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
-						<div class="inner_div" style="background-color: #888; height: 200px; width: 300px; border-radius: 10px;">
-							<img alt="" src="${path}/resources/images/cat1.jpg" width="100px" height="100px">
+						<div class="inner_div" style="background-color: #ADC4CE; height: 200px; width: 300px; border-radius: 10px;">
+						<c:choose>
+							<c:when test="${not empty article.thumbnail && article.thumbnail != 'null'}">
+								<!-- <div class="thumb" >${article.thumbnail}</div> -->
+								<input type="hidden" name="originalFileName" value="${article.thumbnail}"/>
+								<img class="thumb" style="width:100px; height:100px; float:left;" src="${path}/thumbdown?board_id=${article.board_id}&thumbnail=${article.thumbnail}" id="thumbnail"/>
+							</c:when>
+							<c:otherwise>
+								<img class="thumb" style="width:100px; height:100px; float:left;" src="/resources/images/cocktail-icon.jpg"/>
+							</c:otherwise>
+						</c:choose>
 							<div class="lele">
 								<div class="top">
 									<p class="title"><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
