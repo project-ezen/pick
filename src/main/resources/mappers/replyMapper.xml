@@ -4,19 +4,42 @@
 	
 <mapper namespace="com.edu.board.mappers.replyMapper">
 	
+	<resultMap type="com.edu.board.dto.ReplyDTO" id="reply">
+		<result property="replyNum" 	column="REPLY_NUM"/>
+		<result property="board_id" 	column="B_ID"/>
+		<result property="r_writer" 	column="R_WRITER"/>
+		<result property="content" 		column="CONTENT"/>
+		<result property="writeDate" 	column="WRITEDATE"/>
+		<result property="nickname" 	column="m_nickname"/>
+	</resultMap>
+
 	<!-- 댓글목록 -->
-	<select id="replyList" parameterType="int" resultType="com.edu.board.dto.ReplyDTO">
-		select reply_num, b_id, r_writer, content, writeDate
-		from reply
-		where b_id = #{board_id}			
+	<select id="replyList" parameterType="int" resultMap="reply">
+		<![CDATA[
+	         select *
+	         from (
+	             select r.reply_num, r.b_id, r.r_writer, r.content, r.writeDate, m.m_nickname
+	             from reply r, member m
+	             where r.r_writer = m.m_id )
+	         where b_id = #{board_id}
+	      ]]>
 	</select>
 
 	<!-- 댓글 작성 -->
 	<insert id="replyWrite" parameterType="com.edu.board.dto.ReplyDTO">
-		insert into reply(reply_num, b_id, r_writer, content, writeDate)
-			value(#{replyNum},#{board_id}, #{r_writer}, #{content}, #{writeDate})
+		<![CDATA[
+			insert into reply(b_id, r_writer, content, writeDate)
+			values (#{board_id}, #{r_writer}, #{content}, sysdate)
+		]]>
 	</insert>
 		
+	<!-- 댓글번호	
+	<select id="selectNewReplyNum" resultType="int">
+		<![CDATA[
+		SELECT NVL(MAX(REPLY_NUM),0)+1 FROM reply
+		]]>
+	</select>	 -->
+	
 	<!-- 댓글 수정 -->
 	<update id="replyUpdate" parameterType="com.edu.board.dto.ReplyDTO">
 		update reply set
