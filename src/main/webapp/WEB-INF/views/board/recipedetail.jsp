@@ -12,7 +12,8 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
-.foot { padding-bottom: 100px; padding-top: 100px;}
+.foot { padding-bottom: 150px; padding-top: 150px;}
+
 .container { min-height: 600px; }
 table {
 width: 100%;
@@ -42,6 +43,18 @@ background-color: #687AB6;
 color: #fff; 
 border: none;
 }
+
+.btn_3 {
+width: 50px;
+height: 20px;
+border-radius: 10px;
+display :inline-block; 
+background-color: #687AB6; 
+color: #fff; 
+font-size: 10px;
+border: none;
+}
+
 </style>
 </head>
 <body>
@@ -83,7 +96,7 @@ border: none;
                 </tr>
 				<tr>
 					<td colspan="2">
-						<input type="button" class="btn1" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
+						<input type="button" class="btn1" value="목록으로 돌아가기" onClick="location.href='${path}/board/articleList'"/>
 					</td>
 					<td colspan="2" style="text-align: right;">
 						<c:if test="${member.m_id == article.writer}">
@@ -105,33 +118,37 @@ border: none;
 	</form>
 	<br/>
 	<hr/>
-	<div id="replyList"> 
+	<div>
 		<table style="margin-bottom: 20px;">
 			<c:forEach items="${reply}" var="reply">
-			<tr>
-				<th style="text-align: center; width:15%;">${reply.writer}(<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd" />)</th>
-				<td style="width:75%;">${reply.content}</td>
-				<c:if test="${member.m_id == reply.writer}">
-				<td style="width:8%;"><button class="btn_2" type="button">수정</button>/<button class="btn_2" type="button">삭제</button></td>
-				</c:if>
-			</tr>
+				<tr>
+					<th style="text-align: center; width:15%;">${reply.nickname}(<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd"/>)</th>
+					<td style="width:75%;">${reply.content}</td>
+					<c:if test="${reply.r_writer == member.m_id}">
+						<td style="width:8%;"><button class="btn_3" type="button" onclick="">수정</button><button class="btn_3" type="button" onclick="">삭제</button></td>
+					</c:if>
+				</tr>
 			</c:forEach>
 		</table>
-		<form method="post" action="/reply/replywrite">
-		<table style="margin-bottom: 20px;">
-		<c:if test="${isLogOn == true }">
-			<tr>
-				<th style="text-align: center; width:15%;">닉네임</th>
-				<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_id}" readonly/></td>
-			</tr>
-			<tr>	
-				<th style="text-align: center; width:15%;">내용</th>
-				<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
-				<td style="width:8%;"><button class="btn_2" type="submit" id="replyBTN">댓글 작성</button></td>
-			</tr>
-		</c:if>
-		</table>
+
+	<c:if test="${isLogOn == true }">
+		<form method="post" action="/reply/rwrite">
+			<table style="margin-bottom: 20px;">
+					<tr>
+						<th style="text-align: center; width:15%;">닉네임</th>
+						<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_id}" name="r_writer" readonly/></td>
+					</tr>
+					<tr>	
+						<th style="text-align: center; width:15%;">내용</th>
+						<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
+						<td style="width:8%;">
+						<input type="hidden" name="board_id" value="${article.board_id}">
+						<button class="btn_2" type="submit" id="replyBTN">댓글 작성</button>
+						</td>
+					</tr>
+			</table>
 		</form>
+	</c:if>
 	</div>
 </div>
 <br/>
@@ -148,9 +165,8 @@ function backToForm(obj){
 	document.getElementById("content").disabled = true;
 }
 
-function backToList(obj){
-	location.href = "${path}/board/articleList";
-}
+
+
 
 $(document).ready(function(){
 	
@@ -209,7 +225,7 @@ function fn_remove(url, board_id){
 	
 }
 
-
+/*
 $(document).ready(function() {
 	
 	replyList();
@@ -242,7 +258,7 @@ $(document).ready(function() {
 
 	
 }
-
+*/
 
 
 </script>

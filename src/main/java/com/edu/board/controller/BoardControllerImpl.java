@@ -100,17 +100,16 @@ public class BoardControllerImpl implements BoardController {
 
 	// 게시글 번호에 해당하는 상세정보
 	@Override
-	@RequestMapping(value="/board/recipedetail", method=RequestMethod.GET)
-	public void articleDetail(@RequestParam("board_id")int board_id, Model model) throws Exception {
+	@RequestMapping(value="/board/recipedetail", method= {RequestMethod.GET, RequestMethod.POST})
+	public void articleDetail(@RequestParam("board_id")int board_id, Model model ) throws Exception {
 		
 		BoardDTO boardDTO = boardService.articleDetail(board_id);
-		//System.out.println("BCI articleDetail() : " + boardDTO);
+		System.out.println("BCI articleDetail() : " + boardDTO);
 		model.addAttribute("article",boardDTO);
 		
 		
 		System.out.println(board_id);
-		List<ReplyDTO> reply =replyService.list(board_id);
-		
+		List<ReplyDTO> reply = replyService.list(board_id);
 		System.out.println(reply);
 		model.addAttribute("reply", reply);
 		

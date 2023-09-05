@@ -27,21 +27,24 @@ public class ReplyServiceImpl implements ReplyService {
 		logger.info("댓글내놔");
 		return replyDAO.list(board_id);
 	}
-	// 댓글 조회
+	// 댓글 입력
 	@Override
 	public void write(ReplyDTO replyDTO) throws Exception {
+		logger.info("쓴거 내놔");
 		replyDAO.write(replyDTO);
 		
 	}
 	// 댓글 수정
 	@Override
 	public void update(ReplyDTO replyDTO) throws Exception {
+		logger.info("되어라");
 		replyDAO.update(replyDTO);
 		
 	}
 	// 댓글 삭제
 	@Override
 	public void delete(ReplyDTO replyDTO) throws Exception {
+		logger.info("삭제되어라");
 		replyDAO.delete(replyDTO);
 		
 	}

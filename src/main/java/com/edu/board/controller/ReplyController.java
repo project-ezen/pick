@@ -37,13 +37,19 @@ public class ReplyController {
 	}*/
 	
 	// 댓글 작성
-	@RequestMapping(value = "/replywrite", method = RequestMethod.POST)
+	@RequestMapping(value = "/rwrite", method = RequestMethod.POST)
 	public String replyWirte(ReplyDTO replyDTO) throws Exception {
 	    
 	    replyService.write(replyDTO);
 	    
-	    return "redirect:/board/recipedetail?board_id"+replyDTO.getBoard_id();
+	    return "redirect:/board/recipedetail?board_id="+replyDTO.getBoard_id();
 	    
 	}
 	
+	//댓글 수정
+	
+	
+	
+	
+	//댓글 삭제
 }
