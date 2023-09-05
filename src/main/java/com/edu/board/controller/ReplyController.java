@@ -1,16 +1,10 @@
 package com.edu.board.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.board.dto.ReplyDTO;
 import com.edu.board.service.ReplyService;
@@ -47,9 +41,22 @@ public class ReplyController {
 	}
 	
 	//댓글 수정
-	
+	@RequestMapping(value="rupdate",method=RequestMethod.POST)
+	public String replyUpdate(ReplyDTO replyDTO) throws Exception {
+		
+		replyService.update(replyDTO);
+		
+		return "redirect:/board/recipedetail?board_id="+replyDTO.getBoard_id();
+	}
 	
 	
 	
 	//댓글 삭제
+	@RequestMapping(value="/rdelete",method=RequestMethod.POST)
+	public void replyDeletePOST(ReplyDTO replyDTO) throws Exception {
+		replyService.delete(replyDTO);
+	}
+	
+	
+	
 }

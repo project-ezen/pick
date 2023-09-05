@@ -42,17 +42,20 @@ display :inline-block;
 background-color: #687AB6; 
 color: #fff; 
 border: none;
+font-family: 'Cafe24Supermagic-Bold-v1.0';
 }
 
 .btn_3 {
-width: 50px;
+width: 40px;
 height: 20px;
-border-radius: 10px;
 display :inline-block; 
 background-color: #687AB6; 
 color: #fff; 
-font-size: 10px;
+font-size: 13px;
 border: none;
+text-align:center;
+font-family: 'Cafe24Supermagic-Bold-v1.0';
+display: inline-block;
 }
 
 </style>
@@ -127,7 +130,7 @@ border: none;
 					<th style="text-align: center; width:15%;">${reply.nickname}(<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd"/>)</th>
 					<td style="width:75%;">${reply.content}</td>
 					<c:if test="${reply.r_writer == member.m_id}">
-						<td style="width:8%;"><button class="btn_3" type="button" onclick="">수정</button><button class="btn_3" type="button" onclick="">삭제</button></td>
+						<td style="width:10%;"><a href="#" class="btn_3" type="button" onclick="Rupdate()">수정</a>/<a href="#" class="btn_3" type="button" onclick="fn_rdelete()">삭제</a></td>
 					</c:if>
 				</tr>
 			</c:forEach>
@@ -138,14 +141,14 @@ border: none;
 			<table style="margin-bottom: 20px;">
 					<tr>
 						<th style="text-align: center; width:15%;">닉네임</th>
-						<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_id}" name="r_writer" readonly/></td>
+						<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_nickname}" name="r_writer" readonly/></td>
 					</tr>
 					<tr>	
 						<th style="text-align: center; width:15%;">내용</th>
 						<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
 						<td style="width:8%;">
 						<input type="hidden" name="board_id" value="${article.board_id}">
-						<button class="btn_2" type="submit" id="replyBTN">댓글 작성</button>
+						<button class="btn_2" type="submit">댓글 작성</button>
 						</td>
 					</tr>
 			</table>
@@ -157,8 +160,8 @@ border: none;
 <script>
 
 function fn_enable(obj){
-	document.getElementById("title").disabled			= false;
-	document.getElementById("content").disabled			= false;
+	document.getElementById("title").disabled		= false;
+	document.getElementById("content").disabled		= false;
 	document.getElementById("thumbnail").disabled	= false;
 }
 
@@ -227,6 +230,27 @@ function fn_remove(url, board_id){
 	form.submit();
 	
 }
+/*댓글 삭제 버튼 */
+function fn_rdelete(e) {
+
+	e.preventDefault();
+	let replyId = $(this).attr("href");	
+	
+	$.ajax({
+		data : {
+			reply_num : replyNum,
+			b_id : '${article.board_id}'
+		},
+		url : '/reply/rdelete',
+		type : 'POST',
+		success : function(result){
+			replyListInit();
+			alert('삭제가 완료되엇습니다.');
+		}
+	});		
+		
+});
+	
 
 </script>
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>

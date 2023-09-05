@@ -20,10 +20,19 @@ background-image: url("../../resources/images/background2.jpg");
 background-attachment : fixed, scroll;
 background-repeat: no-repeat;
 background-size: cover;
+font-family: 'Cafe24Supermagic-Bold-v1.0';
 }
 .container {
 background-color: #fff;
 min-height: 600px;
 border-radius: 10px;
 }
+
+@font-face {
+   font-family: 'Cafe24Supermagic-Bold-v1.0';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/Cafe24Supermagic-Bold-v1.0.woff2') format('woff2');
+   font-weight: 400;
+   font-style: normal;
+}
+
 </style>
