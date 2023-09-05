@@ -70,11 +70,11 @@
 			<tbody>
 				<tr>
 					<th>주문번호</th>
-					<td>${order.order_number}</td>
+					<td>${order[0].order_number}</td>
 				</tr>
 				<tr>
 					<th>주문일자</th>
-					<td>${order.order_date}</td>
+					<td>${order[0].order_date}</td>
 				</tr>
 				<tr>
 					<th>주문자</th>
@@ -90,11 +90,11 @@
 			<tbody>
 				<tr>
 					<th>총 주문내역</th>
-					<td>${order.final_price - 3000}</td> 	<!-- 배송비 미포함 -->
+					<td>${order[0].final_price - 3000}</td> 	<!-- 배송비 미포함 -->
 				</tr>
 				<tr>
 					<th>총 결제금액</th>
-					<td>${order.final_price}</td>			<!-- 배송비 포함 -->
+					<td>${order[0].final_price}</td>			<!-- 배송비 포함 -->
 				</tr>
 				<tr>
 					<th>결제수단</th>
@@ -115,9 +115,15 @@
 			<tbody>
 				<c:forEach var="products" items="${product }" varStatus="p_status">
 					<tr> 
-						<td>${products.product_image}</td>
-						<td>${products.count}</td>
-						<td>${productDisplayVO.product_price}</td>
+						<td>
+							<div class="col-md-12 text-center" id="item_thumbnail">
+							    <a href="#" class="thumbnail">
+							        <input type="image" src="${path }/download?imageFile=${products.product_image }" width="161" height="133" disabled>
+							    </a>
+							</div>
+						</td>
+						<td>${order[p_status.index].count}</td>
+						<td>${products.product_price}</td>
 						<td>${order[p_status.index].order_status}</td>
 					</tr>
 				</c:forEach>
@@ -131,23 +137,23 @@
 			<tbody>
 				<tr>
 					<th>받으시는 분</th>
-					<td>{order.receiver_name}</td>
+					<td>${order[0].receiver_name}</td>
 				</tr>
 				<tr>
 					<th>우편번호</th>
-					<td>{order.receiver_name}</td>
+					<td>${order[0].zipcode}</td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td>{order.receiver_address}</td>
+					<td>${order[0].address}</td>
 				</tr>
 				<tr>
 					<th>상세주소</th>
-					<td>{order.receiver_address_detail}</td>
+					<td>${order[0].address_detail}</td>
 				</tr>
 				<tr>
 					<th>휴대전화</th>
-					<td>{order.receiver_phonenum}</td>
+					<td>${order[0].receiver_phonenum}</td>
 				</tr>
 			</tbody>
 		</table>
