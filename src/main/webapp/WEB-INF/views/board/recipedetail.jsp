@@ -251,8 +251,6 @@ function fn_rdelete(e) {
 		
 });
 	
-	
-
 
 </script>
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
