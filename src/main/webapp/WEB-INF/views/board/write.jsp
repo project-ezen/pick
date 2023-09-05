@@ -104,6 +104,8 @@ function backToList(obj) {
 <script type="text/javascript">
 $(document).ready(function(){
 	
+	var contentval = $("#content").val();
+	
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef: oEditors,
@@ -114,7 +116,13 @@ $(document).ready(function(){
 			bUseModeChanger: false
 		}
 	});
-
+	
+	contentval = $("#content").val().replace(/<p><br><\/p>/gi, "<br>"); // <p><br></p> => <br>로 변환
+	
+	contentval = contentval.replace(/<\/p><p>/gi, "<br>"); // </p><p> => <br>로 변환
+	contentval = contentval.replace(/(<\/p><br>|<p><br>)/gi, "<br><br>");
+	contentval = contentval.replace(/(<p>|<\/p>)/gi, ""); // <p> 또는 </p>모두 제거
+	$("#content").val(content);
 	
 	$("#wsubmit").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
