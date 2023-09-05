@@ -47,7 +47,7 @@ color: #fff;
 <%@ include file="../include/topMenu.jsp" %>
 <br/><br/>
 <div class="container">
-	<form class="form-horizontal" action="${path}/board/addNewArticle" method="post" name="articleForm" id="articleForm">
+	<form class="form-horizontal" action="${contextPath}/board/addNewArticle" enctype="multipart/form-data" method="post" name="articleForm" id="articleForm">
 		<div class="form-group">
 			<div>
 				<h2 align="center">글쓰기</h2>
@@ -65,7 +65,7 @@ color: #fff;
 		<div class="form-group">
 			<label class="control-label col-sm-3">대표사진</label>
 			<div class="col-sm-6">
-				<input type="file" name="image" onchange="readURL(this);"/>
+				<input type="file" name="thumbnail" id="thumbnail" onchange="readURL(this);"/>
 			</div>
 		</div>
 		
@@ -115,6 +115,7 @@ $(document).ready(function(){
 		}
 	});
 
+	
 	$("#wsubmit").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		
@@ -124,9 +125,9 @@ $(document).ready(function(){
 		
 		var writer = document.getElementById("writer").value;
 		var title = $('#title').val();
-		var image = $('#image').val();
 		var content = document.getElementById("content").value;
-		
+		var thumbnail = $('#thumbnail').val();
+				
 		if (title == null || title == ""){
 			alert("제목을 입력하세요");
 			$("#title").focus();
@@ -146,9 +147,7 @@ $(document).ready(function(){
 			ajaxRequest = $.ajax({
 				type: "post",
 				url: "/board/addNewArticle",
-				datatype: "json",
-				contentType: "application/json",
-				data: JSON.stringify({"title":title,"content":content,"writer":writer, "image":image}),
+				data: JSON.stringify({"title":title,"content":content,"writer":writer, "thumbnail":thumbnail}),
 				success: function(data){
 					alert("성공");
 					location.href = "/board/addNewArticle";
@@ -160,6 +159,7 @@ $(document).ready(function(){
 			});
 		}
 	});
+	
 });
 </script>
 <%@ include file="../include/footer.jsp" %>

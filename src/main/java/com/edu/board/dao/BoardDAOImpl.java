@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.dao.DataAccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PagingCriteria;
@@ -51,12 +52,12 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	// 게시글 작성 (post)
 	@Override
-	public void create(BoardDTO boardDTO) throws DataAccessException {
+	public int create(Map articleMap) throws DataAccessException {
 		int board_id = selectNewArticleNO();
 		System.out.println("새로운 게시글 번호 추출: " + board_id);
-		boardDTO.setBoard_id(board_id);
-		
-		sqlSession.insert(namespace + ".create", boardDTO);
+		articleMap.put("board_id", board_id);
+		sqlSession.insert(namespace + ".create", articleMap);
+		return board_id;
 	}
 	
 	// 새로운 게시글 번호 추출

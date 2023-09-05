@@ -13,6 +13,7 @@
 		<result column="image" property="image"/>
 		<result column="m_id" property="writer"/>
 		<result column="m_nickname" property="nickname"/>
+		<result column="thumbnail" property="thumbnail"/>
 		<!-- <collection property="memberDTO" resultMap="MemberDTO" /> -->
 	</resultMap>
 
@@ -40,11 +41,11 @@
 	<![CDATA[
 	select *
 	from (
-	    select recNum, board_id, title, content, writedate, image, m_id, m_nickname
+	    select recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail
 	    from (
-	        select rownum as recNum, board_id, title, content, writedate, image, m_id, m_nickname
+	        select rownum as recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail
 	        from (
-	            select b.board_id, b.title, b.content, b.writedate, b.image, m.m_id, m.m_nickname
+	            select b.board_id, b.title, b.content, b.writedate, m.m_id, m.m_nickname, b.thumbnail
 	            from board b, member m
 	            where b.m_id = m.m_id
 	            order by board_id desc)))
@@ -77,8 +78,8 @@
 	<!-- 게시글 작성(post) -->
 	<insert id="create" parameterType="java.util.Map">
 		<![CDATA[
-			insert into board (board_id, title, content, image, m_id)
-			values (#{board_id}, #{title}, #{content}, #{image, jdbcType=VARCHAR}, #{writer})
+			insert into board (board_id, title, content, image, m_id, thumbnail)
+			values (#{board_id}, #{title}, #{content}, #{image, jdbcType=VARCHAR}, #{writer}, #{thumbnail})
 		]]>
 	</insert>
 	
