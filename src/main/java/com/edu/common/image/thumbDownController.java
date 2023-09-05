@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 //이미지 파일 다운로드
 @Controller
-public class ImgDownloadController {
+public class thumbDownController {
 	// 업로드된 폴더와 위치가 같아야 한다.
-	private static final String ARTICLE_IMAGE_REPO = "C:\\project\\gitspace\\product_images";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\project\\gitspace\\thum";
 	
 	// 이미지 파일 다운로드
-	@RequestMapping(value="/imgdownload")
-	protected void download(@RequestParam("imageFile") String imgfn,
+	@RequestMapping(value="/thumbdown")
+	protected void download(@RequestParam("thumbnail") String imgfn,
 							HttpServletResponse response) throws Exception{
 		OutputStream out = response.getOutputStream();
-		String downFile = ARTICLE_IMAGE_REPO + "\\" + imgfn;
+		String downFile = ARTICLE_IMAGE_REPO + "\\" + "t_" + imgfn;
 		File file = new File(downFile);
 		
 		response.setHeader("Cache-control", "no-cache");
