@@ -1,6 +1,7 @@
 package com.edu.shopping.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -32,4 +33,9 @@ public interface ShoppingDAO {
 	public List<OrderDTO> orderInfo(MemberDTO member) throws DataAccessException;
 	// 주문한 상품 목록 가져오기
 	public ProductDTO orderList(OrderDTO order) throws DataAccessException;
+	// 주문 상품 취소하기
+	public void overwriteOrder(Map<String, String> map) throws DataAccessException;
+//=====================================================================================================
+	// 주문 번호에 해당하는 주문 상세 정보 가져오기
+	public List<OrderDTO> orderNumInfo(int order_num) throws DataAccessException;
 }

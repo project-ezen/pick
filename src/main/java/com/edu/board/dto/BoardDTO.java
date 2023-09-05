@@ -20,6 +20,7 @@ public class BoardDTO {
 	private String nickname;
 	private String thumbnail;
 	private int reply_num;
+
 	
 	private MemberDTO memberDTO;
 

@@ -3,6 +3,20 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.edu.store.mappers.storeMapper">
 
+	<!--  장바구니 -->
+	<sql id="cartNumber">
+		<if test="cartOrStore != null and cartOrStore != ''">
+			<choose>
+				<when test="cartOrStore == 'cart'.toString()">
+					1
+				</when>
+				<otherwise>
+					2
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+	
 	<!-- 상품 리스트 SQL -->
 	<sql id="search">
 	    <if test="category != null and category != ''">
@@ -29,66 +43,95 @@
 			</choose>
 		</if>
 	</sql>
+	
 	<!-- 카테고리 찾기 -->
-<sql id="searchAndKeyword">
-    <if test="category != null and category != ''">
-        <choose>
-            <when test="category == '술'.toString()">
-                AND CATEGORY_CODE = 1
-            </when>
-            <when test="category == '음료'.toString()">
-                AND CATEGORY_CODE = 2
-            </when>
-            <when test="category == '과일'.toString()">
-                AND CATEGORY_CODE = 3
-            </when>
-            <when test="category == '도구'.toString()">
-                AND CATEGORY_CODE = 4
-            </when>
-            <otherwise>
-                AND 1=1 <!-- 아무 작업을 안하도록 설정 -->
-            </otherwise>
-        </choose>
-    </if>
-</sql>
+	<sql id="searchAndKeyword">
+	    <if test="category != null and category != ''">
+	        <choose>
+	            <when test="category == '술'.toString()">
+	                AND CATEGORY_CODE = 1
+	            </when>
+	            <when test="category == '음료'.toString()">
+	                AND CATEGORY_CODE = 2
+	            </when>
+	            <when test="category == '과일'.toString()">
+	                AND CATEGORY_CODE = 3
+	            </when>
+	            <when test="category == '도구'.toString()">
+	                AND CATEGORY_CODE = 4
+	            </when>
+	            <otherwise>
+	                AND 1=1 <!-- 아무 작업을 안하도록 설정 -->
+	            </otherwise>
+	        </choose>
+	    </if>
+	</sql>
 	
 	<!-- 상품 리스트 -->
-	<select id="selectAllProductList" resultType="com.edu.store.dto.ProductDisplayVO" parameterType="com.edu.store.dto.ProductDisplayVO">
+	<select id="selectAllProductList" resultType="com.edu.store.dto.ProductDTO" parameterType="com.edu.store.dto.ProductDTO">
 		<![CDATA[
-			SELECT DISPLAY_PRODUCT_ID, 
-				   CATEGORY_CODE, PRODUCT_PRICE,
+			SELECT PRODUCT_DISPLAY_ID,
+				   CATEGORY_CODE, product_price,
 				   PRODUCT_IMAGE, PRODUCT_NAME
-			FROM DISPLAY_PRODUCT D
+			FROM PRODUCT
 			WHERE 1=1
 		]]>
 		<include refid="search"/>
 		<include refid="select"/>
 	</select>
 	
-	<select id="searchProductByKeyword" resultType="com.edu.store.dto.ProductDisplayVO" parameterType="com.edu.store.dto.ProductDisplayVO">
-			SELECT DISPLAY_PRODUCT_ID, 
+	<!-- 상품 검색으로 찾기 -->
+	<select id="searchProductByKeyword" resultType="com.edu.store.dto.ProductDTO" parameterType="com.edu.store.dto.ProductDTO">
+			SELECT PRODUCT_DISPLAY_ID, 
 				   CATEGORY_CODE, PRODUCT_PRICE,
 				   PRODUCT_IMAGE, PRODUCT_NAME
-			FROM  DISPLAY_PRODUCT 
+			FROM PRODUCT 
 			WHERE 1=1
 			AND PRODUCT_NAME LIKE '%' || #{searchKeyword} || '%'
 			<include refid="select"/>
 	</select>
-	<!-- 상품 상세 보기 -->
-	<select id="productInfos" resultType="com.edu.store.dto.ProductDisplayVO">
+	
+	<!-- 상품 상세 보기 1 -->
+	<select id="productInfos" resultType="com.edu.store.dto.ProductDTO">
 		<![CDATA[
 			SELECT
+				   PRODUCT_ID,
+				   PRODUCT_DISPLAY_ID,
 				   PRODUCT_PRICE,
 				   PRODUCT_IMAGE,
+				   PRODUCT_NAME
+			FROM PRODUCT
+			WHERE PRODUCT_DISPLAY_ID = #{product_id}	
+		]]>
+	</select>
+	
+	<!-- 상품 상세보기 2 -->
+	<select id="displayProductInfos" resultType="com.edu.store.dto.ProductDisplayVO">
+		<![CDATA[
+			SELECT
+				   PRODUCT_DISPLAY_ID,
 				   ALCOHOL_CONTENT,
 				   CAPACITY,
-				   PRODUCT_NAME,
 				   PRODUCT_INFO,
 				   ORIGIN,
-				   menufacturer
-			FROM DISPLAY_PRODUCT
-			WHERE DISPLAY_PRODUCT_ID = #{product_id}	
+				   MANUFACTURER
+			FROM PRODUCT_DISPLAY
+			WHERE PRODUCT_DISPLAY_ID = #{product_id}	
 		]]>
+	</select>
+	
+	<!-- 리뷰 리스트 -->
+	<select id="selectReview" resultType="com.edu.store.dto.ReviewDTO">
+		SELECT
+			REVIEW_ID,
+			PRODUCT_DISPLAY_ID,
+			CONTENT,
+			IMAGE,
+			WRITEDATE,
+			MEMBER_ID
+		FROM (SELECT ROWNUM AS rwm,REVIEW_ID,PRODUCT_DISPLAY_ID,CONTENT,IMAGE,WRITEDATE,MEMBER_ID FROM REVIEW WHERE PRODUCT_DISPLAY_ID = #{product_display_id})
+		where rwm between (#{page} -1) * #{perPageNum} + 1 and #{perPageNum} * #{page}
+	
 	</select>
 	
 	<!-- 상품 상세 검색 보기 -->
@@ -103,13 +146,57 @@
 			<include refid="select"/>
 	</select>
 	
+	<!-- 장바구니 안에 상품 담기 -->
 	<insert id="productToCart">
-		INSERT INTO PRODUCT VALUES(
-		(SELECT nvl(max(PRODUCT_ID), 0) + 1 FROM PRODUCT),
-		#{product_id},
-		(SELECT CART_ID FROM CART WHERE MEMBER_ID = #{memberId}),
-		 #{quantity})
+		INSERT INTO CART 
+				(CART_ID, M_ID, CART_NUMBER, PRODUCT_ID, COUNT)
+		VALUES  (#{cartId}, #{memberId}, 
+				<include refid="cartNumber"></include>,
+				(SELECT PRODUCT_ID FROM PRODUCT WHERE PRODUCT_DISPLAY_ID = #{product_id}),
+				 #{quantity})
 	</insert>
+	
+	<!-- 리뷰 새 번호 줌 -->
+	<select id="selectNewReviewNO" resultType="int">
+		<![CDATA[
+			SELECT NVL(MAX(REVIEW_ID), 0) + 1
+			FROM   REVIEW
+		]]>	
+	</select>
+	
+	<!-- 새리뷰 작성하기 -->
+	<insert id="insertNewReview" parameterType="com.edu.store.dto.ReviewDTO">
+		<![CDATA[
+			INSERT INTO REVIEW
+					(REVIEW_ID, 	PRODUCT_DISPLAY_ID,		CONTENT,	 image,   member_id)
+			VALUES 	(#{reviewNO},	#{product_id},	#{content},	#{image}, #{member})
+		]]>
+	</insert>
+	
+	<!-- 리뷰 삭제하기 -->
+	<delete id="reviewRemove"  parameterType="com.edu.store.dto.ReviewDTO">
+		<![CDATA[
+			DELETE 
+			FROM REVIEW
+			WHERE REVIEW_ID = #{reviewId}
+		]]>
+	</delete>
+	
+	<select id="productReviewCount" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM REVIEW
+			WHERE PRODUCT_DISPLAY_ID = #{product_display_id}
+		]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

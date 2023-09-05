@@ -9,6 +9,10 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
+	.container {
+		background-color: #fff;
+		min-height: 600px;
+	}
 	table {
 		width: 100%;
 		border: 2px solid #ddd;
@@ -66,19 +70,15 @@
 			<tbody>
 				<tr>
 					<th>주문번호</th>
-					<td>{orderDTO.order_id}</td>
+					<td>${order[0].order_number}</td>
 				</tr>
 				<tr>
 					<th>주문일자</th>
-					<td>{orderDTO.order_date}</td>
+					<td>${order[0].order_date}</td>
 				</tr>
 				<tr>
 					<th>주문자</th>
-					<td>{member.m_id}</td>
-				</tr>
-				<tr>
-					<th>주문처리상태</th>
-					<td>{orderDTO.}</td>
+					<td>${member.m_id}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -90,11 +90,11 @@
 			<tbody>
 				<tr>
 					<th>총 주문내역</th>
-					<td>{orderDTO.final_price}</td> 	<!-- 배송비 포함 -->
+					<td>${order[0].final_price - 3000}</td> 	<!-- 배송비 미포함 -->
 				</tr>
 				<tr>
 					<th>총 결제금액</th>
-					<td>{orderDTO.pay_price}</td>		<!-- 배송비 미포함 -->
+					<td>${order[0].final_price}</td>			<!-- 배송비 포함 -->
 				</tr>
 				<tr>
 					<th>결제수단</th>
@@ -107,22 +107,26 @@
 			<thead>
 				<tr>
 					<th>이미지</th>
-					<th>상품정보</th>
 					<th>수량</th>
 					<th>상품구매내역</th>
-					<th>주문처리상태</th> <!-- 배송중/배송완료/  -->
-					<th>취소/교환/환불</th>
+					<th>주문처리상태</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr> 
-					<td>{productDisplayVO.product_image}</td>
-					<td>{productDisplayVO.product_info}</td>
-					<td>{productDTO.count}</td>
-					<td>{productDisplayVO.product_price}</td>
-					<td>{orderDTO.}</td>
-					<td>{orderDTO.}</td>
-				</tr>
+				<c:forEach var="products" items="${product }" varStatus="p_status">
+					<tr> 
+						<td>
+							<div class="col-md-12 text-center" id="item_thumbnail">
+							    <a href="#" class="thumbnail">
+							        <input type="image" src="${path }/download?imageFile=${products.product_image }" width="161" height="133" disabled>
+							    </a>
+							</div>
+						</td>
+						<td>${order[p_status.index].count}</td>
+						<td>${products.product_price}</td>
+						<td>${order[p_status.index].order_status}</td>
+					</tr>
+				</c:forEach>
 			</tbody>
 		</table>
 	<label>배송지 정보</label>
@@ -133,27 +137,23 @@
 			<tbody>
 				<tr>
 					<th>받으시는 분</th>
-					<td>{orderDTO.receiver_name}</td>
+					<td>${order[0].receiver_name}</td>
 				</tr>
 				<tr>
 					<th>우편번호</th>
-					<td>{orderDTO.receiver_name}</td>
+					<td>${order[0].zipcode}</td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td>{orderDTO.receiver_address}</td>
+					<td>${order[0].address}</td>
 				</tr>
 				<tr>
 					<th>상세주소</th>
-					<td>{orderDTO.receiver_address_detail}</td>
+					<td>${order[0].address_detail}</td>
 				</tr>
 				<tr>
 					<th>휴대전화</th>
-					<td>{orderDTO.receiver_phonenum}</td>
-				</tr>
-				<tr>
-					<th>배송메시지</th>
-					<td>{orderDTO.}</td>
+					<td>${order[0].receiver_phonenum}</td>
 				</tr>
 			</tbody>
 		</table>

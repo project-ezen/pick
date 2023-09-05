@@ -1,7 +1,9 @@
 package com.edu.shopping.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -11,11 +13,13 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -182,13 +186,47 @@ public class ShoppingController {
 		mav.addObject("product", product);
 		return mav;
 	}
-	
+//----------------------------------------------------------------------------------------------------------------
+	// cancel
+	@ResponseBody
+	@RequestMapping(value="/reason", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String cancelReason(@RequestParam("id")String id, @RequestParam("reason")String c_reason, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		log.info(id + " 회원의 취소 이유는 : " + c_reason);
+		String order_status = "delivery-refuse(cancel)";
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("id", id);
+		map.put("reason", c_reason);
+		map.put("status", order_status);
+		shoppingService.overwriteOrder(map);
+		
+		return "redirect:/shopping/myOrderList";
+	}
+//----------------------------------------------------------------------------------------------------------------
 	// myOrderListDetail Controller
 	@RequestMapping(value="/myOrderListDetail", method=RequestMethod.GET)
-	public ModelAndView myOrderListDetail() throws Exception {
+	public ModelAndView myOrderListDetail(@RequestParam("order_number") int order_num, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = "/shopping/myOrderListDetail";
 		ModelAndView mav = new ModelAndView(viewName);
 		
+		// 세션 준비하기
+		HttpSession session = request.getSession();
+		// 회원 정보 가져오기
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		
+		// 주문 번호에 해당하는 주문 상세 정보 가져오기
+		List<OrderDTO> order = shoppingService.orderNumInfo(order_num);
+		
+		// 주문한 상품 목록 가져오기 - 주문번호 한 개에 담겨있는 상품 목록 List에 저장
+		List<ProductDTO> product = new ArrayList<ProductDTO>();
+		for(int i = 0; i < order.size(); i++) {
+			product.add(shoppingService.orderList(order.get(i)));
+		}
+		log.info("product : " + product);
+		
+		mav.addObject("order", order);
+		mav.addObject("product", product);
+		mav.addObject("member", member);
 		return mav;
 	}
 //----------------------------------------------------------------------------------------------------------------	

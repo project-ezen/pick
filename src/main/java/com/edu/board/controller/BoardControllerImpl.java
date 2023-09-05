@@ -1,7 +1,6 @@
 package com.edu.board.controller;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
@@ -13,10 +12,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,7 +35,9 @@ import com.edu.board.dao.BoardDAO;
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
+import com.edu.board.dto.ReplyDTO;
 import com.edu.board.service.BoardService;
+import com.edu.board.service.ReplyService;
 
 
 @Controller("BoardController")
@@ -53,7 +53,34 @@ public class BoardControllerImpl implements BoardController {
 	private BoardDAO boardDAO;
 	
 
+
 	private static final String ARTICLE_IMAGE_REPO = "C:\\project\\gitspace\\thum";
+
+	//댓글
+	@Inject
+	@Autowired
+	private ReplyService replyService;
+	
+	// 게시글 목록
+	/*
+	@Override
+	@RequestMapping(value="/board/articleList", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		logger.info("게시글 목록 화면좀 나와라");
+		
+		String viewName = "./board/articleList";
+		ModelAndView mav = new ModelAndView();
+		
+		
+		List<BoardDTO> articlesList = boardService.recipeBoard();
+		mav.setViewName(viewName);
+		mav.addObject("articleList", articlesList);
+	
+		return mav;
+	}
+	*/
+
 	
 	// 게시글 작성 화면
 	@Override
@@ -88,20 +115,19 @@ public class BoardControllerImpl implements BoardController {
 	// 게시글 번호에 해당하는 상세정보
 	@Override
 	@RequestMapping(value="/board/recipedetail", method=RequestMethod.GET)
-	public ModelAndView articleDetail(@RequestParam("board_id")int board_id, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		String viewName = (String) request.getAttribute("viewName");
+	public void articleDetail(@RequestParam("board_id")int board_id, Model model) throws Exception {
 		
-		boardDTO = boardService.articleDetail(board_id);
+		BoardDTO boardDTO = boardService.articleDetail(board_id);
 		System.out.println("BCI articleDetail() : " + boardDTO);
+		model.addAttribute("article",boardDTO);
 		
 		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("article", boardDTO);
+		System.out.println(board_id);
+		List<ReplyDTO> reply =replyService.list(board_id);
 		
+		System.out.println(reply);
+		model.addAttribute("reply", reply);
 		
-		return mav;
 	}
 
 
