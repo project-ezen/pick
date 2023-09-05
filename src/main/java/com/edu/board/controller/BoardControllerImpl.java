@@ -253,7 +253,7 @@ public class BoardControllerImpl implements BoardController {
 				//디렉토리 설정 및 업로드	
 				
 				//파일경로
-				String filePath = "/resources/image";
+				String filePath = "C:\\project\\gitspace\\contentImage\\";
 				File file = new File(filePath);
 				
 				if(!file.exists()) {
@@ -285,7 +285,7 @@ public class BoardControllerImpl implements BoardController {
 				sFileInfo += "&bNewLine=true";
 				// img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 				sFileInfo += "&sFileName="+ sFilename;
-				sFileInfo += "&sFileURL="+"/resources/image "+sRealFileNm;
+				sFileInfo += "&sFileURL="+"C:\\project\\gitspace\\contentImage\\"+sRealFileNm;
 				PrintWriter printWriter = response.getWriter();
 				printWriter.print(sFileInfo);
 				printWriter.flush();
@@ -295,4 +295,5 @@ public class BoardControllerImpl implements BoardController {
 			e.printStackTrace();
 		}		
 	}
+	
 }
