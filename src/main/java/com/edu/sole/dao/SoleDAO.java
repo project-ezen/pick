@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.edu.sole.dto.SoleSearchCriteria;
+import com.edu.sole.dto.recipe.JjimDTO;
+import com.edu.sole.dto.recipe.JjimSelectDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
 import com.edu.sole.dto.recipe.RecipeReviewDTO;
 import com.edu.sole.dto.recipe.ReviewCriteria;
@@ -32,4 +34,13 @@ public interface SoleDAO {
 	
 	// 리뷰 개수
 	public int reviewcount(ReviewCriteria reviewcri) throws Exception;
+	
+	// 찜 인설트
+	public void jjimInsert(JjimDTO jjimInsert) throws Exception;
+	
+	//찜 셀렉하는
+	public JjimDTO jjimSelect(JjimSelectDTO Wla) throws Exception;
+	
+	// 찜 딜리트
+	public void jjimDelete(JjimDTO jjimDelete) throws Exception;
 }

@@ -53,10 +53,18 @@
     </style>
 </head>
 <body>
+<% if (request.getAttribute("logout") != null && request.getAttribute("logout").equals("true")) { %>
+<script>
+    alert("로그아웃 되었습니다.");
+</script>
+<% } %>
     <div class="bg">
         <div class="container-fluid">
             <div class="col-sm-4">
                 <h1 style="margin-top: 50px;">logo</h1>
+                <form id="formList" action="/sole/sole" method="get">
+                	<input type="hidden" name="alcohole_category"/>
+                </form>
                 <div id="listid">          
                     <li class="item" style="margin-top: 50px;"><!-- 잠시 -->
 	                   Alcohol
@@ -66,8 +74,8 @@
 	                       <li id="lilist"><a href="#">위스키</a></li>
 	                       <li id="lilist"><a href="#">보드카</a></li>
 	                       <li id="lilist"><a href="#">와인</a></li>
-	                       <li id="lilist"><a href="#">칵테일</a></li>
-	                       <li id="lilist"><a href="#">하이볼</a></li>
+	                       <li id="lilist" class="cacktail"><a href="#">칵테일</a></li>
+	                       <li id="lilist" class="hiball"><a href="#">하이볼</a></li>
 	                   </ul>
 	          		</li>
 	          		
@@ -76,7 +84,7 @@
                    	</div>
 
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="javascript:fn_mypage('${isLogOn}','${path}/member/mypage','${path}/member/login')">MyPage</a></label>
+                       <label id="solo"><a href="javascript:fn_mypage('${member.m_id}','${path}/member/mypage','${path}/member/login')">MyPage</a></label>
                    	</div>
 
                    	<div style="margin-top: 50px;">
@@ -100,14 +108,30 @@
     </div>
 
     <script>
-        function fn_mypage( isLogOn , mypageForm , loginForm) {
-        	if(isLogOn != '' && isLogOn != 'false') {
+        function fn_mypage( member , mypageForm , loginForm) {
+        	if(member != '' || member != null) {        // 세션 member의 값이 '' 이거나 
         		location.href = mypageForm;
     		} else{
     			alert("로그인을 해주세요");
     			location.href = loginForm + '?action=/member/mypage';
     		} 
         }
+        
+        $(document).ready(function() {
+        	var formList = $("#formList");
+        	var category1 = 1;
+        	var category2 = 2;
+        	
+        	$(".cacktail").click(function (){
+        		formList.find("[name='alcohole_category']").val(category1);
+        		formList.submit();
+        	});
+        	
+        	$(".hiball").click(function (){
+        		formList.find("[name='alcohole_category']").val(category2);
+        		formList.submit();
+        	});
+        });
     </script>
 </body>
 </html>
