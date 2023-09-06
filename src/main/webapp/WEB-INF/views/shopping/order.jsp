@@ -42,51 +42,8 @@
 	}
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-function daumZipCode() {
-	new daum.Postcode({
-        oncomplete: function(data) {
-        	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-
-			// 각 주소의 노출규칙에 따라서 주소를 조합한다.
-			// 내려오는 변수가 값이 없을 경우에는 공백('') 값을 가지므로, 이를 참고해서 분기한다.
-			var fullAddress	= '';	// 최종   주소 변수
-			var subAddress	= '';	// 조합형 주소 변수
-			
-			// 사용자가 선택한 주소의 타입에 따라서 해당 주소값을 가져온다.
-			if(data.userSelectedType == 'R') {	// 도로명 주소를 선택한 경우
-				fullAddress = data.roadAddress;
-			} else {	// 지번 주소를 선택한 경우
-				fullAddress	= data.jibunAddress;
-			}
-			
-			// 사용자가 선택한 주소가 도로명 타입일 떄는 주소를 조합한다.
-			if(data.userSelectedType == 'R') {
-				// 법정동명이 있을 경우 추가한다.
-				if(data.bname != '') {
-					subAddress += data.bname;
-				}
-				// 건물명이 있을 경우에 추가한다.
-				if(data.buildingName != '') {
-					subAddress += (subAddress != '' ? ', ' + data.buildingName : data.buildingName);
-				}
-				// 조합형 주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-				fullAddress += (subAddress != '' ? '(' + subAddress + ')' : '');
-			} // End - if(data.userSelectedType == 'R')
-				
-			// 추출한 우편번호와 주소정보를 입력항목에 나타낸다.
-			document.getElementById('zipcode').value	= data.zonecode;
-			document.getElementById('address').value	= fullAddress;
-			
-			// 커서를 상세주소 입력란으로 이동시킨다.
-			document.getElementById('address_detail').focus();
-        }
-    }).open({
-    	// 우편번호 팝업 창이 여러개 뜨는 것을 방지하기 위해서 popupName을 사용한다.
-    	popupName: "postcodePopup"
-    });
-}
-</script>
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
@@ -96,7 +53,7 @@ function daumZipCode() {
 	    <section class="container text-center" id="ff">
 	        <div><h1>주문하기</h1></div>
 	        <br/>
-	        <form action="/shopping/orderdetail" method="post">
+	        <form action="/shopping/orderdetail" method="post" id="orderConfirm">
 	        <!-- 주문 상품 나열하기 -->
 	        <div>
 	            <table class="table table-stripted">
@@ -227,7 +184,8 @@ function daumZipCode() {
 	                        </div>
 	                    </div>
 	                    <div class="form-group text-right">
-	                        <button type="submit" class="btn btn-info" id="pay" disabled>결제하기</button>
+	                    	<input type="hidden" name="order_number" value="${order_number }">
+	                        <button type="button" class="btn btn-info" id="pay" onclick="requestPay()" disabled>결제하기</button>
 	                    </div>
 	                </div>
 	                <!-- 구매 여부 확인 끝 -->
@@ -352,6 +310,79 @@ function daumZipCode() {
 <%@ include file="../include/footer.jsp" %>
 </body>
 <script>
+//전자 결제 api
+var IMP = window.IMP; // 생략 가능
+IMP.init("imp42776330");
+
+function requestPay() {
+    // IMP.request_pay(param, callback) 결제창 호출
+    IMP.request_pay({ // param
+        pg: "html5_inicis",
+        pay_method: "card",
+        merchant_uid: ${order_number},
+        name: "주문 진행",
+        amount: document.getElementById("fnPrice").value,
+        buyer_email: ${member.m_id},
+        buyer_name: document.getElementById("name").value,
+        buyer_tel: document.getElementById("phone").value,
+        buyer_addr: document.getElementById("address").value + ", " + document.getElementById("address_detail").value,
+        buyer_postcode: document.getElementById("zipcode")
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            // 결제 성공 시 로직
+            document.getElementById("orderConfirm").submit();
+        } else {
+            // 결제 실패 시 로직
+            alert("payment Refuse");
+        }
+    });
+}
+
+//우편번호 검색 api
+function daumZipCode() {
+	new daum.Postcode({
+     oncomplete: function(data) {
+     	// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+
+			// 각 주소의 노출규칙에 따라서 주소를 조합한다.
+			// 내려오는 변수가 값이 없을 경우에는 공백('') 값을 가지므로, 이를 참고해서 분기한다.
+			var fullAddress	= '';	// 최종   주소 변수
+			var subAddress	= '';	// 조합형 주소 변수
+			
+			// 사용자가 선택한 주소의 타입에 따라서 해당 주소값을 가져온다.
+			if(data.userSelectedType == 'R') {	// 도로명 주소를 선택한 경우
+				fullAddress = data.roadAddress;
+			} else {	// 지번 주소를 선택한 경우
+				fullAddress	= data.jibunAddress;
+			}
+			
+			// 사용자가 선택한 주소가 도로명 타입일 떄는 주소를 조합한다.
+			if(data.userSelectedType == 'R') {
+				// 법정동명이 있을 경우 추가한다.
+				if(data.bname != '') {
+					subAddress += data.bname;
+				}
+				// 건물명이 있을 경우에 추가한다.
+				if(data.buildingName != '') {
+					subAddress += (subAddress != '' ? ', ' + data.buildingName : data.buildingName);
+				}
+				// 조합형 주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+				fullAddress += (subAddress != '' ? '(' + subAddress + ')' : '');
+			} // End - if(data.userSelectedType == 'R')
+				
+			// 추출한 우편번호와 주소정보를 입력항목에 나타낸다.
+			document.getElementById('zipcode').value	= data.zonecode;
+			document.getElementById('address').value	= fullAddress;
+			
+			// 커서를 상세주소 입력란으로 이동시킨다.
+			document.getElementById('address_detail').focus();
+     }
+ }).open({
+ 	// 우편번호 팝업 창이 여러개 뜨는 것을 방지하기 위해서 popupName을 사용한다.
+ 	popupName: "postcodePopup"
+ });
+}
+
 $(document).ready(function() {
 	let submit = $("#submit");
 	let cancel = $("#cancel");
@@ -378,6 +409,8 @@ $(document).ready(function() {
    		$("#pay").prop("disabled", true);
         // alert(info.is(":checked"));
     });
+//-----------------------------------------------------------------------------------------------------------------
+	// $("#pay").click(requestPay());
 });
 
 </script>
