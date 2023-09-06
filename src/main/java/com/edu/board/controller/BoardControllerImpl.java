@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class BoardControllerImpl implements BoardController {
 	
 
 
-	private static final String ARTICLE_IMAGE_REPO = "${path}/resources/images/thumb";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\team\\pick\\src\\main\\webapp\\resources\\images";
 
 	//댓글
 	@Inject
@@ -158,8 +159,8 @@ public class BoardControllerImpl implements BoardController {
 		try {
 			int board_id = boardService.create(articleMap);
 			if(fileRealName != null && fileRealName.length() != 0) {
-				File srcDir = new File(ARTICLE_IMAGE_REPO + "/" + "t_" + fileRealName);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "/" + board_id);
+				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"thumb"+ "\\" + "t_" + fileRealName);
+				srcDir.createNewFile();
 			}
 			message	 = "<script>";
 			message	+= "alert('새로운 글을 추가하였습니다.');";
@@ -167,6 +168,8 @@ public class BoardControllerImpl implements BoardController {
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
+			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "thumb" + "\\" + "t_" + fileRealName);
+			srcFile.delete();
 			
 			message	 = "<script>";
 			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
@@ -194,11 +197,11 @@ public class BoardControllerImpl implements BoardController {
 			System.out.println("fileName ==> " + fileName);
 			System.out.println("imageFileName ==> " + fileRealName);
 			
-			File file = new File(ARTICLE_IMAGE_REPO + "/" + "t_" + fileRealName);
+			File file = new File(ARTICLE_IMAGE_REPO + "\\" + "thumb" + "\\" + "t_" + fileRealName);
 			if(mFile.getSize() != 0) {
 				if(!file.exists()) {	// 파일을 올릴 경로에 파일이 존재하지 않으면
 					file.getParentFile().mkdirs();	// 경로에 해당하는 디렉토리 생성
-					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "/" + "t_" + fileRealName)); // 파일 변환
+					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "thumb" + "\\" + "t_" + fileRealName)); // 파일 변환
 				}
 			}
 		}
@@ -209,9 +212,33 @@ public class BoardControllerImpl implements BoardController {
 	// 게시글 삭제
 	@Override
 	@RequestMapping(value="/board/delete.do", method=RequestMethod.POST)
-	public String articleDelete(int board_id) throws Exception {
-		boardService.delete(board_id);
-		return "redirect:articleList";
+	public ResponseEntity articleDelete(@RequestParam("board_id") int board_id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		response.setContentType("text/html;charset=UTF-8");
+		String message;
+		ResponseEntity	resEnt			= null;
+		HttpHeaders		responseHeaders	= new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html;charset=UTF-8");
+		
+		try {
+			boardService.delete(board_id);
+			File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + board_id);
+			FileUtils.deleteDirectory(destDir);
+			message = "<script>";
+			message += " alert('글을 삭제했습니다.');";
+			message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	       
+		} catch(Exception e) {
+			message = "<script>";
+			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
+			message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return resEnt;
 	}
 	
 	// 게시글 수정
@@ -253,7 +280,7 @@ public class BoardControllerImpl implements BoardController {
 				//디렉토리 설정 및 업로드	
 				
 				//파일경로
-				String filePath = "${path}/resources/images/contentImage/";
+				String filePath = "C:\\data\\team\\pick\\src\\main\\webapp\\resources\\images\\contentImage\\";
 				File file = new File(filePath);
 				
 				if(!file.exists()) {
@@ -285,7 +312,7 @@ public class BoardControllerImpl implements BoardController {
 				sFileInfo += "&bNewLine=true";
 				// img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 				sFileInfo += "&sFileName="+ sFilename;
-				sFileInfo += "&sFileURL="+"${path}/resources/images/contentImage/"+sRealFileNm;
+				sFileInfo += "&sFileURL="+"C:\\data\\team\\pick\\src\\main\\webapp\\resources\\images\\contentImage\\"+sRealFileNm;
 				PrintWriter printWriter = response.getWriter();
 				printWriter.print(sFileInfo);
 				printWriter.flush();
