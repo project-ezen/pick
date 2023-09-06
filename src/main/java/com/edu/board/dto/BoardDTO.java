@@ -19,7 +19,7 @@ public class BoardDTO {
 	private String writer;
 	private String nickname;
 	private String thumbnail;
-	private int reply_num;
+	//private int r_num;
 
 	
 	private MemberDTO memberDTO;
@@ -97,14 +97,14 @@ public class BoardDTO {
 		this.nickname = nickname;
 	}
 
-	public int getReply_num() {
-		return reply_num;
+	/*public int getR_num() {
+		return r_num;
 	}
 
-	public void setReply_num(int reply_num) {
-		this.reply_num = reply_num;
+	public void setR_num(int r_num) {
+		this.r_num = r_num;
 	}
-
+*/
 	public String getThumbnail() {
 		return thumbnail;
 	}
@@ -117,7 +117,7 @@ public class BoardDTO {
 	public String toString() {
 		return "BoardDTO [recNum=" + recNum + ", board_id=" + board_id + ", title=" + title + ", content=" + content
 				+ ", writeDate=" + writeDate + ", image=" + image + ", writer=" + writer + ", nickname=" + nickname
-				+ ", thumbnail=" + thumbnail + ", reply_num=" + reply_num + ", memberDTO=" + memberDTO + "]";
+				+ ", thumbnail=" + thumbnail + /*", r_num=" + r_num +*/ ", memberDTO=" + memberDTO + "]";
 	}
 
 	

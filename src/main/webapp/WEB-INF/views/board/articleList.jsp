@@ -76,15 +76,17 @@ height: 30px;
 text-align: center;
 }
 
+/*글쓰기 버튼*/
 .wbtn {
 width: 70px;
 height: 35px;
 border-radius: 5px;
-border: 2px solid #586389;
+border: none;
 background-color: #687AB6;
 color: #fff;
 float: right;
 margin-right: 50px;
+margin-bottom: 15px;
 }
 
 .lele {
@@ -204,7 +206,7 @@ font-size: 15px;
 	         </ul>
 	      </div>
 		<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
-		<br/>
+		<br/><br/>
 	</div>
 <br/><br/>
 </div>

@@ -104,7 +104,7 @@
         	if(isLogOn != '' && isLogOn != 'false') {
         		location.href = mypageForm;
     		} else{
-    			alert("로그인을 해주세요");
+    			alert("로그인 후 이용해주세요");
     			location.href = loginForm + '?action=/member/mypage';
     		} 
         }
