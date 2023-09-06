@@ -4,8 +4,8 @@ import java.sql.Date;
 
 public class ReplyDTO {
 
-	private int 	replyNum;
-	private int 	board_id;
+	private int replyNum;
+	private int b_id;
 	private String  r_writer;
 	private String 	content;
 	private Date 	writeDate;
@@ -17,12 +17,11 @@ public class ReplyDTO {
 	public void setReplyNum(int replyNum) {
 		this.replyNum = replyNum;
 	}
-	
-	public int getBoard_id() {
-		return board_id;
+	public int getB_id() {
+		return b_id;
 	}
-	public void setBoard_id(int board_id) {
-		this.board_id = board_id;
+	public void setB_id(int b_id) {
+		this.b_id = b_id;
 	}
 	public String getR_writer() {
 		return r_writer;
@@ -42,17 +41,19 @@ public class ReplyDTO {
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
-	
 	public String getNickname() {
 		return nickname;
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+	
 	@Override
 	public String toString() {
-		return "ReplyDTO [replyNum=" + replyNum + ", board_id=" + board_id + ", r_writer=" + r_writer + ", content="
-				+ content + ", writeDate=" + writeDate + ", nickname=" + nickname + "]";
+		return "ReplyDTO [replyNum=" + replyNum + ", b_id=" + b_id + ", r_writer=" + r_writer + ", content=" + content
+				+ ", writeDate=" + writeDate + ", nickname=" + nickname + "]";
 	}
-		
+	
+	
+	
 }

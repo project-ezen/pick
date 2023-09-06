@@ -34,7 +34,7 @@ public class ReplyDAOImpl implements ReplyDAO {
 	//댓글 작성
 	@Override
 	public void write(ReplyDTO replyDTO) throws Exception {
-		logger.info("작성");
+		logger.info("왜!");
 		sqlSession.insert(namespace + ".replyWrite", replyDTO);
 		
 	}

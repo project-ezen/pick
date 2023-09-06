@@ -15,6 +15,7 @@
 .foot { padding-bottom: 150px; padding-top: 150px;}
 
 .container { min-height: 600px; }
+
 table {
 width: 100%;
 border: 2px solid #ddd;
@@ -42,17 +43,20 @@ display :inline-block;
 background-color: #687AB6; 
 color: #fff; 
 border: none;
+font-family: 'Cafe24Supermagic-Bold-v1.0';
 }
 
 .btn_3 {
-width: 50px;
+width: 40px;
 height: 20px;
-border-radius: 10px;
 display :inline-block; 
 background-color: #687AB6; 
 color: #fff; 
-font-size: 10px;
+font-size: 13px;
 border: none;
+text-align:center;
+font-family: 'Cafe24Supermagic-Bold-v1.0';
+display: inline-block;
 }
 
 </style>
@@ -120,32 +124,33 @@ border: none;
 	</form>
 	<br/>
 	<hr/>
+	<%-- 댓글 부분  // 목록 나옴--%>
 	<div>
 		<table style="margin-bottom: 20px;">
 			<c:forEach items="${reply}" var="reply">
 				<tr>
 					<th style="text-align: center; width:15%;">${reply.nickname}(<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd"/>)</th>
 					<td style="width:75%;">${reply.content}</td>
-					<c:if test="${reply.r_writer == member.m_id}">
-						<td style="width:8%;"><button class="btn_3" type="button" onclick="">수정</button><button class="btn_3" type="button" onclick="">삭제</button></td>
+					<c:if test="${reply.r_writer == member.m_nickname}">
+						<td style="width:10%;"><a href="#" class="btn_3" type="button" onclick="fn_rupdate()">수정</a>/<a href="#" class="btn_3" type="button" onclick="fn_rdelete()">삭제</a></td>
 					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
-
-	<c:if test="${isLogOn == true }">
+	<%-- 댓글 작성하는 부분 --%>
+	<c:if test="${ isLogOn == true }">
 		<form method="post" action="/reply/rwrite">
 			<table style="margin-bottom: 20px;">
 					<tr>
 						<th style="text-align: center; width:15%;">닉네임</th>
-						<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_id}" name="r_writer" readonly/></td>
+						<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_nickname}" name="r_writer" readonly/></td>
 					</tr>
 					<tr>	
 						<th style="text-align: center; width:15%;">내용</th>
 						<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
 						<td style="width:8%;">
-						<input type="hidden" name="board_id" value="${article.board_id}">
-						<button class="btn_2" type="submit" id="replyBTN">댓글 작성</button>
+						<input type="hidden" name="b_id" value="${article.board_id}">
+						<button class="btn_2" type="submit">댓글 작성</button>
 						</td>
 					</tr>
 			</table>
@@ -157,22 +162,22 @@ border: none;
 <script>
 
 function fn_enable(obj){
-	document.getElementById("title").disabled			= false;
-	document.getElementById("content").disabled			= false;
+	document.getElementById("title").disabled		= false;
+	document.getElementById("content").disabled		= false;
 	document.getElementById("thumbnail").disabled	= false;
 }
 
 function backToForm(obj){
 	document.getElementById("title").disabled = true;
 	document.getElementById("content").disabled = true;
-	document.getElementById("thumbnail").disabled	= false;
+	document.getElementById("thumbnail").disabled	= true;
 }
 
 
 
 
 $(document).ready(function(){
-	
+	var contentval = $("#content").val();
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef: oEditors,
@@ -183,6 +188,13 @@ $(document).ready(function(){
 			bUseModeChanger: false
 		}
 	});
+	
+	contentval = $("#content").val().replace(/<p><br><\/p>/gi, "<br>"); // <p><br></p> => <br>로 변환
+	
+	contentval = contentval.replace(/<\/p><p>/gi, "<br>"); // </p><p> => <br>로 변환
+	contentval = contentval.replace(/(<\/p><br>|<p><br>)/gi, "<br><br>");
+	contentval = contentval.replace(/(<p>|<\/p>)/gi, ""); // <p> 또는 </p>모두 제거
+	$("#content").val(contentval);
 
 	$("#updatewrite").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -227,44 +239,30 @@ function fn_remove(url, board_id){
 	form.submit();
 	
 }
-
-/*
-$(document).ready(function() {
+/*댓글 삭제 버튼 
+function fn_rdelete(e) {
+	e.preventDefault();
+	let replyId = $(this).attr("href");	
 	
-	replyList();
-	
-	$("#replyBTN").click(function() {
-		var replytext 	= $("#replytext").val();
-		var b_id 		= "${article.board_id}"
-		var param		= "replytext=" +replytext +"&board_id="+b_id;
-		
-		$.ajax({
-			type: "post",
-			url: "${path}/reply/replywrite",
-			data: param,
-			success: function() {
-				alert("댓글이 등록되었습니다.");
-				RreplyList();
-			}
-		});
-		
-	});
-		
-		function replyList() {
-		$.ajax ({
-		type: "get",
-		url: "${path}/board/articleList?board_id=${article.board_id}",
-		success: function(result) {
-			$("#replyList").html(result);
+	$.ajax({
+		data : {
+			reply_num : replyNum,
+			b_id : '${article.board_id}'
+		},
+		url : '/reply/rdelete',
+		type : 'POST',
+		success : function(result){
+			replyListInit();
+			alert('삭제가 완료되엇습니다.');
 		}
-	})
-
+	});		
+		
+});*/
 	
-}
-*/
-
+	
 
 </script>
+
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <%@ include file="../include/footer.jsp" %>
