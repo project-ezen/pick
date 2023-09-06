@@ -88,7 +88,7 @@
                    	</div>
 
                    	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="#">Store</a></label>
+                       <label id="solo"><a href="/store/productInfo">Store</a></label>
                    	</div>
                    	<div style="margin-top: 350px;" id="logindiv">
                    	<c:choose>
@@ -112,7 +112,7 @@
         	if(member != '' || member != null) {        // 세션 member의 값이 '' 이거나 
         		location.href = mypageForm;
     		} else{
-    			alert("로그인을 해주세요");
+    			alert("로그인 후 이용해주세요");
     			location.href = loginForm + '?action=/member/mypage';
     		} 
         }

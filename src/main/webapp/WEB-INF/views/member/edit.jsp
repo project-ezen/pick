@@ -7,10 +7,7 @@
     <%@ include file="../include/header.jsp" %>
     
     <style>
-    	.container {
-    		width: 500px;
-    	}
-    	.container { background-color: rgba(255, 255, 255, 0.88); }
+    	.container { width: 500px; background-color: rgba(255, 255, 255, 0.88); }
     	
     	.foot { padding-bottom: 100px; padding-top: 100px; }
     	
@@ -27,7 +24,7 @@
             text-align: center;
             margin-top: 20px;
         }
-		#insertButton {
+		#editButton {
 			margin-right: 50px;
 		}
 		
@@ -40,11 +37,11 @@
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
 		font-size:13px;
 		padding:6px 13px;
 		text-decoration:none;
 		text-shadow:0px 1px 0px #3d768a;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
 			&:hover {
 			background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
 			background-color:#408c99;
@@ -60,15 +57,15 @@
 		background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
 		background-color:#79bbff;
 		border-radius:17px;
-		border:1px solid #337bc4;
+		border:none;
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
-		font-size:13px;
+		font-size:14px;
 		padding:6px 13px;
 		text-decoration:none;
 		text-shadow:0px 1px 0px #528ecc;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
 			&:hover {
 			background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
 			background-color:#378de5;
@@ -83,12 +80,12 @@
 		background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
 		background-color:#fe1a00;
 		border-radius:17px;
-		border:1px solid #d83526;
+		border:none;
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
-		font-size:13px;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';		
+		font-size:14px;
 		padding:6px 13px;
 		text-decoration:none;
 		text-shadow:0px 1px 0px #b23e35;
@@ -119,11 +116,11 @@
 				</div>
 				<div class="form-group">
 					<label>비밀번호</label>
-					<input type="password" class="form-control" id="m_pw" name="m_pw">
+					<input type="password" class="form-control" id="m_pw" name="m_pw" value="${member.m_pw}">
 				</div>
 				<div class="form-group">
 					<label>비밀번호 확인</label>
-					<input type="password" class="form-control" id="m_repw" name="m_repw">
+					<input type="password" class="form-control" id="m_repw" name="m_repw" value="${member.m_repw}">
 				</div>
 				<div class="form-group">
 					<label>이름</label>
@@ -161,7 +158,7 @@
 					<input type="text" class="form-control" id="m_addressDetail" name="m_addressDetail" value="${member.m_addressDetail}">
 				</div>
 				<div class="update-button-group">
-					<button type="submit" class="submit" id="insertButton">수정</button>
+					<button type="submit" class="submit" id="editButton">수정</button>
 					<button type="button" class="cancel" id="resetButton">취소</button>
 				</div>
 			</form>
@@ -191,7 +188,6 @@ function fn_nickCheck() {
 		type:		"post",
 		dataType:	"json",
 		data:		{"m_nickname" : nickname},
-		async:		false,
 		success:	function(data) {
 			
 			if(data == 1) {
@@ -199,9 +195,8 @@ function fn_nickCheck() {
 				$("#m_nickname").focus();
 			} else if(data == 0) {
 				alert("사용 가능한 닉네임입니다.");
-				$("#m_nickCheck").attr("value", "Y");
+				$("#m_nickname").attr("value", "Y");
 				$("#m_tel").focus();
-				nickIsValid = true;
 			}
 		}
 	});
@@ -218,43 +213,51 @@ $(document).ready(function() {
 	
 //빈칸 확인
 
-	$(".joinButton").on("click", function() {
+	$("#editButton").on("click", function() {
 	// 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
 	// 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
 	
-		if($("#m_passwd").val() == "") {
-			alert("비밀번호를 입력하셔야 합니다.");
-			$("#m_pw").focus();
-			return false;
-		}
-		if($("#m_repasswd").val() == "") {
-			alert("비밀번호확인을 입력하셔야 합니다.");
-			$("#m_repw").focus();
-			return false;
-		}
-		if($("#pw").val() != $("#repw").val()) {
-	         alert("비밀번호 확인이 다릅니다.");
-	         $("#repw").focus();
-	         return false;
+		let ok = true;
+	
+		if($("#m_pw").val() == "") {
+	        alert("비밀번호를 입력하셔야 합니다.");
+	        $("#m_pw").focus();
+	        ok = false;
+	    }
+		if($("#m_repw").val() == "") {
+	        alert("비밀번호확인을 입력하셔야 합니다.");
+	        $("#m_repw").focus();
+	        ok = false;
+	    }
+		if($("#m_pw").val() != $("#m_repw").val()) {
+	        alert("비밀번호 확인이 다릅니다.");
+	        $("#m_repw").focus();
+	        ok = false;
 	    }
 		if($("#m_nickname").val() == "") {
 			alert("닉네임을 입력하셔야 합니다.");
 			$("#m_nickname").focus();
-			return false;
+			ok = false;
 		}
 		if($("#m_tel").val() == "") {
 			alert("연락처를 입력하셔야 합니다.");
 			$("#m_tel").focus();
-			return false;
+			ok = false;
 		}
 		if($("#m_address").val() == "") {
 			alert("주소를 입력하셔야 합니다.");
 			$("#m_address").focus();
-			return false;
+			ok = false;
 		}
-		
 	
 		document.getElementById("m_address").value = $("#m_address").val();
+		
+		if(ok) {
+			alert("회원정보 수정이 완료되었습니다.");
+			$("#update-form").submit();
+		}
+		
+	    return false;
 	
 	});
 });

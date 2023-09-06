@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PagingCriteria;
@@ -25,12 +26,10 @@ public interface BoardDAO {
 	public BoardDTO selectArticle(int board_id) throws DataAccessException;
 	
 	// 게시글 작성 (post)
-	public void create(BoardDTO boardDTO) throws DataAccessException;
+	public int create(Map articleMap) throws DataAccessException;
 	
 	// 게시글 삭제
 	public void delete(int board_id) throws DataAccessException;
-	
-	
-	
+
 }
 

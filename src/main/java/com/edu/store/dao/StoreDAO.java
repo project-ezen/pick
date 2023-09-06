@@ -9,6 +9,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.edu.store.dto.ProductDisplayVO;
+import com.edu.store.dto.ProductReviewCriteria;
+import com.edu.store.dto.ReviewDTO;
 import com.edu.store.dto.ProductDTO;
 
 
@@ -41,6 +43,9 @@ public class StoreDAO {
 		return productList;
 	}
 
+	//--------------------------------------------------------------------------------------------
+	// 상품 리스트 키워드로 검색하기
+	//--------------------------------------------------------------------------------------------
 	public List searchProductByKeyword(String searchKeyword, String select) throws DataAccessException {
 		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("searchKeyword", searchKeyword);
@@ -49,7 +54,10 @@ public class StoreDAO {
 		
 		return productList;
 	}
-	
+		
+	//--------------------------------------------------------------------------------------------
+	// 상품 리스트 키워드&카테고리
+	//--------------------------------------------------------------------------------------------
 	public List<ProductDisplayVO> searchProductByCategoryAndKeyword(String category, String searchKeyword, String select) throws DataAccessException {
 	    Map<String, String> paramMap = new HashMap<>();
 	    paramMap.put("category", category);
@@ -66,18 +74,61 @@ public class StoreDAO {
 	//--------------------------------------------------------------------------------------------
 	// 상품 상세 보기
 	//--------------------------------------------------------------------------------------------
-	public List<ProductDisplayVO> productInfos(String product_id) {
+	public List<ProductDTO> productInfos(String product_id) {
 		return sqlSession.selectList(namespace + ".productInfos", product_id);
 	}
 	
-	public void productToCart(String product_id, String quantity, String memberId) throws Exception{
+	public List<ProductDisplayVO> displayProductInfos(String product_id) {
+		return sqlSession.selectList(namespace + ".displayProductInfos", product_id);
+	}
+	
+	public List<ReviewDTO> selectReview(ProductReviewCriteria productreviewcri) throws Exception {
+		return sqlSession.selectList(namespace + ".selectReview", productreviewcri);
+	}
+	
+	public void productToCart(String product_id, String quantity, String memberId, String cartOrStore, String cartId) throws Exception{
 		
 		Map<String, String> paramMap = new HashMap<>();
 		paramMap.put("product_id", product_id);
 	    paramMap.put("quantity", quantity);
 	    paramMap.put("memberId", memberId);
+	    paramMap.put("cartOrStore", cartOrStore);
+	    paramMap.put("cartId", cartId);
+	    
 	    
 		sqlSession.insert(namespace + ".productToCart", paramMap);
 	}
+	
+	//--------------------------------------------------------------------------------------------
+	// 상품 새리뷰 작성하기 
+	//--------------------------------------------------------------------------------------------
+	public int insertNewReview(Map reviewMap, String product_id, String member) throws DataAccessException {
+		
+		
+		reviewMap.put("product_id", product_id);
+		reviewMap.put("member", member);
+		int reviewNO = selectNewReviewNO();
+		System.out.println("새로운 리뷰" + reviewNO);
+		reviewMap.put("reviewNO", reviewNO);
+		sqlSession.insert(namespace + ".insertNewReview", reviewMap);
+		return reviewNO;
+	}
+	
+	public int selectNewReviewNO() throws DataAccessException {
+		return sqlSession.selectOne(namespace + ".selectNewReviewNO");
+	}
+	
+	//----------------------------------------------------------------------------------------------------------------------------------
+	// 리뷰 삭제하기
+	//----------------------------------------------------------------------------------------------------------------------------------
+	public void reviewRemove(String reviewId) throws DataAccessException{
+		sqlSession.delete(namespace + ".reviewRemove", reviewId);
+	}
+	
+	public int productReviewCount(ProductReviewCriteria productReviewCount) throws DataAccessException {
+		return sqlSession.selectOne(namespace + ".productReviewCount", productReviewCount);
+	}
+	
+	
 	
 }

@@ -3,23 +3,28 @@ package com.edu.board.dto;
 import java.sql.Date;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.member.dto.MemberDTO;
 
 @Component("boardDTO")
 public class BoardDTO {
 	
-	private int 	recNum;
-	private int 	board_id;
-	private String 	title;
-	private String 	content;
-	private Date 	writeDate;
-	private String 	image;
-	private String 	writer;
-	private String 	nickname;
+	private int recNum;
+	private int board_id;
+	private String title;
+	private String content;
+	private Date writeDate;
+	private String image;
+	private String writer;
+	private String nickname;
+	private String thumbnail;
+	//private int r_num;
+
 	
 	private MemberDTO memberDTO;
 
+	
 	public int getRecNum() {
 		return recNum;
 	}
@@ -92,11 +97,27 @@ public class BoardDTO {
 		this.nickname = nickname;
 	}
 
+	/*public int getR_num() {
+		return r_num;
+	}
+
+	public void setR_num(int r_num) {
+		this.r_num = r_num;
+	}
+*/
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardDTO [recNum=" + recNum + ", board_id=" + board_id + ", title=" + title + ", content=" + content
 				+ ", writeDate=" + writeDate + ", image=" + image + ", writer=" + writer + ", nickname=" + nickname
-				+ ", memberDTO=" + memberDTO + "]";
+				+ ", thumbnail=" + thumbnail + /*", r_num=" + r_num +*/ ", memberDTO=" + memberDTO + "]";
 	}
 
 	
