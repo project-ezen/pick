@@ -554,7 +554,7 @@ $(document).ready(function() {
 			allCheck();
 		}
 	});
-}
+});
 
 </script>
 
