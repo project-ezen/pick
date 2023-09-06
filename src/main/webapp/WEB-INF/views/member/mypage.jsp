@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="true"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,11 +30,11 @@
 			{ width: 150px; height: 100px; float:left; margin: 30px 25px; display: inline-block; border-radius: 5%;  background-color: rgba(20, 69, 101, 0.7);  }
 
  .AA 		{ text-align: center; line-height : 100px; float: center; margin:0 auto; display: inline-block; color: #fff; 
-			  text-decoration: none; cursor:pointer; font-family:Arial; font-size:15px; }
+			  text-decoration: none; cursor:pointer; font-size:15px; font-family: 'Cafe24Supermagic-Bold-v1.0'; }
 
 .AA:hover 	{ text-decoration: none; color: #ccd6d9; }
 
-.box_1 		{ margin-left: 30px; }
+.box_1 		{ margin-left: 30px; } 
 
 /* 모달 스타일 */
 .modal-open {

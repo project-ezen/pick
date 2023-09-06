@@ -99,10 +99,14 @@ public class ShoppingController {
 			
 			displayOrder.add(temp);
 		}
+		// 주문 번호 부여하기
+		int order_num = getOrderNum(member.getM_id());
 		
+		log.info("order_number : " + order_num);
 		log.info("displayOrderVO : " + displayOrder);
 		log.info("total_price : " + total_price);
 		
+		mav.addObject("order_number", order_num);
 		mav.addObject("member", member);
 		mav.addObject("displayOrder", displayOrder);
 		mav.addObject("total_price", total_price);
@@ -126,10 +130,8 @@ public class ShoppingController {
 		String product[] = request.getParameterValues("productName");
 		String count[] = request.getParameterValues("productCount");
 		
-		// 주문 번호 부여하기
-		int order_num = getOrderNum(member.getM_id());
 		orderDTO.setM_id(member.getM_id());
-		orderDTO.setOrder_number(order_num);
+		// orderDTO.setOrder_number(order_num);
 		orderDTO.setOrder_status("delivery-progressing");
 		log.info("orderDTO : " + orderDTO);
 

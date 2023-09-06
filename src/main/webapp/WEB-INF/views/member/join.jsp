@@ -1,4 +1,4 @@
-+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +53,7 @@
 		<div class="join-form">
 			<h1 class="text-center">회원 가입</h1><hr/>
 			
-			<form id="join-form" method="post" action="/member/join">
+			<form id="join-form">
                 <div class="form-group">
 					<label class="control-label">아이디</label>
 					<input type="text" class="form-control" id="m_id" name="m_id" placeholder="이메일을 입력하세요">
@@ -81,7 +81,7 @@
 					<div class="input-group">
 						<input type="text" class="form-control" id="m_nickname" name="m_nickname">
 						<span class="input-group-btn">
-							<button class="btn btn-info" type="button" id="nickCheck" onClick="fn_nickCheck()">중복확인</button>
+							<button class="btn btn-info" type="button" id="nickCheck">중복확인</button>
 						</span>
 					</div>
 				</div>
@@ -427,63 +427,72 @@ $(document).ready(function() {
            }
        });
    });
-
+	
+// 가입하기 버튼을 클릭했을 경우
 
 // 빈칸 확인
-   $(".joinButton").on("click", function() {
+	$(".joinButton").on("click", function() {
+		$("#join-form").prop("action", "/member/join");
+		$("#join-form").prop("method", "post");
 	// 아이디, 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
 	// 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
 	
+		let ok = true;
+		
 		if($("#m_id").val() == "") {
 			alert("아이디를 입력하셔야 합니다.");
 			$("#m_id").focus();
-			return false;
+			ok = false;
 		}
-		if($("#m_passwd").val() == "") {
+		if($("#m_pw").val() == "") {
 			alert("비밀번호를 입력하셔야 합니다.");
 			$("#m_pw").focus();
-			return false;
+			ok = false;
 		}
-		if($("#m_repasswd").val() == "") {
+		if($("#m_repw").val() == "") {
 			alert("비밀번호확인을 입력하셔야 합니다.");
 			$("#m_repw").focus();
-			return false;
+			ok = false;
 		}
-		if($("#pw").val() != $("#repw").val()) {
+		if($("#m_pw").val() != $("#m_repw").val()) {
 	         alert("비밀번호 확인이 다릅니다.");
-	         $("#repw").focus();
-	         return false;
+	         $("#m_repw").focus();
+	         ok = false;
 	    }
 		if($("#m_name").val() == "") {
 			alert("이름을 입력하셔야 합니다.");
 			$("#m_name").focus();
-			return false;
+			ok = false;
 		}
 		if($("#m_nickname").val() == "") {
 			alert("닉네임을 입력하셔야 합니다.");
 			$("#m_nickname").focus();
-			return false;
+			ok = false;
 		}
 		if($("#m_tel").val() == "") {
 			alert("연락처를 입력하셔야 합니다.");
 			$("#m_tel").focus();
-			return false;
+			ok = false;
 		}
 		if($("#m_birthdate").val() == "") {
 			alert("생년월일을 입력하셔야 합니다.");
 			$("#m_birthdate").focus();
-			return false;
+			ok = false;
 		}
 		if($("#m_address").val() == "") {
 			alert("주소를 입력하셔야 합니다.");
 			$("#m_address").focus();
-			return false;
+			ok = false;
 		}
 		
-	
 		document.getElementById("m_address").value = $("#m_address").val();
 	
-});
+		if(ok) {
+			alert("회원 가입이 완료되었습니다.");
+			$("#join-form").submit();
+		}
+		
+	});
 
 	// 약관 동의
 
@@ -512,12 +521,12 @@ $(document).ready(function() {
        ccl1.on("click", function() {
            $("#info1").prop("checked", false);
        });
-   });
+});
 
 
 // 닉네임 중복 체크
-function fn_nickCheck() {
-
+	$("#nickCheck").on("click", function() {
+	
 	var nickname = $("#m_nickname").val();
 
 	if (!nickname) { // 닉네임이 비어 있을 경우
@@ -531,7 +540,6 @@ function fn_nickCheck() {
 		type:		"post",
 		dataType:	"json",
 		data:		{"m_nickname" : nickname},
-		async:		false,
 		success:	function(data) {
 			
 			if(data == 1) {
@@ -539,14 +547,14 @@ function fn_nickCheck() {
 				$("#m_nickname").focus();
 			} else if(data == 0) {
 				alert("사용 가능한 닉네임입니다.");
-				$("#m_nickCheck").attr("value", "Y");
+				$("#m_nickname").attr("value", "Y");
 				$("#m_tel").focus();
 				nickIsValid = true;
 			}
 			allCheck();
 		}
 	});
-}
+});
 
 </script>
 

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PagingCriteria;
@@ -50,8 +51,8 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 게시글 작성(post)
 	@Override
-	public void create(BoardDTO boardDTO) throws SQLException {
-		boardDAO.create(boardDTO);
+	public int create(Map articleMap) throws SQLException {
+		return boardDAO.create(articleMap);
 	}
 	
 	// 게시글 삭제

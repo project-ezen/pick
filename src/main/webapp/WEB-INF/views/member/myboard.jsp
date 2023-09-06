@@ -47,7 +47,7 @@
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
 		font-size:12px;
 		font-weight:bold;
 		padding:8px 18px;
@@ -99,7 +99,6 @@
 					</c:forEach>
 				</tbody>
 			</table>
-			
 		</div>
 	</div>
 	<br/><br/>
