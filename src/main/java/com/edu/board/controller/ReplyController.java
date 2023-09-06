@@ -19,6 +19,7 @@ public class ReplyController {
 	@Inject
 	private ReplyService replyService;
 	private static final Logger logger = LoggerFactory.getLogger(ReplyController.class);
+	
 	//
 	/*@RequestMapping(value="/replyList" , method = {RequestMethod.POST, RequestMethod.GET})	
 	public ModelAndView replyList(@RequestParam("board_id")int board_id,ModelAndView mav,HttpServletRequest request, HttpServletResponse response) throws Exception { 
@@ -38,13 +39,15 @@ public class ReplyController {
 	public String replyWirte(ReplyDTO replyDTO) throws Exception {
 	    
 	    replyService.write(replyDTO);
-	    logger.info("줘봐봐");
+	    
+	    logger.info("replyDTO");
+	    
 	    return "redirect:/board/recipedetail?board_id="+replyDTO.getB_id();
 	    
 	}
 	
 	//댓글 수정
-	@RequestMapping(value="rupdate",method=RequestMethod.POST)
+	@RequestMapping(value="/rupdate",method=RequestMethod.POST)
 	public String replyUpdate(ReplyDTO replyDTO) throws Exception {
 		
 		replyService.update(replyDTO);

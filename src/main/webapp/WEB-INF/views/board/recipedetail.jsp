@@ -124,20 +124,21 @@ display: inline-block;
 	</form>
 	<br/>
 	<hr/>
+	<%-- 댓글 부분  // 목록 나옴--%>
 	<div>
 		<table style="margin-bottom: 20px;">
 			<c:forEach items="${reply}" var="reply">
 				<tr>
 					<th style="text-align: center; width:15%;">${reply.nickname}(<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd"/>)</th>
 					<td style="width:75%;">${reply.content}</td>
-					<c:if test="${reply.r_writer == member.m_id}">
+					<c:if test="${reply.r_writer == member.m_nickname}">
 						<td style="width:10%;"><a href="#" class="btn_3" type="button" onclick="Rupdate()">수정</a>/<a href="#" class="btn_3" type="button" onclick="fn_rdelete()">삭제</a></td>
 					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
-
-	<c:if test="${isLogOn == true }">
+	<%-- 댓글 작성하는 부분 --%>
+	<c:if test="${ isLogOn == true }">
 		<form method="post" action="/reply/rwrite">
 			<table style="margin-bottom: 20px;">
 					<tr>
@@ -148,7 +149,7 @@ display: inline-block;
 						<th style="text-align: center; width:15%;">내용</th>
 						<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
 						<td style="width:8%;">
-						<input type="hidden" name="board_id" value="${article.board_id}">
+						<input type="hidden" name="b_id" value="${article.board_id}">
 						<button class="btn_2" type="submit">댓글 작성</button>
 						</td>
 					</tr>
@@ -238,7 +239,26 @@ function fn_remove(url, board_id){
 	form.submit();
 	
 }
-
+/*댓글 삭제 버튼 
+function fn_rdelete(e) {
+	e.preventDefault();
+	let replyId = $(this).attr("href");	
+	
+	$.ajax({
+		data : {
+			reply_num : replyNum,
+			b_id : '${article.board_id}'
+		},
+		url : '/reply/rdelete',
+		type : 'POST',
+		success : function(result){
+			replyListInit();
+			alert('삭제가 완료되엇습니다.');
+		}
+	});		
+		
+});*/
+	
 	
 
 </script>
