@@ -6298,7 +6298,7 @@ nhn.husky.SE_WYSIWYGEnterKey = jindo.$Class({
 		if(sLineBreaker == "BR"){
 			this.sLineBreaker = "BR";
 		}else{
-			this.sLineBreaker = "P";
+			this.sLineBreaker = "BR";
 		}
 		
 		this.htBrowser = jindo.$Agent().navigator();
