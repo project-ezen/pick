@@ -37,11 +37,11 @@
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
 		font-size:13px;
 		padding:6px 13px;
 		text-decoration:none;
 		text-shadow:0px 1px 0px #3d768a;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
 			&:hover {
 			background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
 			background-color:#408c99;
@@ -57,15 +57,15 @@
 		background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
 		background-color:#79bbff;
 		border-radius:17px;
-		border:1px solid #337bc4;
+		border:none;
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
-		font-size:13px;
+		font-size:14px;
 		padding:6px 13px;
 		text-decoration:none;
 		text-shadow:0px 1px 0px #528ecc;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
 			&:hover {
 			background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
 			background-color:#378de5;
@@ -80,12 +80,12 @@
 		background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
 		background-color:#fe1a00;
 		border-radius:17px;
-		border:1px solid #d83526;
+		border:none;
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
-		font-size:13px;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';		
+		font-size:14px;
 		padding:6px 13px;
 		text-decoration:none;
 		text-shadow:0px 1px 0px #b23e35;

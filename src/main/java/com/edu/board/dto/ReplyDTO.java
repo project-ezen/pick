@@ -4,25 +4,24 @@ import java.sql.Date;
 
 public class ReplyDTO {
 
-	private int 	replyNum;
-	private int 	board_id;
+	private Integer replyNum;
+	private Integer b_id;
 	private String  r_writer;
 	private String 	content;
 	private Date 	writeDate;
 	private String 	nickname;
 	
-	public int getReplyNum() {
+	public Integer getReplyNum() {
 		return replyNum;
 	}
-	public void setReplyNum(int replyNum) {
+	public void setReplyNum(Integer replyNum) {
 		this.replyNum = replyNum;
 	}
-	
-	public int getBoard_id() {
-		return board_id;
+	public Integer getB_id() {
+		return b_id;
 	}
-	public void setBoard_id(int board_id) {
-		this.board_id = board_id;
+	public void setB_id(Integer b_id) {
+		this.b_id = b_id;
 	}
 	public String getR_writer() {
 		return r_writer;
@@ -42,7 +41,6 @@ public class ReplyDTO {
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
-	
 	public String getNickname() {
 		return nickname;
 	}
@@ -51,8 +49,10 @@ public class ReplyDTO {
 	}
 	@Override
 	public String toString() {
-		return "ReplyDTO [replyNum=" + replyNum + ", board_id=" + board_id + ", r_writer=" + r_writer + ", content="
+		return "ReplyDTO [replyNum=" + replyNum + ", b_id=" + b_id + ", r_writer=" + r_writer + ", content="
 				+ content + ", writeDate=" + writeDate + ", nickname=" + nickname + "]";
 	}
-		
+	
+	
+	
 }

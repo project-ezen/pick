@@ -25,7 +25,7 @@ width: 70px;
 height: 35px;
 font-size: 15px;
 border-radius: 5px;
-border: 2px solid #586389;
+border: none;
 background-color: #687AB6;
 color: #fff;
 }
@@ -35,7 +35,7 @@ width: 70px;
 height: 35px;
 font-size: 15px;
 border-radius: 5px;
-border: 2px solid #B36E79;
+border: none;
 background-color: #E96F84;
 color: #fff;
 }
