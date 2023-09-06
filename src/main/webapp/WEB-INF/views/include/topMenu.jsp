@@ -20,7 +20,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar">
                 <span class="glyphicon glyphicon-align-justify"></span>
             </button>
-            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="/" style="font-size:30px;">마녀의 pick</a> <%--사진넣을꺼? 어찌할거야!?--%>
         </div>
         <div class="collapse navbar-collapse" id="mainNavbar" style="padding-top: 10px;">
             <ul class="nav navbar-nav">

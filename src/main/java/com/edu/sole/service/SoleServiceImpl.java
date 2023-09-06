@@ -13,6 +13,8 @@ import com.edu.sole.dao.SoleDAO;
 import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.SoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
+import com.edu.sole.dto.recipe.JjimDTO;
+import com.edu.sole.dto.recipe.JjimSelectDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
 import com.edu.sole.dto.recipe.RecipeReviewDTO;
 import com.edu.sole.dto.recipe.ReviewCriteria;
@@ -77,6 +79,28 @@ public class SoleServiceImpl implements SoleService {
 	public int reviewcount(ReviewCriteria reviewcri) throws Exception {
 		
 		return soledao.reviewcount(reviewcri);
+	}
+	
+	
+	// 찜 인설트
+	@Override
+	public void jjimInsert(JjimDTO jjimInsert) throws Exception {
+		
+		soledao.jjimInsert(jjimInsert);
+	}
+	
+	// 찜 셀렉하는
+	@Override
+	public JjimDTO jjimSelect(JjimSelectDTO Wla) throws Exception {
+		
+		return soledao.jjimSelect(Wla);
+	}
+	
+	// 찜 딜리트
+	@Override
+	public void jjimDelete(JjimDTO jjimDelete) throws Exception {
+		
+		soledao.jjimDelete(jjimDelete);
 	}
 
 }

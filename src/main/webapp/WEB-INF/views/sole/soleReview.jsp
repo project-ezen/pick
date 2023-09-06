@@ -145,7 +145,7 @@ label {
 			</div>
 		</div>
 		<input type="hidden" name="recipe_code" value="${param.recipe_code}"/>
-		<input type="hidden" name="m_id" value="1"/>
+		<input type="hidden" name="m_id" value="${member.m_id}"/>
 	</form>
 </div>
 

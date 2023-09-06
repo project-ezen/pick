@@ -32,19 +32,12 @@
 		]]>
 	</insert>
 	
-	<!-- 댓글 수정 -->
-	<update id="replyUpdate" parameterType="com.edu.board.dto.ReplyDTO">
-		UPDATE	reply 
-		SET		r_writer = #{r_writer},
-				content = #{content}
-		WHERE 	reply_num = #{replyNum}
-		AND 	b_id = ${b_id}		
-	</update>
-	
+
 	<!-- 댓글 삭제 -->
 	<delete id="replyDelete" parameterType="com.edu.board.dto.ReplyDTO">
 		delete from reply
-		where b_id = ${b_id}
+		WHERE 	reply_num = #{replyNum}
+		AND 	b_id = ${b_id}		
 	</delete>
 
 	

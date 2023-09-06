@@ -25,7 +25,6 @@ font-family: 'Cafe24Supermagic-Bold-v1.0';
 
 .container {
 background-color: #fff;
-min-height: 600px;
 border-radius: 10px;
 }
 
