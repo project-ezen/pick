@@ -52,12 +52,12 @@ public class ReplyController {
 		
 	//댓글 삭제
 	@RequestMapping(value="/rdelete",method= {RequestMethod.GET,RequestMethod.POST})
-	public String replyDeletePOST(@RequestParam("board_id") int board_id,ReplyDTO replyDTO) throws Exception {
+	public void replyDeletePOST(@RequestParam("board_id") int board_id,ReplyDTO replyDTO) throws Exception {
 		
 		
 		replyService.delete(replyDTO);
 		
-		return "redirect:/board/recipedetail?board_id="+replyDTO.getB_id();
+		//return "redirect:/board/recipedetail?board_id="+replyDTO.getB_id();
 	}
 	
 	
