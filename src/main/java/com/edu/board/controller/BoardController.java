@@ -38,7 +38,7 @@ public interface BoardController {
 		public ResponseEntity addNewArticle(HttpServletResponse response, MultipartHttpServletRequest multiRequest) throws Exception;
 		
 		// 게시글 삭제
-		public String articleDelete(int board_id) throws Exception;
+		public ResponseEntity articleDelete(@RequestParam("articleNO") int articleNO,HttpServletRequest request, HttpServletResponse response) throws Exception;
 		
 		// 게시글 수정
 		
