@@ -52,7 +52,6 @@ public class BoardServiceImpl implements BoardService {
 	// 게시글 작성(post)
 	@Override
 	public int create(Map articleMap) throws SQLException {
-		
 		return boardDAO.create(articleMap);
 	}
 	
