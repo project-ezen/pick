@@ -15,6 +15,7 @@
 .foot { padding-bottom: 150px; padding-top: 150px;}
 
 .container { min-height: 600px; }
+
 table {
 width: 100%;
 border: 2px solid #ddd;
@@ -237,26 +238,7 @@ function fn_remove(url, board_id){
 	form.submit();
 	
 }
-/*댓글 삭제 버튼 */
-function fn_rdelete(e) {
 
-	e.preventDefault();
-	let replyId = $(this).attr("href");	
-	
-	$.ajax({
-		data : {
-			reply_num : replyNum,
-			b_id : '${article.board_id}'
-		},
-		url : '/reply/rdelete',
-		type : 'POST',
-		success : function(result){
-			replyListInit();
-			alert('삭제가 완료되엇습니다.');
-		}
-	});		
-		
-});
 	
 
 </script>

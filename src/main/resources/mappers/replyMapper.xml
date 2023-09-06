@@ -6,30 +6,29 @@
 	
 	<resultMap type="com.edu.board.dto.ReplyDTO" id="reply">
 		<result property="replyNum" 	column="REPLY_NUM"/>
-		<result property="board_id" 	column="B_ID"/>
+		<result property="b_id" 		column="B_ID"/>
 		<result property="r_writer" 	column="R_WRITER"/>
 		<result property="content" 		column="CONTENT"/>
 		<result property="writeDate" 	column="WRITEDATE"/>
-		<result property="nickname" 	column="m_nickname"/>
+		<result property="nickname" 	column="M_NICKNAME"/>
 	</resultMap>
 
 	<!-- 댓글목록 -->
-	<select id="replyList" parameterType="int" resultMap="reply">
-		<![CDATA[
+	<select id="replyList" parameterType="integer" resultMap="reply">
 	         select *
 	         from (
-	             select r.reply_num, r.b_id, r.r_writer, r.content, r.writeDate, m.m_nickname
+	             select r.reply_num, r.b_id, r.r_writer, r.content, r.writeDate, m.m_nickname 
 	             from reply r, member m
-	             where r.r_writer = m.m_id )
-	         where b_id = #{board_id}
-	      ]]>
+	             where r.r_writer = m.m_nickname)
+	         where b_id = #{b_id}
+
 	</select>
 
 	<!-- 댓글 작성 -->
 	<insert id="replyWrite" parameterType="com.edu.board.dto.ReplyDTO">
 		<![CDATA[
 			insert into reply(b_id, r_writer, content, writeDate)
-			values (#{board_id}, #{r_writer}, #{content}, sysdate)
+			values (#{b_id}, #{r_writer}, #{content}, sysdate)
 		]]>
 	</insert>
 	
@@ -39,14 +38,14 @@
 		SET		r_writer = #{r_writer},
 				content = #{content}
 		WHERE 	reply_num = #{replyNum}
-		AND 	b_id = ${board_id}		
+		AND 	b_id = ${b_id}		
 	</update>
 	
 	<!-- 댓글 삭제 -->
 	<delete id="replyDelete" parameterType="com.edu.board.dto.ReplyDTO">
 		delete from tbl_reply
 		where reply_num = #{replyNum}
-			and b_id = ${board_id}	
+			and b_id = ${b_id}	
 	</delete>
 
 	
