@@ -137,7 +137,7 @@ display: inline-block;
 					<td style="width:75%;">${reply.content}</td>
 					<c:if test="${reply.r_writer == member.m_nickname}">
 						<td style="width:10%;">
-						<a href="#" onclick="rDelete('<c:out value="${reply.replyNum}"/>')">삭제</a>
+						<%-- <a href="#" onclick="rDelete('<c:out value="${reply.replyNum}"/>')">삭제</a>--%>
 						</td>
 					</c:if>
 				</tr>
@@ -163,13 +163,14 @@ display: inline-block;
 		</form>
 	</c:if>
 	
-	<form method = "POST" id = "form1">
+	<%--<form method = "POST" id = "form1">
 		<input type = "hidden" id = "replyNum"  name = "replyNum"  	value = "${reply.replyNum}">
 		<input type = "hidden" id = "b_id" 		name = "b_id" 		value = "${reply.b_id}">
 		<input type = "hidden" id = "content" 	name = "content" 	value = "${reply.content}">
 		<input type = "hidden" id = "writeDate" name = "writeDate" 	value = "${reply.writeDate}">
 		<input type = "hidden" id = "nickname" 	name = "nickname" 	value = "${reply.nickname}">
 	</form>
+	 --%>
 	</div>
 </div>
 <br/>
@@ -258,7 +259,7 @@ function fn_remove(url, board_id){
 }
 
 
-function fn_rDelete(replyNum){
+/*function fn_rDelete(replyNum){
 	
  	if(confirm("삭제 하시겠습니까?")){
 	        
@@ -277,7 +278,7 @@ function fn_rDelete(replyNum){
             alert("댓글이 삭제되었습니다.")
             
     }
-    
+*/    
 }
 
 </script>
