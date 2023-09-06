@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.SoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
+import com.edu.sole.dto.recipe.JjimDTO;
+import com.edu.sole.dto.recipe.JjimSelectDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
 import com.edu.sole.dto.recipe.RecipeReviewDTO;
 import com.edu.sole.dto.recipe.ReviewCriteria;
@@ -94,5 +96,36 @@ public class SoleDAOImpl implements SoleDAO {
 		
 		return sqlSession.selectOne(namespace + ".reviewcount", reviewcri);
 	}
-
+	
+	// 찜 인설트
+	@Override
+	public void jjimInsert(JjimDTO jjimInsert) throws Exception {
+		
+		String liked_id = selectLikedId();
+		jjimInsert.setLiked_id(liked_id);
+		
+		sqlSession.insert(namespace + ".jjimInsert", jjimInsert);
+		
+	}
+	
+	// liked_id 정하는 메소드
+	private String selectLikedId() throws Exception {
+		String liked_id = sqlSession.selectOne(namespace + ".selectLikedId");
+		
+		return liked_id;
+	}
+	
+	// 찜 셀렉하는
+	@Override
+	public JjimDTO jjimSelect(JjimSelectDTO Wla) throws Exception {
+		
+		return sqlSession.selectOne(namespace + ".jjimSelect", Wla);
+	}
+	
+	// 찜 딜리트
+	@Override
+	public void jjimDelete(JjimDTO jjimDelete) throws Exception {
+		
+		sqlSession.delete(namespace + ".jjimDelte", jjimDelete);
+	}
 } // end class

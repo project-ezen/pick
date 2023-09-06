@@ -8,12 +8,15 @@ import java.util.Iterator;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -27,16 +30,20 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.member.controller.MemberController;
+import com.edu.member.dto.MemberDTO;
 import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.SolePageMaker;
 import com.edu.sole.dto.SoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
+import com.edu.sole.dto.recipe.JjimDTO;
+import com.edu.sole.dto.recipe.JjimSelectDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
 import com.edu.sole.service.SoleService;
 import com.edu.sole.dto.recipe.RecipeReviewDTO;
 import com.edu.sole.dto.recipe.ReviewCriteria;
 import com.edu.sole.dto.recipe.ReviewPageMaker;
 import com.edu.sole.dto.recipe.RecipeDTO;
+import org.apache.commons.lang3.ObjectUtils;
 
 @Controller
 @RequestMapping("/sole")
@@ -116,14 +123,37 @@ public class SoleController {
 		rpgm.setTotalCount(soleservice.reviewcount(reviewcri));
 		
 		List<RecipeReviewDTO> selectReview = soleservice.selectReview(reviewcri);
-		logger.info("TOSTRING : " + selectReview.toString());
 		
-		logger.info("dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd : " + rpgm);
 		
-		mav.addObject("rpgm", rpgm);
-		mav.addObject("selectReview", selectReview);
-		mav.addObject("recipeDetail", recipeDetailDTO);
-		mav.addObject("recipe", recipeDTO);
+		////////////////////////// 세션
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		if(member != null) {    // 로그인을 했을 때
+			String m_id = member.getM_id();
+			JjimSelectDTO Wla = new JjimSelectDTO();
+			Wla.setM_id(m_id);
+			Wla.setRecipe_code(recipe_code);
+			JjimDTO jjimselect = soleservice.jjimSelect(Wla);
+			
+			if(Objects.isNull(jjimselect)) { // 로그인을 하고 찜을 안했을 때
+				mav.addObject("rpgm", rpgm);
+				mav.addObject("selectReview", selectReview);
+				mav.addObject("recipeDetail", recipeDetailDTO);
+				mav.addObject("recipe", recipeDTO);
+			}else if((jjimselect.getLiked_id() != null) && (!jjimselect.getLiked_id().isEmpty())) {  // 로그인을 하고 찜을 했을때
+				mav.addObject("jjimselect", jjimselect);
+				mav.addObject("rpgm", rpgm);
+				mav.addObject("selectReview", selectReview);
+				mav.addObject("recipeDetail", recipeDetailDTO);
+				mav.addObject("recipe", recipeDTO);
+			}
+			
+		} else if(member == null) { // 로그인을 안했을 때
+			mav.addObject("rpgm", rpgm);
+			mav.addObject("selectReview", selectReview);
+			mav.addObject("recipeDetail", recipeDetailDTO);
+			mav.addObject("recipe", recipeDTO);
+		} // end if
 		
 		return mav;
 		
@@ -237,5 +267,30 @@ public class SoleController {
 		return ajaxMap;
 	}
 	
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// jjimInsert ajax
+	@RequestMapping(value="/jjimInsert", method=RequestMethod.GET)
+	@ResponseBody
+	public void jjimInsert(@RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
+		
+		logger.info("code : " + recipe_code);
+		logger.info("id : " + m_id);
+		
+		JjimDTO jjimInsert = new JjimDTO();
+		jjimInsert.setM_id(m_id);
+		jjimInsert.setRecipe_code(recipe_code);
+		
+		soleservice.jjimInsert(jjimInsert);
+	}
+	//jjimDelete ajax
+	@ResponseBody
+	@RequestMapping(value="/jjimDelete", method=RequestMethod.GET)
+	public void jjimDelete(@RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
+		JjimDTO jjimDelete = new JjimDTO();
+		jjimDelete.setM_id(m_id);
+		jjimDelete.setRecipe_code(recipe_code);
+		
+		soleservice.jjimDelete(jjimDelete);
+	}
 } // end class
 

@@ -242,11 +242,14 @@ public class MemberController {
 	
 	//로그아웃
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception {
-		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
-		session.invalidate();
-
-		return "redirect:/";
+	public String logout(HttpSession session, RedirectAttributes redirectAttributes) throws Exception {
+	    // 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
+	    session.invalidate();
+	    
+	    // 리다이렉트 속성에 메시지 추가
+	    redirectAttributes.addFlashAttribute("logout", "true");
+	    
+	    return "redirect:/";
 	}	
 	
 	

@@ -100,6 +100,10 @@ display: inline-block;
                     <th scope="row" style="text-align: center;">내용</th>
                     <td colspan="3"><textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea></td>
                 </tr>
+                <tr>
+                    <th scope="row" style="text-align: center;">이미지 첨부</th>
+                    <td colspan="3"><input type="file" name="image" id="image" disabled /></td>
+                </tr>
 				<tr>
 					<td colspan="2">
 						<input type="button" class="btn1" value="목록으로 돌아가기" onClick="location.href='${path}/board/articleList'"/>
@@ -175,19 +179,22 @@ function fn_enable(obj){
 	document.getElementById("title").disabled		= false;
 	document.getElementById("content").disabled		= false;
 	document.getElementById("thumbnail").disabled	= false;
+	document.getElementById("image").disabled	= false;
 }
 
 function backToForm(obj){
 	document.getElementById("title").disabled = true;
 	document.getElementById("content").disabled = true;
 	document.getElementById("thumbnail").disabled	= true;
+	document.getElementById("image").disabled	= true;
 }
 
 
 
 
 $(document).ready(function(){
-	var contentval = $("#content").val();
+var contentval = $("#content").val();
+	
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef: oEditors,
