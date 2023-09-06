@@ -43,9 +43,8 @@
 	
 	<!-- 댓글 삭제 -->
 	<delete id="replyDelete" parameterType="com.edu.board.dto.ReplyDTO">
-		delete from tbl_reply
-		where reply_num = #{replyNum}
-			and b_id = ${b_id}	
+		delete from reply
+		where b_id = ${b_id}
 	</delete>
 
 	
