@@ -54,7 +54,7 @@ public class BoardControllerImpl implements BoardController {
 	
 
 
-	private static final String ARTICLE_IMAGE_REPO = "C:\\project\\gitspace\\thum";
+	private static final String ARTICLE_IMAGE_REPO = "${path}/resources/images/thumb";
 
 	//댓글
 	@Inject
@@ -158,8 +158,8 @@ public class BoardControllerImpl implements BoardController {
 		try {
 			int board_id = boardService.create(articleMap);
 			if(fileRealName != null && fileRealName.length() != 0) {
-				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" + "t_" + fileRealName);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + board_id);
+				File srcDir = new File(ARTICLE_IMAGE_REPO + "/" + "t_" + fileRealName);
+				File destDir = new File(ARTICLE_IMAGE_REPO + "/" + board_id);
 			}
 			message	 = "<script>";
 			message	+= "alert('새로운 글을 추가하였습니다.');";
@@ -194,11 +194,11 @@ public class BoardControllerImpl implements BoardController {
 			System.out.println("fileName ==> " + fileName);
 			System.out.println("imageFileName ==> " + fileRealName);
 			
-			File file = new File(ARTICLE_IMAGE_REPO + "\\" + "t_" + fileRealName);
+			File file = new File(ARTICLE_IMAGE_REPO + "/" + "t_" + fileRealName);
 			if(mFile.getSize() != 0) {
 				if(!file.exists()) {	// 파일을 올릴 경로에 파일이 존재하지 않으면
 					file.getParentFile().mkdirs();	// 경로에 해당하는 디렉토리 생성
-					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "t_" + fileRealName)); // 파일 변환
+					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "/" + "t_" + fileRealName)); // 파일 변환
 				}
 			}
 		}
@@ -253,7 +253,7 @@ public class BoardControllerImpl implements BoardController {
 				//디렉토리 설정 및 업로드	
 				
 				//파일경로
-				String filePath = "C:\\project\\gitspace\\contentImage\\";
+				String filePath = "${path}/resources/images/contentImage/";
 				File file = new File(filePath);
 				
 				if(!file.exists()) {
@@ -285,7 +285,7 @@ public class BoardControllerImpl implements BoardController {
 				sFileInfo += "&bNewLine=true";
 				// img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 				sFileInfo += "&sFileName="+ sFilename;
-				sFileInfo += "&sFileURL="+"C:\\project\\gitspace\\contentImage\\"+sRealFileNm;
+				sFileInfo += "&sFileURL="+"${path}/resources/images/contentImage/"+sRealFileNm;
 				PrintWriter printWriter = response.getWriter();
 				printWriter.print(sFileInfo);
 				printWriter.flush();

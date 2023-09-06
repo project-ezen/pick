@@ -169,14 +169,14 @@ function fn_enable(obj){
 function backToForm(obj){
 	document.getElementById("title").disabled = true;
 	document.getElementById("content").disabled = true;
-	document.getElementById("thumbnail").disabled	= false;
+	document.getElementById("thumbnail").disabled	= true;
 }
 
 
 
 
 $(document).ready(function(){
-	
+	var contentval = $("#content").val();
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
 		oAppRef: oEditors,
@@ -187,6 +187,13 @@ $(document).ready(function(){
 			bUseModeChanger: false
 		}
 	});
+	
+	contentval = $("#content").val().replace(/<p><br><\/p>/gi, "<br>"); // <p><br></p> => <br>로 변환
+	
+	contentval = contentval.replace(/<\/p><p>/gi, "<br>"); // </p><p> => <br>로 변환
+	contentval = contentval.replace(/(<\/p><br>|<p><br>)/gi, "<br><br>");
+	contentval = contentval.replace(/(<p>|<\/p>)/gi, ""); // <p> 또는 </p>모두 제거
+	$("#content").val(contentval);
 
 	$("#updatewrite").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -235,6 +242,7 @@ function fn_remove(url, board_id){
 	
 
 </script>
+
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <%@ include file="../include/footer.jsp" %>
