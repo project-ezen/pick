@@ -154,10 +154,27 @@
               </tbody>
             </table>
             <!-- 즐겨찾기 부분 -->
-			<div align="right">
-				<span><img src="/resources/images/yellowStar.png" id="star"/></span>
-			</div>
+			<c:choose>
+			    <c:when test="${empty member.m_id || member.m_id eq ''}">
+			        <div align="right">
+			            <span class="nojjim" id="mark">★</span>
+			        </div>
+			    </c:when>
+			    
+			    <c:when test="${not empty jjimselect.liked_id}">
+			        <div align="right">
+			            <span class="jjim" id="mark">★</span>
+			        </div>
+			    </c:when>
+			    
+			    <c:otherwise>
+			    	<div align="right">
+			            <span class="nojjim" id="mark">★</span>
+			        </div>
+			    </c:otherwise>
+			</c:choose>
           </div>
+          
         </div>
 
         <!---------------------------------------------여백------------------------------------------------------------------------>
@@ -230,7 +247,7 @@
        </div>
     </div>
   
-    
+    <br/><br/>
    <%@ include file="../include/footer.jsp" %>
    
     <script>
@@ -238,9 +255,17 @@
 			var reviewForm = $("#reviewForm");
 			
 			$("#reviewBtn").click(function() {
-				reviewForm.find("[name='recipe_code']").val("${recipe.recipe_code}");
-				reviewForm.find("[name='m_id']").val();
-				reviewForm.submit();
+							
+				if("${member.m_id}" != null) {
+					reviewForm.find("[name='recipe_code']").val("${recipe.recipe_code}");
+					reviewForm.find("[name='m_id']").val("${member.m_id}");
+					reviewForm.submit();
+				}
+				
+				if("${member.m_id}" == null || "${member.m_id}" == '') {
+					alert("로그인하셔야 작성할 수 있습니다.");
+					location.href="/member/login";
+				}
 			});	
 			
 			function loadReviews(pageNum) {
@@ -301,14 +326,54 @@
 		        loadReviews(pageNum);
 		    });
 		 
-		    // 찜 하는 부분			
+//////////////////////////////////////////////////////////////////////////// 찜 하는 부분			
 		    $(document).on("click", ".nojjim", function() {
-		        $(this).removeClass("nojjim").addClass("jjim");
+		    	if("${member.m_id}" == null || "${member.m_id}" == '') {
+		    		alert("로그인 하셔야 찜 할 수 있습니다.");
+		    	}else {
+		        	jjimInsert($(this));
+		    	}
 		    });
 
 		    $(document).on("click", ".jjim", function() {
-		        $(this).removeClass("jjim").addClass("nojjim");
+		        jjimDelete($(this));
 		    });
+		    
+		    
+		    function jjimInsert() {
+		    	$.ajax({
+		    		url: "/sole/jjimInsert",
+		    		type: "GET",
+		    		dataType: "text",
+		    		data: {"recipe_code": "${recipe.recipe_code}", "m_id": "${member.m_id}"},
+		    		success: function() {
+		    			alert("성공");
+		    			$("#mark").removeClass("nojjim").addClass("jjim");
+		    		},
+		    		error: function(error) {
+		    			console.error("error : " + error);
+		    			alert("실패");
+		    		}
+		    	});
+		    } ///////////// end jjimInsert
+		    
+		    function jjimDelete() {
+		    	$.ajax({
+		    		url: "/sole/jjimDelete",
+		    		type: "GET",
+		    		dataType: "text",
+		    		data: {"recipe_code": "${recipe.recipe_code}", "m_id": "${member.m_id}"},
+		    		success: function() {
+		    			alert("성공");
+		    			$("#mark").removeClass("jjim").addClass("nojjim");
+		    		},
+		    		error: function(error) {
+		    			console.error("error : " + error);
+		    			alert("실패");
+		    		}
+		    	});
+		    } ///////////// end jjimDelete
+		    
 			
 		});   /// end $
     </script>
