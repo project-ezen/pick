@@ -40,14 +40,6 @@ public class ReplyDAOImpl implements ReplyDAO {
 	}
 
 	
-	//댓글 수정
-	@Override
-	public void update(ReplyDTO replyDTO) throws Exception {
-		logger.info("수정");
-		sqlSession.update(namespace + ".replyUpdate", replyDTO);
-		
-	}
-	
 	//댓글 삭제
 	@Override
 	public void delete(ReplyDTO replyDTO) throws Exception {

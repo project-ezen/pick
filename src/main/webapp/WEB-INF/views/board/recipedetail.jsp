@@ -132,14 +132,16 @@ display: inline-block;
 					<th style="text-align: center; width:15%;">${reply.nickname}(<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd"/>)</th>
 					<td style="width:75%;">${reply.content}</td>
 					<c:if test="${reply.r_writer == member.m_nickname}">
-						<td style="width:10%;"><a href="#" class="btn_3" type="button" onclick="fn_rupdate()">수정</a>/<a href="#" class="btn_3" type="button" onclick="fn_rdelete()">삭제</a></td>
+						<td style="width:10%;">
+						<a href="#" onclick="rDelete('<c:out value="${reply.replyNum}"/>')">삭제</a>
+						</td>
 					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
 	<%-- 댓글 작성하는 부분 --%>
 	<c:if test="${ isLogOn == true }">
-		<form method="post" action="/reply/rwrite">
+		<form method="post" action="/reply/rwrite" name= "form1">
 			<table style="margin-bottom: 20px;">
 					<tr>
 						<th style="text-align: center; width:15%;">닉네임</th>
@@ -156,6 +158,14 @@ display: inline-block;
 			</table>
 		</form>
 	</c:if>
+	
+	<form method = "POST" id = "form1">
+		<input type = "hidden" id = "replyNum"  name = "replyNum"  	value = "${reply.replyNum}">
+		<input type = "hidden" id = "b_id" 		name = "b_id" 		value = "${reply.b_id}">
+		<input type = "hidden" id = "content" 	name = "content" 	value = "${reply.content}">
+		<input type = "hidden" id = "writeDate" name = "writeDate" 	value = "${reply.writeDate}">
+		<input type = "hidden" id = "nickname" 	name = "nickname" 	value = "${reply.nickname}">
+	</form>
 	</div>
 </div>
 <br/>
@@ -239,29 +249,34 @@ function fn_remove(url, board_id){
 	form.submit();
 	
 }
-/*댓글 삭제 버튼 
-function fn_rdelete(e) {
-	e.preventDefault();
-	let replyId = $(this).attr("href");	
+
+
+function fn_rDelete(replyNum){
 	
-	$.ajax({
-		data : {
-			reply_num : replyNum,
-			b_id : '${article.board_id}'
-		},
-		url : '/reply/rdelete',
-		type : 'POST',
-		success : function(result){
-			replyListInit();
-			alert('삭제가 완료되엇습니다.');
-		}
-	});		
-		
-});*/
-	
-	
+ 	if(confirm("삭제 하시겠습니까?")){
+	        
+        //댓글 삭제를 하기위해 댓글 번호, 글 번호, 댓글 내용, 그리고 게시글 세부 페이지로 포워딩 하기 위해 페이지 관련 값들을 변수에 저장한다.
+            var replyNum 	= $("#replyNum").val();
+            var b_id 		= $("#b_id").val();
+            var content 	= $("textarea#content").text();
+            var writeDate 	= $("#writeDate").text();
+            var nickname 	= $("#nickname").text();
+            
+            //url로 삭제에 필요한 변수들을 보낸다.
+            document.form1.action="reply/rdelete?board_id="+b_id+"&replyNum="+replyNum;
+            
+            document.form1.submit();
+            
+            alert("댓글이 삭제되었습니다.")
+            
+    }
+    
+}
 
 </script>
+
+
+
 
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
