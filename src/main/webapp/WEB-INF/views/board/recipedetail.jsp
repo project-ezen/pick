@@ -132,7 +132,7 @@ display: inline-block;
 					<th style="text-align: center; width:15%;">${reply.nickname}(<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd"/>)</th>
 					<td style="width:75%;">${reply.content}</td>
 					<c:if test="${reply.r_writer == member.m_nickname}">
-						<td style="width:10%;"><a href="#" class="btn_3" type="button" onclick="Rupdate()">수정</a>/<a href="#" class="btn_3" type="button" onclick="fn_rdelete()">삭제</a></td>
+						<td style="width:10%;"><a href="#" class="btn_3" type="button" onclick="fn_rupdate()">수정</a>/<a href="#" class="btn_3" type="button" onclick="fn_rdelete()">삭제</a></td>
 					</c:if>
 				</tr>
 			</c:forEach>
