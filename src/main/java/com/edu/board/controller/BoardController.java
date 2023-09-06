@@ -43,8 +43,6 @@ public interface BoardController {
 		// 게시글 수정
 		
 		
-		// 멀티이미지 업로드
-		public void multiImageUploader(HttpServletRequest request, HttpServletResponse response) throws Exception;
-		
+
 }
 

@@ -82,6 +82,10 @@ color: #fff;
 				<textarea id="content" name="content" rows="20"></textarea>
 			</div>
 		</div>
+		<div class="form-group">
+			<label class="control-label col-sm-3">이미지 첨부</label>
+			<div class="col-sm-7"><input type="file"></input></div>
+		</div>
 		<hr/>
 		<div class="form-group">
 			<div class="col-sm-6"></div>
@@ -122,7 +126,7 @@ $(document).ready(function(){
 	contentval = contentval.replace(/<\/p><p>/gi, "<br>"); // </p><p> => <br>로 변환
 	contentval = contentval.replace(/(<\/p><br>|<p><br>)/gi, "<br><br>");
 	contentval = contentval.replace(/(<p>|<\/p>)/gi, ""); // <p> 또는 </p>모두 제거
-	$("#content").val(content);
+	$("#content").val(contentval);
 	
 	$("#wsubmit").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
