@@ -66,7 +66,7 @@
                 	<input type="hidden" name="alcohole_category"/>
                 </form>
                 <div id="listid">          
-                    <li class="item" style="margin-top: 50px;"><!-- 잠시 -->
+                    <li class="item" style="margin-top: 50px;">
 	                   Alcohol
 	                   <ul>
 	                       <li id="lilist"><a href="#">진</a></li>

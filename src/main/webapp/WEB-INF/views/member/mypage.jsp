@@ -134,7 +134,7 @@
 		</div>
 		<hr/>
 		<div class="set2">
-			<div class="box_1"><a class="AA" href="${path}/shopping/myorderList.jsp">주문 조회</a></div>
+			<div class="box_1"><a class="AA" href="${path}/shopping//myOrderList">주문 조회</a></div>
 			<div class="box_2"><a class="AA" href="${path}/board/recipejjim.jsp">찜한 레시피</a></div>
 			<div class="box_3"><a class="AA" href="${path}/member/myboard">내가 쓴 게시물</a></div>
 			<div class="box_4"><a class="AA" href="javascript:void(0);" onclick="openModal()">회원 정보 수정</a></div>

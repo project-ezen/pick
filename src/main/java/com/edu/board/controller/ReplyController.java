@@ -1,16 +1,20 @@
 package com.edu.board.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.edu.board.dao.ReplyDAOImpl;
 import com.edu.board.dto.ReplyDTO;
 import com.edu.board.service.ReplyService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping("/reply")
@@ -45,24 +49,28 @@ public class ReplyController {
 	    return "redirect:/board/recipedetail?board_id="+replyDTO.getB_id();
 	    
 	}
-	
-	//댓글 수정
-	@RequestMapping(value="/rupdate",method=RequestMethod.POST)
-	public String replyUpdate(ReplyDTO replyDTO) throws Exception {
 		
-		replyService.update(replyDTO);
+	//댓글 삭제
+	@RequestMapping(value="/rdelete",method= {RequestMethod.GET,RequestMethod.POST})
+	public String replyDeletePOST(@RequestParam("board_id") int board_id,ReplyDTO replyDTO) throws Exception {
+		
+		
+		replyService.delete(replyDTO);
 		
 		return "redirect:/board/recipedetail?board_id="+replyDTO.getB_id();
 	}
 	
 	
 	
-	//댓글 삭제
-	@RequestMapping(value="/rdelete",method=RequestMethod.POST)
-	public void replyDeletePOST(ReplyDTO replyDTO) throws Exception {
-		replyService.delete(replyDTO);
+	/*
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public String getDelete(@RequestParam("bno") int bno) throws Exception {
+	  
+	 service.delete(bno);  
+
+	 return "redirect:/board/list";
 	}
-	
+	*/
 	
 	
 }
