@@ -10,21 +10,9 @@
 	<%@ include file="../include/header.jsp" %>
     <style>
       /*상품 관련 이미지, 위치*/
-	  .bg {
-		 background-image: url("/resources/images/background2.jpg");
-
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	  }
       .product-img {
         /*width: 400px;
         height: 400px;
-        
         margin-top: 100px;*/
         max-width: 100%;
 		width: auto;
@@ -119,13 +107,11 @@
     </style>
   </head>
   <%@ include file="../include/topMenu.jsp" %>
-  <body class="bg">
-    <br />
-    <br />
-    <br />
-    
-   
-    <div>
+  <body>
+    <br/>
+    <br/>
+    <br/>
+    <div class="foot">
       <div class="container" style="background-color:white">
         
         <div class="row" >
@@ -141,11 +127,11 @@
               <tbody>
                 <tr>
                   <th>설명</th>
-                  <td>${recipe.content }</td>
+                  <td>${recipe.content}</td>
                 </tr>
                 <tr>
                   <th>도수</th>
-                  <td>${recipe.alcohole_dosu }도</td>
+                  <td>${recipe.alcohole_dosu}도</td>
                 </tr>
                 <tr>
                   <th>맛</th>
@@ -182,7 +168,7 @@
         <br />
         <br />
         <br />
-        <div class="container">
+        <div class="container1">
           <!--상세설명&리뷰-->
           <ul class="nav nav-tabs infoAndReview">
             <li class="active">

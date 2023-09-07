@@ -11,41 +11,31 @@
 
     <style>
     
-    .bg {
-		 background-image: url("/resources/images/background2.jpg");
-
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	}
+    .foot { width: 1700px; min-height: 600px; border-radius: 10px; margin:auto;  background-color: rgba( 255, 255, 255, 0.8 ); }
     
     .container-fluid{
     margin-left: 80px;
     margin-right: auto;
     }
-      .carousel-inner img {
+    .carousel-inner img {
         width: 100%;
         margin: auto;
         height: 300px !important;
-      }
-      /* 글리피콘 세모*/
-      #btnDown {
+    }
+    /* 글리피콘 세모*/
+    #btnDown {
         color: #05224e;
         margin-top: 75px;
         display: none;
         font-size: 50px;
-      }
-      /* 글리피콘 세모*/
+    }
+    /* 글리피콘 세모*/
 
-      /* 버튼 통합*/
-      #alcSearchBtn,
-      #doguSearchBtn,
-      #furSearchBtn,
-      #jucSearchBtn {
+    /* 버튼 통합*/
+    #alcSearchBtn,
+    #doguSearchBtn,
+    #furSearchBtn,
+    #jucSearchBtn {
         margin: 0;
         background-color: rgb(115, 115, 189);
         color: #f8f8f2;
@@ -55,12 +45,12 @@
         white-space: -pre-wrap; /* Opera 4-6 */
         white-space: -o-pre-wrap; /* Opera 7 */
         word-wrap: break-word; /* Internet Explorer 5.5+ */
-      }
+     }
 
-      #alcSearchBtn,
-      #doguSearchBtn,
-      #furSearchBtn,
-      #jucSearchBtn {
+    #alcSearchBtn,
+    #doguSearchBtn,
+    #furSearchBtn,
+    #jucSearchBtn {
         margin-left: 30px;
         width: 200px;
         height: 60px;
@@ -69,15 +59,15 @@
         text-transform: uppercase;
         overflow: hidden;
         position: relative;
-      }
-      /*버튼 통합*/
+    }
+    /*버튼 통합*/
 
-      /*술 버튼*/
-      #alcSearchBtn span {
+    /*술 버튼*/
+    #alcSearchBtn span {
         position: relative;
         z-index: 1;
-      }
-      #alcSearchBtn:after {
+    }
+    #alcSearchBtn:after {
         content: "";
         position: absolute;
         left: 0;
@@ -87,20 +77,20 @@
         background-image: url("/resources/images/button.PNG");
         transition: all 0.5s ease-in-out;
         transform: translateX(-120%) translateY(-25%) rotate(45deg);
-      }
+    }
 
-      #alcSearchBtn:hover:after {
+    #alcSearchBtn:hover:after {
         -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
         transform: translateX(-9%) translateY(-25%) rotate(45deg);
-      }
-      /*술 버튼*/
+    }
+    /*술 버튼*/
 
-      /*도구 버튼*/
-      #doguSearchBtn span {
+    /*도구 버튼*/
+    #doguSearchBtn span {
         position: relative;
         z-index: 1;
-      }
-      #doguSearchBtn:after {
+   	}
+    #doguSearchBtn:after {
         content: "";
         position: absolute;
         left: 0;
@@ -110,20 +100,43 @@
         background-image: url("/resources/images/button.PNG");
         transition: all 0.5s ease-in-out;
         transform: translateX(-120%) translateY(-25%) rotate(45deg);
-      }
+    }
 
-      #doguSearchBtn:hover:after {
+    #doguSearchBtn:hover:after {
         -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
         transform: translateX(-9%) translateY(-25%) rotate(45deg);
-      }
-      /*도구 버튼*/
+    }
+    /*도구 버튼*/
 
-      /*과일 버튼*/
-      #furSearchBtn span {
-        position: relative;
+    /*과일 버튼*/
+    #furSearchBtn span {
+       	position: relative;
+      	z-index: 1;
+    }
+    #furSearchBtn:after {
+       	content: "";
+       	position: absolute;
+       	left: 0;
+       	top: 0;
+       	height: 700%;
+       	width: 300%;
+       	background-image: url("/resources/images/button.PNG");
+       	transition: all 0.5s ease-in-out;
+       	transform: translateX(-120%) translateY(-25%) rotate(45deg);
+    }
+
+    #furSearchBtn:hover:after {
+      	-webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+        transform: translateX(-9%) translateY(-25%) rotate(45deg);
+    }
+    /*과일 버튼*/
+
+    /*음료 버튼*/
+    #jucSearchBtn span {
+       	position: relative;
         z-index: 1;
-      }
-      #furSearchBtn:after {
+    }
+    #jucSearchBtn:after {
         content: "";
         position: absolute;
         left: 0;
@@ -133,43 +146,20 @@
         background-image: url("/resources/images/button.PNG");
         transition: all 0.5s ease-in-out;
         transform: translateX(-120%) translateY(-25%) rotate(45deg);
-      }
+    }
 
-      #furSearchBtn:hover:after {
+    #jucSearchBtn:hover:after {
         -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
         transform: translateX(-9%) translateY(-25%) rotate(45deg);
-      }
-      /*과일 버튼*/
+    }
+   	/*음료 버튼*/
 
-      /*음료 버튼*/
-      #jucSearchBtn span {
-        position: relative;
-        z-index: 1;
-      }
-      #jucSearchBtn:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 700%;
-        width: 300%;
-        background-image: url("/resources/images/button.PNG");
-        transition: all 0.5s ease-in-out;
-        transform: translateX(-120%) translateY(-25%) rotate(45deg);
-      }
-
-      #jucSearchBtn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
-      }
-      /*음료 버튼*/
-
-      /*상품 정보*/
-      #productInfo {
+    /*상품 정보*/
+   	#productInfo {
         padding-top: 60px;
-      }
+    }
 
-      .productInfo_in {
+    .productInfo_in {
         border-radius: 5px;
         background-color: rgba(0, 0, 0, 0);
         color: #fff;
@@ -177,80 +167,78 @@
         height: 300px !important;
         width: 330px;
         text-align: center;
-      }
-      .productInfo_in img {
+    }
+    .productInfo_in img {
         border-radius: 13%;
         height: 200px;
         width: 200px;
         margin: 10px;
         margin-top: 20px;
-      }
-      .productInfo_in:hover {
+    }
+    .productInfo_in:hover {
         background-color: #576fa0;
         transition: 0.7s;
         border-radius: 30%;
-      }
+    }
       /*상품 정보*/
 
       /*검색 버튼*/
-		      * {
-		    box-sizing: border-box;
-		  }
-		  #search_fromKeyword {
-		    width: fit-content;
-		    height: fit-content;
-		    position: absolute;
-		  	top:10px;
-		  	right:20px;
-		  }
-		  #searchKeyword {
-		    height: 50px;
-		    width: 50px;
-		    border-style: none;
-		    padding: 10px;
-		    font-size: 18px;
-		    letter-spacing: 2px;
-		    outline: none;
-		    border-radius: 25px;
-		    transition: all 0.5s ease-in-out;
-		    background-color: #22a6b3;
-		    padding-right: 40px;
-		    color: #fff;
-		  }
-		  #searchKeyword::placeholder {
-		    color: rgba(255, 255, 255, 0.5);
-		    font-size: 18px;
-		    letter-spacing: 2px;
-		    font-weight: 100;
-		  }
-		  .btn-search {
-		    width: 50px;
-		    height: 50px;
-		    border-style: none;
-		    font-size: 20px;
-		    font-weight: bold;
-		    outline: none;
-		    cursor: pointer;
-		    border-radius: 50%;
-		    position: absolute;
-		    right: 0px;
-		    color: #ffffff;
-		    background-color: transparent;
-		    pointer-events: painted;
-		  }
-		  	.btn-search:focus ~ #searchKeyword,
-			#searchKeyword:focus,
-			#searchButton:focus ~ #searchKeyword {
-			  width: 300px;
-			  border-radius: 0px;
-			  background-color: transparent;
-			  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-			  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
-			}
-      /*검색 버튼*/
+  	* 	{ box-sizing: border-box; }
+  	#search_fromKeyword {
+    	width: fit-content;
+    	height: fit-content;
+    	position: absolute;
+  		top:10px;
+  		right:20px;
+  	}
+  	#searchKeyword {
+    	height: 50px;
+    	width: 50px;
+    	border-style: none;
+    	padding: 10px;
+    	font-size: 18px;
+    	letter-spacing: 2px;
+    	outline: none;
+    	border-radius: 25px;
+    	transition: all 0.5s ease-in-out;
+    	background-color: #22a6b3;
+    	padding-right: 40px;
+    	color: #fff;
+  	}
+	#searchKeyword::placeholder {
+	   color: rgba(255, 255, 255, 0.5);
+	   font-size: 18px;
+	   letter-spacing: 2px;
+	   font-weight: 100;
+	}
+	.btn-search {
+	    width: 50px;
+	    height: 50px;
+	    border-style: none;
+	    font-size: 20px;
+	    font-weight: bold;
+	    outline: none;
+	    cursor: pointer;
+	    border-radius: 50%;
+	    position: absolute;
+	    right: 0px;
+	    color: #ffffff;
+	    background-color: transparent;
+	    pointer-events: painted;
+  	}
+  	.btn-search:focus ~ #searchKeyword,
+	#searchKeyword:focus,
+	#searchButton:focus ~ #searchKeyword {
+	  width: 300px;
+	  border-radius: 0px;
+	  background-color: transparent;
+	  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+	  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+	}
+    /*검색 버튼*/
 	  
-	  /*select css*/
-	  .selectSearch{
+	/*select css*/
+	.selectSearch{
 	    position:absolute;
 	    top: 80px;
 	    right: 30px;
@@ -258,25 +246,23 @@
 	    background-color: rgba(0, 0, 0, 0);
 	    color:	#FFF;
 	    width: 150px;
-	    font-size: 17px;
-
-	   
-	  }     
-	  .selectSearch:focus{
+	    font-size: 17px; 
+	}     
+	.selectSearch:focus{
 	  	border-style: none;
 	  	outline: none;
-	  }
-      /*select css*/
+	}
+    /*select css*/
      
-	  option {
+	option {
 	   color: rgba(0,0,0,1);
 	   background-color: rgba(0,0,0,0);
-	  }
+	}
 	  
 	  
     </style>
   </head>
-  <body class="bg">
+  <body>
     <!-- Top Menu -->
      <%@ include file="../include/topMenu.jsp" %>
     
@@ -284,127 +270,130 @@
     <!-- 광고 배너 -->
     <br />
     <br />
-   <div class="row">
-    <div id="Advertising" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#Advertising" data-slide-to="0" class="active"></li>
-        <li data-target="#Advertising" data-slide-to="1"></li>
-        <li data-target="#Advertising" data-slide-to="2"></li>
-      </ol>
+    <div class="row">
+	    <div id="Advertising" class="carousel slide" data-ride="carousel">
+	      	<ol class="carousel-indicators">
+	        	<li data-target="#Advertising" data-slide-to="0" class="active"></li>
+	        	<li data-target="#Advertising" data-slide-to="1"></li>
+	        	<li data-target="#Advertising" data-slide-to="2"></li>
+	      	</ol>
 
-      <!-- 광고 내용 또는 이미지 -->
-      <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img src="/resources/images/gango.jpg" />
-        </div>
-        <div class="item">
-          <img src="/resources/images/gango.jpg" />
-        </div>
-        <div class="item">
-          <img src="/resources/images/gango.jpg" />
-        </div>
-      </div>
+	      <!-- 광고 내용 또는 이미지 -->
+		    <div class="carousel-inner" role="listbox">
+		       	<div class="item active">
+		         	<img src="/resources/images/gango.jpg" />
+		       	</div>
+		       	<div class="item">
+		         	<img src="/resources/images/gango.jpg" />
+		       	</div>
+		       	<div class="item">
+		         	<img src="/resources/images/gango.jpg" />
+		       	</div>
+		    </div>
 
-      <!-- 광고 옆으로 넘기기 -->
-      <a
-        class="left carousel-control"
-        href="#Advertising"
-        role="button"
-        data-slide="prev"
-      >
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a
-        class="right carousel-control"
-        href="#Advertising"
-        role="button"
-        data-slide="next"
-      >
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
+      		<!-- 광고 옆으로 넘기기 -->
+	  	    <a
+	        class="left carousel-control"
+		        href="#Advertising"
+	        role="button"
+	        data-slide="prev"
+	      	>
+		        <span class="glyphicon glyphicon-chevron-left"></span>
+		        <span class="sr-only">Previous</span>
+		    </a>
+		    <a
+	        class="right carousel-control"
+	        href="#Advertising"
+	        role="button"
+	        data-slide="next"
+	      	>
+		      	<span class="glyphicon glyphicon-chevron-right"></span>
+		      	<span class="sr-only">Next</span>
+		    </a>
+		</div>
     <br/>
-
-<!-- 버튼 -->
-      <nav id="searchBtn" class="col-sm-12">
-        <button type="button" id="alcSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=술'">
-          <span>&nbsp;&nbsp;술&nbsp;&nbsp;</span>
-        </button>
-        <button type="button" id="jucSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=음료'">
-          <span>음료</span>
-        </button>
-        <button type="button" id="doguSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=도구'">
-          <span>도구</span>
-        </button>
-        <button type="button" id="furSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=과일'">
-          <span>과일</span>
-        </button>
+	<div class="foot">
+	<!-- 버튼 -->
+     	<nav id="searchBtn" class="col-sm-12">
+	        <button type="button" id="alcSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=술'">
+	          <span>&nbsp;&nbsp;술&nbsp;&nbsp;</span>
+	        </button>
+	        <button type="button" id="jucSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=음료'">
+	          <span>음료</span>
+	        </button>
+	        <button type="button" id="doguSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=도구'">
+	          <span>도구</span>
+	        </button>
+	        <button type="button" id="furSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=과일'">
+	          <span>과일</span>
+	        </button>
+        </nav>
         
-    <div>
-      <span
-        id="btnDown"
-        class="glyphicon glyphicon-triangle-bottom"
-      ></span>
-    </div>
-<!-- 검색 버튼 -->
-	<div id="search_fromKeyword">
-    <form action="/store/productInfo" method="GET" id="searchForm">
-        <input type="hidden" name="category" value="${param.category}" />
-        <button class="btn-search" type="button" onclick="handleButtonClick();"><i class="glyphicon glyphicon-search"></i></button>
-        <input type="text" id="searchKeyword" name="searchKeyword" value="${param.searchKeyword.trim()}" placeholder="찾으시는 술이 있나요?"/>    
-    </form>
-	</div>
-
-	<div>
-      <select class="selectSearch" name="select" onchange="selectSearch()" id="select">
-      	<option value="def" <c:if test="${param.select eq 'def'}">selected</c:if>>기본</option>
-      	<option value="lowPrice" <c:if test="${param.select eq 'lowPrice'}">selected</c:if>>낮은 가격순</option>
-      	<option value="highPrice" <c:if test="${param.select eq 'highPrice'}">selected</c:if>>높은 가격순</option>
-      </select>
-    </div>
-    <br />
-    <br />
+	    <div>
+	      <span
+	        id="btnDown"
+	        class="glyphicon glyphicon-triangle-bottom"
+	      ></span>
+	    </div>
     
-	<div class="container-fluid">
-	<div class="row text-center" id="productInfo">
-		<c:forEach var="product" items="${productList}">
-			<a href="/store/productInfos?product_display_id=${product.product_display_id}">
-				<div class="col-sm-3 productInfo_in">
-					<img src="${path}/download.do?imageFileName=${product.product_image}" align="center"/>
-					<p align="center">상품명 : ${product.product_name }</p>
-					<p align="center">가격 : <fmt:formatNumber value="${product.product_price }" pattern="#,###"/>원</p>
-				</div>
-			</a>
-		</c:forEach>
-	</div>
-  </div>
+		<!-- 검색 버튼 -->
+		<div id="search_fromKeyword">
+		    <form action="/store/productInfo" method="GET" id="searchForm">
+		        <input type="hidden" name="category" value="${param.category}" />
+		        <button class="btn-search" type="button" onclick="handleButtonClick();"><i class="glyphicon glyphicon-search"></i></button>
+		        <input type="text" id="searchKeyword" name="searchKeyword" value="${param.searchKeyword.trim()}" placeholder="찾으시는 술이 있나요?"/>    
+		    </form>
+		</div>
+
+		<div>
+	      <select class="selectSearch" name="select" onchange="selectSearch()" id="select">
+	      	<option value="def" <c:if test="${param.select eq 'def'}">selected</c:if>>기본</option>
+	      	<option value="lowPrice" <c:if test="${param.select eq 'lowPrice'}">selected</c:if>>낮은 가격순</option>
+	      	<option value="highPrice" <c:if test="${param.select eq 'highPrice'}">selected</c:if>>높은 가격순</option>
+	      </select>
+	    </div>
+    
+    <br/> <br/>
+    
+		<div class="container-fluid">
+			<div class="row text-center" id="productInfo">
+				<c:forEach var="product" items="${productList}">
+					<a href="/store/productInfos?product_display_id=${product.product_display_id}">
+						<div class="col-sm-3 productInfo_in">
+							<img src="${path}/download.do?imageFileName=${product.product_image}" align="center"/>
+							<p align="center">상품명 : ${product.product_name }</p>
+							<p align="center">가격 : <fmt:formatNumber value="${product.product_price }" pattern="#,###"/>원</p>
+						</div>
+					</a>
+				</c:forEach>
+			</div>
+		</div>
       
          
          
- <div align="center">
-    <nav aria-label="Page navigation">
-        <ul class="pagination">
-            <li>
-                <a href="#" aria-label="First" onclick="updateURLParamsAndNavigate('page', 1); return false;">
-                    <span aria-hidden="true" class="glyphicon glyphicon-backward"></span>
-                </a>
-            </li>
-            <c:forEach begin="1" end="${totalPages}" varStatus="loop">
-                <li class="${loop.index == currentPage ? 'active' : ''}">
-                    <a href="#" onclick="updateURLParamsAndNavigate('page', ${loop.index}); return false;">${loop.index}</a>
-                </li>
-            </c:forEach>
-            <li>
-                <a href="#" aria-label="Last" onclick="updateURLParamsAndNavigate('page', ${totalPages}); return false;">
-                    <span aria-hidden="true" class="glyphicon glyphicon-forward"></span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+		<div align="center">
+		    <nav aria-label="Page navigation">
+		        <ul class="pagination">
+		            <li>
+		                <a href="#" aria-label="First" onclick="updateURLParamsAndNavigate('page', 1); return false;">
+		                    <span aria-hidden="true" class="glyphicon glyphicon-backward"></span>
+		                </a>
+		            </li>
+		            <c:forEach begin="1" end="${totalPages}" varStatus="loop">
+		                <li class="${loop.index == currentPage ? 'active' : ''}">
+		                    <a href="#" onclick="updateURLParamsAndNavigate('page', ${loop.index}); return false;">${loop.index}</a>
+		                </li>
+		            </c:forEach>
+		            <li>
+		                <a href="#" aria-label="Last" onclick="updateURLParamsAndNavigate('page', ${totalPages}); return false;">
+		                    <span aria-hidden="true" class="glyphicon glyphicon-forward"></span>
+		                </a>
+		            </li>
+		        </ul>
+		    </nav>
+		</div>
+	</div>
 </div>
- </div>
 
     <div class="row">
       <div id="footer">
