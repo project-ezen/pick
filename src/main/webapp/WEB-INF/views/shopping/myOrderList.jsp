@@ -82,7 +82,7 @@
 <!-- ----------------------------------------------------------------------------------------------------------- -->
 	<!-- 구매 내역 -->
 	<div id="receipt_info">
-	<form>
+	<form id="buyList" action="/shopping/myOrderList" method="get">
 		<label class="control-label">&nbsp;&nbsp;&nbsp;구매 내역</label>
 		<br/>
 		<div class="form-group">
@@ -96,7 +96,7 @@
 				<input class="form-control" type="text" id="datepicker2" placeholder="날짜를 선택하십시오."/>
 			</div>
 			<div class="col-md-2 col-sm-2" style="margin-bottom: 10px;">
-				<button class="form-control btn btn-default" type="submit">조회</button>
+				<button class="form-control btn btn-default" type="button" id="searchBuy">조회</button>
 			</div>
 			<div class="col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2" style="margin-bottom: 10px;">
 				<button type="button" class="list" style="float: right;">목록으로 돌아가기</button>
@@ -146,7 +146,7 @@
 										<div class="modal-content">
 											<div class="modal-header text-center">
 												<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-												<h3>Cancel Progressing</h3>
+												<h3 class="title">Cancel Progressing</h3>
 											</div>
 											<div class="modal-body">
 												<textarea class="cancel_reason" name="cancel_reason" placeholder="please write the reason"></textarea>
@@ -166,7 +166,7 @@
 										<div class="modal-content">
 											<div class="modal-header text-center">
 												<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-												<h3>Change Progressing</h3>
+												<h3 class="title">Change Progressing</h3>
 											</div>
 											<div class="modal-body">
 												<textarea class="change_reason" name="change_reason" placeholder="please write the reason"></textarea>
@@ -182,7 +182,7 @@
 										<div class="modal-content">
 											<div class="modal-header text-center">
 												<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-												<h3>Refund Progressing</h3>
+												<h3 class="title">Refund Progressing</h3>
 											</div>
 											<div class="modal-body">
 												<textarea class="refund_reason" name="refund_reason" placeholder="please write the reason"></textarea>
@@ -201,13 +201,28 @@
 			</c:forEach>
 		</table>
 		</form>
+		<br>
+		<!-- 화면 하단의 페이지 영역 -->
+		<!-- <div class="col-sm-offset-3">
+			<ul class="btn-group pagination">
+				<c:if test="${page.prev }">
+					<li><a href="<c:url value='/shopping/myOrderList?page=${page.startPage - 1}&startDate=${cri.startDate }&endDate=${cri.endDate }'/>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+				</c:if>
+				<c:forEach begin="${page.startPage }" end="${page.endPage }" step="1" var="pageNum">
+					<li><a href="<c:url value='/shopping/myOrderList?page=${pageNum }&startDate=${cri.startDate }&endDate=${cri.endDate }'/>"><i>${pageNum }</i></a></li>
+				</c:forEach>
+				<c:if test="${page.next && page.endPage > 0}">
+					<li><a href="<c:url value='/shopping/myOrderList?page=${page.endPage + 1}&startDate=${cri.startDate }&endDate=${cri.endDate }'/>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+				</c:if>
+			</ul>
+		</div> -->
 	</div>
 	<hr/>
 	
 <!-- ----------------------------------------------------------------------------------------------------------- -->
 	<!-- 취소 내역 -->
 	<div id="cancel_info">
-	<form>
+	<form id="cancelList" action="/shopping/myOrderList" method="get">
 		<label class="control-label">&nbsp;&nbsp;&nbsp;취소/반품 내역</label>
 		<br/>
 		<div class="form-group">
@@ -221,7 +236,7 @@
 				<input class="form-control" type="text" id="datepicker4" placeholder="날짜를 선택하십시오."/>
 			</div>
 			<div class="col-md-2 col-sm-2" style="margin-bottom: 10px;">
-				<button class="form-control btn btn-default" type="submit">조회</button>
+				<button class="form-control btn btn-default" type="submit" id="searchCancel">조회</button>
 			</div>
 		</div>
 	</form>
@@ -267,16 +282,28 @@
 <br/><br/>
 <script>
 $(document).ready(function() {
+	var frmBuy = $("#buyList");
+	var frmCancel = $("#cancelList");
+	
+	$("#searchBuy").on("click", searchList($("#datepicker1").val(), $("#datepicker2").val()));
+	
+	function searchList(date1, date2) {
+		var startDate = date1;
+		var endDate = date2;
+		console.log(date1 + " ~ " + date2);
+		
+	}
+//-----------------------------------------------------------------------------------------------------------------------------------
 	// 주문 취소하기
 	$(".cancel_order, .orderId, .cancel_reason").each(function(idx) {
 		$(".cancel_order:eq(" + idx + ")").on("click", function() {
-			console.log($(".orderId:eq(" + idx + ")").val() + " " + $(".cancel_reason:eq(" + idx + ")").val());
+			console.log($(".orderId:eq(" + idx + ")").val() + " " + $(".cancel_reason:eq(" + idx + ")").val() + $(".title:eq(" + idx + ")").text());
 			
 			$.ajax({
 				url: "/shopping/reason",
 				type: "post",
 				dataType: "text",
-				data: {"id" : $(".orderId:eq(" + idx + ")").val(), "reason": $(".cancel_reason:eq(" + idx + ")").val()},
+				data: {"id" : $(".orderId:eq(" + idx + ")").val(), "reason": $(".cancel_reason:eq(" + idx + ")").val(), "title" : $(".title:eq(" + idx + ")").text()},
 				success: function(){
 					console.log("succeed");
 					document.location.reload();
@@ -287,7 +314,50 @@ $(document).ready(function() {
 			});
 		});
 	});
-	
+//-----------------------------------------------------------------------------------------------------------------------------------	
+	// 상품 환불하기
+	$(".refund_order, .orderId, .refund_reason").each(function(idx) {
+		$(".refund_order:eq(" + idx + ")").on("click", function() {
+			console.log($(".orderId:eq(" + idx + ")").val() + " " + $(".refund_reason:eq(" + idx + ")").val() + $(".title:eq(" + idx + ")").text());
+			
+			$.ajax({
+				url: "/shopping/reason",
+				type: "post",
+				dataType: "text",
+				data: {"id" : $(".orderId:eq(" + idx + ")").val(), "reason": $(".refund_reason:eq(" + idx + ")").val(), "title" : $(".title:eq(" + idx + ")").text()},
+				success: function(){
+					console.log("succeed");
+					document.location.reload();
+				},
+				error: function() {
+					console.log("error");
+				}
+			});
+		});
+	});
+//-----------------------------------------------------------------------------------------------------------------------------------
+	// 상품 교환하기
+	$(".change_order, .orderId, .change_reason").each(function(idx) {
+		$(".change_order:eq(" + idx + ")").on("click", function() {
+			console.log($(".orderId:eq(" + idx + ")").val() + " " + $(".change_reason:eq(" + idx + ")").val() + $(".title:eq(" + idx + ")").text());
+			
+			$.ajax({
+				url: "/shopping/reason",
+				type: "post",
+				dataType: "text",
+				data: {"id" : $(".orderId:eq(" + idx + ")").val(), "reason": $(".change_reason:eq(" + idx + ")").val(), "title" : $(".title:eq(" + idx + ")").text()},
+				success: function(){
+					console.log("succeed");
+					document.location.reload();
+				},
+				error: function() {
+					console.log("error");
+				}
+			});
+		});
+	});
+//-----------------------------------------------------------------------------------------------------------------------------------
+	// 주문 번호에 해당하는 주문 상세보기
 	$(".orderNum").each(function(idx) {
 		$(".orderNum:eq(" + idx + ")").on("click", function() {
 			location.href = "/shopping/myOrderListDetail?order_number=" + $(".orderNum:eq(" + idx + ")").text();

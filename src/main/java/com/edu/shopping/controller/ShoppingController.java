@@ -27,6 +27,8 @@ import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.DisplayOrderVO;
 import com.edu.shopping.dto.OrderDTO;
+import com.edu.shopping.dto.OrderPaging;
+import com.edu.shopping.dto.OrderSearch;
 import com.edu.shopping.service.ShoppingService;
 import com.edu.store.dto.ProductDTO;
 
@@ -137,7 +139,7 @@ public class ShoppingController {
 
 		// 구매한 물품을 장바구니에서 주문내역으로 이동하기
 		for(int i = 0; i < product.length; i++) {
-			// 무작위 8자리 장바구니 번호 부여하기
+			// 무작위 8자리 주문 아이디 부여하기
 			String order_id = getOrderId();
 			orderDTO.setOrder_id(order_id);
 			
@@ -164,7 +166,7 @@ public class ShoppingController {
 //----------------------------------------------------------------------------------------------------------------	
 	// myOrderList Controller
 	@RequestMapping(value="/myOrderList", method=RequestMethod.GET)
-	public ModelAndView myOrderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView myOrderList(HttpServletRequest request, HttpServletResponse response, OrderSearch search) throws Exception {
 		String viewName = "/shopping/myOrderList";
 		ModelAndView mav = new ModelAndView(viewName);
 		
@@ -184,17 +186,49 @@ public class ShoppingController {
 		}
 		log.info("product : " + product);
 		
+//		// OrderPaging
+//		OrderPaging page = new OrderPaging();
+//		page.setCri(search);
+//		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
+//		page.setTotalCount(ShoppingService.orderListTotalCount(search));
+//		log.info("게시물의 총 건수 : " + page.getTotalCount());
+//		
+//		mav.addObject("page", page);
+//		mav.addObject("cri", search);
 		mav.addObject("order", order);
 		mav.addObject("product", product);
 		return mav;
 	}
 //----------------------------------------------------------------------------------------------------------------
-	// cancel
+	// 상품 취소, 교환, 환불
 	@ResponseBody
 	@RequestMapping(value="/reason", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String cancelReason(@RequestParam("id")String id, @RequestParam("reason")String c_reason, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		log.info(id + " 회원의 취소 이유는 : " + c_reason);
-		String order_status = "delivery-refuse(cancel)";
+	public String cancelReason(@RequestParam("id")String id, @RequestParam("reason")String c_reason, @RequestParam("title")String title, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		
+		String order_status = new String();
+		if(title.equals("Cancel Progressing")) {
+			log.info(id + " 주문의 취소 이유는 : " + c_reason);
+			order_status = "delivery-refuse(cancel)";
+		} else if(title.equals("Refund Progressing")) {
+			log.info(id + " 주문의 환불 이유는 : " + c_reason);
+			order_status = "product refund";
+		} else if(title.equals("Change Progressing")) {
+			log.info(id + " 주문의 교환 이유는 : " + c_reason);
+			order_status = "product change";
+			
+			// 같은 물품으로 새 제품 배송 진행
+			OrderDTO ordertemp = shoppingService.changeProduct(id);
+
+			// 주문 번호 부여하기
+			int order_num = getOrderNum(member.getM_id());
+			// 무작위 8자리 주문 아이디 부여하기
+			String order_id = getOrderId();
+			ordertemp.setOrder_number(order_num);
+			ordertemp.setOrder_id(order_id);
+			ordertemp.setOrder_status("delivery-progressing");
+		}
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
