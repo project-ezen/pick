@@ -250,7 +250,10 @@
 		height: 200px;
 	}
      /*리뷰 자세히*/
-      
+     
+    #whiteBg{
+    	background-color:white;
+    }
     </style>
   </head>
   <body class="bg">
@@ -262,7 +265,7 @@
     
    <c:forEach var="productItem" items="${product}" varStatus="status">
 	<input type="hidden" id="productIdInput" value="${productInfo[status.index].product_display_id }"/>
-      <div class="container">
+      <div class="container" id="whiteBg">
         <div class="row">
           <!--상품 이미지-->
           <div class="col-md-6">
