@@ -35,6 +35,8 @@ public interface ShoppingDAO {
 	public ProductDTO orderList(OrderDTO order) throws DataAccessException;
 	// 주문 상품 취소하기
 	public void overwriteOrder(Map<String, String> map) throws DataAccessException;
+	// 교환 상품 재배송하기
+	public OrderDTO changeProduct(String order_id) throws DataAccessException;
 //=====================================================================================================
 	// 주문 번호에 해당하는 주문 상세 정보 가져오기
 	public List<OrderDTO> orderNumInfo(int order_num) throws DataAccessException;

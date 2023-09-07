@@ -5,17 +5,15 @@
 
 	<!--  장바구니 -->
 	<sql id="cartNumber">
-		<if test="cartOrStore != null and cartOrStore != ''">
-			<choose>
-				<when test="cartOrStore == 'cart'.toString()">
-					1
-				</when>
-				<otherwise>
-					2
-				</otherwise>
-			</choose>
-		</if>
-	</sql>
+    <choose>
+        <when test="cartOrStore == 'buyNow'.toString()">
+            2
+        </when>
+        <otherwise>
+            1
+        </otherwise>
+    </choose>
+</sql>
 	
 	<!-- 상품 리스트 SQL -->
 	<sql id="search">
@@ -190,7 +188,13 @@
 		]]>
 	</select>
 	
-	
+	<!--  랜덤 노중복  -->
+	<select id="checkCartId" resultType="String">
+		<![CDATA[
+			SELECT CART_ID
+			FROM CART
+		]]>
+	</select>
 	
 	
 	
