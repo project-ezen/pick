@@ -1,10 +1,5 @@
 package com.edu.board.controller;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -16,8 +11,8 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +35,8 @@ import com.edu.board.dto.PagingCriteria;
 import com.edu.board.dto.ReplyDTO;
 import com.edu.board.service.BoardService;
 import com.edu.board.service.ReplyService;
+import com.edu.member.dto.MemberDTO;
+import com.edu.member.service.MemberService;
 
 
 @Controller("BoardController")
@@ -53,7 +50,6 @@ public class BoardControllerImpl implements BoardController {
 	private BoardDTO boardDTO;
 	@Autowired
 	private BoardDAO boardDAO;
-	
 
 
 	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\team\\pick\\src\\main\\webapp\\resources\\images";
@@ -63,26 +59,6 @@ public class BoardControllerImpl implements BoardController {
 	@Autowired
 	private ReplyService replyService;
 	
-	// 게시글 목록
-	/*
-	@Override
-	@RequestMapping(value="/board/articleList", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		logger.info("게시글 목록 화면좀 나와라");
-		
-		String viewName = "./board/articleList";
-		ModelAndView mav = new ModelAndView();
-		
-		
-		List<BoardDTO> articlesList = boardService.recipeBoard();
-		mav.setViewName(viewName);
-		mav.addObject("articleList", articlesList);
-	
-		return mav;
-	}
-	*/
-
 	
 	// 게시글 작성 화면
 	@Override
@@ -100,12 +76,16 @@ public class BoardControllerImpl implements BoardController {
 	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri)
 			throws Exception {
 		
+		
+		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(pcri);
 		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
-
+		//boardService.rCount(board_id);   // 게시물에 들어가면 댓글 수 업데이트	
+		
+		
 		List<BoardDTO> list = boardService.boardListPaging(pcri);
 		mav.addObject("articlesList", list);
 		mav.addObject("pageMaker", pageMaker);
@@ -120,6 +100,7 @@ public class BoardControllerImpl implements BoardController {
 	public void articleDetail(@RequestParam("board_id")int board_id, Model model ) throws Exception {
 		
 		BoardDTO boardDTO = boardService.articleDetail(board_id);
+		
 		System.out.println("BCI articleDetail() : " + boardDTO);
 		model.addAttribute("article",boardDTO);
 		

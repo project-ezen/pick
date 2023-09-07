@@ -1,6 +1,7 @@
 package com.edu.store.controller;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -145,20 +146,45 @@ public class StoreController {
 	public String productToCart(@RequestParam("product_display_id") String product_id,
 								@RequestParam("quantity") String quantity,
 								@RequestParam("cartOrStore") String cartOrStore,
+								@RequestParam(value="image", required = false) String image,
+								@RequestParam(value="name", required = false) String name,
+								@RequestParam(value="total", required = false) Integer total,
+								@RequestParam(value="price", required = false) Integer price,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		String memberId = (String)session.getAttribute("memberId");
-		
-		double randomValue = Math.random() * 1000000;
-		int randomNumber = (int) randomValue;
-		String cartId = String.valueOf(randomNumber);
+		int cai = getCartId();
+	
+		String cartId = Integer.toString(cai);
 		
 		logger.info("-----------------------------------------------------------------------------------" + product_id);
 		
 		storeService.productToCart(product_id, quantity, memberId, cartOrStore, cartId);
 		
+		String locate = "";
+		int totalValue = 0; 
+		int priceValue = 0;
+		 
+		if (total != null) {
+			totalValue = total.intValue();
+		} else {
+			logger.info("total이 널임");
+		}		
+		
+		if (price != null) {
+		    priceValue = price.intValue();		   
+		} else {
+			logger.info("price가 널임");
+		}
+		
 		 if ("cart".equals(cartOrStore)) {
 		        return "redirect:/shopping/cart";
+		    }else if("buyNow".equals(cartOrStore)) {	    	
+		    	String encodedName = URLEncoder.encode(name, "UTF-8");
+		    	locate   
+		    	= "redirect:/shopping/order?cart_id=" + cartId + "&image=" + image + "&product_name=" + encodedName + "&product_price=" + priceValue + "&count=" + quantity + "&total_price=" + totalValue;
+
+		    	return locate;
 		    }
 		    return "redirect:/store/productInfo";
 	}
@@ -266,6 +292,9 @@ public class StoreController {
 		return sad; 
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------
+	// 리뷰 Ajax
+	//----------------------------------------------------------------------------------------------------------------------------------	
 	@ResponseBody
 	@RequestMapping(value="/store/reviewDetailAjax", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Map reviewDetailAjax(@RequestParam("product_display_id") String product_id, 
@@ -294,7 +323,23 @@ public class StoreController {
 		return productAjaxMap;
 	}
 	
-	
+	//----------------------------------------------------------------------------------------------------------------------------------
+	// 랜덤 노중복
+	//----------------------------------------------------------------------------------------------------------------------------------		
+	public int getCartId() throws Exception {
+		int random_id = (int)(Math.random() * 100000);
+		List<String> check_cart_id = storeService.checkCartId();
+		for(int i = 0; i < check_cart_id.size(); i++) {
+			if(random_id == Integer.parseInt(check_cart_id.get(i))) {
+				break;
+			}
+			else {
+				random_id = (int)(Math.random() * 100000);
+				break;
+			}
+		}
+		return random_id;
+	}
 	
 	
 }
