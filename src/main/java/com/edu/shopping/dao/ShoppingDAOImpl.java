@@ -76,6 +76,11 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	public void overwriteOrder(Map<String, String> map) throws DataAccessException {
 		sqlsession.update(namespace + ".cancelProgress", map);
 	}
+
+	@Override
+	public OrderDTO changeProduct(String order_id) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".changeProduct", order_id);
+	}
 //=====================================================================================================
 	@Override
 	public List<OrderDTO> orderNumInfo(int order_num) throws DataAccessException {

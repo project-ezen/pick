@@ -7,7 +7,7 @@
 			SELECT *
 			FROM cart
 			WHERE m_id = #{m_id}
-			AND cart_number = (SELECT MIN(cart_number) FROM cart WHERE m_id = '101')
+			AND cart_number = (SELECT MIN(cart_number) FROM cart WHERE m_id = #{m_id})
 		]]>
 	</select>
 
@@ -91,6 +91,14 @@
 			WHERE order_id = #{id}
 		]]>
 	</update>
+	
+	<select id="changeProduct" parameterType="String" resultType="orderDTO">
+		<![CDATA[
+			SELECT m_id, product_id, receiver_name, receiver_phonenum, zipcode, address, address_detail, count, final_price
+			FROM product_order
+			WHERE order_id = #{order_id}
+		]]>
+	</select>
 	<!-- ============================================================================================================================================================================================= -->
 	<select id="orderNumInfo" parameterType="int" resultType="orderDTO">
 		<![CDATA[
