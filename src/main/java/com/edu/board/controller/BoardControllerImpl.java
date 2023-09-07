@@ -245,5 +245,9 @@ public class BoardControllerImpl implements BoardController {
 		}
 		return fileList;
 	}
+	
+	// 찜
+	
+	
 
 }
