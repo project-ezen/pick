@@ -10,24 +10,25 @@
 
 
     <style>
-    
     .foot { width: 1700px; min-height: 600px; border-radius: 10px; margin:auto;  background-color: rgba( 255, 255, 255, 0.8 ); }
-    
+
     .container-fluid{
-    margin-left: 80px;
-    margin-right: auto;
+	    margin-left: 80px;
+	    margin-right: auto;
     }
+    
     .carousel-inner img {
-        width: 100%;
-        margin: auto;
-        height: 300px !important;
+	     width: 100%;
+	     margin: auto;
+	     height: 300px !important;
     }
+    
     /* 글리피콘 세모*/
     #btnDown {
-        color: #05224e;
-        margin-top: 75px;
-        display: none;
-        font-size: 50px;
+      color: #05224e;
+      margin-top: 75px;
+      display: none;
+      font-size: 50px;
     }
     /* 글리피콘 세모*/
 
@@ -36,182 +37,181 @@
     #doguSearchBtn,
     #furSearchBtn,
     #jucSearchBtn {
-        margin: 0;
-        background-color: rgb(115, 115, 189);
-        color: #f8f8f2;
-        font-size: 1.1em;
-        border-radius: 4px 4px 4px 4px;
-        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-        white-space: -pre-wrap; /* Opera 4-6 */
-        white-space: -o-pre-wrap; /* Opera 7 */
-        word-wrap: break-word; /* Internet Explorer 5.5+ */
-     }
+      	margin: 0;
+      	background-color: rgb(115, 115, 189);
+      	color: #f8f8f2;
+      	font-size: 1.1em;
+      	border-radius: 4px 4px 4px 4px;
+      	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+      	white-space: -pre-wrap; /* Opera 4-6 */
+      	white-space: -o-pre-wrap; /* Opera 7 */
+      	word-wrap: break-word; /* Internet Explorer 5.5+ */
+    }
 
     #alcSearchBtn,
     #doguSearchBtn,
     #furSearchBtn,
     #jucSearchBtn {
-        margin-left: 30px;
-        width: 200px;
-        height: 60px;
-        border: none;
-        display: inline-block;
-        text-transform: uppercase;
-        overflow: hidden;
-        position: relative;
+      	margin-left: 30px;
+      	width: 200px;
+     	height: 60px;
+     	border: none;
+      	display: inline-block;
+      	text-transform: uppercase;
+      	overflow: hidden;
+      	position: relative;
     }
     /*버튼 통합*/
 
     /*술 버튼*/
     #alcSearchBtn span {
-        position: relative;
-        z-index: 1;
+      	position: relative;
+      	z-index: 1;
     }
     #alcSearchBtn:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 700%;
-        width: 300%;
-        background-image: url("/resources/images/button.PNG");
-        transition: all 0.5s ease-in-out;
-        transform: translateX(-120%) translateY(-25%) rotate(45deg);
+      	content: "";
+      	position: absolute;
+      	left: 0;
+      	top: 0;
+      	height: 700%;
+      	width: 300%;
+      	background-image: url("/resources/images/button.PNG");
+      	transition: all 0.5s ease-in-out;
+      	transform: translateX(-120%) translateY(-25%) rotate(45deg);
     }
 
     #alcSearchBtn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
+      	-webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+      	transform: translateX(-9%) translateY(-25%) rotate(45deg);
     }
     /*술 버튼*/
 
     /*도구 버튼*/
     #doguSearchBtn span {
-        position: relative;
-        z-index: 1;
-   	}
+      position: relative;
+      z-index: 1;
+    }
     #doguSearchBtn:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 700%;
-        width: 300%;
-        background-image: url("/resources/images/button.PNG");
-        transition: all 0.5s ease-in-out;
-        transform: translateX(-120%) translateY(-25%) rotate(45deg);
+     	content: "";
+     	position: absolute;
+      	left: 0;
+      	top: 0;
+      	height: 700%;
+     	width: 300%;
+      	background-image: url("/resources/images/button.PNG");
+      	transition: all 0.5s ease-in-out;
+      	transform: translateX(-120%) translateY(-25%) rotate(45deg);
     }
 
     #doguSearchBtn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
+      	-webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+      	transform: translateX(-9%) translateY(-25%) rotate(45deg);
     }
     /*도구 버튼*/
 
     /*과일 버튼*/
     #furSearchBtn span {
-       	position: relative;
+      	position: relative;
       	z-index: 1;
     }
     #furSearchBtn:after {
-       	content: "";
-       	position: absolute;
-       	left: 0;
-       	top: 0;
-       	height: 700%;
-       	width: 300%;
-       	background-image: url("/resources/images/button.PNG");
-       	transition: all 0.5s ease-in-out;
-       	transform: translateX(-120%) translateY(-25%) rotate(45deg);
+      	content: "";
+      	position: absolute;
+      	left: 0;
+      	top: 0;
+      	height: 700%;
+      	width: 300%;
+      	background-image: url("/resources/images/button.PNG");
+      	transition: all 0.5s ease-in-out;
+      	transform: translateX(-120%) translateY(-25%) rotate(45deg);
     }
 
     #furSearchBtn:hover:after {
       	-webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
+      	transform: translateX(-9%) translateY(-25%) rotate(45deg);
     }
     /*과일 버튼*/
 
     /*음료 버튼*/
     #jucSearchBtn span {
-       	position: relative;
-        z-index: 1;
+      	position: relative;
+      	z-index: 1;
     }
     #jucSearchBtn:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 700%;
-        width: 300%;
-        background-image: url("/resources/images/button.PNG");
-        transition: all 0.5s ease-in-out;
-        transform: translateX(-120%) translateY(-25%) rotate(45deg);
+      	content: "";
+      	position: absolute;
+      	left: 0;
+      	top: 0;
+      	height: 700%;
+      	width: 300%;
+      	background-image: url("/resources/images/button.PNG");
+      	transition: all 0.5s ease-in-out;
+      	transform: translateX(-120%) translateY(-25%) rotate(45deg);
     }
 
     #jucSearchBtn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
+      	-webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+      	transform: translateX(-9%) translateY(-25%) rotate(45deg);
     }
-   	/*음료 버튼*/
+    /*음료 버튼*/
 
     /*상품 정보*/
-   	#productInfo {
-        padding-top: 60px;
+    #productInfo {
+      	padding-top: 60px;
     }
 
     .productInfo_in {
-        border-radius: 5px;
-        background-color: rgba(0, 0, 0, 0);
-        color: #fff;
-        margin: 10px;
-        height: 300px !important;
-        width: 330px;
-        text-align: center;
+	    border-radius: 5px;
+	    background-color: rgba(0, 0, 0, 0);
+	    color: #fff;
+	    margin: 10px;
+	    height: 300px !important;
+	    width: 330px;
+	    text-align: center;
     }
     .productInfo_in img {
-        border-radius: 13%;
-        height: 200px;
-        width: 200px;
-        margin: 10px;
-        margin-top: 20px;
+      	border-radius: 13%;
+      	height: 200px;
+      	width: 200px;
+      	margin: 10px;
+      	margin-top: 20px;
     }
     .productInfo_in:hover {
-        background-color: #576fa0;
-        transition: 0.7s;
-        border-radius: 30%;
+      	background-color: #576fa0;
+      	transition: 0.7s;
+      	border-radius: 30%;
     }
-      /*상품 정보*/
+    /*상품 정보*/
 
-      /*검색 버튼*/
-  	* 	{ box-sizing: border-box; }
+    /*검색 버튼*/
+    * { box-sizing: border-box; }
   	#search_fromKeyword {
-    	width: fit-content;
-    	height: fit-content;
-    	position: absolute;
-  		top:10px;
-  		right:20px;
+	    width: fit-content;
+	    height: fit-content;
+	    position: absolute;
+	  	right:120px;
   	}
   	#searchKeyword {
-    	height: 50px;
-    	width: 50px;
-    	border-style: none;
-    	padding: 10px;
-    	font-size: 18px;
-    	letter-spacing: 2px;
-    	outline: none;
-    	border-radius: 25px;
-    	transition: all 0.5s ease-in-out;
-    	background-color: #22a6b3;
-    	padding-right: 40px;
-    	color: #fff;
+	    height: 50px;
+	    width: 50px;
+	    border-style: none;
+	    padding: 10px;
+	    font-size: 18px;
+	    letter-spacing: 2px;
+	    outline: none;
+	    border-radius: 25px;
+	    transition: all 0.5s ease-in-out;
+	    background-color: #22a6b3;
+	    padding-right: 40px;
+	    color: #fff;
   	}
-	#searchKeyword::placeholder {
-	   color: rgba(255, 255, 255, 0.5);
-	   font-size: 18px;
-	   letter-spacing: 2px;
-	   font-weight: 100;
-	}
-	.btn-search {
+  	#searchKeyword::placeholder {
+	    color: rgba(255, 255, 255, 0.5);
+	    font-size: 18px;
+	    letter-spacing: 2px;
+	    font-weight: 100;
+  	}
+  	.btn-search {
 	    width: 50px;
 	    height: 50px;
 	    border-style: none;
@@ -229,92 +229,90 @@
   	.btn-search:focus ~ #searchKeyword,
 	#searchKeyword:focus,
 	#searchButton:focus ~ #searchKeyword {
-	  width: 300px;
-	  border-radius: 0px;
-	  background-color: transparent;
-	  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-	  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+		width: 300px;
+		border-radius: 0px;
+		background-color: transparent;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+	 	transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 	}
     /*검색 버튼*/
 	  
-	/*select css*/
-	.selectSearch{
-	    position:absolute;
-	    top: 80px;
-	    right: 30px;
-	    border-style: none;
-	    background-color: rgba(0, 0, 0, 0);
-	    color:	#FFF;
-	    width: 150px;
-	    font-size: 17px; 
+  	/*select css*/
+  	.selectSearch{
+    	position:absolute;
+    	top: 500px;
+    	right: 120px;
+    	border-style: none;
+   		background-color: rgba(0, 0, 0, 0);
+    	color:	#FFF;
+    	width: 150px;
+    	font-size: 17px;
 	}     
-	.selectSearch:focus{
-	  	border-style: none;
-	  	outline: none;
-	}
+  	.selectSearch:focus{
+  		border-style: none;
+  		outline: none;
+  	}
     /*select css*/
-     
-	option {
-	   color: rgba(0,0,0,1);
-	   background-color: rgba(0,0,0,0);
-	}
+    
+ 	option {
+   		color: rgba(0,0,0,1);
+   		background-color: rgba(0,0,0,0);
+  	}
 	  
 	  
     </style>
   </head>
-  <body>
+  <body class="bg">
     <!-- Top Menu -->
      <%@ include file="../include/topMenu.jsp" %>
     
-
     <!-- 광고 배너 -->
-    <br />
-    <br />
-    <div class="row">
+   	<div class="row">
 	    <div id="Advertising" class="carousel slide" data-ride="carousel">
 	      	<ol class="carousel-indicators">
-	        	<li data-target="#Advertising" data-slide-to="0" class="active"></li>
-	        	<li data-target="#Advertising" data-slide-to="1"></li>
-	        	<li data-target="#Advertising" data-slide-to="2"></li>
+		        <li data-target="#Advertising" data-slide-to="0" class="active"></li>
+		        <li data-target="#Advertising" data-slide-to="1"></li>
+		        <li data-target="#Advertising" data-slide-to="2"></li>
 	      	</ol>
 
 	      <!-- 광고 내용 또는 이미지 -->
-		    <div class="carousel-inner" role="listbox">
-		       	<div class="item active">
-		         	<img src="/resources/images/gango.jpg" />
-		       	</div>
-		       	<div class="item">
-		         	<img src="/resources/images/gango.jpg" />
-		       	</div>
-		       	<div class="item">
-		         	<img src="/resources/images/gango.jpg" />
-		       	</div>
-		    </div>
+	    <div class="carousel-inner" role="listbox">
+	        <div class="item active">
+	          	<img src="/resources/images/gango.jpg" />
+	        </div>
+	        <div class="item">
+	          	<img src="/resources/images/gango.jpg" />
+	        </div>
+	        <div class="item">
+	          	<img src="/resources/images/gango.jpg" />
+	        </div>
+	     </div>
 
-      		<!-- 광고 옆으로 넘기기 -->
-	  	    <a
+      <!-- 광고 옆으로 넘기기 -->
+      		<a
 	        class="left carousel-control"
-		        href="#Advertising"
+	        href="#Advertising"
 	        role="button"
 	        data-slide="prev"
-	      	>
-		        <span class="glyphicon glyphicon-chevron-left"></span>
-		        <span class="sr-only">Previous</span>
+      		>
+	        <span class="glyphicon glyphicon-chevron-left"></span>
+	        <span class="sr-only">Previous</span>
 		    </a>
 		    <a
 	        class="right carousel-control"
 	        href="#Advertising"
 	        role="button"
 	        data-slide="next"
-	      	>
-		      	<span class="glyphicon glyphicon-chevron-right"></span>
-		      	<span class="sr-only">Next</span>
-		    </a>
-		</div>
+      		>
+	        <span class="glyphicon glyphicon-chevron-right"></span>
+	        <span class="sr-only">Next</span>
+      		</a>
+    	</div>
     <br/>
 	<div class="foot">
+	<br/>
 	<!-- 버튼 -->
-     	<nav id="searchBtn" class="col-sm-12">
+      	<nav id="searchBtn" class="col-sm-12">
 	        <button type="button" id="alcSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=술'">
 	          <span>&nbsp;&nbsp;술&nbsp;&nbsp;</span>
 	        </button>
@@ -335,7 +333,7 @@
 	        class="glyphicon glyphicon-triangle-bottom"
 	      ></span>
 	    </div>
-    
+	    
 		<!-- 검색 버튼 -->
 		<div id="search_fromKeyword">
 		    <form action="/store/productInfo" method="GET" id="searchForm">
@@ -352,8 +350,8 @@
 	      	<option value="highPrice" <c:if test="${param.select eq 'highPrice'}">selected</c:if>>높은 가격순</option>
 	      </select>
 	    </div>
-    
-    <br/> <br/>
+	    
+    <br /><br />
     
 		<div class="container-fluid">
 			<div class="row text-center" id="productInfo">
@@ -367,33 +365,32 @@
 					</a>
 				</c:forEach>
 			</div>
-		</div>
-      
+	  	</div>
+ </div>     
          
          
-		<div align="center">
-		    <nav aria-label="Page navigation">
-		        <ul class="pagination">
-		            <li>
-		                <a href="#" aria-label="First" onclick="updateURLParamsAndNavigate('page', 1); return false;">
-		                    <span aria-hidden="true" class="glyphicon glyphicon-backward"></span>
-		                </a>
-		            </li>
-		            <c:forEach begin="1" end="${totalPages}" varStatus="loop">
-		                <li class="${loop.index == currentPage ? 'active' : ''}">
-		                    <a href="#" onclick="updateURLParamsAndNavigate('page', ${loop.index}); return false;">${loop.index}</a>
-		                </li>
-		            </c:forEach>
-		            <li>
-		                <a href="#" aria-label="Last" onclick="updateURLParamsAndNavigate('page', ${totalPages}); return false;">
-		                    <span aria-hidden="true" class="glyphicon glyphicon-forward"></span>
-		                </a>
-		            </li>
-		        </ul>
-		    </nav>
-		</div>
-	</div>
+ <div align="center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a href="#" aria-label="First" onclick="updateURLParamsAndNavigate('page', 1); return false;">
+                    <span aria-hidden="true" class="glyphicon glyphicon-backward"></span>
+                </a>
+            </li>
+            <c:forEach begin="1" end="${totalPages}" varStatus="loop">
+                <li class="${loop.index == currentPage ? 'active' : ''}">
+                    <a href="#" onclick="updateURLParamsAndNavigate('page', ${loop.index}); return false;">${loop.index}</a>
+                </li>
+            </c:forEach>
+            <li>
+                <a href="#" aria-label="Last" onclick="updateURLParamsAndNavigate('page', ${totalPages}); return false;">
+                    <span aria-hidden="true" class="glyphicon glyphicon-forward"></span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
+ </div>
 
     <div class="row">
       <div id="footer">
@@ -576,9 +573,9 @@
         $("#jucSearchBtn").css("background-image", "none");
 
         // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-850px");
+        $("#btnDown").css("margin-left", "-550px");
         $("#btnDown").css("display", "inline-block");
-        $("#productInfo").css("margin-top", "0px");
+        $("#productInfo").css("margin-bottom", "10px");
 
         // 높이 바꾸기
         $("#alcSearchBtn").css("height", "90px");
@@ -678,4 +675,3 @@
     
   </script>
 </html>
-
