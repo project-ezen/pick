@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -241,83 +242,27 @@ public class BoardControllerImpl implements BoardController {
 	// 게시글 수정
 	
 	
-	// 멀티이미지 업로드
-	@Override
-	@RequestMapping(value="/multiImageUploader")
-	public void multiImageUploader(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		try {
-			//파일정보
-			String sFileInfo = "";
-			//파일명을 받는다 - 일반 원본파일명
-			String sFilename = request.getHeader("file-name");
-			//파일 확장자
-			String sFilenameExt = sFilename.substring(sFilename.lastIndexOf(".")+1);
-			//확장자를소문자로 변경
-			sFilenameExt = sFilenameExt.toLowerCase();
-				
-			//이미지 검증 배열변수
-			String[] allowFileArr = {"jpg","png","bmp","gif"};
-
-			//확장자 체크
-			int nCnt = 0;
-			for(int i=0; i<allowFileArr.length; i++) {
-				if(sFilenameExt.equals(allowFileArr[i])){
-					nCnt++;
+	//-----------------------------------------------------------------------------------------------------------
+	//다중 이미지 업로드하기
+	//-----------------------------------------------------------------------------------------------------------
+	private List<String> uploadMulti(MultipartHttpServletRequest multipartRequest) throws Exception{
+		List<String> 		fileList	= new ArrayList<String>();
+		Iterator<String> 	fileNames 	= multipartRequest.getFileNames();
+		while(fileNames.hasNext()) {
+			String fileName = fileNames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			String originalFileName = mFile.getOriginalFilename();
+			System.out.println("##### 다중 이미지 업로드하기 originalFileName ==> " + originalFileName);
+			fileList.add(originalFileName);
+			File file = new File(ARTICLE_IMAGE_REPO +"\\"+"contentImage"+ "\\" + fileName);
+			if(mFile.getSize() != 0) { //File Null Check
+				if(!file.exists()) { //경로상에 파일이 존재하지 않을 경우
+					file.getParentFile().mkdirs();  //경로에 해당하는 디렉토리들을 생성
+					mFile.transferTo(new File(ARTICLE_IMAGE_REPO +"\\"+"contentImage"+ "\\" + originalFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
 				}
 			}
-
-			//이미지가 아니라면
-			if(nCnt == 0) {
-				PrintWriter print = response.getWriter();
-				print.print("NOTALLOW_"+sFilename);
-				print.flush();
-				print.close();
-			} else {
-				//디렉토리 설정 및 업로드	
-				
-				//파일경로
-				String filePath = "C:\\data\\team\\pick\\src\\main\\webapp\\resources\\images\\contentImage\\";
-				File file = new File(filePath);
-				
-				if(!file.exists()) {
-					file.mkdirs();
-				}
-				
-				String sRealFileNm = "";
-				SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-				String today= formatter.format(new java.util.Date());
-				sRealFileNm = today+UUID.randomUUID().toString() + sFilename.substring(sFilename.lastIndexOf("."));
-				String rlFileNm = filePath + sRealFileNm;
-				
-				///////////////// 서버에 파일쓰기 ///////////////// 
-				InputStream inputStream = request.getInputStream();
-				OutputStream outputStream=new FileOutputStream(rlFileNm);
-				int numRead;
-				byte bytes[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-				while((numRead = inputStream.read(bytes,0,bytes.length)) != -1){
-					outputStream.write(bytes,0,numRead);
-				}
-				if(inputStream != null) {
-					inputStream.close();
-				}
-				outputStream.flush();
-				outputStream.close();
-				
-				///////////////// 이미지 /////////////////
-				// 정보 출력
-				sFileInfo += "&bNewLine=true";
-				// img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
-				sFileInfo += "&sFileName="+ sFilename;
-				sFileInfo += "&sFileURL="+"C:\\data\\team\\pick\\src\\main\\webapp\\resources\\images\\contentImage\\"+sRealFileNm;
-				PrintWriter printWriter = response.getWriter();
-				printWriter.print(sFileInfo);
-				printWriter.flush();
-				printWriter.close();
-			}	
-		} catch (Exception e) {
-			e.printStackTrace();
-		}		
+		}
+		return fileList;
 	}
-	
+
 }

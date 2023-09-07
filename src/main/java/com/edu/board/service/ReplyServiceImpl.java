@@ -34,13 +34,7 @@ public class ReplyServiceImpl implements ReplyService {
 		replyDAO.write(replyDTO);
 		
 	}
-	// 댓글 수정
-	@Override
-	public void update(ReplyDTO replyDTO) throws Exception {
-		logger.info("되어라");
-		replyDAO.update(replyDTO);
-		
-	}
+
 	// 댓글 삭제
 	@Override
 	public void delete(ReplyDTO replyDTO) throws Exception {

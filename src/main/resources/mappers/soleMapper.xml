@@ -130,5 +130,39 @@
 		]]>
 		
 	</select>
+	
+	<!-- liked_id 생성하는 -->
+	<select id="selectLikedId" resultType="String">
+		<![CDATA[
+			select nvl(max(to_number(liked_id)),0)+1
+  			from liked
+		]]>
+	</select>
+	
+	<!-- 찜 인설트 -->
+	<insert id="jjimInsert" parameterType="com.edu.sole.dto.recipe.JjimDTO">
+		<![CDATA[
+			insert into liked
+				   (liked_id, m_id, recipe_code, ingredient_number)
+			values (#{liked_id}, #{m_id}, #{recipe_code}, '1')
+		]]>
+	</insert>
+	
+	<!-- 찜 셀렉하는 -->
+	<select id="jjimSelect" parameterType="com.edu.sole.dto.recipe.JjimSelectDTO" resultType="com.edu.sole.dto.recipe.JjimDTO">
+		<![CDATA[
+			select *
+			from liked
+			where m_id = #{m_id} and recipe_code = #{recipe_code}
+		]]>
+	</select>
+	
+	<!-- 찜 딜리트 -->
+	<delete id="jjimDelte" parameterType="com.edu.sole.dto.recipe.JjimDTO">
+		<![CDATA[
+			delete from liked
+			where m_id = #{m_id} and recipe_code = #{recipe_code}
+		]]>
+	</delete>
 
 </mapper>
