@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.PagingCriteria;
 
 
@@ -39,6 +40,7 @@ public interface BoardController {
 		
 		// 게시글 삭제
 		public ResponseEntity articleDelete(@RequestParam("board_id") int board_id,HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 		
 		// 게시글 수정
 		

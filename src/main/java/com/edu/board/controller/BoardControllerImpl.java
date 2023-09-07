@@ -59,26 +59,6 @@ public class BoardControllerImpl implements BoardController {
 	@Autowired
 	private ReplyService replyService;
 	
-	// 게시글 목록
-	/*
-	@Override
-	@RequestMapping(value="/board/articleList", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		logger.info("게시글 목록 화면좀 나와라");
-		
-		String viewName = "./board/articleList";
-		ModelAndView mav = new ModelAndView();
-		
-		
-		List<BoardDTO> articlesList = boardService.recipeBoard();
-		mav.setViewName(viewName);
-		mav.addObject("articleList", articlesList);
-	
-		return mav;
-	}
-	*/
-
 	
 	// 게시글 작성 화면
 	@Override
@@ -103,7 +83,9 @@ public class BoardControllerImpl implements BoardController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(pcri);
 		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
-
+		//boardService.rCount(board_id);   // 게시물에 들어가면 댓글 수 업데이트	
+		
+		
 		List<BoardDTO> list = boardService.boardListPaging(pcri);
 		mav.addObject("articlesList", list);
 		mav.addObject("pageMaker", pageMaker);
@@ -118,6 +100,7 @@ public class BoardControllerImpl implements BoardController {
 	public void articleDetail(@RequestParam("board_id")int board_id, Model model ) throws Exception {
 		
 		BoardDTO boardDTO = boardService.articleDetail(board_id);
+		
 		System.out.println("BCI articleDetail() : " + boardDTO);
 		model.addAttribute("article",boardDTO);
 		

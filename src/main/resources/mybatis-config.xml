@@ -15,7 +15,7 @@
 		<typeAlias type="com.edu.store.dto.ProductDTO" alias="productDTO"/>
 		
 		<typeAlias type="com.edu.board.dto.BoardDTO" alias="boardDTO"/>
-		
+		<typeAlias type="com.edu.board.dto.ReplyDTO" alias="replyDTO"/>
  
 		<!--<typeAlias type="com.edu.sole.dto.LiveSoleDTO" alias="liveSoleDTO"/>
 		<typeAlias type="com.edu.sole.dto.RecipedSoleDTO" alias="recipedSoleDTO"/>

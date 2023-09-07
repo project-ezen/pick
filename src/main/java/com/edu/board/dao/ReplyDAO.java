@@ -9,7 +9,7 @@ public interface ReplyDAO {
 		// 댓글 조회
 		public List<ReplyDTO> list(int board_id) throws Exception;
 
-		// 댓글 조회
+		// 댓글 작성
 		public void write(ReplyDTO replyDTO) throws Exception;
 
 		
