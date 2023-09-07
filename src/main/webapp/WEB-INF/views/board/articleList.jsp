@@ -153,10 +153,12 @@ font-size: 15px;
 		</div>
 		<div class="outer_div">
 		<c:choose>
-			<c:when test="${empty articlesList}"> <!-- 게시글이 하나도 없는 경우 -->
+			<%--게시글이 하나도 없는 경우 --%>
+			<c:when test="${empty articlesList}"> 
 				<h3 style="font-size:22px; text-align: center;"><b>등록된 게시글이 없습니다.</b></h3>
 			</c:when>
-			<c:when test="${not empty articlesList}"> <!-- 게시글이 하나라도 있는 경우 -->
+			<%-- 게시글이 하나라도 있는 경우 --%>
+			<c:when test="${not empty articlesList}"> 
 				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
 						<div class="inner_div" style="background-color: #ADC4CE; height: 200px; width: 300px; border-radius: 10px;">
 						<c:choose>
@@ -175,7 +177,10 @@ font-size: 15px;
 									<p class="writer">${article.nickname}</p>
 								</div>
 								<div class="bottom">
-									<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
+									<i class="bi bi-chat" style="width: 25px; height: 25px;"></i>
+									<c:if test ="${article.reply_count != 0}">
+									<span>${article.reply_count}</span>
+									</c:if>
 									&nbsp;&nbsp;&nbsp;&nbsp;
 									<i class="bi bi-heart"></i><span>100</span>
 								</div>

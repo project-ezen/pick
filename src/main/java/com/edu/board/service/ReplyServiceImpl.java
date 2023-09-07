@@ -27,7 +27,7 @@ public class ReplyServiceImpl implements ReplyService {
 		logger.info("댓글내놔");
 		return replyDAO.list(board_id);
 	}
-	// 댓글 입력
+	// 댓글 작성
 	@Override
 	public void write(ReplyDTO replyDTO) throws Exception {
 		logger.info("쓴거 내놔");
