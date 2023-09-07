@@ -30,6 +30,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <style>
     
+     /* 배경화면 */
 	  .bg {
 			 background-image: url("/resources/images/background2.jpg");
 	
@@ -159,6 +160,9 @@
 	   white-space: pre-line;
 	}
 	
+	/*상세 설명, 리뷰*/
+	
+	/*modal : 장바구니 보내는*/
 	#cart_modal {
         position: absolute;
         top: 0;
@@ -201,7 +205,9 @@
 		font-size: 20px;
 
 	}
+	/*modal : 장바구니 보내는*/
 	
+	/*리뷰 자세히*/
 	#reviewContent{
 		word-wrap:break-word;
 		width: 600px;
@@ -243,7 +249,7 @@
 		width: 200px;
 		height: 200px;
 	}
-      /*상세 설명, 리뷰*/
+     /*리뷰 자세히*/
       
     </style>
   </head>
@@ -261,9 +267,11 @@
           <!--상품 이미지-->
           <div class="col-md-6">
             <img src="${path}/download.do?imageFileName=${productItem.product_image}" class="product-img img-responsive" />
+            <input type="hidden" value="${productItem.product_image}" id="imageHidden"/>
           </div>
           <!--상품 간단 정보-->
           <h1>${productItem.product_name }</h1>
+          <input type="hidden" value="${productItem.product_name }" id="nameHidden"/>
           
           <div class="col-md-6 product-info">
             <table class="table table-bordered table">
@@ -305,7 +313,7 @@
                   <button class="btn buy-button add-to-cart" data-toggle="modal" data-target="#cart_modal">
                     장바구니 추가
                   </button>
-                  <button class="btn buy-button buy-now">바로구매</button>
+                  <button class="btn buy-button buy-now" id="buyNow">바로구매</button>
                 </div>
               </div>
               <div class="bold-line"></div>
@@ -336,29 +344,15 @@
 	              <div align="center">
 	            <p class="multiline">아니 근데 <br/> 아닌가?</p>
 	              	<pre class="multiline">${productInfo[status.index].product_info}</pre>
-	              </div>
-	              
+	              </div>              
             </div>
+            
+            <!-- 리뷰 & 페이징 -->
             <div id="review" class="tab-pane fade">
             	<br/>
       			<button class="btn btn-info" id="writeReviewBtn" data-toggle="modal" data-target="#writeReview">리뷰 작성하기</button>
              <div class="reviewDiv">
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             
-             </div>
-             
+             </div>           
              <div class="row">		
 			  <div class="col-sm-offset-5 col-sm-3">
 			  	<ul class="btn-group pagination">
@@ -403,6 +397,8 @@
                 </div>
             </div>
             <!-- End Modal-->
+            
+            <!-- 리뷰 작성하기 모달 -->
     		<div class="modal" id="writeReview">
     			<div class="modal-dialog modal-lg">
 					<h1>리뷰 작성하기</h1>
@@ -439,7 +435,7 @@
 								</table>
 							</form>
 						</div>
-    
+  
     
     			</div>
     		</div>
@@ -447,9 +443,12 @@
 
     <script>
     
+    // DisplayOrderVO temp = new DisplayOrderVO(cart_id[i], image[i], product_name[i], product_price[i], count[i]);
     // 세션 아이디
     var memberId = "<%= memberId %>"; 
-    
+    var productIdInputs = $("#productIdInput").val();
+
+    // 페이징 Ajax
     $(document).ready(function () {
     
     	function productLoadReviews(pageNum) {
@@ -457,7 +456,7 @@
             url: "/store/reviewDetailAjax",
             type: "GET",
             dataType: "json",
-            data: {"product_display_id": "10002", "page": pageNum},
+            data: {"product_display_id": productIdInputs, "page": pageNum},
             success: function (data) {
             	
             	
@@ -510,9 +509,8 @@
    	
     productLoadReviews(${prpgm.cri.page});
     
+    // 페이징 클릭
     $(".paging-list").click(function () {
-    	
-    	//$(".ajaxDiv").remove();
     	
         var pageNum = $(this).data("page"); // data-page 속성에서 페이지 번호 가져오기
         productLoadReviews(pageNum);
@@ -524,14 +522,17 @@
     
     
     // 리뷰 삭제하기
-    $(document).ready(function(){
-    	$('#reviewRemoveBtn').on("click", function(){
-    		var reviewIdInput = $("#reviewIdInput").val();
-    		var productIdInput =$("#productIdInput").val();
-    		var locate		  = "/store/reviewRemove?reviewId=" + reviewIdInput + "&product_display_id=" + productIdInput;
-    		location.href =locate;
-    	});
+    $(document).ready(function(){  	
+    	$(document).on("click", '#reviewRemoveBtn', function () {
+            alert("삭제되었습니다.");
+            var reviewIdInput = $("#reviewIdInput").val();
+            var productIdInput = $("#productIdInput").val();
+            var locate = "/store/reviewRemove?reviewId=" + reviewIdInput + "&product_display_id=" + productIdInput;
+            location.href = locate;
+        });
     });
+
+    	
     
 	// 사진 프리뷰 보여주기
     function readURL(input) {	// 파일을 선택해서 변화가 생겼을 때
@@ -637,6 +638,24 @@
               $(this).val(inputValue.replace(/[^0-9]/g, "")); // 숫자 이외의 문자 제거
           }
       }
+      
+      // 바로 구매
+    $(document).ready(function(){
+    	$('#buyNow').on("click", function(){
+    		const priceString = document.getElementById("price").textContent;
+    		const price = parseInt(priceString.replace(/[^\d]/g, ""));
+    		var productID = $("#productIdInput").val();
+    		var count = $("#quantity").val();
+    		var image = $("#imageHidden").val();
+    		var name  = $("#nameHidden").val();
+    		var total = price * count;
+    		var encodedName = encodeURIComponent(name);
+    		var locate = "/store/addToCart?product_display_id=" + productID +"&quantity=" + count + "&cartOrStore=buyNow&image=" + image + "&name=" + encodedName + "&total=" + total +"&price=" + price;
+			
+    		location.href = locate;
+    	});
+    });
+    
     </script>
   </body>
 </html>
