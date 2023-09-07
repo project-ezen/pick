@@ -47,7 +47,7 @@
                 	<c:when test="${ member != null }">
 						<li><a class="tt" data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/logout">LogOut</a></li>
 						<li><a class="tt" data-toggle="tooltip" title="장바구니" style="margin-right: 20px; margin-top: 5px;" href="${path}/shopping/cart">Cart</a></li>
-						<li><a class="tt" data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="${path}/shopping/myOrderList">MyPage</a></li>
+						<li><a class="tt" data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/mypage">MyPage</a></li>
 					</c:when>
 					<%-- 로그인이 되지 않은 경우 --%>
 					<c:when test="${ member == null }">
