@@ -13,6 +13,13 @@
         display: block;
     }
 }
+
+.tt {
+	color: white;
+}
+.tt:hover {
+	background-color: rgba( 255, 255, 255, 0 );
+}
 </style>
 <section class="navbar navbar-light fixed-top">
     <div class="container-fluid">
@@ -20,32 +27,32 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar">
                 <span class="glyphicon glyphicon-align-justify"></span>
             </button>
-            <a class="navbar-brand" href="/" style="font-size:30px;">마녀의 pick</a> <%--사진넣을꺼? 어찌할거야!?--%>
+            <a class="navbar-brand tt" href="/">Home</a>
         </div>
         <div class="collapse navbar-collapse" id="mainNavbar" style="padding-top: 10px;">
-            <ul class="nav navbar-nav">
+            <ul class="nav nav-pills navbar-nav">
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Alcohol</a>
+                    <a class="dropdown-toggle tt" data-toggle="dropdown" href="#">Alcohol</a>
                     <ul class="dropdown-menu">
                         <li><a href="#">list</a></li>
                     </ul>
                 </li>
-                <li><a href="${path}/board/articleList">My Own Recipe</a></li>
-                <li><a href="${path}/store/productInfo/">Store</a></li>
+                <li><a class="tt" href="${path}/board/articleList">My Own Recipe</a></li>
+                <li><a class="tt" href="${path}/store/productInfo/">Store</a></li>
 
             </ul>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav nav-pills navbar-nav navbar-right">
                 <c:choose>
                 	<%-- 로그인이 된 경우 --%>
                 	<c:when test="${ member != null }">
-						<li><a data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/logout">Logout</a></li>
-						<li><a data-toggle="tooltip" title="장바구니" style="margin-right: 20px; margin-top: 5px;" href="${path}/shopping/cart">Cart</a></li>
-						<li><a data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/mypage">MyPage</a></li>
+						<li><a class="tt" data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/logout">LogOut</a></li>
+						<li><a class="tt" data-toggle="tooltip" title="장바구니" style="margin-right: 20px; margin-top: 5px;" href="${path}/shopping/cart">Cart</a></li>
+						<li><a class="tt" data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="${path}/shopping/myOrderList">MyPage</a></li>
 					</c:when>
 					<%-- 로그인이 되지 않은 경우 --%>
 					<c:when test="${ member == null }">
-						<li><a data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/login">Login</a></li>
-						<li><a data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/join">Sign on</a></li>
+						<li><a class="tt" data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/login">LogIn</a></li>
+						<li><a class="tt" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/join">Sign In</a></li>
 					</c:when>
 				</c:choose>
 			</ul>
