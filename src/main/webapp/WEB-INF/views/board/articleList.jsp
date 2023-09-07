@@ -116,16 +116,33 @@ width: 100%;
 position: absolute;
 bottom: 10px;
 text-align: center;
+padding-left: 10px;
 }
 
 .bi-chat::before {
     content: "\f268";
-    font-size: 17px;
+    font-size: 20px;
+    margin-right: 4px;
 }
 
 .bi-heart::before {
     content: "\f417";
-    font-size: 17px;
+    font-size: 20px;
+}
+
+.bi-heart-fill::before {
+	content: "\f415";
+	font-size: 20px;
+}
+
+.jjimBtn {
+	background-color: #ADC4CE;
+	/*background-color: #f8f8f8;*/
+}
+
+.jjimBtn:hover {
+	color: #c5a1eb;
+	background-color: #895db7;
 }
 
 span {
@@ -168,21 +185,35 @@ font-size: 15px;
 								<img class="thumb" style="width:100px; height:100px; float:left;" src="${path}/thumbdown?board_id=${article.board_id}&thumbnail=${article.thumbnail}" id="thumbnail"/>
 							</c:when>
 							<c:otherwise>
-								<img class="thumb" style="width:100px; height:100px; float:left;" src="/resources/images/cocktail-icon.jpg"/>
+								<img class="thumb" style="width:100px; height:100px; float:left;" src="/resources/images/defaultThumb.png"/>
 							</c:otherwise>
 						</c:choose>
 							<div class="lele">
 								<div class="top">
-									<p class="title"><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
+									<p class="title" ><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
 									<p class="writer">${article.nickname}</p>
 								</div>
 								<div class="bottom">
-									<i class="bi bi-chat" style="width: 25px; height: 25px;"></i>
-									<c:if test ="${article.reply_count != 0}">
-									<span>${article.reply_count}</span>
-									</c:if>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<i class="bi bi-heart"></i><span>100</span>
+								<c:choose>
+									<c:when test="${member != null}"> <!-- 로그인 했을 때 -->
+										<button id="jjimBtn" name="jjimBtn" class="jjimBtn" onClick="jjimBtn('${isLogOn}', '${page}/member/login')" type="button" style="position:relative;bottom:6px; border: none;border-radius:3px; padding: 0px; width:28px; height:26px;">
+										<i id="heart" class="bi bi-heart" style="position:absolute;bottom:-1px;right:4px;"></i></button><span class="jjim_count">100</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<i class="bi bi-chat" style="width: 25px; height: 25px;"></i>
+										<c:if test ="${article.reply_count != 0}">
+										<span>${article.reply_count}</span>
+										</c:if>
+									</c:when>
+									<c:otherwise> <!-- 비로그인 상태일 때, 찜 버튼 디폴트 -->
+										<button class="jjimBtn" onClick="jjimBtn('${isLogOn}', '${page}/member/login')" type="button" style="position:relative;bottom:6px; border: none;border-radius:3px; padding: 0px; width:28px; height:26px;">
+										<i class="bi bi-heart" style="position:absolute;bottom:-1px;right:4px;"></i></button><span class="jjim_count">100</span>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<i class="bi bi-chat" style="width: 25px; height: 25px;"></i>
+										<c:if test ="${article.reply_count != 0}">
+										<span>${article.reply_count}</span>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
 								</div>
 							</div>
 						</div>
@@ -225,6 +256,39 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 		location.href= loginForm + '?action=/board/write';
 	}
 }
+
+function jjimBtn(isLogOn, loginForm){
+	
+	// 비로그인 상태에서 찜버튼을 누를 시
+    if (isLogOn == "" || isLogOn == false) {
+        if (confirm("로그인 한 회원만 이용가능합니다. 로그인 하시겠습니까?")) {
+            // 승낙하면 로그인 페이지로 이동
+            location.href =  loginForm + '?action=/board/articleList';
+        } else {
+            // 거부하면 해당 페이지 새로고침
+            location.reload();
+        }
+    // 로그인 상태에서 찜버튼을 누를 시
+    } else {
+    	alert("회원");
+    	
+    	$.ajax({
+    		url: "/board/jjimUpdate",
+    		type: "post",
+    		data: {
+    			"mid": ${member.m_id}
+    		},
+    		success: function(data){
+    			jjim_count();
+    		},
+    		error: function(data){
+    			alert("오류");
+    		}
+    	});
+    	
+    }
+}
+
 </script>
 </body>
 </html>
