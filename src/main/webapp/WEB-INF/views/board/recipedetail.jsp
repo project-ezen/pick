@@ -137,40 +137,34 @@ display: inline-block;
 					<td style="width:75%;">${reply.content}</td>
 					<c:if test="${reply.r_writer == member.m_nickname}">
 						<td style="width:10%;">
-						<%-- <a href="#" onclick="rDelete('<c:out value="${reply.replyNum}"/>')">삭제</a>--%>
+						<input type="hidden" value="${reply.replyNum}" 		name="replyNum"/>
+						<input type="hidden" value="${reply.b_id}" 	name="b_id"/>
+						<a href="#" onclick="fn_replyDelete('${path}/reply/rdelete',${reply.replyNum},${reply.b_id})" >삭제</a>
 						</td>
 					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
 	<%-- 댓글 작성하는 부분 --%>
-	<c:if test="${ isLogOn == true }">
-		<form method="post" action="/reply/rwrite" name= "form1">
+	<form method="post" action="/reply/rwrite" name= "form1">
+		<c:if test="${ isLogOn == true }">
+			<input type="hidden" name="b_id" value="${article.board_id}">
 			<table style="margin-bottom: 20px;">
-					<tr>
-						<th style="text-align: center; width:15%;">닉네임</th>
-						<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_nickname}" name="r_writer" readonly/></td>
-					</tr>
-					<tr>	
-						<th style="text-align: center; width:15%;">내용</th>
-						<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
-						<td style="width:8%;">
-						<input type="hidden" name="b_id" value="${article.board_id}">
-						<button class="btn_2" type="submit">댓글 작성</button>
-						</td>
-					</tr>
+				<tr>
+					<th style="text-align: center; width:15%;">닉네임</th>
+					<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_nickname}" name="r_writer" readonly/></td>
+				</tr>
+				<tr>	
+					<th style="text-align: center; width:15%;">내용</th>
+					<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
+					<td style="width:8%;">
+					<button class="btn_2" type="submit">댓글 작성</button>
+					</td>
+				</tr>
 			</table>
-		</form>
-	</c:if>
-	
-	<%--<form method = "POST" id = "form1">
-		<input type = "hidden" id = "replyNum"  name = "replyNum"  	value = "${reply.replyNum}">
-		<input type = "hidden" id = "b_id" 		name = "b_id" 		value = "${reply.b_id}">
-		<input type = "hidden" id = "content" 	name = "content" 	value = "${reply.content}">
-		<input type = "hidden" id = "writeDate" name = "writeDate" 	value = "${reply.writeDate}">
-		<input type = "hidden" id = "nickname" 	name = "nickname" 	value = "${reply.nickname}">
+		</c:if>
 	</form>
-	 --%>
+	
 	</div>
 </div>
 <br/>
@@ -258,28 +252,28 @@ function fn_remove(url, board_id){
 	
 }
 
-
-/*function fn_rDelete(replyNum){
+<%--댓글 삭제--%>
+function fn_replyDelete(url,replyNum ,b_id){
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", url);
 	
- 	if(confirm("삭제 하시겠습니까?")){
-	        
-        //댓글 삭제를 하기위해 댓글 번호, 글 번호, 댓글 내용, 그리고 게시글 세부 페이지로 포워딩 하기 위해 페이지 관련 값들을 변수에 저장한다.
-            var replyNum 	= $("#replyNum").val();
-            var b_id 		= $("#b_id").val();
-            var content 	= $("textarea#content").text();
-            var writeDate 	= $("#writeDate").text();
-            var nickname 	= $("#nickname").text();
-            
-            //url로 삭제에 필요한 변수들을 보낸다.
-            document.form1.action="reply/rdelete?board_id="+b_id+"&replyNum="+replyNum;
-            
-            document.form1.submit();
-            
-            alert("댓글이 삭제되었습니다.")
-            
-    }
-*/    
-}
+	var replyNumInput = document.createElement("input");
+	replyNumInput.setAttribute("type", "hidden");
+	replyNumInput.setAttribute("name", "replyNum");
+	replyNumInput.setAttribute("value", replyNum );
+	
+	var boardNumInput = document.createElement("input");
+	boardNumInput.setAttribute("type", "hidden");
+	boardNumInput.setAttribute("name", "b_id");
+	boardNumInput.setAttribute("value", b_id );
+	
+	form.appendChild(replyNumInput);
+	form.appendChild(boardNumInput);
+	document.body.appendChild(form);
+	form.submit();
+       
+} 
 
 </script>
 
