@@ -44,6 +44,7 @@ public interface BoardController {
 		
 		// 게시글 수정
 		
+		//
 		
 
 }

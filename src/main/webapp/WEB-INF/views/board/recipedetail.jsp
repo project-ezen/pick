@@ -169,7 +169,7 @@ display: inline-block;
 </div>
 <br/>
 <script>
-
+// 수정 버튼 눌렀을 시 disabled 해제
 function fn_enable(obj){
 	document.getElementById("title").disabled		= false;
 	document.getElementById("content").disabled		= false;
@@ -177,6 +177,7 @@ function fn_enable(obj){
 	document.getElementById("image").disabled	= false;
 }
 
+// 수정취소 버튼 눌렀을 시 disabled
 function backToForm(obj){
 	document.getElementById("title").disabled = true;
 	document.getElementById("content").disabled = true;
@@ -184,11 +185,26 @@ function backToForm(obj){
 	document.getElementById("image").disabled	= true;
 }
 
-
-
-
+// 글 삭제
+function fn_remove(url, board_id){
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", url);
+	
+	var boardIdInput = document.createElement("input");
+	boardIdInput.setAttribute("type", "hidden");
+	boardIdInput.setAttribute("name", "board_id");
+	boardIdInput.setAttribute("value", board_id);
+	
+	form.appendChild(boardIdInput);
+	document.body.appendChild(form);
+	form.submit();
+	
+}
+	
+// 에디터
 $(document).ready(function(){
-var contentval = $("#content").val();
+	var contentval = $("#content").val();
 	
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
@@ -202,7 +218,6 @@ var contentval = $("#content").val();
 	});
 	
 	contentval = $("#content").val().replace(/<p><br><\/p>/gi, "<br>"); // <p><br></p> => <br>로 변환
-	
 	contentval = contentval.replace(/<\/p><p>/gi, "<br>"); // </p><p> => <br>로 변환
 	contentval = contentval.replace(/(<\/p><br>|<p><br>)/gi, "<br><br>");
 	contentval = contentval.replace(/(<p>|<\/p>)/gi, ""); // <p> 또는 </p>모두 제거
@@ -231,26 +246,45 @@ var contentval = $("#content").val();
 			return false;
 		} else {
 			
-			console.log(content);
+			ajaxRequest = $.ajax({
+				type: "post",
+				url: "/board/addNewArticle",
+				data: JSON.stringify({"title":title,"content":content,"writer":writer, "thumbnail":thumbnail}),
+				success: function(data){
+					alert("성공");
+					location.href = "/board/addNewArticle";
+				},
+				error: function(data){
+					alert("오류");
+					return false;
+				}
+			});
 		}
-	});
+	});	// 에디터
+
 });
 
-function fn_remove(url, board_id){
-	var form = document.createElement("form");
-	form.setAttribute("method", "post");
-	form.setAttribute("action", url);
+/*function fn_rDelete(replyNum){
 	
-	var boardIdInput = document.createElement("input");
-	boardIdInput.setAttribute("type", "hidden");
-	boardIdInput.setAttribute("name", "board_id");
-	boardIdInput.setAttribute("value", board_id);
-	
-	form.appendChild(boardIdInput);
-	document.body.appendChild(form);
-	form.submit();
-	
+ 	if(confirm("삭제 하시겠습니까?")){
+	        
+        //댓글 삭제를 하기위해 댓글 번호, 글 번호, 댓글 내용, 그리고 게시글 세부 페이지로 포워딩 하기 위해 페이지 관련 값들을 변수에 저장한다.
+            var replyNum 	= $("#replyNum").val();
+            var b_id 		= $("#b_id").val();
+            var content 	= $("textarea#content").text();
+            var writeDate 	= $("#writeDate").text();
+            var nickname 	= $("#nickname").text();
+            
+            //url로 삭제에 필요한 변수들을 보낸다.
+            document.form1.action="reply/rdelete?board_id="+b_id+"&replyNum="+replyNum;
+            
+            document.form1.submit();
+            
+            alert("댓글이 삭제되었습니다.")
+            
+    }
 }
+*/    
 
 <%--댓글 삭제--%>
 function fn_replyDelete(url,replyNum ,b_id){
@@ -274,7 +308,6 @@ function fn_replyDelete(url,replyNum ,b_id){
 	form.submit();
        
 } 
-
 </script>
 
 

@@ -13,7 +13,7 @@
         	background-color:	#FFFFFF;
 			text-align:			center;
 			border-radius:		10px;
-			padding: 30px 30px 30px 30px;
+			padding: 30px;
 			margin: 0 auto;
 		   	margin-top:		150PX ;
 			margin-bottom: 150px;
@@ -45,12 +45,13 @@
             border-radius: 10px;
         }
     </style>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js" integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 <div class="foot">
     <div class="login" >
-    	<form  class="form-horizontal" action="/member/login" method="post" id="loginForm">
+    	<form class="form-horizontal" method="post" id="loginForm">
         <div class="login-header">
             <h1 class="text-center">Login</h1><br><br>
         </div>
@@ -76,7 +77,7 @@
             </div>
             <div class="form-group">
                 <div class="login-button">
-                    <button type="submit" class="btn btn-primary" id="loginButton" >로그인</button>
+                    <button class="btn btn-primary" id="loginButton" >로그인</button>
                 </div>
             </div>
             <div class="form-group">                            
@@ -87,7 +88,9 @@
 	        </div>
 	        <br>
 	        <div class="social-buttons">
-	            <button class="btn btn-warning" id="kakaoLogin">카카오 로그인</button>
+	        	<!-- <a href="javascript:loginWithKakao()"> </a> -->
+	            <button class="btn btn-warning" id="kakaoLogin" onClick="loginWithKakao()" >카카오 로그인</button>
+	           
 	        </div>
 	        <div class="social-buttons">
 	            <button class="btn btn-success" id="naverLogin">네이버 로그인</button>
@@ -108,15 +111,27 @@
     <%@ include file="../include/footer.jsp" %>
     
     <script>
+   		Kakao.init('8ebd75cf75f3f5574a71e06fbbc387a9'); // 사용하려는 앱의 JavaScript 키 입력
+   		
+	    function loginWithKakao() {
+	    	console.log("ok");
+	        Kakao.Auth.authorize({
+	          redirectUri: 'https://developers.kakao.com/tool/demo/oauth'
+	        });
+	      }
+    
     	$(document).ready(function() {
     		// 로그인 버튼을 눌렀을 경우
     		$("#loginButton").on("click", function() {
+    			$("#loginForm").prop("action", "/member/login");
+    			$("#loginForm").prop("method", "post");
+    			
     			// 아이디와 비밀번호는 꼭 입력해야 한다.
     			// 아이디와 비밀번호는 4자리 이상 입력해야 한다.
     			
     			if($("#m_id").val() == "") {
     				alert("이메일을 입력해주세요.");
-    				$("#m_Id").focus();
+    				$("#m_id").focus();
     				return false;
     			}
     			if($("#m_pw").val() == "") {
@@ -129,6 +144,8 @@
     			document.getElementById("loginForm").submit();
     			return false;
     		});
+    		
+    		
     	});
     </script>
 </body>
