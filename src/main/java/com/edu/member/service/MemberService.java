@@ -52,7 +52,10 @@ public interface MemberService {
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
 
-	public MemberDTO myboardList(String m_id) throws Exception;
+	public MemberDTO myboardList(String mid) throws Exception;
+
+
+	
 
 	
 }

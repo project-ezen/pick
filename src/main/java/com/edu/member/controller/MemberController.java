@@ -1,5 +1,7 @@
 package com.edu.member.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.edu.board.dto.BoardDTO;
 import com.edu.member.dto.MemberDTO;
 import com.edu.member.service.MemberService;
 
@@ -278,11 +280,24 @@ public class MemberController {
 		String m_id = mid.getM_id();
 
 		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
-		model.addAttribute("member", member);
+		//boardDTO를 List로 가져오세요
+		//model에 넣어서 넘기세요
+		//foreach로 돌려서 보여주세요
 		
+		model.addAttribute("member", member.getMyPageList());
+		System.out.println("*******************************썸네일"+member.getMyPageList());
 		return "/member/myboard";
 	}
 		
 	//찜한 게시물 get/ post
-	
+	@RequestMapping(value="/mylist",method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView mylist() throws Exception {
+		
+		ModelAndView ma = new ModelAndView();
+		ma.setViewName("/member/mylist");
+		logger.info("아이디내놔");
+		
+		return ma;
+
+	}
 }	

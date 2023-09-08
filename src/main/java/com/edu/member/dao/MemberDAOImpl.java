@@ -116,9 +116,9 @@ public class MemberDAOImpl implements MemberDAO {
 	//내가 쓴 게시물
 
 	@Override
-	public MemberDTO myboardList(String m_id) throws Exception {
+	public MemberDTO myboardList(String mid) throws Exception {
 	
-		return sqlSession.selectOne(namespace + ".myboard" , m_id);
+		return sqlSession.selectOne(namespace + ".myboard" , mid);
 	}
 
 	

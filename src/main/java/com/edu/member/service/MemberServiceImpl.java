@@ -105,9 +105,9 @@ public class MemberServiceImpl implements MemberService {
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
 	@Override
-	public MemberDTO myboardList(String m_id) throws Exception {
+	public MemberDTO myboardList(String mid) throws Exception {
 		logger.info("아아");
-		return memberDAO.myboardList(m_id);
+		return memberDAO.myboardList(mid);
 	}
 
 
