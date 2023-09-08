@@ -24,12 +24,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.board.dao.BoardDAO;
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.LikedDTO;
 import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
 import com.edu.board.dto.ReplyDTO;
@@ -99,16 +101,15 @@ public class BoardControllerImpl implements BoardController {
 	public void articleDetail(@RequestParam("board_id")int board_id, Model model ) throws Exception {
 		
 		BoardDTO boardDTO = boardService.articleDetail(board_id);
-		
 		System.out.println("BCI articleDetail() : " + boardDTO);
 		model.addAttribute("article",boardDTO);
 		
-		
+		LikedDTO likedDTO = boardService.jjimSelect(board_id);
+		model.addAttribute("liked", likedDTO);
 		System.out.println(board_id);
 		List<ReplyDTO> reply = replyService.list(board_id);
 		System.out.println(reply);
 		model.addAttribute("reply", reply);
-		
 	}
 
 
@@ -244,8 +245,20 @@ public class BoardControllerImpl implements BoardController {
 		}
 		return fileList;
 	}
-	
-	// 찜
+
+
+	// 찜 등록
+	@Override
+	@ResponseBody
+	@RequestMapping(value="/board/jjimOK", method=RequestMethod.GET, produces = "application/json")
+	public LikedDTO jjimOK(@RequestParam("bid") int bid, @RequestParam("mid") String mid) throws Exception {
+		LikedDTO likedDTO = new LikedDTO();
+		likedDTO.setB_id(bid);
+		likedDTO.setMem_id(mid);
+		logger.info("likedDTO 값: " + likedDTO);
+		boardService.jjimOK(likedDTO);
+		return likedDTO;
+	}
 	
 	
 

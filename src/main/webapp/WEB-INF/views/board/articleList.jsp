@@ -175,7 +175,7 @@ font-size: 15px;
 						<c:choose>
 							<c:when test="${not empty article.thumbnail && article.thumbnail != 'null'}">
 								<!-- <div class="thumb" >${article.thumbnail}</div> -->
-								<input type="hidden" name="originalFileName" value="${article.thumbnail}"/>
+								<input type="hidden" name="thumbnail" value="${article.thumbnail}"/>
 								<img class="thumb" style="width:100px; height:100px; float:left;" src="${path}/thumbdown?board_id=${article.board_id}&thumbnail=${article.thumbnail}" id="thumbnail"/>
 							</c:when>
 							<c:otherwise>
