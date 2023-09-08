@@ -34,7 +34,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle tt" data-toggle="dropdown" href="#">Alcohol</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">list</a></li>
+                        <li><a class="tt"  href="#">list</a></li>
                     </ul>
                 </li>
                 <li><a class="tt" href="${path}/board/articleList">My Own Recipe</a></li>

@@ -56,7 +56,7 @@
       .infoAndReview li a {
         background-color: rgb(139, 139, 139);
       }
-      a:link {
+      .page:link {
         color: black;
       }
       #reviewBtn {
@@ -172,11 +172,11 @@
           <!--상세설명&리뷰-->
           <ul class="nav nav-tabs infoAndReview">
             <li class="active">
-              <a data-toggle="tab" href="#description">재료정보</a>
+              <a class="page" data-toggle="tab" href="#description">재료정보</a>
             </li>
             
             <li>
-            	<a data-toggle="tab" href="#review">리뷰</a>
+            	<a class="page" data-toggle="tab" href="#review">리뷰</a>
             </li>
           </ul>
           <div class="tab-content">
@@ -201,19 +201,19 @@
 			  	<ul class="btn-group pagination">
 					<c:if test="${rpgm.prev}">
 						<li>
-							<a class="paging-list" data-page="${rpgm.startPage -1}"><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a class="paging-list page" data-page="${rpgm.startPage -1}"><span class="glyphicon glyphicon-chevron-left"></span></a>
 						</li>
 					</c:if>
 										
 					<c:forEach begin="${rpgm.startPage}" end="${rpgm.endPage}" var="pageNum">
 						<li>
-							<a class="paging-list" data-page="${pageNum}"><i>${pageNum}</i></a>
+							<a class="paging-list page" data-page="${pageNum}"><i>${pageNum}</i></a>
 								</li>
 						</c:forEach>
 										
 					<c:if test="${rpgm.next}">
 						<li>
-							<a class="paging-list" data-page="${rpgm.endPage +1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a class="paging-list page" data-page="${rpgm.endPage +1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
 						</li>
 					</c:if>
 				</ul>

@@ -12,7 +12,7 @@
     <style>
     .foot { width: 1700px; min-height: 600px; border-radius: 10px; margin:auto;  background-color: rgba( 255, 255, 255, 0.8 ); }
 
-    .container-fluid{
+    .container-fluid pro{
 	    margin-left: 80px;
 	    margin-right: auto;
     }
@@ -353,7 +353,7 @@
 	    
     <br /><br />
     
-		<div class="container-fluid">
+		<div class="container-fluid pro">
 			<div class="row text-center" id="productInfo">
 				<c:forEach var="product" items="${productList}">
 					<a href="/store/productInfos?product_display_id=${product.product_display_id}">
