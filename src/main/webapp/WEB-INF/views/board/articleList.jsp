@@ -29,8 +29,9 @@ margin-left: 45px;
 display: inline-block;
 }
 
-a:link{text-decoration: none; color: #000}
-a:visited,a:active{color: #000;}
+
+.page:link{text-decoration: none; color: #000}
+.page:visited,.page:active{color: #000;}
 
 .pagenav {
 display: inline-block;
@@ -183,7 +184,7 @@ font-size: 15px;
 						</c:choose>
 							<div class="lele">
 								<div class="top">
-									<p class="title" ><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
+									<p class="title" ><a class="page"  href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
 									<p class="writer">${article.nickname}</p>
 								</div>
 								<div class="bottom">
@@ -219,17 +220,17 @@ font-size: 15px;
 	         <ul class="btn-group pagination">
 	            <c:if test="${pageMaker.prev}">
 	               <li>
-	                  <a href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 	               </li>
 	            </c:if>
 	            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 	               <li>
-	                  <a href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
 	               </li>
 	            </c:forEach>
 	            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 	               <li>
-	                  <a href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 	               </li>
 	            </c:if>
 	         </ul>
