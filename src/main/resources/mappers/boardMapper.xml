@@ -93,6 +93,31 @@
 		]]>
 	</delete>
 	
+	<!-- 찜 등록 -->
+	<insert id="jjimOK">
+		<![CDATA[
+			insert into jjim (jjim_id, b_id, mem_id, j_check)
+			values (#{jjim_id}, #{b_id}, #{mem_id}, #{j_check})
+		]]>
+	</insert>
+	
+	<!-- 찜 조회 -->
+	<select id="jjimSelect" parameterType="com.edu.board.dto.LikedDTO" resultType="com.edu.board.dto.LikedDTO">
+		<![CDATA[
+			select jjim_id, j_check
+			from jjim
+			where b_id = #{b_id}
+		]]>
+	</select>
+	
+	<!-- 찜 id 추출 -->
+	<select id="selectjjimNO" resultType="int">
+		<![CDATA[
+			SELECT	NVL(MAX(jjim_id), 0) + 1
+			FROM	jjim
+		]]>
+	</select>
+	
 	<!-- 댓글 수 
 	<update id="rCount" parameterType="int">
 		<![CDATA[

@@ -4,9 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.LikedDTO;
 import com.edu.board.dto.PagingCriteria;
 
 import oracle.jdbc.proxy.annotation.Post;
@@ -32,5 +34,9 @@ public interface BoardService {
 	// 게시글 삭제
 	public void delete(int board_id) throws Exception;
 	
+	// 찜 등록
+	public void jjimOK(LikedDTO likedDTO) throws Exception;
 	
+	// 찜 조회
+	public LikedDTO jjimSelect(int board_id) throws Exception;
 }
