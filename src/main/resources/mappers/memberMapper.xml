@@ -16,6 +16,7 @@
 		<result property="writeDate" 	column="writeDate"/>
 		<result property="image" 		column="image"/>
 		<result property="writer" 		column="M_ID"/>
+		<result property="thumbnail"	column="THUMBNAIL"/>
 	</resultMap>
 	
 	<!-- 회원목록 가져오기 -->
@@ -117,7 +118,7 @@
 	<!-- 내가 쓴 게시물 -->
 	 <select id="myboard" parameterType="String" resultMap="member">
 	 <![CDATA[
-		SELECT b.m_id, b.board_id, b.title , b.writeDate ,b.image
+		SELECT b.m_id, b.board_id, b.title , b.writeDate ,b.image, b.thumbnail
 		FROM  member m
 		LEFT OUTER JOIN board b
 		ON m.m_id = b.m_id

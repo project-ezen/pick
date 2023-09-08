@@ -29,8 +29,8 @@
 .box_1,.box_2,.box_3, .box_4  
 			{ width: 150px; height: 100px; float:left; margin: 30px 25px; display: inline-block; border-radius: 5%;  background-color: rgba(20, 69, 101, 0.7);  }
 
- .AA 		{ text-align: center; line-height : 100px; float: center; margin:0 auto; display: inline-block; color: #fff; 
-			  text-decoration: none; cursor:pointer; font-size:15px; font-family: 'Cafe24Supermagic-Bold-v1.0'; }
+.AA 		{ text-align: center; line-height : 100px; float: center; margin:0 auto; display: inline-block; color: #fff; 
+			  text-decoration: none; cursor:pointer; font-family:'Cafe24Supermagic-Bold-v1.0'; font-size:20px;  }
 
 .AA:hover 	{ text-decoration: none; color: #ccd6d9; }
 
@@ -135,7 +135,7 @@
 		<hr/>
 		<div class="set2">
 			<div class="box_1"><a class="AA" href="${path}/shopping//myOrderList">주문 조회</a></div>
-			<div class="box_2"><a class="AA" href="${path}/board/recipejjim.jsp">찜한 레시피</a></div>
+			<div class="box_2"><a class="AA" href="${path}/member/mylist">좋아요♥</a></div>
 			<div class="box_3"><a class="AA" href="${path}/member/myboard">내가 쓴 게시물</a></div>
 			<div class="box_4"><a class="AA" href="javascript:void(0);" onclick="openModal()">회원 정보 수정</a></div>
 		</div>
