@@ -84,8 +84,7 @@ public class BoardControllerImpl implements BoardController {
 		ModelAndView mav = new ModelAndView(viewName);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(pcri);
-		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
-		//boardService.rCount(board_id);   // 게시물에 들어가면 댓글 수 업데이트	
+		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
 		
 		
 		List<BoardDTO> list = boardService.boardListPaging(pcri);

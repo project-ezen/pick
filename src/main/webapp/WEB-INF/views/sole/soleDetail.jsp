@@ -10,21 +10,9 @@
 	<%@ include file="../include/header.jsp" %>
     <style>
       /*상품 관련 이미지, 위치*/
-	  .bg {
-		 background-image: url("/resources/images/background2.jpg");
-
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	  }
       .product-img {
         /*width: 400px;
         height: 400px;
-        
         margin-top: 100px;*/
         max-width: 100%;
 		width: auto;
@@ -68,7 +56,7 @@
       .infoAndReview li a {
         background-color: rgb(139, 139, 139);
       }
-      a:link {
+      .page:link {
         color: black;
       }
       #reviewBtn {
@@ -119,13 +107,11 @@
     </style>
   </head>
   <%@ include file="../include/topMenu.jsp" %>
-  <body class="bg">
-    <br />
-    <br />
-    <br />
-    
-   
-    <div>
+  <body>
+    <br/>
+    <br/>
+    <br/>
+    <div class="foot">
       <div class="container" style="background-color:white">
         
         <div class="row" >
@@ -141,11 +127,11 @@
               <tbody>
                 <tr>
                   <th>설명</th>
-                  <td>${recipe.content }</td>
+                  <td>${recipe.content}</td>
                 </tr>
                 <tr>
                   <th>도수</th>
-                  <td>${recipe.alcohole_dosu }도</td>
+                  <td>${recipe.alcohole_dosu}도</td>
                 </tr>
                 <tr>
                   <th>맛</th>
@@ -157,19 +143,19 @@
 			<c:choose>
 			    <c:when test="${empty member.m_id || member.m_id eq ''}">
 			        <div align="right">
-			            <span class="nojjim" id="mark">★</span>
+			            <span class="nojjim" id="mark" style="font-family: 'Tenada';">★</span>
 			        </div>
 			    </c:when>
 			    
 			    <c:when test="${not empty jjimselect.liked_id}">
 			        <div align="right">
-			            <span class="jjim" id="mark">★</span>
+			            <span class="jjim" id="mark" style="font-family: 'Tenada';">★</span>
 			        </div>
 			    </c:when>
 			    
 			    <c:otherwise>
 			    	<div align="right">
-			            <span class="nojjim" id="mark">★</span>
+			            <span class="nojjim" id="mark" style="font-family: 'Tenada';">★</span>
 			        </div>
 			    </c:otherwise>
 			</c:choose>
@@ -182,15 +168,15 @@
         <br />
         <br />
         <br />
-        <div class="container">
+        <div class="container1">
           <!--상세설명&리뷰-->
           <ul class="nav nav-tabs infoAndReview">
             <li class="active">
-              <a data-toggle="tab" href="#description">재료정보</a>
+              <a class="page" data-toggle="tab" href="#description">재료정보</a>
             </li>
             
             <li>
-            	<a data-toggle="tab" href="#review">리뷰</a>
+            	<a class="page" data-toggle="tab" href="#review">리뷰</a>
             </li>
           </ul>
           <div class="tab-content">
@@ -215,19 +201,19 @@
 			  	<ul class="btn-group pagination">
 					<c:if test="${rpgm.prev}">
 						<li>
-							<a class="paging-list" data-page="${rpgm.startPage -1}"><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a class="paging-list page" data-page="${rpgm.startPage -1}"><span class="glyphicon glyphicon-chevron-left"></span></a>
 						</li>
 					</c:if>
 										
 					<c:forEach begin="${rpgm.startPage}" end="${rpgm.endPage}" var="pageNum">
 						<li>
-							<a class="paging-list" data-page="${pageNum}"><i>${pageNum}</i></a>
+							<a class="paging-list page" data-page="${pageNum}"><i>${pageNum}</i></a>
 								</li>
 						</c:forEach>
 										
 					<c:if test="${rpgm.next}">
 						<li>
-							<a class="paging-list" data-page="${rpgm.endPage +1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a class="paging-list page" data-page="${rpgm.endPage +1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
 						</li>
 					</c:if>
 				</ul>
