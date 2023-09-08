@@ -22,6 +22,7 @@ border: 2px solid #ddd;
 }
 th {
 background-color: #ccd6d9;
+text-align:center;
 }
 th, td {
 border-bottom: 1px solid #ddd;
@@ -59,6 +60,30 @@ font-family: 'Cafe24Supermagic-Bold-v1.0';
 display: inline-block;
 }
 
+.bi-heart::before {
+    content: "\f417";
+    font-size: 20px;
+    margin-top: 3px;
+}
+
+
+.bi-heart-fill::before {
+	content: "\f415";
+	font-size: 20px;
+    margin-top: 3px;
+}
+
+.jjimBtn {
+width:30px;height:30px;padding:0px;
+border:none;background-color:#fff;
+border-radius: 5px;
+}
+
+.jjimBtn:hover{
+background-color:#ADC4CE;
+color:#fff;
+}
+
 </style>
 </head>
 <body>
@@ -77,7 +102,8 @@ display: inline-block;
 					<th style="text-align: center;">글번호</th>
 					<td>
 						<input type="text"   value="${article['board_id']}" disabled/>
-						<input type="hidden" value="${article['board_id']}" name="board_id"/>
+						<input type="hidden" id="bid" name="bid" value="${article['board_id']}" />
+						<input type="hidden" id="mid" name="mid" value="${member.m_id}"/>
 					</td>
 					
 					<th style="text-align: center;">작성일자</th>
@@ -87,12 +113,15 @@ display: inline-block;
 					<th style="text-align: center;">작성자</th>
 					<td><input type="text"   value="${article.nickname}" name="nickname" disabled/></td>
 					
-					<th style="text-align: center;">찜 개수</th>
-					<td>{100}</td>
+					<th style="text-align: center;">찜하기</th>
+					<td style="padding-bottom:5px;">
+						<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
+						<span style="margin-left:20px; font-size:16px;">{100}</span>
+					</td>
 				</tr>
 				<tr>
                 	<th>제목</th>
-                	<td><input type="text" value="${article.title}" name="title" id="title" disabled/></td>
+                	<td><input type="text" value="${article.title}" name="title" id="title" style="width:100%;" disabled/></td>
                 	<th>대표사진</th>
                 	<td><input type="file" name="thumbnail" id="thumbnail" disabled/></td>
                 </tr>
@@ -264,28 +293,6 @@ $(document).ready(function(){
 
 });
 
-/*function fn_rDelete(replyNum){
-	
- 	if(confirm("삭제 하시겠습니까?")){
-	        
-        //댓글 삭제를 하기위해 댓글 번호, 글 번호, 댓글 내용, 그리고 게시글 세부 페이지로 포워딩 하기 위해 페이지 관련 값들을 변수에 저장한다.
-            var replyNum 	= $("#replyNum").val();
-            var b_id 		= $("#b_id").val();
-            var content 	= $("textarea#content").text();
-            var writeDate 	= $("#writeDate").text();
-            var nickname 	= $("#nickname").text();
-            
-            //url로 삭제에 필요한 변수들을 보낸다.
-            document.form1.action="reply/rdelete?board_id="+b_id+"&replyNum="+replyNum;
-            
-            document.form1.submit();
-            
-            alert("댓글이 삭제되었습니다.")
-            
-    }
-}
-*/    
-
 <%--댓글 삭제--%>
 function fn_replyDelete(url,replyNum ,b_id){
 	var form = document.createElement("form");
@@ -308,11 +315,22 @@ function fn_replyDelete(url,replyNum ,b_id){
 	form.submit();
        
 } 
+
+// 찜 버튼 눌렀을 시
+function fn_jjimBtn(isLogOn){
+	if(isLogOn == null || isLogOn == false){
+		alert("로그인 후 이용해주세요.");
+	} else{
+		if(!confirm("발행하겠습니까?")){
+			alert("취소되었습니다");
+			return false;
+		}
+	}
+		
+}
+
+
 </script>
-
-
-
-
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <%@ include file="../include/footer.jsp" %>
