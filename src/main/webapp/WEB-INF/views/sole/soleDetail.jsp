@@ -143,19 +143,19 @@
 			<c:choose>
 			    <c:when test="${empty member.m_id || member.m_id eq ''}">
 			        <div align="right">
-			            <span class="nojjim" id="mark">★</span>
+			            <span class="nojjim" id="mark" style="font-family: 'Tenada';">★</span>
 			        </div>
 			    </c:when>
 			    
 			    <c:when test="${not empty jjimselect.liked_id}">
 			        <div align="right">
-			            <span class="jjim" id="mark">★</span>
+			            <span class="jjim" id="mark" style="font-family: 'Tenada';">★</span>
 			        </div>
 			    </c:when>
 			    
 			    <c:otherwise>
 			    	<div align="right">
-			            <span class="nojjim" id="mark">★</span>
+			            <span class="nojjim" id="mark" style="font-family: 'Tenada';">★</span>
 			        </div>
 			    </c:otherwise>
 			</c:choose>
