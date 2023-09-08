@@ -292,5 +292,6 @@ public class SoleController {
 		
 		soleservice.jjimDelete(jjimDelete);
 	}
+	
 } // end class
 

@@ -80,48 +80,6 @@
 				<td class="date">{sysDate}</td>
 				<td class="write">{write}</td>
 			</tr>
-			<tr>
-				<td class="img">{image}</td>
-				<td class="title">{title}</td>
-				<td class="date">{sysDate}</td>
-				<td class="write">{write}</td>
-			</tr>
-			<tr>
-				<td class="img">{image}</td>
-				<td class="title">{title}</td>
-				<td class="date">{sysDate}</td>
-				<td class="write">{write}</td>
-			</tr>
-			<tr>
-				<td class="img">{image}</td>
-				<td class="title">{title}</td>
-				<td class="date">{sysDate}</td>
-				<td class="write">{write}</td>
-			</tr>
-			<tr>
-				<td class="img">{image}</td>
-				<td class="title">{title}</td>
-				<td class="date">{sysDate}</td>
-				<td class="write">{write}</td>
-			</tr>
-			<tr>
-				<td class="img">{image}</td>
-				<td class="title">{title}</td>
-				<td class="date">{sysDate}</td>
-				<td class="write">{write}</td>
-			</tr>
-			<tr>
-				<td class="img">{image}</td>
-				<td class="title">{title}</td>
-				<td class="date">{sysDate}</td>
-				<td class="write">{write}</td>
-			</tr>
-			<tr>
-				<td class="img">{image}</td>
-				<td class="title">{title}</td>
-				<td class="date">{sysDate}</td>
-				<td class="write">{write}</td>
-			</tr>
 		</table>
 	</div>
 	<br/><br/>
