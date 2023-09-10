@@ -1,5 +1,6 @@
 package com.edu.shopping.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -196,6 +197,30 @@ public class ShoppingController {
 //		mav.addObject("page", page);
 //		mav.addObject("cri", search);
 		mav.addObject("order", order);
+		mav.addObject("product", product);
+		return mav;
+	}
+//----------------------------------------------------------------------------------------------------------------
+	// 페이징
+	@ResponseBody
+	@RequestMapping(value="/paging", method=RequestMethod.GET)
+	public ModelAndView pagingList(@RequestParam("page") int page, 
+			@RequestParam(value="start_date", required=false) Date start, @RequestParam(value="end_date", required=false) Date end) throws Exception {
+		log.info(page + " 페이지, " + start + "부터 " + end + "까지 주문 정보");
+		ModelAndView mav = new ModelAndView("jsonView");
+		
+		
+		List<OrderDTO> orderList = shoppingService.showOrder();
+		log.info("order_list : " + orderList);
+		
+		// 주문한 상품 목록 가져오기 - 주문번호 한 개에 담겨있는 상품 목록 List에 저장
+		List<ProductDTO> product = new ArrayList<ProductDTO>();
+		for(int i = 0; i < orderList.size(); i++) {
+			product.add(shoppingService.orderList(orderList.get(i)));
+		}
+		log.info("product : " + product);
+		
+		mav.addObject("order", orderList);
 		mav.addObject("product", product);
 		return mav;
 	}
