@@ -103,7 +103,7 @@
 			</div>
 		</div>
 	</form>
-		<form id="order_list">
+		<div id="order_list">
 		<table id="t1">
 			<thead>
 				<tr>
@@ -116,9 +116,9 @@
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
-			<c:forEach var="order" items="${order }" varStatus="o_status">
-			<c:if test="${order.order_complaint == null }">
-				<tbody>
+			<tbody id="order_product_list">
+				<c:forEach var="order" items="${order }" varStatus="o_status">
+				<c:if test="${order.order_complaint == null }">
 					<tr>
 						<td>
 							<a class="orderNum">${order.order_number}</a>
@@ -127,7 +127,6 @@
 							<div class="col-md-12 text-center" id="item_thumbnail">
 							    <a href="#" class="thumbnail">
 							        <input type="image" src="${path }/download?imageFile=${product[o_status.index].product_image }" width="161" height="133" disabled>
-							        <input type="hidden" class="pdtImage" value="${product[o_status.index].product_image }" name="imageFile">
 							        <input type="hidden" class="orderId" name="orderId" value="${order.order_id }">
 							    </a>
 							</div>
@@ -135,9 +134,7 @@
 						<td class="pdtName">${product[o_status.index].product_name }</td>
 						<td class="pdtCount">${order.count}</td>
 						<td class="orderPrice">${product[o_status.index].product_price * order.count}</td>
-						<td class="orderStatus">
-							${order.order_status}
-						</td>
+						<td class="orderStatus">${order.order_status}</td>
 						<td>
 							<c:if test="${order.order_status == 'delivery-progressing'}">
 								<input type="button" class="btn btn-default cancel" data-toggle="modal" data-target=".cancel${o_status.index }" value="취소">
@@ -196,26 +193,26 @@
 							</c:if>
 						</td>
 					</tr>
-				</tbody>
-			</c:if>
-			</c:forEach>
+				</c:if>
+				</c:forEach>
+			</tbody>
 		</table>
-		</form>
+		</div>
 		<br>
 		<!-- 화면 하단의 페이지 영역 -->
-		<!-- <div class="col-sm-offset-3">
+		<div class="col-sm-offset-3">
 			<ul class="btn-group pagination">
 				<c:if test="${page.prev }">
-					<li><a href="<c:url value='/shopping/myOrderList?page=${page.startPage - 1}&startDate=${cri.startDate }&endDate=${cri.endDate }'/>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+					<li><a class="paging" data-page="${page.startPage - 1}" data-start="${cri.startDate }" data-end="${cri.endDate }"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
 				</c:if>
 				<c:forEach begin="${page.startPage }" end="${page.endPage }" step="1" var="pageNum">
-					<li><a href="<c:url value='/shopping/myOrderList?page=${pageNum }&startDate=${cri.startDate }&endDate=${cri.endDate }'/>"><i>${pageNum }</i></a></li>
+					<li><a class="paging" data-page="${pageNum }" data-start="${cri.startDate }" data-end="${cri.endDate }"><i>${pageNum }</i></a></li>
 				</c:forEach>
-				<c:if test="${page.next && page.endPage > 0}">
-					<li><a href="<c:url value='/shopping/myOrderList?page=${page.endPage + 1}&startDate=${cri.startDate }&endDate=${cri.endDate }'/>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+				<c:if test="${page.next }">
+					<li><a class="paging" data-page="${page.endPage + 1}" data-start="${cri.startDate }" data-end="${cri.endDate }"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
 				</c:if>
 			</ul>
-		</div> -->
+		</div>
 	</div>
 	<hr/>
 	
@@ -285,14 +282,59 @@ $(document).ready(function() {
 	var frmBuy = $("#buyList");
 	var frmCancel = $("#cancelList");
 	
-	$("#searchBuy").on("click", searchList($("#datepicker1").val(), $("#datepicker2").val()));
+	// 주문 내역 페이징
+	function orderPaging(pageNum) {
+		$.ajax({
+			url: "/shopping/paging",
+			type: "get",
+			dataType: "json",
+			data: {"page" : pageNum, "start_date" : $("#datepicker1").val(), "end_date" : $("#datepicker2").val()},
+			success: function(data) {
+				console.log("success : " + data);
+				
+				// 페이지를 누를때 기존 내용으 지우고 새 페이지의 내용을 채움
+				$("#order_product_list").empty()
+				
+				var orderedHTML = '';
+				$.each(data, function(idx, orderProduct) {
+					orderedHTML += '<tr>'
+								+= '<td><a class="orderNum">' + orderProduct.order.order_number + '</a></td>'
+								+= '<td><div class="col-md-12 text-center" id="item_thumbnail">'
+								+= '<input type="image" src="${path }/download?imageFile=' + orderProduct.product.product_image + '" width="161" height="133" disabled>'
+								+= '<input type="hidden" class="orderId" name="orderId" value="' + orderProduct.order.order_id + '">'
+								+= '</td></div>'
+								+= '<td class="pdtName">' + orderProduct.product.product_name + '</td>'
+								+= '<td class="pdtCount">' + orderProduct.order.count + '</td>'
+								+= '<td class="orderPrice">' + orderProduct.product.product_price * orderProduct.order.count + '</td>'
+								+= '<td class="orderStatus">' + orderProduct.order.order_status + '</td>'
+								+= '<td>cancel</td>'
+					
+					$("#order_product_list").append(orderedHTML);
+				});
+			},
+			error: function(data) {
+				console.log("error : " + data);
+			}
+		});
+	}
+	
+	orderPaging(${page.cri.page});
+	// paging 버튼 클릭할 때마다 data-page에 지정된 값으로 페이지 넘기기
+	$(".paging").on("click", function() {
+		var pageNum = $(this).data("page");
+		orderPaging(pageNum);
+	});
+	
+	/* $("#searchBuy").on("click", searchList($("#datepicker1").val(), $("#datepicker2").val()));
 	
 	function searchList(date1, date2) {
 		var startDate = date1;
 		var endDate = date2;
 		console.log(date1 + " ~ " + date2);
-		
-	}
+	} */
+//-----------------------------------------------------------------------------------------------------------------------------------
+	// 취소 / 반품 내역 페이징
+	
 //-----------------------------------------------------------------------------------------------------------------------------------
 	// 주문 취소하기
 	$(".cancel_order, .orderId, .cancel_reason").each(function(idx) {
