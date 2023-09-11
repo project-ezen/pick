@@ -1,6 +1,6 @@
 package com.edu.sole.dto.recipe;
 
-public class JjimDTO {
+public class LikedDTO {
 	private String liked_id;
 	private String m_id;
 	private String recipe_code;

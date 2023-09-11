@@ -1,6 +1,6 @@
 package com.edu.board.dto;
 
-public class LikedDTO {
+public class JjimDTO {
 	
 	private int jjim_id;
 	private int b_id;

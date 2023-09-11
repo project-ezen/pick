@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.board.dto.BoardDTO;
-import com.edu.board.dto.LikedDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PagingCriteria;
 
 
@@ -33,10 +33,10 @@ public interface BoardDAO {
 	public void delete(int board_id) throws DataAccessException;
 	
 	// 찜 등록
-	public void jjimOK(LikedDTO likedDTO) throws DataAccessException;
+	public void jjimOK(JjimDTO jjimDTO) throws DataAccessException;
 	
 	// 찜 조회
-	public LikedDTO jjimSelect(int board_id) throws DataAccessException;
+	public  JjimDTO jjimSelect(int board_id) throws DataAccessException;
 
 }
 

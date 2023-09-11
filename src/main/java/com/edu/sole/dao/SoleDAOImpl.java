@@ -12,9 +12,11 @@ import org.springframework.stereotype.Repository;
 
 import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.SoleSearchCriteria;
+import com.edu.sole.dto.base.BaseSoleDTO;
+import com.edu.sole.dto.base.BaseSoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
-import com.edu.sole.dto.recipe.JjimDTO;
-import com.edu.sole.dto.recipe.JjimSelectDTO;
+import com.edu.sole.dto.recipe.LikedDTO;
+import com.edu.sole.dto.recipe.LikedSelectDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
 import com.edu.sole.dto.recipe.RecipeReviewDTO;
 import com.edu.sole.dto.recipe.ReviewCriteria;
@@ -99,7 +101,7 @@ public class SoleDAOImpl implements SoleDAO {
 	
 	// 찜 인설트
 	@Override
-	public void jjimInsert(JjimDTO jjimInsert) throws Exception {
+	public void jjimInsert(LikedDTO jjimInsert) throws Exception {
 		
 		String liked_id = selectLikedId();
 		jjimInsert.setLiked_id(liked_id);
@@ -117,15 +119,29 @@ public class SoleDAOImpl implements SoleDAO {
 	
 	// 찜 셀렉하는
 	@Override
-	public JjimDTO jjimSelect(JjimSelectDTO Wla) throws Exception {
+	public LikedDTO jjimSelect(LikedSelectDTO Wla) throws Exception {
 		
 		return sqlSession.selectOne(namespace + ".jjimSelect", Wla);
 	}
 	
 	// 찜 딜리트
 	@Override
-	public void jjimDelete(JjimDTO jjimDelete) throws Exception {
+	public void jjimDelete(LikedDTO jjimDelete) throws Exception {
 		
 		sqlSession.delete(namespace + ".jjimDelte", jjimDelete);
+	}
+	
+	// 베이스주 셀렉
+	@Override
+	public List<BaseSoleDTO> selectbase(BaseSoleSearchCriteria cri) {
+		
+		return sqlSession.selectList(namespace + ".selectbase", cri);
+	}
+	
+	// 베이스주 총 개수 구하는
+	@Override
+	public int basecount(BaseSoleSearchCriteria cri) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace + ".basecount", cri);
 	}
 } // end class

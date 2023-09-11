@@ -10,9 +10,11 @@
 	<%@ include file="../include/header.jsp" %>
     <style>
       /*상품 관련 이미지, 위치*/
+	  
       .product-img {
         /*width: 400px;
         height: 400px;
+        
         margin-top: 100px;*/
         max-width: 100%;
 		width: auto;
@@ -56,8 +58,13 @@
       .infoAndReview li a {
         background-color: rgb(139, 139, 139);
       }
-      .page:link {
-        color: black;
+      a:link {
+        text-decoration-line: none;
+        color: white;
+      }
+      a:visited {
+      	color: white;
+      	text-decoration-line: none;
       }
       #reviewBtn {
       	margin-left: 50px;
@@ -95,23 +102,35 @@
 	  	font-size: 3em;
 		color: transparent;
 		text-shadow: 0 0 0 #f0f0f0;
-		cursor: default;
+		cursor: pointer;
 	  }
 	  .jjim {
 	  	font-size: 3em;
 	  	color: transparent;
 	  	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-	  	cursor: default;
+	  	cursor: pointer;
+	  }
+	  
+	  .btnAndJjim {
+	  	display: flex; 
+	  	flex-direction: row; 
+	  	align-items: center;
+	  }
+	  
+	  .right {
+	  	margin-left: auto;
 	  }
 	  
     </style>
   </head>
   <%@ include file="../include/topMenu.jsp" %>
-  <body>
-    <br/>
-    <br/>
-    <br/>
-    <div class="foot">
+  <body class="bg">
+    <br />
+    <br />
+    <br />
+    
+   
+    <div>
       <div class="container" style="background-color:white">
         
         <div class="row" >
@@ -123,15 +142,15 @@
           <!--상품 간단 정보-->
           <h1>${recipe.alcohole_name}</h1>
           <div class="col-md-6 product-info">
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="margin:0px;">
               <tbody>
                 <tr>
                   <th>설명</th>
-                  <td>${recipe.content}</td>
+                  <td>${recipe.content }</td>
                 </tr>
                 <tr>
                   <th>도수</th>
-                  <td>${recipe.alcohole_dosu}도</td>
+                  <td>${recipe.alcohole_dosu }도</td>
                 </tr>
                 <tr>
                   <th>맛</th>
@@ -139,26 +158,31 @@
                 </tr>
               </tbody>
             </table>
+            <div class="btnAndJjim">
+	            <div>
+	            	<button type="button" id="moklok">목록으로 돌아가기</button>
+	            </div>
             <!-- 즐겨찾기 부분 -->
 			<c:choose>
 			    <c:when test="${empty member.m_id || member.m_id eq ''}">
-			        <div align="right">
-			            <span class="nojjim" id="mark" style="font-family: 'Tenada';">★</span>
+			        <div align="right" class="right">
+			            <span class="nojjim" id="mark">★</span>
 			        </div>
 			    </c:when>
 			    
 			    <c:when test="${not empty jjimselect.liked_id}">
-			        <div align="right">
-			            <span class="jjim" id="mark" style="font-family: 'Tenada';">★</span>
+			        <div align="right" class="right">
+			            <span class="jjim" id="mark">★</span>
 			        </div>
 			    </c:when>
 			    
 			    <c:otherwise>
-			    	<div align="right">
-			            <span class="nojjim" id="mark" style="font-family: 'Tenada';">★</span>
+			    	<div align="right" class="right">
+			            <span class="nojjim" id="mark">★</span>
 			        </div>
 			    </c:otherwise>
 			</c:choose>
+			</div>
           </div>
           
         </div>
@@ -168,15 +192,15 @@
         <br />
         <br />
         <br />
-        <div class="container1">
+        <div class="container1" >
           <!--상세설명&리뷰-->
           <ul class="nav nav-tabs infoAndReview">
             <li class="active">
-              <a class="page" data-toggle="tab" href="#description">재료정보</a>
+              <a data-toggle="tab" href="#description">재료정보</a>
             </li>
             
             <li>
-            	<a class="page" data-toggle="tab" href="#review">리뷰</a>
+            	<a data-toggle="tab" href="#review">리뷰</a>
             </li>
           </ul>
           <div class="tab-content">
@@ -201,19 +225,19 @@
 			  	<ul class="btn-group pagination">
 					<c:if test="${rpgm.prev}">
 						<li>
-							<a class="paging-list page" data-page="${rpgm.startPage -1}"><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a class="paging-list" data-page="${rpgm.startPage -1}"><span class="glyphicon glyphicon-chevron-left"></span></a>
 						</li>
 					</c:if>
 										
 					<c:forEach begin="${rpgm.startPage}" end="${rpgm.endPage}" var="pageNum">
 						<li>
-							<a class="paging-list page" data-page="${pageNum}"><i>${pageNum}</i></a>
+							<a class="paging-list" data-page="${pageNum}"><i>${pageNum}</i></a>
 								</li>
 						</c:forEach>
 										
 					<c:if test="${rpgm.next}">
 						<li>
-							<a class="paging-list page" data-page="${rpgm.endPage +1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a class="paging-list" data-page="${rpgm.endPage +1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
 						</li>
 					</c:if>
 				</ul>
@@ -239,6 +263,8 @@
     <script>
 		$(document).ready(function () {
 			var reviewForm = $("#reviewForm");
+			var page = ${rpgm.cri.page} || 1;
+			var encodedPage = encodeURIComponent(page);
 			
 			$("#reviewBtn").click(function() {
 							
@@ -249,8 +275,8 @@
 				}
 				
 				if("${member.m_id}" == null || "${member.m_id}" == '') {
-					alert("로그인하셔야 작성할 수 있습니다.");
-					location.href="/member/login";
+					alert("로그인하셔야 작성할 수 있습니다. page");
+				 	location.href="/member/login?action=/sole/soleDetail?recipe_code=" + "${recipe.recipe_code}" + "&page=" + page;					
 				}
 			});	
 			
@@ -286,7 +312,7 @@
 		                        '<p>' + review.writedate + '</p>' +
 		                        '<p>' + starHtml + '</p>' +
 		                        '</div>' +
-		                        '<div class="col-sm-7">' +
+		                        '<div class="col-sm-6">' +
 		                        '<p id="reviewcontent">' + review.content + '</p>' +
 		                        '</div>' +
 		                        '</div>';
@@ -360,6 +386,10 @@
 		    	});
 		    } ///////////// end jjimDelete
 		    
+		    
+		    $("#moklok").click(function() {
+		    	action="/sole/sole?
+		    });
 			
 		});   /// end $
     </script>
