@@ -187,15 +187,17 @@ public class ShoppingController {
 		}
 		log.info("product : " + product);
 		
-//		// OrderPaging
-//		OrderPaging page = new OrderPaging();
-//		page.setCri(search);
-//		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
-//		page.setTotalCount(ShoppingService.orderListTotalCount(search));
-//		log.info("게시물의 총 건수 : " + page.getTotalCount());
-//		
-//		mav.addObject("page", page);
-//		mav.addObject("cri", search);
+		OrderPaging orderPage = new OrderPaging();
+		OrderPaging cancelPage = new OrderPaging();
+		
+		orderPage.setCri(search);
+		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
+		orderPage.setTotalCount(shoppingService.orderListTotalCount(search));
+		log.info("게시물의 총 건수 : " + orderPage.getTotalCount());
+		
+		
+		mav.addObject("orderPage", orderPage);
+		mav.addObject("cancelPage", cancelPage);
 		mav.addObject("order", order);
 		mav.addObject("product", product);
 		return mav;
@@ -204,13 +206,30 @@ public class ShoppingController {
 	// 페이징
 	@ResponseBody
 	@RequestMapping(value="/paging", method=RequestMethod.GET)
-	public ModelAndView pagingList(@RequestParam("page") int page, 
-			@RequestParam(value="start_date", required=false) Date start, @RequestParam(value="end_date", required=false) Date end) throws Exception {
-		log.info(page + " 페이지, " + start + "부터 " + end + "까지 주문 정보");
+	public ModelAndView pagingList(@RequestParam(value="page", required=false, defaultValue="1") int page, OrderSearch search, HttpServletRequest request) throws Exception {
+		log.info(page + " 페이지, " + search.getStartDate() + "부터 " + search.getEndDate() + "까지 주문 정보");
 		ModelAndView mav = new ModelAndView("jsonView");
 		
+		// 세션 준비하기
+		HttpSession session = request.getSession();
+		// 회원 정보 가져오기
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
 		
-		List<OrderDTO> orderList = shoppingService.showOrder();
+		OrderPaging orderPage = new OrderPaging();
+		orderPage.setCri(search);
+		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
+		orderPage.setTotalCount(shoppingService.orderListTotalCount(search));
+		log.info("게시물의 총 건수 : " + orderPage.getTotalCount());
+		
+		// 지정한 기간에 주문한 주문 정보 가져오기
+		Map searchMap = new HashMap();
+		searchMap.put("member", member.getM_id());
+		searchMap.put("startDate", search.getStartDate());
+		searchMap.put("endDate", search.getEndDate());
+		searchMap.put("page", search.getPage());
+		searchMap.put("perPageNum", search.getPerPageNum());
+		
+		List<OrderDTO> orderList = shoppingService.showOrder(searchMap);
 		log.info("order_list : " + orderList);
 		
 		// 주문한 상품 목록 가져오기 - 주문번호 한 개에 담겨있는 상품 목록 List에 저장
@@ -219,7 +238,9 @@ public class ShoppingController {
 			product.add(shoppingService.orderList(orderList.get(i)));
 		}
 		log.info("product : " + product);
+		log.info("page : " + orderPage);
 		
+		mav.addObject("orderPage", orderPage);
 		mav.addObject("order", orderList);
 		mav.addObject("product", product);
 		return mav;
