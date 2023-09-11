@@ -279,14 +279,13 @@ public class MemberController {
 		
 
 		HttpSession session = request.getSession(); 		
-		MemberDTO mid = (MemberDTO) session.getAttribute("member");
-		String m_id = mid.getM_id();
-
+		MemberDTO memberd = (MemberDTO) session.getAttribute("member");
+		String m_id = memberd.getM_id();
 		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
 		
-		
-		model.addAttribute("member", member.getMyPageList());
+		model.addAttribute("boardList", member.getMyPageList());
 		System.out.println("*******************************썸네일"+member.getMyPageList());
+		
 		return "/member/myboard";
 	}
 		

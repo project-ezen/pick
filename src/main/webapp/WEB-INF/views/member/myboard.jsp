@@ -10,7 +10,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
 
-	.container { background-color: #fff; min-height: 1000px; }
+	.container { background-color: #fff; min-height: 900px; }
 	
 	.foot { padding-bottom: 150px; padding-top: 150px; margin:auto; }
 	
@@ -91,15 +91,16 @@
 					</tr>
 				</thead>
 				<tbody>
-				<c:choose>
-					<c:when test="${empty member}"><!-- 게시글이 하나도 없는 경우 -->
-					<tr>
-						<td colspan="5"><div style="font-size: 17px; font-weight: bold;">작성글이 없습니다.</div></td>						
-					</tr>
-					</c:when>
-					<c:when test="${member != null }"><!-- 게시글이 하나라도 있는 경우 -->
+				
+					<c:if test="${boardList == null}"><!-- 게시글이 하나도 없는 경우 -->
+						<tr>
+							<td colspan="5"><div style="font-size: 17px; font-weight: bold;">작성글이 없습니다.</div></td>						
+						</tr>
+					</c:if>
+					
+					<!-- 게시글이 하나라도 있는 경우 -->
 					<%int cnt=1; %>
-						<c:forEach items="${member}" var="dto">
+						<c:forEach items="${boardList}" var="dto">
 							<tr>
 								<td><%=cnt++ %></td>
 								<td><img style="height:100px; width:100px;"src="${path}/resources/images/thumb/t_${dto.thumbnail}" alt="사진"></td>
@@ -109,8 +110,7 @@
 								<td style="width:10%;">${dto.jjim_cnt}</td>
 							</tr>
 						</c:forEach>
-					</c:when>
-				</c:choose>
+				
 				</tbody>
 			</table>
 		</div>
@@ -118,10 +118,6 @@
 	<br/><br/>
 </div>
 <%@ include file="../include/footer.jsp" %>
-
-<script>
-
-</script>
 
 </body>
 </html>
