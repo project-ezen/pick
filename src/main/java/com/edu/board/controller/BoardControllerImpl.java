@@ -31,7 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.board.dao.BoardDAO;
 import com.edu.board.dto.BoardDTO;
-import com.edu.board.dto.LikedDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
 import com.edu.board.dto.ReplyDTO;
@@ -104,8 +104,8 @@ public class BoardControllerImpl implements BoardController {
 		System.out.println("BCI articleDetail() : " + boardDTO);
 		model.addAttribute("article",boardDTO);
 		
-		LikedDTO likedDTO = boardService.jjimSelect(board_id);
-		model.addAttribute("liked", likedDTO);
+		JjimDTO jjimDTO = boardService.jjimSelect(board_id);
+		model.addAttribute("liked", jjimDTO);
 		System.out.println(board_id);
 		List<ReplyDTO> reply = replyService.list(board_id);
 		System.out.println(reply);
@@ -251,13 +251,13 @@ public class BoardControllerImpl implements BoardController {
 	@Override
 	@ResponseBody
 	@RequestMapping(value="/board/jjimOK", method=RequestMethod.GET, produces = "application/json")
-	public LikedDTO jjimOK(@RequestParam("bid") int bid, @RequestParam("mid") String mid) throws Exception {
-		LikedDTO likedDTO = new LikedDTO();
-		likedDTO.setB_id(bid);
-		likedDTO.setMem_id(mid);
-		logger.info("likedDTO 값: " + likedDTO);
-		boardService.jjimOK(likedDTO);
-		return likedDTO;
+	public JjimDTO jjimOK(@RequestParam("bid") int bid, @RequestParam("mid") String mid) throws Exception {
+		JjimDTO jjimDTO = new JjimDTO();
+		jjimDTO.setB_id(bid);
+		jjimDTO.setMem_id(mid);
+		logger.info("likedDTO 값: " + jjimDTO);
+		boardService.jjimOK(jjimDTO);
+		return jjimDTO;
 	}
 	
 	

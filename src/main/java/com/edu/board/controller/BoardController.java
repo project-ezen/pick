@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.edu.board.dto.LikedDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PagingCriteria;
 
 
@@ -39,7 +39,7 @@ public interface BoardController {
 		// 게시글 수정
 		
 		// 찜 등록
-		public LikedDTO jjimOK(int bid, String mid) throws Exception;
+		public JjimDTO jjimOK(int bid, String mid) throws Exception;
 		
 
 }

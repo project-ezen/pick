@@ -40,7 +40,7 @@ label {
 	height: 35px;
 	font-size: 15px;
 	border-radius: 5px;
-	border: 2px solid #586389;
+	border: none;
 	background-color: #687AB6;
 	color: #fff;
 	}
@@ -50,7 +50,7 @@ label {
 	height: 35px;
 	font-size: 15px;
 	border-radius: 5px;
-	border: 2px solid #B36E79;
+	border: none;
 	background-color: #E96F84;
 	color: #fff;
 	}
@@ -100,10 +100,10 @@ label {
 			</div>
 		</div>
 		<br/>
-		<div class="form-group">
+		<div class="form-group" style="display: flex; align-items: center;">   <!--style  수직정렬 -->
 			<label class="control-label col-sm-3">작성자</label>
 			<div class="col-sm-7">
-				<input type="text" class="form-control-plaintext reon" value="${member.m_nickname}" readonly/>
+				<input type="text" class="form-control-plaintext reon" value="${member.m_nickname}" readonly />
 			</div>
 		</div>
 		
@@ -111,11 +111,11 @@ label {
 			<label class="control-label col-sm-3" id="별점">별점</label>
 			<div class="col-sm-7">
 				<fieldset id="stars">
-		            <input type="radio" name="star" value="1" id="rate1"><label for="rate1">★</label>
-		            <input type="radio" name="star" value="2" id="rate2"><label for="rate2">★</label>
+		            <input type="radio" name="star" value="5" id="rate1"><label for="rate1">★</label>
+		            <input type="radio" name="star" value="4" id="rate2"><label for="rate2">★</label>
 		            <input type="radio" name="star" value="3" id="rate3"><label for="rate3">★</label>
-		            <input type="radio" name="star" value="4" id="rate4"><label for="rate4">★</label>
-		            <input type="radio" name="star" value="5" id="rate5"><label for="rate5">★</label>
+		            <input type="radio" name="star" value="2" id="rate4"><label for="rate4">★</label>
+		            <input type="radio" name="star" value="1" id="rate5"><label for="rate5">★</label>
 					<input type="radio" name="star" value="0" checked/>
         		</fieldset>
 			</div>
@@ -124,7 +124,7 @@ label {
 		<div class="form-group">
 			<label class="control-label col-sm-3">내용</label>
 			<div class="col-sm-6">
-				<textarea class="form-control" rows="15" name="content"></textarea>
+				<textarea class="form-control" rows="15" name="content" maxlength="500" placeholder="한 번 작성한 리뷰는 수정하거나 삭제할 수 없으니 신중하게 작성해주세요."></textarea>
 			</div>
 		</div>
 		
@@ -148,15 +148,12 @@ label {
 		<input type="hidden" name="m_id" value="${member.m_id}"/>
 	</form>
 </div>
-
+<br/><br/>
 <script>
 	function back() {   // 취소버튼을 누르면 바로 뒤로 감
 		window.history.back();
 	}
 	
-	$(document).ready(function() {
-		
-	});
 	
 	function readURL(input) { // 파일을 선택해서 변화가 생겼을 때 
 		if(input.files && input.files[0]) {  // 파일을 선택해서 파일이 있는 경우 files[0] : 선택한 첫번째 파일

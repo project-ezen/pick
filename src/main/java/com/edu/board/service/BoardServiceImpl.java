@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.board.dto.BoardDTO;
-import com.edu.board.dto.LikedDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PagingCriteria;
 
 import oracle.jdbc.proxy.annotation.Post;
@@ -68,15 +68,15 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 찜 등록
 	@Override
-	public void jjimOK(LikedDTO likedDTO) throws Exception {
-		boardDAO.jjimOK(likedDTO);
+	public void jjimOK( JjimDTO jjimDTO) throws Exception {
+		boardDAO.jjimOK(jjimDTO);
 	}
 	
 	// 찜 조회
 	@Override
-	public LikedDTO jjimSelect(int board_id) throws Exception {
-		LikedDTO likedDTO = boardDAO.jjimSelect(board_id);
-		return likedDTO;
+	public  JjimDTO jjimSelect(int board_id) throws Exception {
+		 JjimDTO jjimDTO = boardDAO.jjimSelect(board_id);
+		return jjimDTO;
 	}
 	
 

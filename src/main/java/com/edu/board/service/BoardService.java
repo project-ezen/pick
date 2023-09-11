@@ -8,7 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.board.dto.BoardDTO;
-import com.edu.board.dto.LikedDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PagingCriteria;
 
 import oracle.jdbc.proxy.annotation.Post;
@@ -35,8 +35,8 @@ public interface BoardService {
 	public void delete(int board_id) throws Exception;
 	
 	// 찜 등록
-	public void jjimOK(LikedDTO likedDTO) throws Exception;
+	public void jjimOK(JjimDTO likedDTO) throws Exception;
 	
 	// 찜 조회
-	public LikedDTO jjimSelect(int board_id) throws Exception;
+	public  JjimDTO jjimSelect(int board_id) throws Exception;
 }
