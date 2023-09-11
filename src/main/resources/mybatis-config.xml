@@ -10,6 +10,7 @@
 		
 		<typeAlias type="com.edu.shopping.dto.CartDTO" alias="cartDTO"/>
 		<typeAlias type="com.edu.shopping.dto.OrderDTO" alias="orderDTO"/>
+		<typeAlias type="com.edu.shopping.dto.OrderSearch" alias="orderSearch"/>
 		
 		<typeAlias type="com.edu.store.dto.ProductDisplayVO" alias="productDisplayVO"/>
 		<typeAlias type="com.edu.store.dto.ProductDTO" alias="productDTO"/>
