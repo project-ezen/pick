@@ -79,5 +79,11 @@ public class BoardServiceImpl implements BoardService {
 		return jjimDTO;
 	}
 	
+	// 찜 삭제
+	@Override
+	public void jjimNO(JjimDTO jjimNO) throws Exception {
+		boardDAO.jjimNO(jjimNO);
+	}
+	
 
 }

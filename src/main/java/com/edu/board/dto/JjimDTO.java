@@ -3,9 +3,8 @@ package com.edu.board.dto;
 public class JjimDTO {
 	
 	private int jjim_id;
-	private int b_id;
-	private String mem_id;
-	private int j_check;
+	private int board_id;
+	private String m_id;
 	
 	public int getJjim_id() {
 		return jjim_id;
@@ -13,27 +12,21 @@ public class JjimDTO {
 	public void setJjim_id(int jjim_id) {
 		this.jjim_id = jjim_id;
 	}
-	public int getB_id() {
-		return b_id;
+	public int getBoard_id() {
+		return board_id;
 	}
-	public void setB_id(int b_id) {
-		this.b_id = b_id;
+	public void setBoard_id(int board_id) {
+		this.board_id = board_id;
 	}
-	public String getMem_id() {
-		return mem_id;
+	public String getM_id() {
+		return m_id;
 	}
-	public void setMem_id(String mem_id) {
-		this.mem_id = mem_id;
-	}
-	public int getJ_check() {
-		return j_check;
-	}
-	public void setJ_check(int j_check) {
-		this.j_check = j_check;
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
 	}
 	@Override
 	public String toString() {
-		return "LikedDTO [jjim_id=" + jjim_id + ", b_id=" + b_id + ", mem_id=" + mem_id + ", j_check=" + j_check + "]";
+		return "JjimDTO [jjim_id=" + jjim_id + ", board_id=" + board_id + ", m_id=" + m_id + "]";
 	}
 	
 }

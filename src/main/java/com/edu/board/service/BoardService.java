@@ -38,5 +38,8 @@ public interface BoardService {
 	public void jjimOK(JjimDTO likedDTO) throws Exception;
 	
 	// 찜 조회
-	public  JjimDTO jjimSelect(int board_id) throws Exception;
+	public JjimDTO jjimSelect(int board_id) throws Exception;
+	
+	// 찜 삭제
+	public void jjimNO(JjimDTO jjimNO) throws Exception;
 }
