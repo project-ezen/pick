@@ -36,7 +36,7 @@ public interface BoardDAO {
 	public void jjimOK(JjimDTO jjimDTO) throws DataAccessException;
 	
 	// 찜 조회
-	public  JjimDTO jjimSelect(int board_id) throws DataAccessException;
+	public List<JjimDTO> jjimSelect(int board_id) throws DataAccessException;
 	
 	// 찜 삭제
 	public void jjimNO(JjimDTO jjimNO) throws DataAccessException;

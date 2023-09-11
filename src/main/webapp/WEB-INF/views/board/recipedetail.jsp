@@ -117,16 +117,22 @@ color:#fff;
 					<c:choose>
 						<c:when test="${not empty member}">	<!--  로그인 했을 시 -->
 							<c:choose>
-								<c:when test="${member.m_id == article.writer && not empty liked}">	<!-- 찜 했을 시 -->
+								<c:when test="${member.m_id == article.writer && not empty liked}">	<!-- 본인 글 찜 했을 시 -->
 									<td style="padding-bottom:5px;">
 										<button class="jjimBtn" type="button" onClick="jjimNO()"><i class="bi bi-heart-fill"></i></button>
-										<span style="margin-left:20px; font-size:16px;">{article.jjim_cnt}</span>
+										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
+									</td>
+								</c:when>
+								<c:when test="${member.m_id != article.writer && not empty liked}">	<!-- 본인 글 아닌거 찜 했을 시 -->
+									<td style="padding-bottom:5px;">
+										<button class="jjimBtn" type="button" onClick="jjimNO()"><i class="bi bi-heart-fill"></i></button>
+										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
 									</td>
 								</c:when>
 								<c:otherwise>	<!-- 찜 안했을 시 -->
 									<td style="padding-bottom:5px;">
 										<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
-										<span style="margin-left:20px; font-size:16px;">{article.jjim_cnt}</span>
+										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
 									</td>
 								</c:otherwise>
 							</c:choose>
@@ -134,7 +140,7 @@ color:#fff;
 						<c:otherwise>	<!-- 로그인 안했을 시 -->
 							<td style="padding-bottom:5px;">
 								<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
-								<span style="margin-left:20px; font-size:16px;">{100}</span>
+								<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
 							</td>
 						</c:otherwise>
 					</c:choose>
