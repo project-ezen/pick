@@ -90,8 +90,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 	
 	// 찜 조회
-	public JjimDTO jjimSelect(int board_id) throws DataAccessException {
-		return sqlSession.selectOne(namespace + ".jjimSelect", board_id);
+	public List<JjimDTO> jjimSelect(int board_id) throws DataAccessException {
+		return sqlSession.selectList(namespace + ".jjimSelect", board_id);
 	}
 	
 	// 찜 삭제
