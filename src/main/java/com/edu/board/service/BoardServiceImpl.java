@@ -68,15 +68,14 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 찜 등록
 	@Override
-	public void jjimOK( JjimDTO jjimDTO) throws Exception {
+	public void jjimOK(JjimDTO jjimDTO) throws Exception {
 		boardDAO.jjimOK(jjimDTO);
 	}
 	
 	// 찜 조회
 	@Override
-	public  JjimDTO jjimSelect(int board_id) throws Exception {
-		 JjimDTO jjimDTO = boardDAO.jjimSelect(board_id);
-		return jjimDTO;
+	public List<JjimDTO> jjimSelect(int board_id) throws Exception {
+		 return boardDAO.jjimSelect(board_id);
 	}
 	
 	// 찜 삭제

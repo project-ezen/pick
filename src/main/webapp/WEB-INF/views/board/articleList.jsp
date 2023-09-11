@@ -196,7 +196,7 @@ font-size: 15px;
 										</c:if>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<i id="heart" class="bi bi-heart"></i>
-										<span class="jjim_count">100</span>
+										<span class="jjim_count">${article.jjim_cnt}</span>
 									</c:when>
 									<c:otherwise> <!-- 비로그인 상태일 때, 찜 버튼 디폴트 -->
 										<i class="bi bi-chat"></i>
@@ -205,7 +205,7 @@ font-size: 15px;
 										</c:if>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<i class="bi bi-heart"></i>
-										<span class="jjim_count">100</span>
+										<span class="jjim_count">${article.jjim_cnt}</span>
 									</c:otherwise>
 								</c:choose>
 								</div>
