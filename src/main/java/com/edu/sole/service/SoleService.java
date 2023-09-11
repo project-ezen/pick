@@ -7,8 +7,10 @@ import javax.inject.Inject;
 
 import com.edu.sole.dao.SoleDAO;
 import com.edu.sole.dto.SoleSearchCriteria;
-import com.edu.sole.dto.recipe.JjimDTO;
-import com.edu.sole.dto.recipe.JjimSelectDTO;
+import com.edu.sole.dto.base.BaseSoleDTO;
+import com.edu.sole.dto.base.BaseSoleSearchCriteria;
+import com.edu.sole.dto.recipe.LikedDTO;
+import com.edu.sole.dto.recipe.LikedSelectDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
 import com.edu.sole.dto.recipe.RecipeReviewDTO;
 import com.edu.sole.dto.recipe.ReviewCriteria;
@@ -39,11 +41,17 @@ public interface SoleService {
 	public int reviewcount(ReviewCriteria reviewcri) throws Exception;
 	
 	//찜 인설트
-	public void jjimInsert(JjimDTO jjimInsert) throws Exception;
+	public void jjimInsert(LikedDTO jjimInsert) throws Exception;
 	
 	//찜 셀렉하는거
-	public JjimDTO jjimSelect(JjimSelectDTO Wla) throws Exception;
+	public LikedDTO jjimSelect(LikedSelectDTO Wla) throws Exception;
 	
 	// 찜 딜리트
-	public void jjimDelete(JjimDTO jjimDelete) throws Exception;
+	public void jjimDelete(LikedDTO jjimDelete) throws Exception;
+	
+	//베이스주 셀렉
+	public List<BaseSoleDTO> selectbase(BaseSoleSearchCriteria cri);
+	
+	//베이스주 총개수
+	public int basecount(BaseSoleSearchCriteria cri);
 }

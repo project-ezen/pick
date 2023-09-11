@@ -1,11 +1,11 @@
 package com.edu.board.dto;
 
-public class LikedDTO {
+public class JjimDTO {
 	
 	private int jjim_id;
 	private int b_id;
 	private String mem_id;
-	private int like_check;
+	private int j_check;
 	
 	public int getJjim_id() {
 		return jjim_id;
@@ -25,16 +25,15 @@ public class LikedDTO {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
-	public int getLike_check() {
-		return like_check;
+	public int getJ_check() {
+		return j_check;
 	}
-	public void setLike_check(int like_check) {
-		this.like_check = like_check;
+	public void setJ_check(int j_check) {
+		this.j_check = j_check;
 	}
 	@Override
 	public String toString() {
-		return "LikedDTO [jjim_id=" + jjim_id + ", b_id=" + b_id + ", mem_id=" + mem_id + ", like_check=" + like_check
-				+ "]";
+		return "LikedDTO [jjim_id=" + jjim_id + ", b_id=" + b_id + ", mem_id=" + mem_id + ", j_check=" + j_check + "]";
 	}
 	
 }

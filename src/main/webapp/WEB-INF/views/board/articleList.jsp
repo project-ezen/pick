@@ -29,8 +29,9 @@ margin-left: 45px;
 display: inline-block;
 }
 
-a:link{text-decoration: none; color: #000}
-a:visited,a:active{color: #000;}
+
+.page:link{text-decoration: none; color: #000}
+.page:visited,.page:active{color: #000;}
 
 .pagenav {
 display: inline-block;
@@ -113,6 +114,7 @@ margin-right: 5px;
 
 .bottom {
 width: 100%;
+height: 24px;
 position: absolute;
 bottom: 10px;
 text-align: center;
@@ -128,21 +130,13 @@ padding-left: 10px;
 .bi-heart::before {
     content: "\f417";
     font-size: 20px;
+    margin-right: 4px;
 }
 
 .bi-heart-fill::before {
 	content: "\f415";
 	font-size: 20px;
-}
-
-.jjimBtn {
-	background-color: #ADC4CE;
-	/*background-color: #f8f8f8;*/
-}
-
-.jjimBtn:hover {
-	color: #c5a1eb;
-	background-color: #895db7;
+	margin-right: 4px;
 }
 
 span {
@@ -181,7 +175,7 @@ font-size: 15px;
 						<c:choose>
 							<c:when test="${not empty article.thumbnail && article.thumbnail != 'null'}">
 								<!-- <div class="thumb" >${article.thumbnail}</div> -->
-								<input type="hidden" name="originalFileName" value="${article.thumbnail}"/>
+								<input type="hidden" name="thumbnail" value="${article.thumbnail}"/>
 								<img class="thumb" style="width:100px; height:100px; float:left;" src="${path}/thumbdown?board_id=${article.board_id}&thumbnail=${article.thumbnail}" id="thumbnail"/>
 							</c:when>
 							<c:otherwise>
@@ -190,28 +184,28 @@ font-size: 15px;
 						</c:choose>
 							<div class="lele">
 								<div class="top">
-									<p class="title" ><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
+									<p class="title" ><a class="page"  href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
 									<p class="writer">${article.nickname}</p>
 								</div>
 								<div class="bottom">
 								<c:choose>
 									<c:when test="${member != null}"> <!-- 로그인 했을 때 -->
-										<button id="jjimBtn" name="jjimBtn" class="jjimBtn" onClick="jjimBtn('${isLogOn}', '${page}/member/login')" type="button" style="position:relative;bottom:6px; border: none;border-radius:3px; padding: 0px; width:28px; height:26px;">
-										<i id="heart" class="bi bi-heart" style="position:absolute;bottom:-1px;right:4px;"></i></button><span class="jjim_count">100</span>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<i class="bi bi-chat" style="width: 25px; height: 25px;"></i>
+										<i class="bi bi-chat"></i>
 										<c:if test ="${article.reply_count != 0}">
 										<span>${article.reply_count}</span>
 										</c:if>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<i id="heart" class="bi bi-heart"></i>
+										<span class="jjim_count">100</span>
 									</c:when>
 									<c:otherwise> <!-- 비로그인 상태일 때, 찜 버튼 디폴트 -->
-										<button class="jjimBtn" onClick="jjimBtn('${isLogOn}', '${page}/member/login')" type="button" style="position:relative;bottom:6px; border: none;border-radius:3px; padding: 0px; width:28px; height:26px;">
-										<i class="bi bi-heart" style="position:absolute;bottom:-1px;right:4px;"></i></button><span class="jjim_count">100</span>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<i class="bi bi-chat" style="width: 25px; height: 25px;"></i>
+										<i class="bi bi-chat"></i>
 										<c:if test ="${article.reply_count != 0}">
 										<span>${article.reply_count}</span>
 										</c:if>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<i class="bi bi-heart"></i>
+										<span class="jjim_count">100</span>
 									</c:otherwise>
 								</c:choose>
 								</div>
@@ -226,17 +220,17 @@ font-size: 15px;
 	         <ul class="btn-group pagination">
 	            <c:if test="${pageMaker.prev}">
 	               <li>
-	                  <a href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 	               </li>
 	            </c:if>
 	            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 	               <li>
-	                  <a href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
 	               </li>
 	            </c:forEach>
 	            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 	               <li>
-	                  <a href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 	               </li>
 	            </c:if>
 	         </ul>
@@ -257,37 +251,6 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 	}
 }
 
-function jjimBtn(isLogOn, loginForm){
-	
-	// 비로그인 상태에서 찜버튼을 누를 시
-    if (isLogOn == "" || isLogOn == false) {
-        if (confirm("로그인 한 회원만 이용가능합니다. 로그인 하시겠습니까?")) {
-            // 승낙하면 로그인 페이지로 이동
-            location.href =  loginForm + '?action=/board/articleList';
-        } else {
-            // 거부하면 해당 페이지 새로고침
-            location.reload();
-        }
-    // 로그인 상태에서 찜버튼을 누를 시
-    } else {
-    	alert("회원");
-    	
-    	$.ajax({
-    		url: "/board/jjimUpdate",
-    		type: "post",
-    		data: {
-    			"mid": ${member.m_id}
-    		},
-    		success: function(data){
-    			jjim_count();
-    		},
-    		error: function(data){
-    			alert("오류");
-    		}
-    	});
-    	
-    }
-}
 
 </script>
 </body>

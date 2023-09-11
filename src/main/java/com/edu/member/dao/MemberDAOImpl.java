@@ -10,7 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.member.dto.MemberDTO;
+import com.edu.sole.dto.recipe.LikedDTO;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -116,9 +118,21 @@ public class MemberDAOImpl implements MemberDAO {
 	//내가 쓴 게시물
 
 	@Override
-	public MemberDTO myboardList(String m_id) throws Exception {
+	public MemberDTO myboardList(String mid) throws Exception {
 	
-		return sqlSession.selectOne(namespace + ".myboard" , m_id);
+		return sqlSession.selectOne(namespace + ".myboard" , mid);
+	}
+
+	@Override
+	public List<LikedDTO> likeList(String m_id) throws Exception {
+		logger.info("좋아요");
+		return sqlSession.selectOne(namespace + ".mylikelist" , m_id);
+	}
+
+	@Override
+	public List<JjimDTO> jjimList(String m_id) throws Exception {
+		return sqlSession.selectOne(namespace + ".myjjimlist" , m_id);
+
 	}
 
 	

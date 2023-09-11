@@ -10,7 +10,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
 
-	.container { background-color: #fff; min-height: 600px; }
+	.container { background-color: #fff; min-height: 1000px; }
 	
 	.foot { padding-bottom: 150px; padding-top: 150px; margin:auto; }
 	
@@ -59,6 +59,15 @@
 	.list:hover { background-color:#afb7db; }
 	
 	.list:active { position:relative; top:1px; }
+	
+	.pagenav {
+	display: inline-block;
+	width: 50%;
+	text-align: center;
+	position: relative;
+	left: 25%;
+	
+	}
 
 </style>
 </head>
@@ -78,25 +87,30 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>작성일자</th>
-						<!--  <th>찜</th>-->
+						<th>찜</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:if test="${empty member.myPageList}">
+				<c:choose>
+					<c:when test="${empty member}"><!-- 게시글이 하나도 없는 경우 -->
 					<tr>
-						<td colspan="5"><div style="font-size: 17px; font-weight: bold;">작성글이 없습니다.</div></td>
+						<td colspan="5"><div style="font-size: 17px; font-weight: bold;">작성글이 없습니다.</div></td>						
 					</tr>
-					</c:if>
-					<c:forEach items="${member.myPageList}" var="dto">
-					<tr>
-						<td>${dto.board_id}</td>
-						<td>${dto.image}</td>
-						<td><a href="${path}/board/recipedetail?board_id=${dto.board_id}">${dto.title}</a></td>
-						<td>${dto.writer}</td>
-						<td>${dto.writeDate}</td>
-						<!--  <td>{boardDTO.jjim}</td>-->
-					</tr>
-					</c:forEach>
+					</c:when>
+					<c:when test="${member != null }"><!-- 게시글이 하나라도 있는 경우 -->
+					<%int cnt=1; %>
+						<c:forEach items="${member}" var="dto">
+							<tr>
+								<td><%=cnt++ %></td>
+								<td><img style="height:100px; width:100px;"src="${path}/resources/images/thumb/t_${dto.thumbnail}" alt="사진"></td>
+								<td style="width:45%;"><a href="${path}/board/recipedetail?board_id=${dto.board_id}">${dto.title}</a></td>
+								<td style="width:15%;">${dto.writer}</td>
+								<td style="width:15%;">${dto.writeDate}</td>
+								<td style="width:10%;">${dto.jjim_cnt}</td>
+							</tr>
+						</c:forEach>
+					</c:when>
+				</c:choose>
 				</tbody>
 			</table>
 		</div>
@@ -104,5 +118,10 @@
 	<br/><br/>
 </div>
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+
+</script>
+
 </body>
 </html>

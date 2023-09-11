@@ -73,10 +73,23 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public void overwriteOrder(Map<String, String> map) throws Exception {
 		shoppingDAO.overwriteOrder(map);
 	}
+
+	@Override
+	public OrderDTO changeProduct(String order_id) throws Exception {
+		return shoppingDAO.changeProduct(order_id);
+	}
 //=====================================================================================================
 	@Override
 	public List<OrderDTO> orderNumInfo(int order_num) throws Exception {
 		return shoppingDAO.orderNumInfo(order_num);
 	}
+	
+	//모름 -> 빨간표시 지움
+	@Override
+	public List<OrderDTO> showOrder() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

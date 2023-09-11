@@ -34,9 +34,12 @@ import com.edu.member.dto.MemberDTO;
 import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.SolePageMaker;
 import com.edu.sole.dto.SoleSearchCriteria;
+import com.edu.sole.dto.base.BaseSoleDTO;
+import com.edu.sole.dto.base.BaseSolePageMaker;
+import com.edu.sole.dto.base.BaseSoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
-import com.edu.sole.dto.recipe.JjimDTO;
-import com.edu.sole.dto.recipe.JjimSelectDTO;
+import com.edu.sole.dto.recipe.LikedDTO;
+import com.edu.sole.dto.recipe.LikedSelectDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
 import com.edu.sole.service.SoleService;
 import com.edu.sole.dto.recipe.RecipeReviewDTO;
@@ -97,7 +100,7 @@ public class SoleController {
 	//------------------------------------------------------------------------------------------------------
 	// sole detail
 	@RequestMapping(value="/soleDetail", method=RequestMethod.GET)
-	public ModelAndView soleDetail(HttpServletRequest request, HttpServletResponse response, @RequestParam("recipe_code") String recipe_code, int page) throws Exception{
+	public ModelAndView soleDetail(HttpServletRequest request, HttpServletResponse response, @RequestParam("recipe_code") String recipe_code, @RequestParam(name="page", required = false, defaultValue = "1") int page) throws Exception{	
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -115,9 +118,6 @@ public class SoleController {
 		reviewcri.setRecipe_code(recipe_code);     // 레시피 코드를 설정한다.
 		rpgm.setCri(reviewcri);
 		
-		if(page == 0) {
-			page = 1;
-		}
 		
 		reviewcri.setPage(page);
 		rpgm.setTotalCount(soleservice.reviewcount(reviewcri));
@@ -130,10 +130,10 @@ public class SoleController {
 		MemberDTO member = (MemberDTO)session.getAttribute("member");
 		if(member != null) {    // 로그인을 했을 때
 			String m_id = member.getM_id();
-			JjimSelectDTO Wla = new JjimSelectDTO();
+			LikedSelectDTO Wla = new LikedSelectDTO();
 			Wla.setM_id(m_id);
 			Wla.setRecipe_code(recipe_code);
-			JjimDTO jjimselect = soleservice.jjimSelect(Wla);
+			LikedDTO jjimselect = soleservice.jjimSelect(Wla);
 			
 			if(Objects.isNull(jjimselect)) { // 로그인을 하고 찜을 안했을 때
 				mav.addObject("rpgm", rpgm);
@@ -276,7 +276,7 @@ public class SoleController {
 		logger.info("code : " + recipe_code);
 		logger.info("id : " + m_id);
 		
-		JjimDTO jjimInsert = new JjimDTO();
+		LikedDTO jjimInsert = new LikedDTO();
 		jjimInsert.setM_id(m_id);
 		jjimInsert.setRecipe_code(recipe_code);
 		
@@ -286,11 +286,33 @@ public class SoleController {
 	@ResponseBody
 	@RequestMapping(value="/jjimDelete", method=RequestMethod.GET)
 	public void jjimDelete(@RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
-		JjimDTO jjimDelete = new JjimDTO();
+		LikedDTO jjimDelete = new LikedDTO();
 		jjimDelete.setM_id(m_id);
 		jjimDelete.setRecipe_code(recipe_code);
 		
 		soleservice.jjimDelete(jjimDelete);
 	}
+	
+
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// base sole
+	@RequestMapping(value="baseSole", method=RequestMethod.GET)
+	public ModelAndView baseSole(HttpServletRequest request, HttpServletResponse response, BaseSoleSearchCriteria cri) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		BaseSolePageMaker bpgm = new BaseSolePageMaker();
+		
+		bpgm.setCri(cri);
+		bpgm.setTotalCount(soleservice.basecount(cri));
+		List<BaseSoleDTO> basesole = soleservice.selectbase(cri);
+		
+		mav.addObject("basesole", basesole);
+		mav.addObject("pagemaker", bpgm);
+		mav.addObject("cri", cri);
+		
+		return mav;
+	}
+
 } // end class
 

@@ -24,12 +24,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.board.dao.BoardDAO;
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
 import com.edu.board.dto.ReplyDTO;
@@ -82,8 +84,7 @@ public class BoardControllerImpl implements BoardController {
 		ModelAndView mav = new ModelAndView(viewName);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(pcri);
-		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
-		//boardService.rCount(board_id);   // 게시물에 들어가면 댓글 수 업데이트	
+		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
 		
 		
 		List<BoardDTO> list = boardService.boardListPaging(pcri);
@@ -100,16 +101,17 @@ public class BoardControllerImpl implements BoardController {
 	public void articleDetail(@RequestParam("board_id")int board_id, Model model ) throws Exception {
 		
 		BoardDTO boardDTO = boardService.articleDetail(board_id);
-		
 		System.out.println("BCI articleDetail() : " + boardDTO);
 		model.addAttribute("article",boardDTO);
 		
-		
+		JjimDTO jjimDTO = boardService.jjimSelect(board_id);
+		model.addAttribute("liked", jjimDTO);
 		System.out.println(board_id);
+		
 		List<ReplyDTO> reply = replyService.list(board_id);
 		System.out.println(reply);
-		model.addAttribute("reply", reply);
 		
+		model.addAttribute("reply", reply);
 	}
 
 
@@ -245,5 +247,21 @@ public class BoardControllerImpl implements BoardController {
 		}
 		return fileList;
 	}
+
+
+	// 찜 등록
+	@Override
+	@ResponseBody
+	@RequestMapping(value="/board/jjimOK", method=RequestMethod.GET, produces = "application/json")
+	public JjimDTO jjimOK(@RequestParam("bid") int bid, @RequestParam("mid") String mid) throws Exception {
+		JjimDTO jjimDTO = new JjimDTO();
+		jjimDTO.setB_id(bid);
+		jjimDTO.setMem_id(mid);
+		logger.info("likedDTO 값: " + jjimDTO);
+		boardService.jjimOK(jjimDTO);
+		return jjimDTO;
+	}
+	
+	
 
 }

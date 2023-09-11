@@ -9,21 +9,12 @@
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
 		<java-version>11</java-version>
+		<!-- 태규가 2일 날린 ajax 원인 -->
 		<org.springframework-version>5.3.24</org.springframework-version>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
-	<dependency>
-		<groupId>commons-fileupload</groupId>
-		<artifactId>commons-fileupload</artifactId>
-		<version>2.0.0</version>
-	</dependency>
-	<dependency>
-		<groupId>commons-io</groupId>
-		<artifactId>commons-io</artifactId>
-		<version>2.13.0</version>
-	</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -138,7 +129,7 @@
 	       <scope>system</scope>
 	       <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc10.jar</systemPath>
 	      </dependency>
-	    
+
 		
 		<!-- MyBatis 3.5.6 -->
 		<!-- MyBatis 프레임워크 -->
@@ -214,7 +205,7 @@
       <dependency>
           <groupId>com.fasterxml.jackson.core</groupId>
           <artifactId>jackson-databind</artifactId>
-          <version>2.9.6</version>
+          <version>2.9.2</version>
       </dependency>
 
       <!-- Ajax 실행에 필요한 라이브러리 -->
@@ -262,24 +253,18 @@
 		    <version>1.1.1</version>
 		</dependency>
 		
+		<!-- JSON 라이브러리 -->
 		<dependency>
-  <groupId>org.apache.tomcat</groupId>
-  <artifactId>tomcat-jasper</artifactId>
-  <version>9.0.16</version>
-</dependency>
-		      
-		      <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-
-<dependency>
-
-    <groupId>org.apache.commons</groupId>
-
-    <artifactId>commons-lang3</artifactId>
-
-    <version>3.8</version>
-
-</dependency>
-		      
+		    <groupId>net.sf.json-lib</groupId>
+		    <artifactId>json-lib</artifactId>
+		    <version>2.3</version>
+		    <classifier>jdk15</classifier>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.5.1</version>
+		</dependency>
 		      
 	</dependencies>
     <build>
@@ -303,8 +288,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>

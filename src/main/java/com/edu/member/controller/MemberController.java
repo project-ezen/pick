@@ -1,5 +1,7 @@
 package com.edu.member.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.JjimDTO;
+import com.edu.board.dto.ReplyDTO;
 import com.edu.member.dto.MemberDTO;
 import com.edu.member.service.MemberService;
+import com.edu.sole.dto.recipe.LikedDTO;
 
 @Controller					// 컨트롤러를 빈으로 등록한다.
 @RequestMapping("/member")	// 공통으로 처리할 URL 매핑.
@@ -278,11 +283,35 @@ public class MemberController {
 		String m_id = mid.getM_id();
 
 		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
-		model.addAttribute("member", member);
 		
+		
+		model.addAttribute("member", member.getMyPageList());
+		System.out.println("*******************************썸네일"+member.getMyPageList());
 		return "/member/myboard";
 	}
 		
 	//찜한 게시물 get/ post
+	@RequestMapping(value="/mylist",method= {RequestMethod.GET, RequestMethod.POST})
+	public void mylist(HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
+		
+		HttpSession session = request.getSession();
+		MemberDTO md = (MemberDTO) session.getAttribute("member");
+		String m_d = md.getM_id();
+		
+		List<LikedDTO> like = memberService.likeList(m_d);
+		List<JjimDTO> jjim	= memberService.jjimList(m_d);
+		logger.info("아이디내놔");
+		
+		System.out.println(like);
+		System.out.println(jjim);
+		
+		model.addAttribute("like", like);
+		model.addAttribute("jjim", jjim);
+		
+		
+	}
+	
+	
+	
 	
 }	

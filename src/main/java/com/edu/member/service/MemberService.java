@@ -3,7 +3,9 @@ package com.edu.member.service;
 import java.util.List;
 
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.member.dto.MemberDTO;
+import com.edu.sole.dto.recipe.LikedDTO;
 
 // 멤버 관련
 public interface MemberService {
@@ -52,7 +54,17 @@ public interface MemberService {
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
 
-	public MemberDTO myboardList(String m_id) throws Exception;
+	public MemberDTO myboardList(String mid) throws Exception;
+
+
+	public List<LikedDTO> likeList(String m_id) throws Exception;
+
+
+	public List<JjimDTO> jjimList(String m_id) throws Exception;
+
+
+
+	
 
 	
 }
