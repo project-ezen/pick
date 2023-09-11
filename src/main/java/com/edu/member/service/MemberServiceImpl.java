@@ -113,13 +113,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<LikedDTO> likeList(String m_id) throws Exception {
+	public LikedDTO likeList(String m_id) throws Exception {
 		logger.info("좋아요");
 		return memberDAO.likeList(m_id);
 	}
 
 	@Override
-	public List<JjimDTO> jjimList(String m_id) throws Exception {
+	public JjimDTO jjimList(String m_id) throws Exception {
 		logger.info("찜");
 		return memberDAO.jjimList(m_id);
 	}

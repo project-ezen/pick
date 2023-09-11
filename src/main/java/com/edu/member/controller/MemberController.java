@@ -291,26 +291,20 @@ public class MemberController {
 		
 	//찜한 게시물 get/ post
 	@RequestMapping(value="/mylist",method= {RequestMethod.GET, RequestMethod.POST})
-	public void mylist(HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
+	public void mylist(@RequestParam("m_id")String m_id,HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
 		
 		HttpSession session = request.getSession();
 		MemberDTO md = (MemberDTO) session.getAttribute("member");
-		String m_d = md.getM_id();
-		
-		List<LikedDTO> like = memberService.likeList(m_d);
-		List<JjimDTO> jjim	= memberService.jjimList(m_d);
+	
+		LikedDTO like	= memberService.likeList(m_id);
+		JjimDTO  jjim	= memberService.jjimList(m_id);
 		logger.info("아이디내놔");
-		
-		System.out.println(like);
-		System.out.println(jjim);
 		
 		model.addAttribute("like", like);
 		model.addAttribute("jjim", jjim);
 		
 		
 	}
-	
-	
-	
+
 	
 }	

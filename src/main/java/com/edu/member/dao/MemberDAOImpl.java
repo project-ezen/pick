@@ -124,14 +124,15 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<LikedDTO> likeList(String m_id) throws Exception {
+	public LikedDTO likeList(String m_id) throws Exception {
 		logger.info("좋아요");
-		return sqlSession.selectList(namespace + ".mylikelist" , m_id);
+		return (LikedDTO) sqlSession.selectList(namespace + ".mylikelist" , m_id);
 	}
 
 	@Override
-	public List<JjimDTO> jjimList(String m_id) throws Exception {
-		return sqlSession.selectList(namespace + ".myjjimlist" , m_id);
+	public JjimDTO jjimList(String m_id) throws Exception {
+		logger.info("좋아요");
+		return (JjimDTO) sqlSession.selectList(namespace + ".myjjimlist" , m_id);
 
 	}
 
