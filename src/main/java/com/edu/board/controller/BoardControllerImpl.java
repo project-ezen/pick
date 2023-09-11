@@ -107,8 +107,10 @@ public class BoardControllerImpl implements BoardController {
 		JjimDTO jjimDTO = boardService.jjimSelect(board_id);
 		model.addAttribute("liked", jjimDTO);
 		System.out.println(board_id);
+		
 		List<ReplyDTO> reply = replyService.list(board_id);
 		System.out.println(reply);
+		
 		model.addAttribute("reply", reply);
 	}
 

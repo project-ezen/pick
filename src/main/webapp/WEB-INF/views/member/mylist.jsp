@@ -104,7 +104,7 @@
 				<th>맛</th>
 			</tr>	
 			<%int cn=1; %>
-			<%-- <c:forEach items="${}" var="">  --%>
+			<c:forEach items="${sole.recipe_code == like.recipe_code }">
 			<tr>
 				<td><%=cn++ %></td>
 				<td><img style="height:100px; width:100px;" src="${path }/resources/images/thumb/t_${dto.thumbnail}" alt="사진"></td>
@@ -112,7 +112,7 @@
 				<td style="width:15%;">${recipe.alcohole_dosu}</td>
 				<td style="width:15%;">${recipe.favor}</td>
 			</tr>
-			<%-- </c:forEach> --%>
+			</c:forEach>
 		</table>
 		
 		
