@@ -96,8 +96,8 @@
 	<!-- 찜 등록 -->
 	<insert id="jjimOK">
 		<![CDATA[
-			insert into jjim (jjim_id, b_id, mem_id, j_check)
-			values (#{jjim_id}, #{b_id}, #{mem_id}, #{j_check})
+			insert into jjim (jjim_id, b_id, mem_id)
+			values (#{jjim_id}, #{b_id}, #{mem_id})
 		]]>
 	</insert>
 	
