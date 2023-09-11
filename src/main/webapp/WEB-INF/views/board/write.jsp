@@ -84,7 +84,7 @@ color: #fff;
 		</div>
 		<div class="form-group">
 			<label class="control-label col-sm-3">이미지 첨부</label>
-			<div class="col-sm-7"><input type="file"></input></div>
+			<div class="col-sm-7"><input type="file" name="image" id="image"></input></div>
 		</div>
 		<hr/>
 		<div class="form-group">

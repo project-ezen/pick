@@ -14,7 +14,7 @@
 	</resultMap>
 
 	<!-- 댓글목록 -->
-	<select id="replyList" parameterType="integer" resultMap="reply">
+	<select id="replyList" parameterType="int" resultMap="reply">
 	         select *
 	         from (
 	             select r.reply_num, r.b_id, r.r_writer, r.content, r.writeDate, m.m_nickname 
@@ -26,25 +26,20 @@
 
 	<!-- 댓글 작성 -->
 	<insert id="replyWrite" parameterType="com.edu.board.dto.ReplyDTO">
+		 <selectKey resultType="int" keyProperty="replyNum" order="BEFORE">
+        	SELECT NVL(MAX(reply_num),0)+1 FROM REPLY
+   		 </selectKey>
 		<![CDATA[
-			insert into reply(b_id, r_writer, content, writeDate)
-			values (#{b_id}, #{r_writer}, #{content}, sysdate)
+			insert into reply(reply_num ,b_id, r_writer, content, writeDate)
+			values (#{replyNum},#{b_id}, #{r_writer}, #{content}, sysdate)
 		]]>
 	</insert>
 	
-	<!-- 댓글 수정 -->
-	<update id="replyUpdate" parameterType="com.edu.board.dto.ReplyDTO">
-		UPDATE	reply 
-		SET		r_writer = #{r_writer},
-				content = #{content}
-		WHERE 	reply_num = #{replyNum}
-		AND 	b_id = ${b_id}		
-	</update>
-	
+
 	<!-- 댓글 삭제 -->
 	<delete id="replyDelete" parameterType="com.edu.board.dto.ReplyDTO">
 		delete from reply
-		where b_id = ${b_id}
+		WHERE 	reply_num = #{replyNum}
 	</delete>
 
 	

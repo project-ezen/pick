@@ -50,11 +50,11 @@
 	  color: black;
 	  /*background: #272822;*/
 	}
-	a:link {
+	.page:link {
 		text-decoration-line: none;
 		color: white;
 	}
-	a:visited {
+	.page:visited {
 		text-decoration-line: none;
 		color: white;
 	}
@@ -109,8 +109,13 @@
 			<c:forEach var="sole" items="${sole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
+<<<<<<< HEAD
 					<a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
 					<p style="text-align: center;"><a class="custom-link" href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0">${sole.alcohole_name}</a></p>
+=======
+					<a class="page" href="#"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
+					<p style="text-align: center;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0">${sole.alcohole_name}</a></p>
+>>>>>>> eed2a6d398563dbe1fd5de65c9c28428950a80c0
 				</div>
 			</c:forEach>
 			
@@ -130,19 +135,23 @@
             	<ul class="btn-group pagination col-sm-offset-6 col-sm-2">
 					<c:if test="${pageMaker.prev}">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a class="page" href='<c:url value="/sole/sole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 						</li>
 					</c:if>
 					
 					<c:forEach begin="${pagemaker.startPage}" end="${pagemaker.endPage}" var="pageNum">
 						<li>
+<<<<<<< HEAD
 							<a href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}&alcohole_category=${cri.alcohole_category}"/>'><i style="color:black">${pageNum}</i></a>
+=======
+							<a class="page" href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}&alcohole_category=${cri.alcohole_category}"/>'><i>${pageNum}</i></a>
+>>>>>>> eed2a6d398563dbe1fd5de65c9c28428950a80c0
 						</li>
 					</c:forEach>
 					
 					<c:if test="${pageMaker.next}">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a class="page" href='<c:url value="/sole/sole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 						</li>
 					</c:if>
 				</ul>

@@ -10,17 +10,7 @@
 	<%@ include file="../include/header.jsp" %>
     <style>
       /*상품 관련 이미지, 위치*/
-	  .bg {
-		 background-image: url("/resources/images/background2.jpg");
-
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	  }
+	  
       .product-img {
         /*width: 400px;
         height: 400px;
@@ -398,7 +388,7 @@
 		    
 		    
 		    $("#moklok").click(function() {
-		    	action="/sole/soleDetail?recipe_code" + ${recipe.recipe_code} + "&page=1"
+		    	action="/sole/sole?
 		    });
 			
 		});   /// end $

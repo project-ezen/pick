@@ -1,10 +1,5 @@
 package com.edu.board.controller;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -16,8 +11,8 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +24,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.board.dao.BoardDAO;
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
 import com.edu.board.dto.ReplyDTO;
 import com.edu.board.service.BoardService;
 import com.edu.board.service.ReplyService;
+import com.edu.member.dto.MemberDTO;
+import com.edu.member.service.MemberService;
 
 
 @Controller("BoardController")
@@ -53,7 +52,6 @@ public class BoardControllerImpl implements BoardController {
 	private BoardDTO boardDTO;
 	@Autowired
 	private BoardDAO boardDAO;
-	
 
 
 	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\team\\pick\\src\\main\\webapp\\resources\\images";
@@ -63,26 +61,6 @@ public class BoardControllerImpl implements BoardController {
 	@Autowired
 	private ReplyService replyService;
 	
-	// 게시글 목록
-	/*
-	@Override
-	@RequestMapping(value="/board/articleList", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		logger.info("게시글 목록 화면좀 나와라");
-		
-		String viewName = "./board/articleList";
-		ModelAndView mav = new ModelAndView();
-		
-		
-		List<BoardDTO> articlesList = boardService.recipeBoard();
-		mav.setViewName(viewName);
-		mav.addObject("articleList", articlesList);
-	
-		return mav;
-	}
-	*/
-
 	
 	// 게시글 작성 화면
 	@Override
@@ -100,12 +78,15 @@ public class BoardControllerImpl implements BoardController {
 	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri)
 			throws Exception {
 		
+		
+		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(pcri);
-		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
-
+		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
+		
+		
 		List<BoardDTO> list = boardService.boardListPaging(pcri);
 		mav.addObject("articlesList", list);
 		mav.addObject("pageMaker", pageMaker);
@@ -123,12 +104,12 @@ public class BoardControllerImpl implements BoardController {
 		System.out.println("BCI articleDetail() : " + boardDTO);
 		model.addAttribute("article",boardDTO);
 		
-		
+		JjimDTO jjimDTO = boardService.jjimSelect(board_id);
+		model.addAttribute("liked", jjimDTO);
 		System.out.println(board_id);
 		List<ReplyDTO> reply = replyService.list(board_id);
 		System.out.println(reply);
 		model.addAttribute("reply", reply);
-		
 	}
 
 
@@ -254,15 +235,31 @@ public class BoardControllerImpl implements BoardController {
 			String originalFileName = mFile.getOriginalFilename();
 			System.out.println("##### 다중 이미지 업로드하기 originalFileName ==> " + originalFileName);
 			fileList.add(originalFileName);
-			File file = new File(ARTICLE_IMAGE_REPO +"\\"+"temp"+"\\" + fileName);
+			File file = new File(ARTICLE_IMAGE_REPO +"\\"+"contentImage"+ "\\" + fileName);
 			if(mFile.getSize() != 0) { //File Null Check
 				if(!file.exists()) { //경로상에 파일이 존재하지 않을 경우
 					file.getParentFile().mkdirs();  //경로에 해당하는 디렉토리들을 생성
-					mFile.transferTo(new File(ARTICLE_IMAGE_REPO +"\\"+"temp"+ "\\"+originalFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
+					mFile.transferTo(new File(ARTICLE_IMAGE_REPO +"\\"+"contentImage"+ "\\" + originalFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
 				}
 			}
 		}
 		return fileList;
 	}
+
+
+	// 찜 등록
+	@Override
+	@ResponseBody
+	@RequestMapping(value="/board/jjimOK", method=RequestMethod.GET, produces = "application/json")
+	public JjimDTO jjimOK(@RequestParam("bid") int bid, @RequestParam("mid") String mid) throws Exception {
+		JjimDTO jjimDTO = new JjimDTO();
+		jjimDTO.setB_id(bid);
+		jjimDTO.setMem_id(mid);
+		logger.info("likedDTO 값: " + jjimDTO);
+		boardService.jjimOK(jjimDTO);
+		return jjimDTO;
+	}
+	
+	
 
 }

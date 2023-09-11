@@ -79,7 +79,7 @@
                 </form>
                 
                 <div id="listid">          
-                    <li class="item" style="margin-top: 50px;"><!-- 잠시 -->
+                    <li class="item" style="margin-top: 50px;">
 	                   Alcohol
 	                   <ul>
 	                       <li id="lilist" class="base"><a href="#">베이스주</a></li>

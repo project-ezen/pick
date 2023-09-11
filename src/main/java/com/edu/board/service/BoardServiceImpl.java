@@ -5,15 +5,19 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PagingCriteria;
 
 import oracle.jdbc.proxy.annotation.Post;
 
+import com.edu.board.controller.BoardControllerImpl;
 import com.edu.board.dao.BoardDAO;
 
 @Service("BoardService")
@@ -22,6 +26,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
 	
+	private static final Logger logger = LoggerFactory.getLogger(BoardServiceImpl.class);
 	/* 게시글 목록
 	@Override
 	public List<BoardDTO> recipeBoard() throws Exception {
@@ -61,8 +66,18 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.delete(board_id);
 	}
 	
+	// 찜 등록
+	@Override
+	public void jjimOK( JjimDTO jjimDTO) throws Exception {
+		boardDAO.jjimOK(jjimDTO);
+	}
 	
-	
+	// 찜 조회
+	@Override
+	public  JjimDTO jjimSelect(int board_id) throws Exception {
+		 JjimDTO jjimDTO = boardDAO.jjimSelect(board_id);
+		return jjimDTO;
+	}
 	
 
 }

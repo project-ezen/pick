@@ -5,12 +5,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.edu.board.controller.BoardControllerImpl;
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PagingCriteria;
 
 import oracle.jdbc.proxy.annotation.Post;
@@ -25,6 +29,7 @@ public class BoardDAOImpl implements BoardDAO {
 	private static final String namespace="com.edu.board.mappers.boardMapper";
 	@Autowired
 	private BoardDTO boardDTO;
+	private static final Logger logger = LoggerFactory.getLogger(BoardDAOImpl.class);
 	/* 게시글 목록
 	@Override
 	public List selectAllArticlesList() throws DataAccessException {
@@ -71,6 +76,26 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.delete(namespace + ".delete", board_id);
 	}
 	
+	// 찜 등록
+	@Override
+	public void jjimOK(JjimDTO jjimDTO) throws DataAccessException {
+		jjimDTO.setJjim_id(selectjjimNO());
+		if(jjimDTO.getJ_check() == 0) {
+			jjimDTO.setJ_check(1);
+		}
+		logger.info("jjimOK DAO if문 값 : " + jjimDTO);
+		sqlSession.insert(namespace + ".jjimOK", jjimDTO);
+	}
+	
+	// 찜 id 추출
+	private int selectjjimNO() throws DataAccessException {
+		return sqlSession.selectOne(namespace + ".selectjjimNO");
+	}
+	
+	// 찜 조회
+	public JjimDTO jjimSelect(int board_id) throws DataAccessException {
+		return sqlSession.selectOne(namespace + ".jjimSelect", board_id);
+	}
 	
 }
 		

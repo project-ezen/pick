@@ -125,10 +125,19 @@ public class StoreDAO {
 		sqlSession.delete(namespace + ".reviewRemove", reviewId);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------
+	// 리뷰 세기
+	//----------------------------------------------------------------------------------------------------------------------------------		
 	public int productReviewCount(ProductReviewCriteria productReviewCount) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".productReviewCount", productReviewCount);
 	}
 	
+	//----------------------------------------------------------------------------------------------------------------------------------
+	// 랜덤 노중복
+	//----------------------------------------------------------------------------------------------------------------------------------	
+	public List<String> checkCartId() throws DataAccessException {
+		return sqlSession.selectList(namespace + ".checkCartId");
+	}
 	
 	
 }

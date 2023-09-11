@@ -22,6 +22,7 @@ border: 2px solid #ddd;
 }
 th {
 background-color: #ccd6d9;
+text-align:center;
 }
 th, td {
 border-bottom: 1px solid #ddd;
@@ -59,6 +60,30 @@ font-family: 'Cafe24Supermagic-Bold-v1.0';
 display: inline-block;
 }
 
+.bi-heart::before {
+    content: "\f417";
+    font-size: 20px;
+    margin-top: 3px;
+}
+
+
+.bi-heart-fill::before {
+	content: "\f415";
+	font-size: 20px;
+    margin-top: 3px;
+}
+
+.jjimBtn {
+width:30px;height:30px;padding:0px;
+border:none;background-color:#fff;
+border-radius: 5px;
+}
+
+.jjimBtn:hover{
+background-color:#ADC4CE;
+color:#fff;
+}
+
 </style>
 </head>
 <body>
@@ -77,7 +102,8 @@ display: inline-block;
 					<th style="text-align: center;">글번호</th>
 					<td>
 						<input type="text"   value="${article['board_id']}" disabled/>
-						<input type="hidden" value="${article['board_id']}" name="board_id"/>
+						<input type="hidden" id="bid" name="board_id" value="${article['board_id']}" />
+						<input type="hidden" id="mid" name="mid" value="${member.m_id}" />
 					</td>
 					
 					<th style="text-align: center;">작성일자</th>
@@ -87,12 +113,31 @@ display: inline-block;
 					<th style="text-align: center;">작성자</th>
 					<td><input type="text"   value="${article.nickname}" name="nickname" disabled/></td>
 					
-					<th style="text-align: center;">찜 개수</th>
-					<td>{100}</td>
+					<th style="text-align: center;">찜하기</th>
+					<c:choose>
+						<c:when test="${member.m_id == null}">
+							<td style="padding-bottom:5px;">
+								<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
+								<span style="margin-left:20px; font-size:16px;">{100}</span>
+							</td>
+						</c:when>
+						<c:when test="${liked.j_check == 0 || liked.j_check == null}">
+							<td style="padding-bottom:5px;">
+								<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
+								<span style="margin-left:20px; font-size:16px;">{article.jjim_cnt}</span>
+							</td>
+						</c:when>
+						<c:when test="${member.m_id != null && liked.j_check == 1}">
+							<td style="padding-bottom:5px;">
+								<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart-fill"></i></button>
+								<span style="margin-left:20px; font-size:16px;">{article.jjim_cnt}</span>
+							</td>
+						</c:when>
+					</c:choose>
 				</tr>
 				<tr>
                 	<th>제목</th>
-                	<td><input type="text" value="${article.title}" name="title" id="title" disabled/></td>
+                	<td><input type="text" value="${article.title}" name="title" id="title" style="width:100%;" disabled/></td>
                 	<th>대표사진</th>
                 	<td><input type="file" name="thumbnail" id="thumbnail" disabled/></td>
                 </tr>
@@ -136,54 +181,75 @@ display: inline-block;
 					<th style="text-align: center; width:15%;">${reply.nickname}(<fmt:formatDate value="${reply.writeDate}" pattern="yyyy-MM-dd"/>)</th>
 					<td style="width:75%;">${reply.content}</td>
 					<c:if test="${reply.r_writer == member.m_nickname}">
-						<td style="width:10%;"><a href="#" class="btn_3" type="button" onclick="fn_rupdate()">수정</a>/<a href="#" class="btn_3" type="button" onclick="fn_rdelete()">삭제</a></td>
+						<td style="width:10%;">
+						<input type="hidden" value="${reply.replyNum}" 		name="replyNum"/>
+						<input type="hidden" value="${reply.b_id}" 	name="b_id"/>
+						<a href="#" onclick="fn_replyDelete('${path}/reply/rdelete',${reply.replyNum},${reply.b_id})" >삭제</a>
+						</td>
 					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
 	<%-- 댓글 작성하는 부분 --%>
-	<c:if test="${ isLogOn == true }">
-		<form method="post" action="/reply/rwrite">
+	<form method="post" action="/reply/rwrite" name= "form1">
+		<c:if test="${ isLogOn == true }">
+			<input type="hidden" name="b_id" value="${article.board_id}">
 			<table style="margin-bottom: 20px;">
-					<tr>
-						<th style="text-align: center; width:15%;">닉네임</th>
-						<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_nickname}" name="r_writer" readonly/></td>
-					</tr>
-					<tr>	
-						<th style="text-align: center; width:15%;">내용</th>
-						<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
-						<td style="width:8%;">
-						<input type="hidden" name="b_id" value="${article.board_id}">
-						<button class="btn_2" type="submit">댓글 작성</button>
-						</td>
-					</tr>
+				<tr>
+					<th style="text-align: center; width:15%;">닉네임</th>
+					<td style="width:75%;"><input type="text" size="20" maxlength="100" value="${member.m_nickname}" name="r_writer" readonly/></td>
+				</tr>
+				<tr>	
+					<th style="text-align: center; width:15%;">내용</th>
+					<td style="width:75%;"><textarea rows="5" cols="50" style="width:100%" name="content"></textarea></td>
+					<td style="width:8%;">
+					<button class="btn_2" type="submit">댓글 작성</button>
+					</td>
+				</tr>
 			</table>
-		</form>
-	</c:if>
+		</c:if>
+	</form>
+	
 	</div>
 </div>
 <br/>
 <script>
-
+// 수정 버튼 눌렀을 시 disabled 해제
 function fn_enable(obj){
 	document.getElementById("title").disabled		= false;
 	document.getElementById("content").disabled		= false;
 	document.getElementById("thumbnail").disabled	= false;
 	document.getElementById("image").disabled	= false;
-}
+};
 
+// 수정취소 버튼 눌렀을 시 disabled
 function backToForm(obj){
 	document.getElementById("title").disabled = true;
 	document.getElementById("content").disabled = true;
 	document.getElementById("thumbnail").disabled	= true;
 	document.getElementById("image").disabled	= true;
-}
+};
 
-
-
-
+// 글 삭제
+function fn_remove(url, board_id){
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", url);
+	
+	var boardIdInput = document.createElement("input");
+	boardIdInput.setAttribute("type", "hidden");
+	boardIdInput.setAttribute("name", "board_id");
+	boardIdInput.setAttribute("value", board_id);
+	
+	form.appendChild(boardIdInput);
+	document.body.appendChild(form);
+	form.submit();
+	
+};
+	
+// 에디터
 $(document).ready(function(){
-var contentval = $("#content").val();
+	var contentval = $("#content").val();
 	
 	var oEditors = [];
 	nhn.husky.EZCreator.createInIFrame({
@@ -197,7 +263,6 @@ var contentval = $("#content").val();
 	});
 	
 	contentval = $("#content").val().replace(/<p><br><\/p>/gi, "<br>"); // <p><br></p> => <br>로 변환
-	
 	contentval = contentval.replace(/<\/p><p>/gi, "<br>"); // </p><p> => <br>로 변환
 	contentval = contentval.replace(/(<\/p><br>|<p><br>)/gi, "<br><br>");
 	contentval = contentval.replace(/(<p>|<\/p>)/gi, ""); // <p> 또는 </p>모두 제거
@@ -226,50 +291,78 @@ var contentval = $("#content").val();
 			return false;
 		} else {
 			
-			console.log(content);
+			$.ajax({
+				type: "post",
+				url: "/board/updateArticle",
+				data: JSON.stringify({"title":title,"content":content,"writer":writer, "thumbnail":thumbnail}),
+				success: function(data){
+					alert("성공");
+					location.href = "/board/updateArticle";
+				},
+				error: function(data){
+					alert("오류");
+					return false;
+				}
+			});
 		}
-	});
+	});	// 에디터
+
 });
 
-function fn_remove(url, board_id){
+<%--댓글 삭제--%>
+function fn_replyDelete(url,replyNum ,b_id){
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");
 	form.setAttribute("action", url);
 	
-	var boardIdInput = document.createElement("input");
-	boardIdInput.setAttribute("type", "hidden");
-	boardIdInput.setAttribute("name", "board_id");
-	boardIdInput.setAttribute("value", board_id);
+	var replyNumInput = document.createElement("input");
+	replyNumInput.setAttribute("type", "hidden");
+	replyNumInput.setAttribute("name", "replyNum");
+	replyNumInput.setAttribute("value", replyNum );
 	
-	form.appendChild(boardIdInput);
+	var boardNumInput = document.createElement("input");
+	boardNumInput.setAttribute("type", "hidden");
+	boardNumInput.setAttribute("name", "b_id");
+	boardNumInput.setAttribute("value", b_id );
+	
+	form.appendChild(replyNumInput);
+	form.appendChild(boardNumInput);
 	document.body.appendChild(form);
 	form.submit();
-	
-}
-/*댓글 삭제 버튼 
-function fn_rdelete(e) {
-	e.preventDefault();
-	let replyId = $(this).attr("href");	
+       
+};
+
+// 찜 버튼 눌렀을 시
+function fn_jjimBtn(isLogOn){
+	if(isLogOn == null || isLogOn == false){
+		alert("로그인 후 이용해주세요.");
+	} else{
+		if(!confirm("찜 하겠습니까?")){
+			alert("취소되었습니다");
+			return false;
+		} else {
+			jjimOK($(this));
+		}
+	}
+};
+
+function jjimOK(){
 	
 	$.ajax({
-		data : {
-			reply_num : replyNum,
-			b_id : '${article.board_id}'
+		type: "get",
+		url: "/board/jjimOK",
+		dataType: "json",
+		data: {"bid":${article.board_id}, "mid":"${member.m_id}"},
+		success: function(data){
+			alert("성공");
+			$('.bi').removeClass('bi-heart').addClass('bi-heart-fill');
 		},
-		url : '/reply/rdelete',
-		type : 'POST',
-		success : function(result){
-			replyListInit();
-			alert('삭제가 완료되엇습니다.');
+		error: function(data){
+			alert("오류");
 		}
-	});		
-		
-});*/
-	
-	
-
+	});
+}
 </script>
-
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.js"></script>
 <%@ include file="../include/footer.jsp" %>

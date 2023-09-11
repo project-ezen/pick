@@ -97,6 +97,12 @@ public int productReviewCount(ProductReviewCriteria productreviewcri) throws Exc
 	return  storeDAO.productReviewCount(productreviewcri);
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------
+// 랜덤 노중복
+//----------------------------------------------------------------------------------------------------------------------------------	
+public List<String> checkCartId() throws Exception{
+	return storeDAO.checkCartId();
+}
 
 
 

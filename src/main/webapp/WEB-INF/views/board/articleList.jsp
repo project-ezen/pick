@@ -29,8 +29,9 @@ margin-left: 45px;
 display: inline-block;
 }
 
-a:link{text-decoration: none; color: #000}
-a:visited,a:active{color: #000;}
+
+.page:link{text-decoration: none; color: #000}
+.page:visited,.page:active{color: #000;}
 
 .pagenav {
 display: inline-block;
@@ -113,19 +114,29 @@ margin-right: 5px;
 
 .bottom {
 width: 100%;
+height: 24px;
 position: absolute;
 bottom: 10px;
 text-align: center;
+padding-left: 10px;
 }
 
 .bi-chat::before {
     content: "\f268";
-    font-size: 17px;
+    font-size: 20px;
+    margin-right: 4px;
 }
 
 .bi-heart::before {
     content: "\f417";
-    font-size: 17px;
+    font-size: 20px;
+    margin-right: 4px;
+}
+
+.bi-heart-fill::before {
+	content: "\f415";
+	font-size: 20px;
+	margin-right: 4px;
 }
 
 span {
@@ -153,31 +164,50 @@ font-size: 15px;
 		</div>
 		<div class="outer_div">
 		<c:choose>
-			<c:when test="${empty articlesList}"> <!-- 게시글이 하나도 없는 경우 -->
+			<%--게시글이 하나도 없는 경우 --%>
+			<c:when test="${empty articlesList}"> 
 				<h3 style="font-size:22px; text-align: center;"><b>등록된 게시글이 없습니다.</b></h3>
 			</c:when>
-			<c:when test="${not empty articlesList}"> <!-- 게시글이 하나라도 있는 경우 -->
+			<%-- 게시글이 하나라도 있는 경우 --%>
+			<c:when test="${not empty articlesList}"> 
 				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
 						<div class="inner_div" style="background-color: #ADC4CE; height: 200px; width: 300px; border-radius: 10px;">
 						<c:choose>
 							<c:when test="${not empty article.thumbnail && article.thumbnail != 'null'}">
 								<!-- <div class="thumb" >${article.thumbnail}</div> -->
-								<input type="hidden" name="originalFileName" value="${article.thumbnail}"/>
+								<input type="hidden" name="thumbnail" value="${article.thumbnail}"/>
 								<img class="thumb" style="width:100px; height:100px; float:left;" src="${path}/thumbdown?board_id=${article.board_id}&thumbnail=${article.thumbnail}" id="thumbnail"/>
 							</c:when>
 							<c:otherwise>
-								<img class="thumb" style="width:100px; height:100px; float:left;" src="/resources/images/cocktail-icon.jpg"/>
+								<img class="thumb" style="width:100px; height:100px; float:left;" src="/resources/images/defaultThumb.png"/>
 							</c:otherwise>
 						</c:choose>
 							<div class="lele">
 								<div class="top">
-									<p class="title"><a href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
+									<p class="title" ><a class="page"  href="${page}/board/recipedetail?board_id=${article.board_id}">${article.title}</a></p>
 									<p class="writer">${article.nickname}</p>
 								</div>
 								<div class="bottom">
-									<i class="bi bi-chat" style="width: 20px; height: 20px;"></i><span>100</span>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-									<i class="bi bi-heart"></i><span>100</span>
+								<c:choose>
+									<c:when test="${member != null}"> <!-- 로그인 했을 때 -->
+										<i class="bi bi-chat"></i>
+										<c:if test ="${article.reply_count != 0}">
+										<span>${article.reply_count}</span>
+										</c:if>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<i id="heart" class="bi bi-heart"></i>
+										<span class="jjim_count">100</span>
+									</c:when>
+									<c:otherwise> <!-- 비로그인 상태일 때, 찜 버튼 디폴트 -->
+										<i class="bi bi-chat"></i>
+										<c:if test ="${article.reply_count != 0}">
+										<span>${article.reply_count}</span>
+										</c:if>
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<i class="bi bi-heart"></i>
+										<span class="jjim_count">100</span>
+									</c:otherwise>
+								</c:choose>
 								</div>
 							</div>
 						</div>
@@ -190,17 +220,17 @@ font-size: 15px;
 	         <ul class="btn-group pagination">
 	            <c:if test="${pageMaker.prev}">
 	               <li>
-	                  <a href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 	               </li>
 	            </c:if>
 	            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 	               <li>
-	                  <a href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
 	               </li>
 	            </c:forEach>
 	            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 	               <li>
-	                  <a href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 	               </li>
 	            </c:if>
 	         </ul>
@@ -220,6 +250,8 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 		location.href= loginForm + '?action=/board/write';
 	}
 }
+
+
 </script>
 </body>
 </html>

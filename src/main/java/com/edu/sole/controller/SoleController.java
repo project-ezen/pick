@@ -293,6 +293,7 @@ public class SoleController {
 		soleservice.jjimDelete(jjimDelete);
 	}
 	
+
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// base sole
 	@RequestMapping(value="baseSole", method=RequestMethod.GET)
@@ -312,5 +313,6 @@ public class SoleController {
 		
 		return mav;
 	}
+
 } // end class
 
