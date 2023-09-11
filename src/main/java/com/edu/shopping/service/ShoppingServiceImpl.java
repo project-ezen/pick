@@ -12,6 +12,7 @@ import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dao.ShoppingDAO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.OrderDTO;
+import com.edu.shopping.dto.OrderSearch;
 import com.edu.store.dto.ProductDTO;
 
 @Service("shoppingService")
@@ -80,16 +81,17 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 //=====================================================================================================
 	@Override
+	public int orderListTotalCount(OrderSearch search) throws Exception {
+		return shoppingDAO.orderListTotalCount(search);
+	}
+
+	@Override
+	public List<OrderDTO> showOrder(Map searchMap) throws Exception {
+		return shoppingDAO.showOrder(searchMap);
+	}
+//=====================================================================================================
+	@Override
 	public List<OrderDTO> orderNumInfo(int order_num) throws Exception {
 		return shoppingDAO.orderNumInfo(order_num);
 	}
-	
-	//모름 -> 빨간표시 지움
-	@Override
-	public List<OrderDTO> showOrder() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
 }
