@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.JjimDTO;
 import com.edu.member.dao.MemberDAO;
 import com.edu.member.dto.MemberDTO;
+import com.edu.sole.dto.recipe.LikedDTO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -106,8 +108,20 @@ public class MemberServiceImpl implements MemberService {
 	//내가 쓴 게시물
 	@Override
 	public MemberDTO myboardList(String mid) throws Exception {
-		logger.info("아아");
+	
 		return memberDAO.myboardList(mid);
+	}
+
+	@Override
+	public List<LikedDTO> likeList(String m_id) throws Exception {
+		logger.info("좋아요");
+		return memberDAO.likeList(m_id);
+	}
+
+	@Override
+	public List<JjimDTO> jjimList(String m_id) throws Exception {
+		logger.info("찜");
+		return memberDAO.jjimList(m_id);
 	}
 
 

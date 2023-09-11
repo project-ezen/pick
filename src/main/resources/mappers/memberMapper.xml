@@ -127,4 +127,14 @@
 		]]>
 	</select>
 	
+	<!--  좋아요 게시판 -->
+	<select id="likeList" parameterType="String" resultType="com.edu.sole.dto.RecipedSoleDTO">
+		select re.alcohole_name ,re.alcohole_image,re.alcohole_dosu,re.favor,l.m_id
+			from liked l, reciped_alcohole re
+			where re.recipe_code = l.recipe_code
+			and l.m_id = #{m_id};
+	</select>
+	
+	
+	
 </mapper>
