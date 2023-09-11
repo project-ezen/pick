@@ -263,9 +263,9 @@
 		
 		      
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.9.4</version>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.12.4</version> <!-- 사용 가능한 최신 버전으로 대체 -->
 		</dependency>
 		
 		<dependency>

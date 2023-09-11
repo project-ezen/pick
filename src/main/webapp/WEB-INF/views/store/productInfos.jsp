@@ -1,48 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"	uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <%@ page session="true" %>
+
  <%
    String memberId = (String)session.getAttribute("memberId");
 %>
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%@ include file="../include/header.jsp" %>
     <title>상품 상세 페이지</title>
-    <!-- 합쳐지고 최소화된 최신 CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
-    />
-
-    <!-- 부가적인 테마 -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"
-    />
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <style>
     
-     /* 배경화면 */
-	  .bg {
-			 background-image: url("/resources/images/background2.jpg");
-	
-	         height: 100vh;      
-	         
-	         
-			 background-attachment: fixed, scroll;
-	         background-position: center;
-	         background-repeat: no-repeat;
-	         background-size: cover; 
-		}
-     
       /*상품 관련 이미지, 위치*/
       .product-img {
         width: 400px;
@@ -63,11 +35,11 @@
       .table th,
       .table td {
         vertical-align: middle !important;
-        color: #FFF;
+        color: black;
       }
       h1 {
         text-align: center;
-        color: #FFF;
+        color: black;
       }
       .table th {
         background-color: rgb(171, 173, 175);
@@ -254,6 +226,13 @@
     #whiteBg{
     	background-color:white;
     }
+    
+    #detailDescription{
+	    font-family: 'Cafe24Supermagic-Bold-v1.0';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/Cafe24Supermagic-Bold-v1.0.woff2') format('woff2');
+		font-style: normal;
+		font-size: 30px;
+    }
     </style>
   </head>
   <body class="bg">
@@ -287,10 +266,12 @@
                   <th>원산지</th>
                   <td>${productInfo[status.index].origin }</td>
                 </tr>
+                <c:if test="${Integer.parseInt(productInfo[status.index].product_display_id) / 10000 == 1}">
                 <tr>
-                  <th>도수</th>
+    			  <th>도수</th>
                   <td>${productInfo[status.index].alcohol_content }</td>
                 </tr>
+				</c:if>                
                 <tr>
                   <th>용량</th>
                   <td>${productInfo[status.index].capacity }</td>
@@ -332,7 +313,7 @@
         <br />
         <br />
         <br />
-        <div class="container">
+        <div>
           <!--상세설명&리뷰-->
           <ul class="nav nav-tabs infoAndReview">
             <li class="active">
@@ -345,8 +326,7 @@
               <h3>상세설명</h3>
 	              <!--상세 설명 와라락-->
 	              <div align="center">
-	            <p class="multiline">아니 근데 <br/> 아닌가?</p>
-	              	<pre class="multiline">${productInfo[status.index].product_info}</pre>
+	              	<pre class="multiline" id="detailDescription">${productInfo[status.index].product_info}</pre>
 	              </div>              
             </div>
             
