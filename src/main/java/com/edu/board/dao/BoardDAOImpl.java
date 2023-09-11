@@ -80,10 +80,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void jjimOK(JjimDTO jjimDTO) throws DataAccessException {
 		jjimDTO.setJjim_id(selectjjimNO());
-		if(jjimDTO.getJ_check() == 0) {
-			jjimDTO.setJ_check(1);
-		}
-		logger.info("jjimOK DAO if문 값 : " + jjimDTO);
+		logger.info("jjimOK DAO : " + jjimDTO);
 		sqlSession.insert(namespace + ".jjimOK", jjimDTO);
 	}
 	
@@ -95,6 +92,12 @@ public class BoardDAOImpl implements BoardDAO {
 	// 찜 조회
 	public JjimDTO jjimSelect(int board_id) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".jjimSelect", board_id);
+	}
+	
+	// 찜 삭제
+	@Override
+	public void jjimNO(JjimDTO jjimNO) throws DataAccessException {
+		sqlSession.delete(namespace + ".jjimNO", jjimNO);
 	}
 	
 }

@@ -98,7 +98,12 @@ public class BoardControllerImpl implements BoardController {
 	// 게시글 번호에 해당하는 상세정보
 	@Override
 	@RequestMapping(value="/board/recipedetail", method= {RequestMethod.GET, RequestMethod.POST})
-	public void articleDetail(@RequestParam("board_id")int board_id, Model model ) throws Exception {
+	public void articleDetail(@RequestParam("board_id")int board_id, Model model, HttpServletRequest request) throws Exception {
+		
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		System.out.println("으아ㅓㄹㅇ너래ㅑ어랻저래ㅑㅇ너량널야ㅓ래ㅑㅓㅇ랴ㅓㄴㄴ어랴ㅐ얼" + member);
+		
 		
 		BoardDTO boardDTO = boardService.articleDetail(board_id);
 		System.out.println("BCI articleDetail() : " + boardDTO);
@@ -106,7 +111,6 @@ public class BoardControllerImpl implements BoardController {
 		
 		JjimDTO jjimDTO = boardService.jjimSelect(board_id);
 		model.addAttribute("liked", jjimDTO);
-		System.out.println(board_id);
 		
 		List<ReplyDTO> reply = replyService.list(board_id);
 		System.out.println(reply);
@@ -253,14 +257,28 @@ public class BoardControllerImpl implements BoardController {
 	@Override
 	@ResponseBody
 	@RequestMapping(value="/board/jjimOK", method=RequestMethod.GET, produces = "application/json")
-	public JjimDTO jjimOK(@RequestParam("bid") int bid, @RequestParam("mid") String mid) throws Exception {
+	public JjimDTO jjimOK(@RequestParam("board_id") int board_id, @RequestParam("m_id") String m_id) throws Exception {
 		JjimDTO jjimDTO = new JjimDTO();
-		jjimDTO.setB_id(bid);
-		jjimDTO.setMem_id(mid);
+		jjimDTO.setBoard_id(board_id);
+		jjimDTO.setM_id(m_id);
 		logger.info("likedDTO 값: " + jjimDTO);
 		boardService.jjimOK(jjimDTO);
 		return jjimDTO;
 	}
+
+
+	// 찜 삭제
+	@Override
+	@ResponseBody
+	@RequestMapping(value="/board/jjimNO", method=RequestMethod.GET, produces = "application/json")
+	public JjimDTO jjimNO(@RequestParam("board_id") int board_id, @RequestParam("m_id") String m_id) throws Exception {
+		JjimDTO jjimNO = new JjimDTO();
+		jjimNO.setBoard_id(board_id);
+		jjimNO.setM_id(m_id);
+		boardService.jjimNO(jjimNO);
+		return jjimNO;
+	}
+	
 	
 	
 
