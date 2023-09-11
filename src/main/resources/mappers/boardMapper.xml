@@ -102,7 +102,7 @@
 	</insert>
 	
 	<!-- 찜 조회 -->
-	<select id="jjimSelect" parameterType="com.edu.board.dto.LikedDTO" resultType="com.edu.board.dto.LikedDTO">
+	<select id="jjimSelect" parameterType="com.edu.board.dto.JjimDTO" resultType="com.edu.board.dto.JjimDTO">
 		<![CDATA[
 			select jjim_id, j_check
 			from jjim
