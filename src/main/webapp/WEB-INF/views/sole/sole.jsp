@@ -47,17 +47,23 @@
 	option {
 	  padding: 4px;
 	  font-size: 14px;
-	  color: #fff;
-	  background: #272822;
+	  color: black;
+	  /*background: #272822;*/
 	}
 	a:link {
 		text-decoration-line: none;
-		color: black !important;
+		color: white;
 	}
 	a:visited {
 		text-decoration-line: none;
-		color: black !important;
+		color: white;
 	}
+	
+	a.custom-link:link,
+	a.custom-link:visited {
+    	color: black; 
+	}
+
 	
 	img {
 		max-width: 100%;
@@ -103,8 +109,8 @@
 			<c:forEach var="sole" items="${sole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a href="#"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
-					<p style="text-align: center;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0">${sole.alcohole_name}</a></p>
+					<a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
+					<p style="text-align: center;"><a class="custom-link" href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
 			
@@ -130,7 +136,7 @@
 					
 					<c:forEach begin="${pagemaker.startPage}" end="${pagemaker.endPage}" var="pageNum">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}&alcohole_category=${cri.alcohole_category}"/>'><i>${pageNum}</i></a>
+							<a href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}&alcohole_category=${cri.alcohole_category}"/>'><i style="color:black">${pageNum}</i></a>
 						</li>
 					</c:forEach>
 					
@@ -143,7 +149,7 @@
 			</div>			
 		</div>
 	</div>
-	<br/>
+	<br/><br/>
 <%@ include file="../include/footer.jsp" %>
 
 <script type="text/javascript">
@@ -204,12 +210,13 @@ $(document).ready(function() {
             formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
             formObj.find("[name='page']").val("1");
             formObj.submit();          
-        }
+        } else {
         formObj.find("[name='mat']").val(matValue);
         formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
         formObj.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
         formObj.find("[name='page']").val("1");
         formObj.submit();
+        }
     });
     
 	$("#searchBox").keydown(function(key) {    // 엔터키 누르면 쳐지는

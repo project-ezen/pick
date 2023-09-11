@@ -1,6 +1,6 @@
 package com.edu.board.dto;
 
-public class LikedDTO {
+public class JjimDTO {
 	
 	private String id;
 	private boolean jjim;

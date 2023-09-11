@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 import com.edu.sole.dao.SoleDAO;
 import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.SoleSearchCriteria;
+import com.edu.sole.dto.base.BaseSoleDTO;
+import com.edu.sole.dto.base.BaseSoleSearchCriteria;
 import com.edu.sole.dto.LiveSoleDTO;
-import com.edu.sole.dto.recipe.JjimDTO;
-import com.edu.sole.dto.recipe.JjimSelectDTO;
+import com.edu.sole.dto.recipe.LikedDTO;
+import com.edu.sole.dto.recipe.LikedSelectDTO;
 import com.edu.sole.dto.recipe.RecipeDTO;
 import com.edu.sole.dto.recipe.RecipeReviewDTO;
 import com.edu.sole.dto.recipe.ReviewCriteria;
@@ -84,23 +86,39 @@ public class SoleServiceImpl implements SoleService {
 	
 	// 찜 인설트
 	@Override
-	public void jjimInsert(JjimDTO jjimInsert) throws Exception {
+	public void jjimInsert(LikedDTO jjimInsert) throws Exception {
 		
 		soledao.jjimInsert(jjimInsert);
 	}
 	
 	// 찜 셀렉하는
 	@Override
-	public JjimDTO jjimSelect(JjimSelectDTO Wla) throws Exception {
+	public LikedDTO jjimSelect(LikedSelectDTO Wla) throws Exception {
 		
 		return soledao.jjimSelect(Wla);
 	}
 	
 	// 찜 딜리트
 	@Override
-	public void jjimDelete(JjimDTO jjimDelete) throws Exception {
+	public void jjimDelete(LikedDTO jjimDelete) throws Exception {
 		
 		soledao.jjimDelete(jjimDelete);
 	}
+	
+	// 베이스주 셀렉
+	@Override
+	public List<BaseSoleDTO> selectbase(BaseSoleSearchCriteria cri) {
+		
+		return soledao.selectbase(cri);
+	}
+	
+	// 베이스주 카운트
+	@Override
+	public int basecount(BaseSoleSearchCriteria cri) {
+		
+		return soledao.basecount(cri);
+	}
+	
+	
 
 }

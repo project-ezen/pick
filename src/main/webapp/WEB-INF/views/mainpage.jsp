@@ -19,12 +19,16 @@
             background-size: cover;
         }
         .item > ul{
-            display: none;
-            color: white;
+            visibility: hidden;
+    		max-height: 0;
+    		overflow: hidden;
+    		color: white;
+    		transition: visibility 0.5s ease, max-height 0.5s ease; /* 모든 효과를 하나의 트랜지션 속성에 포함시킵니다 */
         }
         
         .item:hover > ul{
-            display: block;
+            visibility: visible;
+    		max-height: 1000px; /* 충분히 큰 값을 설정하여 서서히 펼쳐지도록 만듭니다 */
         }
 
         ul {
@@ -47,6 +51,10 @@
             color: white;
             text-decoration-line: none;
         }
+        a:visited {
+        	color: white;
+        	text-decoration-line: none;
+        }
         #solo {
             font-size: 25px;
         }
@@ -65,17 +73,22 @@
                 <form id="formList" action="/sole/sole" method="get">
                 	<input type="hidden" name="alcohole_category"/>
                 </form>
+                
+                <form id="baseList" action="/sole/baseSole" method="get">
+                	<input type="hidden" name="alcohole_category"/>
+                </form>
+                
                 <div id="listid">          
                     <li class="item" style="margin-top: 50px;"><!-- 잠시 -->
 	                   Alcohol
 	                   <ul>
-	                       <li id="lilist"><a href="#">진</a></li>
-	                       <li id="lilist"><a href="#">럼</a></li>
-	                       <li id="lilist"><a href="#">위스키</a></li>
-	                       <li id="lilist"><a href="#">보드카</a></li>
-	                       <li id="lilist"><a href="#">와인</a></li>
-	                       <li id="lilist" class="cacktail"><a href="#">칵테일</a></li>
-	                       <li id="lilist" class="hiball"><a href="#">하이볼</a></li>
+	                       <li id="lilist" class="base"><a href="#">베이스주</a></li>
+	                       <li id="lilist"><a href="#">위스키 베이스주</a></li>
+	                       <li id="lilist"><a href="#">브랜디 베이스주</a></li>
+	                       <li id="lilist"><a href="#">진 베이스주</a></li>
+	                       <li id="lilist"><a href="#">럼 베이스주</a></li>
+	                       <li id="lilist" class="cacktail"><a href="#">보드카 베이스주</a></li>
+	                       <li id="lilist" class="hiball"><a href="#">데킬라 베이스주</a></li>
 	                   </ul>
 	          		</li>
 	          		
@@ -83,9 +96,21 @@
                        <label id="solo"><a href="${path}/board/articleList">나만의 레시피</a></label>
                    	</div>
 
-                   	<div style="margin-top: 50px;">
-                       <label id="solo"><a href="javascript:fn_mypage('${member.m_id}','${path}/member/mypage','${path}/member/login')">MyPage</a></label>
-                   	</div>
+                   	
+                   	<c:choose>
+                   		<%-- 로그인이 되지 않은 경우 --%>
+                   		<c:when test="${empty member.m_id || member.m_id eq ''}">
+                   			<div style="margin-top: 50px;">
+                       			<label id="solo"><a href="${path}/member/login">MyPage</a></label>
+                   			</div>
+                   		</c:when>
+                   		<%-- 로그인이 된 경우 --%>
+                   		<c:otherwise>
+                   			<div style="margin-top: 50px;">
+                       			<label id="solo"><a href="${path}/member/mypage">MyPage</a></label>
+                   			</div>
+                   		</c:otherwise>
+                   	</c:choose>
 
                    	<div style="margin-top: 50px;">
                        <label id="solo"><a href="/store/productInfo">Store</a></label>
@@ -106,21 +131,15 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function fn_mypage( member , mypageForm , loginForm) {
-        	if(member != '' || member != null) {        // 세션 member의 값이 '' 이거나 
-        		location.href = mypageForm;
-    		} else{
-    			alert("로그인 후 이용해주세요");
-    			location.href = loginForm + '?action=/member/mypage';
-    		} 
-        }
-        
+	
+    <script>    
         $(document).ready(function() {
         	var formList = $("#formList");
+        	var baseList = $("#baseList");
         	var category1 = 1;
         	var category2 = 2;
+        	var category3 = 3;
+        	
         	
         	$(".cacktail").click(function (){
         		formList.find("[name='alcohole_category']").val(category1);
@@ -131,7 +150,13 @@
         		formList.find("[name='alcohole_category']").val(category2);
         		formList.submit();
         	});
-        });
+        	
+        	$(".base").click(function() {
+        		baseList.find("[name='alcohole_category']").val(category3);
+        		baseList.submit();
+        	})
+            	
+        });   //// end $
     </script>
 </body>
 </html>
