@@ -103,7 +103,7 @@ color:#fff;
 					<td>
 						<input type="text"   value="${article['board_id']}" disabled/>
 						<input type="hidden" id="bid" name="board_id" value="${article['board_id']}" />
-						<input type="hidden" id="mid" name="mid" value="${member.m_id}" />
+						<input type="hidden" id="mid" name="m_id" value="${member.m_id}" />
 					</td>
 					
 					<th style="text-align: center;">작성일자</th>
@@ -115,24 +115,28 @@ color:#fff;
 					
 					<th style="text-align: center;">찜하기</th>
 					<c:choose>
-						<c:when test="${member.m_id == null}">
+						<c:when test="${not empty member}">	<!--  로그인 했을 시 -->
+							<c:choose>
+								<c:when test="${member.m_id == article.writer && not empty liked}">	<!-- 찜 했을 시 -->
+									<td style="padding-bottom:5px;">
+										<button class="jjimBtn" type="button" onClick="jjimNO()"><i class="bi bi-heart-fill"></i></button>
+										<span style="margin-left:20px; font-size:16px;">{article.jjim_cnt}</span>
+									</td>
+								</c:when>
+								<c:otherwise>	<!-- 찜 안했을 시 -->
+									<td style="padding-bottom:5px;">
+										<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
+										<span style="margin-left:20px; font-size:16px;">{article.jjim_cnt}</span>
+									</td>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>	<!-- 로그인 안했을 시 -->
 							<td style="padding-bottom:5px;">
 								<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
 								<span style="margin-left:20px; font-size:16px;">{100}</span>
 							</td>
-						</c:when>
-						<c:when test="${liked.j_check == 0 || liked.j_check == null}">
-							<td style="padding-bottom:5px;">
-								<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
-								<span style="margin-left:20px; font-size:16px;">{article.jjim_cnt}</span>
-							</td>
-						</c:when>
-						<c:when test="${member.m_id != null && liked.j_check == 1}">
-							<td style="padding-bottom:5px;">
-								<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart-fill"></i></button>
-								<span style="margin-left:20px; font-size:16px;">{article.jjim_cnt}</span>
-							</td>
-						</c:when>
+						</c:otherwise>
 					</c:choose>
 				</tr>
 				<tr>
@@ -352,10 +356,27 @@ function jjimOK(){
 		type: "get",
 		url: "/board/jjimOK",
 		dataType: "json",
-		data: {"bid":${article.board_id}, "mid":"${member.m_id}"},
+		data: {"board_id":${article.board_id}, "m_id":"${member.m_id}"},
 		success: function(data){
 			alert("성공");
 			$('.bi').removeClass('bi-heart').addClass('bi-heart-fill');
+		},
+		error: function(data){
+			alert("오류");
+		}
+	});
+}
+
+function jjimNO(){
+	
+	$.ajax({
+		type: "get",
+		url: "/board/jjimNO",
+		dataType: "json",
+		data: {"board_id":${article.board_id}, "m_id":"${member.m_id}"},
+		success: function(data){
+			alert("성공");
+			$('.bi').removeClass('bi-heart-fill').addClass('bi-heart');
 		},
 		error: function(data){
 			alert("오류");

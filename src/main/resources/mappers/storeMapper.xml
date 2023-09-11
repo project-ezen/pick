@@ -127,7 +127,7 @@
 			IMAGE,
 			WRITEDATE,
 			MEMBER_ID
-		FROM (SELECT ROWNUM AS rwm,REVIEW_ID,PRODUCT_DISPLAY_ID,CONTENT,IMAGE,WRITEDATE,MEMBER_ID FROM REVIEW WHERE PRODUCT_DISPLAY_ID = #{product_display_id})
+		FROM (SELECT ROWNUM AS rwm,REVIEW_ID,PRODUCT_DISPLAY_ID,CONTENT,IMAGE,WRITEDATE,MEMBER_ID FROM PRODUCT_REVIEW WHERE PRODUCT_DISPLAY_ID = #{product_display_id})
 		where rwm between (#{page} -1) * #{perPageNum} + 1 and #{perPageNum} * #{page}
 	
 	</select>
@@ -158,14 +158,14 @@
 	<select id="selectNewReviewNO" resultType="int">
 		<![CDATA[
 			SELECT NVL(MAX(REVIEW_ID), 0) + 1
-			FROM   REVIEW
+			FROM   PRODUCT_REVIEW
 		]]>	
 	</select>
 	
 	<!-- 새리뷰 작성하기 -->
 	<insert id="insertNewReview" parameterType="com.edu.store.dto.ReviewDTO">
 		<![CDATA[
-			INSERT INTO REVIEW
+			INSERT INTO PRODUCT_REVIEW
 					(REVIEW_ID, 	PRODUCT_DISPLAY_ID,		CONTENT,	 image,   member_id)
 			VALUES 	(#{reviewNO},	#{product_id},	#{content},	#{image}, #{member})
 		]]>
@@ -175,7 +175,7 @@
 	<delete id="reviewRemove"  parameterType="com.edu.store.dto.ReviewDTO">
 		<![CDATA[
 			DELETE 
-			FROM REVIEW
+			FROM PRODUCT_REVIEW
 			WHERE REVIEW_ID = #{reviewId}
 		]]>
 	</delete>
@@ -183,7 +183,7 @@
 	<select id="productReviewCount" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*)
-			FROM REVIEW
+			FROM PRODUCT_REVIEW
 			WHERE PRODUCT_DISPLAY_ID = #{product_display_id}
 		]]>
 	</select>

@@ -96,17 +96,17 @@
 	<!-- 찜 등록 -->
 	<insert id="jjimOK">
 		<![CDATA[
-			insert into jjim (jjim_id, b_id, mem_id)
-			values (#{jjim_id}, #{b_id}, #{mem_id})
+			insert into jjim (jjim_id, board_id, m_id)
+			values (#{jjim_id}, #{board_id}, #{m_id})
 		]]>
 	</insert>
 	
 	<!-- 찜 조회 -->
 	<select id="jjimSelect" parameterType="com.edu.board.dto.JjimDTO" resultType="com.edu.board.dto.JjimDTO">
 		<![CDATA[
-			select jjim_id, j_check
+			select jjim_id
 			from jjim
-			where b_id = #{b_id}
+			where board_id = #{board_id}
 		]]>
 	</select>
 	
@@ -117,6 +117,14 @@
 			FROM	jjim
 		]]>
 	</select>
+	
+	<!-- 찜 삭제 -->
+	<delete id="jjimNO" parameterType="com.edu.board.dto.JjimDTO">
+		<![CDATA[
+			delete jjim
+			where board_id = #{board_id}
+		]]>
+	</delete>
 	
 	<!-- 댓글 수 
 	<update id="rCount" parameterType="int">
