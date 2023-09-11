@@ -158,7 +158,7 @@
 	</select>
 	
 	<!-- 찜 딜리트 -->
-	<delete id="jjimDelte" parameterType="com.edu.sole.dto.recipe.Liked DTO">
+	<delete id="jjimDelte" parameterType="com.edu.sole.dto.recipe.LikedDTO">
 		<![CDATA[
 			delete from liked
 			where m_id = #{m_id} and recipe_code = #{recipe_code}

@@ -298,6 +298,9 @@ public class MemberController {
 		logger.info("아이디내놔");
 		
 		return ma;
-
 	}
+	
+	
+	
+	
 }	

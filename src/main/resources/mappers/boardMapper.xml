@@ -96,13 +96,13 @@
 	<!-- 찜 등록 -->
 	<insert id="jjimOK">
 		<![CDATA[
-			insert into jjim (jjim_id, b_id, mem_id, j_check)
-			values (#{jjim_id}, #{b_id}, #{mem_id}, #{j_check})
+			insert into jjim (jjim_id, b_id, mem_id)
+			values (#{jjim_id}, #{b_id}, #{mem_id})
 		]]>
 	</insert>
 	
 	<!-- 찜 조회 -->
-	<select id="jjimSelect" parameterType="com.edu.board.dto.LikedDTO" resultType="com.edu.board.dto.LikedDTO">
+	<select id="jjimSelect" parameterType="com.edu.board.dto.JjimDTO" resultType="com.edu.board.dto.JjimDTO">
 		<![CDATA[
 			select jjim_id, j_check
 			from jjim

@@ -38,4 +38,7 @@ public interface ShoppingService {
 //=====================================================================================================
 	// 주문 번호에 해당하는 주문 상세 정보 가져오기
 	public List<OrderDTO> orderNumInfo(int order_num) throws Exception;
+	
+	//모름 -> 빨간표시 지움
+	public List<OrderDTO> showOrder();
 }
