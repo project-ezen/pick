@@ -98,16 +98,16 @@
 		<table>
 			<tr>
 				<th>번호</th>
-				<th>이미지</th>
+				<!--  <th>이미지</th> -->
 				<th>이름</th>
 				<th>도수</th>
 				<th>맛</th>
 			</tr>	
 			<%int cn=1; %>
-			<c:forEach items="${sole.recipe_code == like.recipe_code }">
+			<c:forEach items="${like}" var="dto">
 			<tr>
 				<td><%=cn++ %></td>
-				<td><img style="height:100px; width:100px;" src="${path }/resources/images/thumb/t_${dto.thumbnail}" alt="사진"></td>
+				<!--  <td><img style="height:100px; width:100px;" src="${path }/resources/images/thumb/t_${dto.thumbnail}" alt="사진"></td> -->
 				<td style="width:45%;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0">${sole.alcohole_name}</a></td>
 				<td style="width:15%;">${recipe.alcohole_dosu}</td>
 				<td style="width:15%;">${recipe.favor}</td>

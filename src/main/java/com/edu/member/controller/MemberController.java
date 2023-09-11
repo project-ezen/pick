@@ -279,39 +279,32 @@ public class MemberController {
 		
 
 		HttpSession session = request.getSession(); 		
-		MemberDTO mid = (MemberDTO) session.getAttribute("member");
-		String m_id = mid.getM_id();
-
+		MemberDTO memberd = (MemberDTO) session.getAttribute("member");
+		String m_id = memberd.getM_id();
 		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
 		
-		
-		model.addAttribute("member", member.getMyPageList());
+		model.addAttribute("boardList", member.getMyPageList());
 		System.out.println("*******************************썸네일"+member.getMyPageList());
+		
 		return "/member/myboard";
 	}
 		
 	//찜한 게시물 get/ post
 	@RequestMapping(value="/mylist",method= {RequestMethod.GET, RequestMethod.POST})
-	public void mylist(HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
+	public void mylist(@RequestParam("m_id")String m_id,HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
 		
 		HttpSession session = request.getSession();
 		MemberDTO md = (MemberDTO) session.getAttribute("member");
-		String m_d = md.getM_id();
-		
-		List<LikedDTO> like = memberService.likeList(m_d);
-		List<JjimDTO> jjim	= memberService.jjimList(m_d);
+	
+		LikedDTO like	= memberService.likeList(m_id);
+		JjimDTO  jjim	= memberService.jjimList(m_id);
 		logger.info("아이디내놔");
-		
-		System.out.println(like);
-		System.out.println(jjim);
 		
 		model.addAttribute("like", like);
 		model.addAttribute("jjim", jjim);
 		
 		
 	}
-	
-	
-	
+
 	
 }	

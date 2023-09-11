@@ -57,10 +57,10 @@ public interface MemberService {
 	public MemberDTO myboardList(String mid) throws Exception;
 
 
-	public List<LikedDTO> likeList(String m_id) throws Exception;
+	public LikedDTO likeList(String m_id) throws Exception;
 
 
-	public List<JjimDTO> jjimList(String m_id) throws Exception;
+	public JjimDTO jjimList(String m_id) throws Exception;
 
 
 
