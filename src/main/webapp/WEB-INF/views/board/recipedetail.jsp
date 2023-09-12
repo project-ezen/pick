@@ -117,13 +117,7 @@ color:#fff;
 					<c:choose>
 						<c:when test="${not empty member}">	<!--  로그인 했을 시 -->
 							<c:choose>
-								<c:when test="${member.m_id == article.writer && not empty liked}">	<!-- 본인 글에는 찜할 수 없음 -->
-									<td style="padding-bottom:5px;">
-										<button class="jjimBtn" type="button" onClick="jjimNO()"><i class="bi bi-heart-fill"></i></button>
-										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
-									</td>
-								</c:when>
-								<c:when test="${member.m_id != article.writer && not empty liked}">	<!-- 본인 글 아닌거 찜 했을 시 -->
+								<c:when test="${not empty liked}">
 									<td style="padding-bottom:5px;">
 										<button class="jjimBtn" type="button" onClick="jjimNO()"><i class="bi bi-heart-fill"></i></button>
 										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
@@ -151,16 +145,23 @@ color:#fff;
                 	<th>대표사진</th>
                 	<td><input type="file" name="thumbnail" id="thumbnail" disabled/></td>
                 </tr>
-                <tr>
-                    <th scope="row" style="text-align: center;">내용</th>
-                    <td colspan="3"><div contentEditable="true">
-                    <textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
-                    <img class="image" style="width:500px; height:300px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}" id="image"/></div>
-                    </td>
-                </tr>
-                <tr>
+	                <tr>
+	                    <th scope="row" style="text-align: center;">내용</th>
+	                    <c:if test="${article.image == null}">
+	                    <td colspan="3">
+	                    	<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
+	                    </td>
+	                    </c:if>
+	                    <c:if test="${article.image != null}">
+	                    <td colspan="3"><div contentEditable="true">
+	                    <textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
+	                    <img class="image" style="width:500px; height:300px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}" id="image"/></div>
+	                    </td>
+	                    </c:if>
+	                </tr>
+               	<tr>
                     <th scope="row" style="text-align: center;">이미지 첨부</th>
-                    <td colspan="3"><input type="file" name="image" id="image" disabled /></td>
+                    <td colspan="3"><input type="file" name="image" id="image" disabled/></td>
                 </tr>
 				<tr>
 					<td colspan="2">
@@ -232,15 +233,15 @@ function fn_enable(obj){
 	document.getElementById("title").disabled		= false;
 	document.getElementById("content").disabled		= false;
 	document.getElementById("thumbnail").disabled	= false;
-	document.getElementById("image").disabled	= false;
+	document.getElementById("image").disabled		= false;
 };
 
 // 수정취소 버튼 눌렀을 시 disabled
 function backToForm(obj){
-	document.getElementById("title").disabled = true;
-	document.getElementById("content").disabled = true;
+	document.getElementById("title").disabled 		= true;
+	document.getElementById("content").disabled 	= true;
 	document.getElementById("thumbnail").disabled	= true;
-	document.getElementById("image").disabled	= true;
+	document.getElementById("image").disabled		= true;
 };
 
 // 글 삭제
@@ -262,6 +263,7 @@ function fn_remove(url, board_id){
 	
 // 에디터
 $(document).ready(function(){
+	
 	var contentval = $("#content").val();
 	
 	var oEditors = [];
@@ -276,18 +278,25 @@ $(document).ready(function(){
 	});
 	
 	contentval = $("#content").val().replace(/<p><br><\/p>/gi, "<br>"); // <p><br></p> => <br>로 변환
+	
 	contentval = contentval.replace(/<\/p><p>/gi, "<br>"); // </p><p> => <br>로 변환
 	contentval = contentval.replace(/(<\/p><br>|<p><br>)/gi, "<br><br>");
 	contentval = contentval.replace(/(<p>|<\/p>)/gi, ""); // <p> 또는 </p>모두 제거
 	$("#content").val(contentval);
-
-	$("#updatewrite").click(function(){
+	
+	$("#wsubmit").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		
-		var title = $("#title").val();
-		var content = document.getElementById("content").value;
-		var writer = $("#writer").val();
+		if (ajaxRequest !== null){
+			ajaxRequest.abort();
+		}
 		
+		var writer = document.getElementById("writer").value;
+		var title = $('#title').val();
+		var content = document.getElementById("content").value;
+		var thumbnail = $('#thumbnail').val();
+		var image = $('#image')[0];
+				
 		if (title == null || title == ""){
 			alert("제목을 입력하세요");
 			$("#title").focus();
@@ -304,13 +313,13 @@ $(document).ready(function(){
 			return false;
 		} else {
 			
-			$.ajax({
+			ajaxRequest = $.ajax({
 				type: "post",
-				url: "/board/updateArticle",
-				data: JSON.stringify({"title":title,"content":content,"writer":writer, "thumbnail":thumbnail}),
+				url: "/board/addNewArticle",
+				data: JSON.stringify({"title":title,"content":content,"writer":writer, "thumbnail":thumbnail, "image":image}),
 				success: function(data){
 					alert("성공");
-					location.href = "/board/updateArticle";
+					location.href = "/board/addNewArticle";
 				},
 				error: function(data){
 					alert("오류");
@@ -318,8 +327,8 @@ $(document).ready(function(){
 				}
 			});
 		}
-	});	// 에디터
-
+	});
+	
 });
 
 <%--댓글 삭제--%>
