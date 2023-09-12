@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.board.dao.BoardDAO;
 import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.ImageVO;
 import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
@@ -125,7 +125,7 @@ public class BoardControllerImpl implements BoardController {
 	@RequestMapping(value="/board/addNewArticle", method=RequestMethod.POST)
 	public ResponseEntity addNewArticle(HttpServletResponse response, MultipartHttpServletRequest multiRequest) throws Exception {
 		multiRequest.setCharacterEncoding("UTF-8");
-		
+		String imageFileName = null;
 		Map<String, Object> articleMap = new HashMap<String, Object>();
 		Enumeration enu = multiRequest.getParameterNames();
 		
@@ -136,9 +136,16 @@ public class BoardControllerImpl implements BoardController {
 			System.out.println("value : " + value);
 			articleMap.put(name, value);
 		}
+		// 썸네일
 		String fileRealName = thupload(multiRequest);
+		System.out.println("String fileRealName : " + fileRealName);
 		// 서버에 저장할 파일이름 fileextension으로 .jpg 이런 식의 확장자 명을 구한다
 		articleMap.put("thumbnail", fileRealName);
+		// 본문 이미지
+		String safeFile = uploadMulti(multiRequest);
+		System.out.println("String safeFile : " + safeFile);
+		articleMap.put("image", safeFile);
+		
 		
 		String	message;
 		ResponseEntity resEnt = null;
@@ -146,11 +153,17 @@ public class BoardControllerImpl implements BoardController {
 		responseHeaders.add("Content-type", "text/html;charset=UTF-8");
 		
 		try {
-			int board_id = boardService.create(articleMap);
+			System.out.println("ggggggggg ArticleMap: " + articleMap);
+			boardService.create(articleMap);
 			if(fileRealName != null && fileRealName.length() != 0) {
 				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"thumb"+ "\\" + "t_" + fileRealName);
 				srcDir.createNewFile();
 			}
+			if(safeFile != null && safeFile.length() != 0) {
+				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"contentImage"+ "\\" + safeFile);
+				srcDir.createNewFile();
+			}
+			
 			message	 = "<script>";
 			message	+= "alert('새로운 글을 추가하였습니다.');";
 			message	+= "location.href='" + multiRequest.getContextPath() + "/board/articleList';";
@@ -159,6 +172,12 @@ public class BoardControllerImpl implements BoardController {
 		} catch (Exception e) {
 			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "thumb" + "\\" + "t_" + fileRealName);
 			srcFile.delete();
+			
+			if(safeFile != null && safeFile.length() != 0) {
+				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"contentImage"+ "\\" + safeFile);
+				srcDir.delete();
+			}
+			
 			
 			message	 = "<script>";
 			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
@@ -193,7 +212,9 @@ public class BoardControllerImpl implements BoardController {
 					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "thumb" + "\\" + "t_" + fileRealName)); // 파일 변환
 				}
 			}
+			break;
 		}
+		System.out.println("return fileRealName 호호: " + fileRealName);
 		return fileRealName;
 	}
 	
@@ -233,24 +254,30 @@ public class BoardControllerImpl implements BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	//다중 이미지 업로드하기
 	//-----------------------------------------------------------------------------------------------------------
-	private List<String> uploadMulti(MultipartHttpServletRequest multipartRequest) throws Exception{
-		List<String> 		fileList	= new ArrayList<String>();
-		Iterator<String> 	fileNames 	= multipartRequest.getFileNames();
-		while(fileNames.hasNext()) {
-			String fileName = fileNames.next();
-			MultipartFile mFile = multipartRequest.getFile(fileName);
-			String originalFileName = mFile.getOriginalFilename();
-			System.out.println("##### 다중 이미지 업로드하기 originalFileName ==> " + originalFileName);
-			fileList.add(originalFileName);
-			File file = new File(ARTICLE_IMAGE_REPO +"\\"+"contentImage"+ "\\" + fileName);
-			if(mFile.getSize() != 0) { //File Null Check
-				if(!file.exists()) { //경로상에 파일이 존재하지 않을 경우
-					file.getParentFile().mkdirs();  //경로에 해당하는 디렉토리들을 생성
-					mFile.transferTo(new File(ARTICLE_IMAGE_REPO +"\\"+"contentImage"+ "\\" + originalFileName)); //임시로 저장된 multipartFile을 실제 파일로 전송
+	private String uploadMulti(MultipartHttpServletRequest multReq) throws Exception {
+		
+		String fileRealName = null; // 파일 이름을 넣을 변수
+		Iterator<String> fileNames = multReq.getFileNames(); // file이란 파라미터의 이름을 저장한 Enumeration 객체를 반환한다
+		
+		while(fileNames.hasNext()) { // 가져올 값 유무에 따라 true/false로 반환
+			String fileName = fileNames.next(); // 다음 요소 값 반환(아무 타입이나)
+			MultipartFile mFile = multReq.getFile(fileName); // 업로드된 파일에 대한 파일 객체 반환
+			fileRealName = mFile.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드
+			
+			System.out.println("------------------------------------------------------------");
+			System.out.println("fileName2 ==> " + fileName);
+			System.out.println("imageFileName2 ==> " + fileRealName);
+			
+			File file = new File(ARTICLE_IMAGE_REPO + "\\" + "contentImage" + "\\" + fileRealName);
+			if(mFile.getSize() != 0) {
+				if(!file.exists()) {	// 파일을 올릴 경로에 파일이 존재하지 않으면
+					file.getParentFile().mkdirs();	// 경로에 해당하는 디렉토리 생성
+					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "contentImage" + "\\" + fileRealName)); // 파일 변환
 				}
 			}
 		}
-		return fileList;
+		System.out.println("return fileRealName 흑흑: " + fileRealName);
+		return fileRealName;
 	}
 
 
@@ -259,6 +286,7 @@ public class BoardControllerImpl implements BoardController {
 	@ResponseBody
 	@RequestMapping(value="/board/jjimOK", method=RequestMethod.GET, produces = "application/json")
 	public JjimDTO jjimOK(@RequestParam("board_id") int board_id, @RequestParam("m_id") String m_id) throws Exception {
+		
 		JjimDTO jjimDTO = new JjimDTO();
 		jjimDTO.setBoard_id(board_id);
 		jjimDTO.setM_id(m_id);
