@@ -54,6 +54,7 @@ public class PagingCriteria {
 		}
 	}
 	
+	/*
 	public String getKeyword() {
 		return keyword;
 	}
@@ -61,10 +62,10 @@ public class PagingCriteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
-
+	*/
 	@Override
 	public String toString() {
-		return "PagingCriteria [page=" + page + ", perPageNum=" + perPageNum + ", keyword=" + keyword + "]";
+		return "PagingCriteria [page=" + page + ", perPageNum=" + perPageNum +/* ", keyword=" + keyword +*/ "]";
 	}
 
 	
