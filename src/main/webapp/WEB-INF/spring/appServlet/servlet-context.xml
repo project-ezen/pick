@@ -64,7 +64,7 @@
 	<!-- 파일 업로드를 위한 디렉토리 설정  -->
 	<!-- String uploadPath = new Strung("c:/board/upload"); -->
 	<beans:bean id="uploadPath" class="java.lang.String">
-		<beans:constructor-arg value="${path}/resources/images/thumb"/>
+		<beans:constructor-arg value="${path}/resources/images/"/>
 	</beans:bean>
 	
 </beans:beans>

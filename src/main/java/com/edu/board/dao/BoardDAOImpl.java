@@ -99,6 +99,8 @@ public class BoardDAOImpl implements BoardDAO {
 	public void jjimNO(JjimDTO jjimNO) throws DataAccessException {
 		sqlSession.delete(namespace + ".jjimNO", jjimNO);
 	}
+
+	
 	
 }
 		
