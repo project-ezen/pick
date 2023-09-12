@@ -154,7 +154,7 @@ font-size: 15px;
 		<div style="display: flex;">
 		<form action="/board/search" method="GET">
 			<div class="searchbar">
-				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요" value="${pageMaker.cri.keyword}"/>
+				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요"/>
 			</div>
 		</form>
 			<div class="selectbtn">
