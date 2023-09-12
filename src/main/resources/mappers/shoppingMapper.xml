@@ -99,6 +99,14 @@
 			WHERE order_id = #{order_id}
 		]]>
 	</select>
+	
+	<update id="completeOrder" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE product_order
+			SET order_status = #{status}
+			WHERE order_id = #{id}
+		]]>
+	</update>
 	<!-- ============================================================================================================================================================================================= -->
 	<sql id="search">
 		<if test="startDate != null and endDate != null">
@@ -108,7 +116,7 @@
 		</if>
 	</sql>
 	
-	<select id="totalCount" parameterType="orderSearch" resultType="int">
+	<select id="orderTotalCount" parameterType="orderSearch" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM product_order
@@ -118,16 +126,40 @@
 	</select>
 	
 	<select id="showOrder" parameterType="java.util.Map" resultType="orderDTO">
+		<![CDATA[
 		SELECT order_id, m_id, product_id, order_number, receiver_name, receiver_phonenum, zipcode, address, address_detail, order_date, order_status, order_complaint, count, final_price
 		FROM (
-			<![CDATA[
 				SELECT ROWNUM as rnum, order_id, m_id, product_id, order_number, receiver_name, receiver_phonenum, zipcode, address, address_detail, order_date, order_status, order_complaint, count, final_price
 				FROM product_order
 				WHERE m_id = #{member} AND order_complaint IS NULL
 			]]>
 			<include refid="search"/>
+			<![CDATA[
 			)
+		WHERE rnum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+		]]>
+	</select>
+	
+	<select id="cancelTotalCount" parameterType="orderSearch" resultType="int">
 		<![CDATA[
+			SELECT COUNT(*)
+			FROM product_order
+			WHERE order_complaint IS NOT NULL
+		]]>
+		<include refid="search"/>
+	</select>
+	
+	<select id="showCancel" parameterType="java.util.Map" resultType="orderDTO">
+		<![CDATA[
+		SELECT order_id, m_id, product_id, order_number, receiver_name, receiver_phonenum, zipcode, address, address_detail, order_date, order_status, order_complaint, count, final_price
+		FROM (
+				SELECT ROWNUM as rnum, order_id, m_id, product_id, order_number, receiver_name, receiver_phonenum, zipcode, address, address_detail, order_date, order_status, order_complaint, count, final_price
+				FROM product_order
+				WHERE m_id = #{member} AND order_complaint IS NOT NULL
+			]]>
+			<include refid="search"/>
+			<![CDATA[
+			)
 		WHERE rnum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
 		]]>
 	</select>
