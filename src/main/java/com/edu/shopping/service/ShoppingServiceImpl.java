@@ -79,6 +79,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public OrderDTO changeProduct(String order_id) throws Exception {
 		return shoppingDAO.changeProduct(order_id);
 	}
+
+	@Override
+	public void completeOrder(Map<String, String> completeMap) throws Exception {
+		shoppingDAO.completeOrder(completeMap);
+	}
 //=====================================================================================================
 	@Override
 	public int orderListTotalCount(OrderSearch search) throws Exception {
@@ -88,6 +93,15 @@ public class ShoppingServiceImpl implements ShoppingService {
 	@Override
 	public List<OrderDTO> showOrder(Map searchMap) throws Exception {
 		return shoppingDAO.showOrder(searchMap);
+	}
+	@Override
+	public int cancelListTotalCount(OrderSearch search) throws Exception {
+		return shoppingDAO.cancelListTotalCount(search);
+	}
+
+	@Override
+	public List<OrderDTO> showCancel(Map searchMap) throws Exception {
+		return shoppingDAO.showCancel(searchMap);
 	}
 //=====================================================================================================
 	@Override
