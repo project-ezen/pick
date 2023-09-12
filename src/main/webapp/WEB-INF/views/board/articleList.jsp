@@ -152,9 +152,11 @@ font-size: 15px;
 		<h2 align="center">나만의 레시피</h2>
 		<br/>
 		<div style="display: flex;">
+		<form action="/board/search" method="GET">
 			<div class="searchbar">
-				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="검색"/>
+				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요" value="${pageMaker.cri.keyword}"/>
 			</div>
+		</form>
 			<div class="selectbtn">
 				<select class="btnsub">
 					<option>최신순</option>
