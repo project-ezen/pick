@@ -9,9 +9,11 @@
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
 
-	h1 {
-		color: black;
-	}
+	.container { background-color: #fff; min-height: 600px; }
+	
+	.foot { padding-bottom: 150px; padding-top: 150px; margin:auto; }
+
+	h1 { color: black; }
 	#bigdiv {
 		/*height: auto;    /* footer 아래로 고정 */
   		/*min-height: 100%;
@@ -23,22 +25,22 @@
 		item-align: center;   /*셀렉박스 가운데정렬*/
 	}
 	select {
-	  width: 200px;
-	  padding: .8em .5em;
-	  font-family: inherit;
-	  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
-	  -webkit-appearance: none;
-	  -moz-appearance: none;
-	  appearance: none;
-	  border: 1px solid #999;
-	  color: black;
-	  border-radius: 10px;
+		width: 200px;
+		padding: .8em .5em;
+		font-family: inherit;
+		background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		color: black;
+		border-radius: 10px;
 	}
 	option {
-	  padding: 4px;
-	  font-size: 14px;
-	  color: #fff;
-	  background: #272822;
+		padding: 4px;
+		font-size: 14px;
+		color: #fff;
+		background: #272822;
 	}
 	.aa:link {
 		text-decoration-line: none;
@@ -68,7 +70,8 @@
 </head>
 <%@ include file="../include/topMenu.jsp" %>
 <body>
-	<div id="bigdiv" class="container" style="background-color:white;">
+<div class="foot">
+	<div id="bigdiv" class="container">
 		<h1 style="text-align:center">Alcohole</h1>
 		<br>
 		<!-- select  -->
@@ -133,7 +136,8 @@
 			</div>			
 		</div>
 	</div>
-	<br/>
+	<br/><br/>
+</div>
 <%@ include file="../include/footer.jsp" %>
 
 <script type="text/javascript">
