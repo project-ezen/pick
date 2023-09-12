@@ -26,6 +26,7 @@ import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.ReplyDTO;
 import com.edu.member.dto.MemberDTO;
 import com.edu.member.service.MemberService;
+import com.edu.sole.dto.RecipedSoleDTO;
 import com.edu.sole.dto.recipe.LikedDTO;
 
 @Controller					// 컨트롤러를 빈으로 등록한다.
@@ -280,28 +281,34 @@ public class MemberController {
 
 		HttpSession session = request.getSession(); 		
 		MemberDTO memberd = (MemberDTO) session.getAttribute("member");
-		String m_id = memberd.getM_id();
-		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
+		String mid = memberd.getM_id();
 		
-		model.addAttribute("boardList", member.getMyPageList());
-		System.out.println("*******************************썸네일"+member.getMyPageList());
+		List<BoardDTO> myboard = memberService.myboardList(mid);
+		
+		model.addAttribute("boardList", myboard);
+		System.out.println("*******************************썸네일"+myboard);
 		
 		return "/member/myboard";
 	}
 		
-	//찜한 게시물 get/ post
+	//레시피 즐겨찾기 게시물 get/ post
 	@RequestMapping(value="/mylist",method= {RequestMethod.GET, RequestMethod.POST})
-	public void mylist(@RequestParam("m_id")String m_id,HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
+	public ModelAndView mylikelist(HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
 		
+		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
-		MemberDTO md = (MemberDTO) session.getAttribute("member");
-	
-		LikedDTO like	= memberService.likeList(m_id);
-		JjimDTO  jjim	= memberService.jjimList(m_id);
+		MemberDTO mid = (MemberDTO) session.getAttribute("member");
+		String m_id = mid.getM_id();
+		
+		List<RecipedSoleDTO> likeList	= memberService.likeList(m_id);
+		List<BoardDTO> 		 jjimList	= memberService.jjimList(m_id);
+
 		logger.info("아이디내놔");
 		
-		model.addAttribute("like", like);
-		model.addAttribute("jjim", jjim);
+		mav.addObject("like", likeList);
+		mav.addObject("jjim", jjimList);		
+		mav.setViewName("member/mylist");
+		return mav;
 		
 		
 	}
