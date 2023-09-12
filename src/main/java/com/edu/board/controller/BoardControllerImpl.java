@@ -109,8 +109,15 @@ public class BoardControllerImpl implements BoardController {
 		System.out.println("BCI articleDetail() : " + boardDTO);
 		model.addAttribute("article",boardDTO);
 		
-		List<JjimDTO> jjimDTO = boardService.jjimSelect(board_id);
-		model.addAttribute("liked", jjimDTO);
+		JjimDTO jjimDTO = new JjimDTO();
+		if(member != null) {
+			String m_id = member.getM_id();
+			jjimDTO.setM_id(m_id);
+			jjimDTO.setBoard_id(board_id);
+			jjimDTO = boardService.jjimSelect(jjimDTO);
+			model.addAttribute("liked", jjimDTO);
+		}
+		
 		System.out.println("jjimDTO List 값 : " + jjimDTO);
 		
 		List<ReplyDTO> reply = replyService.list(board_id);

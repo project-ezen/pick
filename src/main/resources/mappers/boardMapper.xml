@@ -106,7 +106,7 @@
 		<![CDATA[
 			select *
 			from jjim
-			where board_id = #{board_id}
+			where m_id = #{m_id} and board_id = #{board_id}
 		]]>
 	</select>
 	
