@@ -117,7 +117,7 @@ color:#fff;
 					<c:choose>
 						<c:when test="${not empty member}">	<!--  로그인 했을 시 -->
 							<c:choose>
-								<c:when test="${member.m_id == article.writer && not empty liked}">	<!-- 본인 글 찜 했을 시 -->
+								<c:when test="${member.m_id == article.writer && not empty liked}">	<!-- 본인 글에는 찜할 수 없음 -->
 									<td style="padding-bottom:5px;">
 										<button class="jjimBtn" type="button" onClick="jjimNO()"><i class="bi bi-heart-fill"></i></button>
 										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
@@ -153,7 +153,10 @@ color:#fff;
                 </tr>
                 <tr>
                     <th scope="row" style="text-align: center;">내용</th>
-                    <td colspan="3"><textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea></td>
+                    <td colspan="3"><div contentEditable="true">
+                    <textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
+                    <img class="image" style="width:500px; height:300px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}" id="image"/></div>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row" style="text-align: center;">이미지 첨부</th>

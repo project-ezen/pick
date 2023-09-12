@@ -40,5 +40,7 @@ public interface BoardDAO {
 	
 	// 찜 삭제
 	public void jjimNO(JjimDTO jjimNO) throws DataAccessException;
+	
+	// 다중 이미지
 }
 
