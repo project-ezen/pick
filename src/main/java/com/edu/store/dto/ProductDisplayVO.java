@@ -8,6 +8,7 @@ public class ProductDisplayVO {
 	private String alcohol_content;
 	private String origin;
 	private String manufacturer;
+	
 	public String getProduct_display_id() {
 		return product_display_id;
 	}

@@ -172,6 +172,14 @@
 	   color: rgba(0,0,0,1);
 	   background-color: rgba(0,0,0,0);
 	  }
+
+	  
+	  #backgroundBy{
+	  	background-color:rgba(255,255,255,0.8);
+	  	border-radius: 10px;
+	  	margin-right: 30px;
+	  	margin-left: 30px;
+	  }
 	  
 	  #backgroundBy{
 	  	background-color:rgba(255,255,255,0.8);
@@ -187,9 +195,7 @@
     <!-- Top Menu -->
      <%@ include file="../include/topMenu.jsp" %>
     
-
     <!-- 광고 배너 -->
-
 
     <div id="Advertising" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -211,27 +217,29 @@
         </div>
       </div>
 
+
       <!-- 광고 옆으로 넘기기 -->
-      <a
-        class="left carousel-control"
-        href="#Advertising"
-        role="button"
-        data-slide="prev"
-      >
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a
-        class="right carousel-control"
-        href="#Advertising"
-        role="button"
-        data-slide="next"
-      >
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
+      		<a
+	        class="left carousel-control"
+	        href="#Advertising"
+	        role="button"
+	        data-slide="prev"
+      		>
+	        <span class="glyphicon glyphicon-chevron-left"></span>
+	        <span class="sr-only">Previous</span>
+		    </a>
+		    <a
+	        class="right carousel-control"
+	        href="#Advertising"
+	        role="button"
+	        data-slide="next"
+      		>
+	        <span class="glyphicon glyphicon-chevron-right"></span>
+	        <span class="sr-only">Next</span>
+      		</a>
+    	</div>
     <br/>
+
 
 <!-- 버튼 -->
    <div class="row" id="backgroundBy">
@@ -270,21 +278,24 @@
     </div>
     <br />
     <br />
-    
-	<div class="container-fluid">
-	<div class="row text-center" id="productInfo">
-		<c:forEach var="product" items="${productList}">
-			<a href="/store/productInfos?product_display_id=${product.product_display_id}">
-				<div class="col-sm-3 productInfo_in">
-					<img src="/resources/product_images/${product.product_image}" align="center"/>
-					<p align="center">상품명 : ${product.product_name }</p>
-					<p align="center">가격 : <fmt:formatNumber value="${product.product_price }" pattern="#,###"/>원</p>
-				</div>
-			</a>
-		</c:forEach>
-	</div>
-  </div>
-      
+
+	
+ 
+		<div class="container-fluid pro">
+			<div class="row text-center" id="productInfo">
+				<c:forEach var="product" items="${productList}">
+					<a href="/store/productInfos?product_display_id=${product.product_display_id}">
+						<div class="col-sm-3 productInfo_in">
+							<img src="${path}/download.do?imageFileName=${product.product_image}" align="center"/>
+							<p align="center">상품명 : ${product.product_name }</p>
+							<p align="center">가격 : <fmt:formatNumber value="${product.product_price }" pattern="#,###"/>원</p>
+						</div>
+					</a>
+				</c:forEach>
+			</div>
+	  	</div>
+ </div>     
+
          
          
  <div align="center">
@@ -307,8 +318,8 @@
             </li>
         </ul>
     </nav>
-	</div>
 </div>
+
 
     <div class="row">
       <div id="footer">
@@ -497,6 +508,16 @@
         $("#furSearchBtn").css("background-image", "none");
         $("#jucSearchBtn").css("background-image", "none");
 
+<<<<<<< HEAD
+=======
+       
+        // 글리피콘 세모 바꾸기
+        $("#btnDown").css("margin-left", "-550px");
+        $("#btnDown").css("display", "inline-block");
+        $("#productInfo").css("margin-bottom", "10px");
+
+
+>>>>>>> 9d01849c61b8bdfe840272a1e0e1937460130672
         // 높이 바꾸기
         $("#alcSearchBtn").css("height", "90px");
         $("#doguSearchBtn").css("height", "60px");
@@ -580,3 +601,4 @@
     
   </script>
 </html>
+

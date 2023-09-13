@@ -16,7 +16,6 @@
     <title>상품 상세 페이지</title>
     <style>
     
-    
       /*상품 관련 이미지, 위치*/
       .product-img {
         width: 400px;
@@ -236,10 +235,10 @@
 		font-size: 30px;
     }
     
-    
     #loginTf{
     	float: right;
     }
+
     </style>
   </head>
   <body class="bg">

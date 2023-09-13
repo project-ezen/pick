@@ -1,5 +1,6 @@
 package com.edu.shopping.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +28,8 @@ import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.DisplayOrderVO;
 import com.edu.shopping.dto.OrderDTO;
+import com.edu.shopping.dto.OrderPaging;
+import com.edu.shopping.dto.OrderSearch;
 import com.edu.shopping.service.ShoppingService;
 import com.edu.store.dto.ProductDTO;
 
@@ -137,7 +140,7 @@ public class ShoppingController {
 
 		// 구매한 물품을 장바구니에서 주문내역으로 이동하기
 		for(int i = 0; i < product.length; i++) {
-			// 무작위 8자리 장바구니 번호 부여하기
+			// 무작위 8자리 주문 아이디 부여하기
 			String order_id = getOrderId();
 			orderDTO.setOrder_id(order_id);
 			
@@ -164,7 +167,7 @@ public class ShoppingController {
 //----------------------------------------------------------------------------------------------------------------	
 	// myOrderList Controller
 	@RequestMapping(value="/myOrderList", method=RequestMethod.GET)
-	public ModelAndView myOrderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView myOrderList(HttpServletRequest request, HttpServletResponse response, OrderSearch search) throws Exception {
 		String viewName = "/shopping/myOrderList";
 		ModelAndView mav = new ModelAndView(viewName);
 		
@@ -184,17 +187,134 @@ public class ShoppingController {
 		}
 		log.info("product : " + product);
 		
+		OrderPaging orderPage = new OrderPaging();
+		OrderPaging cancelPage = new OrderPaging();
+		
+		orderPage.setCri(search);
+		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
+		orderPage.setTotalCount(shoppingService.orderListTotalCount(search));
+		log.info("게시물의 총 건수 : " + orderPage.getTotalCount());
+		
+		cancelPage.setCri(search);
+		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
+		cancelPage.setTotalCount(shoppingService.cancelListTotalCount(search));
+		log.info("게시물의 총 건수 : " + cancelPage.getTotalCount());
+		
+		mav.addObject("orderPage", orderPage);
+		mav.addObject("cancelPage", cancelPage);
 		mav.addObject("order", order);
 		mav.addObject("product", product);
 		return mav;
 	}
 //----------------------------------------------------------------------------------------------------------------
-	// cancel
+	// 페이징
+	@ResponseBody
+	@RequestMapping(value="/paging", method=RequestMethod.GET)
+	public ModelAndView pagingList(@RequestParam(value="page", required=false, defaultValue="1") int page, @RequestParam("relation") String rel, OrderSearch search, HttpServletRequest request) throws Exception {
+		log.info(page + " 페이지, " + search.getStartDate() + "부터 " + search.getEndDate() + "까지 주문 정보");
+		ModelAndView mav = new ModelAndView("jsonView");
+		
+		// 세션 준비하기
+		HttpSession session = request.getSession();
+		// 회원 정보 가져오기
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		
+		OrderPaging paging = new OrderPaging();
+		
+		// 지정한 기간에 주문한 주문 정보 가져오기
+		Map searchMap = new HashMap();
+		searchMap.put("member", member.getM_id());
+		searchMap.put("startDate", search.getStartDate());
+		searchMap.put("endDate", search.getEndDate());
+		searchMap.put("page", search.getPage());
+		searchMap.put("perPageNum", search.getPerPageNum());
+		
+		// 주문 or 취소 목록
+		List<OrderDTO> list = new ArrayList<OrderDTO>();
+		
+		if(rel.equals("order")) {
+			paging.setCri(search);
+			// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
+			paging.setTotalCount(shoppingService.orderListTotalCount(search));
+			log.info("게시물의 총 건수 : " + paging.getTotalCount());
+			
+			list = shoppingService.showOrder(searchMap);
+			log.info("order_list : " + list);
+			
+		}
+		else if(rel.equals("cancel")) {
+			paging.setCri(search);
+			// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
+			paging.setTotalCount(shoppingService.cancelListTotalCount(search));
+			log.info("게시물의 총 건수 : " + paging.getTotalCount());
+			
+			list = shoppingService.showCancel(searchMap);
+			log.info("order_list : " + list);
+		}
+		
+		// 주문한 상품 목록 가져오기 - 주문번호 한 개에 담겨있는 상품 목록 List에 저장
+		List<ProductDTO> product = new ArrayList<ProductDTO>();
+		for(int i = 0; i < list.size(); i++) {
+			product.add(shoppingService.orderList(list.get(i)));
+		}
+		log.info("product : " + product);
+		log.info("page : " + paging);
+		
+		if(rel.equals("order")) {
+			mav.addObject("orderPage", paging);
+			mav.addObject("order", list);
+		}
+		else if(rel.equals("cancel")) {
+			mav.addObject("cancelPage", paging);
+			mav.addObject("cancel", list);
+		}
+		mav.addObject("product", product);
+		return mav;
+	}
+//----------------------------------------------------------------------------------------------------------------
+	// 배송 완료
+	@ResponseBody
+	@RequestMapping(value="/orderComplete", method=RequestMethod.GET)
+	public String orderComplete(@RequestParam("id")String id, HttpServletRequest request) throws Exception {
+		
+		Map<String, String> completeMap = new HashMap<String, String>();
+		completeMap.put("id", id);
+		completeMap.put("status", "delivery-successed");
+		
+		shoppingService.completeOrder(completeMap);
+		
+		return "redirect:/shopping/myOrderList";
+	}
+//----------------------------------------------------------------------------------------------------------------
+	// 상품 취소, 교환, 환불
 	@ResponseBody
 	@RequestMapping(value="/reason", method=RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String cancelReason(@RequestParam("id")String id, @RequestParam("reason")String c_reason, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		log.info(id + " 회원의 취소 이유는 : " + c_reason);
-		String order_status = "delivery-refuse(cancel)";
+	public String cancelReason(@RequestParam("id")String id, @RequestParam("reason")String c_reason, @RequestParam("title")String title, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		HttpSession session = request.getSession();
+		MemberDTO member = (MemberDTO)session.getAttribute("member");
+		
+		String order_status = new String();
+		if(title.equals("Cancel Progressing")) {
+			log.info(id + " 주문의 취소 이유는 : " + c_reason);
+			order_status = "delivery-refuse(cancel)";
+		} else if(title.equals("Refund Progressing")) {
+			log.info(id + " 주문의 환불 이유는 : " + c_reason);
+			order_status = "product refund";
+		} else if(title.equals("Change Progressing")) {
+			log.info(id + " 주문의 교환 이유는 : " + c_reason);
+			order_status = "product change";
+			
+			// 같은 물품으로 새 제품 배송 진행
+			OrderDTO ordertemp = shoppingService.changeProduct(id);
+
+			// 주문 번호 부여하기
+			int order_num = getOrderNum(member.getM_id());
+			// 무작위 8자리 주문 아이디 부여하기
+			String order_id = getOrderId();
+			ordertemp.setOrder_number(order_num);
+			ordertemp.setOrder_id(order_id);
+			ordertemp.setOrder_status("delivery-progressing");
+		}
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("id", id);

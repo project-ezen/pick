@@ -12,6 +12,7 @@ import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dao.ShoppingDAO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.OrderDTO;
+import com.edu.shopping.dto.OrderSearch;
 import com.edu.store.dto.ProductDTO;
 
 @Service("shoppingService")
@@ -73,10 +74,38 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public void overwriteOrder(Map<String, String> map) throws Exception {
 		shoppingDAO.overwriteOrder(map);
 	}
+
+	@Override
+	public OrderDTO changeProduct(String order_id) throws Exception {
+		return shoppingDAO.changeProduct(order_id);
+	}
+
+	@Override
+	public void completeOrder(Map<String, String> completeMap) throws Exception {
+		shoppingDAO.completeOrder(completeMap);
+	}
+//=====================================================================================================
+	@Override
+	public int orderListTotalCount(OrderSearch search) throws Exception {
+		return shoppingDAO.orderListTotalCount(search);
+	}
+
+	@Override
+	public List<OrderDTO> showOrder(Map searchMap) throws Exception {
+		return shoppingDAO.showOrder(searchMap);
+	}
+	@Override
+	public int cancelListTotalCount(OrderSearch search) throws Exception {
+		return shoppingDAO.cancelListTotalCount(search);
+	}
+
+	@Override
+	public List<OrderDTO> showCancel(Map searchMap) throws Exception {
+		return shoppingDAO.showCancel(searchMap);
+	}
 //=====================================================================================================
 	@Override
 	public List<OrderDTO> orderNumInfo(int order_num) throws Exception {
 		return shoppingDAO.orderNumInfo(order_num);
 	}
-
 }

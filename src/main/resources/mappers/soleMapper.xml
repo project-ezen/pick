@@ -140,7 +140,7 @@
 	</select>
 	
 	<!-- 찜 인설트 -->
-	<insert id="jjimInsert" parameterType="com.edu.sole.dto.recipe.JjimDTO">
+	<insert id="jjimInsert" parameterType="com.edu.sole.dto.recipe.LikedDTO">
 		<![CDATA[
 			insert into liked
 				   (liked_id, m_id, recipe_code, ingredient_number)
@@ -149,7 +149,7 @@
 	</insert>
 	
 	<!-- 찜 셀렉하는 -->
-	<select id="jjimSelect" parameterType="com.edu.sole.dto.recipe.JjimSelectDTO" resultType="com.edu.sole.dto.recipe.JjimDTO">
+	<select id="jjimSelect" parameterType="com.edu.sole.dto.recipe.LikedSelectDTO" resultType="com.edu.sole.dto.recipe.LikedDTO">
 		<![CDATA[
 			select *
 			from liked
@@ -158,11 +158,60 @@
 	</select>
 	
 	<!-- 찜 딜리트 -->
-	<delete id="jjimDelte" parameterType="com.edu.sole.dto.recipe.JjimDTO">
+	<delete id="jjimDelte" parameterType="com.edu.sole.dto.recipe.LikedDTO">
 		<![CDATA[
 			delete from liked
 			where m_id = #{m_id} and recipe_code = #{recipe_code}
 		]]>
 	</delete>
+	
+	<!-- 베이스주 셀렉 -->
+	<select id="selectbase" parameterType="com.edu.sole.dto.base.BaseSoleSearchCriteria" resultType="com.edu.sole.dto.base.BaseSoleDTO">
+		<![CDATA[
+			select *
+			from (select rownum as rwm, base_alcohole_id, alcohole_category, alcohole_name, alcohole_image, sole_jongryu
+				  from base_alcohole)
+			where rwm between (#{page} -1) * #{perPageNum} + 1 and #{perPageNum} * #{page}
+		]]>
+		<include refid="base"/>
+	</select>
+	
+	<!-- 베이스주 총 개수 -->
+	<select id="basecount" parameterType="com.edu.sole.dto.base.BaseSoleSearchCriteria" resultType="int">
+		<![CDATA[
+			select count(*)
+			from base_alcohole
+			where 1=1
+		]]>
+		<include refid="base"/>
+	</select>
+	
+	<sql id="base">
+		<if test="sole_jongryu != null and sole_jongryu != '' and sole_jongryu != '전부'">
+			<![CDATA[
+				and sole_jongryu = #{sole_jongryu}
+			]]>
+		</if>
+		
+		<if test="keyword != null and keyword != ''">
+  			<![CDATA[
+  				and alcohole_name like '%' || #{keyword} || '%'
+  			]]>
+  		</if>
+  		
+  		<if test="alcohole_category != null and alcohole_category != '' and alcohole_category != 0">
+  			<![CDATA[
+  				and alcohole_category = #{alcohole_category}
+  			]]>
+  		</if>
+  		
+  		<if test="sole_jongryu == '전부'">
+  			<![CDATA[
+  				and 1=1
+  			]]>
+  		</if>
+	</sql>
+	
+	
 
 </mapper>

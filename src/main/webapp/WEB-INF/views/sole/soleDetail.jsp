@@ -8,19 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>상품 상세 페이지</title>
 	<%@ include file="../include/header.jsp" %>
+	<!--<script type="text/javascript">	
+		history.pushState(null, null, location.href);
+	    window.onpopstate = function () {
+	    	location.href="/sole/sole?alcohole_category=" + ${recipe.alcohole_category};
+		};        
+	</script> /// 왜 실행이 안될까  ==> 왜 실행이 되는걸까 , 쓰면서도 뭔 소린지 모르겠음 ==> 하루지나니까 다시 실행이 안됨 왜 ? -->
+	
     <style>
       /*상품 관련 이미지, 위치*/
-	  .bg {
-		 background-image: url("/resources/images/background2.jpg");
-
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	  }
+	  
       .product-img {
         /*width: 400px;
         height: 400px;
@@ -69,7 +66,12 @@
         background-color: rgb(139, 139, 139);
       }
       a:link {
-        color: black;
+        text-decoration-line: none;
+        color: white;
+      }
+      a:visited {
+      	color: white;
+      	text-decoration-line: none;
       }
       #reviewBtn {
       	margin-left: 50px;
@@ -107,13 +109,23 @@
 	  	font-size: 3em;
 		color: transparent;
 		text-shadow: 0 0 0 #f0f0f0;
-		cursor: default;
+		cursor: pointer;
 	  }
 	  .jjim {
 	  	font-size: 3em;
 	  	color: transparent;
 	  	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-	  	cursor: default;
+	  	cursor: pointer;
+	  }
+	  
+	  .btnAndJjim {
+	  	display: flex; 
+	  	flex-direction: row; 
+	  	align-items: center;
+	  }
+	  
+	  .right {
+	  	margin-left: auto;
 	  }
 	  
     </style>
@@ -137,7 +149,7 @@
           <!--상품 간단 정보-->
           <h1>${recipe.alcohole_name}</h1>
           <div class="col-md-6 product-info">
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="margin:0px;">
               <tbody>
                 <tr>
                   <th>설명</th>
@@ -153,26 +165,31 @@
                 </tr>
               </tbody>
             </table>
+            <div class="btnAndJjim">
+	            <div>
+	            	<button type="button" id="moklok">목록으로 돌아가기</button>
+	            </div>
             <!-- 즐겨찾기 부분 -->
 			<c:choose>
 			    <c:when test="${empty member.m_id || member.m_id eq ''}">
-			        <div align="right">
+			        <div align="right" class="right">
 			            <span class="nojjim" id="mark">★</span>
 			        </div>
 			    </c:when>
 			    
 			    <c:when test="${not empty jjimselect.liked_id}">
-			        <div align="right">
+			        <div align="right" class="right">
 			            <span class="jjim" id="mark">★</span>
 			        </div>
 			    </c:when>
 			    
 			    <c:otherwise>
-			    	<div align="right">
+			    	<div align="right" class="right">
 			            <span class="nojjim" id="mark">★</span>
 			        </div>
 			    </c:otherwise>
 			</c:choose>
+			</div>
           </div>
           
         </div>
@@ -182,7 +199,7 @@
         <br />
         <br />
         <br />
-        <div class="container">
+        <div class="container1" >
           <!--상세설명&리뷰-->
           <ul class="nav nav-tabs infoAndReview">
             <li class="active">
@@ -253,6 +270,8 @@
     <script>
 		$(document).ready(function () {
 			var reviewForm = $("#reviewForm");
+			var page = ${rpgm.cri.page} || 1;
+			var encodedPage = encodeURIComponent(page);
 			
 			$("#reviewBtn").click(function() {
 							
@@ -264,7 +283,7 @@
 				
 				if("${member.m_id}" == null || "${member.m_id}" == '') {
 					alert("로그인하셔야 작성할 수 있습니다.");
-					location.href="/member/login";
+				 	location.href="/member/login?action=/sole/soleDetail?recipe_code=" + "${recipe.recipe_code}" + "&page=" + page;					
 				}
 			});	
 			
@@ -275,7 +294,6 @@
 		            dataType: "json",
 		            data: {"recipe_code": ${recipe.recipe_code}, "page": pageNum},
 		            success: function (data) {
-		            	
 		            	$(".ajaxDiv").empty();     // 페이지를 누를때 기존 내용으 지우고 새 페이지의 내용을 채움
 		                
 		            	console.log(data);
@@ -300,7 +318,7 @@
 		                        '<p>' + review.writedate + '</p>' +
 		                        '<p>' + starHtml + '</p>' +
 		                        '</div>' +
-		                        '<div class="col-sm-7">' +
+		                        '<div class="col-sm-6">' +
 		                        '<p id="reviewcontent">' + review.content + '</p>' +
 		                        '</div>' +
 		                        '</div>';
@@ -374,7 +392,10 @@
 		    	});
 		    } ///////////// end jjimDelete
 		    
-			
+		    // 목록으로 돌아가기
+		    $("#moklok").click(function() {
+		    	location.href="/sole/sole?alcohole_category=" + ${recipe.alcohole_category};
+		    });
 		});   /// end $
     </script>
   </body>

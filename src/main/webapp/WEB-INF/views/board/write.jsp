@@ -82,9 +82,9 @@ color: #fff;
 				<textarea id="content" name="content" rows="20"></textarea>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group" id="file-list">
 			<label class="control-label col-sm-3">이미지 첨부</label>
-			<div class="col-sm-7"><input type="file" name="image" id="image"></input></div>
+			<div class="col-sm-7"><input type="file" name="image" id="image" multiple></input></div>
 		</div>
 		<hr/>
 		<div class="form-group">
@@ -139,6 +139,7 @@ $(document).ready(function(){
 		var title = $('#title').val();
 		var content = document.getElementById("content").value;
 		var thumbnail = $('#thumbnail').val();
+		var image = $('#image').val();
 				
 		if (title == null || title == ""){
 			alert("제목을 입력하세요");
@@ -159,7 +160,7 @@ $(document).ready(function(){
 			ajaxRequest = $.ajax({
 				type: "post",
 				url: "/board/addNewArticle",
-				data: JSON.stringify({"title":title,"content":content,"writer":writer, "thumbnail":thumbnail}),
+				data: JSON.stringify({"title":title,"content":content,"writer":writer, "thumbnail":thumbnail, "image":image}),
 				success: function(data){
 					alert("성공");
 					location.href = "/board/addNewArticle";

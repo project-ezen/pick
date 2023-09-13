@@ -5,23 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>레시피술</title>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
-	.bg {
-		 background-image: url("/resources/images/background2.jpg");
 
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	}
-	h1 {
-		color: black;
-	}
+	.container { background-color: #fff; min-height: 600px; }
+	
+	.foot { padding-bottom: 150px; padding-top: 150px; margin:auto; }
+
+	h1 { color: black; }
 	#bigdiv {
 		/*height: auto;    /* footer 아래로 고정 */
   		/*min-height: 100%;
@@ -33,30 +25,40 @@
 		item-align: center;   /*셀렉박스 가운데정렬*/
 	}
 	select {
-	  width: 200px;
-	  padding: .8em .5em;
-	  font-family: inherit;
-	  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
-	  -webkit-appearance: none;
-	  -moz-appearance: none;
-	  appearance: none;
-	  border: 1px solid #999;
-	  color: black;
-	  border-radius: 10px;
+		width: 200px;
+		padding: .8em .5em;
+		font-family: inherit;
+		background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		color: black;
+		border-radius: 10px;
 	}
 	option {
 	  padding: 4px;
 	  font-size: 14px;
-	  color: #fff;
-	  background: #272822;
+	  color: black;
+	  /*background: #272822;*/
 	}
-	a:link {
+	.aa:link {
 		text-decoration-line: none;
-		color: black !important;
+		color: white;
 	}
-	a:visited {
+	.aa:visited {
 		text-decoration-line: none;
-		color: black !important;
+		color: white;
+	}
+	
+	a.alink:link {
+		text-decoration-line: none;
+		color: black;
+	}
+	
+	a.alink:visited {
+		text-decoration-line: none;
+		color: black;
 	}
 	
 	img {
@@ -77,8 +79,9 @@
 </style>
 </head>
 <%@ include file="../include/topMenu.jsp" %>
-<body class="bg">
-	<div id="bigdiv" class="container" style="background-color:white;">
+<body>
+<div class="foot">
+	<div id="bigdiv" class="container">
 		<h1 style="text-align:center">Alcohole</h1>
 		<br>
 		<!-- select  -->
@@ -103,7 +106,7 @@
 			<c:forEach var="sole" items="${sole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a href="#"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
+					<a class="aa" href="#"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
 					<p style="text-align: center;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
@@ -124,26 +127,27 @@
             	<ul class="btn-group pagination col-sm-offset-6 col-sm-2">
 					<c:if test="${pageMaker.prev}">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a class="aa" href='<c:url value="/sole/sole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 						</li>
 					</c:if>
 					
 					<c:forEach begin="${pagemaker.startPage}" end="${pagemaker.endPage}" var="pageNum">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}&alcohole_category=${cri.alcohole_category}"/>'><i>${pageNum}</i></a>
+							<a class="aa" href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}&alcohole_category=${cri.alcohole_category}"/>'><i>${pageNum}</i></a>
 						</li>
 					</c:forEach>
 					
 					<c:if test="${pageMaker.next}">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a class="aa" href='<c:url value="/sole/sole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 						</li>
 					</c:if>
 				</ul>
 			</div>			
 		</div>
 	</div>
-	<br/>
+	<br/><br/>
+</div>
 <%@ include file="../include/footer.jsp" %>
 
 <script type="text/javascript">

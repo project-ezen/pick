@@ -6,7 +6,7 @@
 	  
 	<resultMap id="member" type="com.edu.member.dto.MemberDTO" >
 		<result property="m_id" 			column="M_ID"/>
-		<collection property="myPageList" 	resultMap="board"/>
+		
 	</resultMap>
 
 	<resultMap id="board" type="com.edu.board.dto.BoardDTO" >
@@ -16,6 +16,7 @@
 		<result property="writeDate" 	column="writeDate"/>
 		<result property="image" 		column="image"/>
 		<result property="writer" 		column="M_ID"/>
+		<result property="thumbnail"	column="THUMBNAIL"/>
 	</resultMap>
 	
 	<!-- 회원목록 가져오기 -->
@@ -115,15 +116,33 @@
 	</update>
 	
 	<!-- 내가 쓴 게시물 -->
-	 <select id="myboard" parameterType="String" resultMap="member">
+	 <select id="myboard" parameterType="String" resultMap="board">
 	 <![CDATA[
-		SELECT b.m_id, b.board_id, b.title , b.writeDate ,b.image
-		FROM  member m
-		LEFT OUTER JOIN board b
-		ON m.m_id = b.m_id
-		WHERE m.m_id = #{m_id}
+		SELECT b.m_id, b.board_id, b.title , b.writeDate ,b.image, b.thumbnail
+		FROM  member m , board b
+		WHERE m.m_id = b.m_id
+		AND m.m_id = #{m_id}
 		ORDER BY b.board_id ASC
 		]]>
 	</select>
+	
+	<!--  레시피 술 즐겨찾기 -->
+	<select id="mylikelist" parameterType="String" resultType="com.edu.sole.dto.RecipedSoleDTO">
+		select re.alcohole_name ,re.alcohole_image,re.alcohole_dosu,re.favor,l.m_id ,re.recipe_code
+		from liked l, reciped_alcohole re
+		where re.recipe_code = l.recipe_code
+		and l.m_id = #{m_id}
+	</select>
+	
+	<!-- 나만의 레시피 찜  -->
+	<select id="myjjimlist" parameterType="String" resultMap="board">
+		<![CDATA[
+		select b.board_id, b.title,b.m_id, b.writedate, b.thumbnail , j.m_id
+		from jjim j , board b
+		where j.board_id = b.board_id
+		and j.m_id =  #{m_id}
+		ORDER BY b.writedate ASC
+		]]>
+	</select> 
 	
 </mapper>

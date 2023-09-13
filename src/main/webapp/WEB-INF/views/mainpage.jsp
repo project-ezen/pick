@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=divice-width, initial-scale=1">
-<title>Insert title here</title>
+<title>메인페이지</title>
 <%@ include file="./include/header.jsp" %>
     <style>
         body, html {  height: 100%;  margin: 0;  color: white; }
@@ -20,15 +20,17 @@
         }
         .item > ul{
             visibility: hidden;
-          max-height: 0;
-          overflow: hidden;
-          color: white;
-          transition: visibility 0.5s ease, max-height 0.5s ease; /* 모든 효과를 하나의 트랜지션 속성에 포함시킵니다 */
+    		max-height: 0;
+    		overflow: hidden;
+    		color: white;
+    		transition: visibility 0.5s ease, max-height 0.5s ease; /* 모든 효과를 하나의 트랜지션 속성에 포함시킵니다 */
+
         }
         
         .item:hover > ul{
             visibility: visible;
           max-height: 1000px; /* 충분히 큰 값을 설정하여 서서히 펼쳐지도록 만듭니다 */
+
         }
 
         ul {
@@ -52,8 +54,13 @@
             text-decoration-line: none;
         }
         a:visited {
+<<<<<<< HEAD
            color: white;
            text-decoration-line: none;
+=======
+        	color: white;
+        	text-decoration-line: none;
+>>>>>>> 9d01849c61b8bdfe840272a1e0e1937460130672
         }
         #solo {
             font-size: 25px;
@@ -75,7 +82,9 @@
                 </form>
                 
                 <form id="baseList" action="/sole/baseSole" method="get">
+
                    <input type="hidden" name="alcohole_category"/>
+
                 </form>
                 
                 <div id="listid">          
@@ -91,8 +100,9 @@
                           <li id="lilist" class="hiball"><a href="#">데킬라 베이스주</a></li>
                       </ul>
                    </li>
-                   
-                      <div style="margin-top: 50px;">
+
+	          		
+                   	<div style="margin-top: 50px;">
                        <label id="solo"><a href="${path}/board/articleList">나만의 레시피</a></label>
                       </div>
 
@@ -112,50 +122,54 @@
                          </c:otherwise>
                       </c:choose>
 
+
                       <div style="margin-top: 50px;">
                        <label id="solo"><a href="/store/productInfo">Store</a></label>
-                      </div>
-                      <div style="margin-top: 350px;" id="logindiv">
-                      <c:choose>
-                  <%-- 로그인이 되지 않은 경우 --%>
-                  <c:when test="${ isLogOn != true }">
-                          <label><a href="${path}/member/login">login</a> | <a href="${path}/member/join">sign on</a></label>
-                         </c:when>
-                         <%-- 로그인이 된 경우 --%>
-                      <c:when test="${ isLogOn == true }">
-                          <label><a href="${path}/member/logout">logout</a></label>
-                         </c:when>
-                      </c:choose>
-                      </div>
+
+                   	</div>
+                   	<div style="margin-top: 350px;" id="logindiv">
+                   	<c:choose>
+						<%-- 로그인이 되지 않은 경우 --%>
+						<c:when test="${ member == null }">
+	                       <label><a href="${path}/member/login">login</a> | <a href="${path}/member/join">sign on</a></label>
+	                   	</c:when>
+	                   	<%-- 로그인이 된 경우 --%>
+	                	<c:when test="${ member != null }">
+	                       <label><a href="${path}/member/logout">logout</a></label>
+	                   	</c:when>
+                   	</c:choose>
+                   	</div>
+
                 </div>
             </div>
         </div>
     </div>
-   
+
     <script>    
         $(document).ready(function() {
-           var formList = $("#formList");
-           var baseList = $("#baseList");
-           var category1 = 1;
-           var category2 = 2;
-           var category3 = 3;
-           
-           
-           $(".cacktail").click(function (){
-              formList.find("[name='alcohole_category']").val(category1);
-              formList.submit();
-           });
-           
-           $(".hiball").click(function (){
-              formList.find("[name='alcohole_category']").val(category2);
-              formList.submit();
-           });
-           
-           $(".base").click(function() {
-              baseList.find("[name='alcohole_category']").val(category3);
-              baseList.submit();
-           })
-               
+        	var formList = $("#formList");
+        	var baseList = $("#baseList");
+        	var category1 = 1;
+        	var category2 = 2;
+        	var category3 = 3;
+        	
+        	
+        	$(".cacktail").click(function (){
+        		formList.find("[name='alcohole_category']").val(category1);
+        		formList.submit();
+        	});
+        	
+        	$(".hiball").click(function (){
+        		formList.find("[name='alcohole_category']").val(category2);
+        		formList.submit();
+        	});
+        	
+        	$(".base").click(function() {
+        		baseList.find("[name='alcohole_category']").val(category3);
+        		baseList.submit();
+        	})
+            	
+
         });   //// end $
     </script>
 </body>

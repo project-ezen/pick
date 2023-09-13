@@ -34,7 +34,13 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle tt" data-toggle="dropdown" href="#">Alcohol</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">list</a></li>
+                        <li id="lilist" class="base"><a href="#">베이스주</a></li>
+	                    <li id="lilist"><a href="#">위스키 베이스주</a></li>
+	                    <li id="lilist"><a href="#">브랜디 베이스주</a></li>
+	                    <li id="lilist"><a href="#">진 베이스주</a></li>
+	                    <li id="lilist"><a href="#">럼 베이스주</a></li>
+	                    <li id="lilist" class="cacktail"><a href="#">보드카 베이스주</a></li>
+	                    <li id="lilist" class="hiball"><a href="#">데킬라 베이스주</a></li>
                     </ul>
                 </li>
                 <li><a class="tt" href="${path}/board/articleList">My Own Recipe</a></li>
@@ -47,7 +53,7 @@
                 	<c:when test="${ member != null }">
 						<li><a class="tt" data-toggle="tooltip" title="로그아웃" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/logout">LogOut</a></li>
 						<li><a class="tt" data-toggle="tooltip" title="장바구니" style="margin-right: 20px; margin-top: 5px;" href="${path}/shopping/cart">Cart</a></li>
-						<li><a class="tt" data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="${path}/shopping/myOrderList">MyPage</a></li>
+						<li><a class="tt" data-toggle="tooltip" title="내 페이지" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/mypage">MyPage</a></li>
 					</c:when>
 					<%-- 로그인이 되지 않은 경우 --%>
 					<c:when test="${ member == null }">
@@ -58,4 +64,41 @@
 			</ul>
         </div>
     </div>
+    
+    <form id="formList" action="/sole/sole" method="get">
+    	<input type="hidden" name="alcohole_category"/>
+    </form>
+                
+    <form id="baseList" action="/sole/baseSole" method="get">
+        <input type="hidden" name="alcohole_category"/>
+    </form>
+    
+
 </section>
+
+    <script>    
+        $(document).ready(function() {
+        	var formList = $("#formList");
+        	var baseList = $("#baseList");
+        	var category1 = 1;
+        	var category2 = 2;
+        	var category3 = 3;
+        	
+        	
+        	$(".cacktail").click(function (){
+        		formList.find("[name='alcohole_category']").val(category1);
+        		formList.submit();
+        	});
+        	
+        	$(".hiball").click(function (){
+        		formList.find("[name='alcohole_category']").val(category2);
+        		formList.submit();
+        	});
+        	
+        	$(".base").click(function() {
+        		baseList.find("[name='alcohole_category']").val(category3);
+        		baseList.submit();
+        	})
+            	
+        });   //// end $
+    </script>
