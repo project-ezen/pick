@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>레시피술</title>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
 
@@ -37,18 +37,28 @@
 		border-radius: 10px;
 	}
 	option {
-		padding: 4px;
-		font-size: 14px;
-		color: #fff;
-		background: #272822;
+	  padding: 4px;
+	  font-size: 14px;
+	  color: black;
+	  /*background: #272822;*/
 	}
 	.aa:link {
 		text-decoration-line: none;
-		color: black !important;
+		color: white;
 	}
 	.aa:visited {
 		text-decoration-line: none;
-		color: black !important;
+		color: white;
+	}
+	
+	a.alink:link {
+		text-decoration-line: none;
+		color: black;
+	}
+	
+	a.alink:visited {
+		text-decoration-line: none;
+		color: black;
 	}
 	
 	img {
