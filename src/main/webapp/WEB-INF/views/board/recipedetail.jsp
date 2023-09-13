@@ -92,7 +92,7 @@ color:#fff;
 <div class="container">
 	<h2 style="text-align: center;">나만의 레시피 상세</h2>
 	<br/>
-	<form name="viewArticle" method="post" action="${path}" enctype="multipart/form-data">
+	<form name="viewArticle" method="post" action="${path}/board/updateW" enctype="multipart/form-data">
 		<table>
 			<colgroup>
 				<col style="width:10%;" /><col style="width:23%;" /><col style="width:10%;" /><col style="width:23%;" />
@@ -155,7 +155,7 @@ color:#fff;
 	                    <c:if test="${article.image != null}">
 	                    <td colspan="3"><div contentEditable="true">
 	                    <textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
-	                    <img class="image" style="width:500px; height:300px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}" id="image"/></div>
+	                    <img class="image" style="width:500px; height:300px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}"/></div>
 	                    </td>
 	                    </c:if>
 	                </tr>
@@ -178,7 +178,7 @@ color:#fff;
 					<tr id="ddd">
 						<td colspan="4" style="text-align: right;">
 							<input type="button" class="btn5" value="수정 취소" onClick="backToForm(this.form)"/>
-							<input type="button" class="btn4" value="올리기" id="updatewrite"/>
+							<input type="submit" class="btn4" value="올리기" id="updateW"/>
 						</td>
 					</tr>
 				</c:if>
@@ -284,18 +284,19 @@ $(document).ready(function(){
 	contentval = contentval.replace(/(<p>|<\/p>)/gi, ""); // <p> 또는 </p>모두 제거
 	$("#content").val(contentval);
 	
-	$("#wsubmit").click(function(){
+	$("#updateW").click(function(){
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		
 		if (ajaxRequest !== null){
 			ajaxRequest.abort();
 		}
 		
-		var writer = document.getElementById("writer").value;
+		//var writer = document.getElementById("writer").value;
 		var title = $('#title').val();
 		var content = document.getElementById("content").value;
 		var thumbnail = $('#thumbnail').val();
-		var image = $('#image')[0];
+		var image = $('#image').val();
+		//var board_id = $('#bid').val();
 				
 		if (title == null || title == ""){
 			alert("제목을 입력하세요");
@@ -315,11 +316,11 @@ $(document).ready(function(){
 			
 			ajaxRequest = $.ajax({
 				type: "post",
-				url: "/board/addNewArticle",
-				data: JSON.stringify({"title":title,"content":content,"writer":writer, "thumbnail":thumbnail, "image":image}),
+				url: "/board/updateW",
+				data: JSON.stringify({"title":title,"content":content, "thumbnail":thumbnail, "image":image}),
 				success: function(data){
 					alert("성공");
-					location.href = "/board/addNewArticle";
+					location.href = "/board/updateW";
 				},
 				error: function(data){
 					alert("오류");
@@ -376,7 +377,7 @@ function jjimOK(){
 		dataType: "json",
 		data: {"board_id":${article.board_id}, "m_id":"${member.m_id}"},
 		success: function(data){
-			alert("성공");
+			alert("찜 완료");
 			$('.bi').removeClass('bi-heart').addClass('bi-heart-fill');
 		},
 		error: function(data){
@@ -393,7 +394,7 @@ function jjimNO(){
 		dataType: "json",
 		data: {"board_id":${article.board_id}, "m_id":"${member.m_id}"},
 		success: function(data){
-			alert("성공");
+			alert("찜 취소");
 			$('.bi').removeClass('bi-heart-fill').addClass('bi-heart');
 		},
 		error: function(data){

@@ -37,6 +37,7 @@ public interface BoardController {
 		public ResponseEntity articleDelete(@RequestParam("board_id") int board_id,HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 		// 게시글 수정
+		public ResponseEntity updateW(@RequestParam("board_id")int board_id, HttpServletResponse response, MultipartHttpServletRequest multiRequest) throws Exception;
 		
 		// 찜 등록
 		public JjimDTO jjimOK(int board_id, String m_id) throws Exception;
