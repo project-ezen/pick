@@ -55,6 +55,24 @@
 	]]>
 	</select>
 	
+	<!-- 게시글 찜많은 순 가져오기 (Paging) -->
+	<select id="boardListJjim" parameterType="com.edu.board.dto.PagingCriteria" resultType="boardDTO" resultMap="articlesResult">
+	<![CDATA[
+	select *
+	from (
+	    select recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail ,reply_count, jjim_cnt
+	    from (
+	        select rownum as recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail ,reply_count, jjim_cnt
+	        from (
+	            select b.board_id, b.title, b.content, b.writedate, m.m_id, m.m_nickname, b.thumbnail, 
+	            	(select count(*) from reply where b_id= b.board_id) AS reply_count, (select count(*) from jjim where board_id = b.board_id) as jjim_cnt
+	            from board b, member m
+	            where b.m_id = m.m_id
+	            order by jjim_cnt desc)))
+	WHERE recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+	]]>
+	</select>
+	
 	<!-- 게시글 번호에 해당하는 상세정보 -->
 	<select id="selectArticle" parameterType="int" resultType="boardDTO" resultMap="articlesResult">
 		<![CDATA[
@@ -84,6 +102,24 @@
 			values (#{board_id}, #{title}, #{content}, #{image, jdbcType=VARCHAR}, #{writer}, #{thumbnail})
 		]]>
 	</insert>
+	
+	<!-- 게시글 번호에 해당하는 정보수정 -->
+	<update id="updateW" parameterType="java.util.Map">
+		<![CDATA[
+		update board
+		set title = #{title},
+			content = #{content}
+		]]>
+			<if test="image != '' and image != null">
+			, image = #{image}
+			</if>
+			<if test="thumbnail != '' and thumbnail != null">
+			, thumbnail = #{thumbnail}
+			</if>
+		<![CDATA[
+		WHERE	board_id	= #{board_id}
+		]]>
+	</update>
 	
 	<!-- 게시글 삭제 -->
 	<delete id="delete">

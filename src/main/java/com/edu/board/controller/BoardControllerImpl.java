@@ -78,18 +78,32 @@ public class BoardControllerImpl implements BoardController {
 	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri)
 			throws Exception {
 		
-		
+		String opt = request.getParameter("selop");
+		System.out.println("정렬 파라미터 : " + opt);
 		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(pcri);
-		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
 		
-		
-		List<BoardDTO> list = boardService.boardListPaging(pcri);
-		mav.addObject("articlesList", list);
-		mav.addObject("pageMaker", pageMaker);
+		if(opt == "one") {
+			pageMaker.setPcri(pcri);
+			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
+			List<BoardDTO> list = boardService.boardListPaging(pcri);
+			mav.addObject("articlesList", list);
+			mav.addObject("pageMaker", pageMaker);
+		} else if(opt == "two") {
+			pageMaker.setPcri(pcri);
+			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
+			List<BoardDTO> list2 = boardService.boardListJjim(pcri);
+			mav.addObject("articlesList", list2);
+			mav.addObject("pageMaker", pageMaker);
+		} else {
+			pageMaker.setPcri(pcri);
+			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
+			List<BoardDTO> list = boardService.boardListPaging(pcri);
+			mav.addObject("articlesList", list);
+			mav.addObject("pageMaker", pageMaker);
+		}
 		
 		return mav;
 	}
@@ -132,7 +146,6 @@ public class BoardControllerImpl implements BoardController {
 	@RequestMapping(value="/board/addNewArticle", method=RequestMethod.POST)
 	public ResponseEntity addNewArticle(HttpServletResponse response, MultipartHttpServletRequest multiRequest) throws Exception {
 		multiRequest.setCharacterEncoding("UTF-8");
-		String imageFileName = null;
 		Map<String, Object> articleMap = new HashMap<String, Object>();
 		Enumeration enu = multiRequest.getParameterNames();
 		
@@ -160,8 +173,8 @@ public class BoardControllerImpl implements BoardController {
 		responseHeaders.add("Content-type", "text/html;charset=UTF-8");
 		
 		try {
-			System.out.println("ggggggggg ArticleMap: " + articleMap);
 			boardService.create(articleMap);
+			System.out.println("ggggggggg ArticleMap: " + articleMap);
 			if(fileRealName != null && fileRealName.length() != 0) {
 				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"thumb"+ "\\" + "t_" + fileRealName);
 				srcDir.createNewFile();
@@ -256,6 +269,75 @@ public class BoardControllerImpl implements BoardController {
 	}
 	
 	// 게시글 수정
+	@Override
+	@RequestMapping(value="/board/updateW", method=RequestMethod.POST)
+	public ResponseEntity updateW(@RequestParam("board_id")int board_id, HttpServletResponse response, MultipartHttpServletRequest multiRequest)
+			throws Exception {
+		multiRequest.setCharacterEncoding("UTF-8");
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = multiRequest.getParameterNames();
+		
+		while(enu.hasMoreElements()) { // 현재 위치에 데이터가 있으면 true 반환
+			String	name	= (String)enu.nextElement();
+			String	value	= multiRequest.getParameter(name);
+			System.out.println("name : "  + name);
+			System.out.println("value : " + value);
+			articleMap.put(name, value);
+		}
+		
+		// 썸네일
+		String fileRealName = thupload(multiRequest); 
+		System.out.println("String fileRealName : " + fileRealName);
+		// 서버에 저장할 파일이름 fileextension으로 .jpg 이런 식의 확장자 명을 구한다
+		articleMap.put("thumbnail", fileRealName);
+		// 본문 이미지
+		String safeFile = uploadMulti(multiRequest);
+		System.out.println("String safeFile : " + safeFile);
+		articleMap.put("image", safeFile);
+		
+		
+		String	message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-type", "text/html;charset=UTF-8");
+		
+		try {
+			boardService.updateW(articleMap);
+			System.out.println("ggggggggg ArticleMap: " + articleMap);
+			if(fileRealName != null && fileRealName.length() != 0) {
+				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"thumb"+ "\\" + "t_" + fileRealName);
+				srcDir.createNewFile();
+			}
+			if(safeFile != null && safeFile.length() != 0) {
+				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"contentImage"+ "\\" + safeFile);
+				srcDir.createNewFile();
+			}
+			
+			message	 = "<script>";
+			message	+= "alert('게시글을 수정하였습니다.');";
+			message	+= "location.href='" + multiRequest.getContextPath() + "/board/articleList';";
+			message	+= "</script>";
+			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "thumb" + "\\" + "t_" + fileRealName);
+			srcFile.delete();
+			
+			if(safeFile != null && safeFile.length() != 0) {
+				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"contentImage"+ "\\" + safeFile);
+				srcDir.delete();
+			}
+			
+			
+			message	 = "<script>";
+			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
+			message	+= "location.href='" + multiRequest.getContextPath() + "/board/write';";
+			message	+= "</script>";
+			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		
+		return resEnt;
+	}
 	
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -314,6 +396,8 @@ public class BoardControllerImpl implements BoardController {
 		boardService.jjimNO(jjimNO);
 		return jjimNO;
 	}
+
+
 	
 	
 	
