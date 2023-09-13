@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>레시피술</title>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
 	.bg {
@@ -47,16 +47,26 @@
 	option {
 	  padding: 4px;
 	  font-size: 14px;
-	  color: #fff;
-	  background: #272822;
+	  color: black;
+	  /*background: #272822;*/
 	}
 	a:link {
 		text-decoration-line: none;
-		color: black !important;
+		color: white;
 	}
 	a:visited {
 		text-decoration-line: none;
-		color: black !important;
+		color: white;
+	}
+	
+	a.alink:link {
+		text-decoration-line: none;
+		color: black;
+	}
+	
+	a.alink:visited {
+		text-decoration-line: none;
+		color: black;
 	}
 	
 	img {
@@ -103,8 +113,8 @@
 			<c:forEach var="sole" items="${sole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a href="#"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
-					<p style="text-align: center;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0">${sole.alcohole_name}</a></p>
+					<a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
+					<p style="text-align: center;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0" class="alink">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
 			
