@@ -42,12 +42,12 @@
 	<![CDATA[
 	select *
 	from (
-	    select recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail ,reply_count
+	    select recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail ,reply_count, jjim_cnt
 	    from (
-	        select rownum as recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail ,reply_count
+	        select rownum as recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail ,reply_count, jjim_cnt
 	        from (
 	            select b.board_id, b.title, b.content, b.writedate, m.m_id, m.m_nickname, b.thumbnail, 
-	            	(select count(*) from reply where b_id= b.board_id) AS reply_count
+	            	(select count(*) from reply where b_id= b.board_id) AS reply_count, (select count(*) from jjim where board_id = b.board_id) as jjim_cnt
 	            from board b, member m
 	            where b.m_id = m.m_id
 	            order by board_id desc)))
@@ -60,7 +60,7 @@
 		<![CDATA[
 			select *
 			from (
-			    select  b.board_id, b.title, b.content, b.writedate, b.image, m.m_id, m.m_nickname
+			    select  b.board_id, b.title, b.content, b.writedate, b.image, m.m_id, m.m_nickname, (select count(*) from jjim where board_id = b.board_id) as jjim_cnt
 			    from board b, member m
 			    where b.m_id = m.m_id)
 			where board_id = #{board_id}
@@ -104,9 +104,9 @@
 	<!-- 찜 조회 -->
 	<select id="jjimSelect" parameterType="com.edu.board.dto.JjimDTO" resultType="com.edu.board.dto.JjimDTO">
 		<![CDATA[
-			select jjim_id
+			select *
 			from jjim
-			where board_id = #{board_id}
+			where m_id = #{m_id} and board_id = #{board_id}
 		]]>
 	</select>
 	
@@ -123,6 +123,7 @@
 		<![CDATA[
 			delete jjim
 			where board_id = #{board_id}
+			and m_id = #{m_id}
 		]]>
 	</delete>
 	

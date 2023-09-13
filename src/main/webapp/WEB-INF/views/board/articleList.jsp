@@ -152,9 +152,11 @@ font-size: 15px;
 		<h2 align="center">나만의 레시피</h2>
 		<br/>
 		<div style="display: flex;">
+		<form action="/board/search" method="GET">
 			<div class="searchbar">
-				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="검색"/>
+				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요"/>
 			</div>
+		</form>
 			<div class="selectbtn">
 				<select class="btnsub">
 					<option>최신순</option>
@@ -196,7 +198,7 @@ font-size: 15px;
 										</c:if>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<i id="heart" class="bi bi-heart"></i>
-										<span class="jjim_count">100</span>
+										<span class="jjim_count">${article.jjim_cnt}</span>
 									</c:when>
 									<c:otherwise> <!-- 비로그인 상태일 때, 찜 버튼 디폴트 -->
 										<i class="bi bi-chat"></i>
@@ -205,7 +207,7 @@ font-size: 15px;
 										</c:if>
 										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<i class="bi bi-heart"></i>
-										<span class="jjim_count">100</span>
+										<span class="jjim_count">${article.jjim_cnt}</span>
 									</c:otherwise>
 								</c:choose>
 								</div>
