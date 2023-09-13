@@ -16,7 +16,7 @@ public class PageMaker {
 	
 	public PagingCriteria getPcri() {
 		return pcri;
-
+	}
 	
 	public void setPcri(PagingCriteria pcri) {
 		this.pcri = pcri;
