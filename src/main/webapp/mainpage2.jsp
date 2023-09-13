@@ -23,11 +23,22 @@
         .item > ul{
             display: none;
             color: white;
+            opacity: 0;
+            transition: opacity 2s ease;
         }
         
         .item:hover > ul{
             display: block;
+            opacity 1;
         }
+
+		.item {
+		    transition: margin-top 1s ease; /* 마진 값에 대한 애니메이션 추가 */
+		}
+
+		.item:hover {
+		    margin-top: 0; /* 호버 시 마진 값을 0으로 변경하여 이동 애니메이션 적용 */
+		}
 
         ul {
             list-style: none;

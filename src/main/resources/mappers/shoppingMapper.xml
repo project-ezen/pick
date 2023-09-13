@@ -7,7 +7,7 @@
 			SELECT *
 			FROM cart
 			WHERE m_id = #{m_id}
-			AND cart_number = (SELECT MIN(cart_number) FROM cart WHERE m_id = '101')
+			AND cart_number = (SELECT MIN(cart_number) FROM cart WHERE m_id = #{m_id})
 		]]>
 	</select>
 
