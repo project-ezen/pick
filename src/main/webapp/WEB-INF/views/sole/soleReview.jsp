@@ -10,7 +10,18 @@
 
 <script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
+<script type="text/javascript">
+	
+	var referrer = document.referrer;
 
+	window.onpageshow = function(event) {
+    	if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        	alert("이전 페이지로 이동합니다.");
+        	
+        	window.location.href = referrer;    // 이 페이지에서 컨트롤러에 있는 레시피 코드를 끌고 가서  카테고리 구해서 그쪽으로 넘긴다?????????
+    }
+}     // 구조 이해 x 
+</script>
 <style>
 body {
 	background-image: url("/resources/images/background2.jpg");
@@ -93,7 +104,7 @@ label {
 <%@ include file="../include/topMenu.jsp" %>
 <br/><br/>
 <div class="container">
-	<form class="form-horizontal" action="/sole/soleReviewInsert" method="post" enctype="multipart/form-data">
+	<form class="form-horizontal" action="/sole/soleReviewInsert" method="post" enctype="multipart/form-data" id="reviewForm">
 		<div class="form-group">
 			<div>
 				<h2 align="center">리뷰 작성</h2>
@@ -124,7 +135,7 @@ label {
 		<div class="form-group">
 			<label class="control-label col-sm-3">내용</label>
 			<div class="col-sm-6">
-				<textarea class="form-control" rows="15" name="content" maxlength="500" placeholder="한 번 작성한 리뷰는 수정하거나 삭제할 수 없으니 신중하게 작성해주세요."></textarea>
+				<textarea class="form-control" rows="15" name="content" maxlength="500" placeholder="한 번 작성한 리뷰는 수정하거나 삭제할 수 없으니 신중하게 작성해주세요." id="reviewContent"></textarea>
 			</div>
 		</div>
 		
@@ -141,7 +152,7 @@ label {
 			<div class="col-sm-4" style="text-align: center; margin-left: 10px;">
 				<button class="btn_cle" type="button" onclick="back()">취소</button>
 				&nbsp;
-				<button class="btn_sub" type="submit">올리기</button>
+				<button class="btn_sub" type="button" id="reviewSubmit">올리기</button>
 			</div>
 		</div>
 		<input type="hidden" name="recipe_code" value="${param.recipe_code}"/>
@@ -165,6 +176,18 @@ label {
 		}
 	}
 	
+	$(document).ready(function() {
+		
+		// 리뷰 쓸때 내용에 값이 없으면 서밋하지 못하게 하는 
+		$("#reviewSubmit").click(function() {
+			var contentValue = $("#reviewContent").val();
+			if(!contentValue || contentValue.trim() === "") {
+				alert("내용을 작성해야 합니다.");
+			} else {
+				$("#reviewForm").submit();
+			}
+		});
+	});
 </script>
 
 <%@ include file="../include/footer.jsp" %>

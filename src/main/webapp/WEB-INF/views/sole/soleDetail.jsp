@@ -8,6 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>상품 상세 페이지</title>
 	<%@ include file="../include/header.jsp" %>
+	<!--<script type="text/javascript">	
+		history.pushState(null, null, location.href);
+	    window.onpopstate = function () {
+	    	location.href="/sole/sole?alcohole_category=" + ${recipe.alcohole_category};
+		};        
+	</script> /// 왜 실행이 안될까  ==> 왜 실행이 되는걸까 , 쓰면서도 뭔 소린지 모르겠음 ==> 하루지나니까 다시 실행이 안됨 왜 ? -->
+	
     <style>
       /*상품 관련 이미지, 위치*/
 	  
@@ -275,7 +282,7 @@
 				}
 				
 				if("${member.m_id}" == null || "${member.m_id}" == '') {
-					alert("로그인하셔야 작성할 수 있습니다. page");
+					alert("로그인하셔야 작성할 수 있습니다.");
 				 	location.href="/member/login?action=/sole/soleDetail?recipe_code=" + "${recipe.recipe_code}" + "&page=" + page;					
 				}
 			});	
@@ -287,7 +294,6 @@
 		            dataType: "json",
 		            data: {"recipe_code": ${recipe.recipe_code}, "page": pageNum},
 		            success: function (data) {
-		            	
 		            	$(".ajaxDiv").empty();     // 페이지를 누를때 기존 내용으 지우고 새 페이지의 내용을 채움
 		                
 		            	console.log(data);
@@ -386,11 +392,10 @@
 		    	});
 		    } ///////////// end jjimDelete
 		    
-		    
+		    // 목록으로 돌아가기
 		    $("#moklok").click(function() {
-		    	action="/sole/sole?
+		    	location.href="/sole/sole?alcohole_category=" + ${recipe.alcohole_category};
 		    });
-			
 		});   /// end $
     </script>
   </body>
