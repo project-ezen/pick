@@ -153,19 +153,18 @@ font-size: 15px;
 		<h2 align="center">나만의 레시피</h2>
 		<br/>
 		<div style="display: flex;">
-		<div class="searchbar">
-			<form action="/board/search" method="GET">
-				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요"/>
-			</form>
+			<div class="searchbar" id="search_keyword">
+				<i class="bi bi-search bis" id="word"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요" name="keyword" value="${pcri.keyword}" onkeypress="if( event.keyCode == 13 ){searchData();}"/>
+			</div>
 		</div>
 		<div class="selectbtn">
 			<form action="/board/articleList" method="get" id="selectBtn">
 				<select class="btnsub" name="selop" id="selop" onChange="selectOp()">
 					<option value="one">최신순</option>
 					<option value="two">찜 많은순</option>
+
 				</select>
 			</form>
-		</div>
 		</div>
 		<div class="outer_div">
 		<c:choose>
@@ -242,8 +241,10 @@ font-size: 15px;
 	      </div>
 		<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
 		<br/><br/>
+		
 	</div>
 <br/><br/>
+		
 </div>
 <%@ include file="../include/footer.jsp" %>
 <script>
@@ -254,7 +255,7 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 		alert("로그인 후 이용해주세요.");
 		location.href= loginForm + '?action=/board/write';
 	}
-}
+};
 
 function selectOp() {
 	var selop = $("#selop option:selected").val();
@@ -274,6 +275,22 @@ function selectOp() {
 }
 
 
+/*
+function searchData() {
+	e.preventDefault();
+	
+	let keyword = $("#search_keyword input[name='keyword']").val();
+
+	if(!keyword){
+		alert("키워드를 입력하세요.");
+		return false;
+	}		
+	
+	find("input[name='keyword']").val(keyword);
+	find("input[name='prev']").val(1);
+	submit();
+});
+*/
 </script>
 </body>
 </html>

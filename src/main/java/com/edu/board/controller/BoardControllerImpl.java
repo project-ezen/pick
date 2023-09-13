@@ -75,11 +75,14 @@ public class BoardControllerImpl implements BoardController {
 	// 게시글 목록(페이징) 화면 보여주기
 	@Override
 	@RequestMapping(value="/board/articleList", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri)
-			throws Exception {
+	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception {
+		
+		logger.info("boardArticleList");
+
 		
 		String opt = request.getParameter("selop");
 		System.out.println("정렬 파라미터 : " + opt);
+
 		
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -104,6 +107,7 @@ public class BoardControllerImpl implements BoardController {
 			mav.addObject("articlesList", list);
 			mav.addObject("pageMaker", pageMaker);
 		}
+
 		
 		return mav;
 	}
@@ -209,6 +213,8 @@ public class BoardControllerImpl implements BoardController {
 		
 		return resEnt;
 	}
+
+//=========================================================================================================================================
 
 	// 썸네일 업로드
 	private String thupload(MultipartHttpServletRequest multReq) throws Exception {
@@ -369,7 +375,7 @@ public class BoardControllerImpl implements BoardController {
 		return fileRealName;
 	}
 
-
+//=========================================================================================================================================
 	// 찜 등록
 	@Override
 	@ResponseBody
@@ -397,7 +403,9 @@ public class BoardControllerImpl implements BoardController {
 		return jjimNO;
 	}
 
-
+//=========================================================================================================================================
+	
+	
 	
 	
 	

@@ -95,7 +95,5 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.jjimNO(jjimNO);
 	}
 
-	
-	
 
 }

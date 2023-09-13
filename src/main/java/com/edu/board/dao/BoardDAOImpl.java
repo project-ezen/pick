@@ -114,6 +114,12 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 
+	@Override
+	public List<BoardDTO> searchKeyword(PagingCriteria pcri) throws DataAccessException {
+		return sqlSession.selectList(namespace + ".searchKeyword",pcri);
+	}
+
+
 	
 	
 }

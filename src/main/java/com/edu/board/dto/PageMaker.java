@@ -49,6 +49,7 @@ public class PageMaker {
 		
 		// 다음 페이지 (next)
 		next = endPage == realEndPage ? false : true;
+
 		
 	} // End - 화면 하단에 보여줄 페이지를 계산한다
 	
