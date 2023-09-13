@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=divice-width, initial-scale=1">
-<title>Insert title here</title>
+<title>메인페이지</title>
 <%@ include file="./include/header.jsp" %>
     <style>
         body, html {  height: 100%;  margin: 0;  color: white; }
@@ -118,11 +118,11 @@
                    	<div style="margin-top: 350px;" id="logindiv">
                    	<c:choose>
 						<%-- 로그인이 되지 않은 경우 --%>
-						<c:when test="${ isLogOn != true }">
+						<c:when test="${ member == null }">
 	                       <label><a href="${path}/member/login">login</a> | <a href="${path}/member/join">sign on</a></label>
 	                   	</c:when>
 	                   	<%-- 로그인이 된 경우 --%>
-	                	<c:when test="${ isLogOn == true }">
+	                	<c:when test="${ member != null }">
 	                       <label><a href="${path}/member/logout">logout</a></label>
 	                   	</c:when>
                    	</c:choose>

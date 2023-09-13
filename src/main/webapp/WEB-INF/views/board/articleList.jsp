@@ -64,6 +64,7 @@ font-size: 16px;
 background-color: rgb(233, 233, 233);
 outline: none;
 }
+
 .selectbtn {
 width: 150px;
 margin-left: auto;
@@ -155,12 +156,15 @@ font-size: 15px;
 			<div class="searchbar" id="search_keyword">
 				<i class="bi bi-search bis" id="word"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요" name="keyword" value="${pcri.keyword}" onkeypress="if( event.keyCode == 13 ){searchData();}"/>
 			</div>
-			<div class="selectbtn">
-				<select class="btnsub">
-					<option>최신순</option>
-					<option>찜 많은순</option>
+		</div>
+		<div class="selectbtn">
+			<form action="/board/articleList" method="get" id="selectBtn">
+				<select class="btnsub" name="selop" id="selop" onChange="selectOp()">
+					<option value="one">최신순</option>
+					<option value="two">찜 많은순</option>
+
 				</select>
-			</div>
+			</form>
 		</div>
 		<div class="outer_div">
 		<c:choose>
@@ -228,7 +232,7 @@ font-size: 15px;
 	                  <a class="page" href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
 	               </li>
 	            </c:forEach>
-	            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+	            <c:if test="${pageMaker.next}">
 	               <li>
 	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 	               </li>
@@ -252,6 +256,23 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 		location.href= loginForm + '?action=/board/write';
 	}
 };
+
+function selectOp() {
+	var selop = $("#selop option:selected").val();
+	
+		$.ajax({
+			url: "/board/articleList",
+			type: "get",
+			dataType: "text",
+			data: selop,
+			success: function(data){
+				alert(selop);
+			},
+			error: function(data){
+				alert("ㅋ");
+			}
+		});
+}
 
 
 /*
