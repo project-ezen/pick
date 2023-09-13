@@ -5,7 +5,7 @@ package com.edu.board.dto;
 //-----------------------------------------------------------------------------------------------------------
 public class PageMaker {
 	
-	private	PagingCriteria	cri;
+	private	PagingCriteria	pcri;
 	private	int			totalCount;				// 전체 페이지 개수
 	private	int			startPage;				// 현재 화면에서 보이는 startPage 번호
 	private	int			endPage;				// 현재 화면에서 보이는 endPage 번호
@@ -13,8 +13,8 @@ public class PageMaker {
 	private	boolean		next;					// 페이징 다음 버튼 활성화 여부
 	private	int			displayPageNum = 10;	// 화면 하단에 보여줄 페이지의 개수 (1,2,3,4,5,6,7,8,9,10)
 
-	public void setCri(PagingCriteria cri) {
-		this.cri = cri;
+	public void setPcri(PagingCriteria pcri) {
+		this.pcri = pcri;
 	}
 	public int getTotalCount() {
 		return totalCount;
@@ -27,13 +27,13 @@ public class PageMaker {
 	// 화면 하단에 보여줄 페이지를 계산한다.
 	//-----------------------------------------------------------------------------------------------------------
 	private void calculatePages() {
-		endPage = (int) (Math.ceil(cri.getPage() / (double)displayPageNum) * displayPageNum);
+		endPage = (int) (Math.ceil(pcri.getPage() / (double)displayPageNum) * displayPageNum);
 		
 		startPage	= (endPage - displayPageNum) + 1;
 		if(startPage <= 0)	startPage = 1;
 		
 		// 보여줄 총 페이지 건수를 계산한다.
-		int realEndPage	= (int) (Math.ceil(totalCount / (double)cri.getPerPageNum())); 
+		int realEndPage	= (int) (Math.ceil(totalCount / (double)pcri.getPerPageNum())); 
 		if(endPage > realEndPage) {
 			endPage = realEndPage;
 		}
@@ -42,7 +42,7 @@ public class PageMaker {
 		prev = (startPage == 1 ? false : true);
 		
 		// 다음 페이지 (next)
-		next = (endPage * cri.getPageStart() >= totalCount ? false : true);
+		next = (endPage * pcri.getPageStart() >= totalCount ? false : true);
 		
 	} // End - 화면 하단에 보여줄 페이지를 계산한다
 	
@@ -80,7 +80,7 @@ public class PageMaker {
 	
 	@Override
 	public String toString() {
-		return "PageMaker [cri=" + cri + ", totalCount=" + totalCount + ", startPage=" + startPage + ", endPage="
+		return "PageMaker [pcri=" + pcri + ", totalCount=" + totalCount + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", prev=" + prev + ", next=" + next + ", displayPageNum=" + displayPageNum + "]";
 	}
 	

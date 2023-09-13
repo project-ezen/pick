@@ -7,6 +7,7 @@ public class ReviewDTO {
 	private String image;
 	private String writeDate;
 	private String member_id;
+	
 	public String getReview_id() {
 		return review_id;
 	}

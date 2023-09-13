@@ -152,11 +152,9 @@ font-size: 15px;
 		<h2 align="center">나만의 레시피</h2>
 		<br/>
 		<div style="display: flex;">
-		<form action="/board/search" method="GET">
-			<div class="searchbar">
-				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요"/>
+			<div class="searchbar" id="search_keyword">
+				<i class="bi bi-search bis" id="word"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요" name="keyword" value="${pcri.keyword}" onkeypress="if( event.keyCode == 13 ){searchData();}"/>
 			</div>
-		</form>
 			<div class="selectbtn">
 				<select class="btnsub">
 					<option>최신순</option>
@@ -239,8 +237,10 @@ font-size: 15px;
 	      </div>
 		<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
 		<br/><br/>
+		
 	</div>
 <br/><br/>
+		
 </div>
 <%@ include file="../include/footer.jsp" %>
 <script>
@@ -251,9 +251,25 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 		alert("로그인 후 이용해주세요.");
 		location.href= loginForm + '?action=/board/write';
 	}
-}
+};
 
 
+/*
+function searchData() {
+	e.preventDefault();
+	
+	let keyword = $("#search_keyword input[name='keyword']").val();
+
+	if(!keyword){
+		alert("키워드를 입력하세요.");
+		return false;
+	}		
+	
+	find("input[name='keyword']").val(keyword);
+	find("input[name='prev']").val(1);
+	submit();
+});
+*/
 </script>
 </body>
 </html>

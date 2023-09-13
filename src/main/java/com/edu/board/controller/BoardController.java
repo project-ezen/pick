@@ -38,10 +38,13 @@ public interface BoardController {
 
 		// 게시글 수정
 		
+
 		// 찜 등록
 		public JjimDTO jjimOK(int board_id, String m_id) throws Exception;
 		
 		// 찜 삭제
 		public JjimDTO jjimNO(int board_id, String m_id) throws Exception;
+
+		
 }
 

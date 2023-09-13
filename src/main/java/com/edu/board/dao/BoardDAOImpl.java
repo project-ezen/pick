@@ -100,6 +100,11 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.delete(namespace + ".jjimNO", jjimNO);
 	}
 
+	@Override
+	public List<BoardDTO> searchKeyword(PagingCriteria pcri) throws DataAccessException {
+		return sqlSession.selectList(namespace + ".searchKeyword",pcri);
+	}
+
 	
 	
 }

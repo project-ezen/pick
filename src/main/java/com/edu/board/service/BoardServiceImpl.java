@@ -83,6 +83,7 @@ public class BoardServiceImpl implements BoardService {
 	public void jjimNO(JjimDTO jjimNO) throws Exception {
 		boardDAO.jjimNO(jjimNO);
 	}
+
 	
 
 }
