@@ -11,159 +11,59 @@
 
     <style>
     
-    .bg {
-		 background-image: url("/resources/images/background2.jpg");
-
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	}
-    
-    .container-fluid{
-    margin-left: 80px;
-    margin-right: auto;
-    }
-      .carousel-inner img {
+       .carousel-inner img {
         width: 100%;
         margin: auto;
         height: 300px !important;
       }
-      /* 글리피콘 세모*/
-      #btnDown {
-        color: #05224e;
-        margin-top: 75px;
-        display: none;
-        font-size: 50px;
-      }
-      /* 글리피콘 세모*/
 
-      /* 버튼 통합*/
-      #alcSearchBtn,
-      #doguSearchBtn,
-      #furSearchBtn,
-      #jucSearchBtn {
-        margin: 0;
-        background-color: rgb(115, 115, 189);
-        color: #f8f8f2;
-        font-size: 1.1em;
-        border-radius: 4px 4px 4px 4px;
-        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-        white-space: -pre-wrap; /* Opera 4-6 */
-        white-space: -o-pre-wrap; /* Opera 7 */
-        word-wrap: break-word; /* Internet Explorer 5.5+ */
-      }
 
-      #alcSearchBtn,
-      #doguSearchBtn,
-      #furSearchBtn,
-      #jucSearchBtn {
-        margin-left: 30px;
-        width: 200px;
-        height: 60px;
-        border: none;
-        display: inline-block;
-        text-transform: uppercase;
-        overflow: hidden;
-        position: relative;
-      }
-      /*버튼 통합*/
+/* 버튼 공통 스타일 */
+.custom-button {
+    margin: 0;
+    background-color: rgb(115, 115, 189);
+    color: #f8f8f2;
+    font-size: 1.1em;
+    border-radius: 4px 4px 4px 4px;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+    margin-top: 90px;
+    margin-left: 30px;
+    width: 200px;
+    height: 60px;
+    border: none;
+    display: inline-block;
+    text-transform: uppercase;
+    overflow: hidden;
+    position: relative;
+}
 
-      /*술 버튼*/
-      #alcSearchBtn span {
-        position: relative;
-        z-index: 1;
-      }
-      #alcSearchBtn:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 700%;
-        width: 300%;
-        background-image: url("/resources/images/button.PNG");
-        transition: all 0.5s ease-in-out;
-        transform: translateX(-120%) translateY(-25%) rotate(45deg);
-      }
+.custom-button span {
+    position: relative;
+    z-index: 1;
+}
 
-      #alcSearchBtn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
-      }
-      /*술 버튼*/
 
-      /*도구 버튼*/
-      #doguSearchBtn span {
-        position: relative;
-        z-index: 1;
-      }
-      #doguSearchBtn:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 700%;
-        width: 300%;
-        background-image: url("/resources/images/button.PNG");
-        transition: all 0.5s ease-in-out;
-        transform: translateX(-120%) translateY(-25%) rotate(45deg);
-      }
+.custom-button:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 700%;
+    width: 300%;
+    background-image: url("/resources/images/button.PNG");
+    transition: all 0.5s ease-in-out;
+    transform: translateX(-120%) translateY(-25%) rotate(45deg);
+}
 
-      #doguSearchBtn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
-      }
-      /*도구 버튼*/
+.custom-button:hover:after {
+    -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+    transform: translateX(-9%) translateY(-25%) rotate(45deg);
+}
 
-      /*과일 버튼*/
-      #furSearchBtn span {
-        position: relative;
-        z-index: 1;
-      }
-      #furSearchBtn:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 700%;
-        width: 300%;
-        background-image: url("/resources/images/button.PNG");
-        transition: all 0.5s ease-in-out;
-        transform: translateX(-120%) translateY(-25%) rotate(45deg);
-      }
-
-      #furSearchBtn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
-      }
-      /*과일 버튼*/
-
-      /*음료 버튼*/
-      #jucSearchBtn span {
-        position: relative;
-        z-index: 1;
-      }
-      #jucSearchBtn:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 700%;
-        width: 300%;
-        background-image: url("/resources/images/button.PNG");
-        transition: all 0.5s ease-in-out;
-        transform: translateX(-120%) translateY(-25%) rotate(45deg);
-      }
-
-      #jucSearchBtn:hover:after {
-        -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-        transform: translateX(-9%) translateY(-25%) rotate(45deg);
-      }
-      /*음료 버튼*/
-
+        
       /*상품 정보*/
       #productInfo {
         padding-top: 60px;
@@ -172,7 +72,7 @@
       .productInfo_in {
         border-radius: 5px;
         background-color: rgba(0, 0, 0, 0);
-        color: #fff;
+        color: black;
         margin: 10px;
         height: 300px !important;
         width: 330px;
@@ -183,7 +83,7 @@
         height: 200px;
         width: 200px;
         margin: 10px;
-        margin-top: 20px;
+        margin-top: 30px;
       }
       .productInfo_in:hover {
         background-color: #576fa0;
@@ -200,8 +100,8 @@
 		    width: fit-content;
 		    height: fit-content;
 		    position: absolute;
-		  	top:10px;
-		  	right:20px;
+		  	top:480px;
+		  	right:50px;
 		  }
 		  #searchKeyword {
 		    height: 50px;
@@ -213,12 +113,12 @@
 		    outline: none;
 		    border-radius: 25px;
 		    transition: all 0.5s ease-in-out;
-		    background-color: #22a6b3;
+		    background-color: #B5D0FF;
 		    padding-right: 40px;
-		    color: #fff;
+		    color: black;
 		  }
 		  #searchKeyword::placeholder {
-		    color: rgba(255, 255, 255, 0.5);
+		    color: rgba(0, 0, 0, 0.5);
 		    font-size: 18px;
 		    letter-spacing: 2px;
 		    font-weight: 100;
@@ -234,7 +134,7 @@
 		    border-radius: 50%;
 		    position: absolute;
 		    right: 0px;
-		    color: #ffffff;
+		    color: white;
 		    background-color: transparent;
 		    pointer-events: painted;
 		  }
@@ -244,7 +144,7 @@
 			  width: 300px;
 			  border-radius: 0px;
 			  background-color: transparent;
-			  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+			  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 			  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
 			}
       /*검색 버튼*/
@@ -252,11 +152,11 @@
 	  /*select css*/
 	  .selectSearch{
 	    position:absolute;
-	    top: 80px;
-	    right: 30px;
+	    top: 560px;
+	    right: 40px;
 	    border-style: none;
 	    background-color: rgba(0, 0, 0, 0);
-	    color:	#FFF;
+	    color:	black;
 	    width: 150px;
 	    font-size: 17px;
 
@@ -273,6 +173,13 @@
 	   background-color: rgba(0,0,0,0);
 	  }
 	  
+	  #backgroundBy{
+	  	background-color:rgba(255,255,255,0.8);
+	  	border-radius: 10px;
+	  	margin-right: 30px;
+	  	margin-left: 30px;
+	  }
+	  
 	  
     </style>
   </head>
@@ -282,9 +189,8 @@
     
 
     <!-- 광고 배너 -->
-    <br />
-    <br />
-   <div class="row">
+
+
     <div id="Advertising" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#Advertising" data-slide-to="0" class="active"></li>
@@ -328,26 +234,24 @@
     <br/>
 
 <!-- 버튼 -->
-      <nav id="searchBtn" class="col-sm-12">
-        <button type="button" id="alcSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=술'">
-          <span>&nbsp;&nbsp;술&nbsp;&nbsp;</span>
+   <div class="row" id="backgroundBy">
+<div class="btns">
+    <nav id="searchBtn" class="col-sm-12">
+        <button type="button" id="alcSearchBtn" class="col-sm-2 custom-button" onclick="toggleTriangleAndRedirect('alcSearchBtn','/store/productInfo?category=술')">
+    		<span>&nbsp;&nbsp;술&nbsp;&nbsp;</span>
+		</button>
+        <button type="button" id="jucSearchBtn" class="col-sm-2 custom-button" onclick="toggleTriangleAndRedirect('jucSearchBtn','/store/productInfo?category=음료')">
+            <span>음료</span>
         </button>
-        <button type="button" id="jucSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=음료'">
-          <span>음료</span>
+        <button type="button" id="doguSearchBtn" class="col-sm-2 custom-button" onclick="toggleTriangleAndRedirect('doguSearchBtn','/store/productInfo?category=도구')">
+            <span>도구</span>
         </button>
-        <button type="button" id="doguSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=도구'">
-          <span>도구</span>
+        <button type="button" id="furSearchBtn" class="col-sm-2 custom-button" onclick="toggleTriangleAndRedirect('furSearchBtn','/store/productInfo?category=과일')">
+            <span>과일</span>
         </button>
-        <button type="button" id="furSearchBtn" class="col-sm-2" onclick="location.href='/store/productInfo?category=과일'">
-          <span>과일</span>
-        </button>
-        
-    <div>
-      <span
-        id="btnDown"
-        class="glyphicon glyphicon-triangle-bottom"
-      ></span>
-    </div>
+    </nav>
+</div>
+ 
 <!-- 검색 버튼 -->
 	<div id="search_fromKeyword">
     <form action="/store/productInfo" method="GET" id="searchForm">
@@ -372,7 +276,7 @@
 		<c:forEach var="product" items="${productList}">
 			<a href="/store/productInfos?product_display_id=${product.product_display_id}">
 				<div class="col-sm-3 productInfo_in">
-					<img src="${path}/download.do?imageFileName=${product.product_image}" align="center"/>
+					<img src="/resources/product_images/${product.product_image}" align="center"/>
 					<p align="center">상품명 : ${product.product_name }</p>
 					<p align="center">가격 : <fmt:formatNumber value="${product.product_price }" pattern="#,###"/>원</p>
 				</div>
@@ -403,8 +307,8 @@
             </li>
         </ul>
     </nav>
+	</div>
 </div>
- </div>
 
     <div class="row">
       <div id="footer">
@@ -569,9 +473,16 @@
         window.location.href = newURL; // 새로운 URL로 이동
       }
     
-    
+    // 페이지 이동 펑션
+    function toggleTriangleAndRedirect(buttonId, url) {
+        var button = document.getElementById(buttonId);
+
+        // 페이지 이동
+	window.location.href = url;
+        
+    }
     // 술 펑션
-    function arcButton() {
+     function arcButton() {
     	// 색상바꾸기
         $("#doguSearchBtn").css("background-color", "rgb(115, 115, 189)");
         $("#furSearchBtn").css("background-color", "rgb(115, 115, 189)");
@@ -585,11 +496,6 @@
         $("#doguSearchBtn").css("background-image", "none");
         $("#furSearchBtn").css("background-image", "none");
         $("#jucSearchBtn").css("background-image", "none");
-
-        // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-850px");
-        $("#btnDown").css("display", "inline-block");
-        $("#productInfo").css("margin-top", "0px");
 
         // 높이 바꾸기
         $("#alcSearchBtn").css("height", "90px");
@@ -613,11 +519,6 @@
         $("#alcSearchBtn").css("background-image", "none");
         $("#furSearchBtn").css("background-image", "none");
         $("#jucSearchBtn").css("background-image", "none");
-
-        // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-380px");
-        $("#btnDown").css("display", "inline-block");
-        $("#productInfo").css("margin-top", "0px");
 
         // 높이 바꾸기
         $("#alcSearchBtn").css("height", "60px");
@@ -643,11 +544,6 @@
         $("#doguSearchBtn").css("background-image", "none");
         $("#jucSearchBtn").css("background-image", "none");
 
-        // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-160px");
-        $("#btnDown").css("display", "inline-block");
-        $("#productInfo").css("margin-top", "0px");
-
         // 높이 바꾸기
         $("#alcSearchBtn").css("height", "60px");
         $("#doguSearchBtn").css("height", "60px");
@@ -671,11 +567,6 @@
         $("#doguSearchBtn").css("background-image", "none");
         $("#furSearchBtn").css("background-image", "none");
 
-        // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-615px");
-        $("#btnDown").css("display", "inline-block");
-        $("#productInfo").css("margin-top", "0px");
-
         // 높이 바꾸기
         $("#alcSearchBtn").css("height", "60px");
         $("#doguSearchBtn").css("height", "60px");
@@ -689,4 +580,3 @@
     
   </script>
 </html>
-

@@ -1,48 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt"	uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <%@ page session="true" %>
- <%
-   String memberId = (String)session.getAttribute("memberId");
+<%@ page import="com.edu.member.dto.MemberDTO" %>
+<%
+   MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+   String memberId = (memberDTO != null) ? memberDTO.getM_id() : null;
 %>
+
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%@ include file="../include/header.jsp" %>
     <title>상품 상세 페이지</title>
-    <!-- 합쳐지고 최소화된 최신 CSS -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
-    />
-
-    <!-- 부가적인 테마 -->
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"
-    />
-
-    <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     <style>
     
-     /* 배경화면 */
-	  .bg {
-			 background-image: url("/resources/images/background2.jpg");
-	
-	         height: 100vh;      
-	         
-	         
-			 background-attachment: fixed, scroll;
-	         background-position: center;
-	         background-repeat: no-repeat;
-	         background-size: cover; 
-		}
-     
+    
       /*상품 관련 이미지, 위치*/
       .product-img {
         width: 400px;
@@ -63,11 +37,11 @@
       .table th,
       .table td {
         vertical-align: middle !important;
-        color: #FFF;
+        color: black;
       }
       h1 {
         text-align: center;
-        color: #FFF;
+        color: black;
       }
       .table th {
         background-color: rgb(171, 173, 175);
@@ -254,6 +228,18 @@
     #whiteBg{
     	background-color:white;
     }
+    
+    #detailDescription{
+	    font-family: 'Cafe24Supermagic-Bold-v1.0';
+		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/Cafe24Supermagic-Bold-v1.0.woff2') format('woff2');
+		font-style: normal;
+		font-size: 30px;
+    }
+    
+    
+    #loginTf{
+    	float: right;
+    }
     </style>
   </head>
   <body class="bg">
@@ -269,7 +255,7 @@
         <div class="row">
           <!--상품 이미지-->
           <div class="col-md-6">
-            <img src="${path}/download.do?imageFileName=${productItem.product_image}" class="product-img img-responsive" />
+            <img src="/resources/product_images/${productItem.product_image}" class="product-img img-responsive" />
             <input type="hidden" value="${productItem.product_image}" id="imageHidden"/>
           </div>
           <!--상품 간단 정보-->
@@ -287,10 +273,12 @@
                   <th>원산지</th>
                   <td>${productInfo[status.index].origin }</td>
                 </tr>
+                <c:if test="${Integer.parseInt(productInfo[status.index].product_display_id) / 10000 == 1}">
                 <tr>
-                  <th>도수</th>
+    			  <th>도수</th>
                   <td>${productInfo[status.index].alcohol_content }</td>
                 </tr>
+				</c:if>                
                 <tr>
                   <th>용량</th>
                   <td>${productInfo[status.index].capacity }</td>
@@ -332,7 +320,7 @@
         <br />
         <br />
         <br />
-        <div class="container">
+        <div>
           <!--상세설명&리뷰-->
           <ul class="nav nav-tabs infoAndReview">
             <li class="active">
@@ -345,15 +333,18 @@
               <h3>상세설명</h3>
 	              <!--상세 설명 와라락-->
 	              <div align="center">
-	            <p class="multiline">아니 근데 <br/> 아닌가?</p>
-	              	<pre class="multiline">${productInfo[status.index].product_info}</pre>
+	              	<pre class="multiline" id="detailDescription">${productInfo[status.index].product_info}</pre>
 	              </div>              
             </div>
             
             <!-- 리뷰 & 페이징 -->
             <div id="review" class="tab-pane fade">
             	<br/>
-      			<button class="btn btn-info" id="writeReviewBtn" data-toggle="modal" data-target="#writeReview">리뷰 작성하기</button>
+					<% if (memberId != null) { %>
+						    <button class="btn btn-info" id="writeReviewBtn" data-toggle="modal" data-target="#writeReview">리뷰 작성하기</button>
+						<% } else { %>
+						    <p id="loginTf">로그인 후에 리뷰를 작성할 수 있습니다.</p>
+						<% } %>
              <div class="reviewDiv">
              </div>           
              <div class="row">		
@@ -411,7 +402,7 @@
 									<tr>
 										<td align="right">작성자</td>
 										<td colspan="2" align="left">
-											<input type="text" size="50" name="id" maxlength="50" value="${sessionScope.memberId}"readonly style="color:black"/>
+											<input type="text" size="50" name="id" maxlength="50" value="<%=memberId%>"readonly style="color:black"/>
 										</td>
 									</tr>
 									
@@ -425,7 +416,7 @@
 										<td align="right">이미지파일 첨부</td>
 										<td>
 											<input type="file" name="imageFileName" onchange="readURL(this);"/><br/>
-											<img id="preview" src="#" width="200" height="200"/>
+											<img id="preview" src="/resources/product_review_images/no_image/no_image.jpg" width="200" height="200"/>
 										</td>
 									</tr>
 									<tr>
@@ -448,9 +439,8 @@
     
     // DisplayOrderVO temp = new DisplayOrderVO(cart_id[i], image[i], product_name[i], product_price[i], count[i]);
     // 세션 아이디
-    var memberId = "<%= memberId %>"; 
-    var productIdInputs = $("#productIdInput").val();
-
+	    var memberId = "<%= memberId %>"; 
+	    var productIdInputs = $("#productIdInput").val();   	
     // 페이징 Ajax
     $(document).ready(function () {
     
@@ -549,43 +539,37 @@
     	}
     }
     
-    
-    
     // 장바구니 바로 가기 버튼
     $(document).ready(function (){	
     	$("#goToCart").on("click", function(){
-    		if(memberId != null || memberId != ""){
-   				alert("로그인 되어있음");
-   				
-    		var quantity = parseInt($("#quantity").val());
-    		var param = $("#displayParam").val();
-    		alert("param=" + param);
-    		var locate = "/store/addToCart?product_display_id=" + param + "&quantity=" + quantity + "&cartOrStore=cart";
-    		location.href = locate;
-    		
-    		
-    		}else{
-    			alert("로그인 하고와");
-    		}
-	
+    		if(memberId != 'null'){		
+        		var quantity = parseInt($("#quantity").val());
+        		var param = $("#displayParam").val();
+        		var locate = "/store/addToCart?product_display_id=" + param + "&quantity=" + quantity + "&cartOrStore=cart";
+        		location.href = locate;
+   		
+        		}else if (memberId == 'null'){
+        			alert("로그인이 필요한 서비스입니다.");
+        			var currentURL = window.location.href; // 현재 페이지의 URL을 가져옴
+        	        location.href = "/member/login?action=" + encodeURIComponent(currentURL);	
+        		}
     	});
     });
     
     // 상품 더 담기 버튼
     $(document).ready(function (){
     	$("#moreProduct").on("click", function(){
-    		if(memberId != null || memberId != ""){
-   				alert("로그인 되어있음");
-   				
+    		if(memberId != 'null'){		
     		var quantity = parseInt($("#quantity").val());
     		var param = $("#displayParam").val();
-    		alert("param=" + param);
     		var locate = "/store/addToCart?product_display_id=" + param + "&quantity=" + quantity + "&cartOrStore=store";
     		location.href = locate;
     		
     		
-    		}else{
-    			alert("로그인 하고와");
+    		}else if (memberId == 'null'){
+    			alert("로그인이 필요한 서비스입니다.");
+    			var currentURL = window.location.href; // 현재 페이지의 URL을 가져옴
+    	        location.href = "/member/login?action=" + encodeURIComponent(currentURL);	
     		}
 	
     	});
