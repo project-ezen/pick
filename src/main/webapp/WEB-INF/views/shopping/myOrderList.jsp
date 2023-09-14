@@ -103,7 +103,7 @@
 			</div>
 		</div>
 	</form>
-		<form id="order_list">
+		<div id="order_list">
 		<table id="t1">
 			<thead>
 				<tr>
@@ -116,106 +116,26 @@
 					<th>취소/교환/반품</th>
 				</tr>
 			</thead>
-			<c:forEach var="order" items="${order }" varStatus="o_status">
-			<c:if test="${order.order_complaint == null }">
-				<tbody>
-					<tr>
-						<td>
-							<a class="orderNum">${order.order_number}</a>
-						</td>
-						<td>
-							<div class="col-md-12 text-center" id="item_thumbnail">
-							    <a href="#" class="thumbnail">
-							        <input type="image" src="${path }/download?imageFile=${product[o_status.index].product_image }" width="161" height="133" disabled>
-							        <input type="hidden" class="pdtImage" value="${product[o_status.index].product_image }" name="imageFile">
-							        <input type="hidden" class="orderId" name="orderId" value="${order.order_id }">
-							    </a>
-							</div>
-						</td>
-						<td class="pdtName">${product[o_status.index].product_name }</td>
-						<td class="pdtCount">${order.count}</td>
-						<td class="orderPrice">${product[o_status.index].product_price * order.count}</td>
-						<td class="orderStatus">
-							${order.order_status}
-						</td>
-						<td>
-							<c:if test="${order.order_status == 'delivery-progressing'}">
-								<input type="button" class="btn btn-default cancel" data-toggle="modal" data-target=".cancel${o_status.index }" value="취소">
-								<div class="modal fade cancel${o_status.index }">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header text-center">
-												<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-												<h3 class="title">Cancel Progressing</h3>
-											</div>
-											<div class="modal-body">
-												<textarea class="cancel_reason" name="cancel_reason" placeholder="please write the reason"></textarea>
-											</div>
-											<div class="modal-footer">
-												<input type="button" class="btn btn-primary cancel_order" data-dismiss="modal" value="확인">
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:if>
-							<c:if test="${order.order_status == 'delivery-successed'}">
-								<input type="button" class="btn btn-default change" data-toggle="modal" data-target=".change${o_status.index }" value="교환">
-								<input type="button" class="btn btn-default refund" data-toggle="modal" data-target=".refund${o_status.index }" value="반품">
-								<div class="modal fade cancel${o_status.index }">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header text-center">
-												<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-												<h3 class="title">Change Progressing</h3>
-											</div>
-											<div class="modal-body">
-												<textarea class="change_reason" name="change_reason" placeholder="please write the reason"></textarea>
-											</div>
-											<div class="modal-footer">
-												<input type="button" class="btn btn-primary change_order" data-dismiss="modal" value="확인">
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="modal fade refund${o_status.index }">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header text-center">
-												<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
-												<h3 class="title">Refund Progressing</h3>
-											</div>
-											<div class="modal-body">
-												<textarea class="refund_reason" name="refund_reason" placeholder="please write the reason"></textarea>
-											</div>
-											<div class="modal-footer">
-												<input type="button" class="btn btn-primary refund_order" data-dismiss="modal" value="확인">
-											</div>
-										</div>
-									</div>
-								</div>
-							</c:if>
-						</td>
-					</tr>
-				</tbody>
-			</c:if>
-			</c:forEach>
+			<tbody id="order_product_list">
+				<!-- 주문된 상품이 들어갈 장소 -->
+			</tbody>
 		</table>
-		</form>
+		</div>
 		<br>
 		<!-- 화면 하단의 페이지 영역 -->
-		<!-- <div class="col-sm-offset-3">
+		<div align="center">
 			<ul class="btn-group pagination">
-				<c:if test="${page.prev }">
-					<li><a href="<c:url value='/shopping/myOrderList?page=${page.startPage - 1}&startDate=${cri.startDate }&endDate=${cri.endDate }'/>"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+				<c:if test="${orderPage.prev }">
+					<li><a class="orderPaging" data-page="${orderPage.startPage - 1}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
 				</c:if>
-				<c:forEach begin="${page.startPage }" end="${page.endPage }" step="1" var="pageNum">
-					<li><a href="<c:url value='/shopping/myOrderList?page=${pageNum }&startDate=${cri.startDate }&endDate=${cri.endDate }'/>"><i>${pageNum }</i></a></li>
+				<c:forEach begin="${orderPage.startPage }" end="${orderPage.endPage }" step="1" var="pageNum">
+					<li><a class="orderPaging" data-page="${pageNum }"><i>${pageNum }</i></a></li>
 				</c:forEach>
-				<c:if test="${page.next && page.endPage > 0}">
-					<li><a href="<c:url value='/shopping/myOrderList?page=${page.endPage + 1}&startDate=${cri.startDate }&endDate=${cri.endDate }'/>"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+				<c:if test="${orderPage.next }">
+					<li><a class="orderPaging" data-page="${orderPage.endPage + 1}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
 				</c:if>
 			</ul>
-		</div> -->
+		</div>
 	</div>
 	<hr/>
 	
@@ -240,6 +160,7 @@
 			</div>
 		</div>
 	</form>
+	<div>
 		<table id="t2">
 			<thead>
 				<tr>
@@ -251,32 +172,28 @@
 					<th>취소/반품처리상태</th>
 				</tr>
 			</thead>
-			<c:forEach var="order" items="${order }" varStatus="o_status">
-			<c:if test="${order.order_complaint != null }">
-				<tbody>
-					<tr>
-						<td>
-							<a class="orderNum">${order.order_number}</a>
-						</td>
-						<td>
-							<div class="col-md-12 text-center" id="item_thumbnail">
-							    <a href="#" class="thumbnail">
-							        <input type="image" src="${path }/download?imageFile=${product[o_status.index].product_image }" width="161" height="133" disabled>
-							        <input type="hidden" class="pdtImage" value="${product[o_status.index].product_image }" name="imageFile">
-							        <input type="hidden" class="orderId" value="${order.order_id }">
-							    </a>
-							</div>
-						</td>
-						<td class="pdtName">${product[o_status.index].product_name }</td>
-						<td class="pdtCount">${order.count}</td>
-						<td class="orderPrice">${product[o_status.index].product_price * order.count}</td>
-						<td class="orderStatus">${order.order_status}</td>
-					</tr>
-				</tbody>
-			</c:if>
-			</c:forEach>
+			<tbody id="cancel_product_list">
+				<!-- 취소된 상품이 들어갈 장소 -->
+			</tbody>
 		</table>
 	</div>
+	<br>
+	<!-- 화면 하단의 페이지 영역 -->
+	<div align="center">
+		<ul class="btn-group pagination">
+			<c:if test="${cancelPage.prev }">
+				<li><a class="cancelPaging" data-page="${cancelPage.startPage - 1}"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+			</c:if>
+			<c:forEach begin="${cancelPage.startPage }" end="${cancelPage.endPage }" step="1" var="pageNum">
+				<li><a class="cancelPaging" data-page="${pageNum }"><i>${pageNum }</i></a></li>
+			</c:forEach>
+			<c:if test="${cancelPage.next }">
+				<li><a class="cancelPaging" data-page="${cancelPage.endPage + 1}"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+			</c:if>
+		</ul>
+	</div>
+	</div>
+	
 <!-- ----------------------------------------------------------------------------------------------------------- -->
 </div>
 <br/><br/>
@@ -285,83 +202,248 @@ $(document).ready(function() {
 	var frmBuy = $("#buyList");
 	var frmCancel = $("#cancelList");
 	
-	$("#searchBuy").on("click", searchList($("#datepicker1").val(), $("#datepicker2").val()));
-	
-	function searchList(date1, date2) {
-		var startDate = date1;
-		var endDate = date2;
-		console.log(date1 + " ~ " + date2);
-		
+	// 주문 내역 페이징
+	function orderPaging(pageNum) {
+		$.ajax({
+			url: "/shopping/paging",
+			type: "get",
+			dataType: "json",
+			data: {"page" : pageNum, "start_date" : $("#datepicker1").val(), "end_date" : $("#datepicker2").val(), "relation" : "order"},
+			success: function(data) {
+				//console.log("success : " + data);
+				console.log(data.order);
+				console.log(data.product);
+				
+				// 페이지를 누를때 기존 내용으 지우고 새 페이지의 내용을 채움
+				$("#order_product_list").empty();
+				
+				var orderedHTML = '';
+				for(let idx = 0; idx < data.order.length; idx++){
+					orderedHTML = '<tr>'
+								+ '<td><a class="orderNum">' + data.order[idx].order_number + '</a></td>'
+								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
+								+ '<a href="#" class="thumbnail">'
+								+ '<input type="image" src="${path }/download?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="hidden" class="orderId" name="orderId" value="' + data.order[idx].order_id + '">'
+								+ '</a></div></td>'
+								+ '<td class="pdtName">' + data.product[idx].product_name + '</td>'
+								+ '<td class="pdtCount">' + data.order[idx].count + '</td>'
+								+ '<td class="orderPrice">' + data.product[idx].product_price * data.order[idx].count + '</td>'
+								+ '<td class="orderStatus">' + data.order[idx].order_status + '</td>';
+					// 배송중
+					if(data.order[idx].order_status == 'delivery-progressing'){
+						orderedHTML += '<td>'
+									+ '<input type="button" class="btn btn-default cancel" data-toggle="modal" data-target=".cancel' + idx + '" value="취소">'
+									+ '<div class="modal fade cancel' + idx + '">'
+									+ '<div class="modal-dialog">'
+									+ '<div class="modal-content">'
+									+ '<div class="modal-header text-center">'
+									+ '<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>'
+									+ '<h3 class="title">Cancel Progressing</h3>'
+									+ '</div>'
+									+ '<div class="modal-body"><textarea class="cancel_reason" name="cancel_reason" placeholder="please write the reason"></textarea></div>'
+									+ '<div class="modal-footer">'
+									+ '<input type="button" class="btn btn-primary cancel_order" data-dismiss="modal" value="확인">'
+									+ '</div></div></div></div>'
+					}
+					// 배송 완료
+					else if(data.order[idx].order_status == 'delivery-successed'){
+						orderedHTML += '<td>'
+									+ '<input type="button" class="btn btn-default change" data-toggle="modal" data-target=".change' + idx + '" value="교환">'
+									+ '<input type="button" class="btn btn-default refund" data-toggle="modal" data-target=".refund' + idx + '" value="반품">'
+									+ '<div class="modal fade change' + idx + '">'
+									+ '<div class="modal-dialog">'
+									+ '<div class="modal-content">'
+									+ '<div class="modal-header text-center">'
+									+ '<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>'
+									+ '<h3 class="title">Change Progressing</h3>'
+									+ '</div>'
+									+ '<div class="modal-body"><textarea class="change_reason" name="change_reason" placeholder="please write the reason"></textarea></div>'
+									+ '<div class="modal-footer">'
+									+ '<input type="button" class="btn btn-primary change_order" data-dismiss="modal" value="확인">'
+									+ '</div></div></div></div>'
+									+ '<div class="modal fade refund' + idx + '">'
+									+ '<div class="modal-dialog">'
+									+ '<div class="modal-content">'
+									+ '<div class="modal-header text-center">'
+									+ '<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>'
+									+ '<h3 class="title">Refund Progressing</h3>'
+									+ '</div>'
+									+ '<div class="modal-body"><textarea class="refund_reason" name="refund_reason" placeholder="please write the reason"></textarea></div>'
+									+ '<div class="modal-footer">'
+									+ '<input type="button" class="btn btn-primary refund_order" data-dismiss="modal" value="확인">'
+									+ '</div></div></div></div>'
+					}
+					orderedHTML += '</td></tr>';
+					
+					$("#order_product_list").append(orderedHTML);
+				}
+			},
+			error: function(data) {
+				console.log("error : " + data);
+			}
+		});
 	}
+	orderPaging(${orderPage.cri.page});
+	
+	// paging 버튼 클릭할 때마다 data-page에 지정된 값으로 페이지 넘기기
+	$(".orderPaging").on("click", function() {
+		var pageNum = $(this).data("page");
+		orderPaging(pageNum);
+	});
+	
+	// 조회 버튼을 클릭했을 경우
+	$("#searchBuy").on("click", function() {
+		var pageNum = 1;
+		orderPaging(pageNum);
+	});
+//-----------------------------------------------------------------------------------------------------------------------------------
+	// 취소 / 반품 내역 페이징
+	function cancelPaging(pageNum) {
+		$.ajax({
+			url: "/shopping/paging",
+			type: "get",
+			dataType: "json",
+			data: {"page" : pageNum, "start_date" : $("#datepicker3").val(), "end_date" : $("#datepicker4").val(), "relation" : "cancel"},
+			success: function(data) {
+				//console.log("success : " + data);
+				console.log(data.cancel);
+				console.log(data.product);
+				
+				// 페이지를 누를때 기존 내용으 지우고 새 페이지의 내용을 채움
+				$("#cancel_product_list").empty();
+				
+				var orderedHTML = '';
+				for(let idx = 0; idx < data.cancel.length; idx++){
+					orderedHTML = '<tr>'
+								+ '<td><a class="orderNum">' + data.cancel[idx].order_number + '</a></td>'
+								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
+								+ '<a href="#" class="thumbnail">'
+								+ '<input type="image" src="${path }/download?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="hidden" name="orderId" value="' + data.cancel[idx].order_id + '">'
+								+ '</a></div></td>'
+								+ '<td>' + data.product[idx].product_name + '</td>'
+								+ '<td>' + data.cancel[idx].count + '</td>'
+								+ '<td>' + data.product[idx].product_price * data.cancel[idx].count + '</td>'
+								+ '<td>' + data.cancel[idx].order_status + '</td>'
+								+ '</tr>';
+					
+					$("#cancel_product_list").append(orderedHTML);
+				}
+			},
+			error: function(data) {
+				console.log("error : " + data);
+			}
+		});
+	}
+	cancelPaging(${cancelPage.cri.page});
+	
+	// paging 버튼 클릭할 때마다 data-page에 지정된 값으로 페이지 넘기기
+	$(".cancelPaging").on("click", function() {
+		var pageNum = $(this).data("page");
+		cancelPaging(pageNum);
+	});
+	
+	// 조회 버튼을 클릭했을 경우
+	$("#searchCancel").on("click", function() {
+		var pageNum = 1;
+		cancelPaging(pageNum);
+	});
+//-----------------------------------------------------------------------------------------------------------------------------------
+	// 주문 완료하기
+	$(document).on("click", ".orderStatus" ,function() {
+		let order_status = $(this).text();
+		let order_id = $(this).closest("tr").find(".orderId").val();
+		
+		console.log(order_status + ", " + order_id);
+		
+		$.ajax({
+			url: "/shopping/orderComplete",
+			type: "get",
+			dataType: "text",
+			data: {"id": order_id},
+			success: function(data) {
+				console.log("succeed");
+				document.location.reload();
+			},
+			error: function(data) {
+				console.log("error");
+			}
+		});
+	});
 //-----------------------------------------------------------------------------------------------------------------------------------
 	// 주문 취소하기
-	$(".cancel_order, .orderId, .cancel_reason").each(function(idx) {
-		$(".cancel_order:eq(" + idx + ")").on("click", function() {
-			console.log($(".orderId:eq(" + idx + ")").val() + " " + $(".cancel_reason:eq(" + idx + ")").val() + $(".title:eq(" + idx + ")").text());
-			
-			$.ajax({
-				url: "/shopping/reason",
-				type: "post",
-				dataType: "text",
-				data: {"id" : $(".orderId:eq(" + idx + ")").val(), "reason": $(".cancel_reason:eq(" + idx + ")").val(), "title" : $(".title:eq(" + idx + ")").text()},
-				success: function(){
-					console.log("succeed");
-					document.location.reload();
-				},
-				error: function() {
-					console.log("error");
-				}
-			});
+	$(document).on("click", ".cancel_order", function() {
+		let order_id = $(this).closest("tr").find(".orderId").val();
+		let cancel_reason = $(this).closest("tr").find(".cancel_reason").val();
+		let title = $(this).closest("tr").find(".title").text();
+		
+		console.log(order_id + " " + cancel_reason + " " + title);
+		
+		$.ajax({
+			url: "/shopping/reason",
+			type: "post",
+			dataType: "text",
+			data: {"id": order_id, "reason": cancel_reason, "title": title},
+			success: function(){
+				console.log("succeed");
+				document.location.reload();
+			},
+			error: function() {
+				console.log("error");
+			}
 		});
 	});
 //-----------------------------------------------------------------------------------------------------------------------------------	
 	// 상품 환불하기
-	$(".refund_order, .orderId, .refund_reason").each(function(idx) {
-		$(".refund_order:eq(" + idx + ")").on("click", function() {
-			console.log($(".orderId:eq(" + idx + ")").val() + " " + $(".refund_reason:eq(" + idx + ")").val() + $(".title:eq(" + idx + ")").text());
-			
-			$.ajax({
-				url: "/shopping/reason",
-				type: "post",
-				dataType: "text",
-				data: {"id" : $(".orderId:eq(" + idx + ")").val(), "reason": $(".refund_reason:eq(" + idx + ")").val(), "title" : $(".title:eq(" + idx + ")").text()},
-				success: function(){
-					console.log("succeed");
-					document.location.reload();
-				},
-				error: function() {
-					console.log("error");
-				}
-			});
+	$(document).on("click", ".refund_order", function() {
+		let order_id = $(this).closest("tr").find(".orderId").val();
+		let refund_reason = $(this).closest("tr").find(".refund_reason").val();
+		let title = $(this).closest("tr").find(".title").text();
+		
+		console.log(order_id + " " + refund_reason + " " + title);
+		
+		$.ajax({
+			url: "/shopping/reason",
+			type: "post",
+			dataType: "text",
+			data: {"id": order_id, "reason": refund_reason, "title": title},
+			success: function(){
+				console.log("succeed");
+				document.location.reload();
+			},
+			error: function() {
+				console.log("error");
+			}
 		});
 	});
 //-----------------------------------------------------------------------------------------------------------------------------------
 	// 상품 교환하기
-	$(".change_order, .orderId, .change_reason").each(function(idx) {
-		$(".change_order:eq(" + idx + ")").on("click", function() {
-			console.log($(".orderId:eq(" + idx + ")").val() + " " + $(".change_reason:eq(" + idx + ")").val() + $(".title:eq(" + idx + ")").text());
-			
-			$.ajax({
-				url: "/shopping/reason",
-				type: "post",
-				dataType: "text",
-				data: {"id" : $(".orderId:eq(" + idx + ")").val(), "reason": $(".change_reason:eq(" + idx + ")").val(), "title" : $(".title:eq(" + idx + ")").text()},
-				success: function(){
-					console.log("succeed");
-					document.location.reload();
-				},
-				error: function() {
-					console.log("error");
-				}
-			});
+	$(document).on("click", ".change_order", function() {
+		let order_id = $(this).closest("tr").find(".orderId").val();
+		let change_reason = $(this).closest("tr").find(".change_reason").val();
+		let title = $(this).closest("tr").find(".title").text();
+		
+		console.log(order_id + " " + change_reason + " " + title);
+		
+		$.ajax({
+			url: "/shopping/reason",
+			type: "post",
+			dataType: "text",
+			data: {"id": order_id, "reason": change_reason, "title": title},
+			success: function(){
+				console.log("succeed");
+				document.location.reload();
+			},
+			error: function() {
+				console.log("error");
+			}
 		});
 	});
 //-----------------------------------------------------------------------------------------------------------------------------------
 	// 주문 번호에 해당하는 주문 상세보기
-	$(".orderNum").each(function(idx) {
-		$(".orderNum:eq(" + idx + ")").on("click", function() {
-			location.href = "/shopping/myOrderListDetail?order_number=" + $(".orderNum:eq(" + idx + ")").text();
-		});
+	$(document).on("click", ".orderNum", function() {
+		location.href = "/shopping/myOrderListDetail?order_number=" + $(this).text();
 	});
 });
 //===================================================================================================================

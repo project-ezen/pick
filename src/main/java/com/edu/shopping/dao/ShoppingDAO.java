@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.OrderDTO;
+import com.edu.shopping.dto.OrderSearch;
 import com.edu.store.dto.ProductDTO;
 
 public interface ShoppingDAO {
@@ -37,6 +38,18 @@ public interface ShoppingDAO {
 	public void overwriteOrder(Map<String, String> map) throws DataAccessException;
 	// 교환 상품 재배송하기
 	public OrderDTO changeProduct(String order_id) throws DataAccessException;
+	// 상품 배송완료
+	public void completeOrder(Map<String, String> completeMap) throws DataAccessException;
+//=====================================================================================================
+	// 페이징
+	// 총 주문량
+	public int orderListTotalCount(OrderSearch search) throws DataAccessException;
+	// 지정한 기간에 주문한 주문 정보 가져오기
+	public List<OrderDTO> showOrder(Map searchMap) throws DataAccessException;
+	// 총 쥐소량
+	public int cancelListTotalCount(OrderSearch search) throws DataAccessException;
+	// 지정한 기간에 취소한 주문 정보 가져오기
+	public List<OrderDTO> showCancel(Map searchMap) throws DataAccessException;
 //=====================================================================================================
 	// 주문 번호에 해당하는 주문 상세 정보 가져오기
 	public List<OrderDTO> orderNumInfo(int order_num) throws DataAccessException;

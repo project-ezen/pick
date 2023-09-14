@@ -1,6 +1,7 @@
 package com.edu.sole.dto.recipe;
 
-public class JjimSelectDTO {
+public class LikedSelectDTO {
+	
 	private String recipe_code;
 	private String m_id;
 	

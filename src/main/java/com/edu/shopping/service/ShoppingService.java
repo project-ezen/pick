@@ -6,6 +6,7 @@ import java.util.Map;
 import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.OrderDTO;
+import com.edu.shopping.dto.OrderSearch;
 import com.edu.store.dto.ProductDTO;
 
 public interface ShoppingService {
@@ -35,6 +36,18 @@ public interface ShoppingService {
 	public void overwriteOrder(Map<String, String> map) throws Exception;
 	// 교환 상품 재배송하기
 	public OrderDTO changeProduct(String order_id) throws Exception;
+	// 상품 배송완료
+	public void completeOrder(Map<String, String> completeMap) throws Exception;
+//=====================================================================================================
+	// 페이징
+	// 총 주문량
+	public int orderListTotalCount(OrderSearch search) throws Exception;
+	// 지정한 기간에 주문한 주문 정보 가져오기
+	public List<OrderDTO> showOrder(Map searchMap) throws Exception;
+	// 총 쥐소량
+	public int cancelListTotalCount(OrderSearch search) throws Exception;
+	// 지정한 기간에 쥐소한 주문 정보 가져오기
+	public List<OrderDTO> showCancel(Map searchMap) throws Exception;
 //=====================================================================================================
 	// 주문 번호에 해당하는 주문 상세 정보 가져오기
 	public List<OrderDTO> orderNumInfo(int order_num) throws Exception;

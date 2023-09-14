@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.edu.member.dto.MemberDTO;
 import com.edu.shopping.dto.CartDTO;
 import com.edu.shopping.dto.OrderDTO;
+import com.edu.shopping.dto.OrderSearch;
 import com.edu.store.dto.ProductDTO;
 
 @Repository("shoppingDAO")
@@ -80,6 +81,30 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	@Override
 	public OrderDTO changeProduct(String order_id) throws DataAccessException {
 		return sqlsession.selectOne(namespace + ".changeProduct", order_id);
+	}
+
+	@Override
+	public void completeOrder(Map<String, String> completeMap) throws DataAccessException {
+		sqlsession.update(namespace + ".completeOrder", completeMap);
+	}
+//=====================================================================================================
+	@Override
+	public int orderListTotalCount(OrderSearch search) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".orderTotalCount", search);
+	}
+
+	@Override
+	public List<OrderDTO> showOrder(Map searchMap) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".showOrder", searchMap);
+	}
+	@Override
+	public int cancelListTotalCount(OrderSearch search) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".cancelTotalCount", search);
+	}
+
+	@Override
+	public List<OrderDTO> showCancel(Map searchMap) throws DataAccessException {
+		return sqlsession.selectList(namespace + ".showCancel", searchMap);
 	}
 //=====================================================================================================
 	@Override

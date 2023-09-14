@@ -1,5 +1,7 @@
 package com.edu.member.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +21,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
+import com.edu.board.dto.BoardDTO;
+import com.edu.board.dto.JjimDTO;
+import com.edu.board.dto.ReplyDTO;
 import com.edu.member.dto.MemberDTO;
 import com.edu.member.service.MemberService;
+import com.edu.sole.dto.RecipedSoleDTO;
+import com.edu.sole.dto.recipe.LikedDTO;
 
 @Controller					// 컨트롤러를 빈으로 등록한다.
 @RequestMapping("/member")	// 공통으로 처리할 URL 매핑.
@@ -274,15 +280,38 @@ public class MemberController {
 		
 
 		HttpSession session = request.getSession(); 		
-		MemberDTO mid = (MemberDTO) session.getAttribute("member");
-		String m_id = mid.getM_id();
-
-		MemberDTO member = (MemberDTO) memberService.myboardList(m_id);
-		model.addAttribute("member", member);
+		MemberDTO memberd = (MemberDTO) session.getAttribute("member");
+		String mid = memberd.getM_id();
+		
+		List<BoardDTO> myboard = memberService.myboardList(mid);
+		
+		model.addAttribute("boardList", myboard);
+		System.out.println("*******************************썸네일"+myboard);
 		
 		return "/member/myboard";
 	}
 		
-	//찜한 게시물 get/ post
+	//레시피 즐겨찾기 게시물 get/ post
+	@RequestMapping(value="/mylist",method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView mylikelist(HttpServletRequest request, HttpServletResponse response , Model model) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberDTO mid = (MemberDTO) session.getAttribute("member");
+		String m_id = mid.getM_id();
+		
+		List<RecipedSoleDTO> likeList	= memberService.likeList(m_id);
+		List<BoardDTO> 		 jjimList	= memberService.jjimList(m_id);
+
+		logger.info("아이디내놔");
+		
+		mav.addObject("like", likeList);
+		mav.addObject("jjim", jjimList);		
+		mav.setViewName("member/mylist");
+		return mav;
+		
+		
+	}
+
 	
 }	

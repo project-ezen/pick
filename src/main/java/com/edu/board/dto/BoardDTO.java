@@ -20,6 +20,7 @@ public class BoardDTO {
 	private String nickname;
 	private String thumbnail;
 	private int reply_count;
+	private int jjim_cnt;
 
 	
 	private MemberDTO memberDTO;
@@ -135,13 +136,23 @@ public class BoardDTO {
 	}
 
 
+	public int getJjim_cnt() {
+		return jjim_cnt;
+	}
+
+
+	public void setJjim_cnt(int jjim_cnt) {
+		this.jjim_cnt = jjim_cnt;
+	}
+
+
 	@Override
 	public String toString() {
 		return "BoardDTO [recNum=" + recNum + ", board_id=" + board_id + ", title=" + title + ", content=" + content
 				+ ", writeDate=" + writeDate + ", image=" + image + ", writer=" + writer + ", nickname=" + nickname
-				+ ", thumbnail=" + thumbnail + ", reply_count=" + reply_count + ", memberDTO=" + memberDTO + "]";
+				+ ", thumbnail=" + thumbnail + ", reply_count=" + reply_count + ", jjim_cnt=" + jjim_cnt
+				+ ", memberDTO=" + memberDTO + "]";
 	}
 
-	
 	
 }
