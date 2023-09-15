@@ -35,6 +35,7 @@ import com.edu.store.dto.ProductDisplayVO;
 import com.edu.store.dto.ProductReviewCriteria;
 import com.edu.store.dto.ProductReviewPageMaker;
 import com.edu.store.dto.ReviewDTO;
+import com.edu.member.dto.MemberDTO;
 import com.edu.store.dto.ProductDTO;
 import com.edu.store.service.StoreService;
 
@@ -150,9 +151,12 @@ public class StoreController {
 								@RequestParam(value="name", required = false) String name,
 								@RequestParam(value="total", required = false) Integer total,
 								@RequestParam(value="price", required = false) Integer price,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		HttpSession session = request.getSession();
-		String memberId = (String)session.getAttribute("memberId");
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		
+		String memberId = (String)memberDTO.getM_id(); 
 		int cai = getCartId();
 	
 		String cartId = Integer.toString(cai);
@@ -200,8 +204,12 @@ public class StoreController {
 	
 		
 		HttpSession session = request.getSession();
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+
 		
-		String member = (String)session.getAttribute("memberId");
+		String member = (String)memberDTO.getM_id(); 
+		
+		logger.info("333333333333333333333333333333333333333333333333333333333333333333333333333333333333" + member);
 		
 		multipartRequest.setCharacterEncoding("UTF-8");
 		

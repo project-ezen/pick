@@ -181,6 +181,13 @@
 	  	margin-left: 30px;
 	  }
 	  
+	  #backgroundBy{
+	  	background-color:rgba(255,255,255,0.8);
+	  	border-radius: 10px;
+	  	margin-right: 30px;
+	  	margin-left: 30px;
+	  }
+	  
 	  
     </style>
   </head>
@@ -189,6 +196,7 @@
      <%@ include file="../include/topMenu.jsp" %>
     
     <!-- 광고 배너 -->
+
     <div id="Advertising" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#Advertising" data-slide-to="0" class="active"></li>
@@ -272,7 +280,7 @@
     <br />
 
 	
-    
+ 
 		<div class="container-fluid pro">
 			<div class="row text-center" id="productInfo">
 				<c:forEach var="product" items="${productList}">
@@ -287,6 +295,7 @@
 			</div>
 	  	</div>
  </div>     
+
          
          
  <div align="center">
@@ -309,8 +318,8 @@
             </li>
         </ul>
     </nav>
-	</div>
 </div>
+
 
     <div class="row">
       <div id="footer">
@@ -499,6 +508,8 @@
         $("#furSearchBtn").css("background-image", "none");
         $("#jucSearchBtn").css("background-image", "none");
 
+<<<<<<< HEAD
+=======
        
         // 글리피콘 세모 바꾸기
         $("#btnDown").css("margin-left", "-550px");
@@ -506,6 +517,7 @@
         $("#productInfo").css("margin-bottom", "10px");
 
 
+>>>>>>> 9d01849c61b8bdfe840272a1e0e1937460130672
         // 높이 바꾸기
         $("#alcSearchBtn").css("height", "90px");
         $("#doguSearchBtn").css("height", "60px");
@@ -588,6 +600,5 @@
     }
     
   </script>
-
 </html>
 
