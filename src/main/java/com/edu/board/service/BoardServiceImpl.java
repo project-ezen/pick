@@ -44,6 +44,7 @@ public class BoardServiceImpl implements BoardService {
 	// 게시글 목록 가져오기 (Paging)
 	@Override
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws Exception {
+		logger.info("서비스");
 		return boardDAO.boardListPaging(pcri);
 	}
 	
@@ -94,6 +95,7 @@ public class BoardServiceImpl implements BoardService {
 	public void jjimNO(JjimDTO jjimNO) throws Exception {
 		boardDAO.jjimNO(jjimNO);
 	}
+
 
 
 }

@@ -78,37 +78,24 @@ public class BoardControllerImpl implements BoardController {
 	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception {
 		
 		logger.info("boardArticleList");
-
 		
-		String opt = request.getParameter("selop");
-		System.out.println("정렬 파라미터 : " + opt);
 
-		
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView();
 		PageMaker pageMaker = new PageMaker();
 		
-		if(opt == "one") {
-			pageMaker.setPcri(pcri);
-			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
-			List<BoardDTO> list = boardService.boardListPaging(pcri);
-			mav.addObject("articlesList", list);
-			mav.addObject("pageMaker", pageMaker);
-		} else if(opt == "two") {
-			pageMaker.setPcri(pcri);
-			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
-			List<BoardDTO> list2 = boardService.boardListJjim(pcri);
-			mav.addObject("articlesList", list2);
-			mav.addObject("pageMaker", pageMaker);
-		} else {
-			pageMaker.setPcri(pcri);
-			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
-			List<BoardDTO> list = boardService.boardListPaging(pcri);
-			mav.addObject("articlesList", list);
-			mav.addObject("pageMaker", pageMaker);
-		}
-
+		pageMaker.setPcri(pcri);
+		logger.info("2");
+		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
+		logger.info("3");
+		List<BoardDTO> list = boardService.boardListPaging(pcri);
+		logger.info("4");
+		mav.addObject("articlesList", list);		
+		logger.info("5");
+		mav.addObject("pcri",pcri);
+		logger.info("6");
+		mav.addObject("pageMaker", pageMaker);
 		
+		System.out.println("pageMaker" + " "+ pageMaker);
 		return mav;
 	}
 	
