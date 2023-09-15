@@ -71,7 +71,7 @@ $(document).ready(function() {
 	        success: function(data) {
 	            if (data === 1) {
 	                confirmCode = Math.floor(Math.random() * 900000) + 100000;
-	                alert("인증번호: " + confirmCode);
+	                alert("인증번호는 " + confirmCode + "입니다.");
 	            } else {
 	                alert("이름과 전화번호가 일치하지 않습니다.");
 	            }
@@ -110,7 +110,7 @@ $(document).ready(function() {
 	        success: function(data) {
 	            if (data === 1) {
 	                confirmCode = Math.floor(Math.random() * 900000) + 100000;
-	                alert("인증번호: " + confirmCode);
+	                alert("인증번호는 " + confirmCode + "입니다.");
 	            } else {
 	                alert("이름과 닉네임이 일치하지 않습니다.");
 	            }
@@ -135,7 +135,7 @@ $(document).ready(function() {
         	    contentType: 'application/json',
         	    data: tel,
         	    success: function(data) {
-        	        alert("아이디는: " + data);
+        	        alert("아이디는 " + data + "입니다.");
         	    }, error: function(data) {
         	        alert("뭐가 문제인거시냐");
         	    }
@@ -158,7 +158,7 @@ $(document).ready(function() {
         	    contentType: 'application/json',
         	    data: nick,
         	    success: function(data) {
-        	        alert("아이디는: " + data);
+        	        alert("아이디는 " + data + "입니다.");
         	    }, error: function(data) {
         	        alert("뭐가 문제인거시냐");
         	    }
@@ -199,7 +199,7 @@ $(document).ready(function() {
 	        success: function(data) {
 	            if (data === 1) {
 	                confirmCode = Math.floor(Math.random() * 900000) + 100000;
-	                alert("인증번호: " + confirmCode);
+	                alert("인증번호는 " + confirmCode + "입니다.");
 	            } else {
 	                alert("아이디와 전화번호가 일치하지 않습니다.");
 	            }
@@ -224,7 +224,7 @@ $(document).ready(function() {
         	    contentType: 'application/json',
         	    data: ID,
         	    success: function(data) {
-        	        alert("비밀번호는: " + data);
+        	        alert("비밀번호는 " + data + "입니다.");
         	    }, error: function(data) {
         	        alert("뭐가 문제인거시냐");
         	    }
