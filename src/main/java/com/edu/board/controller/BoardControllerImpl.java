@@ -76,29 +76,32 @@ public class BoardControllerImpl implements BoardController {
 	@Override
 	@ResponseBody
 	@RequestMapping(value="/board/articleList", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView recipeBoardPaging(String selop, HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception {
+	public ModelAndView recipeBoardPaging(@RequestParam(required = false) String selop, HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception {
 		
 		logger.info("boardArticleList");
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView();
 		PageMaker pageMaker = new PageMaker();
-		
-		System.out.println("정렬 파라미터 : " + selop);
 		
 		pageMaker.setPcri(pcri);
 		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
-		
-		if("one".equals(selop) || selop == null) {
-			System.out.println("원 이프 값 : " + selop);
-			List<BoardDTO> list = boardService.boardListPaging(pcri);
-			mav.addObject("articlesList", list);
-		}else if("two".equals(selop)) {
-			System.out.println("투 이프 값 : " + selop);
-			List<BoardDTO> list2 = boardService.boardListJjim(pcri);
-			mav.addObject("articlesList", list2);
-		}
+		List<BoardDTO> list = boardService.boardListPaging(pcri);
+		mav.addObject("articlesList", list);
+		mav.addObject("pcri",pcri);
 		mav.addObject("pageMaker", pageMaker);
 		
+		System.out.println("셀렉트 옵션 값 : " + selop);
+		pcri.setSelop(selop);
+		System.out.println("셀렉트 옵션 setSelop값 : " + pcri.getSelop());
+		
+		if(pcri.getSelop() == "two") {
+			System.out.println("셀렉트 옵션 값 : " + selop);
+			List<BoardDTO> list2 = boardService.boardListJjim(pcri);
+			mav.addObject("articlesList", list2);
+			mav.addObject("pcri",pcri);
+			mav.addObject("pageMaker", pageMaker);
+		}
+		
+		System.out.println("pageMaker" + " "+ pageMaker);
 		return mav;
 	}
 	

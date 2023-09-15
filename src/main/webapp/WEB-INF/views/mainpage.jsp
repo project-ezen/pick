@@ -28,7 +28,7 @@
         }
         
         .item:hover > ul{
-            visibility: visible;
+          visibility: visible;
           max-height: 1000px; /* 충분히 큰 값을 설정하여 서서히 펼쳐지도록 만듭니다 */
 
         }
@@ -54,13 +54,9 @@
             text-decoration-line: none;
         }
         a:visited {
-<<<<<<< HEAD
+
            color: white;
            text-decoration-line: none;
-=======
-        	color: white;
-        	text-decoration-line: none;
->>>>>>> 9d01849c61b8bdfe840272a1e0e1937460130672
         }
         #solo {
             font-size: 25px;

@@ -28,22 +28,20 @@
 			order by board_id desc
 		]]>
 	</select> -->
+		
 	
 	<!-- 전체 게시글 수 구하기 (Paging 처리) -->
 	<select id="boardListTotalCount" parameterType="com.edu.board.dto.PagingCriteria" resultType="Integer">
 		 	SELECT	COUNT(*)
 		 	FROM	board
-		<if test="keyword != null">
-			and title like '%'||#{keyword}||'%'
-		</if>
 	</select>
 	
-	<!-- 게시글 목록 가져오기 (Paging) -->
+	<!-- 게시글 목록 가져오기 (Paging)-->
 	<select id="boardListPaging" parameterType="com.edu.board.dto.PagingCriteria" resultType="boardDTO" resultMap="articlesResult">
 	<![CDATA[
 	select *
 	from (
-	    select recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail ,reply_count, jjim_cnt
+	    select *
 	    from (
 	        select rownum as recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail ,reply_count, jjim_cnt
 	        from (
@@ -53,12 +51,12 @@
 	            where b.m_id = m.m_id
 	            order by board_id desc))
 	]]>
-		<if test="keyword != null">
-			and title like '%'||#{keyword}||'%'
+		<if test="keyword != null and keyword != ''">
+			where title like '%'||#{keyword}||'%'
 		</if>
-	<![CDATA[            
+	<![CDATA[          
 			)
-	WHERE recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+			 WHERE recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum} 
 	]]>
 	</select>
 	

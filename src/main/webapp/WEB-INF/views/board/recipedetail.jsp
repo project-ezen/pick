@@ -89,7 +89,7 @@ color:#fff;
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 
-<div class="container">
+<div class="container" id="jjj">
 	<h2 style="text-align: center;">나만의 레시피 상세</h2>
 	<br/>
 	<form name="viewArticle" method="post" action="${path}/board/updateW" enctype="multipart/form-data">
@@ -118,13 +118,13 @@ color:#fff;
 						<c:when test="${not empty member}">	<!--  로그인 했을 시 -->
 							<c:choose>
 								<c:when test="${not empty liked}">
-									<td style="padding-bottom:5px;" id="jjimre1">
+									<td style="padding-bottom:5px;" id="jjNo">
 										<button class="jjimBtn" type="button" onClick="jjimNO()"><i class="bi bi-heart-fill"></i></button>
 										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
 									</td>
 								</c:when>
 								<c:otherwise>	<!-- 찜 안했을 시 -->
-									<td style="padding-bottom:5px;" id="jjimre2">
+									<td style="padding-bottom:5px;" id="jjYes">
 										<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
 										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
 									</td>
@@ -379,7 +379,7 @@ function jjimOK(){
 		success: function(data){
 			alert("찜 완료");
 			$('.bi').removeClass('bi-heart').addClass('bi-heart-fill');
-			$('#jjimre2').reload();
+			location.reload();
 		},
 		error: function(data){
 			alert("오류");
@@ -397,6 +397,7 @@ function jjimNO(){
 		success: function(data){
 			alert("찜 취소");
 			$('.bi').removeClass('bi-heart-fill').addClass('bi-heart');
+			location.reload();
 		},
 		error: function(data){
 			alert("오류");

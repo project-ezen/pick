@@ -9,6 +9,7 @@ public class PagingCriteria {
 	private	int	perPageNum;	// 한 페이지당 보여줄 글의 갯수
 	private String keyword;
 	private String selop;
+	
 	/* 게시글이 0으로 시작할 경우
 	 * 현재 페이지의 게시글 시작번호 = (현재 페이지 번호 -1) * 페이지당 보여줄 게시글의 개수 + 1
 	 * 
@@ -62,6 +63,7 @@ public class PagingCriteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+
 	
 	public String getSelop() {
 		return selop;
@@ -77,6 +79,5 @@ public class PagingCriteria {
 				+ selop + "]";
 	}
 
-	
 	
 } // End - public class Criteria
