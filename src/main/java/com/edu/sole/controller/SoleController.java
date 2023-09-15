@@ -168,7 +168,9 @@ public class SoleController {
 		
 		logger.info("recipe_code :" + recipe_code);
 		
+		String category = soleservice.getCategory(recipe_code);
 		
+		mav.addObject("category", category);
 		mav.addObject("recipe_code", recipe_code);
 		mav.addObject("m_id", m_id);
 		

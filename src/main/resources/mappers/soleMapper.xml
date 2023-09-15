@@ -212,6 +212,15 @@
   		</if>
 	</sql>
 	
+	<!-- 술 리뷰쓰는 페이지에서 강제로 목록으로 보낼려고 카테고리 가져오는 -->
+	<select id="getCategory" parameterType="String" resultType="String">
+		<![CDATA[
+			select re.alcohole_category
+			from reciped_alcohole re , alcohole_category al
+			where re.alcohole_category = al.alcohole_category and recipe_code = #{recipe_code}
+		]]>
+	</select>
+	
 	
 
 </mapper>

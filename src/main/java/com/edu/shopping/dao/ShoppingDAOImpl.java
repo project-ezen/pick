@@ -38,6 +38,11 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	public void changeCount(CartDTO count) throws DataAccessException {
 		sqlsession.update(namespace + ".changeCount", count);
 	}
+	
+	@Override
+	public void deleteCartList(String cart_id) throws DataAccessException {
+		sqlsession.delete(namespace + ".deleteCartList", cart_id);
+	}
 //=====================================================================================================
 	@Override
 	public int searchProductId(String product_name) throws DataAccessException {

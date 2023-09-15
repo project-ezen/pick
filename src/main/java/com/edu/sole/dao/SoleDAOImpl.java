@@ -141,7 +141,16 @@ public class SoleDAOImpl implements SoleDAO {
 	// 베이스주 총 개수 구하는
 	@Override
 	public int basecount(BaseSoleSearchCriteria cri) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne(namespace + ".basecount", cri);
 	}
+
+	//술 리뷰쓰는 페이지에서 강제로 목록으로 보낼려고 카테고리 가져오는
+	@Override
+	public String getCategory(String recipe_code) {
+		
+		return sqlSession.selectOne(namespace + ".getCategory", recipe_code);
+	}
+	
+	
 } // end class

@@ -19,6 +19,9 @@ public interface ShoppingDAO {
 	
 	// count change ajax
 	public void changeCount(CartDTO count) throws DataAccessException;
+	
+	// 선택한 물품 장바구니에서 삭제하기
+	public void deleteCartList(String cart_id) throws DataAccessException;
 //=====================================================================================================
 	// 상품 id 가져오기
 	public int searchProductId(String product_name) throws DataAccessException;

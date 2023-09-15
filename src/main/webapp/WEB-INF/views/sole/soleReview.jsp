@@ -18,8 +18,10 @@
     	if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
         	alert("이전 페이지로 이동합니다.");
         	
-        	window.location.href = referrer;    // 이 페이지에서 컨트롤러에 있는 레시피 코드를 끌고 가서  카테고리 구해서 그쪽으로 넘긴다?????????
-    }
+        	var backUrl = "/sole/sole?alcohole_category=" + ${category};
+        	
+        	window.location.href = backUrl;    
+        }
 }     // 구조 이해 x 
 </script>
 <style>
