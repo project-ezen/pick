@@ -118,13 +118,13 @@ color:#fff;
 						<c:when test="${not empty member}">	<!--  로그인 했을 시 -->
 							<c:choose>
 								<c:when test="${not empty liked}">
-									<td style="padding-bottom:5px;">
+									<td style="padding-bottom:5px;" id="jjimre1">
 										<button class="jjimBtn" type="button" onClick="jjimNO()"><i class="bi bi-heart-fill"></i></button>
 										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
 									</td>
 								</c:when>
 								<c:otherwise>	<!-- 찜 안했을 시 -->
-									<td style="padding-bottom:5px;">
+									<td style="padding-bottom:5px;" id="jjimre2">
 										<button class="jjimBtn" type="button" onClick="fn_jjimBtn('${isLogOn}')"><i class="bi bi-heart"></i></button>
 										<span style="margin-left:20px; font-size:16px;">${article.jjim_cnt}</span>
 									</td>
@@ -379,6 +379,7 @@ function jjimOK(){
 		success: function(data){
 			alert("찜 완료");
 			$('.bi').removeClass('bi-heart').addClass('bi-heart-fill');
+			$('#jjimre2').reload();
 		},
 		error: function(data){
 			alert("오류");
