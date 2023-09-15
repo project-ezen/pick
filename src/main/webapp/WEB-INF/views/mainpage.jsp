@@ -85,7 +85,7 @@
 	                       <li id="lilist" class="base"><a href="#">베이스주</a></li>
 	                       <li id="lilist"><a href="#">위스키 베이스주</a></li>
 	                       <li id="lilist"><a href="#">브랜디 베이스주</a></li>
-	                       <li id="lilist"><a href="#">진 베이스주</a></li>
+	                       <li id="lilist" class="jin"><a href="#">진 베이스주</a></li>
 	                       <li id="lilist"><a href="#">럼 베이스주</a></li>
 	                       <li id="lilist" class="cacktail"><a href="#">보드카 베이스주</a></li>
 	                       <li id="lilist" class="hiball"><a href="#">데킬라 베이스주</a></li>
@@ -139,7 +139,13 @@
         	var category1 = 1;
         	var category2 = 2;
         	var category3 = 3;
+        	var category4 = 4;
         	
+        	
+        	$(".base").click(function() {
+        		baseList.find("[name='alcohole_category']").val(category1);
+        		baseList.submit();
+        	})
         	
         	$(".cacktail").click(function (){
         		formList.find("[name='alcohole_category']").val(category1);
@@ -151,10 +157,11 @@
         		formList.submit();
         	});
         	
-        	$(".base").click(function() {
-        		baseList.find("[name='alcohole_category']").val(category3);
-        		baseList.submit();
-        	})
+        	$(".jin").click(function (){
+        		formList.find("[name='alcohole_category']").val(category4);
+        		formList.submit();
+        	});
+        	
             	
         });   //// end $
     </script>
