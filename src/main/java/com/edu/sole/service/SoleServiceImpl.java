@@ -119,6 +119,13 @@ public class SoleServiceImpl implements SoleService {
 		return soledao.basecount(cri);
 	}
 	
+	//술 리뷰쓰는 페이지에서 강제로 목록으로 보낼려고 카테고리 가져오는
+	@Override
+	public String getCategory(String recipe_code) {
+		
+		return soledao.getCategory(recipe_code);
+	}
+	
 	
 
 }
