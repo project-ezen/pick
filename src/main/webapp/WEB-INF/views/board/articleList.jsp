@@ -166,7 +166,6 @@ span {
 		<form id="formBoList" action="/board/articleList" method="get">
 			<input type="hidden" name="page"/>
 			<input type="hidden" name="keyword"/>
-			<input type="hidden" name="selop"/>
 		</form>
 	<%---------------------------------- 검색 외 --------------------------------------%>			
 		<div class="outer_div">
@@ -267,21 +266,21 @@ $(document).ready(function() {
     var formObj  = $("#formBoList");
     var selop = $("#selop");
     
-    // 페이지 로드 시 셀렉트 박스 값 설정
+    /*// 페이지 로드 시 셀렉트 박스 값 설정
     var selectSelop = "${pcri.selop}";
     if (selectSelop !== "") {
         selop.val(selectSelop).change(); // 값을 선택한 상태로 설정하고 change 이벤트 발생
-    }
+    }*/
 
     // 검색 버튼 클릭 이벤트
     $("#searchBtn").click(function() {
         performSearch();
     });
     
-    // 셀렉트 박스 값 변경 이벤트 핸들러
+    /*// 셀렉트 박스 값 변경 이벤트 핸들러
     selop.on("change", function() {
         performSearch();
-    });
+    });*/
 
     // 검색어 입력 시 엔터 키 이벤트 처리
     $("#searchKeyword").keydown(function(key) {
@@ -295,7 +294,6 @@ $(document).ready(function() {
         var keywordB = $("#searchKeyword").val();
         var keywordBoardTrim = keywordB.trim();
         formObj.find("[name='keyword']").val(keywordBoardTrim);
-        formObj.find("[name='selop']").val(selectSelop); 
         formObj.find("[name='page']").val("1");
         formObj.submit();
     }

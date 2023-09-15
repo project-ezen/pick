@@ -27,7 +27,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar">
                 <span class="glyphicon glyphicon-align-justify"></span>
             </button>
-            <a class="navbar-brand tt" href="/">Home</a>
+            <a class="navbar-brand tt" href="/" style="font-size: 30px;">마녀의 pick</a>
         </div>
         <div class="collapse navbar-collapse" id="mainNavbar" style="padding-top: 10px;">
             <ul class="nav nav-pills navbar-nav">

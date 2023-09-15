@@ -85,6 +85,7 @@ public class BoardControllerImpl implements BoardController {
 		
 		pageMaker.setPcri(pcri);
 		logger.info("2");
+		
 		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
 		logger.info("3");
 		List<BoardDTO> list = boardService.boardListPaging(pcri);

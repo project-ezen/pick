@@ -72,7 +72,7 @@
     <div class="bg">
         <div class="container-fluid">
             <div class="col-sm-4">
-                <h1 style="margin-top: 50px;">logo</h1>
+                <h1 style="margin-top: 50px;">마녀의 pick</h1>
                 <form id="formList" action="/sole/sole" method="get">
                    <input type="hidden" name="alcohole_category"/>
                 </form>
