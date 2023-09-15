@@ -76,8 +76,25 @@ public class ShoppingController {
 		log.info("Count change 완료");
 	}
 //----------------------------------------------------------------------------------------------------------------	
+	// Delete Cart Controller
+	@RequestMapping(value="/deleteCart", method=RequestMethod.GET)
+	public ModelAndView deleteCart(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String viewName = "redirect:/shopping/cart";
+		
+		String cart_id[] = request.getParameterValues("cartId");
+		
+		for(int i = 0; i < cart_id.length; i++) {
+			log.info("cart_id : " + cart_id[i]);
+			shoppingService.deleteCartList(cart_id[i]);
+		}
+
+		mav.setViewName(viewName);
+		return mav;
+	}
+//----------------------------------------------------------------------------------------------------------------	
 	// Order Controller
-	@RequestMapping(value="/order", method=RequestMethod.POST)
+	@RequestMapping(value="/order", method= {RequestMethod.POST, RequestMethod.GET})
 	public ModelAndView shoppingOrder(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = "/shopping/order";
 		ModelAndView mav = new ModelAndView();
