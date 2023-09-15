@@ -278,7 +278,12 @@ function sortListSearch(selop){
 $(document).ready(function() {
     var formObj  = $("#formBoList");	// 키워드 검색 폼
     var formSort = $("#selectBtn");		// 최신순, 찜많은순 정렬 폼
-    
+
+    // 검색 버튼 클릭 이벤트
+    $("#searchBtn").click(function() {
+        performSearch();
+    });
+
     // 검색어 입력 시 엔터 키 이벤트 처리
     $("#searchKeyword").keydown(function(key) {
         if (key.keyCode === 13) { // Enter 키 코드는 13입니다.

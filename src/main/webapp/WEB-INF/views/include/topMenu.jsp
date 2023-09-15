@@ -27,7 +27,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar">
                 <span class="glyphicon glyphicon-align-justify"></span>
             </button>
-            <a class="navbar-brand tt" href="/">Home</a>
+            <a class="navbar-brand tt" href="/" style="font-size: 30px;">마녀의 pick</a>
         </div>
         <div class="collapse navbar-collapse" id="mainNavbar" style="padding-top: 10px;">
             <ul class="nav nav-pills navbar-nav">
@@ -35,12 +35,12 @@
                     <a class="dropdown-toggle tt" data-toggle="dropdown" href="#">Alcohol</a>
                     <ul class="dropdown-menu">
                         <li id="lilist" class="base"><a href="#">베이스주</a></li>
-	                    <li id="lilist"><a href="#">위스키 베이스주</a></li>
-	                    <li id="lilist"><a href="#">브랜디 베이스주</a></li>
-	                    <li id="lilist"><a href="#">진 베이스주</a></li>
-	                    <li id="lilist"><a href="#">럼 베이스주</a></li>
-	                    <li id="lilist" class="cacktail"><a href="#">보드카 베이스주</a></li>
-	                    <li id="lilist" class="hiball"><a href="#">데킬라 베이스주</a></li>
+	                    <li id="lilist"><a href="#">위스키 칵테일</a></li>
+	                    <li id="lilist"><a href="#">브랜디 칵테일</a></li>
+	                    <li id="lilist"><a href="#">진 칵테일</a></li>
+	                    <li id="lilist"><a href="#">럼 칵테일</a></li>
+	                    <li id="lilist" class="cacktail"><a href="#">보드카 칵테일</a></li>
+	                    <li id="lilist" class="hiball"><a href="#">데킬라 칵테일</a></li>
                     </ul>
                 </li>
                 <li><a class="tt" href="${path}/board/articleList">My Own Recipe</a></li>
