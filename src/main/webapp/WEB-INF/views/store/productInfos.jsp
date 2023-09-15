@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page session="true" %>
-
- <%
-   String memberId = (String)session.getAttribute("memberId");
+<%@ page import="com.edu.member.dto.MemberDTO" %>
+<%
+   MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+   String memberId = (memberDTO != null) ? memberDTO.getM_id() : null;
 %>
 
 <!DOCTYPE html>
@@ -233,6 +234,11 @@
 		font-style: normal;
 		font-size: 30px;
     }
+    
+    #loginTf{
+    	float: right;
+    }
+
     </style>
   </head>
   <body class="bg">
@@ -248,7 +254,7 @@
         <div class="row">
           <!--상품 이미지-->
           <div class="col-md-6">
-            <img src="${path}/download.do?imageFileName=${productItem.product_image}" class="product-img img-responsive" />
+            <img src="/resources/product_images/${productItem.product_image}" class="product-img img-responsive" />
             <input type="hidden" value="${productItem.product_image}" id="imageHidden"/>
           </div>
           <!--상품 간단 정보-->
@@ -333,7 +339,11 @@
             <!-- 리뷰 & 페이징 -->
             <div id="review" class="tab-pane fade">
             	<br/>
-      			<button class="btn btn-info" id="writeReviewBtn" data-toggle="modal" data-target="#writeReview">리뷰 작성하기</button>
+					<% if (memberId != null) { %>
+						    <button class="btn btn-info" id="writeReviewBtn" data-toggle="modal" data-target="#writeReview">리뷰 작성하기</button>
+						<% } else { %>
+						    <p id="loginTf">로그인 후에 리뷰를 작성할 수 있습니다.</p>
+						<% } %>
              <div class="reviewDiv">
              </div>           
              <div class="row">		
@@ -391,7 +401,7 @@
 									<tr>
 										<td align="right">작성자</td>
 										<td colspan="2" align="left">
-											<input type="text" size="50" name="id" maxlength="50" value="${sessionScope.memberId}"readonly style="color:black"/>
+											<input type="text" size="50" name="id" maxlength="50" value="<%=memberId%>"readonly style="color:black"/>
 										</td>
 									</tr>
 									
@@ -405,7 +415,7 @@
 										<td align="right">이미지파일 첨부</td>
 										<td>
 											<input type="file" name="imageFileName" onchange="readURL(this);"/><br/>
-											<img id="preview" src="#" width="200" height="200"/>
+											<img id="preview" src="/resources/product_review_images/no_image/no_image.jpg" width="200" height="200"/>
 										</td>
 									</tr>
 									<tr>
@@ -428,9 +438,8 @@
     
     // DisplayOrderVO temp = new DisplayOrderVO(cart_id[i], image[i], product_name[i], product_price[i], count[i]);
     // 세션 아이디
-    var memberId = "<%= memberId %>"; 
-    var productIdInputs = $("#productIdInput").val();
-
+	    var memberId = "<%= memberId %>"; 
+	    var productIdInputs = $("#productIdInput").val();   	
     // 페이징 Ajax
     $(document).ready(function () {
     
@@ -529,43 +538,37 @@
     	}
     }
     
-    
-    
     // 장바구니 바로 가기 버튼
     $(document).ready(function (){	
     	$("#goToCart").on("click", function(){
-    		if(memberId != null || memberId != ""){
-   				alert("로그인 되어있음");
-   				
-    		var quantity = parseInt($("#quantity").val());
-    		var param = $("#displayParam").val();
-    		alert("param=" + param);
-    		var locate = "/store/addToCart?product_display_id=" + param + "&quantity=" + quantity + "&cartOrStore=cart";
-    		location.href = locate;
-    		
-    		
-    		}else{
-    			alert("로그인 하고와");
-    		}
-	
+    		if(memberId != 'null'){		
+        		var quantity = parseInt($("#quantity").val());
+        		var param = $("#displayParam").val();
+        		var locate = "/store/addToCart?product_display_id=" + param + "&quantity=" + quantity + "&cartOrStore=cart";
+        		location.href = locate;
+   		
+        		}else if (memberId == 'null'){
+        			alert("로그인이 필요한 서비스입니다.");
+        			var currentURL = window.location.href; // 현재 페이지의 URL을 가져옴
+        	        location.href = "/member/login?action=" + encodeURIComponent(currentURL);	
+        		}
     	});
     });
     
     // 상품 더 담기 버튼
     $(document).ready(function (){
     	$("#moreProduct").on("click", function(){
-    		if(memberId != null || memberId != ""){
-   				alert("로그인 되어있음");
-   				
+    		if(memberId != 'null'){		
     		var quantity = parseInt($("#quantity").val());
     		var param = $("#displayParam").val();
-    		alert("param=" + param);
     		var locate = "/store/addToCart?product_display_id=" + param + "&quantity=" + quantity + "&cartOrStore=store";
     		location.href = locate;
     		
     		
-    		}else{
-    			alert("로그인 하고와");
+    		}else if (memberId == 'null'){
+    			alert("로그인이 필요한 서비스입니다.");
+    			var currentURL = window.location.href; // 현재 페이지의 URL을 가져옴
+    	        location.href = "/member/login?action=" + encodeURIComponent(currentURL);	
     		}
 	
     	});

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session ="true" %>
-<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,11 +24,13 @@
     		overflow: hidden;
     		color: white;
     		transition: visibility 0.5s ease, max-height 0.5s ease; /* 모든 효과를 하나의 트랜지션 속성에 포함시킵니다 */
+
         }
         
         .item:hover > ul{
             visibility: visible;
-    		max-height: 1000px; /* 충분히 큰 값을 설정하여 서서히 펼쳐지도록 만듭니다 */
+          max-height: 1000px; /* 충분히 큰 값을 설정하여 서서히 펼쳐지도록 만듭니다 */
+
         }
 
         ul {
@@ -52,8 +54,13 @@
             text-decoration-line: none;
         }
         a:visited {
+<<<<<<< HEAD
+           color: white;
+           text-decoration-line: none;
+=======
         	color: white;
         	text-decoration-line: none;
+>>>>>>> 9d01849c61b8bdfe840272a1e0e1937460130672
         }
         #solo {
             font-size: 25px;
@@ -71,49 +78,54 @@
             <div class="col-sm-4">
                 <h1 style="margin-top: 50px;">logo</h1>
                 <form id="formList" action="/sole/sole" method="get">
-                	<input type="hidden" name="alcohole_category"/>
+                   <input type="hidden" name="alcohole_category"/>
                 </form>
                 
                 <form id="baseList" action="/sole/baseSole" method="get">
-                	<input type="hidden" name="alcohole_category"/>
+
+                   <input type="hidden" name="alcohole_category"/>
+
                 </form>
                 
                 <div id="listid">          
                     <li class="item" style="margin-top: 50px;">
-	                   Alcohol
-	                   <ul>
-	                       <li id="lilist" class="base"><a href="#">베이스주</a></li>
-	                       <li id="lilist"><a href="#">위스키 베이스주</a></li>
-	                       <li id="lilist"><a href="#">브랜디 베이스주</a></li>
-	                       <li id="lilist"><a href="#">진 베이스주</a></li>
-	                       <li id="lilist"><a href="#">럼 베이스주</a></li>
-	                       <li id="lilist" class="cacktail"><a href="#">보드카 베이스주</a></li>
-	                       <li id="lilist" class="hiball"><a href="#">데킬라 베이스주</a></li>
-	                   </ul>
-	          		</li>
+                      Alcohol
+                      <ul>
+                          <li id="lilist" class="base"><a href="#">베이스주</a></li>
+                          <li id="lilist"><a href="#">위스키 베이스주</a></li>
+                          <li id="lilist"><a href="#">브랜디 베이스주</a></li>
+                          <li id="lilist"><a href="#">진 베이스주</a></li>
+                          <li id="lilist"><a href="#">럼 베이스주</a></li>
+                          <li id="lilist" class="cacktail"><a href="#">보드카 베이스주</a></li>
+                          <li id="lilist" class="hiball"><a href="#">데킬라 베이스주</a></li>
+                      </ul>
+                   </li>
+
 	          		
                    	<div style="margin-top: 50px;">
                        <label id="solo"><a href="${path}/board/articleList">나만의 레시피</a></label>
-                   	</div>
+                      </div>
 
-                   	
-                   	<c:choose>
-                   		<%-- 로그인이 되지 않은 경우 --%>
-                   		<c:when test="${empty member.m_id || member.m_id eq ''}">
-                   			<div style="margin-top: 50px;">
-                       			<label id="solo"><a href="${path}/member/login">MyPage</a></label>
-                   			</div>
-                   		</c:when>
-                   		<%-- 로그인이 된 경우 --%>
-                   		<c:otherwise>
-                   			<div style="margin-top: 50px;">
-                       			<label id="solo"><a href="${path}/member/mypage">MyPage</a></label>
-                   			</div>
-                   		</c:otherwise>
-                   	</c:choose>
+                      
+                      <c:choose>
+                         <%-- 로그인이 되지 않은 경우 --%>
+                         <c:when test="${empty member.m_id || member.m_id eq ''}">
+                            <div style="margin-top: 50px;">
+                                <label id="solo"><a href="${path}/member/login">MyPage</a></label>
+                            </div>
+                         </c:when>
+                         <%-- 로그인이 된 경우 --%>
+                         <c:otherwise>
+                            <div style="margin-top: 50px;">
+                                <label id="solo"><a href="${path}/member/mypage">MyPage</a></label>
+                            </div>
+                         </c:otherwise>
+                      </c:choose>
 
-                   	<div style="margin-top: 50px;">
+
+                      <div style="margin-top: 50px;">
                        <label id="solo"><a href="/store/productInfo">Store</a></label>
+
                    	</div>
                    	<div style="margin-top: 350px;" id="logindiv">
                    	<c:choose>
@@ -127,11 +139,12 @@
 	                   	</c:when>
                    	</c:choose>
                    	</div>
+
                 </div>
             </div>
         </div>
     </div>
-	
+
     <script>    
         $(document).ready(function() {
         	var formList = $("#formList");
@@ -156,6 +169,7 @@
         		baseList.submit();
         	})
             	
+
         });   //// end $
     </script>
 </body>
