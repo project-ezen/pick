@@ -49,11 +49,18 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList(namespace + ".boardListPaging", pcri);
 	}
 	
+	// 게시글 찜많은 순 가져오기(Paging)
+	@Override
+	public List<BoardDTO> boardListJjim(PagingCriteria pcri) throws DataAccessException {
+		return sqlSession.selectList(namespace + ".boardListJjim", pcri);
+	}
+	
 	// 게시글 번호에 해당하는 상세정보
 	@Override
 	public BoardDTO selectArticle(int board_id) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".selectArticle", board_id);
 	}
+	
 	
 	// 게시글 작성 (post)
 	@Override
@@ -74,6 +81,12 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void delete(int board_id) throws DataAccessException {
 		sqlSession.delete(namespace + ".delete", board_id);
+	}
+	
+	// 게시글 수정
+	@Override
+	public void updateW(Map articleMap) throws DataAccessException {
+		sqlSession.update(namespace + ".updateW", articleMap);
 	}
 	
 	// 찜 등록
@@ -99,6 +112,13 @@ public class BoardDAOImpl implements BoardDAO {
 	public void jjimNO(JjimDTO jjimNO) throws DataAccessException {
 		sqlSession.delete(namespace + ".jjimNO", jjimNO);
 	}
+
+
+	@Override
+	public List<BoardDTO> searchKeyword(PagingCriteria pcri) throws DataAccessException {
+		return sqlSession.selectList(namespace + ".searchKeyword",pcri);
+	}
+
 
 	
 	

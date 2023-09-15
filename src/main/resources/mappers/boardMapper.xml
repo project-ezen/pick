@@ -18,6 +18,7 @@
 		<!-- <collection property="memberDTO" resultMap="MemberDTO" /> -->
 	</resultMap>
 
+
 	<!-- 게시물 목록 
 	<select id="selectAllArticleList" resultType="boardDTO">
 		<![CDATA[
@@ -26,19 +27,41 @@
 			order by board_id desc
 		]]>
 	</select> -->
+		
 	
 	<!-- 전체 게시글 수 구하기 (Paging 처리) -->
 	<select id="boardListTotalCount" parameterType="com.edu.board.dto.PagingCriteria" resultType="Integer">
-		<![CDATA[
 		 	SELECT	COUNT(*)
 		 	FROM	board
-		]]>
 	</select>
 	
-	<!-- 게시글 목록 가져오기 (Paging) -->
-	<!-- ROWNUM 을 가장 안 쪽에 사용하면 Mapper에서 인식을 못하기 때문에 바깥쪽에 사용하였다. -->
-	<!-- rownum, level 이름으로 인해서 resultMap articlesResult 로 사용한다. -->
+	<!-- 게시글 목록 가져오기 (Paging)-->
 	<select id="boardListPaging" parameterType="com.edu.board.dto.PagingCriteria" resultType="boardDTO" resultMap="articlesResult">
+	<![CDATA[
+	select *
+	from (
+	    select *
+	    from (
+	        select rownum as recNum, board_id, title, content, writedate, m_id, m_nickname, thumbnail ,reply_count, jjim_cnt
+	        from (
+	            select b.board_id, b.title, b.content, b.writedate, m.m_id, m.m_nickname, b.thumbnail, 
+	            	(select count(*) from reply where b_id= b.board_id) AS reply_count, (select count(*) from jjim where board_id = b.board_id) as jjim_cnt
+	            from board b, member m
+	            where b.m_id = m.m_id
+	            order by board_id desc))
+	]]>
+		<if test="keyword != null and keyword != ''">
+			where title like '%'||#{keyword}||'%'
+		</if>
+	<![CDATA[          
+			)
+			 WHERE recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum} 
+	]]>
+	</select>
+	
+
+	<!-- 게시글 찜많은 순 가져오기 (Paging) -->
+	<select id="boardListJjim" parameterType="com.edu.board.dto.PagingCriteria" resultType="boardDTO" resultMap="articlesResult">
 	<![CDATA[
 	select *
 	from (
@@ -50,10 +73,11 @@
 	            	(select count(*) from reply where b_id= b.board_id) AS reply_count, (select count(*) from jjim where board_id = b.board_id) as jjim_cnt
 	            from board b, member m
 	            where b.m_id = m.m_id
-	            order by board_id desc)))
+	            order by jjim_cnt desc)))
 	WHERE recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
 	]]>
 	</select>
+
 	
 	<!-- 게시글 번호에 해당하는 상세정보 -->
 	<select id="selectArticle" parameterType="int" resultType="boardDTO" resultMap="articlesResult">
@@ -85,6 +109,24 @@
 		]]>
 	</insert>
 	
+	<!-- 게시글 번호에 해당하는 정보수정 -->
+	<update id="updateW" parameterType="java.util.Map">
+		<![CDATA[
+		update board
+		set title = #{title},
+			content = #{content}
+		]]>
+			<if test="image != '' and image != null">
+			, image = #{image}
+			</if>
+			<if test="thumbnail != '' and thumbnail != null">
+			, thumbnail = #{thumbnail}
+			</if>
+		<![CDATA[
+		WHERE	board_id	= #{board_id}
+		]]>
+	</update>
+	
 	<!-- 게시글 삭제 -->
 	<delete id="delete">
 		<![CDATA[
@@ -96,7 +138,7 @@
 	<!-- 찜 등록 -->
 	<insert id="jjimOK">
 		<![CDATA[
-			insert into jjim (jjim_id, board_id, m_id)
+			insert into jjim (jjim_id, b_id, mem_id)
 			values (#{jjim_id}, #{board_id}, #{m_id})
 		]]>
 	</insert>
@@ -106,7 +148,7 @@
 		<![CDATA[
 			select *
 			from jjim
-			where m_id = #{m_id} and board_id = #{board_id}
+			where mem_id = #{m_id} and b_id = #{board_id}
 		]]>
 	</select>
 	
@@ -122,8 +164,8 @@
 	<delete id="jjimNO" parameterType="com.edu.board.dto.JjimDTO">
 		<![CDATA[
 			delete jjim
-			where board_id = #{board_id}
-			and m_id = #{m_id}
+			where b_id = #{board_id}
+			and mem_id = #{m_id}
 		]]>
 	</delete>
 	

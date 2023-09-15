@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,21 +11,21 @@
 
 
 .thumb {
-margin-top: 50px;
-margin-left: 10px;
-border-radius: 5px;
+	margin-top: 50px;
+	margin-left: 10px;
+	border-radius: 5px;
 }
 
 .outer_div {
-min-height: 534px;
+	min-height: 534px;
 }
 
 .inner_div {
-margin-top: 20px;
-margin-right: 20px;
-margin-bottom: 10px;
-margin-left: 45px;
-display: inline-block;
+	margin-top: 20px;
+	margin-right: 20px;
+	margin-bottom: 10px;
+	margin-left: 45px;
+	display: inline-block;
 }
 
 
@@ -34,91 +33,92 @@ display: inline-block;
 .page:visited,.page:active{color: #000;}
 
 .pagenav {
-display: inline-block;
-width: 50%;
-text-align: center;
-position: relative;
-left: 25%;
-bottom: 20px;
+	display: inline-block;
+	width: 50%;
+	text-align: center;
+	position: relative;
+	left: 25%;
+	bottom: 20px;
 }
 
 .searchbar {
-width: 300px;
-height: 30px;
-border-radius: 5px;
-border: solid 1px rgba(0,0,0,0.3);
-display: flex;
-justify-content: center;
-align-items: center;
-opacity: 1;
-background-color: rgb(233, 233, 233);
-margin-left: 36%;
+	width: 300px;
+	height: 30px;
+	border-radius: 5px;
+	border: solid 1px rgba(0,0,0,0.3);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: 1;
+	background-color: rgb(233, 233, 233);
+	margin-left: 36%;
 }
 
 .searchinput {
-width: 250px;
-border: none;
-margin-left: 10px;
-overflow: auto;
-font-size: 16px;
-background-color: rgb(233, 233, 233);
-outline: none;
+	width: 250px;
+	border: none;
+	margin-left: 10px;
+	overflow: auto;
+	font-size: 16px;
+	background-color: rgb(233, 233, 233);
+	outline: none;
 }
+
 .selectbtn {
-width: 150px;
-margin-left: auto;
+	width: 150px;
+	margin-left: auto;
 }
 
 .btnsub {
-border-radius: 10px;
-border: 2px solid #586389;
-width: 90px;
-height: 30px;
-text-align: center;
+	border-radius: 10px;
+	border: 2px solid #586389;
+	width: 90px;
+	height: 30px;
+	text-align: center;
 }
 
 /*글쓰기 버튼*/
 .wbtn {
-width: 70px;
-height: 35px;
-border-radius: 5px;
-border: none;
-background-color: #687AB6;
-color: #fff;
-float: right;
-margin-right: 50px;
-margin-bottom: 15px;
+	width: 70px;
+	height: 35px;
+	border-radius: 5px;
+	border: none;
+	background-color: #687AB6;
+	color: #fff;
+	float: right;
+	margin-right: 50px;
+	margin-bottom: 15px;
 }
 
 .lele {
-width: 180px;
-height: 200px;
-position: relative;
-float: right;
+	width: 180px;
+	height: 200px;
+	position: relative;
+	float: right;
 }
 
 .top {
-text-align: center;
-padding : 60px 0;
-margin-right: 20px;
+	text-align: center;
+	padding : 60px 0;
+	margin-right: 20px;
 }
 
 .top p.title {
-font-size: 20px;
+	font-size: 20px;
 }
 
 .top p.writer {
-text-align: right;
-margin-right: 5px;
+	text-align: right;
+	margin-right: 5px;
 }
 
 .bottom {
-width: 100%;
-height: 24px;
-position: absolute;
-bottom: 10px;
-text-align: center;
-padding-left: 10px;
+	width: 100%;
+	height: 24px;
+	position: absolute;
+	bottom: 10px;
+	text-align: center;
+	padding-left: 10px;
 }
 
 .bi-chat::before {
@@ -140,7 +140,7 @@ padding-left: 10px;
 }
 
 span {
-font-size: 15px;
+	font-size: 15px;
 }
  
 </style>
@@ -151,19 +151,24 @@ font-size: 15px;
 	<div class="container" style="background-color: white;">
 		<h2 align="center">나만의 레시피</h2>
 		<br/>
+		
 		<div style="display: flex;">
-		<form action="/board/search" method="GET">
 			<div class="searchbar">
-				<i class="bi bi-search bis"></i><input class="searchinput" type="text" placeholder="제목을 검색하세요"/>
-			</div>
-		</form>
-			<div class="selectbtn">
-				<select class="btnsub">
-					<option>최신순</option>
-					<option>찜 많은순</option>
-				</select>
+				<span class="bi bi-search bis" id="text"></span><input class="searchinput" type="text" placeholder="제목을 검색하세요" id="searchKeyword" value="${pcri.keyword}"/>
 			</div>
 		</div>
+		<div class="selectbtn">
+			<select class="btnsub" name="selop" id="selop">
+				<option value="최신순">최신순</option>
+				<option value="찜많은순">찜 많은순</option>
+			</select>
+		</div>
+		<form id="formBoList" action="/board/articleList" method="get">
+			<input type="hidden" name="page"/>
+			<input type="hidden" name="keyword"/>
+			<input type="hidden" name="selop"/>
+		</form>
+	<%---------------------------------- 검색 외 --------------------------------------%>			
 		<div class="outer_div">
 		<c:choose>
 			<%--게시글이 하나도 없는 경우 --%>
@@ -217,33 +222,36 @@ font-size: 15px;
 			 <!-- 화면 하단의 페이지 영역 -->
 	      </c:when>
 		</c:choose>
+	
 	    </div>  
 	      <div class="pagenav">
 	         <ul class="btn-group pagination">
 	            <c:if test="${pageMaker.prev}">
 	               <li>
-	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.startPage-1}&keyword=${pcri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 	               </li>
 	            </c:if>
 	            <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 	               <li>
-	                  <a class="page" href='<c:url value="/board/articleList?page=${pageNum}"/>'><i></i>${pageNum}</a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageNum}&selop=${pcri.selop}&keyword=${pcri.keyword}"/>'><i></i>${pageNum}</a>
 	               </li>
 	            </c:forEach>
-	            <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+	            <c:if test="${pageMaker.next}">
 	               <li>
-	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+	                  <a class="page" href='<c:url value="/board/articleList?page=${pageMaker.endPage+1}&keyword=${pcri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 	               </li>
 	            </c:if>
 	         </ul>
 	      </div>
 		<button type="button" class="wbtn" onclick="javascript:fn_writeForm('${isLogOn}', '${page}/board/write', '${page}/member/login')">글쓰기</button>
 		<br/><br/>
+		
 	</div>
 <br/><br/>
+		
 </div>
 <%@ include file="../include/footer.jsp" %>
-<script>
+<script type="text/javascript">
 function fn_writeForm(isLogOn, articleForm, loginForm) {
 	if(isLogOn != '' && isLogOn != false){
 		location.href = articleForm;
@@ -251,7 +259,47 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 		alert("로그인 후 이용해주세요.");
 		location.href= loginForm + '?action=/board/write';
 	}
-}
+};
+
+
+
+$(document).ready(function() {
+    var formObj  = $("#formBoList");
+    var selop = $("#selop");
+    
+    // 페이지 로드 시 셀렉트 박스 값 설정
+    var selectSelop = "${pcri.selop}";
+    if (selectSelop !== "") {
+        selop.val(selectSelop).change(); // 값을 선택한 상태로 설정하고 change 이벤트 발생
+    }
+
+    // 검색 버튼 클릭 이벤트
+    $("#searchBtn").click(function() {
+        performSearch();
+    });
+    
+    // 셀렉트 박스 값 변경 이벤트 핸들러
+    selop.on("change", function() {
+        performSearch();
+    });
+
+    // 검색어 입력 시 엔터 키 이벤트 처리
+    $("#searchKeyword").keydown(function(key) {
+        if (key.keyCode === 13) { // Enter 키 코드는 13입니다.
+            performSearch();
+        }
+    });
+
+    // 검색 기능 수행 함수
+    function performSearch() {
+        var keywordB = $("#searchKeyword").val();
+        var keywordBoardTrim = keywordB.trim();
+        formObj.find("[name='keyword']").val(keywordBoardTrim);
+        formObj.find("[name='selop']").val(selectSelop); 
+        formObj.find("[name='page']").val("1");
+        formObj.submit();
+    }
+});
 
 
 </script>

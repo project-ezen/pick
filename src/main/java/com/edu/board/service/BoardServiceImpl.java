@@ -44,7 +44,14 @@ public class BoardServiceImpl implements BoardService {
 	// 게시글 목록 가져오기 (Paging)
 	@Override
 	public List<BoardDTO> boardListPaging(PagingCriteria pcri) throws Exception {
+		logger.info("서비스");
 		return boardDAO.boardListPaging(pcri);
+	}
+	
+	// 게시글 찜 많은 순 가져오기(Paging)
+	@Override
+	public List<BoardDTO> boardListJjim(PagingCriteria pcri) throws Exception {
+		return boardDAO.boardListJjim(pcri);
 	}
 	
 	// 게시글번호에 해당하는 상세정보
@@ -65,6 +72,11 @@ public class BoardServiceImpl implements BoardService {
 	public void delete(int board_id) throws Exception {
 		boardDAO.delete(board_id);
 	}
+	// 게시글 수정
+	@Override
+	public void updateW(Map articleMap) throws Exception {
+		boardDAO.updateW(articleMap);
+	}
 	
 	// 찜 등록
 	@Override
@@ -83,6 +95,7 @@ public class BoardServiceImpl implements BoardService {
 	public void jjimNO(JjimDTO jjimNO) throws Exception {
 		boardDAO.jjimNO(jjimNO);
 	}
-	
+
+
 
 }

@@ -159,7 +159,7 @@
 				</div>
 				<div class="update-button-group">
 					<button type="submit" class="submit" id="editButton">수정</button>
-					<button type="button" class="cancel" id="resetButton">취소</button>
+					<button type="reset" class="cancel" id="resetButton">취소</button>
 				</div>
 			</form>
 		</div>

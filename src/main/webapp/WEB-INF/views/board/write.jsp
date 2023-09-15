@@ -139,7 +139,7 @@ $(document).ready(function(){
 		var title = $('#title').val();
 		var content = document.getElementById("content").value;
 		var thumbnail = $('#thumbnail').val();
-		var image = $('#image')[0];
+		var image = $('#image').val();
 				
 		if (title == null || title == ""){
 			alert("제목을 입력하세요");
