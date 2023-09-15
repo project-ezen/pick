@@ -23,9 +23,12 @@
         height: 400px;
         
         margin-top: 100px;*/
-        max-width: 100%;
+        /*max-width: 100%;
 		width: auto;
-		height: auto;
+		height: auto;*/
+		width: 100%;
+        margin: auto;
+        height: 500px !important;
       }
       .product-info {
         margin-top: 39px;
@@ -128,6 +131,11 @@
 	  	margin-left: auto;
 	  }
 	  
+	  .imgclass {
+	  	width: 100%;
+        margin: auto;
+        height: 165px !important;
+	  }
     </style>
   </head>
   <%@ include file="../include/topMenu.jsp" %>
@@ -238,7 +246,7 @@
 										
 					<c:forEach begin="${rpgm.startPage}" end="${rpgm.endPage}" var="pageNum">
 						<li>
-							<a class="paging-list" data-page="${pageNum}"><i>${pageNum}</i></a>
+							<a class="paging-list" data-page="${pageNum}"><i style="color:black">${pageNum}</i></a>
 								</li>
 						</c:forEach>
 										
@@ -283,7 +291,9 @@
 				
 				if("${member.m_id}" == null || "${member.m_id}" == '') {
 					alert("로그인하셔야 작성할 수 있습니다.");
-				 	location.href="/member/login?action=/sole/soleDetail?recipe_code=" + "${recipe.recipe_code}" + "&page=" + page;					
+				 	//location.href="/member/login?action=/sole/soleDetail?recipe_code=" + "${recipe.recipe_code}" + "&page=" + page; 이렇게 할때는 page 값이 안넘어가는데 변수에 넣어서 가니까 넣어짐
+				 	var actionParam = "/sole/soleDetail?recipe_code=" + "${recipe.recipe_code}" + "&page=" + page;
+					location.href = "/member/login?action=" + actionParam;
 				}
 			});	
 			
@@ -311,7 +321,7 @@
 
 		                    var reviewHtml = '<div class="row ajaxDiv">' +
 		                        '<div class="col-sm-offset-1 col-sm-2">' +
-		                        '<img src="${path}/ReviewDownload?review_image=' + review.image + '&review_id=' + review.review_id + '" width="100%" height="100%"/>' +
+		                        '<img class="imgclass" src="${path}/ReviewDownload?review_image=' + review.image + '&review_id=' + review.review_id + '" width="100%" height="100%"/>' +
 		                        '</div>' +
 		                        '<div class="col-sm-2">' +
 		                        '<p>' + review.m_id + '</p>' +
