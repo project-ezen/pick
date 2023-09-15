@@ -158,10 +158,14 @@ span {
 			</div>
 		</div>
 		<div class="selectbtn">
-			<select class="btnsub" name="selop" id="selop">
-				<option value="최신순">최신순</option>
-				<option value="찜많은순">찜 많은순</option>
-			</select>
+
+			<form action="/board/articleList" method="get" id="selectBtn">
+				<select class="btnsub" name="selop" id="selop" onchange="selectOp(this)">
+					<option value="one" >최신순</option>
+					<option value="two" >찜 많은순</option>
+				</select>
+				<input type="hidden" name="selop"/>
+			</form>
 		</div>
 		<form id="formBoList" action="/board/articleList" method="get">
 			<input type="hidden" name="page"/>
@@ -260,27 +264,25 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 	}
 };
 
+function selectOp(obj){
+	alert("selectOp 값 : " + $(obj).val());
+	var selop = $(obj).val();
+	alert("selop 값 : " + selop);
+	sortListSearch(selop);
+};
 
+function sortListSearch(selop){
+	alert("sortListSearch(selop)값 : " + selop);
+};
 
 $(document).ready(function() {
-    var formObj  = $("#formBoList");
-    var selop = $("#selop");
-    
-    /*// 페이지 로드 시 셀렉트 박스 값 설정
-    var selectSelop = "${pcri.selop}";
-    if (selectSelop !== "") {
-        selop.val(selectSelop).change(); // 값을 선택한 상태로 설정하고 change 이벤트 발생
-    }*/
+    var formObj  = $("#formBoList");	// 키워드 검색 폼
+    var formSort = $("#selectBtn");		// 최신순, 찜많은순 정렬 폼
 
     // 검색 버튼 클릭 이벤트
     $("#searchBtn").click(function() {
         performSearch();
     });
-    
-    /*// 셀렉트 박스 값 변경 이벤트 핸들러
-    selop.on("change", function() {
-        performSearch();
-    });*/
 
     // 검색어 입력 시 엔터 키 이벤트 처리
     $("#searchKeyword").keydown(function(key) {
@@ -298,8 +300,6 @@ $(document).ready(function() {
         formObj.submit();
     }
 });
-
-
 </script>
 </body>
 </html>

@@ -34,6 +34,7 @@
 	#cancel_info { padding-bottom: 20px; }
 
 	.list {
+		margin-bottom: 20px;
 		float: right;
 		background-color:#8aa2b2;
 		border-radius:8px;
@@ -41,15 +42,16 @@
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
 		font-size:12px;
 		font-weight:bold;
 		padding:8px 18px;
 		text-decoration:none;
-		float: right; 
+		float: right;
+		margin-bottom:10px; 
 	}
 	
-	.list:hover { background-color:#476e9e; }
+	.list:hover { background-color:#afb7db; }
 	
 	.list:active { position:relative; top:1px; }
 	
@@ -99,7 +101,7 @@
 				<button class="form-control btn btn-default" type="button" id="searchBuy">조회</button>
 			</div>
 			<div class="col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2" style="margin-bottom: 10px;">
-				<button type="button" class="list" style="float: right;">목록으로 돌아가기</button>
+				<button type="button" onclick="location.href='${path}/member/mypage'" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
 			</div>
 		</div>
 	</form>
