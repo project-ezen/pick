@@ -160,13 +160,12 @@ font-size: 15px;
 		<div class="selectbtn">
 			<form action="/board/articleList" method="get" id="selectBtn">
 				<select class="btnsub" name="selop" id="selop" onChange="selectOp()">
-					<option value="one">최신순</option>
-					<option value="two">찜 많은순</option>
-
+					<option value="one"<c:if test="${param.selop eq 'one'}">selected</c:if>>최신순</option>
+					<option value="two"<c:if test="${param.selop eq 'two'}">selected</c:if>>찜 많은순</option>
 				</select>
 			</form>
 		</div>
-		<div class="outer_div">
+		<div class="outer_div" id="outer_div">
 		<c:choose>
 			<%--게시글이 하나도 없는 경우 --%>
 			<c:when test="${empty articlesList}"> 
@@ -259,12 +258,12 @@ function fn_writeForm(isLogOn, articleForm, loginForm) {
 
 function selectOp() {
 	var selop = $("#selop option:selected").val();
+	var sendData = {"selop":selop}
 	
 		$.ajax({
 			url: "/board/articleList",
-			type: "get",
-			dataType: "text",
-			data: selop,
+			type: "post",
+			data: sendData,
 			success: function(data){
 				alert(selop);
 			},
@@ -274,23 +273,6 @@ function selectOp() {
 		});
 }
 
-
-/*
-function searchData() {
-	e.preventDefault();
-	
-	let keyword = $("#search_keyword input[name='keyword']").val();
-
-	if(!keyword){
-		alert("키워드를 입력하세요.");
-		return false;
-	}		
-	
-	find("input[name='keyword']").val(keyword);
-	find("input[name='prev']").val(1);
-	submit();
-});
-*/
 </script>
 </body>
 </html>

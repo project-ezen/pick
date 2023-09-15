@@ -25,7 +25,7 @@ public interface BoardController {
 		public ModelAndView articleForm() throws Exception;
 
 		// 게시글 목록(페이징)화면 보여주기
-		public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception;
+		public ModelAndView recipeBoardPaging(String selop, HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception;
 
 		// 게시글 번호에 해당하는 상세내역
 		public void articleDetail(@RequestParam("board_id") int board_id, Model model, HttpServletRequest request) throws Exception;
@@ -38,7 +38,6 @@ public interface BoardController {
 
 		// 게시글 수정
 		public ResponseEntity updateW(@RequestParam("board_id")int board_id, HttpServletResponse response, MultipartHttpServletRequest multiRequest) throws Exception;
-		
 
 		// 찜 등록
 		public JjimDTO jjimOK(int board_id, String m_id) throws Exception;

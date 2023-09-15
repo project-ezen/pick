@@ -15,6 +15,7 @@
 		<result column="m_nickname" 	property="nickname"/>
 		<result column="thumbnail" 		property="thumbnail"/>
 		<result column="reply_count" 	property="reply_count"/>
+		<result column="jjim_cnt" 		property="jjim_cnt"/>
 		<!-- <collection property="memberDTO" resultMap="MemberDTO" /> -->
 	</resultMap>
 
