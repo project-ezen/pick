@@ -87,13 +87,13 @@
                     <li class="item" style="margin-top: 50px;">
 	                   Alcohol
 	                   <ul>
-	                       <li id="lilist" class="base"><a href="#">베이스주</a></li>
-	                       <li id="lilist"><a href="#">위스키 베이스주</a></li>
-	                       <li id="lilist"><a href="#">브랜디 베이스주</a></li>
-	                       <li id="lilist" class="jin"><a href="#">진 베이스주</a></li>
-	                       <li id="lilist"><a href="#">럼 베이스주</a></li>
-	                       <li id="lilist" class="cacktail"><a href="#">보드카 베이스주</a></li>
-	                       <li id="lilist" class="hiball"><a href="#">데킬라 베이스주</a></li>
+	                       <li id="lilist" class="base"><a href="#">Base Alcohol</a></li>
+	                       <li id="lilist"><a href="#">위스키 칵테일</a></li>
+	                       <li id="lilist"><a href="#">브랜디 칵테일</a></li>
+	                       <li id="lilist" class="jin"><a href="#">진 칵테일</a></li>
+	                       <li id="lilist"><a href="#">럼 칵테일</a></li>
+	                       <li id="lilist" class="cacktail"><a href="#">보드카 칵테일</a></li>
+	                       <li id="lilist" class="hiball"><a href="#">데킬라 칵테일</a></li>
 	                   </ul>
 	          		</li>
 	          		
