@@ -36,6 +36,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 	public void changeCount(CartDTO count) throws Exception {
 		shoppingDAO.changeCount(count);
 	}
+	
+	@Override
+	public void deleteCartList(String cart_id) throws Exception {
+		shoppingDAO.deleteCartList(cart_id);
+	}
 //=====================================================================================================
 	@Override
 	public int searchProductId(String product_name) throws Exception {

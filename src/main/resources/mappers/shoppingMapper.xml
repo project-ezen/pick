@@ -29,6 +29,13 @@
 			WHERE cart_id = #{cart_id}
 		]]>
 	</update>
+	
+	<delete id="deleteCartList" parameterType="String">
+		<![CDATA[
+			DELETE FROM cart
+			WHERE cart_id = #{cart_id}
+		]]>
+	</delete>
 	<!-- ============================================================================================================================================================================================= -->
 	<select id="searchProductId" parameterType="String" resultType="int">
 		<![CDATA[
