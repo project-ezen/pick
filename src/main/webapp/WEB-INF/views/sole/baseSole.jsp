@@ -65,10 +65,13 @@
 	}
 
 	
-	img {
-		max-width: 100%;
+	.soleimg {
+		/*max-width: 100%;
 		width: auto;
 		height: auto;		/* 이미지 크기 자동조절*/
+		width: 100%;
+        margin: auto;
+        height: 230px !important;
 	}
 	#searchBox {
 		width: 15%;
@@ -85,7 +88,7 @@
 <%@ include file="../include/topMenu.jsp" %>
 <body class="bg">
 	<div id="bigdiv" class="container" style="background-color:white;">
-		<h1 style="text-align:center">Alcohole</h1>
+		<h1 style="text-align:center">Base Alcohole</h1>
 		<br>
 		<!-- select  -->
 		<div class="selectdiv">
@@ -106,7 +109,7 @@
 			<c:forEach var="sole" items="${basesole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a href="#"><img src="${path}/Basedownload?alcohole_image=${sole.alcohole_image}"/></a>
+					<a href="#"><img class="soleimg" src="${path}/Basedownload?alcohole_image=${sole.alcohole_image}"/></a>
 					<p style="text-align: center;"><a class="custom-link" href="#">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
@@ -116,7 +119,7 @@
             	
             	<input type="text" class="form-control" id="searchBox" value="${cri.keyword}"/>
             	
-            	<form id="formList" action="/sole/baseSole" method="get">
+            	<form id="BaseList" action="/sole/baseSole" method="get">
 					<input type="hidden" name="page"/>
 					<input type="hidden" name="sole_jongryu"/>
 					<input type="hidden" name="alcohole_category"/>
@@ -150,7 +153,7 @@
 </body>
 <script>
 	$(document).ready(function() {
-		var formObj = $("#formList");
+		var baseForm = $("#BaseList");
 		var jong	= $("#jongryu");
 		
 		// 페이지 로드시 셀렉트박스 값 설정
@@ -165,11 +168,11 @@
 		$("#searchBtn").click(function() {
 			var keywordStr = $("#searchBox").val();
 			var keywordStrTrim = keywordStr.trim();
-			formObj.find("[name='keyword']").val(keywordStrTrim);
-			formObj.find("[name='sole_jongryu']").val(selectJong);
-			formObj.find("[name='alcohole_category']").val(selectCategory);
-			formObj.find("[name='page']").val("1");
-			formObj.submit();
+			baseForm.find("[name='keyword']").val(keywordStrTrim);
+			baseForm.find("[name='sole_jongryu']").val(selectJong);
+			baseForm.find("[name='alcohole_category']").val(selectCategory);
+			baseForm.find("[name='page']").val("1");
+			baseForm.submit();
 		});
 		
 		/// 엔터키 누르면
@@ -177,21 +180,21 @@
 			if(key.keyCode == 13) {
 				var keywordStr = $("#searchBox").val();
 				var keywordStrTrim = keywordStr.trim();
-				formObj.find("[name='keyword']").val(keywordStrTrim);
-				formObj.find("[name='sole_jongryu']").val(selectJong);
-				formObj.find("[name='alcohole_category']").val(selectCategory);
-				formObj.find("[name='page']").val("1");
-				formObj.submit();
+				baseForm.find("[name='keyword']").val(keywordStrTrim);
+				baseForm.find("[name='sole_jongryu']").val(selectJong);
+				baseForm.find("[name='alcohole_category']").val(selectCategory);
+				baseForm.find("[name='page']").val("1");
+				baseForm.submit();
 			}
 		});
 		
 		////// 셀렉박스
 		jong.on("change", function() {
 			var jongValue = jong.val();
-			formObj.find("[name='sole_jongryu']").val(jongValue);
-			formObj.find("[name='alcohole_category']").val(selectCategory);
-			formObj.find("[name='page']").val("1");
-			formObj.submit();
+			baseForm.find("[name='sole_jongryu']").val(jongValue);
+			baseForm.find("[name='alcohole_category']").val(selectCategory);
+			baseForm.find("[name='page']").val("1");
+			baseForm.submit();
 		});
 		
 	});//// end $

@@ -42,11 +42,11 @@
 	  color: black;
 	  /*background: #272822;*/
 	}
-	.aa:link {
+	a:link {
 		text-decoration-line: none;
 		color: white;
 	}
-	.aa:visited {
+	a:visited {
 		text-decoration-line: none;
 		color: white;
 	}
@@ -61,10 +61,15 @@
 		color: black;
 	}
 	
-	img {
-		max-width: 100%;
-		width: auto;
+	.soleimg {
+		/*max-width: 100%;*/
+		/*width: auto;
 		height: auto;		/* 이미지 크기 자동조절*/
+		/*position: absolute;*/
+		/*object-fit: cover;*/
+		width: 100%;
+        margin: auto;
+        height: 230px !important;
 	}
 	#searchBox {
 		width: 15%;
@@ -106,8 +111,8 @@
 			<c:forEach var="sole" items="${sole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a class="aa" href="#"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
-					<p style="text-align: center;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0">${sole.alcohole_name}</a></p>
+					<a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0"><img class="soleimg" src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
+					<p style="text-align: center;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0" class="alink">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
 			
@@ -116,7 +121,7 @@
             	
             	<input type="text" class="form-control" id="searchBox" value="${cri.keyword}"/>
             	
-            	<form id="formList" action="/sole/sole" method="get">
+            	<form id="recipeList" action="/sole/sole" method="get">
 					<input type="hidden" name="page"/>
 					<input type="hidden" name="keyword"/>
 					<input type="hidden" name="dosu"/>
@@ -127,19 +132,19 @@
             	<ul class="btn-group pagination col-sm-offset-6 col-sm-2">
 					<c:if test="${pageMaker.prev}">
 						<li>
-							<a class="aa" href='<c:url value="/sole/sole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a href='<c:url value="/sole/sole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 						</li>
 					</c:if>
 					
 					<c:forEach begin="${pagemaker.startPage}" end="${pagemaker.endPage}" var="pageNum">
 						<li>
-							<a class="aa" href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}&alcohole_category=${cri.alcohole_category}"/>'><i>${pageNum}</i></a>
+							<a href='<c:url value="/sole/sole?page=${pageNum}&keyword=${cri.keyword}&dosu=${cri.dosu}&mat=${cri.mat}&alcohole_category=${cri.alcohole_category}"/>' class="alink"><i>${pageNum}</i></a>
 						</li>
 					</c:forEach>
 					
 					<c:if test="${pageMaker.next}">
 						<li>
-							<a class="aa" href='<c:url value="/sole/sole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a href='<c:url value="/sole/sole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 						</li>
 					</c:if>
 				</ul>
@@ -152,7 +157,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    var formObj = $("#formList");
+    var listRecipe = $("#recipeList");
     var dosuSelect = $("#dosu");
     var matSelect = $("#mat");
     
@@ -176,27 +181,27 @@ $(document).ready(function() {
     $("#searchBtn").click(function() {
         var keywordStr = $("#searchBox").val();
         var keywordStrTrim = keywordStr.trim();
-        formObj.find("[name='keyword']").val(keywordStrTrim);
-        formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
-        formObj.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
-        formObj.find("[name='page']").val("1");
-        formObj.submit();
+        listRecipe.find("[name='keyword']").val(keywordStrTrim);
+        listRecipe.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+        listRecipe.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
+        listRecipe.find("[name='page']").val("1");
+        listRecipe.submit();
     });
     
     // 셀렉트 박스 값 변경 이벤트 핸들러
     dosuSelect.on("change", function() {
         var dosuValue = dosuSelect.val();
         if(dosuValue == 0) {
-            formObj.find("[name='dosu']").val(dosuValue);
-            formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
-            formObj.find("[name='page']").val("1");
-            formObj.submit();
+        	listRecipe.find("[name='dosu']").val(dosuValue);
+        	listRecipe.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+        	listRecipe.find("[name='page']").val("1");
+        	listRecipe.submit();
         }else {
-        formObj.find("[name='dosu']").val(dosuValue);
-        formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
-        formObj.find("[name='mat']").val(selectedMat); // 카테고리 값 유지
-        formObj.find("[name='page']").val("1");
-        formObj.submit();
+	        listRecipe.find("[name='dosu']").val(dosuValue);
+	        listRecipe.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+	        listRecipe.find("[name='mat']").val(selectedMat); // 카테고리 값 유지
+	        listRecipe.find("[name='page']").val("1");
+	        listRecipe.submit();
         }
     });
     
@@ -204,28 +209,28 @@ $(document).ready(function() {
     matSelect.on("change", function() {
         var matValue = matSelect.val();
         if(matValue == "모두") {
-            formObj.find("[name='mat']").val(matValue);
-            formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
-            formObj.find("[name='page']").val("1");
-            formObj.submit();          
+        	listRecipe.find("[name='mat']").val(matValue);
+        	listRecipe.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+        	listRecipe.find("[name='page']").val("1");
+        	listRecipe.submit();          
         }
-        formObj.find("[name='mat']").val(matValue);
-        formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
-        formObj.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
-        formObj.find("[name='page']").val("1");
-        formObj.submit();
+        listRecipe.find("[name='mat']").val(matValue);
+        listRecipe.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+        listRecipe.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
+        listRecipe.find("[name='page']").val("1");
+        listRecipe.submit();
     });
     
 	$("#searchBox").keydown(function(key) {    // 엔터키 누르면 쳐지는
 		if(key.keyCode == 13) {
 			var keywordStr = $("#searchBox").val();
 			var keywordStrTrim = keywordStr.trim();
-			formObj.find("[name='keyword']").val(keywordStrTrim);
-			formObj.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
-		    formObj.find("[name='mat']").val(selectedMat); // 카테고리 값 유지
-		    formObj.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
-			formObj.find("[name='page']").val("1");
-			formObj.submit();			
+			listRecipe.find("[name='keyword']").val(keywordStrTrim);
+			listRecipe.find("[name='alcohole_category']").val(selectedCategory); // 카테고리 값 유지
+			listRecipe.find("[name='mat']").val(selectedMat); // 카테고리 값 유지
+			listRecipe.find("[name='dosu']").val(selectedDosu); // 카테고리 값 유지
+			listRecipe.find("[name='page']").val("1");
+			listRecipe.submit();			
 		}
 	});
     

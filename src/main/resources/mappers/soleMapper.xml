@@ -14,8 +14,8 @@
 			select *
 			from	
 					(select rownum as rwm, alcohole_name, alcohole_image, alcohole_level, favor, alcohole_category, recipe_code
-				 	 from reciped_alcohole)
-			where rwm >= #{perPageNum}*#{page}-(#{perPageNum}-1) and rwm <= #{perPageNum}*#{page}
+				 	 from reciped_alcohole where alcohole_category = #{alcohole_category})
+			where rwm between (#{page} -1) * #{perPageNum} + 1 and #{perPageNum} * #{page}
 		]]>
 		<include refid="search"/>
 	</select>
@@ -43,12 +43,6 @@
   			]]>
   		</if>
 
-  		<if test="alcohole_category != null and alcohole_category != '' and alcohole_category != 0">
-  			<![CDATA[
-  				and alcohole_category = #{alcohole_category}
-  			]]>
-  		</if>
-
   		 <if test="dosu == 0">
   			<![CDATA[
   				and 1=1
@@ -67,7 +61,7 @@
 		<![CDATA[
 			select count(*)
 			from reciped_alcohole
-			where 1=1 
+			where alcohole_category = #{alcohole_category}
 		]]>
 		
 		<include refid="search"/>
@@ -211,6 +205,15 @@
   			]]>
   		</if>
 	</sql>
+	
+	<!-- 술 리뷰쓰는 페이지에서 강제로 목록으로 보낼려고 카테고리 가져오는 -->
+	<select id="getCategory" parameterType="String" resultType="String">
+		<![CDATA[
+			select re.alcohole_category
+			from reciped_alcohole re , alcohole_category al
+			where re.alcohole_category = al.alcohole_category and recipe_code = #{recipe_code}
+		]]>
+	</select>
 	
 	
 

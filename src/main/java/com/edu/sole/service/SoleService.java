@@ -54,4 +54,7 @@ public interface SoleService {
 	
 	//베이스주 총개수
 	public int basecount(BaseSoleSearchCriteria cri);
+	
+	//술 리뷰쓰는 페이지에서 강제로 목록으로 보낼려고 카테고리 가져오는
+	public String getCategory(String recipe_code);
 }

@@ -74,41 +74,34 @@ public class BoardControllerImpl implements BoardController {
 	
 	// 게시글 목록(페이징) 화면 보여주기
 	@Override
+	@ResponseBody
 	@RequestMapping(value="/board/articleList", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception {
+	public ModelAndView recipeBoardPaging(@RequestParam(required = false) String selop, HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception {
 		
 		logger.info("boardArticleList");
-
-		
-		String opt = request.getParameter("selop");
-		System.out.println("정렬 파라미터 : " + opt);
-
-		
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView();
 		PageMaker pageMaker = new PageMaker();
 		
-		if(opt == "one") {
-			pageMaker.setPcri(pcri);
-			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
-			List<BoardDTO> list = boardService.boardListPaging(pcri);
-			mav.addObject("articlesList", list);
-			mav.addObject("pageMaker", pageMaker);
-		} else if(opt == "two") {
-			pageMaker.setPcri(pcri);
-			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
+		pageMaker.setPcri(pcri);
+		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
+		List<BoardDTO> list = boardService.boardListPaging(pcri);
+		mav.addObject("articlesList", list);
+		mav.addObject("pcri",pcri);
+		mav.addObject("pageMaker", pageMaker);
+		
+		System.out.println("셀렉트 옵션 값 : " + selop);
+		pcri.setSelop(selop);
+		System.out.println("셀렉트 옵션 setSelop값 : " + pcri.getSelop());
+		
+		if(pcri.getSelop() == "two") {
+			System.out.println("셀렉트 옵션 값 : " + selop);
 			List<BoardDTO> list2 = boardService.boardListJjim(pcri);
 			mav.addObject("articlesList", list2);
-			mav.addObject("pageMaker", pageMaker);
-		} else {
-			pageMaker.setPcri(pcri);
-			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
-			List<BoardDTO> list = boardService.boardListPaging(pcri);
-			mav.addObject("articlesList", list);
+			mav.addObject("pcri",pcri);
 			mav.addObject("pageMaker", pageMaker);
 		}
-
 		
+		System.out.println("pageMaker" + " "+ pageMaker);
 		return mav;
 	}
 	
