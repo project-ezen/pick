@@ -38,13 +38,13 @@ public interface SoleDAO {
 	public int reviewcount(ReviewCriteria reviewcri) throws Exception;
 	
 	// 찜 인설트
-	public void jjimInsert(LikedDTO jjimInsert) throws Exception;
+	public void likedInsert(LikedDTO likedInsert) throws Exception;
 	
 	//찜 셀렉하는
-	public LikedDTO jjimSelect(LikedSelectDTO Wla) throws Exception;
+	public LikedDTO likedSelect(LikedSelectDTO Wla) throws Exception;
 	
 	// 찜 딜리트
-	public void jjimDelete(LikedDTO jjimDelete) throws Exception;
+	public void likedDelete(LikedDTO likedDelete) throws Exception;
 	
 	// 베이스주 셀렉
 	public List<BaseSoleDTO> selectbase(BaseSoleSearchCriteria cri);

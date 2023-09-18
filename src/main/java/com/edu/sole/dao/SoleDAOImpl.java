@@ -101,12 +101,12 @@ public class SoleDAOImpl implements SoleDAO {
 	
 	// 찜 인설트
 	@Override
-	public void jjimInsert(LikedDTO jjimInsert) throws Exception {
+	public void likedInsert(LikedDTO likedInsert) throws Exception {
 		
 		String liked_id = selectLikedId();
-		jjimInsert.setLiked_id(liked_id);
+		likedInsert.setLiked_id(liked_id);
 		
-		sqlSession.insert(namespace + ".jjimInsert", jjimInsert);
+		sqlSession.insert(namespace + ".likedInsert", likedInsert);
 		
 	}
 	
@@ -119,16 +119,16 @@ public class SoleDAOImpl implements SoleDAO {
 	
 	// 찜 셀렉하는
 	@Override
-	public LikedDTO jjimSelect(LikedSelectDTO Wla) throws Exception {
+	public LikedDTO likedSelect(LikedSelectDTO Wla) throws Exception {
 		
-		return sqlSession.selectOne(namespace + ".jjimSelect", Wla);
+		return sqlSession.selectOne(namespace + ".likedSelect", Wla);
 	}
 	
 	// 찜 딜리트
 	@Override
-	public void jjimDelete(LikedDTO jjimDelete) throws Exception {
+	public void likedDelete(LikedDTO likedDelete) throws Exception {
 		
-		sqlSession.delete(namespace + ".jjimDelte", jjimDelete);
+		sqlSession.delete(namespace + ".likedDelte", likedDelete);
 	}
 	
 	// 베이스주 셀렉

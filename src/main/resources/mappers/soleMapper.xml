@@ -134,7 +134,7 @@
 	</select>
 	
 	<!-- 찜 인설트 -->
-	<insert id="jjimInsert" parameterType="com.edu.sole.dto.recipe.LikedDTO">
+	<insert id="likedInsert" parameterType="com.edu.sole.dto.recipe.LikedDTO">
 		<![CDATA[
 			insert into liked
 				   (liked_id, m_id, recipe_code, ingredient_number)
@@ -143,7 +143,7 @@
 	</insert>
 	
 	<!-- 찜 셀렉하는 -->
-	<select id="jjimSelect" parameterType="com.edu.sole.dto.recipe.LikedSelectDTO" resultType="com.edu.sole.dto.recipe.LikedDTO">
+	<select id="likedSelect" parameterType="com.edu.sole.dto.recipe.LikedSelectDTO" resultType="com.edu.sole.dto.recipe.LikedDTO">
 		<![CDATA[
 			select *
 			from liked
@@ -152,7 +152,7 @@
 	</select>
 	
 	<!-- 찜 딜리트 -->
-	<delete id="jjimDelte" parameterType="com.edu.sole.dto.recipe.LikedDTO">
+	<delete id="likedDelte" parameterType="com.edu.sole.dto.recipe.LikedDTO">
 		<![CDATA[
 			delete from liked
 			where m_id = #{m_id} and recipe_code = #{recipe_code}

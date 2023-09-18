@@ -108,20 +108,20 @@
 	  	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99); 
 	  	color: transparent;
 	  }
-	  .nojjim {
+	  .noliked {
 	  	font-size: 3em;
 		color: transparent;
 		text-shadow: 0 0 0 #f0f0f0;
 		cursor: pointer;
 	  }
-	  .jjim {
+	  .liked {
 	  	font-size: 3em;
 	  	color: transparent;
 	  	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
 	  	cursor: pointer;
 	  }
 	  
-	  .btnAndJjim {
+	  .btnAndliked {
 	  	display: flex; 
 	  	flex-direction: row; 
 	  	align-items: center;
@@ -173,7 +173,7 @@
                 </tr>
               </tbody>
             </table>
-            <div class="btnAndJjim">
+            <div class="btnAndliked">
 	            <div>
 	            	<button type="button" id="moklok">목록으로 돌아가기</button>
 	            </div>
@@ -181,19 +181,19 @@
 			<c:choose>
 			    <c:when test="${empty member.m_id || member.m_id eq ''}">
 			        <div align="right" class="right">
-			            <span class="nojjim" id="mark">★</span>
+			            <span class="noliked" id="mark">★</span>
 			        </div>
 			    </c:when>
 			    
-			    <c:when test="${not empty jjimselect.liked_id}">
+			    <c:when test="${not empty likedselect.liked_id}">
 			        <div align="right" class="right">
-			            <span class="jjim" id="mark">★</span>
+			            <span class="liked" id="mark">★</span>
 			        </div>
 			    </c:when>
 			    
 			    <c:otherwise>
 			    	<div align="right" class="right">
-			            <span class="nojjim" id="mark">★</span>
+			            <span class="noliked" id="mark">★</span>
 			        </div>
 			    </c:otherwise>
 			</c:choose>
@@ -354,52 +354,52 @@
 		    });
 		 
 //////////////////////////////////////////////////////////////////////////// 찜 하는 부분			
-		    $(document).on("click", ".nojjim", function() {
+		    $(document).on("click", ".noliked", function() {
 		    	if("${member.m_id}" == null || "${member.m_id}" == '') {
 		    		alert("로그인 하셔야 찜 할 수 있습니다.");
 		    	}else {
-		        	jjimInsert($(this));
+		        	likedInsert($(this));
 		    	}
 		    });
 
-		    $(document).on("click", ".jjim", function() {
-		        jjimDelete($(this));
+		    $(document).on("click", ".liked", function() {
+		        likedDelete($(this));
 		    });
 		    
 		    
-		    function jjimInsert() {
+		    function likedInsert() {
 		    	$.ajax({
-		    		url: "/sole/jjimInsert",
+		    		url: "/sole/likedInsert",
 		    		type: "GET",
 		    		dataType: "text",
 		    		data: {"recipe_code": "${recipe.recipe_code}", "m_id": "${member.m_id}"},
 		    		success: function() {
 		    			alert("성공");
-		    			$("#mark").removeClass("nojjim").addClass("jjim");
+		    			$("#mark").removeClass("noliked").addClass("liked");
 		    		},
 		    		error: function(error) {
 		    			console.error("error : " + error);
 		    			alert("실패");
 		    		}
 		    	});
-		    } ///////////// end jjimInsert
+		    } ///////////// end likedInsert
 		    
-		    function jjimDelete() {
+		    function likedDelete() {
 		    	$.ajax({
-		    		url: "/sole/jjimDelete",
+		    		url: "/sole/likedDelete",
 		    		type: "GET",
 		    		dataType: "text",
 		    		data: {"recipe_code": "${recipe.recipe_code}", "m_id": "${member.m_id}"},
 		    		success: function() {
 		    			alert("성공");
-		    			$("#mark").removeClass("jjim").addClass("nojjim");
+		    			$("#mark").removeClass("liked").addClass("noliked");
 		    		},
 		    		error: function(error) {
 		    			console.error("error : " + error);
 		    			alert("실패");
 		    		}
 		    	});
-		    } ///////////// end jjimDelete
+		    } ///////////// end likedDelete
 		    
 		    // 목록으로 돌아가기
 		    $("#moklok").click(function() {
