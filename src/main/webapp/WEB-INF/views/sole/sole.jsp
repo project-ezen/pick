@@ -61,7 +61,7 @@
 		color: black;
 	}
 	
-	img {
+	.soleimg {
 		/*max-width: 100%;*/
 		/*width: auto;
 		height: auto;		/* 이미지 크기 자동조절*/
@@ -111,7 +111,7 @@
 			<c:forEach var="sole" items="${sole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0"><img src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
+					<a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0"><img class="soleimg" src="${path}/download?recipe_image=${sole.alcohole_image}"/></a>
 					<p style="text-align: center;"><a href="/sole/soleDetail?recipe_code=${sole.recipe_code}&page=0" class="alink">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
