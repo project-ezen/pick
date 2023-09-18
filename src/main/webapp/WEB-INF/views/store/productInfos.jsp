@@ -225,7 +225,9 @@
      /*리뷰 자세히*/
      
     #whiteBg{
-    	background-color:white;
+    	background-color:rgba(255,255,255,0.8);
+	  	border-radius: 10px;
+	  	padding-bottom: 30px;
     }
     
     #detailDescription{
@@ -272,12 +274,12 @@
                   <th>원산지</th>
                   <td>${productInfo[status.index].origin }</td>
                 </tr>
-                <c:if test="${Integer.parseInt(productInfo[status.index].product_display_id) / 10000 == 1}">
+
                 <tr>
     			  <th>도수</th>
                   <td>${productInfo[status.index].alcohol_content }</td>
                 </tr>
-				</c:if>                
+               
                 <tr>
                   <th>용량</th>
                   <td>${productInfo[status.index].capacity }</td>
@@ -342,7 +344,7 @@
 					<% if (memberId != null) { %>
 						    <button class="btn btn-info" id="writeReviewBtn" data-toggle="modal" data-target="#writeReview">리뷰 작성하기</button>
 						<% } else { %>
-						    <p id="loginTf">로그인 후에 리뷰를 작성할 수 있습니다.</p>
+						    <button class="btn btn-warning"id="loginTf">로그인 후에 리뷰를 작성할 수 있습니다.</button>
 						<% } %>
              <div class="reviewDiv">
              </div>           
@@ -628,6 +630,10 @@
       // 바로 구매
     $(document).ready(function(){
     	$('#buyNow').on("click", function(){
+    		
+    		
+    		if(memberId != 'null'){		
+    			
     		const priceString = document.getElementById("price").textContent;
     		const price = parseInt(priceString.replace(/[^\d]/g, ""));
     		var productID = $("#productIdInput").val();
@@ -636,9 +642,29 @@
     		var name  = $("#nameHidden").val();
     		var total = price * count;
     		var encodedName = encodeURIComponent(name);
-    		var locate = "/store/addToCart?product_display_id=" + productID +"&quantity=" + count + "&cartOrStore=buyNow&image=" + image + "&name=" + encodedName + "&total=" + total +"&price=" + price;
+    		var locate = "/store/addToCart?product_display_id=" + productID +"&quantity=" + count + "&cartOrStore=buyNow&image=" + image + "&name=" + name + "&total=" + total +"&price=" + price;
 			
+    		console.log(productID);
+    		console.log(price);
+    		console.log(count);
+    		console.log(image);
+    		console.log(name);
+    		console.log(total);
+    			
     		location.href = locate;
+
+        		}else if (memberId == 'null'){
+        			alert("로그인이 필요한 서비스입니다.");
+        			var currentURL = window.location.href; // 현재 페이지의 URL을 가져옴
+        	        location.href = "/member/login?action=" + encodeURIComponent(currentURL);	
+        		}
+    		
+    		
+    		
+    		
+    		
+    		
+    		
     	});
     });
     

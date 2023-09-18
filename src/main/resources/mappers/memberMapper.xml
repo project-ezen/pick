@@ -118,7 +118,7 @@
 	<!-- 내가 쓴 게시물 -->
 	 <select id="myboard" parameterType="String" resultMap="board">
 	 <![CDATA[
-		SELECT b.m_id, b.board_id, b.title , b.writeDate ,b.image, b.thumbnail ,b.jjim_cnt
+		SELECT b.m_id, b.board_id, b.title , b.writeDate ,b.image, b.thumbnail ,(select count(*) from jjim where board_id = b.board_id) as jjim_cnt
 		FROM  member m , board b
 		WHERE m.m_id = b.m_id
 		AND m.m_id = #{m_id}

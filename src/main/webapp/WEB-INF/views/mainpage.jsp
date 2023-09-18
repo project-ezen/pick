@@ -30,7 +30,6 @@
         .item:hover > ul{
           visibility: visible;
           max-height: 1000px; /* 충분히 큰 값을 설정하여 서서히 펼쳐지도록 만듭니다 */
-
         }
 
         ul {
@@ -83,8 +82,8 @@
 
                 </form>
                 
-                <div id="listid">          
-                    <li class="item" style="margin-top: 50px;">
+                <div id="listid">   
+                	<li class="item" style="margin-top: 50px;">       
 	                   Alcohol
 	                   <ul>
 	                       <li id="lilist" class="base"><a class="AA" href="#">Base Alcohol</a></li>
@@ -95,7 +94,7 @@
 	                       <li id="lilist" class="cacktail"><a class="AA" href="#">보드카 칵테일</a></li>
 	                       <li id="lilist" class="hiball"><a class="AA" href="#">데킬라 칵테일</a></li>
 	                   </ul>
-	          		</li>
+	                </li>
 	          		
                    	<div style="margin-top: 50px;">
                        <label id="solo"><a href="${path}/board/articleList">나만의 레시피</a></label>
@@ -148,6 +147,9 @@
         	var category2 = 2;
         	var category3 = 3;
         	var category4 = 4;
+        	var category5 = 5;
+        	var category6 = 6;
+        	var category7 = 7;
         	
         	
         	$(".base").click(function() {
@@ -155,18 +157,33 @@
         		baseList.submit();
         	})
         	
-        	$(".cacktail").click(function (){
-        		formList.find("[name='alcohole_category']").val(category1);
+        	$(".weski").click(function (){
+        		formList.find("[name='alcohole_category']").val(category2);
         		formList.submit();
         	});
         	
-        	$(".hiball").click(function (){
-        		formList.find("[name='alcohole_category']").val(category2);
+        	$(".brandi").click(function (){
+        		formList.find("[name='alcohole_category']").val(category3);
         		formList.submit();
         	});
         	
         	$(".jin").click(function (){
         		formList.find("[name='alcohole_category']").val(category4);
+        		formList.submit();
+        	});
+        	
+        	$(".rum").click(function (){
+        		formList.find("[name='alcohole_category']").val(category5);
+        		formList.submit();
+        	});
+        	
+        	$(".bodcar").click(function (){
+        		formList.find("[name='alcohole_category']").val(category6);
+        		formList.submit();
+        	});
+        	
+        	$(".dekilla").click(function (){
+        		formList.find("[name='alcohole_category']").val(category7);
         		formList.submit();
         	});
         	

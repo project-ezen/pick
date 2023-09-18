@@ -49,6 +49,8 @@ public interface BoardDAO {
 
 	//검색
 	public List<BoardDTO> searchKeyword(PagingCriteria pcri) throws DataAccessException;
+
+	
 	
 	// 다중 이미지
 }

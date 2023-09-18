@@ -371,7 +371,7 @@ public class BoardControllerImpl implements BoardController {
 	// 찜 등록
 	@Override
 	@ResponseBody
-	@RequestMapping(value="/board/jjimOK", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/board/jjimOK", method= RequestMethod.GET, produces = "application/json")
 	public JjimDTO jjimOK(@RequestParam("board_id") int board_id, @RequestParam("m_id") String m_id) throws Exception {
 		
 		JjimDTO jjimDTO = new JjimDTO();
@@ -381,7 +381,8 @@ public class BoardControllerImpl implements BoardController {
 		boardService.jjimOK(jjimDTO);
 		return jjimDTO;
 	}
-
+	
+	
 
 	// 찜 삭제
 	@Override

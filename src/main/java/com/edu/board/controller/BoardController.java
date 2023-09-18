@@ -19,7 +19,6 @@ public interface BoardController {
 
 		// 게시글 목록
 		//public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
 		
 		// 게시글 작성 화면
 		public ModelAndView articleForm() throws Exception;
@@ -44,7 +43,7 @@ public interface BoardController {
 		
 		// 찜 삭제
 		public JjimDTO jjimNO(int board_id, String m_id) throws Exception;
-
+		
 		
 }
 
