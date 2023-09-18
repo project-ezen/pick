@@ -201,9 +201,6 @@
 <br/><br/>
 <script>
 $(document).ready(function() {
-	var frmBuy = $("#buyList");
-	var frmCancel = $("#cancelList");
-	
 	// 주문 내역 페이징
 	function orderPaging(pageNum) {
 		$.ajax({
@@ -225,7 +222,7 @@ $(document).ready(function() {
 								+ '<td><a class="orderNum">' + data.order[idx].order_number + '</a></td>'
 								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
 								+ '<a href="#" class="thumbnail">'
-								+ '<input type="image" src="${path }/download?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="image" src="${path }/imgdownload?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
 								+ '<input type="hidden" class="orderId" name="orderId" value="' + data.order[idx].order_id + '">'
 								+ '</a></div></td>'
 								+ '<td class="pdtName">' + data.product[idx].product_name + '</td>'
@@ -321,7 +318,7 @@ $(document).ready(function() {
 								+ '<td><a class="orderNum">' + data.cancel[idx].order_number + '</a></td>'
 								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
 								+ '<a href="#" class="thumbnail">'
-								+ '<input type="image" src="${path }/download?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="image" src="${path }/imgdownload?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
 								+ '<input type="hidden" name="orderId" value="' + data.cancel[idx].order_id + '">'
 								+ '</a></div></td>'
 								+ '<td>' + data.product[idx].product_name + '</td>'

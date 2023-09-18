@@ -16,7 +16,7 @@ public class BaseImageDownController {
 	//---------------------------------------------------------------------------------
 	// 업로드된 폴더와 위치가 같아야 한다.
 	//---------------------------------------------------------------------------------
-	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\board\\base_image";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\team\\pick\\src\\main\\webapp\\resources\\base_images";
 	
 	//---------------------------------------------------------------------------------
 	// 이미지 파일 다운로드
