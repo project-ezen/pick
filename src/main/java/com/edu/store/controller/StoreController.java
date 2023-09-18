@@ -149,8 +149,8 @@ public class StoreController {
 								@RequestParam("cartOrStore") String cartOrStore,
 								@RequestParam(value="image", required = false) String image,
 								@RequestParam(value="name", required = false) String name,
-								@RequestParam(value="total", required = false) Integer total,
-								@RequestParam(value="price", required = false) Integer price,
+								@RequestParam(value="total", required = false) int total,
+								@RequestParam(value="price", required = false) int price,
 		HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
@@ -169,14 +169,14 @@ public class StoreController {
 		int totalValue = 0; 
 		int priceValue = 0;
 		 
-		if (total != null) {
-			totalValue = total.intValue();
+		if (total != 0) {
+			totalValue = total;
 		} else {
 			logger.info("total이 널임");
 		}		
 		
-		if (price != null) {
-		    priceValue = price.intValue();		   
+		if (price != 0) {
+		    priceValue = price;		   
 		} else {
 			logger.info("price가 널임");
 		}
@@ -186,7 +186,7 @@ public class StoreController {
 		    }else if("buyNow".equals(cartOrStore)) {	    	
 		    	String encodedName = URLEncoder.encode(name, "UTF-8");
 		    	locate   
-		    	= "redirect:/shopping/order?cart_id=" + cartId + "&image=" + image + "&product_name=" + encodedName + "&product_price=" + priceValue + "&count=" + quantity + "&total_price=" + totalValue;
+		    	= "redirect:/shopping/order?cartId=" + cartId + "&imageFile=" + image + "&productName=" + encodedName + "&productPrice=" + priceValue + "&cnt=" + quantity + "&totalPrice=" + totalValue;
 
 		    	return locate;
 		    }

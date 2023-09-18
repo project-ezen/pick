@@ -77,7 +77,7 @@ public class ShoppingController {
 	}
 //----------------------------------------------------------------------------------------------------------------	
 	// Order Controller
-	@RequestMapping(value="/order", method=RequestMethod.POST)
+	@RequestMapping(value="/order", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView shoppingOrder(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = "/shopping/order";
 		ModelAndView mav = new ModelAndView();

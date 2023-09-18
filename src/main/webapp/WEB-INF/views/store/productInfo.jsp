@@ -19,49 +19,49 @@
 
 
 /* 버튼 공통 스타일 */
-.custom-button {
-    margin: 0;
-    background-color: rgb(115, 115, 189);
-    color: #f8f8f2;
-    font-size: 1.1em;
-    border-radius: 4px 4px 4px 4px;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word;
-    margin-top: 90px;
-    margin-left: 30px;
-    width: 200px;
-    height: 60px;
-    border: none;
-    display: inline-block;
-    text-transform: uppercase;
-    overflow: hidden;
-    position: relative;
-}
-
-.custom-button span {
-    position: relative;
-    z-index: 1;
-}
-
-
-.custom-button:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 700%;
-    width: 300%;
-    background-image: url("/resources/images/button.PNG");
-    transition: all 0.5s ease-in-out;
-    transform: translateX(-120%) translateY(-25%) rotate(45deg);
-}
-
-.custom-button:hover:after {
-    -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-    transform: translateX(-9%) translateY(-25%) rotate(45deg);
-}
+		.custom-button {
+		    margin: 0;
+		    background-color: rgb(115, 115, 189);
+		    color: #f8f8f2;
+		    font-size: 1.1em;
+		    border-radius: 4px 4px 4px 4px;
+		    white-space: -moz-pre-wrap;
+		    white-space: -pre-wrap;
+		    white-space: -o-pre-wrap;
+		    word-wrap: break-word;
+		    margin-top: 90px;
+		    margin-left: 30px;
+		    width: 200px;
+		    height: 60px;
+		    border: none;
+		    display: inline-block;
+		    text-transform: uppercase;
+		    overflow: hidden;
+		    position: relative;
+		}
+		
+		.custom-button span {
+		    position: relative;
+		    z-index: 1;
+		}
+		
+		
+		.custom-button:after {
+		    content: "";
+		    position: absolute;
+		    left: 0;
+		    top: 0;
+		    height: 700%;
+		    width: 300%;
+		    background-image: url("/resources/images/button.png");
+		    transition: all 0.5s ease-in-out;
+		    transform: translateX(-120%) translateY(-25%) rotate(45deg);
+		}
+	
+		.custom-button:hover:after {
+		    -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+		    transform: translateX(-9%) translateY(-25%) rotate(45deg);
+		}
 
         
       /*상품 정보*/
@@ -179,15 +179,10 @@
 	  	border-radius: 10px;
 	  	margin-right: 30px;
 	  	margin-left: 30px;
+	  	padding-bottom: 30px;
 	  }
 	  
-	  #backgroundBy{
-	  	background-color:rgba(255,255,255,0.8);
-	  	border-radius: 10px;
-	  	margin-right: 30px;
-	  	margin-left: 30px;
-	  }
-	  
+
 	  
     </style>
   </head>
@@ -196,7 +191,6 @@
      <%@ include file="../include/topMenu.jsp" %>
     
     <!-- 광고 배너 -->
-
     <div id="Advertising" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#Advertising" data-slide-to="0" class="active"></li>
@@ -219,23 +213,13 @@
 
 
       <!-- 광고 옆으로 넘기기 -->
-      		<a
-	        class="left carousel-control"
-	        href="#Advertising"
-	        role="button"
-	        data-slide="prev"
-      		>
-	        <span class="glyphicon glyphicon-chevron-left"></span>
-	        <span class="sr-only">Previous</span>
+      		<a class="left carousel-control" href="#Advertising" role="button" data-slide="prev">
+		        <span class="glyphicon glyphicon-chevron-left"></span>
+		        <span class="sr-only">Previous</span>
 		    </a>
-		    <a
-	        class="right carousel-control"
-	        href="#Advertising"
-	        role="button"
-	        data-slide="next"
-      		>
-	        <span class="glyphicon glyphicon-chevron-right"></span>
-	        <span class="sr-only">Next</span>
+		    <a class="right carousel-control" href="#Advertising" role="button" data-slide="next">
+		        <span class="glyphicon glyphicon-chevron-right"></span>
+		        <span class="sr-only">Next</span>
       		</a>
     	</div>
     <br/>
@@ -278,15 +262,12 @@
     </div>
     <br />
     <br />
-
-	
- 
 		<div class="container-fluid pro">
 			<div class="row text-center" id="productInfo">
 				<c:forEach var="product" items="${productList}">
 					<a href="/store/productInfos?product_display_id=${product.product_display_id}">
 						<div class="col-sm-3 productInfo_in">
-							<img src="${path}/download.do?imageFileName=${product.product_image}" align="center"/>
+							<img src="/resources/product_images/${product.product_image}" align="center"/>
 							<p align="center">상품명 : ${product.product_name }</p>
 							<p align="center">가격 : <fmt:formatNumber value="${product.product_price }" pattern="#,###"/>원</p>
 						</div>
@@ -502,22 +483,12 @@
         // 이미지 바꾸기
         $("#alcSearchBtn").css(
           "background-image",
-          "url('/resources/images/button.PNG')"
+          "url('/resources/images/button.png')"
         );
         $("#doguSearchBtn").css("background-image", "none");
         $("#furSearchBtn").css("background-image", "none");
         $("#jucSearchBtn").css("background-image", "none");
-
-<<<<<<< HEAD
-=======
-       
-        // 글리피콘 세모 바꾸기
-        $("#btnDown").css("margin-left", "-550px");
-        $("#btnDown").css("display", "inline-block");
-        $("#productInfo").css("margin-bottom", "10px");
-
-
->>>>>>> 9d01849c61b8bdfe840272a1e0e1937460130672
+        
         // 높이 바꾸기
         $("#alcSearchBtn").css("height", "90px");
         $("#doguSearchBtn").css("height", "60px");
@@ -535,7 +506,7 @@
         // 이미지 바꾸기
         $("#doguSearchBtn").css(
           "background-image",
-          "url('/resources/images/button.PNG')"
+          "url('/resources/images/button.png')"
         );
         $("#alcSearchBtn").css("background-image", "none");
         $("#furSearchBtn").css("background-image", "none");
@@ -559,7 +530,7 @@
         // 이미지 바꾸기
         $("#furSearchBtn").css(
           "background-image",
-          "url('/resources/images/button.PNG')"
+          "url('/resources/images/button.png')"
         );
         $("#alcSearchBtn").css("background-image", "none");
         $("#doguSearchBtn").css("background-image", "none");
@@ -582,7 +553,7 @@
         // 이미지 바꾸기
         $("#jucSearchBtn").css(
           "background-image",
-          "url('/resources/images/button.PNG')"
+          "url('/resources/images/button.png')"
         );
         $("#alcSearchBtn").css("background-image", "none");
         $("#doguSearchBtn").css("background-image", "none");
