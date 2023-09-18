@@ -154,7 +154,11 @@ span {
 		
 		<div style="display: flex;">
 			<div class="searchbar">
+				<form id="formBoList" action="/board/articleList" method="get">
 				<span class="bi bi-search bis" id="text"></span><input class="searchinput" type="text" placeholder="제목을 검색하세요" id="searchKeyword" value="${pcri.keyword}"/>
+				<input type="hidden" name="page"/>
+				<input type="hidden" name="keyword"/>
+				</form>
 			</div>
 		</div>
 		<div class="selectbtn">
@@ -166,11 +170,7 @@ span {
 				</select>
 				<input type="hidden" name="selop"/>
 			</form>
-		</div>
-		<form id="formBoList" action="/board/articleList" method="get">
-			<input type="hidden" name="page"/>
-			<input type="hidden" name="keyword"/>
-		</form>
+		</div>		
 	<%---------------------------------- 검색 외 --------------------------------------%>			
 		<div class="outer_div">
 		<c:choose>

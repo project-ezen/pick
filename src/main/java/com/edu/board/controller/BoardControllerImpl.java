@@ -73,21 +73,30 @@ public class BoardControllerImpl implements BoardController {
 	
 	// 게시글 목록(페이징) 화면 보여주기
 	@Override
-	@ResponseBody
 	@RequestMapping(value="/board/articleList", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView recipeBoardPaging(@RequestParam(required = false) String selop, HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception {
+	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception {
 		
 		logger.info("boardArticleList");
-		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
 		PageMaker pageMaker = new PageMaker();
 		
 		pageMaker.setPcri(pcri);
+		
 		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
+		logger.info(" 게시글의 총 건수: " +pageMaker.getTotalCount());
+		
 		List<BoardDTO> list = boardService.boardListPaging(pcri);
+		
+		System.out.println("pageMaker =" + pageMaker);
+
 		mav.addObject("articlesList", list);
 		mav.addObject("pcri",pcri);
 		mav.addObject("pageMaker", pageMaker);
 		
+		return mav;
+		
+		/*
 		System.out.println("셀렉트 옵션 값 : " + selop);
 		pcri.setSelop(selop);
 		System.out.println("셀렉트 옵션 setSelop값 : " + pcri.getSelop());
@@ -99,9 +108,7 @@ public class BoardControllerImpl implements BoardController {
 			mav.addObject("pcri",pcri);
 			mav.addObject("pageMaker", pageMaker);
 		}
-		
-		System.out.println("pageMaker" + " "+ pageMaker);
-		return mav;
+		*/
 	}
 	
 
