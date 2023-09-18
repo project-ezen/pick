@@ -25,7 +25,7 @@ body {
 }
 
 #class {
-	background-color: #fff;
+	background-color: #EBFBFF;
 	padding: 10px 0;
 }
 
@@ -132,6 +132,7 @@ body {
 			    	<c:when test="${cart == '[]' }">
 			    		<div class="row">
 			    			<div class="col-md-offset-8 col-md-4 text-right">
+					            <button type="submit" id="cancel" class="btn btn-danger" disabled>결제하기</button>
 					            <button type="submit" id="pay" class="btn btn-primary" disabled>결제하기</button>
 					        </div>
 			    		</div>
@@ -140,6 +141,7 @@ body {
 			    	<c:when test="${cart != '[]' }">
 					    <div class="row">
 					    	<div class="col-md-offset-8 col-md-4 text-right">
+					            <button type="submit" id="cancel" class="btn btn-danger">삭제하기</button>
 					            <button type="submit" id="pay" class="btn btn-primary">결제하기</button>
 					        </div>
 					    </div>
@@ -387,6 +389,32 @@ $(document).ready(function() {
 	    }
 	}
 //----------------------------------------------------------------------------------------------------------------
+	// 선택된 상품이 없을 경우 버튼 비활성화
+	$(document).on("click", ".check", function() {
+		if(!$(".check").is(":checked")) {
+			$("#cancel").prop("disabled", true);
+			$("#pay").prop("disabled", true);
+		}
+		else {
+			$("#cancel").prop("disabled", false);
+			$("#pay").prop("disabled", false);
+		}
+	});
+//----------------------------------------------------------------------------------------------------------------
+	// 삭제 버튼 클릭 시 선택 물품 삭제
+	$("#cancel").on("click", function() {
+		let frm = $(".check").closest("form");
+		
+		for(let i = 0; i < (".check").length; i++) {
+			if(!$(".check:eq(" + i + ")").is(":checked")) {
+				$(".ctId:eq(" + i + ")").prop("disabled", true);
+			}
+		}
+		
+		frm.prop("action", "/shopping/deleteCart");
+		frm.prop("method", "get");
+		frm.submit();
+	});
 });
 </script>
 </html>

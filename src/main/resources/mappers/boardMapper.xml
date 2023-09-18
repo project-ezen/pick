@@ -15,6 +15,7 @@
 		<result column="m_nickname" 	property="nickname"/>
 		<result column="thumbnail" 		property="thumbnail"/>
 		<result column="reply_count" 	property="reply_count"/>
+		<result column="jjim_cnt" 		property="jjim_cnt"/>
 		<!-- <collection property="memberDTO" resultMap="MemberDTO" /> -->
 	</resultMap>
 
@@ -138,7 +139,7 @@
 	<!-- 찜 등록 -->
 	<insert id="jjimOK">
 		<![CDATA[
-			insert into jjim (jjim_id, b_id, mem_id)
+			insert into jjim (jjim_id, board_id, m_id)
 			values (#{jjim_id}, #{board_id}, #{m_id})
 		]]>
 	</insert>
@@ -148,7 +149,7 @@
 		<![CDATA[
 			select *
 			from jjim
-			where mem_id = #{m_id} and b_id = #{board_id}
+			where m_id = #{m_id} and board_id = #{board_id}
 		]]>
 	</select>
 	
@@ -164,8 +165,8 @@
 	<delete id="jjimNO" parameterType="com.edu.board.dto.JjimDTO">
 		<![CDATA[
 			delete jjim
-			where b_id = #{board_id}
-			and mem_id = #{m_id}
+			where board_id = #{board_id}
+			and m_id = #{m_id}
 		]]>
 	</delete>
 	
