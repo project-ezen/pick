@@ -76,7 +76,7 @@
 								<td class="form-group" style="vertical-align: middle;">
 									<div class="col-md-12 text-center" id="item_thumbnail">
 									    <a href="#" class="thumbnail">
-									        <input type="image" src="${path }/download?imageFile=${display.image }" width="161" height="133" disabled>
+									        <input type="image" src="${path }/imgdownload?imageFile=${display.image }" width="161" height="133" disabled>
 									    </a>
 									</div>
 								</td>
