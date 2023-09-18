@@ -19,13 +19,12 @@ public interface BoardController {
 
 		// 게시글 목록
 		//public ModelAndView recipeBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
 		
 		// 게시글 작성 화면
 		public ModelAndView articleForm() throws Exception;
 
 		// 게시글 목록(페이징)화면 보여주기
-		public ModelAndView recipeBoardPaging(@RequestParam(required = false) String selop, HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception;
+		public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception;
 
 		// 게시글 번호에 해당하는 상세내역
 		public void articleDetail(@RequestParam("board_id") int board_id, Model model, HttpServletRequest request) throws Exception;
@@ -44,7 +43,7 @@ public interface BoardController {
 		
 		// 찜 삭제
 		public JjimDTO jjimNO(int board_id, String m_id) throws Exception;
-
+		
 		
 }
 

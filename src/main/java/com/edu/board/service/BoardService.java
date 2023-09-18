@@ -50,4 +50,6 @@ public interface BoardService {
 	public void jjimNO(JjimDTO jjimNO) throws Exception;
 
 	
+
+	
 } 

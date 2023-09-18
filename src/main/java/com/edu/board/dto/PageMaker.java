@@ -48,7 +48,7 @@ public class PageMaker {
 		prev = (startPage == 1 ? false : true);
 		
 		// 다음 페이지 (next)
-		next = endPage == realEndPage ? false : true;
+		next = endPage * pcri.getPageStart() < totalCount ? true : false;
 
 		
 	} // End - 화면 하단에 보여줄 페이지를 계산한다
