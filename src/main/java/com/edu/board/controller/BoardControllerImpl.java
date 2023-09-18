@@ -83,8 +83,8 @@ public class BoardControllerImpl implements BoardController {
 		PageMaker pageMaker = new PageMaker();
 		
 		pageMaker.setPcri(pcri);
-		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));
-		List<BoardDTO> list = boardService.boardListPaging(pcri);
+		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	// pageMaker.totalCount에 총 게시글 수 넣기
+		List<BoardDTO> list = boardService.boardListPaging(pcri);	// 게시글 목록(페이징 처리 포함) List로 넣기
 		mav.addObject("articlesList", list);
 		mav.addObject("pcri",pcri);
 		mav.addObject("pageMaker", pageMaker);
@@ -113,7 +113,7 @@ public class BoardControllerImpl implements BoardController {
 		
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO)session.getAttribute("member");
-		System.out.println("으아ㅓㄹㅇ너래ㅑ어랻저래ㅑㅇ너량널야ㅓ래ㅑㅓㅇ랴ㅓㄴㄴ어랴ㅐ얼" + member);
+		System.out.println("memberSession 값 : " + member);
 		
 		
 		BoardDTO boardDTO = boardService.articleDetail(board_id);
@@ -121,12 +121,12 @@ public class BoardControllerImpl implements BoardController {
 		model.addAttribute("article",boardDTO);
 		
 		JjimDTO jjimDTO = new JjimDTO();
-		if(member != null) {
-			String m_id = member.getM_id();
-			jjimDTO.setM_id(m_id);
-			jjimDTO.setBoard_id(board_id);
-			jjimDTO = boardService.jjimSelect(jjimDTO);
-			model.addAttribute("liked", jjimDTO);
+		if(member != null) {	// 로그인했을 경우
+			String m_id = member.getM_id();	// 로그인한 회원의 m_id를 가져와서
+			jjimDTO.setM_id(m_id);	// jjimDTO.m_id에 넣는다
+			jjimDTO.setBoard_id(board_id);	// 해당 게시물 id를 가져와서 jjimDTO.board_id에 넣는다
+			jjimDTO = boardService.jjimSelect(jjimDTO);	// 찜 조회값을 jjimDTO에 넣어 불러온다
+			model.addAttribute("liked", jjimDTO);		// 불러온 jjimDTO에 liked 라는 변수이름을 준다
 		}
 		
 		System.out.println("jjimDTO List 값 : " + jjimDTO);
@@ -233,7 +233,7 @@ public class BoardControllerImpl implements BoardController {
 			}
 			break;
 		}
-		System.out.println("return fileRealName 호호: " + fileRealName);
+		System.out.println("return fileRealName 썸네일 : " + fileRealName);
 		return fileRealName;
 	}
 	
@@ -364,7 +364,7 @@ public class BoardControllerImpl implements BoardController {
 				}
 			}
 		}
-		System.out.println("return fileRealName 흑흑: " + fileRealName);
+		System.out.println("return fileRealName 본문이미지 : " + fileRealName);
 		return fileRealName;
 	}
 

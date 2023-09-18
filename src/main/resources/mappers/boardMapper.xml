@@ -54,7 +54,7 @@
 		<if test="keyword != null and keyword != ''">
 			where title like '%'||#{keyword}||'%'
 		</if>
-	<![CDATA[          
+	<![CDATA[
 			)
 			 WHERE recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum} 
 	]]>
