@@ -45,7 +45,7 @@
 	.list {
 		margin-bottom: 20px;
 		float: right;
-		background-color:#8aa2b2;
+		background-color:#25556C;
 		border-radius:8px;
 		border:none;
 		display:inline-block;
@@ -60,7 +60,7 @@
 		margin-bottom:10px; 
 	}
 	
-	.list:hover { background-color:#afb7db; }
+	.list:hover { background-color:#ccd6d9; }
 	
 	.list:active { position:relative; top:1px; }
    

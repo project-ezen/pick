@@ -20,7 +20,7 @@
       .product-img {
         width: 400px;
         height: 400px;
-        
+        margin-left:100px;
         margin-top: 100px;
       }
       .product-info {
@@ -66,34 +66,39 @@
       /*수량 증가 감소*/
 
       /*구매 버튼들*/
-      .buy-now {
-        background-color: rgb(150, 232, 250);
-      }
-      .add-to-cart {
-        background-color: rgb(59, 59, 59);
+    .buy-now {
+        background-color: #25556C;
+    }
+    .buy-now:hover { background-color:#687AB6; }
+    
+    .add-to-cart {
+        background-color: #c90076;
         width: 140px;
         margin-left: 10px;
-      }
-      .buy-button {
+    }
+    
+    .add-to-cart:hover {  background-color:#E96F84; }
+    
+    .buy-button {
         color: aliceblue;
         float: right;
         height: 40px;
-      }
-      /*구매 버튼들*/
+    }
+    /*구매 버튼들*/
 
-      /*합계*/
-      .bold-line {
+    /*합계*/
+    .bold-line {
         height: 1px;
         background-color: rgb(135, 135, 135);
         width: 100%;
         margin-top: 8px;
         margin-bottom: 10px;
-      }
-      #totalkr {
+    }
+    #totalkr {
         font-size: 20px;
         margin: 30px;
-      }
-      #total {
+    }
+    #total {
         margin-left: 90px;
         width: 330px;
         height: 36px;
@@ -103,30 +108,29 @@
         border: 1px solid rgba(202, 202, 202, 0.9);
         background-color: rgba(202, 202, 202, 0.9);
         color: rgba(67, 67, 67, 0.9);
-      }
-      /*합계*/
+    }
+    /*합계*/
 
-      /*상세 설명, 리뷰*/
-      input:focus {
+    /*상세 설명, 리뷰*/
+    input:focus {
         outline: none;
-      }
-      .infoAndReview li {
-        width: 120px;
-        text-align: center;
-        font-size: 15px;
-        color: rgb(0, 0, 0);
-      }
+    }
+    
+	.infoAndReview li {
+	  	width: 120px;
+	  	text-align: center;
+	  	font-size: 15px;
+	  	color: rgb(0, 0, 0);
+	}
 
-      .infoAndReview li a {
-        background-color: rgb(139, 139, 139);
-      }
-      a:link {
-        color: black;
-      }
+    .infoAndReview li .AA { background-color: rgb(139, 139, 139); }
+    
+    .AA:link { color: black; }
+    
     #wrapper{
-		 height: auto;
- 		 min-height: 100%;
-  		 padding-bottom: 600px;
+		height: auto;
+		min-height: 100%;
+		padding-bottom: 600px;
 	}
 	
 	.multiline {
@@ -147,36 +151,35 @@
       }
       
   	#cart_modal_body {
-	  height: 600px;
-	  padding: 40px;
-	  text-align: center;
-	  border-radius: 10px;
+		height: 600px;
+		padding: 40px;
+		text-align: center;
+		border-radius: 10px;
 	}
 	
 	
-	 #cart_modal_content {
-	 background-color: rgba(0,0,0,0);
-	 box-shadow: none;
-	 border: 0px;
+	#cart_modal_content {
+		background-color: rgba(0,0,0,0);
+		box-shadow: none;
+		border: 0px;
 	}
 	
 	
 	#goToCart, #moreProduct {
-	 height: 80px;
-	 width: 30%;
-	 margin: 15px;
-	 margin-top: 100px;
+		height: 80px;
+		width: 30%;
+		margin: 15px;
+		margin-top: 100px;
 	}
 	
 	#cart_coment{
-	 color: #FFF;
-	 font-size: 30px;
-	 margin-top: 200px;
+		color: #FFF;
+		font-size: 30px;
+		margin-top: 200px;
 	}
 	
 	#modal-icon {
-		font-size: 20px;
-
+		font-size: 20px;	
 	}
 	/*modal : 장바구니 보내는*/
 	
@@ -241,18 +244,39 @@
     	float: right;
     }
 
+	.btn_sub {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #25556C;
+		color: #fff;
+	}
+	.btn_sub:hover { background-color:#687AB6; }
+
+	.btn_ret {
+		width: 90px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #E96F84;
+		color: #fff;
+	}
+
+	.btn_ret:hover { background-color: #c90076; }
+	
     </style>
   </head>
   <body class="bg">
-    <%@ include file="../include/topMenu.jsp" %>
-    
+    <%@ include file="../include/topMenu.jsp" %>  
     <br />
     <br />
-    <br />
-    
+    <br />  
+<div class="container" id="whiteBg">
    <c:forEach var="productItem" items="${product}" varStatus="status">
 	<input type="hidden" id="productIdInput" value="${productInfo[status.index].product_display_id }"/>
-      <div class="container" id="whiteBg">
         <div class="row">
           <!--상품 이미지-->
           <div class="col-md-6">
@@ -260,7 +284,7 @@
             <input type="hidden" value="${productItem.product_image}" id="imageHidden"/>
           </div>
           <!--상품 간단 정보-->
-          <h1>${productItem.product_name }</h1>
+          <h1 style="font-size: 30px;">${productItem.product_name }</h1>
           <input type="hidden" value="${productItem.product_name }" id="nameHidden"/>
           
           <div class="col-md-6 product-info">
@@ -325,16 +349,16 @@
           <!--상세설명&리뷰-->
           <ul class="nav nav-tabs infoAndReview">
             <li class="active">
-              <a data-toggle="tab" href="#description">상세설명</a>
+              <a class="AA" data-toggle="tab" href="#description">상세설명</a>
             </li>
-            <li><a data-toggle="tab" href="#review" id="reviewReadBtn">리뷰</a></li>
+            <li><a class="AA" data-toggle="tab" href="#review" id="reviewReadBtn">리뷰</a></li>
           </ul>
           <div class="tab-content">
             <div id="description" class="tab-pane fade in active">
               <h3>상세설명</h3>
 	              <!--상세 설명 와라락-->
 	              <div align="center">
-	              	<pre class="multiline" id="detailDescription">${productInfo[status.index].product_info}</pre>
+	              	<pre style="font-size: 18px; word-break: keep-all;  white-space: pre-wrap; overflow: auto; " class="multiline" id="detailDescription">${productInfo[status.index].product_info}</pre>
 	              </div>              
             </div>
             
@@ -342,9 +366,9 @@
             <div id="review" class="tab-pane fade">
             	<br/>
 					<% if (memberId != null) { %>
-						    <button class="btn btn-info" id="writeReviewBtn" data-toggle="modal" data-target="#writeReview">리뷰 작성하기</button>
+						    <button class="btn_sub" style="width: 130px;" id="writeReviewBtn" data-toggle="modal" data-target="#writeReview">리뷰 작성하기</button>
 						<% } else { %>
-						    <button class="btn btn-warning"id="loginTf">로그인 후에 리뷰를 작성할 수 있습니다.</button>
+						    <button class="btn_ret" style="width: 230px;" id="loginTf">로그인 후에 리뷰를 작성할 수 있습니다.</button>
 						<% } %>
              <div class="reviewDiv">
              </div>           
@@ -353,24 +377,23 @@
 			  	<ul class="btn-group pagination">
 					<c:if test="${prpgm.prev}">
 						<li>
-							<a class="paging-list" data-page="${prpgm.startPage -1}"><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a class="paging-list AA" data-page="${prpgm.startPage -1}"><span class="glyphicon glyphicon-chevron-left"></span></a>
 						</li>
 					</c:if>
 										
 					<c:forEach begin="${prpgm.startPage}" end="${prpgm.endPage}" var="pageNum">
 						<li>
-							<a class="paging-list" data-page="${pageNum}"><i>${pageNum}</i></a>
+							<a class="paging-list AA" data-page="${pageNum}"><i>${pageNum}</i></a>
 								</li>
 						</c:forEach>								
 					<c:if test="${prpgm.next}">
 						<li>
-							<a class="paging-list" data-page="${prpgm.endPage +1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a class="paging-list AA" data-page="${prpgm.endPage +1}"><span class="glyphicon glyphicon-chevron-right"></span></a>
 						</li>
 					</c:if>
 				</ul>
 			 </div>
-            </div>
-			           
+            </div>         
           </div>
         </div>
       </div>
@@ -384,8 +407,8 @@
                             <h4 id="cart_coment">장바구니에 상품을 넣었습니다.</h4>
                         <div class="modal-body" id="cart_modal_body">
                             <div id="col-md-2 col-md-4" align="center">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="goToCart"><span class="glyphicon glyphicon-shopping-cart" id="modal-icon"></span><span>&nbsp;장바구니 바로 가기</span></button>
-                          	<button type="button" class="btn btn-primary" data-dismiss="modal" id="moreProduct"><span class="glyphicon glyphicon-repeat" id="modal-icon"></span><span>&nbsp;상품 더 담기</span></button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="goToCart"><span class="glyphicon glyphicon-shopping-cart" id="modal-icon"></span><span style="font-size: 20px;">&nbsp;장바구니 바로 가기</span></button>
+                          	<button type="button" class="btn btn-primary" data-dismiss="modal" id="moreProduct"><span class="glyphicon glyphicon-repeat" id="modal-icon"></span><span style="font-size: 20px;">&nbsp;상품 더 담기</span></button>
                             </div>
                         </div>
                     </div>
@@ -397,43 +420,43 @@
     		<div class="modal" id="writeReview">
     			<div class="modal-dialog modal-lg">
 					<h1>리뷰 작성하기</h1>
-						<div class="container">
-							<form name="articleForm" method="post" action="/store/reviewWrite?product_display_id=${param.product_display_id}" enctype="multipart/form-data">
-								<table class="table" id="reviewTable">
-									<tr>
-										<td align="right">작성자</td>
-										<td colspan="2" align="left">
-											<input type="text" size="50" name="id" maxlength="50" value="<%=memberId%>"readonly style="color:black"/>
-										</td>
-									</tr>
-									
-									<tr>
-										<td align="right" valign="top">글내용</td>
-										<td colspan="2" align="left">
-											<textarea name="content" rows="10" cols="100" maxlength="4000" style="color:black"></textarea>
-										</td>
-									</tr>
-									<tr>
-										<td align="right">이미지파일 첨부</td>
-										<td>
-											<input type="file" name="imageFileName" onchange="readURL(this);"/><br/>
-											<img id="preview" src="/resources/product_review_images/no_image/no_image.jpg" width="200" height="200"/>
-										</td>
-									</tr>
-									<tr>
-										<td align="right"></td>
-										<td colspan="2">
-											<input class="btn btn-primary" type="submit" value="글쓰기"/>
-											<input class="btn btn-danger"  type="reset"  value="다시작성하기"/>
-										</td>
-									</tr>
-								</table>
-							</form>
-						</div>
-  
-    
+					<div class="container">
+						<form name="articleForm" method="post" action="/store/reviewWrite?product_display_id=${param.product_display_id}" enctype="multipart/form-data">
+							<table class="table" id="reviewTable">
+								<tr>
+									<td align="right">작성자</td>
+									<td colspan="2" align="left">
+										<input type="text" size="50" name="id" maxlength="50" value="<%=memberId%>"readonly style="color:black"/>
+									</td>
+								</tr>
+								
+								<tr>
+									<td align="right" valign="top">글내용</td>
+									<td colspan="2" align="left">
+										<textarea name="content" rows="10" cols="100" maxlength="4000" style="color:black"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td align="right">이미지파일 첨부</td>
+									<td>
+										<input type="file" name="imageFileName" onchange="readURL(this);"/><br/>
+										<img id="preview" src="/resources/product_review_images/no_image/no_image.jpg" width="200" height="200"/>
+									</td>
+								</tr>
+								<tr>
+									<td align="right"></td>
+									<td colspan="2">
+										<input class="btn_sub" type="submit" value="글쓰기"/>
+										<input class="btn_ret"  type="reset"  value="다시작성하기"/>
+									</td>
+								</tr>
+							</table>
+						</form>
+					</div>
     			</div>
     		</div>
+    	</div>	
+    	<br/><br/>
 	<%@ include file="../include/footer.jsp" %>
 
     <script>

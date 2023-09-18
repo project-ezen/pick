@@ -7,97 +7,66 @@
     <%@ include file="../include/header.jsp" %>
     
     <style>
-    	.container { width: 500px; background-color: rgba(255, 255, 255, 0.88); }
-    	
-    	.foot { padding-bottom: 100px; padding-top: 100px; }
-    	
-        .update-form {
-            margin: auto;
-            padding: 30px;
-        }
-        .form-group {
-			width: 350px;
-			margin: auto;
-			margin-bottom: 10px;
-        }
-        .update-button-group {
-            text-align: center;
-            margin-top: 20px;
-        }
-		#editButton {
-			margin-right: 50px;
-		}
+  	.container { width: 500px; background-color: rgba(255, 255, 255, 0.88); }
+  	
+  	.foot { padding-bottom: 100px; padding-top: 100px; }
+  	
+    .update-form {
+        margin: auto;
+        padding: 30px;
+    }
+    .form-group {
+		width: 350px;
+		margin: auto;
+		margin-bottom: 10px;
+    }
+    .update-button-group {
+        text-align: center;
+         margin-top: 20px;
+      }
+			
+	.sub {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #25556C;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+	}
+	.sub:hover {
+		background-color: #687AB6;;
+	}
+	.sub:active {
+		position:relative;
+		top:1px;
+	}
+	
+	.cel {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+		background-color: #cc0000;
 		
-		.check {
-		box-shadow:inset 0px 0px 15px 3px #276873;
-		background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
-		background-color:#599bb3;
-		border-radius:17px;
-		border:1px solid #29668f;
-		display:inline-block;
-		cursor:pointer;
-		color:#ffffff;
-		font-size:13px;
-		padding:6px 13px;
-		text-decoration:none;
-		text-shadow:0px 1px 0px #3d768a;
-		font-family: 'Cafe24Supermagic-Bold-v1.0';
-			&:hover {
-			background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-			background-color:#408c99;
-			}
-		 	&:active {
-			position:relative;
-			top:1px;
-			}
- 		}
- 		
-		.submit {
-		box-shadow:inset 0px 0px 15px 3px #1564ad;
-		background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
-		background-color:#79bbff;
-		border-radius:17px;
-		border:none;
-		display:inline-block;
-		cursor:pointer;
-		color:#ffffff;
-		font-size:14px;
-		padding:6px 13px;
-		text-decoration:none;
-		text-shadow:0px 1px 0px #528ecc;
-		font-family: 'Cafe24Supermagic-Bold-v1.0';
-			&:hover {
-			background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
-			background-color:#378de5;
-			}
-				&:active {
-			position:relative;
-			top:1px;
-			}
-		}
-		.cancel {
-		box-shadow:inset 0px 0px 15px 3px #f29c93;
-		background:linear-gradient(to bottom, #fe1a00 5%, #ce0100 100%);
-		background-color:#fe1a00;
-		border-radius:17px;
-		border:none;
-		display:inline-block;
-		cursor:pointer;
-		color:#ffffff;
-		font-family: 'Cafe24Supermagic-Bold-v1.0';		
-		font-size:14px;
-		padding:6px 13px;
-		text-decoration:none;
-		text-shadow:0px 1px 0px #b23e35;
-			&:hover {
-			background:linear-gradient(to bottom, #ce0100 5%, #fe1a00 100%);
-			background-color:#ce0100;
-			}
-			&:active {
-			position:relative;
-			top:1px;
-			}	
-		}
+	}
+
+	.cel:hover {background-color: #E96F84; }
+	
+	.cel:active {
+		position:relative;
+		top:1px;
+	}
     </style>
 </head>
 
@@ -158,8 +127,8 @@
 					<input type="text" class="form-control" id="m_addressDetail" name="m_addressDetail" value="${member.m_addressDetail}">
 				</div>
 				<div class="update-button-group">
-					<button type="submit" class="submit" id="editButton">수정</button>
-					<button type="reset" class="cancel" id="resetButton">취소</button>
+					<button type="submit" class="sub" id="editButton">수정</button>
+					<button type="reset" class="cel" id="resetButton">취소</button>
 				</div>
 			</form>
 		</div>

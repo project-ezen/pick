@@ -83,12 +83,14 @@
 	height: 35px;
 	border-radius: 5px;
 	border: none;
-	background-color: #687AB6;
+	background-color: #25556C;
 	color: #fff;
 	float: right;
 	margin-right: 50px;
 	margin-bottom: 15px;
 }
+
+.wbtn:hover { background-color:#687AB6; }
 
 .lele {
 	width: 180px;
@@ -274,6 +276,7 @@ function selectOp(obj){
 function sortListSearch(selop){
 	alert("sortListSearch(selop)값 : " + selop);
 };
+
 
 $(document).ready(function() {
     var formObj  = $("#formBoList");	// 키워드 검색 폼

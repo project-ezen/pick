@@ -8,24 +8,13 @@
 <title>Insert title here</title>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
-	.bg {
-		 background-image: url("/resources/images/background2.jpg");
-
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	}
 	h1 {
 		color: black;
 	}
 	#bigdiv {
-		/*height: auto;    /* footer 아래로 고정 */
-  		/*min-height: 100%;
-  		padding-bottom: 63px;*/
+		height: auto;    /* footer 아래로 고정 */
+  		min-height: 100%;
+  		padding-bottom: 63px;
 	}
 	.selectdiv {
 		display: flex;
@@ -63,7 +52,8 @@
 	a.custom-link:visited {
     	color: black; 
 	}
-
+	
+	.foot { padding-bottom: 20px; padding-top: 20px; margin:auto; }
 	
 	.soleimg {
 		/*max-width: 100%;
@@ -86,7 +76,8 @@
 </style>
 </head>
 <%@ include file="../include/topMenu.jsp" %>
-<body class="bg">
+<body>
+	<div class="foot">
 	<div id="bigdiv" class="container" style="background-color:white;">
 		<h1 style="text-align:center">Base Alcohole</h1>
 		<br>
@@ -147,6 +138,7 @@
 				</ul>
 			</div>			
 		</div>
+	</div>
 	</div>
 	<br/><br/>
 <%@ include file="../include/footer.jsp" %>

@@ -35,22 +35,22 @@
 	.relist {
 		margin-bottom: 20px;
 		float: right;
-		background-color:#8aa2b2;
+		background-color:#25556C;
 		border-radius:8px;
 		border:none;
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
 		font-size:12px;
 		font-weight:bold;
 		padding:8px 18px;
 		text-decoration:none;
 		float: right;
-		margin-bottom:10px; 
+		margin-bottom:10px;
 	}
 	
-	.relist:hover { background-color:#476e9e;}
+	.relist:hover { background-color:#ccd6d9; }
 	
 	.relist:active { position:relative; top:1px; }
 </style>
