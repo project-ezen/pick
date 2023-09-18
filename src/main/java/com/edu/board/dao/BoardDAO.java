@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.edu.board.dto.BoardDTO;
 import com.edu.board.dto.JjimDTO;
