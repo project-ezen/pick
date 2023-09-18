@@ -216,7 +216,7 @@ public class SoleController {
 		return mav;
 		
 	}
-	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\board\\review_image";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\team\\pick\\src\\main\\webapp\\resources\\sole_review_images";
 	////////////////////////////////////////////////////////////////////////////////////////////
 	// review image 등록
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {

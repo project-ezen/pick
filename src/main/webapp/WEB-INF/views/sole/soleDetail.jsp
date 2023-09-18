@@ -296,7 +296,8 @@
 					location.href = "/member/login?action=" + actionParam;
 				}
 			});	
-			
+					
+			///// ajax 
 			function loadReviews(pageNum) {
 		        $.ajax({
 		            url: "/sole/soleDetailAjax",
@@ -347,8 +348,6 @@
 			loadReviews(${rpgm.cri.page});
 		    
 		    $(".paging-list").click(function () {
-		    	
-		    	//$(".ajaxDiv").remove();
 		    	
 		        var pageNum = $(this).data("page"); // data-page 속성에서 페이지 번호 가져오기
 		        loadReviews(pageNum);

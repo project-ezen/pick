@@ -72,7 +72,7 @@
     <div class="bg">
         <div class="container-fluid">
             <div class="col-sm-4">
-                <h1 style="margin-top: 50px;">logo</h1>
+                <h1 style="margin-top: 50px;">마녀의 pick</h1>
                 <form id="formList" action="/sole/sole" method="get">
                    <input type="hidden" name="alcohole_category"/>
                 </form>
@@ -83,19 +83,19 @@
 
                 </form>
                 
-                <div id="listid">          
-                    <li class="item" style="margin-top: 50px;">
+                <div id="listid">   
+                	<li class="item" style="margin-top: 50px;">       
 	                   Alcohol
 	                   <ul>
 	                       <li id="lilist" class="base"><a href="#">베이스주</a></li>
-	                       <li id="lilist"><a href="#">위스키 베이스주</a></li>
-	                       <li id="lilist"><a href="#">브랜디 베이스주</a></li>
+	                       <li id="lilist" class="weski"><a href="#">위스키 베이스주</a></li>
+	                       <li id="lilist" class="brandi"><a href="#">브랜디 베이스주</a></li>
 	                       <li id="lilist" class="jin"><a href="#">진 베이스주</a></li>
-	                       <li id="lilist"><a href="#">럼 베이스주</a></li>
-	                       <li id="lilist" class="cacktail"><a href="#">보드카 베이스주</a></li>
-	                       <li id="lilist" class="hiball"><a href="#">데킬라 베이스주</a></li>
+	                       <li id="lilist" class="rum"><a href="#">럼 베이스주</a></li>
+	                       <li id="lilist" class="bodcar"><a href="#">보드카 베이스주</a></li>
+	                       <li id="lilist" class="dekilla"><a href="#">데킬라 베이스주</a></li>
 	                   </ul>
-	          		</li>
+	                </li>
 	          		
                    	<div style="margin-top: 50px;">
                        <label id="solo"><a href="${path}/board/articleList">나만의 레시피</a></label>
@@ -148,6 +148,9 @@
         	var category2 = 2;
         	var category3 = 3;
         	var category4 = 4;
+        	var category5 = 5;
+        	var category6 = 6;
+        	var category7 = 7;
         	
         	
         	$(".base").click(function() {
@@ -155,18 +158,33 @@
         		baseList.submit();
         	})
         	
-        	$(".cacktail").click(function (){
-        		formList.find("[name='alcohole_category']").val(category1);
+        	$(".weski").click(function (){
+        		formList.find("[name='alcohole_category']").val(category2);
         		formList.submit();
         	});
         	
-        	$(".hiball").click(function (){
-        		formList.find("[name='alcohole_category']").val(category2);
+        	$(".brandi").click(function (){
+        		formList.find("[name='alcohole_category']").val(category3);
         		formList.submit();
         	});
         	
         	$(".jin").click(function (){
         		formList.find("[name='alcohole_category']").val(category4);
+        		formList.submit();
+        	});
+        	
+        	$(".rum").click(function (){
+        		formList.find("[name='alcohole_category']").val(category5);
+        		formList.submit();
+        	});
+        	
+        	$(".bodcar").click(function (){
+        		formList.find("[name='alcohole_category']").val(category6);
+        		formList.submit();
+        	});
+        	
+        	$(".dekilla").click(function (){
+        		formList.find("[name='alcohole_category']").val(category7);
         		formList.submit();
         	});
         	
