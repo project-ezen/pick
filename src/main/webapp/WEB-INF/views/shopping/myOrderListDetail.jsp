@@ -118,7 +118,7 @@
 						<td>
 							<div class="col-md-12 text-center" id="item_thumbnail">
 							    <a href="#" class="thumbnail">
-							        <input type="image" src="${path }/download?imageFile=${products.product_image }" width="161" height="133" disabled>
+							        <input type="image" src="${path }/imgdownload?imageFile=${products.product_image }" width="161" height="133" disabled>
 							    </a>
 							</div>
 						</td>
