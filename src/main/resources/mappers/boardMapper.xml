@@ -61,7 +61,7 @@
 	</select>
 	
 
-	<!-- 게시글 찜많은 순 가져오기 (Paging) -->
+	<!-- 게시글 찜많은 순 가져오기 (Paging)
 	<select id="boardListJjim" parameterType="com.edu.board.dto.PagingCriteria" resultType="boardDTO" resultMap="articlesResult">
 	<![CDATA[
 	select *
@@ -77,7 +77,7 @@
 	            order by jjim_cnt desc)))
 	WHERE recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
 	]]>
-	</select>
+	</select> -->
 
 	
 	<!-- 게시글 번호에 해당하는 상세정보 -->
