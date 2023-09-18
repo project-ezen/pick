@@ -58,9 +58,9 @@
            color: white;
            text-decoration-line: none;
         }
-        #solo {
-            font-size: 25px;
-        }
+        #solo 	{ font-size: 25px; }
+        
+        .AA 	{ font-size: 20px; }
     </style>
 </head>
 <body>
@@ -87,13 +87,13 @@
                     <li class="item" style="margin-top: 50px;">
 	                   Alcohol
 	                   <ul>
-	                       <li id="lilist" class="base"><a href="#">Base Alcohol</a></li>
-	                       <li id="lilist"><a href="#">위스키 칵테일</a></li>
-	                       <li id="lilist"><a href="#">브랜디 칵테일</a></li>
-	                       <li id="lilist" class="jin"><a href="#">진 칵테일</a></li>
-	                       <li id="lilist"><a href="#">럼 칵테일</a></li>
-	                       <li id="lilist" class="cacktail"><a href="#">보드카 칵테일</a></li>
-	                       <li id="lilist" class="hiball"><a href="#">데킬라 칵테일</a></li>
+	                       <li id="lilist" class="base"><a class="AA" href="#">Base Alcohol</a></li>
+	                       <li id="lilist"><a class="AA" href="#">위스키 칵테일</a></li>
+	                       <li id="lilist"><a class="AA" href="#">브랜디 칵테일</a></li>
+	                       <li id="lilist" class="jin"><a class="AA" href="#">진 칵테일</a></li>
+	                       <li id="lilist"><a class="AA" href="#">럼 칵테일</a></li>
+	                       <li id="lilist" class="cacktail"><a class="AA" href="#">보드카 칵테일</a></li>
+	                       <li id="lilist" class="hiball"><a class="AA" href="#">데킬라 칵테일</a></li>
 	                   </ul>
 	          		</li>
 	          		
