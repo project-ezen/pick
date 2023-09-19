@@ -129,19 +129,19 @@
             	<ul class="btn-group pagination col-sm-offset-6 col-sm-2">
 					<c:if test="${pageMaker.prev}">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a href='<c:url value="/sole/baseSole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 						</li>
 					</c:if>
 					
 					<c:forEach begin="${pagemaker.startPage}" end="${pagemaker.endPage}" var="pageNum">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageNum}&sole_jongryu=${cri.sole_jongryu}&alcohole_category=${cri.alcohole_category}"/>'><i style="color:black">${pageNum}</i></a>
+							<a href='<c:url value="/sole/baseSole?page=${pageNum}&sole_jongryu=${cri.sole_jongryu}&alcohole_category=${cri.alcohole_category}"/>'><i style="color:black">${pageNum}</i></a>
 						</li>
 					</c:forEach>
 					
 					<c:if test="${pageMaker.next}">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a href='<c:url value="/sole/baseSole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 						</li>
 					</c:if>
 				</ul>
