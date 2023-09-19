@@ -71,25 +71,19 @@ public class SoleController {
 				
 				ModelAndView mav = new ModelAndView();
 				
-				
-				logger.info("solesearchcriteria " + solesearchcriteria.toString());
 				SolePageMaker pgm = new SolePageMaker();
-				//logger.info("alcohole_category: "+ alcohole_category);
-				
-				//category.setCategory_code(alcohole_category);
 				
 				pgm.setCri(solesearchcriteria);
-				logger.info("2");
+				
 				pgm.setTotalCount(soleservice.solecount(solesearchcriteria));   // cri로 검색한 총 건수를 totalCount 변수에 저장한다.
-				logger.info("3");
+			
 				List<LiveSoleDTO> soleMain = soleservice.soleMain(solesearchcriteria);
-				logger.info("4");
+				
 				mav.addObject("sole", soleMain);
-				logger.info("5");
+			
 				mav.addObject("pagemaker", pgm);	
-				logger.info("6");
+	
 				mav.addObject("cri",solesearchcriteria);
-				logger.info("7");
 				
 				System.out.println("pgm" + " "+ pgm);
 				
@@ -103,8 +97,6 @@ public class SoleController {
 	public ModelAndView soleDetail(HttpServletRequest request, HttpServletResponse response, @RequestParam("recipe_code") String recipe_code, @RequestParam(name="page", required = false, defaultValue = "1") int page) throws Exception{	
 		
 		ModelAndView mav = new ModelAndView();
-		
-		logger.info("recipe_code : " + recipe_code);
 		
 		List<RecipeDTO> recipeDetailDTO = soleservice.solerecipeDetail(recipe_code);   // 술 상세한 레시피 보여주는
 		
@@ -165,8 +157,6 @@ public class SoleController {
 	public ModelAndView soleReview(HttpServletRequest request, HttpServletResponse response, @RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
-		
-		logger.info("recipe_code :" + recipe_code);
 		
 		String category = soleservice.getCategory(recipe_code);
 		
@@ -248,7 +238,6 @@ public class SoleController {
 	@ResponseBody
 	public Map soleDetailAjax(@RequestParam("recipe_code") String recipe_code, @RequestParam("page") int page) throws Exception{
 		
-		logger.info("recipe_codeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd : " + recipe_code);
 		
 		Map ajaxMap = new HashMap();
 		
