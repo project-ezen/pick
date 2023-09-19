@@ -51,6 +51,22 @@
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 </head>
+
+<script type="text/javascript"> // 로그인 된 상태로 뒤로가기를 눌러서 접근하면 메인페이지로 넘겨버림
+	
+	var referrer = document.referrer;
+
+	window.onpageshow = function(event) {
+    	if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        	alert("메인 페이지로 이동합니다.");
+        	
+        	var backUrl = "http://localhost:8056/#";
+        	
+        	window.location.href = backUrl;    
+        }
+}     //
+</script>
+
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 <div class="foot">
