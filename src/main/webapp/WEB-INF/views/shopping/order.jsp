@@ -322,7 +322,7 @@ function requestPay() {
         merchant_uid: ${order_number},
         name: "주문 진행",
         amount: document.getElementById("fnPrice").value,
-        buyer_email: ${member.m_id},
+        buyer_email: "${member.m_id}" ,
         buyer_name: document.getElementById("name").value,
         buyer_tel: document.getElementById("phone").value,
         buyer_addr: document.getElementById("address").value + ", " + document.getElementById("address_detail").value,
@@ -400,14 +400,14 @@ $(document).ready(function() {
         info.prop("checked", true);
         info.prop("value", true);
     	$("#pay").prop("disabled", false);
-        // alert(info.is(":checked"));
+        alert(info.is(":checked"));
     });
 	// 구매 서약 동의 하지 않은 경우
     cancel.on("click", function() {
         info.prop("checked", false);
         info.prop("value", false);
    		$("#pay").prop("disabled", true);
-        // alert(info.is(":checked"));
+        alert(info.is(":checked"));
     });
 //-----------------------------------------------------------------------------------------------------------------
 	// $("#pay").click(requestPay());
