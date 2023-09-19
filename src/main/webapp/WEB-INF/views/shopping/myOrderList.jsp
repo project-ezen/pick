@@ -203,11 +203,14 @@
 $(document).ready(function() {
 	// 주문 내역 페이징
 	function orderPaging(pageNum) {
+		let start = $("#datepicker1").val();
+		let end = $("#datepicker2").val();
+
 		$.ajax({
 			url: "/shopping/paging",
 			type: "get",
 			dataType: "json",
-			data: {"page" : pageNum, "start_date" : $("#datepicker1").val(), "end_date" : $("#datepicker2").val(), "relation" : "order"},
+			data: {"page" : pageNum, "startDate" : start, "endDate" : end, "relation" : "order"},
 			success: function(data) {
 				//console.log("success : " + data);
 				console.log(data.order);
@@ -299,11 +302,14 @@ $(document).ready(function() {
 //-----------------------------------------------------------------------------------------------------------------------------------
 	// 취소 / 반품 내역 페이징
 	function cancelPaging(pageNum) {
+		let start = $("#datepicker3").val();
+		let end = $("#datepicker4").val();
+		
 		$.ajax({
 			url: "/shopping/paging",
 			type: "get",
 			dataType: "json",
-			data: {"page" : pageNum, "start_date" : $("#datepicker3").val(), "end_date" : $("#datepicker4").val(), "relation" : "cancel"},
+			data: {"page" : pageNum, "startDate" : start, "endDate" : end, "relation" : "cancel"},
 			success: function(data) {
 				//console.log("success : " + data);
 				console.log(data.cancel);
@@ -457,7 +463,7 @@ $.datepicker.setDefaults({
 	buttonImageOnly: true,
 	changeYear:		true,				// 년도를 바꿀 수 있는 셀렉트 박스를 표시한다.
 	changeMonth:	true,				// 월을 바꿀 수 있는 셀렉트 박스를 표시한다.
-	dateFormat:		"yy년 mm월 dd일",	// 날짜 포맷
+	dateFormat:		"yy/mm/dd",	// 날짜 포맷
 	prevText:		'이전 달',			// 마우스 오버시 이전 달이라는 텍스트 풍선도움말을 보여준다.
 	nextText:		'다음 달',			// 마우스 오버시 다음 달이라는 텍스트 풍선도움말을 보여준다.
 	closeText:		'닫기',				// 닫기 버튼 텍스트 변경
