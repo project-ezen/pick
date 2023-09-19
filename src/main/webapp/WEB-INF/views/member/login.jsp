@@ -60,9 +60,9 @@
     	if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
         	alert("메인 페이지로 이동합니다.");
         	
-        	var backUrl = "http://localhost:8056/#";
+        	//var backUrl = "http://localhost:8056/#";
         	
-        	window.location.href = backUrl;    
+        	window.location.href = referrer;    
         }
 }     //
 </script>

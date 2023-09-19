@@ -133,11 +133,11 @@
 	</select>
 	
 	<!-- 상품 상세 검색 보기 -->
-	<select id="searchProductByCategoryAndKeyword" resultType="com.edu.store.dto.ProductDisplayVO" parameterType="com.edu.store.dto.ProductDisplayVO">
-		SELECT DISPLAY_PRODUCT_ID, 
+	<select id="searchProductByCategoryAndKeyword" resultType="com.edu.store.dto.ProductDTO" parameterType="com.edu.store.dto.ProductDTO">
+			SELECT PRODUCT_DISPLAY_ID, 
 				   CATEGORY_CODE, PRODUCT_PRICE,
 				   PRODUCT_IMAGE, PRODUCT_NAME
-			FROM DISPLAY_PRODUCT
+			FROM PRODUCT 
 			WHERE 1=1
 			<include refid="searchAndKeyword"/>
 			AND PRODUCT_NAME LIKE '%' || #{searchKeyword} || '%'

@@ -137,7 +137,7 @@ public class ShoppingController {
 	// OrderDetail Controller
 	@RequestMapping(value="/orderdetail", method=RequestMethod.POST)
 	public ModelAndView orderComplete(@ModelAttribute("order")OrderDTO orderDTO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = "redirect:/shopping/cart";
+		String viewName = "redirect:/store/productInfo";
 		ModelAndView mav = new ModelAndView();
 		
 		log.info("orderDTO : " + orderDTO);
