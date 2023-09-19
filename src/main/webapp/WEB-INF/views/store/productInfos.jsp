@@ -43,9 +43,10 @@
       	color: black;
     }
     .table th {
-      	background-color: rgb(171, 173, 175);
-      	width: 160px;
-      	text-align: center;
+      	background-color: 	rgba(37,85,108,0.8);
+	  	color:				white;
+      	width: 				160px;
+      	text-align: 		center;
     }
     /*테이블*/
 
@@ -69,8 +70,13 @@
     .buy-now {
         background-color: #25556C;
     }
-    .buy-now:hover { background-color:#687AB6; }
+    .buy-now:hover { background-color: #51a1c7; }
     
+    .buy-button {
+        color: aliceblue;
+        float: right;
+        height: 40px;
+    }
     .add-to-cart {
         background-color: #c90076;
         width: 140px;
@@ -79,11 +85,6 @@
     
     .add-to-cart:hover {  background-color:#E96F84; }
     
-    .buy-button {
-        color: aliceblue;
-        float: right;
-        height: 40px;
-    }
     /*구매 버튼들*/
 
     /*합계*/
@@ -123,7 +124,7 @@
 	  	color: rgb(0, 0, 0);
 	}
 
-    .infoAndReview li .AA { background-color: rgb(139, 139, 139); }
+    .infoAndReview li .AA { background-color: rgba(37,85,108,0.5); }
     
     .AA:link { color: black; }
     
@@ -243,7 +244,8 @@
     #loginTf{
     	float: right;
     }
-
+	
+	/*리뷰 창 버튼*/
 	.btn_sub {
 		width: 70px;
 		height: 35px;
@@ -253,7 +255,7 @@
 		background-color: #25556C;
 		color: #fff;
 	}
-	.btn_sub:hover { background-color:#687AB6; }
+	.btn_sub:hover { background-color: #51a1c7; }
 
 	.btn_ret {
 		width: 90px;

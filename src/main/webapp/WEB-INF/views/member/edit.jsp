@@ -38,9 +38,7 @@
 		padding:6px 13px;
 		border-radius:17px;
 	}
-	.sub:hover {
-		background-color: #687AB6;;
-	}
+	.sub:hover { background-color: #51a1c7; }
 	.sub:active {
 		position:relative;
 		top:1px;

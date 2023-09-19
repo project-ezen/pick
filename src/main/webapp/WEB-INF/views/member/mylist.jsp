@@ -20,7 +20,7 @@
   	}
   	
   	th {
-  		background-color: #ccd6d9;
+  		background-color: rgba(37,85,108,0.5);
   		position: sticky; 
   		top: 0; 
   		height: 20px;
@@ -60,7 +60,7 @@
 		margin-bottom:10px; 
 	}
 	
-	.list:hover { background-color:#ccd6d9; }
+	.list:hover { background-color: #51a1c7; }
 	
 	.list:active { position:relative; top:1px; }
    

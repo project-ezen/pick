@@ -58,9 +58,7 @@
 		padding:6px 13px;
 		border-radius:17px;
 		}
-		.btn_sub:hover {
-			background-color: #687AB6;
-		}
+		.btn_sub:hover { background-color: #3D7792; }
 		.btn_sub:active {
 			position:relative;
 			top:1px;
@@ -100,7 +98,7 @@
 			font-size:15px;
 		}
 		
-		#joinButton:hover { background-color: #687AB6; }
+		#joinButton:hover { background-color: #51a1c7; }
 		
 		
 		#joinButton:active { position:relative; top:1px; }

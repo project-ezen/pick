@@ -29,8 +29,8 @@
 }
 
 
-.page:link{text-decoration: none; color: #000}
-.page:visited,.page:active{color: #000;}
+.page:link	{text-decoration: none; color: #000}
+.page:visited,.page:active	{color: #000;}
 
 .pagenav {
 	display: inline-block;
@@ -183,7 +183,7 @@ span {
 			<%-- 게시글이 하나라도 있는 경우 --%>
 			<c:when test="${not empty articlesList}"> 
 				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
-						<div class="inner_div" style="background-color: #ADC4CE; height: 200px; width: 300px; border-radius: 10px;">
+						<div class="inner_div" style="background-color: rgba(68,131,161,0.2); height: 200px; width: 300px; border-radius: 10px;">
 						<c:choose>
 							<c:when test="${not empty article.thumbnail && article.thumbnail != 'null'}">
 								<!-- <div class="thumb" >${article.thumbnail}</div> -->

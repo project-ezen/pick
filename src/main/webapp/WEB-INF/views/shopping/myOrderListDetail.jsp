@@ -21,7 +21,7 @@
 		margin-bottom: 20px;
 	}
 	
-	th { background-color: #ccd6d9 }
+	th { background-color: rgba(37,85,108,0.5); }
 	
 	th, td {
 		border-bottom: 1px solid #ddd;
@@ -50,9 +50,10 @@
 		margin-bottom:10px;
 	}
 	
-	.relist:hover { background-color:#ccd6d9; }
+	.relist:hover { background-color: #51a1c7; }
 	
 	.relist:active { position:relative; top:1px; }
+	
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>

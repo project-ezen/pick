@@ -20,7 +20,7 @@
 		margin-right: auto;
 	}
 	
-	th { background-color: #ccd6d9; }
+	th { background-color: rgba(37,85,108,0.5); }
 	
 	th, td {
 	border-bottom: 1px solid #ddd;
@@ -51,7 +51,7 @@
 		margin-bottom:10px; 
 	}
 	
-	.list:hover { background-color:#ccd6d9; }
+	.list:hover { background-color: #51a1c7; }
 	
 	.list:active { position:relative; top:1px; }
 	

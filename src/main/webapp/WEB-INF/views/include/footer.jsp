@@ -64,7 +64,7 @@
             <div class="col-sm-3 sns">
                 <h3><b>SNS</b></h3>
                 <br/>
-                <img style="height: 45px; width: 45px;" src="${path}/resources/images/youtube.png">
+                <img style="height: 45px; width: 45px;" src="${path}/resources/images/youTube.png">
                	<img style="height: 45px; width: 45px;" src="${path}/resources/images/facebook.png">
                	<img style="height: 45px; width: 45px;" src="${path}/resources/images/instagram.png">
             </div>
