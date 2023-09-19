@@ -245,7 +245,7 @@ $(document).ready(function() {
 									+ '</div>'
 									+ '<div class="modal-body"><textarea class="cancel_reason" name="cancel_reason" placeholder="please write the reason"></textarea></div>'
 									+ '<div class="modal-footer">'
-									+ '<input type="button" class="btn btn-primary cancel_order" data-dismiss="modal" value="확인">'
+									+ '<input type="button" class="btn btn-primary cancel_order" data-dismiss="modal" value="확인" disabled>'
 									+ '</div></div></div></div>'
 					}
 					// 배송 완료
@@ -258,22 +258,22 @@ $(document).ready(function() {
 									+ '<div class="modal-content">'
 									+ '<div class="modal-header text-center">'
 									+ '<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>'
-									+ '<h3 class="title">Change Progressing</h3>'
+									+ '<h3 class="title_c">Change Progressing</h3>'
 									+ '</div>'
 									+ '<div class="modal-body"><textarea class="change_reason" name="change_reason" placeholder="please write the reason"></textarea></div>'
 									+ '<div class="modal-footer">'
-									+ '<input type="button" class="btn btn-primary change_order" data-dismiss="modal" value="확인">'
+									+ '<input type="button" class="btn btn-primary change_order" data-dismiss="modal" value="확인" disabled>'
 									+ '</div></div></div></div>'
 									+ '<div class="modal fade refund' + idx + '">'
 									+ '<div class="modal-dialog">'
 									+ '<div class="modal-content">'
 									+ '<div class="modal-header text-center">'
 									+ '<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>'
-									+ '<h3 class="title">Refund Progressing</h3>'
+									+ '<h3 class="title_r">Refund Progressing</h3>'
 									+ '</div>'
 									+ '<div class="modal-body"><textarea class="refund_reason" name="refund_reason" placeholder="please write the reason"></textarea></div>'
 									+ '<div class="modal-footer">'
-									+ '<input type="button" class="btn btn-primary refund_order" data-dismiss="modal" value="확인">'
+									+ '<input type="button" class="btn btn-primary refund_order" data-dismiss="modal" value="확인" disabled>'
 									+ '</div></div></div></div>'
 					}
 					orderedHTML += '</td></tr>';
@@ -404,7 +404,7 @@ $(document).ready(function() {
 	$(document).on("click", ".refund_order", function() {
 		let order_id = $(this).closest("tr").find(".orderId").val();
 		let refund_reason = $(this).closest("tr").find(".refund_reason").val();
-		let title = $(this).closest("tr").find(".title").text();
+		let title = $(this).closest("tr").find(".title_r").text();
 		
 		console.log(order_id + " " + refund_reason + " " + title);
 		
@@ -427,7 +427,7 @@ $(document).ready(function() {
 	$(document).on("click", ".change_order", function() {
 		let order_id = $(this).closest("tr").find(".orderId").val();
 		let change_reason = $(this).closest("tr").find(".change_reason").val();
-		let title = $(this).closest("tr").find(".title").text();
+		let title = $(this).closest("tr").find(".title_c").text();
 		
 		console.log(order_id + " " + change_reason + " " + title);
 		
@@ -449,6 +449,25 @@ $(document).ready(function() {
 	// 주문 번호에 해당하는 주문 상세보기
 	$(document).on("click", ".orderNum", function() {
 		location.href = "/shopping/myOrderListDetail?order_number=" + $(this).text();
+	});
+//-----------------------------------------------------------------------------------------------------------------------------------
+	// 사유가 없는 경우 취소/환불/교환 불가
+	$(document).on("input", ".cancel_reason, .change_reason, .refund_reason", function(){
+		if($(".cancel_reason").text() != null || $(".cancel_reason").text() != "") {
+			$(".cancel_order").prop("disabled", false);
+		} else if($(".cancel_reason").text() == null || $(".cancel_reason").text() == "") {
+			$(".cancel_order").prop("disabled", true);
+		}
+		if($(".change_reason").text() != null || $(".change_reason").text() != "") {
+			$(".change_order").prop("disabled", false);
+		} else if($(".change_reason").text() == null || $(".change_reason").text() == "") {
+			$(".change_order").prop("disabled", true);
+		}
+		if($(".refund_reason").text() != null || $(".refund_reason").text() != "") {
+			$(".refund_order").prop("disabled", false);
+		} else if($(".refund_reason").text() == null || $(".refund_reason").text() == "") {
+			$(".refund_order").prop("disabled", true);
+		}
 	});
 });
 //===================================================================================================================
