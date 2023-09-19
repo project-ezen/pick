@@ -20,7 +20,7 @@
 		margin-right: auto;
 	}
 	
-	th { background-color: #ccd6d9; }
+	th { background-color: rgba(37,85,108,0.5); }
 	
 	th, td {
 	border-bottom: 1px solid #ddd;
@@ -36,7 +36,7 @@
 	.list {
 		margin-bottom: 20px;
 		float: right;
-		background-color:#8aa2b2;
+		background-color:#25556C;
 		border-radius:8px;
 		border:none;
 		display:inline-block;
@@ -51,7 +51,7 @@
 		margin-bottom:10px; 
 	}
 	
-	.list:hover { background-color:#afb7db; }
+	.list:hover { background-color: #51a1c7; }
 	
 	.list:active { position:relative; top:1px; }
 	

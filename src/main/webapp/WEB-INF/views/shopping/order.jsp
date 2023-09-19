@@ -15,7 +15,13 @@
     }
     /* 결제하기 버튼 위치 설정 */
     #pay {
-        padding: 10px 70px;
+        width: 85px;
+		height: 40px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #25556C;
+		color: #fff;
     }
     /* 팝업 창 내 내용 보여주는 스타일 */
     #contract{
@@ -34,12 +40,9 @@
 		padding: 10px 0;
 	}
 	
-	body { 	
-	    background-image:url("/resources/images/background2.jpg");
-	    background-attachment: fixed, scroll;
-	    background-repeat:no-repeat;
-	    background-size:cover;
-	}
+	
+	.btn_sub:hover { background-color:#687AB6; }
+	
 </style>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- iamport.payment.js -->
@@ -185,7 +188,7 @@
 	                    </div>
 	                    <div class="form-group text-right">
 	                    	<input type="hidden" name="order_number" value="${order_number }">
-	                        <button type="button" class="btn btn-info" id="pay" onclick="requestPay()" disabled>결제하기</button>
+	                        <button type="button" class="btn_sub" id="pay" onclick="requestPay()" disabled>결제하기</button>
 	                    </div>
 	                </div>
 	                <!-- 구매 여부 확인 끝 -->
@@ -322,7 +325,7 @@ function requestPay() {
         merchant_uid: ${order_number},
         name: "주문 진행",
         amount: document.getElementById("fnPrice").value,
-        buyer_email: "${member.m_id}" ,
+        buyer_email: "${member.m_id}",
         buyer_name: document.getElementById("name").value,
         buyer_tel: document.getElementById("phone").value,
         buyer_addr: document.getElementById("address").value + ", " + document.getElementById("address_detail").value,

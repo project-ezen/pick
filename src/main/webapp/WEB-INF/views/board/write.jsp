@@ -26,9 +26,11 @@ height: 35px;
 font-size: 15px;
 border-radius: 5px;
 border: none;
-background-color: #687AB6;
+background-color: #25556C;
 color: #fff;
 }
+
+.btn_sub:hover { background-color:#687AB6; }
 
 .btn_cle {
 width: 70px;
@@ -36,9 +38,11 @@ height: 35px;
 font-size: 15px;
 border-radius: 5px;
 border: none;
-background-color: #E96F84;
+background-color: #c90076;
 color: #fff;
 }
+
+.btn_cle:hover {background-color: #E96F84; }
 
 </style>
 

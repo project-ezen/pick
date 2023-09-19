@@ -21,7 +21,7 @@
 		margin-bottom: 20px;
 	}
 	
-	th { background-color: #ccd6d9 }
+	th { background-color: rgba(37,85,108,0.5); }
 	
 	th, td {
 		border-bottom: 1px solid #ddd;
@@ -35,24 +35,25 @@
 	.relist {
 		margin-bottom: 20px;
 		float: right;
-		background-color:#8aa2b2;
+		background-color:#25556C;
 		border-radius:8px;
 		border:none;
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
 		font-size:12px;
 		font-weight:bold;
 		padding:8px 18px;
 		text-decoration:none;
 		float: right;
-		margin-bottom:10px; 
+		margin-bottom:10px;
 	}
 	
-	.relist:hover { background-color:#476e9e;}
+	.relist:hover { background-color: #51a1c7; }
 	
 	.relist:active { position:relative; top:1px; }
+	
 </style>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
