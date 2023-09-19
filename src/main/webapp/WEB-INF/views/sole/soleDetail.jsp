@@ -97,6 +97,11 @@
     #reviewcontent::-webkit-scrollbar {   /*스크롤*/
  		display: none;
 	}
+	
+	.reviewBtn {
+		
+	}
+	
 	 
 	.star1, .star2 , .star3, .star4, .star5 {     /*기본 별 디자인*/
 		color: transparent;
@@ -174,13 +179,19 @@
 	th:first-child, td:first-child {
 	    border-left: none;
 	}
-
   	
-  	.sole {
-  	 	width: 60%;
-  		font-family: 'Cafe24Supermagic-Bold-v1.0';
-  		font-size: 20px;
-  	}
+  	#reviewBtn {
+		width: 90px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #E96F84;
+		color: #fff;
+	}
+
+	#reviewBtn:hover { background-color: #c90076; }
+  	
   	
     </style>
   </head>
@@ -281,16 +292,13 @@
                  	</c:forEach>
                 </table>
                 <br/>
-                
-                
-               	
                	</div>
             </div>
             <div id="review" class="tab-pane fade">
               <br/>
               <!--리뷰 와라락-->
            	  <div class="reviewDiv">
-           	  
+
            	  </div>	
            	  
 					<!-- 페이징 부분 -->
@@ -316,15 +324,16 @@
 					</c:if>
 				</ul>
 			 </div>
+			 <br/>
               	<div class="col-md-offset-2 col-sm-1">
-              		<form id="reviewForm" action="/sole/soleReview">
+              		<form id="reviewForm" action="/sole/soleReview" method="post">
               			<input type="hidden" name="recipe_code"/>
               			<input type="hidden" name="m_id"/>
               			<button type="button" id="reviewBtn" class="btn btn-defualt">리뷰쓰기</button>
               		</form>
               	</div>
 			</div>
-			 
+			<br/><br/>
             </div>
           </div>
         </div>
@@ -350,7 +359,7 @@
 				
 				if("${member.m_id}" == null || "${member.m_id}" == '') {
 					alert("로그인하셔야 작성할 수 있습니다.");
-				 	//location.href="/member/login?action=/sole/soleDetail?recipe_code=" + "${recipe.recipe_code}" + "&page=" + page; 이렇게 할때는 page 값이 안넘어가는데 변수에 넣어서 가니까 넣어짐
+				 	
 				 	var actionParam = "/sole/soleDetail?recipe_code=" + "${recipe.recipe_code}" + "&page=" + page;
 					location.href = "/member/login?action=" + actionParam;
 				}

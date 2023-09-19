@@ -86,13 +86,13 @@
                 	<li class="item" style="margin-top: 50px;">       
 	                   Alcohol
 	                   <ul>
-	                       <li id="lilist" class="base"><a class="AA" href="#">Base Alcohol</a></li>
-	                       <li id="lilist" class="weski"><a class="AA" href="#">위스키 칵테일</a></li>
-	                       <li id="lilist" class="brandi"><a class="AA" href="#">브랜디 칵테일</a></li>
-	                       <li id="lilist" class="jin"><a class="AA" href="#">진 칵테일</a></li>
-	                       <li id="lilist" class="rum"><a class="AA" href="#">럼 칵테일</a></li>
-	                       <li id="lilist" class="cacktail"><a class="AA" href="#">보드카 칵테일</a></li>
-	                       <li id="lilist" class="hiball"><a class="AA" href="#">데킬라 칵테일</a></li>
+	                       <li id="lilist" class="base"><a href="#">Base Alcohol</a></li>
+	                       <li id="lilist" class="weski"><a href="#">위스키 칵테일</a></li>
+	                       <li id="lilist" class="brandi"><a href="#">브랜디 칵테일</a></li>
+	                       <li id="lilist" class="jin"><a href="#">진 칵테일</a></li>
+	                       <li id="lilist" class="rum"><a href="#">럼 칵테일</a></li>
+	                       <li id="lilist" class="bodcar"><a href="#">보드카 칵테일</a></li>
+	                       <li id="lilist" class="hiball"><a href="#">데킬라 칵테일</a></li>
 	                   </ul>
 	                </li>
 	          		

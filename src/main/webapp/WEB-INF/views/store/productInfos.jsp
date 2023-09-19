@@ -16,54 +16,54 @@
     <title>상품 상세 페이지</title>
     <style>
     
-      /*상품 관련 이미지, 위치*/
-      .product-img {
-        width: 400px;
-        height: 400px;
-        margin-left:100px;
-        margin-top: 100px;
-      }
-      .product-info {
-        margin-top: 50px;
-      }
-      /*상품 관련 이미지, 위치*/
+    /*상품 관련 이미지, 위치*/
+    .product-img {
+      	width: 400px;
+      	height: 400px;
+      	margin-left:100px;
+      	margin-top: 100px;
+    }
+    .product-info {
+      	margin-top: 50px;
+    }
+    /*상품 관련 이미지, 위치*/
 
-      /*테이블*/
-      .table {
-        height: 300px;
-        font-size: 18px;
-      }
-      .table th,
-      .table td {
-        vertical-align: middle !important;
-        color: black;
-      }
-      h1 {
-        text-align: center;
-        color: black;
-      }
-      .table th {
-        background-color: rgb(171, 173, 175);
-        width: 160px;
-        text-align: center;
-      }
-      /*테이블*/
+    /*테이블*/
+    .table {
+      	height: 300px;
+      	font-size: 18px;
+    }
+    .table th,
+    .table td {
+      	vertical-align: middle !important;
+      	color: black;
+    }
+    h1 {
+      	text-align: center;
+      	color: black;
+    }
+    .table th {
+      	background-color: rgb(171, 173, 175);
+      	width: 160px;
+      	text-align: center;
+    }
+    /*테이블*/
 
-      /*수량 증가 감소*/
-      .quantity-group {
-        display: flex;
-        align-items: center;
-      }
-      .quantity-group input {
-        width: 50px;
-        text-align: center;
-      }
-      #decrease,
-      #increase {
-        background-color: rgb(171, 173, 175);
-        margin: 3px;
-      }
-      /*수량 증가 감소*/
+    /*수량 증가 감소*/
+    .quantity-group {
+      	display: flex;
+      	align-items: center;
+    }
+    .quantity-group input {
+      	width: 50px;
+      	text-align: center;
+    }
+    #decrease,
+    #increase {
+      	background-color: rgb(171, 173, 175);
+      	margin: 3px;
+    }
+    /*수량 증가 감소*/
 
       /*구매 버튼들*/
     .buy-now {
@@ -476,44 +476,43 @@
             data: {"product_display_id": productIdInputs, "page": pageNum},
             success: function (data) {
             	
-            	
-            	$(".ajaxDiv").empty();     // 페이지를 누를때 기존 내용으 지우고 새 페이지의 내용을 채움
-            	console.log(data);
+	           	$(".ajaxDiv").empty();     // 페이지를 누를때 기존 내용으 지우고 새 페이지의 내용을 채움
+	           	console.log(data);
+	
+	               $.each(data.ProductReviewList, function (index, review) {
+	
+               	 	var reviewHtml =
+                        '<div class="row ajaxDiv">' +
+                        '<br/>' +
+                        '<div class="col-sm-12">' +
+                        '<div class="col-sm-3">';
+                    
+                    if (review.image == null) {
+                        reviewHtml += '<img src="${path}/reviewDownload.do?imageFileName=no_image.jpg&reviewId=no_image" id="reviewImg">';
+                    } else {
+                        reviewHtml += '<img src="${path}/reviewDownload.do?imageFileName=' + review.image + '&reviewId=' + review.review_id + '" id="reviewImg">';
+                    }
 
-                $.each(data.ProductReviewList, function (index, review) {
+                    reviewHtml +=
+                        '</div>' +
+                        '<div class="col-sm-2" id="idAndStar">' +
+                        '<p> 아이디 : ' + review.member_id + '</p>' +
+                        '</div>' +
+                        '<div class="col-sm-7" id="reviewContent">' +
+                        '<p> 내용 : ' + review.content + '</p>' +
+                        '</div>';
 
-                	 var reviewHtml =
-                         '<div class="row ajaxDiv">' +
-                         '<br/>' +
-                         '<div class="col-sm-12">' +
-                         '<div class="col-sm-3">';
-                     
-                     if (review.image == null) {
-                         reviewHtml += '<img src="${path}/reviewDownload.do?imageFileName=no_image.jpg&reviewId=no_image" id="reviewImg">';
-                     } else {
-                         reviewHtml += '<img src="${path}/reviewDownload.do?imageFileName=' + review.image + '&reviewId=' + review.review_id + '" id="reviewImg">';
-                     }
+                    if (memberId === review.member_id) {
+                        reviewHtml += '<button id="reviewRemoveBtn"><span class="glyphicon glyphicon-remove"></span></button>';
+                    }
 
-                     reviewHtml +=
-                         '</div>' +
-                         '<div class="col-sm-2" id="idAndStar">' +
-                         '<p> 아이디 : ' + review.member_id + '</p>' +
-                         '</div>' +
-                         '<div class="col-sm-7" id="reviewContent">' +
-                         '<p> 내용 : ' + review.content + '</p>' +
-                         '</div>';
+                    reviewHtml +=
+                        '<input type="hidden" id="reviewIdInput" value="' + review.review_id + '"/>' +
+                        '</div>' +
+                        '</div>';
 
-                     if (memberId === review.member_id) {
-                         reviewHtml += '<button id="reviewRemoveBtn"><span class="glyphicon glyphicon-remove"></span></button>';
-                     }
-
-                     reviewHtml +=
-                         '<input type="hidden" id="reviewIdInput" value="' + review.review_id + '"/>' +
-                         '</div>' +
-                         '</div>';
-
-                     $(".reviewDiv").append(reviewHtml);
-                 });
+                    $(".reviewDiv").append(reviewHtml);
+                });
 
             },
             error: function (xhr, status, error) {
@@ -526,14 +525,14 @@
    	
     productLoadReviews(${prpgm.cri.page});
     
-    // 페이징 클릭
-    $(".paging-list").click(function () {
+	    // 페이징 클릭
+	    $(".paging-list").click(function () {
+	    	
+	        var pageNum = $(this).data("page"); // data-page 속성에서 페이지 번호 가져오기
+	        productLoadReviews(pageNum);
+	    });
     	
-        var pageNum = $(this).data("page"); // data-page 속성에서 페이지 번호 가져오기
-        productLoadReviews(pageNum);
-    });
-    	
-   });   /// end jquery
+   	});   /// end jquery
     
     
     
@@ -601,93 +600,94 @@
     
     
     
-      // 증가 버튼
-      $(document).ready(function () {
-        $("#increase").click(function (event) {
-          event.preventDefault();
-          let currentQuantity = parseInt($("#quantity").val());
-          $("#quantity").val(currentQuantity + 1);
-          updateTotal();
-        });
-
-        // 감소 버튼
-        $("#decrease").click(function (event) {
-          event.preventDefault();
-          let currentQuantity = parseInt($("#quantity").val());
-          if (currentQuantity > 1) {
-            $("#quantity").val(currentQuantity - 1);
-            updateTotal();
-          }
-        });
+    // 증가 버튼
+    $(document).ready(function () {
+      $("#increase").click(function (event) {
+        event.preventDefault();
+        let currentQuantity = parseInt($("#quantity").val());
+        $("#quantity").val(currentQuantity + 1);
+        updateTotal();
       });
 
+      // 감소 버튼
+      $("#decrease").click(function (event) {
+        event.preventDefault();
+        let currentQuantity = parseInt($("#quantity").val());
+        if (currentQuantity > 1) {
+          $("#quantity").val(currentQuantity - 1);
+          updateTotal();
+        }
+      });
+    });
+
+    $(document).ready(function(){
+        $("#loginTf").on("click", function(){
+          var currentURL = window.location.href; // 현재 페이지의 URL을 가져옴
+            location.href = "/member/login?action=" + encodeURIComponent(currentURL);   
+        });
+    });  
+      
     // 총 금액 보여주기
-       function updateTotal() {
-    	    const priceString = document.getElementById("price").textContent;
-    	    const quantity = parseInt(document.getElementById("quantity").value);
-    	    
-    	    const price = parseInt(priceString.replace(/[^\d]/g, "")); // 쉼표와 숫자 이외의 문자 제거
-    	    
-    	    const total = price * quantity;
-    	    
-    	    const formattedTotal = new Intl.NumberFormat("ko-KR").format(total) + "원";
-    	    document.getElementById("total").value = formattedTotal; // value로 값을 설정
-    	}
+    function updateTotal() {
+ 	    const priceString = document.getElementById("price").textContent;
+ 	    const quantity = parseInt(document.getElementById("quantity").value);
+ 	    
+ 	    const price = parseInt(priceString.replace(/[^\d]/g, "")); // 쉼표와 숫자 이외의 문자 제거
+ 	    
+ 	    const total = price * quantity;
+ 	    
+ 	    const formattedTotal = new Intl.NumberFormat("ko-KR").format(total) + "원";
+ 	    document.getElementById("total").value = formattedTotal; // value로 값을 설정
+ 	}
     
-      updateTotal();
+     	updateTotal();
 
-      // 바뀔 때마다 총 금액 보여주기
-      $("#quantity").on("change", updateTotal);
+    // 바뀔 때마다 총 금액 보여주기
+    $("#quantity").on("change", updateTotal);
+    
+    $("#quantity").on("input", checkNumber);
+
+    function checkNumber(event) {
+        const inputValue = $(this).val();
+        const onlyDigits = /^[0-9]*$/; // 숫자만 허용하는 정규식
+
+        if (!onlyDigits.test(inputValue)) {
+            $(this).val(inputValue.replace(/[^0-9]/g, "")); // 숫자 이외의 문자 제거
+        }
+    }
       
-      $("#quantity").on("input", checkNumber);
-
-      function checkNumber(event) {
-          const inputValue = $(this).val();
-          const onlyDigits = /^[0-9]*$/; // 숫자만 허용하는 정규식
-
-          if (!onlyDigits.test(inputValue)) {
-              $(this).val(inputValue.replace(/[^0-9]/g, "")); // 숫자 이외의 문자 제거
-          }
-      }
-      
-      // 바로 구매
+    // 바로 구매
     $(document).ready(function(){
     	$('#buyNow').on("click", function(){
     		
-    		
-    		if(memberId != 'null'){		
-    			
-    		const priceString = document.getElementById("price").textContent;
-    		const price = parseInt(priceString.replace(/[^\d]/g, ""));
-    		var productID = $("#productIdInput").val();
-    		var count = $("#quantity").val();
-    		var image = $("#imageHidden").val();
-    		var name  = $("#nameHidden").val();
-    		var total = price * count;
-    		var encodedName = encodeURIComponent(name);
-    		var locate = "/store/addToCart?product_display_id=" + productID +"&quantity=" + count + "&cartOrStore=buyNow&image=" + image + "&name=" + name + "&total=" + total +"&price=" + price;
-			
-    		console.log(productID);
-    		console.log(price);
-    		console.log(count);
-    		console.log(image);
-    		console.log(name);
-    		console.log(total);
-    			
-    		location.href = locate;
+   		
+   		if(memberId != 'null'){		
+   			
+   		const priceString = document.getElementById("price").textContent;
+   		const price = parseInt(priceString.replace(/[^\d]/g, ""));
+   		var productID = $("#productIdInput").val();
+   		var count = $("#quantity").val();
+   		var image = $("#imageHidden").val();
+   		var name  = $("#nameHidden").val();
+   		var total = price * count;
+   		var encodedName = encodeURIComponent(name);
+   		var locate = "/store/addToCart?product_display_id=" + productID +"&quantity=" + count + "&cartOrStore=buyNow&image=" + image + "&name=" + name + "&total=" + total +"&price=" + price;
+		
+   		console.log(productID);
+   		console.log(price);
+   		console.log(count);
+   		console.log(image);
+   		console.log(name);
+   		console.log(total);
+   			
+   		location.href = locate;
 
-        		}else if (memberId == 'null'){
-        			alert("로그인이 필요한 서비스입니다.");
-        			var currentURL = window.location.href; // 현재 페이지의 URL을 가져옴
-        	        location.href = "/member/login?action=" + encodeURIComponent(currentURL);	
-        		}
-    		
-    		
-    		
-    		
-    		
-    		
-    		
+   		}else if (memberId == 'null'){
+   			alert("로그인이 필요한 서비스입니다.");
+   			var currentURL = window.location.href; // 현재 페이지의 URL을 가져옴
+   	        location.href = "/member/login?action=" + encodeURIComponent(currentURL);	
+   		}
+  		
     	});
     });
     
