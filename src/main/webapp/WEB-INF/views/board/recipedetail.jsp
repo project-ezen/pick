@@ -83,7 +83,6 @@ border-radius: 5px;
 background-color:#ADC4CE;
 color:#fff;
 }
-
 </style>
 </head>
 <body>
@@ -143,26 +142,32 @@ color:#fff;
                 	<th>제목</th>
                 	<td><input type="text" value="${article.title}" name="title" id="title" style="width:100%;" disabled/></td>
                 	<th>대표사진</th>
-                	<td><input type="file" name="thumbnail" id="thumbnail" disabled/></td>
+                	<td>
+                		<input type="file" name="thumbnail" id="thumbnail" disabled/>
+                	</td>
                 </tr>
 	                <tr>
 	                    <th scope="row" style="text-align: center;">내용</th>
 	                    <c:if test="${article.image == null}">
 	                    <td colspan="3">
-	                    	<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
+	                    	<!--<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>-->
+	                    	<p>${article.content}</p>
 	                    </td>
 	                    </c:if>
 	                    <c:if test="${article.image != null}">
 	                    <td colspan="3"><div contentEditable="true">
-	                    <textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
+	                    <!--<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>-->
+	                    <p>${article.content}</p>
 	                    <img class="image" style="width:500px; height:300px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}"/></div>
 	                    </td>
 	                    </c:if>
 	                </tr>
-               	<tr>
-                    <th scope="row" style="text-align: center;">이미지 첨부</th>
-                    <td colspan="3"><input type="file" name="image" id="image" disabled/></td>
-                </tr>
+	             <c:if test="${article.writer == member.m_id }">
+	               	<tr>
+	                    <th scope="row" style="text-align: center;">이미지 첨부</th>
+	                    <td colspan="3"><input type="file" name="image" id="image" disabled/></td>
+	                </tr>
+	             </c:if>
 				<tr>
 					<td colspan="2">
 						<input type="button" class="btn1" value="목록으로 돌아가기" onClick="location.href='${path}/board/articleList'"/>
@@ -231,7 +236,7 @@ color:#fff;
 // 수정 버튼 눌렀을 시 disabled 해제
 function fn_enable(obj){
 	document.getElementById("title").disabled		= false;
-	document.getElementById("content").disabled		= false;
+	//document.getElementById("content").disabled		= false;
 	document.getElementById("thumbnail").disabled	= false;
 	document.getElementById("image").disabled		= false;
 };
@@ -239,7 +244,7 @@ function fn_enable(obj){
 // 수정취소 버튼 눌렀을 시 disabled
 function backToForm(obj){
 	document.getElementById("title").disabled 		= true;
-	document.getElementById("content").disabled 	= true;
+	//document.getElementById("content").disabled 	= true;
 	document.getElementById("thumbnail").disabled	= true;
 	document.getElementById("image").disabled		= true;
 };
@@ -262,7 +267,7 @@ function fn_remove(url, board_id){
 };
 	
 // 에디터
-$(document).ready(function(){
+/*$(document).ready(function(){
 	
 	var contentval = $("#content").val();
 	
@@ -330,7 +335,7 @@ $(document).ready(function(){
 		}
 	});
 	
-});
+});*/
 
 <%--댓글 삭제--%>
 function fn_replyDelete(url,replyNum ,b_id){
