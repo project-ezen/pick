@@ -109,8 +109,8 @@
 			<c:forEach var="sole" items="${basesole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a href="#"><img class="soleimg" src="${path}/Basedownload?alcohole_image=${sole.alcohole_image}"/></a>
-					<p style="text-align: center;"><a class="custom-link" href="#">${sole.alcohole_name}</a></p>
+					<a href="/store/productInfos?product_display_id=${sole.alcohole_name}"><img class="soleimg" src="${path}/Basedownload?alcohole_image=${sole.alcohole_image}"/></a>
+					<p style="text-align: center;"><a class="custom-link" href="/store/productInfos?product_display_id=${sole.alcohole_name}">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
 			
