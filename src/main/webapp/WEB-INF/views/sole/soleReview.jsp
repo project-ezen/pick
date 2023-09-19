@@ -49,24 +49,45 @@ label {
 	font-size: 18px;
 }
 
-.btn_sub {
-	width: 70px;
-	height: 35px;
-	font-size: 15px;
-	border-radius: 5px;
-	border: none;
-	background-color: #687AB6;
-	color: #fff;
+	.btn_sub {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #25556C;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+		}
+	.btn_sub:hover { background-color: #51a1c7; }
+	.btn_sub:active {
+		position:relative;
+		top:1px;
+	}
+		
+	.btn_cel {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+		background-color: #cc0000;
+		
 	}
 
-.btn_cle {
-	width: 70px;
-	height: 35px;
-	font-size: 15px;
-	border-radius: 5px;
-	border: none;
-	background-color: #E96F84;
-	color: #fff;
+	.btn_cel:hover {background-color: #E96F84; }
+	
+	.btn_cel:active {
+		position:relative;
+		top:1px;
 	}
 
 #stars{
@@ -153,7 +174,7 @@ label {
 		<div class="form-group">
 			<div class="col-sm-6"></div>
 			<div class="col-sm-4" style="text-align: center; margin-left: 10px;">
-				<button class="btn_cle" type="button" onclick="back()">취소</button>
+				<button class="btn_cel" type="button" onclick="back()">취소</button>
 				&nbsp;
 				<button class="btn_sub" type="button" id="reviewSubmit" onClick="this.disabled=true">올리기</button> <!-- onclick 중복 글쓰기 방지 -->
 			</div>

@@ -8,24 +8,13 @@
 <title>Insert title here</title>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
-	.bg {
-		 background-image: url("/resources/images/background2.jpg");
-
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	}
 	h1 {
 		color: black;
 	}
 	#bigdiv {
-		/*height: auto;    /* footer 아래로 고정 */
-  		/*min-height: 100%;
-  		padding-bottom: 63px;*/
+		height: auto;    /* footer 아래로 고정 */
+  		min-height: 100%;
+  		padding-bottom: 63px;
 	}
 	.selectdiv {
 		display: flex;
@@ -33,22 +22,22 @@
 		item-align: center;   /*셀렉박스 가운데정렬*/
 	}
 	select {
-	  width: 200px;
-	  padding: .8em .5em;
-	  font-family: inherit;
-	  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
-	  -webkit-appearance: none;
-	  -moz-appearance: none;
-	  appearance: none;
-	  border: 1px solid #999;
-	  color: black;
-	  border-radius: 10px;
+		width: 200px;
+		padding: .8em .5em;
+		font-family: inherit;
+		background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		color: black;
+		border-radius: 10px;
 	}
 	option {
-	  padding: 4px;
-	  font-size: 14px;
-	  color: black;
-	  /*background: #272822;*/
+		padding: 4px;
+		font-size: 14px;
+		color: black;
+		/*background: #272822;*/
 	}
 	a:link {
 		text-decoration-line: none;
@@ -63,7 +52,8 @@
 	a.custom-link:visited {
     	color: black; 
 	}
-
+	
+	.foot { padding-bottom: 20px; padding-top: 20px; margin:auto; }
 	
 	.soleimg {
 		/*max-width: 100%;
@@ -86,7 +76,8 @@
 </style>
 </head>
 <%@ include file="../include/topMenu.jsp" %>
-<body class="bg">
+<body>
+	<div class="foot">
 	<div id="bigdiv" class="container" style="background-color:white;">
 		<h1 style="text-align:center">Base Alcohole</h1>
 		<br>
@@ -147,6 +138,7 @@
 				</ul>
 			</div>			
 		</div>
+	</div>
 	</div>
 	<br/><br/>
 <%@ include file="../include/footer.jsp" %>
