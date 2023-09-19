@@ -22,22 +22,22 @@
 		item-align: center;   /*셀렉박스 가운데정렬*/
 	}
 	select {
-	  width: 200px;
-	  padding: .8em .5em;
-	  font-family: inherit;
-	  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
-	  -webkit-appearance: none;
-	  -moz-appearance: none;
-	  appearance: none;
-	  border: 1px solid #999;
-	  color: black;
-	  border-radius: 10px;
+		width: 200px;
+		padding: .8em .5em;
+		font-family: inherit;
+		background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		color: black;
+		border-radius: 10px;
 	}
 	option {
-	  padding: 4px;
-	  font-size: 14px;
-	  color: black;
-	  /*background: #272822;*/
+		padding: 4px;
+		font-size: 14px;
+		color: black;
+		/*background: #272822;*/
 	}
 	a:link {
 		text-decoration-line: none;
@@ -100,8 +100,8 @@
 			<c:forEach var="sole" items="${basesole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a href="#"><img class="soleimg" src="${path}/Basedownload?alcohole_image=${sole.alcohole_image}"/></a>
-					<p style="text-align: center;"><a class="custom-link" href="#">${sole.alcohole_name}</a></p>
+					<a href="/store/productInfos?product_display_id=${sole.alcohole_name}"><img class="soleimg" src="${path}/Basedownload?alcohole_image=${sole.alcohole_image}"/></a>
+					<p style="text-align: center;"><a class="custom-link" href="/store/productInfos?product_display_id=${sole.alcohole_name}">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
 			
