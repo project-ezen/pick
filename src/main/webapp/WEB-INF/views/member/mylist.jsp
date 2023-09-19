@@ -121,7 +121,7 @@
 			<c:forEach items="${like}" var="likeList">
 				<tr>
 					<td><%=cn++ %></td>
-					<td><img style="height:100px; width:100px;" src="${path }/resources/images/thumb/t_${sole.alcohole_image}" alt="사진"></td>
+					<td><img style="height:100px; width:100px;" src="${path}/resources/recipe_images/${likeList.alcohole_image}" alt="사진"></td>
 					<td style="width:45%;"><a href="/sole/soleDetail?recipe_code=${likeList.recipe_code}&page=0">${likeList.alcohole_name}</a></td>
 					<td style="width:15%;">${likeList.alcohole_dosu}</td>
 					<td style="width:15%;">${likeList.favor}</td>
@@ -129,6 +129,7 @@
 			</c:forEach>
 		</table>
 		</form>
+		<br/>
 	</div>
 </div>	
 	<br/><br/>

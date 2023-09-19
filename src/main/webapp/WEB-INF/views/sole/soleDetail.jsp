@@ -35,19 +35,20 @@
     /*상품 관련 이미지, 위치*/
 	
     /*테이블*/
-	.table {
+	.t {
 	 	height: 300px;
 	  	font-size: 18px;
 	}
-	.table th,
-	.table td {
+	.t th,
+	.t td {
 	  	vertical-align: middle !important;
 	}
 	h1 {
 	  	text-align: center;
 	}
-	.table th {
-	  	background-color: rgb(171, 173, 175);
+	.t th {
+	  	background-color: rgba(37,85,108,0.8);
+	  	color:white;
 	  	width: 160px;
 	  	text-align: center;
 	}
@@ -65,8 +66,9 @@
 	}
 	
 	.infoAndReview li a {
-	    background-color: rgb(139, 139, 139);
+	    background-color: rgba(37,85,108,1);;
 	}
+	
     a:link {
 	    text-decoration-line: none;
 	    color: white;
@@ -75,10 +77,7 @@
     	color: white;
     	text-decoration-line: none;
     }
-    #reviewBtn {
-    	margin-left: 50px;
-    	margin-top: 18px;
-    }
+    
     #star {
     	width: 8%;
     	height: 8%;
@@ -96,10 +95,6 @@
 	    
     #reviewcontent::-webkit-scrollbar {   /*스크롤*/
  		display: none;
-	}
-	
-	.reviewBtn {
-		
 	}
 	
 	 
@@ -165,13 +160,17 @@
 	 
 	table {
 	    width: 60%;
-	    border-top: 1px solid #444444;
+	    border-top: 1px solid #25556C;
 	    border-collapse: collapse;
   		text-align: center;
-  	}
+  		box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  	} 
+  	
+  	thead { background-color: rgba(37,85,108,0.7); color:white; }
+  	
   	th, td {
-	    border-bottom: 1px solid #444444;
-	    border-left: 1px solid #444444;
+	    border-bottom: 1px solid #25556C;
+	    border-left: 1px solid #25556C;
 	    padding: 10px;
 	    font-size: 20px;
 	    text-align: center;
@@ -188,6 +187,8 @@
 		border: none;
 		background-color: #E96F84;
 		color: #fff;
+		margin-left: 50px;
+    	margin-top: 18px;
 	}
 
 	#reviewBtn:hover { background-color: #c90076; }
@@ -214,7 +215,7 @@
           <!--상품 간단 정보-->
           <h1>${recipe.alcohole_name}</h1>
           <div class="col-md-6 product-info">
-            <table class="table table-bordered" style="margin:0px;">
+            <table class="table table-bordered t" style="margin:0px;">
               <tbody>
                 <tr>
                   <th>설명</th>
@@ -280,10 +281,12 @@
             	<br/>
                	<div align="center">
            		<table>
+           			<thead>
            			<tr>
            				<th>재료</th>
            				<th>용량</th>
            			</tr>
+           			</thead>
                  	<c:forEach var="recipeDetail" items="${recipeDetail}">
                			<tr>
                				<td>${recipeDetail.ingredient_name}</td>
