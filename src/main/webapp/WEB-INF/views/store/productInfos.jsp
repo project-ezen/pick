@@ -290,8 +290,9 @@
                 </tr>
               </tbody>
             </table>
+            
+           <!--증가, 감소 버튼, total가격-->
             <div>
-              <!--증가, 감소 버튼, total가격-->
               <div class="quantity-group">
                 <button id="decrease" class="btn btn-default">-</button>
                 <input
@@ -376,6 +377,7 @@
       </div>
     
   </c:forEach>
+ </div>
     	<!-- 장바구니 모달  -->
             <div class="modal" id="cart_modal">
                 <div class="modal-dialog modal-lg">
@@ -384,8 +386,10 @@
                             <h4 id="cart_coment">장바구니에 상품을 넣었습니다.</h4>
                         <div class="modal-body" id="cart_modal_body">
                             <div id="col-md-2 col-md-4" align="center">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="goToCart"><span class="glyphicon glyphicon-shopping-cart" id="modal-icon"></span><span>&nbsp;장바구니 바로 가기</span></button>
-                          	<button type="button" class="btn btn-primary" data-dismiss="modal" id="moreProduct"><span class="glyphicon glyphicon-repeat" id="modal-icon"></span><span>&nbsp;상품 더 담기</span></button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="goToCart"><span class="glyphicon glyphicon-shopping-cart" id="modal-icon">
+                            </span><span>&nbsp;장바구니 바로 가기</span></button>
+                          	<button type="button" class="btn btn-primary" data-dismiss="modal" id="moreProduct"><span class="glyphicon glyphicon-repeat" id="modal-icon">
+                          	</span><span>&nbsp;상품 더 담기</span></button>
                             </div>
                         </div>
                     </div>
@@ -577,7 +581,14 @@
     });
     
     
+    $(document).ready(function(){
+    	$("#loginTf").on("click", function(){
+			var currentURL = window.location.href; // 현재 페이지의 URL을 가져옴
+	        location.href = "/member/login?action=" + encodeURIComponent(currentURL);	
+    	});
+    });
     
+
       // 증가 버튼
       $(document).ready(function () {
         $("#increase").click(function (event) {
@@ -642,7 +653,8 @@
     		var name  = $("#nameHidden").val();
     		var total = price * count;
     		var encodedName = encodeURIComponent(name);
-    		var locate = "/store/addToCart?product_display_id=" + productID +"&quantity=" + count + "&cartOrStore=buyNow&image=" + image + "&name=" + name + "&total=" + total +"&price=" + price;
+    		var locate = "/store/addToCart?product_display_id=" + productID +"&quantity=" + count + "&cartOrStore=buyNow&image=" + image + "&name="
+    						+ name + "&total=" + total +"&price=" + price;
 			
     		console.log(productID);
     		console.log(price);

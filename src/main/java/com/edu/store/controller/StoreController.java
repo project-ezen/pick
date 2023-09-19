@@ -52,14 +52,14 @@ public class StoreController {
 
 	private static final Logger logger = LoggerFactory.getLogger(StoreController.class);
 	
-	private static final String REVIEW_IMAGE_REPO = "C:\\data\\product\\review_image";
+	private static final String REVIEW_IMAGE_REPO = "C:\\data\\team\\pick\\src\\main\\webapp\\resources\\product_review_images";
 	
 	@Autowired
 	private StoreService storeService;
 	//--------------------------------------------------------------------------------------------
 	// 상품 리스트
 	//--------------------------------------------------------------------------------------------
-	@RequestMapping(value = "/store/productInfo", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/store/productInfo", method =RequestMethod.GET)
 	public ModelAndView listProduct(
 	        @RequestParam(value = "category", required = false) String category,
 	        @RequestParam(value = "searchKeyword", required = false) String searchKeyword, 
@@ -114,8 +114,6 @@ public class StoreController {
 		List<ProductDisplayVO> productInfo = storeService.displayProductInfos(product_id);
 		List<ProductDTO> product = storeService.productInfos(product_id);
 		
-		
-		System.out.println(product_id + "됐음");
 		String viewName = "/store/productInfos";
 		
 		
@@ -149,8 +147,8 @@ public class StoreController {
 								@RequestParam("cartOrStore") String cartOrStore,
 								@RequestParam(value="image", required = false) String image,
 								@RequestParam(value="name", required = false) String name,
-								@RequestParam(value="total", required = false) int total,
-								@RequestParam(value="price", required = false) int price,
+								@RequestParam(value="total", required = false) Integer total,
+								@RequestParam(value="price", required = false) Integer price,
 		HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
@@ -169,13 +167,13 @@ public class StoreController {
 		int totalValue = 0; 
 		int priceValue = 0;
 		 
-		if (total != 0) {
+		if (total != null) {
 			totalValue = total;
 		} else {
 			logger.info("total이 널임");
 		}		
 		
-		if (price != 0) {
+		if (price != null) {
 		    priceValue = price;		   
 		} else {
 			logger.info("price가 널임");
@@ -186,7 +184,8 @@ public class StoreController {
 		    }else if("buyNow".equals(cartOrStore)) {	    	
 		    	String encodedName = URLEncoder.encode(name, "UTF-8");
 		    	locate   
-		    	= "redirect:/shopping/order?cartId=" + cartId + "&imageFile=" + image + "&productName=" + encodedName + "&productPrice=" + priceValue + "&cnt=" + quantity + "&totalPrice=" + totalValue;
+		    	= "redirect:/shopping/order?cartId=" + cartId + "&imageFile=" + image + "&productName=" + encodedName + "&productPrice=" 
+		    	+ priceValue + "&cnt=" + quantity + "&totalPrice=" + totalValue;
 
 		    	return locate;
 		    }
@@ -307,27 +306,23 @@ public class StoreController {
 	@RequestMapping(value="/store/reviewDetailAjax", method=RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Map reviewDetailAjax(@RequestParam("product_display_id") String product_id, 
 								@RequestParam("page") int page) throws Exception {
-		
-		
-		logger.info("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------1번 product_display_id"+ product_id); 
+
 		Map productAjaxMap = new HashMap();
 		
 		ProductReviewPageMaker prpgm = new ProductReviewPageMaker();
 		ProductReviewCriteria productreviewcri	=	new ProductReviewCriteria();
 		productreviewcri.setProduct_display_id(product_id);
-		logger.info("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------2번 product_display_id"+ product_id);
 		
 		productreviewcri.setPage(page);
-		logger.info("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------3번 product_display_id"+ product_id);
+		
 		prpgm.setCri(productreviewcri);
 		prpgm.setTotalCount(storeService.productReviewCount(productreviewcri));
 		
 		List<ReviewDTO> selectReview = storeService.selectReview(productreviewcri);
-		logger.info("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------4번 product_display_id"+ product_id);
+		
 		productAjaxMap.put("ProductReviewList", selectReview);
 		productAjaxMap.put("prpgm", prpgm);
-		logger.info("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------5번 product_display_id"+ product_id);
-		logger.info("=========================================================================================================================================================================================================================================================" + selectReview);
+		
 		return productAjaxMap;
 	}
 	

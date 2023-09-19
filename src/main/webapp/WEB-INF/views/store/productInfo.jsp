@@ -267,7 +267,7 @@
 				<c:forEach var="product" items="${productList}">
 					<a href="/store/productInfos?product_display_id=${product.product_display_id}">
 						<div class="col-sm-3 productInfo_in">
-							<img src="/resources/product_images/${product.product_image}" align="center"/>
+							<img src="/resources/product_images/${product.product_image}"/>
 							<p align="center">상품명 : ${product.product_name }</p>
 							<p align="center">가격 : <fmt:formatNumber value="${product.product_price }" pattern="#,###"/>원</p>
 						</div>
@@ -275,7 +275,7 @@
 				</c:forEach>
 			</div>
 	  	</div>
- </div>     
+ 	</div>     
 
          
          
@@ -357,7 +357,7 @@
 	  });
 	});
   
-    // 술 버튼
+    // 버튼 클릭 유지
       var arcCheck  = 0;
       var doguCheck = 0;
       var furCheck  = 0;
