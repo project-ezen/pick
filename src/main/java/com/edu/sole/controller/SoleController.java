@@ -161,7 +161,7 @@ public class SoleController {
 	
 	//---------------------------------------------------------------------------------------------------------------
 	// sole detail / review
-	@RequestMapping(value="/soleReview", method=RequestMethod.GET)
+	@RequestMapping(value="/soleReview", method=RequestMethod.POST)
 	public ModelAndView soleReview(HttpServletRequest request, HttpServletResponse response, @RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
