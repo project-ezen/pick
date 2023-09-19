@@ -47,7 +47,7 @@
         }
     </style>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js" integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
-    <script>  Kakao.init('8ebd75cf75f3f5574a71e06fbbc387a9');</script>  <!-- 사용하려는 앱의 JavaScript 키 입력 -->
+    <script>Kakao.init('8ebd75cf75f3f5574a71e06fbbc387a9');</script>  <!-- 사용하려는 앱의 JavaScript 키 입력 -->
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 </head>
