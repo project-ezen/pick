@@ -16,126 +16,172 @@
 	</script> /// 왜 실행이 안될까  ==> 왜 실행이 되는걸까 , 쓰면서도 뭔 소린지 모르겠음 ==> 하루지나니까 다시 실행이 안됨 왜 ? -->
 	
     <style>
-      /*상품 관련 이미지, 위치*/
-	  
-      .product-img {
-        /*width: 400px;
-        height: 400px;
-        
-        margin-top: 100px;*/
-        /*max-width: 100%;
-		width: auto;
-		height: auto;*/
-		width: 100%;
-        margin: auto;
-        height: 500px !important;
-      }
-      .product-info {
-        margin-top: 39px;
-      }
-      /*상품 관련 이미지, 위치*/
-
-      /*테이블*/
-      .table {
-        height: 300px;
-        font-size: 18px;
-      }
-      .table th,
-      .table td {
-        vertical-align: middle !important;
-      }
-      h1 {
-        text-align: center;
-      }
-      .table th {
-        background-color: rgb(171, 173, 175);
-        width: 160px;
-        text-align: center;
-      }
-      /*테이블*/     
-
-      /*상세 설명, 리뷰*/
-      input:focus {
-        outline: none;
-      }
-      .infoAndReview li {
-        width: 50%;
-        text-align: center;
-        font-size: 15px;
-        color: rgb(0, 0, 0);
-      }
-
-      .infoAndReview li a {
-        background-color: rgb(139, 139, 139);
-      }
-      a:link {
-        text-decoration-line: none;
-        color: white;
-      }
-      a:visited {
-      	color: white;
-      	text-decoration-line: none;
-      }
-      #reviewBtn {
-      	margin-left: 50px;
-      	margin-top: 18px;
-      }
-      #star {
-      	width: 8%;
-      	height: 8%;
-      }
-
-      /*상세 설명, 리뷰*/
-      
-      #reviewcontent {   /*스크롤*/
-      	overflow-y: scroll;
-    	-ms-overflow-style: none;
-    	scrollbar-width: none;
+    /*상품 관련 이미지, 위치*/
+	 
+    .product-img {
+    /*width: 400px;
+    height: 400px;
+    margin-top: 100px;*/
+    /*max-width: 100%;
+	width: auto;
+	height: auto;*/
+	width: 100%;
+    margin: auto;
+    height: 500px !important;
+	}
+   	.product-info {
+		margin-top: 39px;
+    }
+    /*상품 관련 이미지, 위치*/
+	
+    /*테이블*/
+	.table {
+	 	height: 300px;
+	  	font-size: 18px;
+	}
+	.table th,
+	.table td {
+	  	vertical-align: middle !important;
+	}
+	h1 {
+	  	text-align: center;
+	}
+	.table th {
+	  	background-color: rgb(171, 173, 175);
+	  	width: 160px;
+	  	text-align: center;
+	}
+    /*테이블*/     
+	
+    /*상세 설명, 리뷰*/
+    input:focus {
+	    outline: none;
+	}
+	.infoAndReview li {
+	    width: 50%;
+	    text-align: center;
+	    font-size: 15px;
+	    color: rgb(0, 0, 0);
+	}
+	
+	.infoAndReview li a {
+	    background-color: rgb(139, 139, 139);
+	}
+    a:link {
+	    text-decoration-line: none;
+	    color: white;
+	}
+	a:visited {
+    	color: white;
+    	text-decoration-line: none;
+    }
+    #reviewBtn {
+    	margin-left: 50px;
+    	margin-top: 18px;
+    }
+    #star {
+    	width: 8%;
+    	height: 8%;
+    }
+	
+    /*상세 설명, 리뷰*/
+	    
+    #reviewcontent {   /*스크롤*/
+    	overflow-y: scroll;
+	  	-ms-overflow-style: none;
+  		scrollbar-width: none;
 		word-wrap: break-word;
 		height: 150px;
-      }
-      
-      #reviewcontent::-webkit-scrollbar {   /*스크롤*/
-   		display: none;
-	  }
-	  
-	  .star1, .star2 , .star3, .star4, .star5 {     /*기본 별 디자인*/
-        color: transparent;
-        text-shadow: 0 0 0 #f0f0f0;
-	  }
-	  
-	  .likestar {       /*별점을 줫을때 디자인*/
-	  	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99); 
-	  	color: transparent;
-	  }
-	  .noliked {
-	  	font-size: 3em;
+    }
+	    
+    #reviewcontent::-webkit-scrollbar {   /*스크롤*/
+ 		display: none;
+	}
+	 
+	.star1, .star2 , .star3, .star4, .star5 {     /*기본 별 디자인*/
+		color: transparent;
+		text-shadow: 0 0 0 #f0f0f0;
+	}
+	 
+	.likestar {       /*별점을 줫을때 디자인*/
+		text-shadow: 0 0 0 rgba(250, 208, 0, 0.99); 
+	 	color: transparent;
+	}
+	.noliked {
+		font-size: 3em;
 		color: transparent;
 		text-shadow: 0 0 0 #f0f0f0;
 		cursor: pointer;
-	  }
-	  .liked {
-	  	font-size: 3em;
-	  	color: transparent;
-	  	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-	  	cursor: pointer;
-	  }
+ 	}
+	.liked {
+	 	font-size: 3em;
+	 	color: transparent;
+	 	text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+	 	cursor: pointer;
+	}
+	 
+	.btnAndliked {
+		display: flex; 
+	 	flex-direction: row; 
+	 	align-items: center;
+	}
+	 
+ 	.right {
+	 	margin-left: auto;
+	}
+	 
+	.imgclass {
+	 	width: 100%;
+	    margin: auto;
+	    height: 165px !important;
+	}
 	  
-	  .btnAndliked {
-	  	display: flex; 
-	  	flex-direction: row; 
-	  	align-items: center;
-	  }
-	  
-	  .right {
-	  	margin-left: auto;
-	  }
-	  
-	  .imgclass {
-	  	width: 100%;
-        margin: auto;
-        height: 165px !important;
-	  }
+	.list  {
+		margin-bottom: 20px;
+		float: right;
+		background-color:#25556C;
+		border-radius:8px;
+		border:none;
+		display:inline-block;
+		cursor:pointer;
+		color:#ffffff;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
+		font-size:12px;
+		font-weight:bold;
+		padding:8px 18px;
+		text-decoration:none;
+		float: right;
+		margin-bottom:10px; 
+	}
+	 
+	.list:hover { background-color:#ccd6d9; }
+	
+	.list:active { position:relative; top:1px; }
+	 
+	table {
+	    width: 60%;
+	    border-top: 1px solid #444444;
+	    border-collapse: collapse;
+  		text-align: center;
+  	}
+  	th, td {
+	    border-bottom: 1px solid #444444;
+	    border-left: 1px solid #444444;
+	    padding: 10px;
+	    font-size: 20px;
+	    text-align: center;
+	}
+	th:first-child, td:first-child {
+	    border-left: none;
+	}
+
+  	
+  	.sole {
+  	 	width: 60%;
+  		font-family: 'Cafe24Supermagic-Bold-v1.0';
+  		font-size: 20px;
+  	}
+  	
     </style>
   </head>
   <%@ include file="../include/topMenu.jsp" %>
@@ -175,7 +221,7 @@
             </table>
             <div class="btnAndliked">
 	            <div>
-	            	<button type="button" id="moklok">목록으로 돌아가기</button>
+	            	<button type="button" id="moklok" class="list">목록으로 돌아가기</button>
 	            </div>
             <!-- 즐겨찾기 부분 -->
 			<c:choose>
@@ -221,11 +267,24 @@
           <div class="tab-content">
             <div id="description" class="tab-pane fade in active">
             	<br/>
-                 <c:forEach var="recipeDetail" items="${recipeDetail}">
-                 	<div align="center">
-                    	<p>${recipeDetail.ingredient_name}&nbsp;${recipeDetail.ingredient_cpcty}</p>
-                 	</div>
-                 </c:forEach>
+               	<div align="center">
+           		<table>
+           			<tr>
+           				<th>재료</th>
+           				<th>용량</th>
+           			</tr>
+                 	<c:forEach var="recipeDetail" items="${recipeDetail}">
+               			<tr>
+               				<td>${recipeDetail.ingredient_name}</td>
+               				<td>${recipeDetail.ingredient_cpcty}</td>
+               			</tr>
+                 	</c:forEach>
+                </table>
+                <br/>
+                
+                
+               	
+               	</div>
             </div>
             <div id="review" class="tab-pane fade">
               <br/>
