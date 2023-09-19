@@ -133,15 +133,15 @@ public class SoleController {
 			LikedSelectDTO Wla = new LikedSelectDTO();
 			Wla.setM_id(m_id);
 			Wla.setRecipe_code(recipe_code);
-			LikedDTO jjimselect = soleservice.jjimSelect(Wla);
+			LikedDTO likedselect = soleservice.likedSelect(Wla);
 			
-			if(Objects.isNull(jjimselect)) { // 로그인을 하고 찜을 안했을 때
+			if(Objects.isNull(likedselect)) { // 로그인을 하고 찜을 안했을 때
 				mav.addObject("rpgm", rpgm);
 				mav.addObject("selectReview", selectReview);
 				mav.addObject("recipeDetail", recipeDetailDTO);
 				mav.addObject("recipe", recipeDTO);
-			}else if((jjimselect.getLiked_id() != null) && (!jjimselect.getLiked_id().isEmpty())) {  // 로그인을 하고 찜을 했을때
-				mav.addObject("jjimselect", jjimselect);
+			}else if((likedselect.getLiked_id() != null) && (!likedselect.getLiked_id().isEmpty())) {  // 로그인을 하고 찜을 했을때
+				mav.addObject("likedselect", likedselect);
 				mav.addObject("rpgm", rpgm);
 				mav.addObject("selectReview", selectReview);
 				mav.addObject("recipeDetail", recipeDetailDTO);
@@ -270,29 +270,29 @@ public class SoleController {
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// jjimInsert ajax
-	@RequestMapping(value="/jjimInsert", method=RequestMethod.GET)
+	// likedInsert ajax
+	@RequestMapping(value="/likedInsert", method=RequestMethod.GET)
 	@ResponseBody
-	public void jjimInsert(@RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
+	public void likedInsert(@RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
 		
 		logger.info("code : " + recipe_code);
 		logger.info("id : " + m_id);
 		
-		LikedDTO jjimInsert = new LikedDTO();
-		jjimInsert.setM_id(m_id);
-		jjimInsert.setRecipe_code(recipe_code);
+		LikedDTO likedInsert = new LikedDTO();
+		likedInsert.setM_id(m_id);
+		likedInsert.setRecipe_code(recipe_code);
 		
-		soleservice.jjimInsert(jjimInsert);
+		soleservice.likedInsert(likedInsert);
 	}
-	//jjimDelete ajax
+	//likedDelete ajax
 	@ResponseBody
-	@RequestMapping(value="/jjimDelete", method=RequestMethod.GET)
-	public void jjimDelete(@RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
-		LikedDTO jjimDelete = new LikedDTO();
-		jjimDelete.setM_id(m_id);
-		jjimDelete.setRecipe_code(recipe_code);
+	@RequestMapping(value="/likedDelete", method=RequestMethod.GET)
+	public void likedDelete(@RequestParam("recipe_code") String recipe_code, @RequestParam("m_id") String m_id) throws Exception {
+		LikedDTO likedDelete = new LikedDTO();
+		likedDelete.setM_id(m_id);
+		likedDelete.setRecipe_code(recipe_code);
 		
-		soleservice.jjimDelete(jjimDelete);
+		soleservice.likedDelete(likedDelete);
 	}
 	
 
