@@ -149,8 +149,8 @@ public class StoreController {
 								@RequestParam("cartOrStore") String cartOrStore,
 								@RequestParam(value="image", required = false) String image,
 								@RequestParam(value="name", required = false) String name,
-								@RequestParam(value="total", required = false) int total,
-								@RequestParam(value="price", required = false) int price,
+								@RequestParam(value="total", required = false) Integer total,
+								@RequestParam(value="price", required = false) Integer price,
 		HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		HttpSession session = request.getSession();
@@ -169,13 +169,13 @@ public class StoreController {
 		int totalValue = 0; 
 		int priceValue = 0;
 		 
-		if (total != 0) {
+		if (total != null) {
 			totalValue = total;
 		} else {
 			logger.info("total이 널임");
 		}		
 		
-		if (price != 0) {
+		if (price != null) {
 		    priceValue = price;		   
 		} else {
 			logger.info("price가 널임");
