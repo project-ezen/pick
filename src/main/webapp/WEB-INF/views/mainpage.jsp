@@ -125,7 +125,7 @@
                    	<c:choose>
 						<%-- 로그인이 되지 않은 경우 --%>
 						<c:when test="${ member == null }">
-	                       <label><a href="${path}/member/login">LogIn</a> | <a href="${path}/member/join">Sign In</a></label>
+	                       <label><a href="${path}/member/login">Login</a> | <a href="${path}/member/join">Sign In</a></label>
 	                   	</c:when>
 	                   	<%-- 로그인이 된 경우 --%>
 	                	<c:when test="${ member != null }">
