@@ -126,7 +126,7 @@
 				</div>
 				<div class="update-button-group">
 					<button type="submit" class="sub" id="editButton">수정</button>
-					<button type="reset" class="cel" id="resetButton">취소</button>
+					<button type="button" class="cel" id="resetButton">취소</button>
 				</div>
 			</form>
 		</div>
@@ -172,11 +172,15 @@ function fn_nickCheck() {
 $(document).ready(function() {	
 
 	// 수정하기 버튼을 클릭했을 경우
-	$(".submit").on("click", function() {
+	$(".sub").on("click", function() {
 		$("#update-form").prop("action", "/member/edit");
 		$("#update-form").prop("method", "post");
 	});
 	
+	// 취소하기 버튼을 클릭했을 경우
+	$(".cel").on("click", function() {
+	   window.location.href = "/member/mypage";
+	});
 	
 //빈칸 확인
 
