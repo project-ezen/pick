@@ -11,7 +11,7 @@ public class PageMaker {
 	private	int			endPage;				// 현재 화면에서 보이는 endPage 번호
 	private	boolean		prev;					// 페이징 이전 버튼 활성화 여부
 	private	boolean		next;					// 페이징 다음 버튼 활성화 여부
-	private	int			displayPageNum = 10;	// 화면 하단에 보여줄 페이지의 개수 (1,2,3,4,5,6,7,8,9,10)
+	private	int			displayPageNum = 2;	// 화면 하단에 보여줄 페이지의 개수 (1,2,3,4,5,6,7,8,9,10)
 	
 	
 	public PagingCriteria getPcri() {
@@ -48,7 +48,7 @@ public class PageMaker {
 		prev = (startPage == 1 ? false : true);
 		
 		// 다음 페이지 (next)
-		next = endPage == realEndPage ? false : true;
+		next = endPage * pcri.getPageStart() < totalCount ? true : false;
 
 		
 	} // End - 화면 하단에 보여줄 페이지를 계산한다

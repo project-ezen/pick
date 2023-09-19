@@ -86,23 +86,23 @@ public class SoleServiceImpl implements SoleService {
 	
 	// 찜 인설트
 	@Override
-	public void jjimInsert(LikedDTO jjimInsert) throws Exception {
+	public void likedInsert(LikedDTO likedInsert) throws Exception {
 		
-		soledao.jjimInsert(jjimInsert);
+		soledao.likedInsert(likedInsert);
 	}
 	
 	// 찜 셀렉하는
 	@Override
-	public LikedDTO jjimSelect(LikedSelectDTO Wla) throws Exception {
+	public LikedDTO likedSelect(LikedSelectDTO Wla) throws Exception {
 		
-		return soledao.jjimSelect(Wla);
+		return soledao.likedSelect(Wla);
 	}
 	
 	// 찜 딜리트
 	@Override
-	public void jjimDelete(LikedDTO jjimDelete) throws Exception {
+	public void likedDelete(LikedDTO likedDelete) throws Exception {
 		
-		soledao.jjimDelete(jjimDelete);
+		soledao.likedDelete(likedDelete);
 	}
 	
 	// 베이스주 셀렉
@@ -117,6 +117,13 @@ public class SoleServiceImpl implements SoleService {
 	public int basecount(BaseSoleSearchCriteria cri) {
 		
 		return soledao.basecount(cri);
+	}
+	
+	//술 리뷰쓰는 페이지에서 강제로 목록으로 보낼려고 카테고리 가져오는
+	@Override
+	public String getCategory(String recipe_code) {
+		
+		return soledao.getCategory(recipe_code);
 	}
 	
 	

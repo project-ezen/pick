@@ -1,6 +1,5 @@
 package com.edu.board.controller;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -30,7 +29,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.edu.board.dao.BoardDAO;
 import com.edu.board.dto.BoardDTO;
-import com.edu.board.dto.ImageVO;
 import com.edu.board.dto.JjimDTO;
 import com.edu.board.dto.PageMaker;
 import com.edu.board.dto.PagingCriteria;
@@ -38,7 +36,6 @@ import com.edu.board.dto.ReplyDTO;
 import com.edu.board.service.BoardService;
 import com.edu.board.service.ReplyService;
 import com.edu.member.dto.MemberDTO;
-import com.edu.member.service.MemberService;
 
 
 @Controller("BoardController")
@@ -78,38 +75,35 @@ public class BoardControllerImpl implements BoardController {
 	public ModelAndView recipeBoardPaging(HttpServletRequest request, HttpServletResponse response, PagingCriteria pcri) throws Exception {
 		
 		logger.info("boardArticleList");
-
-		
-		String opt = request.getParameter("selop");
-		System.out.println("정렬 파라미터 : " + opt);
-
-		
-		String viewName = (String)request.getAttribute("viewName");
+		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		PageMaker pageMaker = new PageMaker();
 		
-		if(opt == "one") {
-			pageMaker.setPcri(pcri);
-			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
-			List<BoardDTO> list = boardService.boardListPaging(pcri);
-			mav.addObject("articlesList", list);
-			mav.addObject("pageMaker", pageMaker);
-		} else if(opt == "two") {
-			pageMaker.setPcri(pcri);
-			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
-			List<BoardDTO> list2 = boardService.boardListJjim(pcri);
-			mav.addObject("articlesList", list2);
-			mav.addObject("pageMaker", pageMaker);
-		} else {
-			pageMaker.setPcri(pcri);
-			pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	
-			List<BoardDTO> list = boardService.boardListPaging(pcri);
-			mav.addObject("articlesList", list);
-			mav.addObject("pageMaker", pageMaker);
-		}
+		pageMaker.setPcri(pcri);
+		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	// pageMaker.totalCount에 총 게시글 수 넣기
+		List<BoardDTO> list = boardService.boardListPaging(pcri);	// 게시글 목록(페이징 처리 포함) List로 넣기
+		logger.info(" 게시글의 총 건수: " +pageMaker.getTotalCount());
+		System.out.println("pageMaker =" + pageMaker);
 
+		mav.addObject("articlesList", list);
+		mav.addObject("pcri",pcri);
+		mav.addObject("pageMaker", pageMaker);
 		
 		return mav;
+		
+		/*
+		System.out.println("셀렉트 옵션 값 : " + selop);
+		pcri.setSelop(selop);
+		System.out.println("셀렉트 옵션 setSelop값 : " + pcri.getSelop());
+		
+		if(pcri.getSelop() == "two") {
+			System.out.println("셀렉트 옵션 값 : " + selop);
+			List<BoardDTO> list2 = boardService.boardListJjim(pcri);
+			mav.addObject("articlesList", list2);
+			mav.addObject("pcri",pcri);
+			mav.addObject("pageMaker", pageMaker);
+		}
+		*/
 	}
 	
 
@@ -120,7 +114,7 @@ public class BoardControllerImpl implements BoardController {
 		
 		HttpSession session = request.getSession();
 		MemberDTO member = (MemberDTO)session.getAttribute("member");
-		System.out.println("으아ㅓㄹㅇ너래ㅑ어랻저래ㅑㅇ너량널야ㅓ래ㅑㅓㅇ랴ㅓㄴㄴ어랴ㅐ얼" + member);
+		System.out.println("memberSession 값 : " + member);
 		
 		
 		BoardDTO boardDTO = boardService.articleDetail(board_id);
@@ -128,12 +122,12 @@ public class BoardControllerImpl implements BoardController {
 		model.addAttribute("article",boardDTO);
 		
 		JjimDTO jjimDTO = new JjimDTO();
-		if(member != null) {
-			String m_id = member.getM_id();
-			jjimDTO.setM_id(m_id);
-			jjimDTO.setBoard_id(board_id);
-			jjimDTO = boardService.jjimSelect(jjimDTO);
-			model.addAttribute("liked", jjimDTO);
+		if(member != null) {	// 로그인했을 경우
+			String m_id = member.getM_id();	// 로그인한 회원의 m_id를 가져와서
+			jjimDTO.setM_id(m_id);	// jjimDTO.m_id에 넣는다
+			jjimDTO.setBoard_id(board_id);	// 해당 게시물 id를 가져와서 jjimDTO.board_id에 넣는다
+			jjimDTO = boardService.jjimSelect(jjimDTO);	// 찜 조회값을 jjimDTO에 넣어 불러온다
+			model.addAttribute("liked", jjimDTO);		// 불러온 jjimDTO에 liked 라는 변수이름을 준다
 		}
 		
 		System.out.println("jjimDTO List 값 : " + jjimDTO);
@@ -240,7 +234,7 @@ public class BoardControllerImpl implements BoardController {
 			}
 			break;
 		}
-		System.out.println("return fileRealName 호호: " + fileRealName);
+		System.out.println("return fileRealName 썸네일 : " + fileRealName);
 		return fileRealName;
 	}
 	
@@ -371,7 +365,7 @@ public class BoardControllerImpl implements BoardController {
 				}
 			}
 		}
-		System.out.println("return fileRealName 흑흑: " + fileRealName);
+		System.out.println("return fileRealName 본문이미지 : " + fileRealName);
 		return fileRealName;
 	}
 
@@ -379,7 +373,7 @@ public class BoardControllerImpl implements BoardController {
 	// 찜 등록
 	@Override
 	@ResponseBody
-	@RequestMapping(value="/board/jjimOK", method=RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value="/board/jjimOK", method= RequestMethod.GET, produces = "application/json")
 	public JjimDTO jjimOK(@RequestParam("board_id") int board_id, @RequestParam("m_id") String m_id) throws Exception {
 		
 		JjimDTO jjimDTO = new JjimDTO();
@@ -389,7 +383,8 @@ public class BoardControllerImpl implements BoardController {
 		boardService.jjimOK(jjimDTO);
 		return jjimDTO;
 	}
-
+	
+	
 
 	// 찜 삭제
 	@Override

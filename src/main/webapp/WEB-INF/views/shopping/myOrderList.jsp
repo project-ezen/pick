@@ -20,7 +20,7 @@
 		margin-right: auto;
 	}
 	
-	th { background-color: #ccd6d9; }
+	th { background-color: rgba(37,85,108,0.5); }
 	
 	th, td {
 	border-bottom: 1px solid #ddd;
@@ -34,22 +34,24 @@
 	#cancel_info { padding-bottom: 20px; }
 
 	.list {
+		margin-bottom: 20px;
 		float: right;
-		background-color:#8aa2b2;
+		background-color:#25556C;
 		border-radius:8px;
 		border:none;
 		display:inline-block;
 		cursor:pointer;
 		color:#ffffff;
-		font-family:Arial;
+		font-family: 'Cafe24Supermagic-Bold-v1.0';
 		font-size:12px;
 		font-weight:bold;
 		padding:8px 18px;
 		text-decoration:none;
-		float: right; 
+		float: right;
+		margin-bottom:10px; 
 	}
 	
-	.list:hover { background-color:#476e9e; }
+	.list:hover { background-color: #51a1c7; }
 	
 	.list:active { position:relative; top:1px; }
 	
@@ -99,7 +101,7 @@
 				<button class="form-control btn btn-default" type="button" id="searchBuy">조회</button>
 			</div>
 			<div class="col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2" style="margin-bottom: 10px;">
-				<button type="button" class="list" style="float: right;">목록으로 돌아가기</button>
+				<button type="button" onclick="location.href='${path}/member/mypage'" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button>
 			</div>
 		</div>
 	</form>
@@ -199,9 +201,6 @@
 <br/><br/>
 <script>
 $(document).ready(function() {
-	var frmBuy = $("#buyList");
-	var frmCancel = $("#cancelList");
-	
 	// 주문 내역 페이징
 	function orderPaging(pageNum) {
 		$.ajax({
@@ -223,7 +222,7 @@ $(document).ready(function() {
 								+ '<td><a class="orderNum">' + data.order[idx].order_number + '</a></td>'
 								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
 								+ '<a href="#" class="thumbnail">'
-								+ '<input type="image" src="${path }/download?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="image" src="${path }/imgdownload?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
 								+ '<input type="hidden" class="orderId" name="orderId" value="' + data.order[idx].order_id + '">'
 								+ '</a></div></td>'
 								+ '<td class="pdtName">' + data.product[idx].product_name + '</td>'
@@ -319,7 +318,7 @@ $(document).ready(function() {
 								+ '<td><a class="orderNum">' + data.cancel[idx].order_number + '</a></td>'
 								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
 								+ '<a href="#" class="thumbnail">'
-								+ '<input type="image" src="${path }/download?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="image" src="${path }/imgdownload?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
 								+ '<input type="hidden" name="orderId" value="' + data.cancel[idx].order_id + '">'
 								+ '</a></div></td>'
 								+ '<td>' + data.product[idx].product_name + '</td>'

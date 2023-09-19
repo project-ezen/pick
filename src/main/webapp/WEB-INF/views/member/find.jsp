@@ -7,18 +7,57 @@
     <%@ include file="../include/header.jsp" %>
 <style>
     .container {
-        width: 25%;
-        margin: auto;
+        width:			25%;
+        margin: 		auto;
         margin-top:		150PX ;
-		margin-bottom: 150px;
-		min-width: 500px;
+		margin-bottom: 	150px;
+		min-width: 		500px;
         width: 			25%;
         margin: 		auto;
-        margin-bottom: 150px; 
+        margin-bottom: 	150px; 
 		margin-top: 	150px;
+		height:			600px;
     }
     .foot { padding-bottom: 50px; padding-top: 	50px; }
     
+    .btn_sub {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #25556C;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+	}
+	.btn_sub:hover { background-color: #51a1c7; }
+	.btn_sub:active {
+		position:relative;
+		top:1px;
+	}
+	
+	.btn_in {
+		width: 100px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #3D7792;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+	}
+	.btn_in:hover { background-color: #51a1c7; }
+	.btn_in:active {
+		position:relative;
+		top:1px;
+	}
+	
 </style>
 </head>
 
@@ -71,7 +110,7 @@ $(document).ready(function() {
 	        success: function(data) {
 	            if (data === 1) {
 	                confirmCode = Math.floor(Math.random() * 900000) + 100000;
-	                alert("인증번호: " + confirmCode);
+	                alert("인증번호는 " + confirmCode + "입니다.");
 	            } else {
 	                alert("이름과 전화번호가 일치하지 않습니다.");
 	            }
@@ -110,7 +149,7 @@ $(document).ready(function() {
 	        success: function(data) {
 	            if (data === 1) {
 	                confirmCode = Math.floor(Math.random() * 900000) + 100000;
-	                alert("인증번호: " + confirmCode);
+	                alert("인증번호는 " + confirmCode + "입니다.");
 	            } else {
 	                alert("이름과 닉네임이 일치하지 않습니다.");
 	            }
@@ -135,7 +174,7 @@ $(document).ready(function() {
         	    contentType: 'application/json',
         	    data: tel,
         	    success: function(data) {
-        	        alert("아이디는: " + data);
+        	        alert("아이디는 " + data + "입니다.");
         	    }, error: function(data) {
         	        alert("뭐가 문제인거시냐");
         	    }
@@ -158,7 +197,7 @@ $(document).ready(function() {
         	    contentType: 'application/json',
         	    data: nick,
         	    success: function(data) {
-        	        alert("아이디는: " + data);
+        	        alert("아이디는 " + data + "입니다.");
         	    }, error: function(data) {
         	        alert("뭐가 문제인거시냐");
         	    }
@@ -199,7 +238,7 @@ $(document).ready(function() {
 	        success: function(data) {
 	            if (data === 1) {
 	                confirmCode = Math.floor(Math.random() * 900000) + 100000;
-	                alert("인증번호: " + confirmCode);
+	                alert("인증번호는 " + confirmCode + "입니다.");
 	            } else {
 	                alert("아이디와 전화번호가 일치하지 않습니다.");
 	            }
@@ -224,7 +263,7 @@ $(document).ready(function() {
         	    contentType: 'application/json',
         	    data: ID,
         	    success: function(data) {
-        	        alert("비밀번호는: " + data);
+        	        alert("비밀번호는 " + data + "입니다.");
         	    }, error: function(data) {
         	        alert("뭐가 문제인거시냐");
         	    }
@@ -283,7 +322,7 @@ $(document).ready(function() {
 					            <input type="text" class="form-control" id="m_tel_ID" name="m_tel" placeholder="ex) 010-1234-5678">
 					        </div>
 					        <div class="col-md-4">
-					            <button type="button" class="btn btn-default" id="checkNameAndTel">인증번호 받기</button>
+					            <button type="button" class="btn_in" id="checkNameAndTel">인증번호 받기</button>
 					        </div>
 					    </div>
 					</div>
@@ -297,8 +336,9 @@ $(document).ready(function() {
 				     		   <input type="text" class="form-control" id="confirmCode_ID" placeholder="인증번호를 입력하세요">
 				     		</div>
 				     		<div class="col-md-4">
-					   	    	<button type="button" class="btn btn-default" id="confirmCode_NTB">확인</button>
+					   	    	<button type="button" class="btn_sub" id="confirmCode_NTB">확인</button>
 					        </div>
+					        <br/>
 					    </div>
 				    </div>
 				    
@@ -312,7 +352,7 @@ $(document).ready(function() {
 				       			<input type="text" class="form-control" id="m_nickname" name="m_nickname" placeholder="닉네임을 입력하세요">
 				       		</div>
 				       		<div class="col-md-4">
-				       			<button type="button" class="btn btn-default" id="checkNameAndNick">인증번호 받기</button>
+				       			<button type="button" class="btn_in" id="checkNameAndNick">인증번호 받기</button>
 				        	</div>
 				       	</div>
 				    </div>
@@ -326,13 +366,12 @@ $(document).ready(function() {
 				        		<input type="text" class="form-control" id="confirmCode_ID2" placeholder="인증번호를 입력하세요">
 				        	</div>
 				        	<div class="col-md-4">
-				        		<button type="button" class="btn btn-default" id="confirmCode_NNB">확인</button>
+				        		<button type="button" class="btn_sub" id="confirmCode_NNB">확인</button>
 				        	</div>
+				        	<br/>
 				      	</div>
 				    </div>
 				</form>
-
-
 			</div>
 
 			 <div id="findPW" class="tab-pane fade"><br/>
@@ -358,7 +397,7 @@ $(document).ready(function() {
 					            <input type="text" class="form-control" id="m_tel_PW" name="m_tel" placeholder="ex) 010-1234-5678">
 					        </div>
 					        <div class="col-md-4">
-					            <button type="button" class="btn btn-default" id="checkIDAndTel">인증번호 받기</button>
+					            <button type="button" class="btn_in" id="checkIDAndTel">인증번호 받기</button>
 					        </div>
 					    </div>
 					</div>
@@ -372,7 +411,7 @@ $(document).ready(function() {
 					            <input type="text" class="form-control" id="confirmCode_PW" placeholder="인증번호를 입력하세요">
 					        </div>
 					        <div class="col-md-4">
-					            <button type="button" class="btn btn-default" id="confirmCode_ITB">확인</button>
+					            <button type="button" class="btn_sub" id="confirmCode_ITB">확인</button>
 					        </div>
 					    </div>
 					</div>

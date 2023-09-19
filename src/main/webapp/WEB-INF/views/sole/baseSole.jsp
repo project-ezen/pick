@@ -8,24 +8,13 @@
 <title>Insert title here</title>
 <%@ include file="../include/header.jsp" %>
 <style type="text/css">
-	.bg {
-		 background-image: url("/resources/images/background2.jpg");
-
-         height: 100vh;        /*%로 주면 안되고 vh로 줘야함  */
-         
-         
-		 background-attachment: fixed, scroll;
-         background-position: center;
-         background-repeat: no-repeat;
-         background-size: cover; 
-	}
 	h1 {
 		color: black;
 	}
 	#bigdiv {
-		/*height: auto;    /* footer 아래로 고정 */
-  		/*min-height: 100%;
-  		padding-bottom: 63px;*/
+		height: auto;    /* footer 아래로 고정 */
+  		min-height: 100%;
+  		padding-bottom: 63px;
 	}
 	.selectdiv {
 		display: flex;
@@ -33,22 +22,22 @@
 		item-align: center;   /*셀렉박스 가운데정렬*/
 	}
 	select {
-	  width: 200px;
-	  padding: .8em .5em;
-	  font-family: inherit;
-	  background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
-	  -webkit-appearance: none;
-	  -moz-appearance: none;
-	  appearance: none;
-	  border: 1px solid #999;
-	  color: black;
-	  border-radius: 10px;
+		width: 200px;
+		padding: .8em .5em;
+		font-family: inherit;
+		background: url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg) no-repeat 95% 50%;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		border: 1px solid #999;
+		color: black;
+		border-radius: 10px;
 	}
 	option {
-	  padding: 4px;
-	  font-size: 14px;
-	  color: black;
-	  /*background: #272822;*/
+		padding: 4px;
+		font-size: 14px;
+		color: black;
+		/*background: #272822;*/
 	}
 	a:link {
 		text-decoration-line: none;
@@ -63,12 +52,16 @@
 	a.custom-link:visited {
     	color: black; 
 	}
-
 	
-	img {
-		max-width: 100%;
+	.foot { padding-bottom: 20px; padding-top: 20px; margin:auto; }
+	
+	.soleimg {
+		/*max-width: 100%;
 		width: auto;
 		height: auto;		/* 이미지 크기 자동조절*/
+		width: 100%;
+        margin: auto;
+        height: 230px !important;
 	}
 	#searchBox {
 		width: 15%;
@@ -83,9 +76,10 @@
 </style>
 </head>
 <%@ include file="../include/topMenu.jsp" %>
-<body class="bg">
+<body>
+	<div class="foot">
 	<div id="bigdiv" class="container" style="background-color:white;">
-		<h1 style="text-align:center">Alcohole</h1>
+		<h1 style="text-align:center">Base Alcohole</h1>
 		<br>
 		<!-- select  -->
 		<div class="selectdiv">
@@ -106,8 +100,8 @@
 			<c:forEach var="sole" items="${basesole}">
 				<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 				<div class="col-sm-3">
-					<a href="#"><img src="${path}/Basedownload?alcohole_image=${sole.alcohole_image}"/></a>
-					<p style="text-align: center;"><a class="custom-link" href="#">${sole.alcohole_name}</a></p>
+					<a href="/store/productInfos?product_display_id=${sole.alcohole_name}"><img class="soleimg" src="${path}/Basedownload?alcohole_image=${sole.alcohole_image}"/></a>
+					<p style="text-align: center;"><a class="custom-link" href="/store/productInfos?product_display_id=${sole.alcohole_name}">${sole.alcohole_name}</a></p>
 				</div>
 			</c:forEach>
 			
@@ -116,7 +110,7 @@
             	
             	<input type="text" class="form-control" id="searchBox" value="${cri.keyword}"/>
             	
-            	<form id="formList" action="/sole/baseSole" method="get">
+            	<form id="BaseList" action="/sole/baseSole" method="get">
 					<input type="hidden" name="page"/>
 					<input type="hidden" name="sole_jongryu"/>
 					<input type="hidden" name="alcohole_category"/>
@@ -126,31 +120,32 @@
             	<ul class="btn-group pagination col-sm-offset-6 col-sm-2">
 					<c:if test="${pageMaker.prev}">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+							<a href='<c:url value="/sole/baseSole?page=${pageMaker.startPage-1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 						</li>
 					</c:if>
 					
 					<c:forEach begin="${pagemaker.startPage}" end="${pagemaker.endPage}" var="pageNum">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageNum}&sole_jongryu=${cri.sole_jongryu}&alcohole_category=${cri.alcohole_category}"/>'><i style="color:black">${pageNum}</i></a>
+							<a href='<c:url value="/sole/baseSole?page=${pageNum}&sole_jongryu=${cri.sole_jongryu}&alcohole_category=${cri.alcohole_category}"/>'><i style="color:black">${pageNum}</i></a>
 						</li>
 					</c:forEach>
 					
 					<c:if test="${pageMaker.next}">
 						<li>
-							<a href='<c:url value="/sole/sole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+							<a href='<c:url value="/sole/baseSole?page=${pageMaker.endPage+1}&keyword=${cri.keyword}"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 						</li>
 					</c:if>
 				</ul>
 			</div>			
 		</div>
 	</div>
+	</div>
 	<br/><br/>
 <%@ include file="../include/footer.jsp" %>
 </body>
 <script>
 	$(document).ready(function() {
-		var formObj = $("#formList");
+		var baseForm = $("#BaseList");
 		var jong	= $("#jongryu");
 		
 		// 페이지 로드시 셀렉트박스 값 설정
@@ -165,11 +160,11 @@
 		$("#searchBtn").click(function() {
 			var keywordStr = $("#searchBox").val();
 			var keywordStrTrim = keywordStr.trim();
-			formObj.find("[name='keyword']").val(keywordStrTrim);
-			formObj.find("[name='sole_jongryu']").val(selectJong);
-			formObj.find("[name='alcohole_category']").val(selectCategory);
-			formObj.find("[name='page']").val("1");
-			formObj.submit();
+			baseForm.find("[name='keyword']").val(keywordStrTrim);
+			baseForm.find("[name='sole_jongryu']").val(selectJong);
+			baseForm.find("[name='alcohole_category']").val(selectCategory);
+			baseForm.find("[name='page']").val("1");
+			baseForm.submit();
 		});
 		
 		/// 엔터키 누르면
@@ -177,21 +172,21 @@
 			if(key.keyCode == 13) {
 				var keywordStr = $("#searchBox").val();
 				var keywordStrTrim = keywordStr.trim();
-				formObj.find("[name='keyword']").val(keywordStrTrim);
-				formObj.find("[name='sole_jongryu']").val(selectJong);
-				formObj.find("[name='alcohole_category']").val(selectCategory);
-				formObj.find("[name='page']").val("1");
-				formObj.submit();
+				baseForm.find("[name='keyword']").val(keywordStrTrim);
+				baseForm.find("[name='sole_jongryu']").val(selectJong);
+				baseForm.find("[name='alcohole_category']").val(selectCategory);
+				baseForm.find("[name='page']").val("1");
+				baseForm.submit();
 			}
 		});
 		
 		////// 셀렉박스
 		jong.on("change", function() {
 			var jongValue = jong.val();
-			formObj.find("[name='sole_jongryu']").val(jongValue);
-			formObj.find("[name='alcohole_category']").val(selectCategory);
-			formObj.find("[name='page']").val("1");
-			formObj.submit();
+			baseForm.find("[name='sole_jongryu']").val(jongValue);
+			baseForm.find("[name='alcohole_category']").val(selectCategory);
+			baseForm.find("[name='page']").val("1");
+			baseForm.submit();
 		});
 		
 	});//// end $

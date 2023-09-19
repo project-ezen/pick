@@ -38,17 +38,20 @@ public interface SoleDAO {
 	public int reviewcount(ReviewCriteria reviewcri) throws Exception;
 	
 	// 찜 인설트
-	public void jjimInsert(LikedDTO jjimInsert) throws Exception;
+	public void likedInsert(LikedDTO likedInsert) throws Exception;
 	
 	//찜 셀렉하는
-	public LikedDTO jjimSelect(LikedSelectDTO Wla) throws Exception;
+	public LikedDTO likedSelect(LikedSelectDTO Wla) throws Exception;
 	
 	// 찜 딜리트
-	public void jjimDelete(LikedDTO jjimDelete) throws Exception;
+	public void likedDelete(LikedDTO likedDelete) throws Exception;
 	
 	// 베이스주 셀렉
 	public List<BaseSoleDTO> selectbase(BaseSoleSearchCriteria cri);
 	
 	// 베이스주 총 개수
 	public int basecount (BaseSoleSearchCriteria cri);
+	
+	//술 리뷰쓰는 페이지에서 강제로 목록으로 보낼려고 카테고리 가져오는
+	public String getCategory(String recipe_code);
 }

@@ -101,12 +101,12 @@ public class SoleDAOImpl implements SoleDAO {
 	
 	// 찜 인설트
 	@Override
-	public void jjimInsert(LikedDTO jjimInsert) throws Exception {
+	public void likedInsert(LikedDTO likedInsert) throws Exception {
 		
 		String liked_id = selectLikedId();
-		jjimInsert.setLiked_id(liked_id);
+		likedInsert.setLiked_id(liked_id);
 		
-		sqlSession.insert(namespace + ".jjimInsert", jjimInsert);
+		sqlSession.insert(namespace + ".likedInsert", likedInsert);
 		
 	}
 	
@@ -119,16 +119,16 @@ public class SoleDAOImpl implements SoleDAO {
 	
 	// 찜 셀렉하는
 	@Override
-	public LikedDTO jjimSelect(LikedSelectDTO Wla) throws Exception {
+	public LikedDTO likedSelect(LikedSelectDTO Wla) throws Exception {
 		
-		return sqlSession.selectOne(namespace + ".jjimSelect", Wla);
+		return sqlSession.selectOne(namespace + ".likedSelect", Wla);
 	}
 	
 	// 찜 딜리트
 	@Override
-	public void jjimDelete(LikedDTO jjimDelete) throws Exception {
+	public void likedDelete(LikedDTO likedDelete) throws Exception {
 		
-		sqlSession.delete(namespace + ".jjimDelte", jjimDelete);
+		sqlSession.delete(namespace + ".likedDelte", likedDelete);
 	}
 	
 	// 베이스주 셀렉
@@ -141,7 +141,16 @@ public class SoleDAOImpl implements SoleDAO {
 	// 베이스주 총 개수 구하는
 	@Override
 	public int basecount(BaseSoleSearchCriteria cri) {
-		// TODO Auto-generated method stub
+		
 		return sqlSession.selectOne(namespace + ".basecount", cri);
 	}
+
+	//술 리뷰쓰는 페이지에서 강제로 목록으로 보낼려고 카테고리 가져오는
+	@Override
+	public String getCategory(String recipe_code) {
+		
+		return sqlSession.selectOne(namespace + ".getCategory", recipe_code);
+	}
+	
+	
 } // end class

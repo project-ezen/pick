@@ -51,6 +51,22 @@
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 </head>
+
+<script type="text/javascript"> // 로그인 된 상태로 뒤로가기를 눌러서 접근하면 메인페이지로 넘겨버림
+	
+	var referrer = document.referrer;
+
+	window.onpageshow = function(event) {
+    	if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+        	alert("메인 페이지로 이동합니다.");
+        	
+        	//var backUrl = "http://localhost:8056/#";
+        	
+        	window.location.href = referrer;    
+        }
+}     //
+</script>
+
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 <div class="foot">
@@ -98,7 +114,15 @@
 	        <div class="social-buttons">
 	            <button type="button" class="btn btn-success naverLogin" id="naverIdLogin_loginButton">네이버 로그인</button>
 	        </div>
-	        <div class="social-buttons">
+	        <!-- <ul>
+	        	<li onclick="naverLogout(); return false;">
+			      <a href="javascript:void(0)">
+			          <span>네이버 로그아웃</span>
+			      </a>
+				</li>
+			</ul> -->
+			
+			<div class="social-buttons">
 	            <button type="button" class="btn btn-danger googleLogin" id="GgCustomLogin">구글 로그인</button>
 	        </div>
 	        
@@ -123,7 +147,7 @@
 	      }
 	    
     	
-	    function kakaoLogout() {
+	    /* function kakaoLogout() {
 	        if (Kakao.Auth.getAccessToken()) {
 	          Kakao.API.request({
 	            url: '/v1/user/unlink',
@@ -136,22 +160,22 @@
 	          })
 	          Kakao.Auth.setAccessToken(undefined)
 	        }
-	      }  
+	      }  */
 	    
 	    
 	    // 네이버
 	    var naverLogin = new naver.LoginWithNaverId(
 	    		{
 	    			clientId: "jwxrW4EpGgFNKNpH_wNr", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
-	    			callbackUrl: "http://localhost:8085/member/login", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+	    			callbackUrl: "http://localhost:8085/", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
 	    			isPopup: false,
-	    			callbackHandle: true
+	    			// callbackHandle: true
 	    		}
 	    	);	
 
 	    naverLogin.init();
 
-	    window.addEventListener('load', function () {
+	    /* window.addEventListener('load', function () {
 	    	naverLogin.getLoginStatus(function (status) {
 	    		if (status) {
 	    			var email = naverLogin.user.getEmail(); // 필수로 설정할것을 받아와 아래처럼 조건문을 줍니다.
@@ -168,8 +192,7 @@
 	    		}
 	    	});
 	    });
-
-
+	    
 	    var testPopUp;
 	    function openPopUp() {
 	        testPopUp= window.open("https://nid.naver.com/nidlogin.logout", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,width=1,height=1");
@@ -177,7 +200,13 @@
 	    function closePopUp(){
 	        testPopUp.close();
 	    }
-    
+
+	    function naverLogout() {
+	    	openPopUp();
+	    	setTimeout(function() {
+	    		closePopUp();
+	    		}, 1000);
+	    } */
 	    
 	    
 	  // 구글
@@ -201,7 +230,7 @@
 	        	// people api를 이용하여 프로필 및 생년월일에 대한 선택동의후 가져온다.
 	    		url: 'https://people.googleapis.com/v1/people/me'
 	            // key에 자신의 API 키를 넣습니다.
-	    		, data: {personFields:'birthdays', key:'AIzaSyBOdmeC4SOSzXmPGLEM2vZueqiBSWKg3wk', 'access_token': access_token}
+	    		, data: {personFields:'birthdays', key:'AIzaSyDAYdJRrrmUJCUkUup3Zvih9g2dDqmxxRs', 'access_token': access_token}
 	    		, method:'GET'
 	    	})
 	    	.done(function(e){

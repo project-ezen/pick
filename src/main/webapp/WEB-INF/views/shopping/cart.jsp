@@ -7,27 +7,52 @@
 <title>Cart</title>
 <%@ include file="../include/header.jsp" %>
 <style>
-/* 체크박스 크기 설정 */
-#check{
-    height: 15px;
-    width: 15px;
-}
-/* disable cursor 스타일 */
-input.form-control:hover{
-    cursor: default;
-}
-/* 배경 화면 */
-body { 	
-    background-image:url("/resources/images/background2.jpg");
-    background-attachment: fixed, scroll;
-    background-repeat:no-repeat;
-    background-size:cover;
-}
+	/* 체크박스 크기 설정 */
+	#check{
+	    height: 15px;
+	    width: 15px;
+	}
+	/* disable cursor 스타일 */
+	input.form-control:hover{
+	    cursor: default;
+	}
+	/* 배경 화면 */
+	body { 	
+	    background-image:url("/resources/images/background2.jpg");
+	    background-attachment: fixed, scroll;
+	    background-repeat:no-repeat;
+	    background-size:cover;
+	}
+	
+	#class {
+		background-color: #EBFBFF;
+		padding: 10px 0;
+	}
 
-#class {
-	background-color: #fff;
-	padding: 10px 0;
-}
+	.btn_sub {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #0070bf;
+		color: #fff;
+	}
+
+	.btn_sub:hover { background-color:#687AB6; }
+
+	.btn_cle {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #cc0000;
+		color: #fff;
+	}
+
+	.btn_cle:hover {background-color: #E96F84; }
+
 
 </style>
 </head>
@@ -80,7 +105,7 @@ body {
 										<td class="form-group" style="vertical-align: middle;">
 											<div class="col-md-12 text-center" id="item_thumbnail">
 											    <a href="#" class="thumbnail">
-											        <input type="image" src="${path }/download?imageFile=${products_item.product_image }" width="161" height="133" disabled>
+											        <input type="image" src="${path }/imgdownload?imageFile=${products_item.product_image }" width="161" height="133" disabled>
 											        <input type="hidden" class="imageFile" value="${products_item.product_image }" name="imageFile">
 											    </a>
 											</div>
@@ -132,7 +157,8 @@ body {
 			    	<c:when test="${cart == '[]' }">
 			    		<div class="row">
 			    			<div class="col-md-offset-8 col-md-4 text-right">
-					            <button type="submit" id="pay" class="btn btn-primary" disabled>결제하기</button>
+					            <button type="submit" id="cancel" class="btn_cle" disabled>삭제하기</button>
+					            <button type="submit" id="pay" class="btn_sub" disabled>결제하기</button>
 					        </div>
 			    		</div>
 			    	</c:when>
@@ -140,7 +166,8 @@ body {
 			    	<c:when test="${cart != '[]' }">
 					    <div class="row">
 					    	<div class="col-md-offset-8 col-md-4 text-right">
-					            <button type="submit" id="pay" class="btn btn-primary">결제하기</button>
+					            <button type="submit" id="cancel" class="btn_cle">삭제하기</button>
+					            <button type="submit" id="pay" class="btn_sub">결제하기</button>
 					        </div>
 					    </div>
 				    </c:when>
@@ -387,6 +414,32 @@ $(document).ready(function() {
 	    }
 	}
 //----------------------------------------------------------------------------------------------------------------
+	// 선택된 상품이 없을 경우 버튼 비활성화
+	$(document).on("click", ".check", function() {
+		if(!$(".check").is(":checked")) {
+			$("#cancel").prop("disabled", true);
+			$("#pay").prop("disabled", true);
+		}
+		else {
+			$("#cancel").prop("disabled", false);
+			$("#pay").prop("disabled", false);
+		}
+	});
+//----------------------------------------------------------------------------------------------------------------
+	// 삭제 버튼 클릭 시 선택 물품 삭제
+	$("#cancel").on("click", function() {
+		let frm = $(".check").closest("form");
+		
+		for(let i = 0; i < (".check").length; i++) {
+			if(!$(".check:eq(" + i + ")").is(":checked")) {
+				$(".ctId:eq(" + i + ")").prop("disabled", true);
+			}
+		}
+		
+		frm.prop("action", "/shopping/deleteCart");
+		frm.prop("method", "get");
+		frm.submit();
+	});
 });
 </script>
 </html>

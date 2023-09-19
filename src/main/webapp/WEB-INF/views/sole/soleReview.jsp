@@ -1,6 +1,7 @@
+<%@page import="com.edu.pillter.Yoksul"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-    <%@ page session="true" %>
-
+<%@ page session="true" %>
+<%@ page import="org.json.JSONArray" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +19,10 @@
     	if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
         	alert("이전 페이지로 이동합니다.");
         	
-        	window.location.href = referrer;    // 이 페이지에서 컨트롤러에 있는 레시피 코드를 끌고 가서  카테고리 구해서 그쪽으로 넘긴다?????????
-    }
+        	var backUrl = "/sole/sole?alcohole_category=" + ${category};
+        	
+        	window.location.href = backUrl;    
+        }
 }     // 구조 이해 x 
 </script>
 <style>
@@ -46,24 +49,45 @@ label {
 	font-size: 18px;
 }
 
-.btn_sub {
-	width: 70px;
-	height: 35px;
-	font-size: 15px;
-	border-radius: 5px;
-	border: none;
-	background-color: #687AB6;
-	color: #fff;
+	.btn_sub {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #25556C;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+		}
+	.btn_sub:hover { background-color: #51a1c7; }
+	.btn_sub:active {
+		position:relative;
+		top:1px;
+	}
+		
+	.btn_cel {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+		background-color: #cc0000;
+		
 	}
 
-.btn_cle {
-	width: 70px;
-	height: 35px;
-	font-size: 15px;
-	border-radius: 5px;
-	border: none;
-	background-color: #E96F84;
-	color: #fff;
+	.btn_cel:hover {background-color: #E96F84; }
+	
+	.btn_cel:active {
+		position:relative;
+		top:1px;
 	}
 
 #stars{
@@ -150,9 +174,9 @@ label {
 		<div class="form-group">
 			<div class="col-sm-6"></div>
 			<div class="col-sm-4" style="text-align: center; margin-left: 10px;">
-				<button class="btn_cle" type="button" onclick="back()">취소</button>
+				<button class="btn_cel" type="button" onclick="back()">취소</button>
 				&nbsp;
-				<button class="btn_sub" type="button" id="reviewSubmit">올리기</button>
+				<button class="btn_sub" type="button" id="reviewSubmit" onClick="this.disabled=true">올리기</button> <!-- onclick 중복 글쓰기 방지 -->
 			</div>
 		</div>
 		<input type="hidden" name="recipe_code" value="${param.recipe_code}"/>
@@ -160,6 +184,11 @@ label {
 	</form>
 </div>
 <br/><br/>
+
+<%
+	String [] yokArray = Yoksul.yoksul; // 욕설필터 가져오기
+%>
+
 <script>
 	function back() {   // 취소버튼을 누르면 바로 뒤로 감
 		window.history.back();
@@ -178,12 +207,21 @@ label {
 	
 	$(document).ready(function() {
 		
+		var yok  = <%= new org.json.JSONArray(yokArray).toString() %>;   // 욕설필터 가져오기
+		
 		// 리뷰 쓸때 내용에 값이 없으면 서밋하지 못하게 하는 
 		$("#reviewSubmit").click(function() {
 			var contentValue = $("#reviewContent").val();
 			if(!contentValue || contentValue.trim() === "") {
 				alert("내용을 작성해야 합니다.");
 			} else {
+				var content = $("#reviewContent").val();
+				for (var i = 0; i < yok.length; i++) {
+		            if (content.includes(yok[i])) { 
+		                alert("비속어는 사용할 수 없습니다.");
+		                return;
+		            }
+		        }
 				$("#reviewForm").submit();
 			}
 		});
