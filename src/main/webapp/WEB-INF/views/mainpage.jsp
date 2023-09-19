@@ -91,8 +91,8 @@
 	                       <li id="lilist" class="brandi"><a href="#">브랜디 칵테일</a></li>
 	                       <li id="lilist" class="jin"><a href="#">진 칵테일</a></li>
 	                       <li id="lilist" class="rum"><a href="#">럼 칵테일</a></li>
-	                       <li id="lilist" class="cacktail"><a href="#">보드카 칵테일</a></li>
-	                       <li id="lilist" class="hiball"><a href="#">데킬라 칵테일</a></li>
+	                       <li id="lilist" class="bodcar"><a href="#">보드카 칵테일</a></li>
+	                       <li id="lilist" class="dekilla"><a href="#">데킬라 칵테일</a></li>
 	                   </ul>
 	                </li>
 	          		
