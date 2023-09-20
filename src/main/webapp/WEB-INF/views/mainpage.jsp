@@ -91,8 +91,8 @@
 	                       <li id="lilist" class="brandi"><a href="#">브랜디 칵테일</a></li>
 	                       <li id="lilist" class="jin"><a href="#">진 칵테일</a></li>
 	                       <li id="lilist" class="rum"><a href="#">럼 칵테일</a></li>
-	                       <li id="lilist" class="cacktail"><a href="#">보드카 칵테일</a></li>
-	                       <li id="lilist" class="hiball"><a href="#">데킬라 칵테일</a></li>
+	                       <li id="lilist" class="bodcar"><a href="#">보드카 칵테일</a></li>
+	                       <li id="lilist" class="dekilla"><a href="#">데킬라 칵테일</a></li>
 	                   </ul>
 	                </li>
 	          		
@@ -125,11 +125,11 @@
                    	<c:choose>
 						<%-- 로그인이 되지 않은 경우 --%>
 						<c:when test="${ member == null }">
-	                       <label><a href="${path}/member/login">login</a> | <a href="${path}/member/join">sign on</a></label>
+	                       <label><a href="${path}/member/login">Login</a> | <a href="${path}/member/join">Join</a></label>
 	                   	</c:when>
 	                   	<%-- 로그인이 된 경우 --%>
 	                	<c:when test="${ member != null }">
-	                       <label><a href="${path}/member/logout">logout</a></label>
+	                       <label><a href="${path}/member/logout">LogOut</a></label>
 	                   	</c:when>
                    	</c:choose>
                    	</div>

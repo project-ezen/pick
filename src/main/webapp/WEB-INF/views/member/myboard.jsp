@@ -10,7 +10,7 @@
 <script src="https://cdn.ckeditor.com/ckeditor5/34.0.0/classic/translations/ko.js"></script>
 <style>
 
-	.container { background-color: #fff; min-height: 1000px; }
+	.container { background-color: #fff; height: 1000px; }
 	
 	.foot { padding-bottom: 150px; padding-top: 150px; margin:auto; }
 	
@@ -20,7 +20,7 @@
 		margin-left: auto;
 		margin-right: auto;
 	}
-	th { background-color: #ccd6d9; }
+	th { background-color: rgba(37,85,108,0.5); }
 	
 	th, td {
 		border-bottom: 1px solid #ddd;
@@ -41,7 +41,7 @@
 	.list {
 		margin-bottom: 20px;
 		float: right;
-		background-color:#8aa2b2;
+		background-color:#25556C;
 		border-radius:8px;
 		border:none;
 		display:inline-block;
@@ -56,7 +56,7 @@
 		margin-bottom:10px; 
 	}
 	
-	.list:hover { background-color:#afb7db; }
+	.list:hover { background-color: #51a1c7; }
 	
 	.list:active { position:relative; top:1px; }
 	

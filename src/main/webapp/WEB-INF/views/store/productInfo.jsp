@@ -11,146 +11,144 @@
 
     <style>
     
-       .carousel-inner img {
-        width: 100%;
-        margin: auto;
-        height: 300px !important;
-      }
+    .carousel-inner img {
+     	width: 100%;
+     	margin: auto;
+     	height: 300px !important;
+   	}
 
 
-/* 버튼 공통 스타일 */
-		.custom-button {
-		    margin: 0;
-		    background-color: rgb(115, 115, 189);
-		    color: #f8f8f2;
-		    font-size: 1.1em;
-		    border-radius: 4px 4px 4px 4px;
-		    white-space: -moz-pre-wrap;
-		    white-space: -pre-wrap;
-		    white-space: -o-pre-wrap;
-		    word-wrap: break-word;
-		    margin-top: 90px;
-		    margin-left: 30px;
-		    width: 200px;
-		    height: 60px;
-		    border: none;
-		    display: inline-block;
-		    text-transform: uppercase;
-		    overflow: hidden;
-		    position: relative;
-		}
-		
-		.custom-button span {
-		    position: relative;
-		    z-index: 1;
-		}
-		
-		
-		.custom-button:after {
-		    content: "";
-		    position: absolute;
-		    left: 0;
-		    top: 0;
-		    height: 700%;
-		    width: 300%;
-		    background-image: url("/resources/images/button.png");
-		    transition: all 0.5s ease-in-out;
-		    transform: translateX(-120%) translateY(-25%) rotate(45deg);
-		}
+	/* 버튼 공통 스타일 */
+	.custom-button {
+	    margin: 0;
+	    background-color: #25556C;
+	    color: #f8f8f2;
+	    font-size: 1.1em;
+	    border-radius: 4px 4px 4px 4px;
+	    white-space: -moz-pre-wrap;
+	    white-space: -pre-wrap;
+	    white-space: -o-pre-wrap;
+	    word-wrap: break-word;
+	    margin-top: 90px;
+	    margin-left: 30px;
+	    width: 200px;
+	    height: 60px;
+	    border: none;
+	    display: inline-block;
+	    text-transform: uppercase;
+	    overflow: hidden;
+	    position: relative;
+	}
 	
-		.custom-button:hover:after {
-		    -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
-		    transform: translateX(-9%) translateY(-25%) rotate(45deg);
-		}
+	.custom-button span {
+	    position: relative;
+	    z-index: 1;
+	}
+	
+	
+	.custom-button:after {
+	    content: "";
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    height: 700%;
+	    width: 300%;
+	    background-image: url("/resources/images/button.png");
+	    transition: all 0.5s ease-in-out;
+	    transform: translateX(-120%) translateY(-25%) rotate(45deg);
+	}
+
+	.custom-button:hover:after {
+	    -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+	    transform: translateX(-9%) translateY(-25%) rotate(45deg);
+	}
 
         
-      /*상품 정보*/
-      #productInfo {
-        padding-top: 60px;
-      }
+    /*상품 정보*/
+    #productInfo {
+      	padding-top: 60px;
+    }
 
-      .productInfo_in {
-        border-radius: 5px;
-        background-color: rgba(0, 0, 0, 0);
-        color: black;
-        margin: 10px;
-        height: 300px !important;
-        width: 330px;
-        text-align: center;
-      }
-      .productInfo_in img {
-        border-radius: 13%;
-        height: 200px;
-        width: 200px;
-        margin: 10px;
-        margin-top: 30px;
-      }
-      .productInfo_in:hover {
-        background-color: #576fa0;
-        transition: 0.7s;
-        border-radius: 30%;
-      }
-      /*상품 정보*/
+    .productInfo_in {
+     	border-radius: 5px;
+      	background-color: rgba(0, 0, 0, 0);
+      	color: black;
+      	margin: 10px;
+      	height: 340px !important;
+    	width: 330px;
+	    text-align: center;
+    }
+    .productInfo_in img {
+	    border-radius: 13%;
+	    height: 200px;
+	    width: 200px;
+	    margin: 10px;
+	    margin-top: 30px;
+    }
+    .productInfo_in:hover {
+      	background-color: rgba(37,85,108,0.5);
+     	transition: 0.7s;
+      	border-radius: 20%;
+    }
+    /*상품 정보*/
 
-      /*검색 버튼*/
-		      * {
-		    box-sizing: border-box;
-		  }
-		  #search_fromKeyword {
-		    width: fit-content;
-		    height: fit-content;
-		    position: absolute;
-		  	top:480px;
-		  	right:50px;
-		  }
-		  #searchKeyword {
-		    height: 50px;
-		    width: 50px;
-		    border-style: none;
-		    padding: 10px;
-		    font-size: 18px;
-		    letter-spacing: 2px;
-		    outline: none;
-		    border-radius: 25px;
-		    transition: all 0.5s ease-in-out;
-		    background-color: #B5D0FF;
-		    padding-right: 40px;
-		    color: black;
-		  }
-		  #searchKeyword::placeholder {
-		    color: rgba(0, 0, 0, 0.5);
-		    font-size: 18px;
-		    letter-spacing: 2px;
-		    font-weight: 100;
-		  }
-		  .btn-search {
-		    width: 50px;
-		    height: 50px;
-		    border-style: none;
-		    font-size: 20px;
-		    font-weight: bold;
-		    outline: none;
-		    cursor: pointer;
-		    border-radius: 50%;
-		    position: absolute;
-		    right: 0px;
-		    color: white;
-		    background-color: transparent;
-		    pointer-events: painted;
-		  }
-		  	.btn-search:focus ~ #searchKeyword,
-			#searchKeyword:focus,
-			#searchButton:focus ~ #searchKeyword {
-			  width: 300px;
-			  border-radius: 0px;
-			  background-color: transparent;
-			  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
-			  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
-			}
+    /*검색 버튼*/
+    * { box-sizing: border-box; }
+  	#search_fromKeyword {
+	    width: fit-content;
+	    height: fit-content;
+	    position: absolute;
+	  	top:480px;
+	  	right:50px;
+ 	}
+	#searchKeyword {
+	    height: 50px;
+	    width: 50px;
+	    border-style: none;
+	    padding: 10px;
+	    font-size: 18px;
+	    letter-spacing: 2px;
+	    outline: none;
+	    border-radius: 25px;
+	    transition: all 0.5s ease-in-out;
+	    background-color: #B5D0FF;
+	    padding-right: 40px;
+	    color: black;
+	}
+  	#searchKeyword::placeholder {
+	    color: rgba(0, 0, 0, 0.5);
+	    font-size: 18px;
+	    letter-spacing: 2px;
+	    font-weight: 100;
+  	}
+  	.btn-search {
+	    width: 50px;
+	    height: 50px;
+	    border-style: none;
+	    font-size: 20px;
+	    font-weight: bold;
+	    outline: none;
+	    cursor: pointer;
+	    border-radius: 50%;
+	    position: absolute;
+	    right: 0px;
+	    color: white;
+	    background-color: transparent;
+	    pointer-events: painted;
+  	}
+  	.btn-search:focus ~ #searchKeyword,
+	#searchKeyword:focus,
+	#searchButton:focus ~ #searchKeyword {
+		  width: 300px;
+		  border-radius: 0px;
+		  background-color: transparent;
+		  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+		  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+	}
       /*검색 버튼*/
 	  
-	  /*select css*/
-	  .selectSearch{
+  	/*select css*/
+  	.selectSearch{
 	    position:absolute;
 	    top: 560px;
 	    right: 40px;
@@ -159,28 +157,26 @@
 	    color:	black;
 	    width: 150px;
 	    font-size: 17px;
-
-	   
-	  }     
-	  .selectSearch:focus{
+	}     
+  	.selectSearch:focus{
 	  	border-style: none;
 	  	outline: none;
-	  }
+  	}
       /*select css*/
      
-	  option {
+ 	option {
 	   color: rgba(0,0,0,1);
 	   background-color: rgba(0,0,0,0);
-	  }
+  	}
 
 	  
-	  #backgroundBy{
+  	#backgroundBy{
 	  	background-color:rgba(255,255,255,0.8);
 	  	border-radius: 10px;
 	  	margin-right: 30px;
 	  	margin-left: 30px;
 	  	padding-bottom: 30px;
-	  }
+  	}
 	  
 
 	  
@@ -201,10 +197,10 @@
       <!-- 광고 내용 또는 이미지 -->
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img src="/resources/images/gango.jpg" />
+          <img src="/resources/images/balvenie2.png" />
         </div>
         <div class="item">
-          <img src="/resources/images/gango.jpg" />
+          <img src="/resources/images/nadura22.png" />
         </div>
         <div class="item">
           <img src="/resources/images/gango.jpg" />
@@ -267,7 +263,7 @@
 				<c:forEach var="product" items="${productList}">
 					<a href="/store/productInfos?product_display_id=${product.product_display_id}">
 						<div class="col-sm-3 productInfo_in">
-							<img src="/resources/product_images/${product.product_image}" align="center"/>
+							<img src="/resources/product_images/${product.product_image}"/>
 							<p align="center">상품명 : ${product.product_name }</p>
 							<p align="center">가격 : <fmt:formatNumber value="${product.product_price }" pattern="#,###"/>원</p>
 						</div>
@@ -275,10 +271,10 @@
 				</c:forEach>
 			</div>
 	  	</div>
- </div>     
+ 	</div>     
 
          
-         
+ <br/><br/>        
  <div align="center">
     <nav aria-label="Page navigation">
         <ul class="pagination">
@@ -300,13 +296,9 @@
         </ul>
     </nav>
 </div>
-
-
-    <div class="row">
-      <div id="footer">
-        <%@ include file="../include/footer.jsp" %>
-      </div>
-    </div>
+<br/><br/>
+<%@ include file="../include/footer.jsp" %>
+   
    
   </body>
 
@@ -357,7 +349,7 @@
 	  });
 	});
   
-    // 술 버튼
+    // 버튼 클릭 유지
       var arcCheck  = 0;
       var doguCheck = 0;
       var furCheck  = 0;
@@ -476,9 +468,9 @@
     // 술 펑션
      function arcButton() {
     	// 색상바꾸기
-        $("#doguSearchBtn").css("background-color", "rgb(115, 115, 189)");
-        $("#furSearchBtn").css("background-color", "rgb(115, 115, 189)");
-        $("#jucSearchBtn").css("background-color", "rgb(115, 115, 189)");
+        $("#doguSearchBtn").css("background-color", "#25556C");
+        $("#furSearchBtn").css("background-color", "#25556C");
+        $("#jucSearchBtn").css("background-color", "#25556C");
 
         // 이미지 바꾸기
         $("#alcSearchBtn").css(
@@ -499,9 +491,9 @@
     // 도구 펑션
     function doguButton(){
     	 // 색상바꾸기
-        $("#alcSearchBtn").css("background-color", "rgb(115, 115, 189)");
-        $("#furSearchBtn").css("background-color", "rgb(115, 115, 189)");
-        $("#jucSearchBtn").css("background-color", "rgb(115, 115, 189)");
+        $("#alcSearchBtn").css("background-color", "#25556C");
+        $("#furSearchBtn").css("background-color", "#25556C");
+        $("#jucSearchBtn").css("background-color", "#25556C");
 
         // 이미지 바꾸기
         $("#doguSearchBtn").css(
@@ -523,9 +515,9 @@
     function furButton(){
     	
     	 // 색상바꾸기
-        $("#alcSearchBtn").css("background-color", "rgb(115, 115, 189)");
-        $("#doguSearchBtn").css("background-color", "rgb(115, 115, 189)");
-        $("#jucSearchBtn").css("background-color", "rgb(115, 115, 189)");
+        $("#alcSearchBtn").css("background-color", "#25556C");
+        $("#doguSearchBtn").css("background-color", "#25556C");
+        $("#jucSearchBtn").css("background-color", "#25556C");
 
         // 이미지 바꾸기
         $("#furSearchBtn").css(
@@ -546,9 +538,9 @@
     // 음료 펑션
     function jucButton(){
     	 // 색상바꾸기
-        $("#alcSearchBtn").css("background-color", "rgb(115, 115, 189)");
-        $("#doguSearchBtn").css("background-color", "rgb(115, 115, 189)");
-        $("#furSearchBtn").css("background-color", "rgb(115, 115, 189)");
+        $("#alcSearchBtn").css("background-color", "#25556C");
+        $("#doguSearchBtn").css("background-color", "#25556C");
+        $("#furSearchBtn").css("background-color", "#25556C");
 
         // 이미지 바꾸기
         $("#jucSearchBtn").css(

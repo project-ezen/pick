@@ -20,7 +20,7 @@
 		margin-right: auto;
 	}
 	
-	th { background-color: #ccd6d9; }
+	th { background-color: rgba(37,85,108,0.5); }
 	
 	th, td {
 	border-bottom: 1px solid #ddd;
@@ -36,7 +36,7 @@
 	.list {
 		margin-bottom: 20px;
 		float: right;
-		background-color:#8aa2b2;
+		background-color:#25556C;
 		border-radius:8px;
 		border:none;
 		display:inline-block;
@@ -51,7 +51,7 @@
 		margin-bottom:10px; 
 	}
 	
-	.list:hover { background-color:#afb7db; }
+	.list:hover { background-color: #51a1c7; }
 	
 	.list:active { position:relative; top:1px; }
 	
@@ -203,11 +203,14 @@
 $(document).ready(function() {
 	// 주문 내역 페이징
 	function orderPaging(pageNum) {
+		let start = $("#datepicker1").val();
+		let end = $("#datepicker2").val();
+
 		$.ajax({
 			url: "/shopping/paging",
 			type: "get",
 			dataType: "json",
-			data: {"page" : pageNum, "start_date" : $("#datepicker1").val(), "end_date" : $("#datepicker2").val(), "relation" : "order"},
+			data: {"page" : pageNum, "startDate" : start, "endDate" : end, "relation" : "order"},
 			success: function(data) {
 				//console.log("success : " + data);
 				console.log(data.order);
@@ -222,7 +225,7 @@ $(document).ready(function() {
 								+ '<td><a class="orderNum">' + data.order[idx].order_number + '</a></td>'
 								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
 								+ '<a href="#" class="thumbnail">'
-								+ '<input type="image" src="${path }/imgdownload?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="image" src="/resources/product_images/' + data.product[idx].product_image + '" width="161" height="133" disabled>'
 								+ '<input type="hidden" class="orderId" name="orderId" value="' + data.order[idx].order_id + '">'
 								+ '</a></div></td>'
 								+ '<td class="pdtName">' + data.product[idx].product_name + '</td>'
@@ -232,7 +235,7 @@ $(document).ready(function() {
 					// 배송중
 					if(data.order[idx].order_status == 'delivery-progressing'){
 						orderedHTML += '<td>'
-									+ '<input type="button" class="btn btn-default cancel" data-toggle="modal" data-target=".cancel' + idx + '" value="취소">'
+									+ '<input type="button" class="btn btn-default cancel_btn" data-toggle="modal" data-target=".cancel' + idx + '" value="취소">'
 									+ '<div class="modal fade cancel' + idx + '">'
 									+ '<div class="modal-dialog">'
 									+ '<div class="modal-content">'
@@ -248,14 +251,14 @@ $(document).ready(function() {
 					// 배송 완료
 					else if(data.order[idx].order_status == 'delivery-successed'){
 						orderedHTML += '<td>'
-									+ '<input type="button" class="btn btn-default change" data-toggle="modal" data-target=".change' + idx + '" value="교환">'
-									+ '<input type="button" class="btn btn-default refund" data-toggle="modal" data-target=".refund' + idx + '" value="반품">'
+									+ '<input type="button" class="btn btn-default change_btn" data-toggle="modal" data-target=".change' + idx + '" value="교환">'
+									+ '<input type="button" class="btn btn-default refund_btn" data-toggle="modal" data-target=".refund' + idx + '" value="반품">'
 									+ '<div class="modal fade change' + idx + '">'
 									+ '<div class="modal-dialog">'
 									+ '<div class="modal-content">'
 									+ '<div class="modal-header text-center">'
 									+ '<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>'
-									+ '<h3 class="title">Change Progressing</h3>'
+									+ '<h3 class="title_c">Change Progressing</h3>'
 									+ '</div>'
 									+ '<div class="modal-body"><textarea class="change_reason" name="change_reason" placeholder="please write the reason"></textarea></div>'
 									+ '<div class="modal-footer">'
@@ -266,7 +269,7 @@ $(document).ready(function() {
 									+ '<div class="modal-content">'
 									+ '<div class="modal-header text-center">'
 									+ '<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>'
-									+ '<h3 class="title">Refund Progressing</h3>'
+									+ '<h3 class="title_r">Refund Progressing</h3>'
 									+ '</div>'
 									+ '<div class="modal-body"><textarea class="refund_reason" name="refund_reason" placeholder="please write the reason"></textarea></div>'
 									+ '<div class="modal-footer">'
@@ -299,11 +302,14 @@ $(document).ready(function() {
 //-----------------------------------------------------------------------------------------------------------------------------------
 	// 취소 / 반품 내역 페이징
 	function cancelPaging(pageNum) {
+		let start = $("#datepicker3").val();
+		let end = $("#datepicker4").val();
+		
 		$.ajax({
 			url: "/shopping/paging",
 			type: "get",
 			dataType: "json",
-			data: {"page" : pageNum, "start_date" : $("#datepicker3").val(), "end_date" : $("#datepicker4").val(), "relation" : "cancel"},
+			data: {"page" : pageNum, "startDate" : start, "endDate" : end, "relation" : "cancel"},
 			success: function(data) {
 				//console.log("success : " + data);
 				console.log(data.cancel);
@@ -318,7 +324,7 @@ $(document).ready(function() {
 								+ '<td><a class="orderNum">' + data.cancel[idx].order_number + '</a></td>'
 								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
 								+ '<a href="#" class="thumbnail">'
-								+ '<input type="image" src="${path }/imgdownload?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="image" src="/resources/product_images/' + data.product[idx].product_image + '" width="161" height="133" disabled>'
 								+ '<input type="hidden" name="orderId" value="' + data.cancel[idx].order_id + '">'
 								+ '</a></div></td>'
 								+ '<td>' + data.product[idx].product_name + '</td>'
@@ -398,7 +404,7 @@ $(document).ready(function() {
 	$(document).on("click", ".refund_order", function() {
 		let order_id = $(this).closest("tr").find(".orderId").val();
 		let refund_reason = $(this).closest("tr").find(".refund_reason").val();
-		let title = $(this).closest("tr").find(".title").text();
+		let title = $(this).closest("tr").find(".title_r").text();
 		
 		console.log(order_id + " " + refund_reason + " " + title);
 		
@@ -421,7 +427,7 @@ $(document).ready(function() {
 	$(document).on("click", ".change_order", function() {
 		let order_id = $(this).closest("tr").find(".orderId").val();
 		let change_reason = $(this).closest("tr").find(".change_reason").val();
-		let title = $(this).closest("tr").find(".title").text();
+		let title = $(this).closest("tr").find(".title_c").text();
 		
 		console.log(order_id + " " + change_reason + " " + title);
 		
@@ -444,6 +450,46 @@ $(document).ready(function() {
 	$(document).on("click", ".orderNum", function() {
 		location.href = "/shopping/myOrderListDetail?order_number=" + $(this).text();
 	});
+//-----------------------------------------------------------------------------------------------------------------------------------
+	// 사유가 없는 경우 취소/환불/교환 불가
+	$(document).on("input", ".cancel_reason, .change_reason, .refund_reason", function(){
+		if ($(this).hasClass("cancel_reason")) {
+	        if ($(this).val() !== "") {
+	            $(".cancel_order").prop("disabled", false);
+	        } else {
+	            $(".cancel_order").prop("disabled", true);
+	        }
+	    }
+	    
+	    if ($(this).hasClass("change_reason")) {
+	        if ($(this).val() !== "") {
+	            $(".change_order").prop("disabled", false);
+	        } else {
+	            $(".change_order").prop("disabled", true);
+	        }
+	    }
+
+	    if ($(this).hasClass("refund_reason")) {
+	        if ($(this).val() !== "") {
+	            $(".refund_order").prop("disabled", false);
+	        } else {
+	            $(".refund_order").prop("disabled", true);
+	        }
+	    }
+	});
+	$(document).on("click", ".cancel_btn, .change_btn, .refund_btn", function() {
+		let refuseOrder = $(this).data("target");
+		
+		console.log(refuseOrder);
+		
+		if($(refuseOrder).find(".cancel_reason").hasClass("cancel_reason")){
+			if($(refuseOrder).find(".cancel_reason").val() !== "") {
+				$(".cancel_order").prop("disabled", false);
+	        } else {
+	            $(".cancel_order").prop("disabled", true);
+	        }
+		}
+	});
 });
 //===================================================================================================================
 // 날짜 조회
@@ -457,7 +503,7 @@ $.datepicker.setDefaults({
 	buttonImageOnly: true,
 	changeYear:		true,				// 년도를 바꿀 수 있는 셀렉트 박스를 표시한다.
 	changeMonth:	true,				// 월을 바꿀 수 있는 셀렉트 박스를 표시한다.
-	dateFormat:		"yy년 mm월 dd일",	// 날짜 포맷
+	dateFormat:		"yy/mm/dd",	// 날짜 포맷
 	prevText:		'이전 달',			// 마우스 오버시 이전 달이라는 텍스트 풍선도움말을 보여준다.
 	nextText:		'다음 달',			// 마우스 오버시 다음 달이라는 텍스트 풍선도움말을 보여준다.
 	closeText:		'닫기',				// 닫기 버튼 텍스트 변경
