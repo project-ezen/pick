@@ -6,196 +6,117 @@
     <title>회원 가입</title>
     <%@ include file="../include/header.jsp" %>
     <style>
-    	.container {
-    		width: 500px;
-    	}
-    	.foot {padding-bottom: 100px; padding-top: 100px; }
+       .container {
+          width: 500px;
+       }
+       .foot {padding-bottom: 100px; padding-top: 100px; }
     
-    	.container { background-color: rgba(255, 255, 255, 0.88); }
+       .container { background-color: rgba(255, 255, 255, 0.88); }
     
         .join-form {
             margin: auto;
             padding: 30px;
         }
         .form-group {
-			width: 350px;
-			margin: auto;
-			margin-bottom: 10px;
+         width: 350px;
+         margin: auto;
+         margin-bottom: 10px;
         }
         .join-button-group {
             text-align: center;
             margin-top: 20px;
         }
-		#insert-button {
-			margin-right: 50px;
-		}
-		#info, #info1 {
-	        width: 15px;
-	        height: 15px;
-		}
-		/* 팝업 창 내 내용 보여주는 스타일 */
-		#contract{
-			overflow-y: scroll;
-			height: 300px;
-			border-radius: 5px;
-			border: 1px solid black;
-		}
-		/* 개인정보 확인 여부  */
-		#info:hover, #info1:hover {
-			cursor: default;
-		}
-		
-		.btn_sub {
-		width: 70px;
-		height: 35px;
-		font-size: 15px;
-		border-radius: 5px;
-		border: none;
-		background-color: #25556C;
-		font-family:'Cafe24Supermagic-Bold-v1.0';
-		color: #fff;
-		font-size:15px;
-		padding:6px 13px;
-		border-radius:17px;
-		}
-		.btn_sub:hover { background-color: #3D7792; }
-		.btn_sub:active {
-			position:relative;
-			top:1px;
-		}
-		
-		.btn_cel {
-			width: 70px;
-			height: 35px;
-			font-size: 15px;
-			border-radius: 5px;
-			border: none;
-			font-family:'Cafe24Supermagic-Bold-v1.0';
-			color: #fff;
-			font-size:15px;
-			padding:6px 13px;
-			border-radius:17px;
-			background-color: #cc0000;
-			
-		}
-	
-		.btn_cel:hover {background-color: #E96F84; }
-		
-		.btn_cel:active {
-			position:relative;
-			top:1px;
-		}
-		
-		#joinButton {
-			width: 70px;
-			height: 35px;
-			font-size: 15px;
-			border-radius: 17px;
-			border: none;
-			background-color: #25556C;
-			font-family:'Cafe24Supermagic-Bold-v1.0';
-			color: #fff;
-			font-size:15px;
-		}
-		
-		#joinButton:hover { background-color: #51a1c7; }
-		
-		
-		#joinButton:active { position:relative; top:1px; }
-		
-		#resetButton {
-			width: 70px;
-			height: 35px;
-			font-size: 15px;
-			border-radius:17px;
-			border: none;
-			font-family:'Cafe24Supermagic-Bold-v1.0';
-			color: #fff;
-			font-size:15px;
-			padding:6px 13px;
-			background-color: #cc0000;
-		}
-		
-		#resetButton:hover {background-color: #E96F84; }
-		
-		#resetButton:active {
-			position:relative;
-			top:1px;
-		}
-		
+      #insert-button {
+         margin-right: 50px;
+      }
+      #info, #info1 {
+           width: 15px;
+           height: 15px;
+      }
+      /* 팝업 창 내 내용 보여주는 스타일 */
+      #contract{
+         overflow-y: scroll;
+         height: 300px;
+         border-radius: 5px;
+         border: 1px solid black;
+      }
+      /* 개인정보 확인 여부  */
+      #info:hover, #info1:hover {
+         cursor: default;
+      }
     </style>
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 <div class="foot">
-	<div class="container">
-		<div class="join-form">
-			<h1 class="text-center">회원 가입</h1><hr/>
-			
-			<form id="join-form">
+   <div class="container">
+      <div class="join-form">
+         <h1 class="text-center">회원 가입</h1><hr/>
+         
+         <form id="join-form" method="post" action="/member/join">
                 <div class="form-group">
-					<label class="control-label">아이디</label>
-					<input type="text" class="form-control" id="m_id" name="m_id" placeholder="이메일을 입력하세요">
-				</div>
+               <label class="control-label">아이디</label>
+               <input type="text" class="form-control" id="m_id" name="m_id" placeholder="이메일을 입력하세요">
+            </div>
                 <div class="form-group">
-					<label class="control-label">실시간 중복확인</label>
-					<input type="text" class="form-control msg" id="msg" name="msg" readonly placeholder="결과 확인">
-				</div>
-				
-				<div class="form-group">
-					<label class="control-label">비밀번호</label>
-					<input type="password" class="form-control" id="m_pw" name="m_pw">
-				</div>
-				<div class="form-group">
-					<label class="control-label">비밀번호 확인</label>
-					<input type="password" class="form-control" id="m_repw" name="m_repw">
-				</div>
-				
-				<div class="form-group">
-					<label class="control-label">이름</label>
-					<input type="text" class="form-control" id="m_name" name="m_name">
-				</div>
-				<div class="form-group">
-					<label class="control-label">닉네임</label>
-					<div class="input-group">
-						<input type="text" class="form-control" id="m_nickname" name="m_nickname">
-						<span class="input-group-btn">
-							<button class="btn btn-info" type="button" id="nickCheck">중복확인</button>
-						</span>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label">연락처</label>
-					<input type="text" class="form-control" id="m_tel" name="m_tel" placeholder="ex) 010-1234-5678">
-				</div>
-				<div class="form-group">
-					<label class="control-label">생년월일</label>
-					<input type="text" class="form-control" id="m_birthdate" name="m_birthdate" placeholder="ex) 19980505">
-				</div>
-				<div class="form-group">
-					<label>성별</label><br>
-					<label class="control-label">
-						<input type="radio" name="m_gender" value="male"> 남성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					</label>
-					<label class="control-label">
-						<input type="radio" name="m_gender" value="female"> 여성
-					</label>
-				</div>
-				<div class="form-group">
-					<label class="control-label">우편번호</label>
-					<input type="text" class="form-control" id="m_zipcode" name="m_zipcode" readonly>
-					<input type="button" class="form-control" onclick="daumZipCode()" value="우편번호검색"/>
-				</div>
-				<div class="form-group">
-					<label class="control-label">주소</label>
-					<input type="text" class="form-control" id="m_address" name="m_address">
-				</div>
-				<div class="form-group">
-					<label class="control-label">상세주소</label>
-					<input type="text" class="form-control" id="m_addressDetail" name="m_addressDetail">
-				</div><br>
+               <label class="control-label">실시간 중복확인</label>
+               <input type="text" class="form-control msg" id="msg" name="msg" readonly placeholder="결과 확인">
+            </div>
+            
+            <div class="form-group">
+               <label class="control-label">비밀번호</label>
+               <input type="password" class="form-control" id="m_pw" name="m_pw">
+            </div>
+            <div class="form-group">
+               <label class="control-label">비밀번호 확인</label>
+               <input type="password" class="form-control" id="m_repw" name="m_repw">
+            </div>
+            
+            <div class="form-group">
+               <label class="control-label">이름</label>
+               <input type="text" class="form-control" id="m_name" name="m_name">
+            </div>
+            <div class="form-group">
+               <label class="control-label">닉네임</label>
+               <div class="input-group">
+                  <input type="text" class="form-control" id="m_nickname" name="m_nickname">
+                  <span class="input-group-btn">
+                     <button class="btn btn-info" type="button" id="nickCheck">중복확인</button>
+                  </span>
+               </div>
+            </div>
+            <div class="form-group">
+               <label class="control-label">연락처</label>
+               <input type="text" class="form-control" id="m_tel" name="m_tel" placeholder="ex) 010-1234-5678">
+            </div>
+            <div class="form-group">
+               <label class="control-label">생년월일</label>
+               <input type="text" class="form-control" id="m_birthdate" name="m_birthdate" placeholder="ex) 19980505">
+            </div>
+            <div class="form-group">
+               <label>성별</label><br>
+               <label class="control-label">
+                  <input type="radio" name="m_gender" value="male"> 남성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+               </label>
+               <label class="control-label">
+                  <input type="radio" name="m_gender" value="female"> 여성
+               </label>
+            </div>
+            <div class="form-group">
+               <label class="control-label">우편번호</label>
+               <input type="text" class="form-control" id="m_zipcode" name="m_zipcode" readonly>
+               <input type="button" class="form-control" onclick="daumZipCode()" value="우편번호검색"/>
+            </div>
+            <div class="form-group">
+               <label class="control-label">주소</label>
+               <input type="text" class="form-control" id="m_address" name="m_address">
+            </div>
+            <div class="form-group">
+               <label class="control-label">상세주소</label>
+               <input type="text" class="form-control" id="m_addressDetail" name="m_addressDetail">
+            </div><br>
 
-				<div class="form-group">
+            <div class="form-group">
                     <label class="control-label">개인정보 수집 및 이용에 동의하십니까?</label>
                     <div class="checkbox">
                         <label data-toggle="modal" data-target="#info_modal" >
@@ -214,13 +135,13 @@
                     </div>
                 </div>
 
-				<div class="join-button-group">
-					<button type="submit" class="joinButton" id="joinButton" disabled="disabled">회원가입</button>
-					<button type="reset" class="cancel" id="resetButton">취소</button>
-				</div>
-				
-				<!-- Modal -->
-				<div class="modal fade" role="dialog" tabindex="-1" id="info_modal">
+            <div class="join-button-group">
+               <button type="submit" class="btn btn-primary joinButton" id="joinButton" disabled="disabled">회원가입</button>
+               <button type="reset" class="btn btn-danger cancel" id="resetButton">취소</button>
+            </div>
+            
+            <!-- Modal -->
+            <div class="modal fade" role="dialog" tabindex="-1" id="info_modal">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -322,15 +243,15 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn_sub" data-dismiss="modal" id="cancel"><span>취소</span></button>
-                                <button type="button" class="btn_cel" data-dismiss="modal" id="submit"><span>동의</span></button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancel"><span>취소</span></button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit"><span>동의</span></button>
                             </div>
                         </div>
                     </div>
                 </div>
 
 
-				<div class="modal fade" role="dialog" tabindex="-1" id="info_modal1">
+            <div class="modal fade" role="dialog" tabindex="-1" id="info_modal1">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -432,18 +353,19 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn_sub" data-dismiss="modal" id="cancel1"><span>취소</span></button>
-                                <button type="button" class="btn_cel" data-dismiss="modal" id="submit1"><span>동의</span></button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancel1"><span>취소</span></button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit1"><span>동의</span></button>
                             </div>
                         </div>
                     </div>
                 </div>
-				<!-- modal -->
-			</form>
-		</div>
-	</div>
-	<br><br>
-</div>	
+            <!-- modal -->
+         </form>
+      </div>
+   </div>
+   <br><br>
+</div>
+   
 <%@ include file="../include/footer.jsp" %>
 </body>
 
@@ -468,12 +390,12 @@ function allCheck() {
 
 $(document).ready(function() {
 
-	// 회원가입취소 버튼을 누르면 
+   // 회원가입취소 버튼을 누르면 
    $(".cancel").on("click", function() {
-	location.href="/member/login";
-	});
+   location.href="/member/login";
+   });
 
-	// 실시간 중복 검사
+   // 실시간 중복 검사
    $("#m_id").on("input", function() {
        var inputID = $('#m_id').val();
 
@@ -483,7 +405,7 @@ $(document).ready(function() {
            dataType: "json",
            data: {"m_id": inputID},
            success: function(data) {
-        	   // alert(inputID + ":" + data);
+              // alert(inputID + ":" + data);
                if (inputID === "" || !inputID.includes("@") || (!inputID.includes(".com") && !inputID.includes(".net"))) {
                    $(".joinButton").prop("disabled", true);
                    $("#msg").val("이메일 형식이 아닙니다.");
@@ -499,81 +421,129 @@ $(document).ready(function() {
                }
            },
            error: function(info) {
-           	
-			},
+              
+         },
            complete: function(info) {
                allCheck();
            }
        });
    });
-	
+   
+// 닉네임 중복 체크
+   $("#nickCheck").on("click", function() {
+   
+   var nickname = $("#m_nickname").val();
+
+   if (!nickname) { // 닉네임이 비어 있을 경우
+      alert("닉네임을 입력하십시오.");
+      $("#m_nickname").focus();
+      return;
+   }
+
+      $.ajax({
+         url:      "/member/nickCheck",
+         type:      "post",
+         dataType:   "json",
+         data:      {"m_nickname" : nickname},
+         success:   function(data) {
+            
+            if(data == 1) {
+               alert("이미 사용 중인 닉네임입니다.\n다른 닉네임을 입력하십시오.");
+               $("#m_nickname").focus();
+            } else if(data == 0) {
+               alert("사용 가능한 닉네임입니다.");
+               $("#m_nickname").attr("value", "Y");
+               $("#m_tel").focus();
+               nickIsValid = true;
+            }
+            allCheck();
+         }
+      });
+   });
+   
 // 가입하기 버튼을 클릭했을 경우
 
 // 빈칸 확인
-	$(".joinButton").on("click", function() {
-		$("#join-form").prop("action", "/member/join");
-		$("#join-form").prop("method", "post");
-	// 아이디, 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
-	// 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
-	
-		let ok = true;
-		
-		if($("#m_id").val() == "") {
-			alert("아이디를 입력하셔야 합니다.");
-			$("#m_id").focus();
-			ok = false;
-		}
-		if($("#m_pw").val() == "") {
-			alert("비밀번호를 입력하셔야 합니다.");
-			$("#m_pw").focus();
-			ok = false;
-		}
-		if($("#m_repw").val() == "") {
-			alert("비밀번호확인을 입력하셔야 합니다.");
-			$("#m_repw").focus();
-			ok = false;
-		}
-		if($("#m_pw").val() != $("#m_repw").val()) {
-	         alert("비밀번호 확인이 다릅니다.");
-	         $("#m_repw").focus();
-	         ok = false;
-	    }
-		if($("#m_name").val() == "") {
-			alert("이름을 입력하셔야 합니다.");
-			$("#m_name").focus();
-			ok = false;
-		}
-		if($("#m_nickname").val() == "") {
-			alert("닉네임을 입력하셔야 합니다.");
-			$("#m_nickname").focus();
-			ok = false;
-		}
-		if($("#m_tel").val() == "") {
-			alert("연락처를 입력하셔야 합니다.");
-			$("#m_tel").focus();
-			ok = false;
-		}
-		if($("#m_birthdate").val() == "") {
-			alert("생년월일을 입력하셔야 합니다.");
-			$("#m_birthdate").focus();
-			ok = false;
-		}
-		if($("#m_address").val() == "") {
-			alert("주소를 입력하셔야 합니다.");
-			$("#m_address").focus();
-			ok = false;
-		}
-		
-		document.getElementById("m_address").value = $("#m_address").val();
-	
-		if(ok) {
-			alert("회원 가입이 완료되었습니다.");
-			$("#join-form").submit();
-		}
-		
-	});
+   $(".joinButton").on("click", function(event) {
+      
+      // event.preventDefault();
+      
+   //   $("#join-form").prop("action", "/member/join");
+   //   $("#join-form").prop("method", "post");
+   // 아이디, 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
+   // 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
+   
+      let ok = true;
+      
+      if($("#m_id").val() == "") {
+         alert("아이디를 입력하셔야 합니다.");
+         $("#m_id").focus();
+         ok = false;
+         return false;
+      }
+      if($("#m_pw").val() == "") {
+         alert("비밀번호를 입력하셔야 합니다.");
+         $("#m_pw").focus();
+         ok = false;
+         return false;
+      }
+      if($("#m_repw").val() == "") {
+         alert("비밀번호확인을 입력하셔야 합니다.");
+         $("#m_repw").focus();
+         ok = false;
+         return false;
+      }
+      if($("#m_pw").val() != $("#m_repw").val()) {
+            alert("비밀번호 확인이 다릅니다.");
+            $("#m_repw").focus();
+            ok = false;
+         return false;
+       }
+      if($("#m_name").val() == "") {
+         alert("이름을 입력하셔야 합니다.");
+         $("#m_name").focus();
+         ok = false;
+         return false;
+      }
+      if($("#m_nickname").val() == "") {
+         alert("닉네임을 입력하셔야 합니다.");
+         $("#m_nickname").focus();
+         ok = false;
+         return false;
+      }
+      if($("#m_tel").val() == "") {
+         alert("연락처를 입력하셔야 합니다.");
+         $("#m_tel").focus();
+         ok = false;
+         return false;
+      }
+      if($("#m_birthdate").val() == "") {
+         alert("생년월일을 입력하셔야 합니다.");
+         $("#m_birthdate").focus();
+         ok = false;
+         return false;
+      }
+      if($("#m_address").val() == "") {
+         alert("주소를 입력하셔야 합니다.");
+         $("#m_address").focus();
+         ok = false;
+         return false;
+      }
+      
+      document.getElementById("m_address").value = $("#m_address").val();
+   
+      if(오케이) {
+          alert("회원 가입이 완료되었습니다.");
+          console.log("Submitting form...");
+          // $("#join-form").submit(); // 폼 제출 동작 실행
+          console.log("Form should be submitted.");
+      } else {
+         return false;
+      }
+      
+   });
 
-	// 약관 동의
+   // 약관 동의
 
        var smt = $("#submit");
        var ccl = $("#cancel");
@@ -603,41 +573,9 @@ $(document).ready(function() {
 });
 
 
-// 닉네임 중복 체크
-	$("#nickCheck").on("click", function() {
-	
-	var nickname = $("#m_nickname").val();
-
-	if (!nickname) { // 닉네임이 비어 있을 경우
-		alert("닉네임을 입력하십시오.");
-		$("#m_nickname").focus();
-		return;
-	}
-
-	$.ajax({
-		url:		"/member/nickCheck",
-		type:		"post",
-		dataType:	"json",
-		data:		{"m_nickname" : nickname},
-		success:	function(data) {
-			
-			if(data == 1) {
-				alert("이미 사용 중인 닉네임입니다.\n다른 닉네임을 입력하십시오.");
-				$("#m_nickname").focus();
-			} else if(data == 0) {
-				alert("사용 가능한 닉네임입니다.");
-				$("#m_nickname").attr("value", "Y");
-				$("#m_tel").focus();
-				nickIsValid = true;
-			}
-			allCheck();
-		}
-	});
-});
-
 </script>
 
-<!-- 우편번호 검색 -->
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 function daumZipCode() {
@@ -645,42 +583,42 @@ function daumZipCode() {
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
 
-			// 각 주소의 노출규칙에 따라서 주소를 조합한다.
-			// 내려오는 변수가 값이 없을 경우에는 공백('') 값을 가지므로, 이를 참고해서 분기한다.
-			var fullAddress	= '';	// 최종   주소 변수
-			var subAddress	= '';	// 조합형 주소 변수
-			
-			// 사용자가 선택한 주소의 타입에 따라서 해당 주소값을 가져온다.
-			if(data.userSelectedType == 'R') {	// 도로명 주소를 선택한 경우
-				fullAddress = data.roadAddress;
-			} else {	// 지번 주소를 선택한 경우
-				fullAddress	= data.jibunAddress;
-			}
-			
-			// 사용자가 선택한 주소가 도로명 타입일 떄는 주소를 조합한다.
-			if(data.userSelectedType == 'R') {
-				// 법정동명이 있을 경우 추가한다.
-				if(data.bname != '') {
-					subAddress += data.bname;
-				}
-				// 건물명이 있을 경우에 추가한다.
-				if(data.buildingName != '') {
-					subAddress += (subAddress != '' ? ', ' + data.buildingName : data.buildingName);
-				}
-				// 조합형 주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-				fullAddress += (subAddress != '' ? '(' + subAddress + ')' : '');
-			} // End - if(data.userSelectedType == 'R')
-				
-			// 추출한 우편번호와 주소정보를 입력항목에 나타낸다.
-			document.getElementById('m_zipcode').value	= data.zonecode;
-			document.getElementById('m_address').value	= fullAddress;
-			
-			// 커서를 상세주소 입력란으로 이동시킨다.
-			document.getElementById('m_addressDetail').focus();
+         // 각 주소의 노출규칙에 따라서 주소를 조합한다.
+         // 내려오는 변수가 값이 없을 경우에는 공백('') 값을 가지므로, 이를 참고해서 분기한다.
+         var fullAddress   = '';   // 최종   주소 변수
+         var subAddress   = '';   // 조합형 주소 변수
+         
+         // 사용자가 선택한 주소의 타입에 따라서 해당 주소값을 가져온다.
+         if(data.userSelectedType == 'R') {   // 도로명 주소를 선택한 경우
+            fullAddress = data.roadAddress;
+         } else {   // 지번 주소를 선택한 경우
+            fullAddress   = data.jibunAddress;
+         }
+         
+         // 사용자가 선택한 주소가 도로명 타입일 떄는 주소를 조합한다.
+         if(data.userSelectedType == 'R') {
+            // 법정동명이 있을 경우 추가한다.
+            if(data.bname != '') {
+               subAddress += data.bname;
+            }
+            // 건물명이 있을 경우에 추가한다.
+            if(data.buildingName != '') {
+               subAddress += (subAddress != '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            // 조합형 주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+            fullAddress += (subAddress != '' ? '(' + subAddress + ')' : '');
+         } // End - if(data.userSelectedType == 'R')
+            
+         // 추출한 우편번호와 주소정보를 입력항목에 나타낸다.
+         document.getElementById('m_zipcode').value   = data.zonecode;
+         document.getElementById('m_address').value   = fullAddress;
+         
+         // 커서를 상세주소 입력란으로 이동시킨다.
+         document.getElementById('m_addressDetail').focus();
         }
     }).open({
-    	// 우편번호 팝업 창이 여러개 뜨는 것을 방지하기 위해서 popupName을 사용한다.
-		popupName:	'postcodePopup'
+       // 우편번호 팝업 창이 여러개 뜨는 것을 방지하기 위해서 popupName을 사용한다.
+      popupName:   'postcodePopup'
     });
 }
 </script>
