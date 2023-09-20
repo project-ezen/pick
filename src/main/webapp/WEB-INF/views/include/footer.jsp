@@ -49,7 +49,7 @@
 
 <footer class="jumbotron" id="footer_ft">
         <div class="row" style="width: 100%; overflow: hidden;" id="footer_ff">
-            <div class="col-sm-3 logo"><h1 style="margin-top:100px;"><a class="ff" href="/">마녀의 PICK</a></h1></div>
+            <div class="col-sm-3 logo"><h1 style="margin-top:50px;"><a class="footer" href="/"><img style="height:150px;"src="${path}/resources/images/logo.png"></a></h1></div>
             <div class="col-sm-3 info">
 			<br/>
                 <b>(주)마녀의 Pick</b><br>
