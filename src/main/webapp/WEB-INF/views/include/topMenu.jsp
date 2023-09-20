@@ -61,7 +61,7 @@
 					<%-- 로그인이 되지 않은 경우 --%>
 					<c:when test="${ member == null }">
 						<li><a class="tt" data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="javascript:fn_loginForm('${member }', '${path }/member/login')">LogIn</a></li>
-						<li><a class="tt" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/join">Sign In</a></li>
+						<li><a class="tt" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/join">Join</a></li>
 					</c:when>
 				</c:choose>
 			</ul>

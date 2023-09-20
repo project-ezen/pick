@@ -6,44 +6,124 @@
     <title>회원 가입</title>
     <%@ include file="../include/header.jsp" %>
     <style>
-       .container {
-          width: 500px;
-       }
-       .foot {padding-bottom: 100px; padding-top: 100px; }
-    
-       .container { background-color: rgba(255, 255, 255, 0.88); }
-    
-        .join-form {
-            margin: auto;
-            padding: 30px;
-        }
-        .form-group {
-         width: 350px;
-         margin: auto;
-         margin-bottom: 10px;
-        }
-        .join-button-group {
-            text-align: center;
-            margin-top: 20px;
-        }
-      #insert-button {
-         margin-right: 50px;
-      }
-      #info, #info1 {
-           width: 15px;
-           height: 15px;
-      }
-      /* 팝업 창 내 내용 보여주는 스타일 */
-      #contract{
-         overflow-y: scroll;
-         height: 300px;
-         border-radius: 5px;
-         border: 1px solid black;
-      }
-      /* 개인정보 확인 여부  */
-      #info:hover, #info1:hover {
-         cursor: default;
-      }
+    .container {
+       width: 500px;
+    }
+    .foot {padding-bottom: 100px; padding-top: 100px; }
+ 
+    .container { background-color: rgba(255, 255, 255, 0.88); }
+ 
+    .join-form {
+        margin: auto;
+        padding: 30px;
+    }
+    .form-group {
+     width: 350px;
+     margin: auto;
+     margin-bottom: 10px;
+    }
+    .join-button-group {
+        text-align: center;
+        margin-top: 20px;
+    }
+    #insert-button {
+       margin-right: 50px;
+    }
+    #info, #info1 {
+         width: 15px;
+         height: 15px;
+    }
+    /* 팝업 창 내 내용 보여주는 스타일 */
+    #contract{
+       overflow-y: scroll;
+       height: 300px;
+       border-radius: 5px;
+       border: 1px solid black;
+    }
+    /* 개인정보 확인 여부  */
+    #info:hover, #info1:hover {
+       cursor: default;
+    }
+    /*버튼*/
+    .joinButton {
+		width: 75px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #25556C;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+	}
+	.joinButton:hover { background-color: #51a1c7; }
+	.joinButton:active {
+		position:relative;
+		top:1px;
+	}
+	
+	.cancel {
+		width: 70px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+		background-color: #cc0000;
+		
+	}
+
+	.cancel:hover { background-color: #E96F84; }
+	
+	.cancel:active {
+		position:relative;
+		top:1px;
+	}
+	
+	/* 약관버튼 */
+	.btn_sub {
+		width: 80px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #25556C;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+	}
+	.btn_sub:hover { background-color: #51a1c7; }
+	.btn_sub:active {
+		position:relative;
+		top:1px;
+	}
+	
+	.btn_can {
+		width: 80px;
+		height: 35px;
+		font-size: 15px;
+		border-radius: 5px;
+		border: none;
+		background-color: #cc0000;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:15px;
+		padding:6px 13px;
+		border-radius:17px;
+	}
+	.btn_can:hover { background-color: #E96F84; }
+	.btn_can:active {
+		position:relative;
+		top:1px;
+	}
     </style>
 </head>
 <body>
@@ -136,8 +216,8 @@
                 </div>
 
             <div class="join-button-group">
-               <button type="submit" class="btn btn-primary joinButton" id="joinButton" disabled="disabled">회원가입</button>
-               <button type="reset" class="btn btn-danger cancel" id="resetButton">취소</button>
+               <button type="submit" class="btn joinButton" id="joinButton" disabled="disabled">회원가입</button>
+               <button type="reset" class="btn cancel" id="resetButton">취소</button>
             </div>
             
             <!-- Modal -->
@@ -243,8 +323,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancel"><span>취소</span></button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit"><span>동의</span></button>
+                                <button type="button" class="btn_can" data-dismiss="modal" id="cancel"><span>취소</span></button>
+                                <button type="button" class="btn_sub" data-dismiss="modal" id="submit"><span>동의</span></button>
                             </div>
                         </div>
                     </div>
@@ -353,8 +433,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancel1"><span>취소</span></button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" id="submit1"><span>동의</span></button>
+                                <button type="button" class="btn_can" data-dismiss="modal" id="cancel1"><span>취소</span></button>
+                                <button type="button" class="btn_sub" data-dismiss="modal" id="submit1"><span>동의</span></button>
                             </div>
                         </div>
                     </div>
