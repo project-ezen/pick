@@ -225,7 +225,7 @@ $(document).ready(function() {
 								+ '<td><a class="orderNum">' + data.order[idx].order_number + '</a></td>'
 								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
 								+ '<a href="#" class="thumbnail">'
-								+ '<input type="image" src="${path }/imgdownload?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="image" src="/resources/product_images/' + data.product[idx].product_image + '" width="161" height="133" disabled>'
 								+ '<input type="hidden" class="orderId" name="orderId" value="' + data.order[idx].order_id + '">'
 								+ '</a></div></td>'
 								+ '<td class="pdtName">' + data.product[idx].product_name + '</td>'
@@ -235,7 +235,7 @@ $(document).ready(function() {
 					// 배송중
 					if(data.order[idx].order_status == 'delivery-progressing'){
 						orderedHTML += '<td>'
-									+ '<input type="button" class="btn btn-default cancel" data-toggle="modal" data-target=".cancel' + idx + '" value="취소">'
+									+ '<input type="button" class="btn btn-default cancel_btn" data-toggle="modal" data-target=".cancel' + idx + '" value="취소">'
 									+ '<div class="modal fade cancel' + idx + '">'
 									+ '<div class="modal-dialog">'
 									+ '<div class="modal-content">'
@@ -245,14 +245,14 @@ $(document).ready(function() {
 									+ '</div>'
 									+ '<div class="modal-body"><textarea class="cancel_reason" name="cancel_reason" placeholder="please write the reason"></textarea></div>'
 									+ '<div class="modal-footer">'
-									+ '<input type="button" class="btn btn-primary cancel_order" data-dismiss="modal" value="확인" disabled>'
+									+ '<input type="button" class="btn btn-primary cancel_order" data-dismiss="modal" value="확인">'
 									+ '</div></div></div></div>'
 					}
 					// 배송 완료
 					else if(data.order[idx].order_status == 'delivery-successed'){
 						orderedHTML += '<td>'
-									+ '<input type="button" class="btn btn-default change" data-toggle="modal" data-target=".change' + idx + '" value="교환">'
-									+ '<input type="button" class="btn btn-default refund" data-toggle="modal" data-target=".refund' + idx + '" value="반품">'
+									+ '<input type="button" class="btn btn-default change_btn" data-toggle="modal" data-target=".change' + idx + '" value="교환">'
+									+ '<input type="button" class="btn btn-default refund_btn" data-toggle="modal" data-target=".refund' + idx + '" value="반품">'
 									+ '<div class="modal fade change' + idx + '">'
 									+ '<div class="modal-dialog">'
 									+ '<div class="modal-content">'
@@ -262,7 +262,7 @@ $(document).ready(function() {
 									+ '</div>'
 									+ '<div class="modal-body"><textarea class="change_reason" name="change_reason" placeholder="please write the reason"></textarea></div>'
 									+ '<div class="modal-footer">'
-									+ '<input type="button" class="btn btn-primary change_order" data-dismiss="modal" value="확인" disabled>'
+									+ '<input type="button" class="btn btn-primary change_order" data-dismiss="modal" value="확인">'
 									+ '</div></div></div></div>'
 									+ '<div class="modal fade refund' + idx + '">'
 									+ '<div class="modal-dialog">'
@@ -273,7 +273,7 @@ $(document).ready(function() {
 									+ '</div>'
 									+ '<div class="modal-body"><textarea class="refund_reason" name="refund_reason" placeholder="please write the reason"></textarea></div>'
 									+ '<div class="modal-footer">'
-									+ '<input type="button" class="btn btn-primary refund_order" data-dismiss="modal" value="확인" disabled>'
+									+ '<input type="button" class="btn btn-primary refund_order" data-dismiss="modal" value="확인">'
 									+ '</div></div></div></div>'
 					}
 					orderedHTML += '</td></tr>';
@@ -324,7 +324,7 @@ $(document).ready(function() {
 								+ '<td><a class="orderNum">' + data.cancel[idx].order_number + '</a></td>'
 								+ '<td><div class="col-md-12 text-center" id="item_thumbnail">'
 								+ '<a href="#" class="thumbnail">'
-								+ '<input type="image" src="${path }/imgdownload?imageFile=' + data.product[idx].product_image + '" width="161" height="133" disabled>'
+								+ '<input type="image" src="/resources/product_images/' + data.product[idx].product_image + '" width="161" height="133" disabled>'
 								+ '<input type="hidden" name="orderId" value="' + data.cancel[idx].order_id + '">'
 								+ '</a></div></td>'
 								+ '<td>' + data.product[idx].product_name + '</td>'
@@ -453,20 +453,41 @@ $(document).ready(function() {
 //-----------------------------------------------------------------------------------------------------------------------------------
 	// 사유가 없는 경우 취소/환불/교환 불가
 	$(document).on("input", ".cancel_reason, .change_reason, .refund_reason", function(){
-		if($(".cancel_reason").text() != null || $(".cancel_reason").text() != "") {
-			$(".cancel_order").prop("disabled", false);
-		} else if($(".cancel_reason").text() == null || $(".cancel_reason").text() == "") {
-			$(".cancel_order").prop("disabled", true);
-		}
-		if($(".change_reason").text() != null || $(".change_reason").text() != "") {
-			$(".change_order").prop("disabled", false);
-		} else if($(".change_reason").text() == null || $(".change_reason").text() == "") {
-			$(".change_order").prop("disabled", true);
-		}
-		if($(".refund_reason").text() != null || $(".refund_reason").text() != "") {
-			$(".refund_order").prop("disabled", false);
-		} else if($(".refund_reason").text() == null || $(".refund_reason").text() == "") {
-			$(".refund_order").prop("disabled", true);
+		if ($(this).hasClass("cancel_reason")) {
+	        if ($(this).val() !== "") {
+	            $(".cancel_order").prop("disabled", false);
+	        } else {
+	            $(".cancel_order").prop("disabled", true);
+	        }
+	    }
+	    
+	    if ($(this).hasClass("change_reason")) {
+	        if ($(this).val() !== "") {
+	            $(".change_order").prop("disabled", false);
+	        } else {
+	            $(".change_order").prop("disabled", true);
+	        }
+	    }
+
+	    if ($(this).hasClass("refund_reason")) {
+	        if ($(this).val() !== "") {
+	            $(".refund_order").prop("disabled", false);
+	        } else {
+	            $(".refund_order").prop("disabled", true);
+	        }
+	    }
+	});
+	$(document).on("click", ".cancel_btn, .change_btn, .refund_btn", function() {
+		let refuseOrder = $(this).data("target");
+		
+		console.log(refuseOrder);
+		
+		if($(refuseOrder).find(".cancel_reason").hasClass("cancel_reason")){
+			if($(refuseOrder).find(".cancel_reason").val() !== "") {
+				$(".cancel_order").prop("disabled", false);
+	        } else {
+	            $(".cancel_order").prop("disabled", true);
+	        }
 		}
 	});
 });
