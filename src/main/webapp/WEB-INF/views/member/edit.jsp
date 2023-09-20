@@ -159,7 +159,7 @@
 				</div>
 				<div class="update-button-group">
 					<button type="submit" class="submit" id="editButton">수정</button>
-					<button type="reset" class="cancel" id="resetButton">취소</button>
+					<button type="button" class="cancel" id="resetButton">취소</button>
 				</div>
 			</form>
 		</div>
@@ -208,6 +208,11 @@ $(document).ready(function() {
 	$(".submit").on("click", function() {
 		$("#update-form").prop("action", "/member/edit");
 		$("#update-form").prop("method", "post");
+	});
+	
+	// 취소하기 버튼을 클릭했을 경우
+	$(".cancel").on("click", function() {
+		window.location.href = "/member/mypage";
 	});
 	
 	

@@ -122,7 +122,7 @@ public class MemberController {
 				memberService.join(memberDTO);
 			}
 		} catch (Exception e) {
-			throw new RuntimeException();
+			throw new RuntimeException("Error during member registration", e);
 		}
 		
 		return "redirect:/";
