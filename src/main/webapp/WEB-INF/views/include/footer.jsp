@@ -33,12 +33,23 @@
  	text-decoration: none;
  	}
 
+	.ff {
+ 	text-decoration: none;
+ 	font-size: 50px;
+ 	text-align: center;
+ 	display: inline-block; 
+ 	color: #fff; 
+ 	text-decoration: none;
+ 	cursor:pointer;
+	}
+	.ff:hover 	{ text-decoration: none; color:#fff;  text-shadow:6px 2px 2px #25556C;;  }
+	
 </style>
 
 
 <footer class="jumbotron" id="footer_ft">
         <div class="row" style="width: 100%; overflow: hidden;" id="footer_ff">
-            <div class="col-sm-3 logo"><h2><a class="footer" href="/"><img style="height:100px; width:100px;"src="${path}/resources/images/alcohol.png"></a></h2></div>
+            <div class="col-sm-3 logo"><h1 style="margin-top:100px;"><a class="ff" href="/">마녀의 PICK</a></h1></div>
             <div class="col-sm-3 info">
 			<br/>
                 <b>(주)마녀의 Pick</b><br>
