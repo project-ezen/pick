@@ -14,14 +14,16 @@
     }
 }
 
-.tt { color: white;  }
+.tt { color: white; font-size: 20px; }
 
 .tt:hover { background-color: rgba( 255, 255, 255, 0 ); }
 
 
-.bb {  color: white; font-size: 30px;  }
+.bb { color: white; font-size: 35px; }
 
-.bb:hover { text-decoration: none; color:#fff;  text-shadow:2px 2px 2px #8aa2b2;}
+.bb:hover { text-decoration: none; color:#fff;  text-shadow:2px 2px 2px #8aa2b2; }
+
+#lilist {font-size: 20px;}
 
 </style>
 <section class="navbar navbar-light fixed-top">

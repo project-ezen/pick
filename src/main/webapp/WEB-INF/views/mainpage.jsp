@@ -32,15 +32,12 @@
           max-height: 1000px; /* 충분히 큰 값을 설정하여 서서히 펼쳐지도록 만듭니다 */
         }
 
-        ul {
-            list-style: none;
-        }
-        li {
-            list-style: none;
-        }
-        .item {
-            font-size: 30px;
-        }
+        ul { list-style: none; }
+        
+        li { list-style: none; }
+        
+        .item { font-size: 30px;  }
+        
         #logindiv {
             position: fixed;
             bottom: 10px;
@@ -48,15 +45,10 @@
             font-size: large;
             color:white;
         }
-        a:link {
-            color: white;
-            text-decoration-line: none;
-        }
-        a:visited {
-
-           color: white;
-           text-decoration-line: none;
-        }
+        a:link { color: white; text-decoration-line: none; }
+        
+        a:visited {  color: white;  text-decoration-line: none;  }
+        
         #solo 	{ font-size: 25px; }
         
         .AA 	{ font-size: 20px; }
@@ -71,7 +63,7 @@
     <div class="bg">
         <div class="container-fluid">
             <div class="col-sm-4">
-                <h1 style="margin-top: 50px;">마녀의 pick</h1>
+                <h1 style="margin-top: 50px; font-size: 50px;">마녀의 pick</h1>
                 <form id="formList" action="/sole/sole" method="get">
                    <input type="hidden" name="alcohole_category"/>
                 </form>
