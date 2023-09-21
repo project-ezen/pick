@@ -79,7 +79,7 @@
 								<td class="form-group" style="vertical-align: middle;">
 									<div class="col-md-12 text-center" id="item_thumbnail">
 									    <a href="#" class="thumbnail">
-									        <input type="image" src="${path }/imgdownload?imageFile=${display.image }" width="161" height="133" disabled>
+									        <input type="image" src="/resources/product_images/${display.image }" width="161" height="133" disabled>
 									    </a>
 									</div>
 								</td>
@@ -403,14 +403,14 @@ $(document).ready(function() {
         info.prop("checked", true);
         info.prop("value", true);
     	$("#pay").prop("disabled", false);
-        alert(info.is(":checked"));
+        // alert(info.is(":checked"));
     });
 	// 구매 서약 동의 하지 않은 경우
     cancel.on("click", function() {
         info.prop("checked", false);
         info.prop("value", false);
    		$("#pay").prop("disabled", true);
-        alert(info.is(":checked"));
+        // alert(info.is(":checked"));
     });
 //-----------------------------------------------------------------------------------------------------------------
 	// $("#pay").click(requestPay());

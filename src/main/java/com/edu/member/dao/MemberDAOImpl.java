@@ -115,6 +115,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<MemberDTO> selectMember() throws Exception {
 		return sqlSession.selectList(namespace + ".selectMember");
 	}
+	
+	// 회원 탈퇴
+	@Override
+	public void delete(MemberDTO memberDTO) throws Exception {
+		sqlSession.delete(namespace + ".delete", memberDTO.getM_id());
+	}
 //-------------------------------------------------------------------------------------
 	//내가 쓴 게시물
 
