@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ImgDownloadController {
 	// 업로드된 폴더와 위치가 같아야 한다.
-	private static final String ARTICLE_IMAGE_REPO = "resources\\product_images";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\team\\pick\\src\\main\\webapp\\resources\\product_images";
 	
 	// 이미지 파일 다운로드
 	@RequestMapping(value="/imgdownload")
