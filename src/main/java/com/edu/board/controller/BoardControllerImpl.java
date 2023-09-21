@@ -174,14 +174,6 @@ public class BoardControllerImpl implements BoardController {
 		try {
 			boardService.create(articleMap);
 			System.out.println("ggggggggg ArticleMap: " + articleMap);
-			if(fileRealName != null && fileRealName.length() != 0) {
-				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"thumb"+ "\\" + "t_" + fileRealName);
-				srcDir.createNewFile();
-			}
-			if(safeFile != null && safeFile.length() != 0) {
-				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"contentImage"+ "\\" + safeFile);
-				srcDir.createNewFile();
-			}
 			
 			message	 = "<script>";
 			message	+= "alert('새로운 글을 추가하였습니다.');";
@@ -189,14 +181,6 @@ public class BoardControllerImpl implements BoardController {
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "thumb" + "\\" + "t_" + fileRealName);
-			srcFile.delete();
-			
-			if(safeFile != null && safeFile.length() != 0) {
-				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"contentImage"+ "\\" + safeFile);
-				srcDir.delete();
-			}
-			
 			
 			message	 = "<script>";
 			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
