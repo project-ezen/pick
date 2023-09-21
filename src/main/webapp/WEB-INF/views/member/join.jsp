@@ -501,7 +501,8 @@ $(document).ready(function() {
                allCheck();
            },
            error: function(info) {
-			}
+              alert("error");
+           }
        });
    });
 	
@@ -607,12 +608,13 @@ $(document).ready(function() {
       }
       
       document.getElementById("m_address").value = $("#m_address").val();
-   
+
       if(ok) {
           alert("회원 가입이 완료되었습니다.");
           console.log("Submitting form...");
           // $("#join-form").submit(); // 폼 제출 동작 실행
           console.log("Form should be submitted.");
+          alert("회원 가입이 완료되었습니다.");
       } else {
          return false;
       }

@@ -1,7 +1,7 @@
-<%@page import="com.edu.pillter.Yoksul"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="true" %>
 <%@ page import="org.json.JSONArray" %>
+<%@ page import="com.edu.pillter.Yoksul"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +17,7 @@
 
 	window.onpageshow = function(event) {
     	if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
-        	alert("이전 페이지로 이동합니다.");
+        	alert("이미 리뷰를 작성하셨습니다.");
         	
         	var backUrl = "/sole/sole?alcohole_category=" + ${category};
         	
