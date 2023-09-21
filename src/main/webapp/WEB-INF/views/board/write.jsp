@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="true" %>
+<%@ page import="org.json.JSONArray" %>
+<%@page import="com.edu.pillter.Yoksul"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -108,8 +110,14 @@ function backToList(obj) {
 	location.href = "${path}/board/articleList";
 }
 </script>
+
+<%
+	String [] yokArray = Yoksul.yoksul; // 욕설필터 가져오기     0919추가
+%>
+
 <script src="${path}/resources/smarteditor/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
+
 $(document).ready(function(){
 	
 	var contentval = $("#content").val();
@@ -130,26 +138,47 @@ $(document).ready(function(){
 	contentval = contentval.replace(/<\/p><p>/gi, "<br>"); // </p><p> => <br>로 변환
 	contentval = contentval.replace(/(<\/p><br>|<p><br>)/gi, "<br><br>");
 	contentval = contentval.replace(/(<p>|<\/p>)/gi, ""); // <p> 또는 </p>모두 제거
-	$("#content").val(contentval);
 	
+	$("#content").val(contentval);
 	$("#wsubmit").click(function(){
+		
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		
-		if (ajaxRequest !== null){
+		/*if (ajaxRequest !== null){   // 중복 올리기 방지 코드 /서밋버튼 수정중 주석처리 0920
 			ajaxRequest.abort();
-		}
+		}*/
 		
 		var writer = document.getElementById("writer").value;
 		var title = $('#title').val();
 		var content = document.getElementById("content").value;
 		var thumbnail = $('#thumbnail').val();
 		var image = $('#image').val();
-				
+		var yok  = <%= new org.json.JSONArray(yokArray).toString() %>;   // 욕설필터 가져오기  0919추가
+		
+		if(content != null || content != "") { /// 욕설필터 0919 추가
+			for (var i = 0; i < yok.length; i++) {
+		        if (content.includes(yok[i])) { 
+		            alert("비속어는 사용할 수 없습니다.");
+		            return false;
+		        }
+		    }
+		}// content 필터 end
+		
+		if(title != null || title != "") { /// 욕설필터 0919 추가
+			for (var i = 0; i < yok.length; i++) {
+		        if (title.includes(yok[i])) { 
+		            alert("비속어는 사용할 수 없습니다.");
+		            return false;
+		        }
+		    }
+		}// title 필터 end
+		
 		if (title == null || title == ""){
 			alert("제목을 입력하세요");
 			$("#title").focus();
 			return false;
 		}
+		
 		if(content == "" || content == null || content == '&nbsp;'
 		|| content == '<br>' || content == '<br/>' || content == '<p>&nbsp;</p>'){
 			alert("내용을 입력하세요");
@@ -160,8 +189,7 @@ $(document).ready(function(){
 			alert("취소되었습니다");
 			return false;
 		} else {
-			
-			ajaxRequest = $.ajax({
+			/*ajaxRequest = $.ajax({ 서밋버튼 수정중 주석처리 0920
 				type: "post",
 				url: "/board/addNewArticle",
 				data: JSON.stringify({"title":title,"content":content,"writer":writer, "thumbnail":thumbnail, "image":image}),
@@ -173,7 +201,7 @@ $(document).ready(function(){
 					alert("오류");
 					return false;
 				}
-			});
+			});*/
 		}
 	});
 	
