@@ -162,7 +162,7 @@ color:#fff;
 	                    	<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
 	                    	<!--<p>${article.content}</p>-->
 	                    </div>
-	                    <img class="image" style="width:500px; height:300px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}"/></div>
+	                    <img class="image" style="width:500px; height:400px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}"/></div>
 	                    </td>
 	                    </c:if>
 	                </tr>
