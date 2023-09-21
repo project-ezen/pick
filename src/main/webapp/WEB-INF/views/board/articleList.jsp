@@ -164,7 +164,6 @@ span {
 			</div>
 		</div>
 		<div class="selectbtn">
-
 			<form action="/board/articleList" method="get" id="selectBtn">
 				<select class="btnsub" name="selop" id="selop" onchange="selectOp(this)">
 					<option value="one" >최신순</option>
