@@ -105,6 +105,12 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberDTO> selectMember() throws Exception {
 		return memberDAO.selectMember();
 	}
+	
+	//회원 탈퇴
+	@Override
+	public void delete(MemberDTO memberDTO) throws Exception {
+		memberDAO.delete(memberDTO);
+	}
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
 	@Override
