@@ -211,7 +211,7 @@ color:#fff;
 		</table>
 	<%-- 댓글 작성하는 부분 --%>
 	<form method="post" action="/reply/rwrite" name= "form1">
-		<c:if test="${ isLogOn == true }">
+		<c:if test="${ member != null }">
 			<input type="hidden" name="b_id" value="${article.board_id}">
 			<table style="margin-bottom: 20px;">
 				<tr>
