@@ -132,7 +132,6 @@
    <div class="container">
       <div class="join-form">
          <h1 class="text-center">회원 가입</h1><hr/>
-         
          <form id="join-form" method="post" action="/member/join">
                 <div class="form-group">
                <label class="control-label">아이디</label>
@@ -439,11 +438,11 @@
                         </div>
                     </div>
                 </div>
-            <!-- modal -->
-         </form>
-      </div>
-   </div>
-   <br><br>
+				<!-- modal -->
+			</form>
+		</div>
+	</div>
+	<br><br>
 </div>
    
 <%@ include file="../include/footer.jsp" %>
@@ -506,39 +505,39 @@ $(document).ready(function() {
            }
        });
    });
-   
+	
 // 닉네임 중복 체크
-   $("#nickCheck").on("click", function() {
-   
-   var nickname = $("#m_nickname").val();
+	$("#nickCheck").on("click", function() {
+	
+	var nickname = $("#m_nickname").val();
 
-   if (!nickname) { // 닉네임이 비어 있을 경우
-      alert("닉네임을 입력하십시오.");
-      $("#m_nickname").focus();
-      return;
-   }
+	if (!nickname) { // 닉네임이 비어 있을 경우
+		alert("닉네임을 입력하십시오.");
+		$("#m_nickname").focus();
+		return;
+	}
 
-      $.ajax({
-         url:      "/member/nickCheck",
-         type:      "post",
-         dataType:   "json",
-         data:      {"m_nickname" : nickname},
-         success:   function(data) {
-            
-            if(data == 1) {
-               alert("이미 사용 중인 닉네임입니다.\n다른 닉네임을 입력하십시오.");
-               $("#m_nickname").focus();
-            } else if(data == 0) {
-               alert("사용 가능한 닉네임입니다.");
-               $("#m_nickname").attr("value", "Y");
-               $("#m_tel").focus();
-               nickIsValid = true;
-            }
-            allCheck();
-         }
-      });
-   });
-   
+		$.ajax({
+			url:		"/member/nickCheck",
+			type:		"post",
+			dataType:	"json",
+			data:		{"m_nickname" : nickname},
+			success:	function(data) {
+				
+				if(data == 1) {
+					alert("이미 사용 중인 닉네임입니다.\n다른 닉네임을 입력하십시오.");
+					$("#m_nickname").focus();
+				} else if(data == 0) {
+					alert("사용 가능한 닉네임입니다.");
+					$("#m_nickname").attr("value", "Y");
+					$("#m_tel").focus();
+					nickIsValid = true;
+				}
+				allCheck();
+			}
+		});
+	});
+	
 // 가입하기 버튼을 클릭했을 경우
 
 // 빈칸 확인
@@ -574,7 +573,7 @@ $(document).ready(function() {
       if($("#m_pw").val() != $("#m_repw").val()) {
             alert("비밀번호 확인이 다릅니다.");
             $("#m_repw").focus();
-            ok = false;
+         ok = false;
          return false;
        }
       if($("#m_name").val() == "") {
@@ -609,8 +608,9 @@ $(document).ready(function() {
       }
       
       document.getElementById("m_address").value = $("#m_address").val();
-   
-      if(오케이) {
+
+      if(ok) {
+          alert("회원 가입이 완료되었습니다.");
           console.log("Submitting form...");
           // $("#join-form").submit(); // 폼 제출 동작 실행
           console.log("Form should be submitted.");

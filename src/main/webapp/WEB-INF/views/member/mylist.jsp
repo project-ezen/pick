@@ -74,7 +74,6 @@
 		<hr>
 		<button type="button" onclick="location.href='${path}/member/mypage'" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button><br>
 		<h3>나만의 레시피 즐겨찾기</h3>
-		<form id="recipeJjim">
 			<table>
 				<tr>
 					<th>번호</th>
@@ -99,9 +98,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-		</form>
 		<hr/>
-		<form id="recipeLike">		
 		<h3>레시피 즐겨찾기</h3>
 		<table id="more_liked">
 			<tr>
@@ -127,7 +124,6 @@
 				</tr>
 			</c:forEach>
 		</table>
-		</form>
 		<br/>
 	</div>
 </div>	

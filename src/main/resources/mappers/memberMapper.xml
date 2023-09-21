@@ -102,6 +102,12 @@
 		SELECT * FROM member WHERE m_id = #{m_id}
 	</select>
 	
+	<!-- 회원탈퇴 -->
+	<delete id="delete" parameterType="String">
+	    DELETE	FROM   member
+	    WHERE	m_id = #{m_id}
+	</delete>
+	
 	<!--  회원 아이디에 해당하는 비밀번호, 비밀번호 확인, 이름, 전화번호, 주소를 변경한다.  -->
 	<update id="edit" parameterType="com.edu.member.dto.MemberDTO">
 		UPDATE	member

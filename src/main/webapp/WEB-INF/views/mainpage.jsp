@@ -32,15 +32,12 @@
           max-height: 1000px; /* 충분히 큰 값을 설정하여 서서히 펼쳐지도록 만듭니다 */
         }
 
-        ul {
-            list-style: none;
-        }
-        li {
-            list-style: none;
-        }
-        .item {
-            font-size: 30px;
-        }
+        ul { list-style: none; }
+        
+        li { list-style: none; }
+        
+        .item { font-size: 30px;  }
+        
         #logindiv {
             position: fixed;
             bottom: 10px;
@@ -48,18 +45,14 @@
             font-size: large;
             color:white;
         }
-        a:link {
-            color: white;
-            text-decoration-line: none;
-        }
-        a:visited {
-
-           color: white;
-           text-decoration-line: none;
-        }
+        a:link { color: white; text-decoration-line: none; }
+        
+        a:visited {  color: white;  text-decoration-line: none;  }
+        
         #solo 	{ font-size: 25px; }
         
         .AA 	{ font-size: 20px; }
+       
     </style>
 </head>
 <body>
@@ -71,7 +64,7 @@
     <div class="bg">
         <div class="container-fluid">
             <div class="col-sm-4">
-                <h1 style="margin-top: 50px;">마녀의 pick</h1>
+                <h1 style="margin-top: 50px; font-size: 50px;">마녀의 pick</h1>
                 <form id="formList" action="/sole/sole" method="get">
                    <input type="hidden" name="alcohole_category"/>
                 </form>
@@ -85,15 +78,15 @@
                 <div id="listid">   
                 	<li class="item" style="margin-top: 50px;">       
 	                   Alcohol
-	                   <ul>
-	                       <li id="lilist" class="base"><a href="#">Base Alcohol</a></li>
-	                       <li id="lilist" class="weski"><a href="#">위스키 칵테일</a></li>
-	                       <li id="lilist" class="brandi"><a href="#">브랜디 칵테일</a></li>
-	                       <li id="lilist" class="jin"><a href="#">진 칵테일</a></li>
-	                       <li id="lilist" class="rum"><a href="#">럼 칵테일</a></li>
-	                       <li id="lilist" class="bodcar"><a href="#">보드카 칵테일</a></li>
-	                       <li id="lilist" class="dekilla"><a href="#">데킬라 칵테일</a></li>
-	                   </ul>
+	                   	<ul>
+	                       	<li id="lilist" class="base"><a href="#" class="AA">Base Alcohol </a></li>
+	                       	<li id="lilist" class="weski"><a href="#" class="AA">위스키 칵테일</a></li>
+	                       	<li id="lilist" class="brandi"><a href="#" class="AA">브랜디 칵테일</a></li>
+                       		<li id="lilist" class="jin"><a href="#" class="AA">진 칵테일</a></li>
+	                      	<li id="lilist" class="rum"><a href="#" class="AA">럼 칵테일</a></li>
+	                       	<li id="lilist" class="bodcar"><a href="#" class="AA">보드카 칵테일</a></li>
+                    	 	<li id="lilist" class="dekilla"><a href="#" class="AA">데킬라 칵테일</a></li>
+	                   	</ul>
 	                </li>
 	          		
                    	<div style="margin-top: 50px;">

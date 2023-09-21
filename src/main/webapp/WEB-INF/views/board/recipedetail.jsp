@@ -150,15 +150,19 @@ color:#fff;
 	                    <th scope="row" style="text-align: center;">내용</th>
 	                    <c:if test="${article.image == null}">
 	                    <td colspan="3">
-	                    	<!--<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>-->
-	                    	<p>${article.content}</p>
+	                    <div id="aaa">
+	                    	<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
+	                    	<!--<p>${article.content}</p>-->
+                    	</div>
 	                    </td>
 	                    </c:if>
 	                    <c:if test="${article.image != null}">
 	                    <td colspan="3"><div contentEditable="true">
-	                    <!--<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>-->
-	                    <p>${article.content}</p>
-	                    <img class="image" style="width:500px; height:300px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}"/></div>
+	                    <div id="aaa">
+	                    	<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
+	                    	<!--<p>${article.content}</p>-->
+	                    </div>
+	                    <img class="image" style="width:500px; height:400px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}"/></div>
 	                    </td>
 	                    </c:if>
 	                </tr>
@@ -211,7 +215,7 @@ color:#fff;
 		</table>
 	<%-- 댓글 작성하는 부분 --%>
 	<form method="post" action="/reply/rwrite" name= "form1">
-		<c:if test="${ isLogOn == true }">
+		<c:if test="${ member != null }">
 			<input type="hidden" name="b_id" value="${article.board_id}">
 			<table style="margin-bottom: 20px;">
 				<tr>
@@ -236,7 +240,7 @@ color:#fff;
 // 수정 버튼 눌렀을 시 disabled 해제
 function fn_enable(obj){
 	document.getElementById("title").disabled		= false;
-	//document.getElementById("content").disabled		= false;
+	document.getElementById("content").disabled		= false;
 	document.getElementById("thumbnail").disabled	= false;
 	document.getElementById("image").disabled		= false;
 };
@@ -244,7 +248,7 @@ function fn_enable(obj){
 // 수정취소 버튼 눌렀을 시 disabled
 function backToForm(obj){
 	document.getElementById("title").disabled 		= true;
-	//document.getElementById("content").disabled 	= true;
+	document.getElementById("content").disabled 	= true;
 	document.getElementById("thumbnail").disabled	= true;
 	document.getElementById("image").disabled		= true;
 };
@@ -267,7 +271,7 @@ function fn_remove(url, board_id){
 };
 	
 // 에디터
-/*$(document).ready(function(){
+$(document).ready(function(){
 	
 	var contentval = $("#content").val();
 	
@@ -335,7 +339,7 @@ function fn_remove(url, board_id){
 		}
 	});
 	
-});*/
+});
 
 <%--댓글 삭제--%>
 function fn_replyDelete(url,replyNum ,b_id){

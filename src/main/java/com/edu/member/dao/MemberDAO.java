@@ -26,6 +26,9 @@ public interface MemberDAO {
 	
 	// 회원 목록 가져오기 
 	public List<MemberDTO> selectMember() throws Exception;
+	
+	// 회원 탈퇴
+	public void delete(MemberDTO memberDTO) throws Exception;
 
 //---------------------------------------------------------------------------------
 	

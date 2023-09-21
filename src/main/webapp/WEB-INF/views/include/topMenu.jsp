@@ -14,14 +14,15 @@
     }
 }
 
-.tt { color: white;  }
+.tt { color: white; }
 
 .tt:hover { background-color: rgba( 255, 255, 255, 0 ); }
 
 
-.bb {  color: white; font-size: 30px;  }
+.bb { color: white; font-size: 30px; }
 
-.bb:hover { text-decoration: none; color:#fff;  text-shadow:2px 2px 2px #8aa2b2;}
+.bb:hover { text-decoration: none; color:#fff;  text-shadow:2px 2px 2px #8aa2b2; }
+
 
 </style>
 <section class="navbar navbar-light fixed-top">
