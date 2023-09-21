@@ -438,23 +438,13 @@
                         </div>
                     </div>
                 </div>
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/member/join.jsp
 				<!-- modal -->
 			</form>
 		</div>
 	</div>
 	<br><br>
 </div>
-	
-=======
-            <!-- modal -->
-         </form>
-      </div>
-   </div>
-   <br><br>
-</div>
    
->>>>>>> 77a2b3cc33e2595b469e0440f7a6521fdb90540d:src/main/webapp/WEB-INF/views/member/signIn.jsp
 <%@ include file="../include/footer.jsp" %>
 </body>
 
@@ -511,7 +501,6 @@ $(document).ready(function() {
                allCheck();
            },
            error: function(info) {
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/member/join.jsp
 			}
        });
    });
@@ -551,128 +540,6 @@ $(document).ready(function() {
 // 가입하기 버튼을 클릭했을 경우
 
 // 빈칸 확인
-	$(".joinButton").on("click", function(event) {
-		
-		// event.preventDefault();
-		
-	//	$("#join-form").prop("action", "/member/join");
-	//	$("#join-form").prop("method", "post");
-	// 아이디, 비밀번호, 비밀번호확인, 이름, 전화번호, 주소에 값이 있는지 검사한다.
-	// 입력된 값이 없으면 입력해야 한다고 경고창을 띄운다.
-	
-		let ok = true;
-		
-		if($("#m_id").val() == "") {
-			alert("아이디를 입력하셔야 합니다.");
-			$("#m_id").focus();
-			ok = false;
-			return false;
-		}
-		if($("#m_pw").val() == "") {
-			alert("비밀번호를 입력하셔야 합니다.");
-			$("#m_pw").focus();
-			ok = false;
-			return false;
-		}
-		if($("#m_repw").val() == "") {
-			alert("비밀번호확인을 입력하셔야 합니다.");
-			$("#m_repw").focus();
-			ok = false;
-			return false;
-		}
-		if($("#m_pw").val() != $("#m_repw").val()) {
-	         alert("비밀번호 확인이 다릅니다.");
-	         $("#m_repw").focus();
-	         ok = false;
-			return false;
-	    }
-		if($("#m_name").val() == "") {
-			alert("이름을 입력하셔야 합니다.");
-			$("#m_name").focus();
-			ok = false;
-			return false;
-		}
-		if($("#m_nickname").val() == "") {
-			alert("닉네임을 입력하셔야 합니다.");
-			$("#m_nickname").focus();
-			ok = false;
-			return false;
-		}
-		if($("#m_tel").val() == "") {
-			alert("연락처를 입력하셔야 합니다.");
-			$("#m_tel").focus();
-			ok = false;
-			return false;
-		}
-		if($("#m_birthdate").val() == "") {
-			alert("생년월일을 입력하셔야 합니다.");
-			$("#m_birthdate").focus();
-			ok = false;
-			return false;
-		}
-		if($("#m_address").val() == "") {
-			alert("주소를 입력하셔야 합니다.");
-			$("#m_address").focus();
-			ok = false;
-			return false;
-		}
-		
-		document.getElementById("m_address").value = $("#m_address").val();
-	
-		if(ok) {
-		    console.log("Submitting form...");
-		    // $("#join-form").submit(); // 폼 제출 동작 실행
-		    console.log("Form should be submitted.");
-		    alert("회원 가입이 완료되었습니다.");
-		} else {
-			return false;
-		}
-		
-	});
-=======
-              
-         },
-           complete: function(info) {
-               allCheck();
-           }
-       });
-   });
-   
-// 닉네임 중복 체크
-   $("#nickCheck").on("click", function() {
-   
-   var nickname = $("#m_nickname").val();
-
-   if (!nickname) { // 닉네임이 비어 있을 경우
-      alert("닉네임을 입력하십시오.");
-      $("#m_nickname").focus();
-      return;
-   }
-
-      $.ajax({
-         url:      "/member/nickCheck",
-         type:      "post",
-         dataType:   "json",
-         data:      {"m_nickname" : nickname},
-         success:   function(data) {
-            
-            if(data == 1) {
-               alert("이미 사용 중인 닉네임입니다.\n다른 닉네임을 입력하십시오.");
-               $("#m_nickname").focus();
-            } else if(data == 0) {
-               alert("사용 가능한 닉네임입니다.");
-               $("#m_nickname").attr("value", "Y");
-               $("#m_tel").focus();
-               nickIsValid = true;
-            }
-            allCheck();
-         }
-      });
-   });
-   
-// 가입하기 버튼을 클릭했을 경우
-
-// 빈칸 확인
    $(".joinButton").on("click", function(event) {
       
       // event.preventDefault();
@@ -705,7 +572,7 @@ $(document).ready(function() {
       if($("#m_pw").val() != $("#m_repw").val()) {
             alert("비밀번호 확인이 다릅니다.");
             $("#m_repw").focus();
-            ok = false;
+         ok = false;
          return false;
        }
       if($("#m_name").val() == "") {
@@ -741,7 +608,7 @@ $(document).ready(function() {
       
       document.getElementById("m_address").value = $("#m_address").val();
    
-      if(오케이) {
+      if(ok) {
           alert("회원 가입이 완료되었습니다.");
           console.log("Submitting form...");
           // $("#join-form").submit(); // 폼 제출 동작 실행
@@ -751,7 +618,6 @@ $(document).ready(function() {
       }
       
    });
->>>>>>> 77a2b3cc33e2595b469e0440f7a6521fdb90540d:src/main/webapp/WEB-INF/views/member/signIn.jsp
 
    // 약관 동의
 

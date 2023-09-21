@@ -245,6 +245,27 @@ public class MemberController {
 		//redirect없이 쓰면 페이지형태만 보여준다.(/member/memberList로 넘어가지 않는다.)
 	}
 	
+	// 회원탈퇴
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public String memberDeletePost(MemberDTO memberDTO, Model model, HttpSession session) throws Exception {
+        // 세션에서 현재 로그인한 회원 정보를 가져옵니다.
+        MemberDTO loggedInMember = (MemberDTO) session.getAttribute("member");
+
+        if (loggedInMember != null && loggedInMember.getM_id().equals(memberDTO.getM_id())) {
+            // 세션에 저장된 회원과 입력한 회원 아이디가 일치하는 경우에만 탈퇴 처리합니다.
+
+                memberService.delete(memberDTO);
+
+                // 탈퇴 후 로그아웃 처리
+                session.invalidate();
+                
+                return "redirect:/"; // 탈퇴 후 홈페이지로 이동하도록 수정
+        } else {
+            // 로그인한 회원과 입력한 회원 아이디가 일치하지 않는 경우에는 처리하지 않고 홈페이지로 이동
+            return "redirect:/";
+        }
+    }
+	
 	
 	//로그아웃
 	@RequestMapping(value="/logout", method=RequestMethod.GET)

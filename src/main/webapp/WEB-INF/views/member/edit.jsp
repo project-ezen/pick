@@ -25,7 +25,7 @@
          margin-top: 20px;
       }
 			
-	.sub {
+	.submit {
 		width: 70px;
 		height: 35px;
 		font-size: 15px;
@@ -38,13 +38,13 @@
 		padding:6px 13px;
 		border-radius:17px;
 	}
-	.sub:hover { background-color: #51a1c7; }
-	.sub:active {
+	.submit:hover { background-color: #51a1c7; }
+	.submit:active {
 		position:relative;
 		top:1px;
 	}
 	
-	.cel {
+	.cancel {
 		width: 70px;
 		height: 35px;
 		font-size: 15px;
@@ -59,9 +59,9 @@
 		
 	}
 
-	.cel:hover {background-color: #E96F84; }
+	.cancel:hover {background-color: #E96F84; }
 	
-	.cel:active {
+	.cancel:active {
 		position:relative;
 		top:1px;
 	}
@@ -74,7 +74,7 @@
 	<div class="container" id="class">
 		<div class="update-form">
 			<h1 class="text-center">회원정보 수정</h1>
-			<form name="frm" id="update-form">
+			<form name="frm" id="update-form" method="post">
 			
 				<div class="form-group">
 					<label>아이디</label>
@@ -126,8 +126,8 @@
 				</div>
 				<div class="update-button-group">
 					<button type="submit" class="submit" id="editButton">수정</button>
-					<button type="button" class="cancel" id="resetButton">취소</button>
-
+					<button type="button" class="cancel" id="resetButton">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="delete" id="deleteButton">회원탈퇴</button>
 				</div>
 			</form>
 		</div>
@@ -183,6 +183,16 @@ $(document).ready(function() {
 	$(".cancel").on("click", function() {
 		window.location.href = "/member/mypage";
 	});
+	
+	// 회원탈퇴 버튼을 클릭했을 경우
+
+	$('#deleteButton').on('click', function() {
+        if (confirm("정말로 탈퇴하시겠습니까?")) {
+            // 폼 액션 변경 및 제출
+            alert("회원 탙퇴가 완료되었습니다.");
+            $('#update-form').attr('action', '/member/delete').submit();
+        }
+    });
 	
 	
 //빈칸 확인
