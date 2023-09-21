@@ -68,6 +68,7 @@
     margin-top: 10px;
 }
 
+/*비밀번호확인 버튼*/
 .confirmButton {
     margin-right: 15px;
     padding: 5px 10px;
@@ -78,7 +79,12 @@
     cursor: pointer;
 }
 
+.confirmButton:hover {
+    background-color: #8fce00;
+}
+
 .closeButton {
+	margin-top: 10px;
     padding: 5px 10px;
     border: none;
     background-color: #E74C3C;
@@ -88,12 +94,10 @@
 }
 
 .closeButton:hover {
-    background-color: #C0392B;
+    background-color: #e06666;
 }
 
-.confirmButton:hover {
-    background-color: #34495E;
-}
+/*비밀번호확인 버튼*/
 .backdrop {
     position: fixed; 
     top: 0; 
@@ -104,19 +108,7 @@
     z-index: 1; 
     display: none; 
 }
-.closeButton {
-    margin-top: 10px;
-    padding: 5px 10px;
-    border: none;
-    background-color: #E74C3C;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-.closeButton:hover {
-    background-color: #C0392B;
-}
 
 </style>
 </head>
