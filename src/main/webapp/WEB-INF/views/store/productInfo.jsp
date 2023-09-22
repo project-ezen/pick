@@ -418,15 +418,15 @@
     });
     
     // 현재 파라미터 값을 가져오는 펑션
-    function getCurrentURLParams() {
+    /*function getCurrentURLParams() {
         var urlParams = new URLSearchParams(window.location.search);
         return urlParams.toString(); // 파라미터를 문자열 형태로 반환
-      }
+      }*/
     
     // page 파라미터 업데이트
     function updateURLParamsAndNavigate(newParam, newValue) {
-        var currentParams = getCurrentURLParams(); // 현재 파라미터 값을 가져옴
-        var urlParams = new URLSearchParams(currentParams);
+        //var currentParams = getCurrentURLParams(); // 현재 파라미터 값을 가져옴
+        var urlParams = new URLSearchParams(window.location.search);
 
         // 'page' 파라미터가 이미 있다면 제거
         if (urlParams.has('page')) {
