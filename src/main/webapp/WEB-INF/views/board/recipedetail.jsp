@@ -83,7 +83,6 @@ border-radius: 5px;
 background-color:#ADC4CE;
 color:#fff;
 }
-
 </style>
 </head>
 <body>
@@ -143,26 +142,36 @@ color:#fff;
                 	<th>제목</th>
                 	<td><input type="text" value="${article.title}" name="title" id="title" style="width:100%;" disabled/></td>
                 	<th>대표사진</th>
-                	<td><input type="file" name="thumbnail" id="thumbnail" disabled/></td>
+                	<td>
+                		<input type="file" name="thumbnail" id="thumbnail" disabled/>
+                	</td>
                 </tr>
 	                <tr>
 	                    <th scope="row" style="text-align: center;">내용</th>
 	                    <c:if test="${article.image == null}">
 	                    <td colspan="3">
+	                    <div id="aaa">
 	                    	<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
+	                    	<!--<p>${article.content}</p>-->
+                    	</div>
 	                    </td>
 	                    </c:if>
 	                    <c:if test="${article.image != null}">
 	                    <td colspan="3"><div contentEditable="true">
-	                    <textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
-	                    <img class="image" style="width:500px; height:300px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}"/></div>
+	                    <div id="aaa">
+	                    	<textarea rows="20" name="content" id="content" style="width: 100%" disabled>${article.content}</textarea>
+	                    	<!--<p>${article.content}</p>-->
+	                    </div>
+	                    <img class="image" style="width:500px; height:400px;" src="${path}/cTIdown?board_id=${article.board_id}&image=${article.image}"/></div>
 	                    </td>
 	                    </c:if>
 	                </tr>
-               	<tr>
-                    <th scope="row" style="text-align: center;">이미지 첨부</th>
-                    <td colspan="3"><input type="file" name="image" id="image" disabled/></td>
-                </tr>
+	             <c:if test="${article.writer == member.m_id }">
+	               	<tr>
+	                    <th scope="row" style="text-align: center;">이미지 첨부</th>
+	                    <td colspan="3"><input type="file" name="image" id="image" disabled/></td>
+	                </tr>
+	             </c:if>
 				<tr>
 					<td colspan="2">
 						<input type="button" class="btn1" value="목록으로 돌아가기" onClick="location.href='${path}/board/articleList'"/>
@@ -206,7 +215,7 @@ color:#fff;
 		</table>
 	<%-- 댓글 작성하는 부분 --%>
 	<form method="post" action="/reply/rwrite" name= "form1">
-		<c:if test="${ isLogOn == true }">
+		<c:if test="${ member != null }">
 			<input type="hidden" name="b_id" value="${article.board_id}">
 			<table style="margin-bottom: 20px;">
 				<tr>

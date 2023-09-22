@@ -112,7 +112,7 @@ $(document).ready(function() {
 	                confirmCode = Math.floor(Math.random() * 900000) + 100000;
 	                alert("인증번호는 " + confirmCode + "입니다.");
 	            } else {
-	                alert("이름과 전화번호가 일치하지 않습니다.");
+	                alert("일치하는 회원 정보가 없습니다.");
 	            }
 	        },
 	        error: function(error) {
@@ -151,7 +151,7 @@ $(document).ready(function() {
 	                confirmCode = Math.floor(Math.random() * 900000) + 100000;
 	                alert("인증번호는 " + confirmCode + "입니다.");
 	            } else {
-	                alert("이름과 닉네임이 일치하지 않습니다.");
+	                alert("일치하는 회원 정보가 없습니다.");
 	            }
 	        },
 	        error: function(error) {
@@ -240,7 +240,7 @@ $(document).ready(function() {
 	                confirmCode = Math.floor(Math.random() * 900000) + 100000;
 	                alert("인증번호는 " + confirmCode + "입니다.");
 	            } else {
-	                alert("아이디와 전화번호가 일치하지 않습니다.");
+	                alert("일치하는 회원 정보가 없습니다..");
 	            }
 	        },
 	        error: function(error) {

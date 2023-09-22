@@ -164,7 +164,6 @@ span {
 			</div>
 		</div>
 		<div class="selectbtn">
-
 			<form action="/board/articleList" method="get" id="selectBtn">
 				<select class="btnsub" name="selop" id="selop" onchange="selectOp(this)">
 					<option value="one" >최신순</option>
@@ -280,7 +279,7 @@ function sortListSearch(selop){
 
 $(document).ready(function() {
     var formObj  = $("#formBoList");	// 키워드 검색 폼
-    var formSort = $("#selectBtn");		// 최신순, 찜많은순 정렬 폼
+    var formSort = $("#selectBtn");		// 최신순 정렬 폼
 
     // 검색 버튼 클릭 이벤트
     $("#searchBtn").click(function() {

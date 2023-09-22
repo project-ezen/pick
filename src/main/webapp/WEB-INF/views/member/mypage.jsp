@@ -14,17 +14,17 @@
   }
 }
 
-.class 	{ width: 900px; min-height: 600px; border-radius: 10px; margin:auto;  background-color: rgba( 255, 255, 255, 0.8 ); }
+.class 	{ width: 900px; min-height: 600px; border-radius: 10px; margin:auto;  background-color: rgba( 255, 255, 255, 0.8 );  }
 
 .foot 	{ padding-bottom: 100px; padding-top: 100px; margin:auto; }
 
-.ll		{ float: left; }
-
-.set1 	{ width: 90%; height: 200px;  margin-left: 50px; border-radius:10px; }
+.ll		{ float: left;  height:180px; width:40%; vertical-align:top; float: left; }
+ 
+.set1 	{ width: 90%; height: 180px;  margin-left: 50px; border-radius:10px; }
 
 .set2 	{ width: 90%; text-align:center; padding-bottom:3%; margin-left: 45px ; margin-right: 45px; border-radius:10px; display: inline-block; padding-top: 30px; }
 
-.nim 	{ text-align : center; line-height : 200px; width: 70%; height: 200px; float: right; margin:0 auto; }
+.nim 	{ text-align : center; line-height : 200px; width: 60%; height: 200px; float: right; margin:0 auto; }
 
 .box_1,.box_2,.box_3, .box_4  
 			{ width: 150px; height: 100px; float:left; margin: 30px 25px; display: inline-block; border-radius: 5%;  background-color: rgba(20, 69, 101, 0.7);  }
@@ -68,6 +68,7 @@
     margin-top: 10px;
 }
 
+/*비밀번호확인 버튼*/
 .confirmButton {
     margin-right: 15px;
     padding: 5px 10px;
@@ -78,7 +79,12 @@
     cursor: pointer;
 }
 
+.confirmButton:hover {
+    background-color: #8fce00;
+}
+
 .closeButton {
+	margin-top: 10px;
     padding: 5px 10px;
     border: none;
     background-color: #E74C3C;
@@ -88,12 +94,10 @@
 }
 
 .closeButton:hover {
-    background-color: #C0392B;
+    background-color: #e06666;
 }
 
-.confirmButton:hover {
-    background-color: #34495E;
-}
+/*비밀번호확인 버튼*/
 .backdrop {
     position: fixed; 
     top: 0; 
@@ -104,19 +108,7 @@
     z-index: 1; 
     display: none; 
 }
-.closeButton {
-    margin-top: 10px;
-    padding: 5px 10px;
-    border: none;
-    background-color: #E74C3C;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-.closeButton:hover {
-    background-color: #C0392B;
-}
 
 </style>
 </head>
@@ -128,8 +120,7 @@
 		<h2 class="title" style="text-align : center;">MyPage</h2>
 		<hr/>		
 		<div id="contents" class="set1">
-		<img class="ll" style=" padding-left: 15px; height:200px; width:30%; vertical-align:top; float: left;" src="${path}/resources/images/alcohol.png" border="0">
-
+		<img class="ll" src="${path}/resources/images/logo.png" border="0">
 		<div><h2 class="nim">${member.m_id}님, 어서오세요!</h2></div>
 		</div>
 		<hr/>

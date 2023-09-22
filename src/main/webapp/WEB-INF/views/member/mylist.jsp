@@ -74,15 +74,14 @@
 		<hr>
 		<button type="button" onclick="location.href='${path}/member/mypage'" class="list" style="float: right; margin-right: 3px;">마이페이지 목록가기</button><br>
 		<h3>나만의 레시피 즐겨찾기</h3>
-		<form id="recipeJjim">
-		<table>
-			<tr>
-				<th>번호</th>
-				<th>이미지</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일자</th>
-			</tr>
+			<table>
+				<tr>
+					<th>번호</th>
+					<th>이미지</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일자</th>
+				</tr>
 				<%int cnt=1; %>	
 				<c:if test="${empty jjim}">
 					<tr>
@@ -98,11 +97,8 @@
 						<td style="width:15%;">${jjimList.writeDate}</td>
 					</tr>
 				</c:forEach>
-	
-		</table>
-		</form>
+			</table>
 		<hr/>
-		<form id="recipeLike">		
 		<h3>레시피 즐겨찾기</h3>
 		<table id="more_liked">
 			<tr>
@@ -128,11 +124,10 @@
 				</tr>
 			</c:forEach>
 		</table>
-		</form>
 		<br/>
 	</div>
 </div>	
-	<br/><br/>
-	<%@ include file="../include/footer.jsp" %>
+<br/><br/>
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

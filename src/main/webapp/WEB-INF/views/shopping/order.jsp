@@ -79,7 +79,7 @@
 								<td class="form-group" style="vertical-align: middle;">
 									<div class="col-md-12 text-center" id="item_thumbnail">
 									    <a href="#" class="thumbnail">
-									        <input type="image" src="${path }/imgdownload?imageFile=${display.image }" width="161" height="133" disabled>
+									        <input type="image" src="/resources/product_images/${display.image }" width="161" height="133" disabled>
 									    </a>
 									</div>
 								</td>
@@ -160,7 +160,7 @@
 				                    <td class="text-center" style="vertical-align: middle;">배송비</td>
 				                    <td align="center">
 				                    	<label>
-				                    		<input class="form-control text-center" id="deliveryFee" type="text" value="3000" disabled>
+				                    		<input class="form-control text-center" id="deliveryFee" type="text" value="0" disabled> <!-- 3000 -->
 				                    	</label>
 				                    </td>
 				                </tr>
@@ -188,7 +188,7 @@
 	                    </div>
 	                    <div class="form-group text-right">
 	                    	<input type="hidden" name="order_number" value="${order_number }">
-	                        <button type="button" class="btn_sub" id="pay" onclick="requestPay()" disabled>결제하기</button>
+	                        <button type="button" class="btn_sub" id="pay" onclick="javascript: document.getElementById('orderConfirm').submit()" disabled>결제하기</button> <!-- onclick="requestPay()" -->
 	                    </div>
 	                </div>
 	                <!-- 구매 여부 확인 끝 -->
@@ -314,7 +314,7 @@
 </body>
 <script>
 //전자 결제 api
-var IMP = window.IMP; // 생략 가능
+/* var IMP = window.IMP; // 생략 가능
 IMP.init("imp42776330");
 
 function requestPay() {
@@ -339,7 +339,7 @@ function requestPay() {
             alert("payment Refuse");
         }
     });
-}
+} */
 
 //우편번호 검색 api
 function daumZipCode() {
@@ -403,14 +403,14 @@ $(document).ready(function() {
         info.prop("checked", true);
         info.prop("value", true);
     	$("#pay").prop("disabled", false);
-        alert(info.is(":checked"));
+        // alert(info.is(":checked"));
     });
 	// 구매 서약 동의 하지 않은 경우
     cancel.on("click", function() {
         info.prop("checked", false);
         info.prop("value", false);
    		$("#pay").prop("disabled", true);
-        alert(info.is(":checked"));
+        // alert(info.is(":checked"));
     });
 //-----------------------------------------------------------------------------------------------------------------
 	// $("#pay").click(requestPay());

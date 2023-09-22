@@ -79,9 +79,9 @@ public class BoardControllerImpl implements BoardController {
 		ModelAndView mav = new ModelAndView(viewName);
 		PageMaker pageMaker = new PageMaker();
 		
-		pageMaker.setPcri(pcri);
+		pageMaker.setPcri(pcri);											//pcri에 찜갯수,댓글갯수 포함됨
 		pageMaker.setTotalCount(boardService.boardListTotalCount(pcri));	// pageMaker.totalCount에 총 게시글 수 넣기
-		List<BoardDTO> list = boardService.boardListPaging(pcri);	// 게시글 목록(페이징 처리 포함) List로 넣기
+		List<BoardDTO> list = boardService.boardListPaging(pcri);			// 게시글 목록(페이징 처리 포함) List로 넣기
 		logger.info(" 게시글의 총 건수: " +pageMaker.getTotalCount());
 		System.out.println("pageMaker =" + pageMaker);
 
@@ -122,17 +122,18 @@ public class BoardControllerImpl implements BoardController {
 		model.addAttribute("article",boardDTO);
 		
 		JjimDTO jjimDTO = new JjimDTO();
-		if(member != null) {	// 로그인했을 경우
-			String m_id = member.getM_id();	// 로그인한 회원의 m_id를 가져와서
-			jjimDTO.setM_id(m_id);	// jjimDTO.m_id에 넣는다
-			jjimDTO.setBoard_id(board_id);	// 해당 게시물 id를 가져와서 jjimDTO.board_id에 넣는다
+		
+		if(member != null) {							// 로그인했을 경우
+			String m_id = member.getM_id();				// 로그인한 회원의 m_id를 가져와서
+			jjimDTO.setM_id(m_id);						// jjimDTO.m_id에 넣는다
+			jjimDTO.setBoard_id(board_id);				// 해당 게시물 id를 가져와서 jjimDTO.board_id에 넣는다
 			jjimDTO = boardService.jjimSelect(jjimDTO);	// 찜 조회값을 jjimDTO에 넣어 불러온다
 			model.addAttribute("liked", jjimDTO);		// 불러온 jjimDTO에 liked 라는 변수이름을 준다
 		}
 		
 		System.out.println("jjimDTO List 값 : " + jjimDTO);
 		
-		List<ReplyDTO> reply = replyService.list(board_id);
+		List<ReplyDTO> reply = replyService.list(board_id);		//게시판_id가 같은 댓글-> list로 넣어서 출력한다.
 		System.out.println(reply);
 		
 		model.addAttribute("reply", reply);
@@ -173,14 +174,6 @@ public class BoardControllerImpl implements BoardController {
 		try {
 			boardService.create(articleMap);
 			System.out.println("ggggggggg ArticleMap: " + articleMap);
-			if(fileRealName != null && fileRealName.length() != 0) {
-				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"thumb"+ "\\" + "t_" + fileRealName);
-				srcDir.createNewFile();
-			}
-			if(safeFile != null && safeFile.length() != 0) {
-				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"contentImage"+ "\\" + safeFile);
-				srcDir.createNewFile();
-			}
 			
 			message	 = "<script>";
 			message	+= "alert('새로운 글을 추가하였습니다.');";
@@ -188,14 +181,6 @@ public class BoardControllerImpl implements BoardController {
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "thumb" + "\\" + "t_" + fileRealName);
-			srcFile.delete();
-			
-			if(safeFile != null && safeFile.length() != 0) {
-				File srcDir = new File(ARTICLE_IMAGE_REPO + "\\" +"contentImage"+ "\\" + safeFile);
-				srcDir.delete();
-			}
-			
 			
 			message	 = "<script>";
 			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
@@ -370,6 +355,7 @@ public class BoardControllerImpl implements BoardController {
 	}
 
 //=========================================================================================================================================
+	
 	// 찜 등록
 	@Override
 	@ResponseBody
@@ -384,7 +370,6 @@ public class BoardControllerImpl implements BoardController {
 		return jjimDTO;
 	}
 	
-	
 
 	// 찜 삭제
 	@Override
@@ -398,11 +383,8 @@ public class BoardControllerImpl implements BoardController {
 		return jjimNO;
 	}
 
+
+
 //=========================================================================================================================================
 	
-	
-	
-	
-	
-
 }

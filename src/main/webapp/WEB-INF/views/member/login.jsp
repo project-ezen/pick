@@ -47,18 +47,18 @@
         }
     </style>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js" integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
-    <script>  Kakao.init('8ebd75cf75f3f5574a71e06fbbc387a9');</script>  <!-- 사용하려는 앱의 JavaScript 키 입력 -->
+    <script>Kakao.init('8ebd75cf75f3f5574a71e06fbbc387a9');</script>  <!-- 사용하려는 앱의 JavaScript 키 입력 -->
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 </head>
 
-<script type="text/javascript"> // 로그인 된 상태로 뒤로가기를 눌러서 접근하면 메인페이지로 넘겨버림
+<script type="text/javascript"> // 로그인 된 상태로 뒤로가기를 눌러서 접근하면 이전 페이지로 넘겨버림
 	
 	var referrer = document.referrer;
 
 	window.onpageshow = function(event) {
     	if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
-        	alert("메인 페이지로 이동합니다.");
+        	alert("이전 페이지로 이동합니다.");
         	
         	//var backUrl = "http://localhost:8056/#";
         	

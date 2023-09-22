@@ -197,10 +197,10 @@
       <!-- 광고 내용 또는 이미지 -->
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img src="/resources/images/gango.jpg" />
+          <img src="/resources/images/balvenie2.png" />
         </div>
         <div class="item">
-          <img src="/resources/images/gango.jpg" />
+          <img src="/resources/images/nadura22.png" />
         </div>
         <div class="item">
           <img src="/resources/images/gango.jpg" />

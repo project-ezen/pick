@@ -43,7 +43,5 @@ public interface BoardController {
 		
 		// 찜 삭제
 		public JjimDTO jjimNO(int board_id, String m_id) throws Exception;
-		
-		
 }
 

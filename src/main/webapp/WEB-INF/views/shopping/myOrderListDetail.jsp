@@ -62,7 +62,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <div class="container">
 	<h3 style="text-align: center;">주문상세내역</h3>
-		<button type="button" class="relist" onclick="${path}/shopping/myOrderList">주문목록으로 돌아가기</button>
+		<button type="button" class="relist" onclick="javascript:location.href='${path}/shopping/myOrderList';">주문목록으로 돌아가기</button>
 	<label>주문정보</label>
 		<table id="t1">
 		<colgroup>
@@ -119,7 +119,7 @@
 						<td>
 							<div class="col-md-12 text-center" id="item_thumbnail">
 							    <a href="#" class="thumbnail">
-							        <input type="image" src="${path }/imgdownload?imageFile=${products.product_image }" width="161" height="133" disabled>
+							        <input type="image" src="/resources/product_images/${products.product_image }" width="161" height="133" disabled>
 							    </a>
 							</div>
 						</td>

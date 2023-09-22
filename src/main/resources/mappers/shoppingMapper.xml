@@ -116,10 +116,12 @@
 	</update>
 	<!-- ============================================================================================================================================================================================= -->
 	<sql id="search">
-		<if test="startDate != null and endDate != null">
-			<![CDATA[
-				AND order_date > #{startDate} AND order_date < #{endDate} 			
-			]]>
+		<if test="(startDate != null and endDate != null)">
+			<if test="(startDate != '' and endDate != '')">
+				<![CDATA[
+					AND order_date > #{startDate} AND order_date < #{endDate} 			
+				]]>
+			</if>
 		</if>
 	</sql>
 	

@@ -445,7 +445,6 @@
 		    		dataType: "text",
 		    		data: {"recipe_code": "${recipe.recipe_code}", "m_id": "${member.m_id}"},
 		    		success: function() {
-		    			alert("성공");
 		    			$("#mark").removeClass("noliked").addClass("liked");
 		    		},
 		    		error: function(error) {
@@ -462,7 +461,6 @@
 		    		dataType: "text",
 		    		data: {"recipe_code": "${recipe.recipe_code}", "m_id": "${member.m_id}"},
 		    		success: function() {
-		    			alert("성공");
 		    			$("#mark").removeClass("liked").addClass("noliked");
 		    		},
 		    		error: function(error) {

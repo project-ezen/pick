@@ -14,12 +14,16 @@
     }
 }
 
-.tt {
-	color: white;
-}
-.tt:hover {
-	background-color: rgba( 255, 255, 255, 0 );
-}
+.tt { color: white; }
+
+.tt:hover { background-color: rgba( 255, 255, 255, 0 ); }
+
+
+.bb { color: white; font-size: 30px; }
+
+.bb:hover { text-decoration: none; color:#fff;  text-shadow:2px 2px 2px #8aa2b2; }
+
+
 </style>
 <section class="navbar navbar-light fixed-top">
     <div class="container-fluid">
@@ -27,7 +31,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainNavbar">
                 <span class="glyphicon glyphicon-align-justify"></span>
             </button>
-            <a class="navbar-brand tt" href="/" style="font-size: 30px;">마녀의 pick</a>
+            <a class="navbar-brand bb" href="/">마녀의 pick</a>
         </div>
         <div class="collapse navbar-collapse" id="mainNavbar" style="padding-top: 10px;">
             <ul class="nav nav-pills navbar-nav">
@@ -58,7 +62,7 @@
 					<%-- 로그인이 되지 않은 경우 --%>
 					<c:when test="${ member == null }">
 						<li><a class="tt" data-toggle="tooltip" title="로그인" style="margin-right: 20px; margin-top: 5px;" href="javascript:fn_loginForm('${member }', '${path }/member/login')">LogIn</a></li>
-						<li><a class="tt" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/join">Sign In</a></li>
+						<li><a class="tt" data-toggle="tooltip" title="회원가입" style="margin-right: 20px; margin-top: 5px;" href="${path}/member/join">Join</a></li>
 					</c:when>
 				</c:choose>
 			</ul>

@@ -52,6 +52,9 @@ public interface MemberService {
 	
 	// 회원목록 가져오기
 	public List<MemberDTO> selectMember() throws Exception;
+	
+	//회원탈퇴
+	public void delete(MemberDTO memberDTO) throws Exception;
 //-------------------------------------------------------------------------------
 	//내가 쓴 게시물
 
