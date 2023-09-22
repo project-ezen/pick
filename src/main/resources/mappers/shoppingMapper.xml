@@ -125,7 +125,7 @@
 		</if>
 	</sql>
 	
-	<select id="orderTotalCount" parameterType="orderSearch" resultType="int">
+	<select id="orderTotalCount" parameterType="java.util.Map" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM product_order
@@ -150,7 +150,7 @@
 		]]>
 	</select>
 	
-	<select id="cancelTotalCount" parameterType="orderSearch" resultType="int">
+	<select id="cancelTotalCount" parameterType="java.util.Map" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM product_order

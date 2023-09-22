@@ -207,14 +207,22 @@ public class ShoppingController {
 		OrderPaging orderPage = new OrderPaging();
 		OrderPaging cancelPage = new OrderPaging();
 		
+		// 지정한 기간에 주문한 주문 정보 가져오기
+		Map searchMap = new HashMap();
+		searchMap.put("member", member.getM_id());
+		searchMap.put("startDate", search.getStartDate());
+		searchMap.put("endDate", search.getEndDate());
+		searchMap.put("page", search.getPage());
+		searchMap.put("perPageNum", search.getPerPageNum());
+		
 		orderPage.setCri(search);
 		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
-		orderPage.setTotalCount(shoppingService.orderListTotalCount(search));
+		orderPage.setTotalCount(shoppingService.orderListTotalCount(searchMap));
 		log.info("게시물의 총 건수 : " + orderPage.getTotalCount());
 		
 		cancelPage.setCri(search);
 		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
-		cancelPage.setTotalCount(shoppingService.cancelListTotalCount(search));
+		cancelPage.setTotalCount(shoppingService.cancelListTotalCount(searchMap));
 		log.info("게시물의 총 건수 : " + cancelPage.getTotalCount());
 		
 		mav.addObject("orderPage", orderPage);
@@ -252,7 +260,7 @@ public class ShoppingController {
 		if(rel.equals("order")) {
 			paging.setCri(search);
 			// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
-			paging.setTotalCount(shoppingService.orderListTotalCount(search));
+			paging.setTotalCount(shoppingService.orderListTotalCount(searchMap));
 			log.info("게시물의 총 건수 : " + paging.getTotalCount());
 			
 			list = shoppingService.showOrder(searchMap);
@@ -262,7 +270,7 @@ public class ShoppingController {
 		else if(rel.equals("cancel")) {
 			paging.setCri(search);
 			// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
-			paging.setTotalCount(shoppingService.cancelListTotalCount(search));
+			paging.setTotalCount(shoppingService.cancelListTotalCount(searchMap));
 			log.info("게시물의 총 건수 : " + paging.getTotalCount());
 			
 			list = shoppingService.showCancel(searchMap);

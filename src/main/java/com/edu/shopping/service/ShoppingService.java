@@ -44,11 +44,11 @@ public interface ShoppingService {
 //=====================================================================================================
 	// 페이징
 	// 총 주문량
-	public int orderListTotalCount(OrderSearch search) throws Exception;
+	public int orderListTotalCount(Map searchMap) throws Exception;
 	// 지정한 기간에 주문한 주문 정보 가져오기
 	public List<OrderDTO> showOrder(Map searchMap) throws Exception;
 	// 총 쥐소량
-	public int cancelListTotalCount(OrderSearch search) throws Exception;
+	public int cancelListTotalCount(Map searchMap) throws Exception;
 	// 지정한 기간에 쥐소한 주문 정보 가져오기
 	public List<OrderDTO> showCancel(Map searchMap) throws Exception;
 //=====================================================================================================

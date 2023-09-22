@@ -94,8 +94,8 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	}
 //=====================================================================================================
 	@Override
-	public int orderListTotalCount(OrderSearch search) throws DataAccessException {
-		return sqlsession.selectOne(namespace + ".orderTotalCount", search);
+	public int orderListTotalCount(Map searchMap) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".orderTotalCount", searchMap);
 	}
 
 	@Override
@@ -103,8 +103,8 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 		return sqlsession.selectList(namespace + ".showOrder", searchMap);
 	}
 	@Override
-	public int cancelListTotalCount(OrderSearch search) throws DataAccessException {
-		return sqlsession.selectOne(namespace + ".cancelTotalCount", search);
+	public int cancelListTotalCount(Map searchMap) throws DataAccessException {
+		return sqlsession.selectOne(namespace + ".cancelTotalCount", searchMap);
 	}
 
 	@Override

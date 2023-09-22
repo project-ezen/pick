@@ -91,8 +91,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 //=====================================================================================================
 	@Override
-	public int orderListTotalCount(OrderSearch search) throws Exception {
-		return shoppingDAO.orderListTotalCount(search);
+	public int orderListTotalCount(Map searchMap) throws Exception {
+		return shoppingDAO.orderListTotalCount(searchMap);
 	}
 
 	@Override
@@ -100,8 +100,8 @@ public class ShoppingServiceImpl implements ShoppingService {
 		return shoppingDAO.showOrder(searchMap);
 	}
 	@Override
-	public int cancelListTotalCount(OrderSearch search) throws Exception {
-		return shoppingDAO.cancelListTotalCount(search);
+	public int cancelListTotalCount(Map searchMap) throws Exception {
+		return shoppingDAO.cancelListTotalCount(searchMap);
 	}
 
 	@Override
