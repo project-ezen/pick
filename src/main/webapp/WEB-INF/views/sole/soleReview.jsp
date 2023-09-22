@@ -23,7 +23,7 @@
         	
         	window.location.href = backUrl;    
         }
-}     // 구조 이해 x 
+} 
 </script>
 <style>
 body {
@@ -176,7 +176,7 @@ label {
 			<div class="col-sm-4" style="text-align: center; margin-left: 10px;">
 				<button class="btn_cel" type="button" onclick="back()">취소</button>
 				&nbsp;
-				<button class="btn_sub" type="button" id="reviewSubmit" onClick="this.disabled=true">올리기</button> <!-- onclick 중복 글쓰기 방지 -->
+				<button class="btn_sub" type="button" id="reviewSubmit">올리기</button> <!-- onclick 중복 글쓰기 방지 -->
 			</div>
 		</div>
 		<input type="hidden" name="recipe_code" value="${param.recipe_code}"/>
@@ -185,9 +185,9 @@ label {
 </div>
 <br/><br/>
 
-<%
-	String [] yokArray = Yoksul.yoksul; // 욕설필터 가져오기
-%>
+	<%
+		String [] yokArray = Yoksul.yoksul; // 욕설필터 가져오기
+	%>
 
 <script>
 	function back() {   // 취소버튼을 누르면 바로 뒤로 감
@@ -205,27 +205,35 @@ label {
 		}
 	}
 	
-	$(document).ready(function() {
+$(document).ready(function() {
 		
-		var yok  = <%= new org.json.JSONArray(yokArray).toString() %>;   // 욕설필터 가져오기
+		var yok  = <%= new org.json.JSONArray(yokArray).toString() %>; 
 		
 		// 리뷰 쓸때 내용에 값이 없으면 서밋하지 못하게 하는 
 		$("#reviewSubmit").click(function() {
 			var contentValue = $("#reviewContent").val();
+			var check = "가능";
 			if(!contentValue || contentValue.trim() === "") {
-				alert("내용을 작성해야 합니다.");
-			} else {
-				var content = $("#reviewContent").val();
-				for (var i = 0; i < yok.length; i++) {
-		            if (content.includes(yok[i])) { 
-		                alert("비속어는 사용할 수 없습니다.");
-		                return;
-		            }
-		        }
-				$("#reviewForm").submit();
+				check = "불가능";
+			}
+			for(var i = 0; i < yok.length; i++) {
+				if(contentValue.includes(yok[i])) {
+					alert("비속어는 사용할 수 없습니다.");
+					check = "불가능";
+				}
+			}
+			if(check == "가능") {
+				if(confirm("리뷰를 작성하시겠습니까?")) {
+					$("#reviewForm").submit();
+				}else{
+					alert("리뷰 작성을 취소하였습니다.");
+				}
+			} else{
+				check = "가능";
 			}
 		});
 	});
+
 </script>
 
 <%@ include file="../include/footer.jsp" %>
