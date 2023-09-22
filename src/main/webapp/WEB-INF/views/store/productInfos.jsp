@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page session="true" %>
 <%@ page import="com.edu.member.dto.MemberDTO" %>
+<%@ page import="org.json.JSONArray" %>
+<%@page import="com.edu.pillter.Yoksul"%>
 <%
    MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
    String memberId = (memberDTO != null) ? memberDTO.getM_id() : null;
@@ -469,6 +471,10 @@
     
     // DisplayOrderVO temp = new DisplayOrderVO(cart_id[i], image[i], product_name[i], product_price[i], count[i]);
     // 세션 아이디
+    
+    <%
+	String [] yokArray = Yoksul.yoksul; // 욕설필터 가져오기
+	%>
 	    var memberId = "<%= memberId %>"; 
 	    var productIdInputs = $("#productIdInput").val();   	
     // 페이징 Ajax
@@ -486,7 +492,9 @@
 	           	console.log(data);
 	
 	               $.each(data.ProductReviewList, function (index, review) {
-	
+	         	   
+	            	var yok  = <%= new org.json.JSONArray(yokArray).toString() %>;
+	            	   
                	 	var reviewHtml =
                         '<div class="row ajaxDiv">' +
                         '<br/>' +
@@ -507,7 +515,15 @@
                         '<div class="col-sm-7" id="reviewContent">' +
                         '<p> 내용 : ' + review.content + '</p>' +
                         '</div>';
-
+  
+                        var content = review.content;           
+                    for (var i = 0; i < yok.length; i++) {
+        		         if (content.includes(yok[i])) { 
+        		        	 var pattern = new RegExp(yok[i], 'g');
+        		        	 reviewHtml = reviewHtml.replace(pattern, "**");
+        		          }
+                    }
+        		            
                     if (memberId === review.member_id) {
                         reviewHtml += '<button id="reviewRemoveBtn"><span class="glyphicon glyphicon-remove"></span></button>';
                     }
