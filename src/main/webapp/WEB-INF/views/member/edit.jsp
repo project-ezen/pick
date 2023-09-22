@@ -7,7 +7,7 @@
     <%@ include file="../include/header.jsp" %>
     
     <style>
-  	.container { width: 500px; background-color: rgba(255, 255, 255, 0.88); }
+  	.container { width: 700px; background-color: rgba(255, 255, 255, 0.88); }
   	
   	.foot { padding-bottom: 100px; padding-top: 100px; }
   	
@@ -64,7 +64,22 @@
 	.cancel:active {
 		position:relative;
 		top:1px;
+	} 
+	
+	.delete { 
+		width: 80px;
+		height: 28px;
+		border: none;
+		font-family:'Cafe24Supermagic-Bold-v1.0';
+		color: #fff;
+		font-size:13px;
+		background-color: #bcbcbc;
+		border-radius:15px;
+		display:inline-block;
+		cursor:pointer;
 	}
+	.delete:hover  	{ background-color: #999999;  }
+	.delete:active 	{ position:relative; top:1px; }
     </style>
 </head>
 
@@ -126,7 +141,10 @@
 				</div>
 				<div class="update-button-group">
 					<button type="submit" class="submit" id="editButton">수정</button>
-					<button type="button" class="cancel" id="resetButton">취소</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="cancel" id="resetButton">취소</button>
+				</div>
+				<br/>
+				<div style="float:right; padding-bottom:25px;">
 					<button type="button" class="delete" id="deleteButton">회원탈퇴</button>
 				</div>
 			</form>
