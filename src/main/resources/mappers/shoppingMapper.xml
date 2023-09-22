@@ -129,7 +129,8 @@
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM product_order
-			WHERE order_complaint IS NULL
+			WHERE m_id = #{m_id}
+			AND order_complaint IS NULL
 		]]>
 		<include refid="search"/>
 	</select>
@@ -153,7 +154,8 @@
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM product_order
-			WHERE order_complaint IS NOT NULL
+			WHERE m_id = #{m_id}
+			AND order_complaint IS NOT NULL
 		]]>
 		<include refid="search"/>
 	</select>
