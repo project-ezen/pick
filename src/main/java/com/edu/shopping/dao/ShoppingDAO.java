@@ -46,11 +46,11 @@ public interface ShoppingDAO {
 //=====================================================================================================
 	// 페이징
 	// 총 주문량
-	public int orderListTotalCount(OrderSearch search) throws DataAccessException;
+	public int orderListTotalCount(Map searchMap) throws DataAccessException;
 	// 지정한 기간에 주문한 주문 정보 가져오기
 	public List<OrderDTO> showOrder(Map searchMap) throws DataAccessException;
 	// 총 쥐소량
-	public int cancelListTotalCount(OrderSearch search) throws DataAccessException;
+	public int cancelListTotalCount(Map searchMap) throws DataAccessException;
 	// 지정한 기간에 취소한 주문 정보 가져오기
 	public List<OrderDTO> showCancel(Map searchMap) throws DataAccessException;
 //=====================================================================================================

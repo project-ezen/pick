@@ -125,11 +125,11 @@
 		</if>
 	</sql>
 	
-	<select id="orderTotalCount" parameterType="orderSearch" resultType="int">
+	<select id="orderTotalCount" parameterType="java.util.Map" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM product_order
-			WHERE m_id = #{m_id}
+			WHERE m_id = #{member}
 			AND order_complaint IS NULL
 		]]>
 		<include refid="search"/>
@@ -150,11 +150,11 @@
 		]]>
 	</select>
 	
-	<select id="cancelTotalCount" parameterType="orderSearch" resultType="int">
+	<select id="cancelTotalCount" parameterType="java.util.Map" resultType="int">
 		<![CDATA[
 			SELECT COUNT(*)
 			FROM product_order
-			WHERE m_id = #{m_id}
+			WHERE m_id = #{member}
 			AND order_complaint IS NOT NULL
 		]]>
 		<include refid="search"/>
