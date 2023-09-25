@@ -329,7 +329,7 @@ public class ShoppingController {
 			log.info(id + " 주문의 교환 이유는 : " + c_reason);
 			order_status = "product change";
 			
-			// 같은 물품으로 새 제품 배송 진행
+			// 재배송 물품 확인하기
 			OrderDTO ordertemp = shoppingService.changeProduct(id);
 
 			// 주문 번호 부여하기
@@ -339,6 +339,10 @@ public class ShoppingController {
 			ordertemp.setOrder_number(order_num);
 			ordertemp.setOrder_id(order_id);
 			ordertemp.setOrder_status("delivery-progressing");
+			log.info("재배송할 상품 : " + ordertemp);
+			
+			// 같은 물품으로 새 제품 배송 진행
+			shoppingService.reDeliveryProduct(ordertemp);
 		}
 		
 		Map<String, String> map = new HashMap<String, String>();

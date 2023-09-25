@@ -89,6 +89,11 @@ public class ShoppingDAOImpl implements ShoppingDAO {
 	}
 
 	@Override
+	public void reDeliveryProduct(OrderDTO ordertemp) throws DataAccessException {
+		sqlsession.insert(namespace + ".reDelivery", ordertemp);
+	}
+
+	@Override
 	public void completeOrder(Map<String, String> completeMap) throws DataAccessException {
 		sqlsession.update(namespace + ".completeOrder", completeMap);
 	}

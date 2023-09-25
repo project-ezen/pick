@@ -107,6 +107,13 @@
 		]]>
 	</select>
 	
+	<insert id="reDelivery" parameterType="orderDTO">
+		<![CDATA[
+			INSERT INTO product_order (order_id, m_id, product_id, order_number, receiver_name, receiver_phoneNum, zipcode, address, address_detail, order_status, count, final_price)
+			VALUES (#{order_id}, #{m_id}, #{product_id}, #{order_number}, #{receiver_name}, #{receiver_phonenum}, #{zipcode}, #{address}, #{address_detail}, #{order_status}, #{count}, #{final_price})
+		]]>
+	</insert>
+	
 	<update id="completeOrder" parameterType="java.util.Map">
 		<![CDATA[
 			UPDATE product_order

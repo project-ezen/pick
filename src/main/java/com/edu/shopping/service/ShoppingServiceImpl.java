@@ -86,6 +86,11 @@ public class ShoppingServiceImpl implements ShoppingService {
 	}
 
 	@Override
+	public void reDeliveryProduct(OrderDTO ordertemp) throws Exception {
+		shoppingDAO.reDeliveryProduct(ordertemp);
+	}
+
+	@Override
 	public void completeOrder(Map<String, String> completeMap) throws Exception {
 		shoppingDAO.completeOrder(completeMap);
 	}
