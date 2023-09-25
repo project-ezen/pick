@@ -37,8 +37,10 @@ public interface ShoppingService {
 	public ProductDTO orderList(OrderDTO order) throws Exception;
 	// 주문 상품 취소하기
 	public void overwriteOrder(Map<String, String> map) throws Exception;
-	// 교환 상품 재배송하기
+	// 교환 상품 불러오기
 	public OrderDTO changeProduct(String order_id) throws Exception;
+	// 교환 상품 재배송하기
+	public void reDeliveryProduct(OrderDTO ordertemp) throws Exception;
 	// 상품 배송완료
 	public void completeOrder(Map<String, String> completeMap) throws Exception;
 //=====================================================================================================
