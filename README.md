@@ -1141,29 +1141,29 @@ var yok  = &lt;%= new org.json.JSONArray(yokArray).toString() %&gt;;
 ## 4. Program 개발 환경 및 사용 언어
 #### ● 개발 환경
 <div>
-    <img src="./vscode.png" height="70px">
-    <img src="./eclipse.png" height="70px">
-    <img src="./spring.png" height="70px">
-    <img src="./ajax.jpg" height="70px">
+    <img src="./md_image/vscode.png" height="70px">
+    <img src="./md_image/eclipse.png" height="70px">
+    <img src="./md_image/spring.png" height="70px">
+    <img src="./md_image/ajax.jpg" height="70px">
 </div>
 
 #### ● 저장소
 <div>
-    <img src="./git.png" height="70px">
-    <img src="./github.png" height="70px">
-    <img src="./amazon.png" height="70px">
-    <img src="./oracledatabase.jpg" height="70px">
+    <img src="./md_image/git.png" height="70px">
+    <img src="./md_image/github.png" height="70px">
+    <img src="./md_image/amazon.png" height="70px">
+    <img src="./md_image/oracledatabase.jpg" height="70px">
 </div>
 
 #### ● 사용 언어
 <div>
-    <img src="./java.png" height="70px">
-    <img src="./jsp.png" height="70px">
-    <img src="./html.png" height="70px">
-    <img src="./css.png" height="70px">
-    <img src="./javascript.png" height="70px">
-    <img src="./bootstrap.png" height="70px">
-    <img src="./jquery.png" height="70px">
+    <img src="./md_image/java.png" height="70px">
+    <img src="./md_image/jsp.png" height="70px">
+    <img src="./md_image/html.png" height="70px">
+    <img src="./md_image/css.png" height="70px">
+    <img src="./md_image/javascript.png" height="70px">
+    <img src="./md_image/bootstrap.png" height="70px">
+    <img src="./md_image/jquery.png" height="70px">
 </div>
 
 ## 5. Program 개선 사항
